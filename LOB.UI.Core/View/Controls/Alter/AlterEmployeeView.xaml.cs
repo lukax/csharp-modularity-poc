@@ -4,22 +4,21 @@ using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls
+namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
     public partial class AlterEmployeeView : UserControl, ITabProp, IView
     {
         [ImportingConstructor]
-        public AlterEmployeeView(AlterEntityViewModel<Employee> dataContext)
+        public AlterEmployeeView(AlterEmployeeViewModel dataContext)
         {
             InitializeComponent();
-            dataContext.Entity = new Employee();
             DataContext = dataContext;
 
             //Registrations
@@ -34,8 +33,8 @@ namespace LOB.UI.Core.View.Controls
 
         public int? Index
         {
-            get { return ((AlterEntityViewModel<Employee>) DataContext).CancelIndex; }
-            set { ((AlterEntityViewModel<Employee>) DataContext).CancelIndex = value; }
+            get { return ((AlterBaseEntityViewModel<Employee>) DataContext).CancelIndex; }
+            set { ((AlterBaseEntityViewModel<Employee>) DataContext).CancelIndex = value; }
         }
 
         public void InitializeServices()

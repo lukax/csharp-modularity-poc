@@ -3,19 +3,18 @@
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls
+namespace LOB.UI.Core.View.Controls.List
 {
     [Export]
     public partial class ListClientView : UserControl, ITabProp, IView
     {
         [ImportingConstructor]
-        public ListClientView(ListEntityViewModel<Client> dataContext)
+        public ListClientView(ListBaseEntityViewModel<Client> dataContext)
         {
             InitializeComponent();
             DataContext = dataContext;

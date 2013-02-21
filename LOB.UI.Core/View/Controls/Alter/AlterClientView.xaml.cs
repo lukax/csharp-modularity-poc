@@ -1,45 +1,44 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
-using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls
+namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
-    public partial class AlterProductView : UserControl, ITabProp, IView
+    public partial class AlterClientView : UserControl, ITabProp, IView
     {
         [ImportingConstructor]
-        public AlterProductView(AlterEntityViewModel<Product> dataContext)
+        public AlterClientView(AlterClientViewModel dataContext)
         {
             InitializeComponent();
-            DataContext = dataContext;
+           // dataContext.Entity = new Employee();
+           // DataContext = dataContext;
 
+            //Registrations
             Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public string Header
         {
-            get { return "Alterar Produto"; }
+            get { return "Alterar Cliente"; }
             set { }
         }
 
         public int? Index
         {
-            get { return ((AlterEntityViewModel<Product>) DataContext).CancelIndex; }
-            set { ((AlterEntityViewModel<Product>) DataContext).CancelIndex = value; }
+            get; 
+            set;
         }
 
         public void InitializeServices()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         public void Refresh()

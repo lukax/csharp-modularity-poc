@@ -113,44 +113,44 @@
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterProductViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\Base\AlterEntityViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\Base\ListEntityViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\AlterBaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\Base\ListBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="View\Controls\AlterProductView.xaml.cs">
+    <Compile Include="View\Controls\Alter\AlterProductView.xaml.cs">
       <DependentUpon>AlterProductView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\AlterEmployeeView.xaml.cs">
+    <Compile Include="View\Controls\Alter\AlterEmployeeView.xaml.cs">
       <DependentUpon>AlterEmployeeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\AlterSaleView.xaml.cs">
+    <Compile Include="View\Controls\Alter\AlterSaleView.xaml.cs">
       <DependentUpon>AlterSaleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Base\AlterAddressView.xaml.cs">
+    <Compile Include="View\Controls\Alter\SubEntity\AlterAddressView.xaml.cs">
       <DependentUpon>AlterAddressView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Base\AlterBaseEntityView.xaml.cs">
+    <Compile Include="View\Controls\Alter\SubEntity\AlterBaseEntityView.xaml.cs">
       <DependentUpon>AlterBaseEntityView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Base\AlterContactInfoView.xaml.cs">
+    <Compile Include="View\Controls\Alter\SubEntity\AlterContactInfoView.xaml.cs">
       <DependentUpon>AlterContactInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Base\AlterPayCheckView.xaml.cs">
+    <Compile Include="View\Controls\Alter\SubEntity\AlterPayCheckView.xaml.cs">
       <DependentUpon>AlterPayCheckView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Base\AlterPersonView.xaml.cs">
+    <Compile Include="View\Controls\Alter\SubEntity\AlterPersonView.xaml.cs">
       <DependentUpon>AlterPersonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\AlterClientView.xaml.cs">
+    <Compile Include="View\Controls\Alter\AlterClientView.xaml.cs">
       <DependentUpon>AlterClientView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\ListClientView.xaml.cs">
+    <Compile Include="View\Controls\List\ListClientView.xaml.cs">
       <DependentUpon>ListClientView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\ListProductView.xaml.cs">
+    <Compile Include="View\Controls\List\ListProductView.xaml.cs">
       <DependentUpon>ListProductView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\ListEmployeeView.xaml.cs">
+    <Compile Include="View\Controls\List\ListEmployeeView.xaml.cs">
       <DependentUpon>ListEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FrameWindow.xaml.cs">
@@ -175,51 +175,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\AlterProductView.xaml">
+    <Page Include="View\Controls\Alter\AlterProductView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\AlterEmployeeView.xaml">
+    <Page Include="View\Controls\Alter\AlterEmployeeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\AlterSaleView.xaml">
+    <Page Include="View\Controls\Alter\AlterSaleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Base\AlterAddressView.xaml">
+    <Page Include="View\Controls\Alter\SubEntity\AlterAddressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Base\AlterBaseEntityView.xaml">
+    <Page Include="View\Controls\Alter\SubEntity\AlterBaseEntityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Base\AlterContactInfoView.xaml">
+    <Page Include="View\Controls\Alter\SubEntity\AlterContactInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Base\AlterPayCheckView.xaml">
+    <Page Include="View\Controls\Alter\SubEntity\AlterPayCheckView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Base\AlterPersonView.xaml">
+    <Page Include="View\Controls\Alter\SubEntity\AlterPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\AlterClientView.xaml">
+    <Page Include="View\Controls\Alter\AlterClientView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\ListClientView.xaml">
+    <Page Include="View\Controls\List\ListClientView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\ListProductView.xaml">
+    <Page Include="View\Controls\List\ListProductView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\ListEmployeeView.xaml">
+    <Page Include="View\Controls\List\ListEmployeeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -316,7 +316,9 @@
   <ItemGroup>
     <Resource Include="View\Resources\Shoppingcart48.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Controls\List\SubEntity\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

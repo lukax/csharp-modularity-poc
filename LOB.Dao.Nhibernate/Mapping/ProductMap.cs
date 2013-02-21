@@ -22,7 +22,7 @@ namespace LOB.Dao.Nhibernate.Mapping
                 .Inverse()
                 .Cascade.All()
                 .Table("ProductSale");
-            References(x => x.Suppliers);
+            HasMany(x => x.Suppliers);
             References(x => x.ShipmentInfo);
         }
     }

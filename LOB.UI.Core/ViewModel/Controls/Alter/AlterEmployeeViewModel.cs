@@ -1,10 +1,10 @@
 ﻿using System;
 using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
-namespace LOB.UI.Core.ViewModel.Controls
+namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public class AlterEmployeeViewModel : AlterEntityViewModel<Employee>
+    public class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>
     {
         public string Title
         {
@@ -30,7 +30,7 @@ namespace LOB.UI.Core.ViewModel.Controls
         public AlterEmployeeViewModel()
             : base(new Employee())
         {
-            Entity = new Employee();
+            
         }
 
         public override void InitializeServices()

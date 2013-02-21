@@ -1,9 +1,9 @@
 ﻿using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
 
-namespace LOB.UI.Core.ViewModel.Controls
+namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListEmployeeViewModel : ListEntityViewModel<Employee>
+    public class ListEmployeeViewModel : ListBaseEntityViewModel<Employee>
     {
         public ListEmployeeViewModel() : base(new Employee())
         {

@@ -12,7 +12,7 @@ using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Base
+namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
     public interface IAlterEntity
     {
@@ -20,22 +20,25 @@ namespace LOB.UI.Core.ViewModel.Controls.Base
     }
 
     [InheritedExport]
-    public class AlterEntityViewModel<T> : BaseViewModel, IAlterEntity where T : BaseEntity
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterEntity where T : BaseEntity
     {
         private readonly CrudOperationType _typeOfOperation;
         [Import] protected IRepository Repository;
         private T _entity;
 
         [ImportingConstructor]
-        public AlterEntityViewModel(T entity)
+        public AlterBaseEntityViewModel(T entity)
         {
             Entity = entity;
+            Code = entity.Code;
             // _typeOfOperation = operation;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
             CancelCommand = new DelegateCommand(Cancel);
         }
 
-        public T Entity
+        public int Code { get; set; }
+
+        protected T Entity
         {
             get { return _entity; }
             set

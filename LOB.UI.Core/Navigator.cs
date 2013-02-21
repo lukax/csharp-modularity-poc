@@ -5,6 +5,8 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.UI.Core.View.Controls;
+using LOB.UI.Core.View.Controls.Alter;
+using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Interface;
 using Microsoft.Practices.Unity;
 

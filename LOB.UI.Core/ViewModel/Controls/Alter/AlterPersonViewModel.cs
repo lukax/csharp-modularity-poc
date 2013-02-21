@@ -1,10 +1,10 @@
 ﻿using System;
 using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
-namespace LOB.UI.Core.ViewModel.Controls
+namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public class AlterPersonViewModel : AlterEntityViewModel<Person>
+    public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>
     {
 
         public string FirstName

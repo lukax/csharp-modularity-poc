@@ -50,7 +50,7 @@ namespace LOB.Dao.Nhibernate
             switch (persistIn)
             {
                 case PersistType.Sql:
-                    cfg = StoreInMySqlConfiguration();
+                    cfg = StoreInMsSqlConfiguration();
                     break;
                 case PersistType.File:
                     cfg = StoreInFileConfiguration();

@@ -1,6 +1,6 @@
 ﻿using LOB.Domain;
 
-namespace LOB.UI.Core.ViewModel.Controls
+namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     public class AlterNaturalPersonViewModel : AlterPersonViewModel
     {

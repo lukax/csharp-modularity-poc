@@ -15,7 +15,7 @@ using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Base
+namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
     public interface IListEntity
     {
@@ -27,7 +27,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Base
     }
 
     [InheritedExport]
-    public class ListEntityViewModel<T> : BaseViewModel, IListEntity where T : BaseEntity
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListEntity where T : BaseEntity
     {
         public T LocalEntity;
         [Import] protected IRepository Repository;
@@ -35,7 +35,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Base
         private IList<T> _list;
 
         [ImportingConstructor]
-        public ListEntityViewModel(T entity)
+        public ListBaseEntityViewModel(T entity)
         {
             Entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
@@ -59,7 +59,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Base
             }
         }
 
-        public T Entity
+        protected T Entity
         {
             get { return _entity; }
             set

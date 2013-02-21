@@ -1,14 +1,13 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls.Base;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls
+namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListProductViewModel : ListEntityViewModel<Product>
+    public class ListProductViewModel : ListBaseEntityViewModel<Product>
     {
         public ListProductViewModel() : base(new Product())
         {
