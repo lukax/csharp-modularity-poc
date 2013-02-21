@@ -50,7 +50,7 @@ namespace LOB.Dao.Nhibernate
             switch (persistIn)
             {
                 case PersistType.Sql:
-                    cfg = StoreInSqlConfiguration();
+                    cfg = StoreInMySqlConfiguration();
                     break;
                 case PersistType.File:
                     cfg = StoreInFileConfiguration();
@@ -64,7 +64,15 @@ namespace LOB.Dao.Nhibernate
             return cfg.BuildSessionFactory();
         }
 
-        private Configuration StoreInSqlConfiguration()
+        private Configuration StoreInMySqlConfiguration()
+        {
+            return Mapping().Database(MySQLConfiguration.Standard
+                                                        .ConnectionString(ConnectionString)
+                                                        .ShowSql)
+                .BuildConfiguration();
+        }
+
+        private Configuration StoreInMsSqlConfiguration()
         {
             return Mapping().Database(MsSqlConfiguration.MsSql2008
                                                         .ConnectionString(ConnectionString)

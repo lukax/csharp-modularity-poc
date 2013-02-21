@@ -21,7 +21,7 @@ namespace LOB.Domain
         public virtual string QuantityPerUnity { get; set; }
         public virtual IList<Store> StockedStores { get; set; }
         public virtual IList<Sale> Sales { get; set; }
-        public virtual IList<Supplier> Supplier { get; set; }
+        public virtual IList<Supplier> Suppliers { get; set; }
         public virtual ShipmentInfo ShipmentInfo { get; set; }
     }
 

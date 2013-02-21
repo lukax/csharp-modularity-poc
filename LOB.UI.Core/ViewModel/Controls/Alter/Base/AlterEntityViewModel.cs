@@ -35,7 +35,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Base
             CancelCommand = new DelegateCommand(Cancel);
         }
 
-        protected T Entity
+        public T Entity
         {
             get { return _entity; }
             set

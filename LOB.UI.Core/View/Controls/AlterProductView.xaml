@@ -68,7 +68,7 @@
                 <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" Content="Sale price:"/>
                 <TextBox Text="{Binding UnitSalePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
 
-                <Label Grid.Column="1" HorizontalAlignment="Right" Content="Supplier:" Grid.Row="2"/>
+                <Label Grid.Column="1" HorizontalAlignment="Right" Content="Suppliers:" Grid.Row="2"/>
                 <ComboBox ItemsSource="{Binding Supplier}" HorizontalAlignment="Left" MinWidth="150" MaxWidth="350" Grid.Column="2" Grid.Row="2" />
 
                 <TextBox controls:TextboxHelper.Watermark="Description" 
