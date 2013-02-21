@@ -17,8 +17,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         public AlterClientView(AlterClientViewModel dataContext)
         {
             InitializeComponent();
-           // dataContext.Entity = new Employee();
-           // DataContext = dataContext;
+            DataContext = dataContext;
 
             //Registrations
             Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));

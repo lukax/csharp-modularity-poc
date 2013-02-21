@@ -1,13 +1,16 @@
-﻿using LOB.Domain;
+﻿using System.ComponentModel.Composition;
+using LOB.Dao.Interface;
+using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
+    [Export]
     public class ListEmployeeViewModel : ListBaseEntityViewModel<Employee>
     {
-        public ListEmployeeViewModel() : base(new Employee())
+        [ImportingConstructor]
+        public ListEmployeeViewModel(Employee employee, IRepository repository) : base(employee, repository)
         {
-            Entity = new Employee();
         }
 
         public override void InitializeServices()

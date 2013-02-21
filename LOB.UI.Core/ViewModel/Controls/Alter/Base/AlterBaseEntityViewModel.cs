@@ -22,22 +22,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
     [InheritedExport]
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterEntity where T : BaseEntity
     {
-        private readonly CrudOperationType _typeOfOperation;
-        [Import] protected IRepository Repository;
+        private CrudOperationType _typeOfOperation;
+        protected IRepository Repository { get; set; }
         private T _entity;
+        
+        public ICommand SaveChangesCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public int? CancelIndex { get; set; }
 
-        [ImportingConstructor]
-        public AlterBaseEntityViewModel(T entity)
-        {
-            Entity = entity;
-            Code = entity.Code;
-            // _typeOfOperation = operation;
-            SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
-            CancelCommand = new DelegateCommand(Cancel);
-        }
-
-        public int Code { get; set; }
-
+        #region Props
         protected T Entity
         {
             get { return _entity; }
@@ -47,11 +40,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
                 OnPropertyChanged();
             }
         }
+        public int Code
+        {
+            get { return _entity.Code; }
+        }
+        #endregion
 
-        public ICommand CancelCommand { get; set; }
+        [ImportingConstructor]
+        public AlterBaseEntityViewModel(T entity, IRepository repository)
+        {
+            Entity = entity;
 
-        public int? CancelIndex { get; set; }
-        public ICommand SaveChangesCommand { get; set; }
+            SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
+            CancelCommand = new DelegateCommand(Cancel);
+        }
 
         public void SaveChanges(object arg)
         {

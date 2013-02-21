@@ -20,33 +20,31 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View
 {
-    /// <summary>
-    ///     Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : MetroWindow, IView, IComposableComponent
+    [Export]
+    public partial class MainWindow : MetroWindow, IView
     {
-        public MainWindow()
+        private IUnityContainer _container;
+        private MainWindowViewModel _viewModel;
+
+        [ImportingConstructor]
+        public MainWindow(IUnityContainer container, MainWindowViewModel viewModel)
         {
-            ComponentCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-            ComponentContainer = new CompositionContainer(ComponentCatalog);
-            _container = new UnityContainer();
+            _container = container;
+            _viewModel = viewModel;
+
             InitializeComponent();
             MiLightGrey();
         }
 
-        [Import]
-        private MainWindowViewModel ViewModel { get; set; }
-
-        [Export]
-        private IUnityContainer _container { get; set; }
-
-        public CompositionContainer ComponentContainer { get; private set; }
-        public ComposablePartCatalog ComponentCatalog { get; private set; }
-
-        public void Compose(params object[] objects)
+        public void OpenTab(object content)
         {
-            if (objects != null) ComponentContainer.ComposeParts(objects);
-            ComponentContainer.ComposeParts(this);
+            if (content == null) throw new ArgumentNullException();
+            if (!(content is ITabProp)) throw new ArgumentException("Content isn't a ITabProp");
+
+            var t = new TabItem { Content = content, Header = ((ITabProp)content).Header };
+
+            ((ITabProp)t.Content).Index = TabControlMain.Items.Add(t);
+            TabControlMain.SelectedItem = t;
         }
 
         public void OpenOperationFlyout(object sender, EventArgs eventArgs)
@@ -59,15 +57,9 @@ namespace LOB.UI.Core.View
             Flyouts[1].IsOpen = !Flyouts[1].IsOpen;
         }
 
-        public void Dispose()
-        {
-            ComponentContainer.Dispose();
-        }
-
         public void InitializeServices()
         {
-            Compose();
-            DataContext = ViewModel;
+            DataContext = _viewModel;
 
             //Registrations
             Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
@@ -76,7 +68,7 @@ namespace LOB.UI.Core.View
 
         public void Refresh()
         {
-            base.DataContext = ViewModel;
+            base.DataContext = _viewModel;
             base.UpdateLayout();
         }
 
@@ -139,15 +131,5 @@ namespace LOB.UI.Core.View
 
         #endregion
 
-        public void OpenTab(object content)
-        {
-            if (content == null) throw new ArgumentNullException();
-            if(!(content is ITabProp)) throw new ArgumentException("Content isn't a ITabProp");
-            
-            var t = new TabItem {Content = content, Header = ((ITabProp) content).Header};
-
-            ((ITabProp) t.Content).Index = TabControlMain.Items.Add(t);
-            TabControlMain.SelectedItem = t;
-        }
     }
 }

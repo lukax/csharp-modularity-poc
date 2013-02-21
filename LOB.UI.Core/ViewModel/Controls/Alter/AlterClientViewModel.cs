@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -9,6 +10,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     [Export]
     public class AlterClientViewModel : AlterPersonViewModel
     {
+        #region Props
         public IList<Store> ClientOf
         {
             get { return _client.ClientOf; }
@@ -41,12 +43,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+        #endregion
 
         private Client _client { get; set; }
 
         [ImportingConstructor]
-        public AlterClientViewModel(Client entity)
-            : base(entity.Person)
+        public AlterClientViewModel(Client entity, IRepository repository)
+            : base(entity.Person, repository)
         {
             _client = entity;
         }

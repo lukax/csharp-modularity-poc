@@ -57,6 +57,9 @@
     <Reference Include="MefContrib">
       <HintPath>..\packages\MefContrib.1.2.2.1\lib\net40-Client\MefContrib.dll</HintPath>
     </Reference>
+    <Reference Include="MefContrib.Integration.Unity">
+      <HintPath>..\packages\MefContrib.Integration.Unity.1.2.2.1\lib\net40-Client\MefContrib.Integration.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Blend.Interctivity.WPF.v4.0.1.0.2\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -103,6 +106,8 @@
     <Compile Include="Navigator.cs" />
     <Compile Include="RegionAdapter.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\AlterSaleViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListClientViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterAddressViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterClientViewModel.cs" />

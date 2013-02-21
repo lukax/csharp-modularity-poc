@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {
-    /// <summary>
-    /// Interaction logic for AlterPersonView.xaml
-    /// </summary>
+    [Export]
     public partial class AlterPersonView : UserControl
     {
+        [ImportingConstructor]
         public AlterPersonView()
         {
             InitializeComponent();

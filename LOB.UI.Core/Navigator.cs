@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
+using LOB.Dao.Interface;
 using LOB.UI.Core.View.Controls;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.List;
@@ -30,7 +31,7 @@ namespace LOB.UI.Core
         {
             var view = _container.Resolve<TView>() as Window;
             if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
+            if (view is IView) ((IView)view).InitializeServices();
             view.Show();
         }
 
@@ -38,7 +39,7 @@ namespace LOB.UI.Core
         {
             var view = _container.Resolve<TView>() as Window;
             if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
+            if (view is IView) ((IView)view).InitializeServices();
             view.DataContext = viewModel;
             view.Show();
         }
@@ -47,7 +48,7 @@ namespace LOB.UI.Core
         {
             var view = _container.Resolve<TView>() as UserControl;
             if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
+            if (view is IView) ((IView)view).InitializeServices();
             _regionAdapter.AddView(view, regionName);
         }
 
@@ -55,7 +56,7 @@ namespace LOB.UI.Core
         {
             var view = _container.Resolve<TView>() as UserControl;
             if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
+            if (view is IView) ((IView)view).InitializeServices();
             dynamic model = viewModel;
             _regionAdapter.AddView(view, regionName, model.Title);
         }

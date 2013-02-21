@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -97,12 +98,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         public ICommand ClearEntityCommand { get; set; }
 
         [ImportingConstructor]
-        public AlterProductViewModel()
-            : base(new Product())
+        public AlterProductViewModel(Product product, IRepository repository)
+            : base(product, repository)
         {
-            Entity = new Product();
             ClearEntityCommand = new DelegateCommand(ClearEntity);
-
         }
 
         private void ClearEntity(object args)

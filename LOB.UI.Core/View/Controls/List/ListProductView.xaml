@@ -36,12 +36,12 @@
             </controls:Tile>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <StackPanel>
-                    <StackPanel>
-                        <DataGrid ItemsSource="{Binding List, Mode=OneWay}" x:Name="DataGridProduct"
-                      SelectedItem="{Binding Entity, Mode=OneWayToSource}" IsReadOnly="True"
+                    <StackPanel Orientation="Vertical"  >
+                        <DataGrid ItemsSource="{Binding Products, Mode=OneWay}" x:Name="DataGridProduct"
+                      SelectedItem="{Binding Product, Mode=OneWayToSource}" IsReadOnly="True"
                       Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
                       Background="{DynamicResource WhiteColorBrush}" Foreground="{DynamicResource BlackColorBrush}">
                             <DataGrid.ColumnHeaderStyle>
@@ -50,9 +50,6 @@
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
                         </DataGrid>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
 
                     </StackPanel>
                 </StackPanel>

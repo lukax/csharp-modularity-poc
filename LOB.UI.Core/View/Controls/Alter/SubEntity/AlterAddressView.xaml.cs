@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {
-    /// <summary>
-    /// Interaction logic for AlterAddressView.xaml
-    /// </summary>
+    [Export]
     public partial class AlterAddressView : UserControl
     {
+        [ImportingConstructor]
         public AlterAddressView()
         {
             InitializeComponent();

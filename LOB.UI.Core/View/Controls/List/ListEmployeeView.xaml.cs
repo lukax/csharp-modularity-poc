@@ -3,6 +3,7 @@
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.Domain;
+using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface;
 
@@ -14,7 +15,7 @@ namespace LOB.UI.Core.View.Controls.List
     public partial class ListEmployeeView : UserControl, ITabProp, IView
     {
         [ImportingConstructor]
-        public ListEmployeeView(ListBaseEntityViewModel<Employee> dataContext)
+        public ListEmployeeView(ListEmployeeViewModel dataContext)
         {
             InitializeComponent();
             DataContext = dataContext;

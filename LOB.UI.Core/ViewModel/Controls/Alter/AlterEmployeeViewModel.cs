@@ -1,11 +1,15 @@
 ﻿using System;
+using System.ComponentModel.Composition;
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
+    [Export]
     public class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>
     {
+        #region Props
         public string Title
         {
             get { return Entity.Title; }
@@ -26,9 +30,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
-        
-        public AlterEmployeeViewModel()
-            : base(new Employee())
+        #endregion
+
+        [ImportingConstructor]
+        public AlterEmployeeViewModel(Employee employee, IRepository repository)
+            : base(employee, repository)
         {
             
         }

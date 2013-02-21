@@ -1,36 +1,36 @@
-﻿using LOB.Domain;
+﻿using LOB.Dao.Interface;
+using LOB.Domain;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     public class AlterNaturalPersonViewModel : AlterPersonViewModel
     {
-        protected NaturalPerson Entity { get; set; }
-
+        #region Props
         public int Rg
         {
-            get { return Entity.Rg; }
+            get { return ((NaturalPerson)Entity).Rg; }
             set
             {
                 if (Rg == value) return;
-                Entity.Rg = value;
+                ((NaturalPerson)Entity).Rg = value;
                 OnPropertyChanged();
             }
         }
         public int Cpf
         {
-            get { return Entity.Cpf; }
+            get { return ((NaturalPerson)Entity).Cpf; }
             set
             {
                 if (Cpf == value) return;
-                Entity.Cpf = value;
+                ((NaturalPerson)Entity).Cpf = value;
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-        public AlterNaturalPersonViewModel(NaturalPerson entity)
-            : base(entity)
+        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
+            : base(entity, repository)
         {
-            Entity = entity;
         }
     }
 }

@@ -1,5 +1,9 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 
@@ -7,11 +11,38 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
+    [Export]
     public class ListProductViewModel : ListBaseEntityViewModel<Product>
     {
-        public ListProductViewModel() : base(new Product())
+        #region Props
+        private IList<Product> _products;
+        public IList<Product> Products
         {
-            Entity = new Product();
+            get { return _products; }
+            set
+            {
+                if (Products == value) return;
+                _products = value;
+                OnPropertyChanged();
+            }
+        }
+        public Product Product
+        {
+            get { return Entity; }
+            set
+            {
+                if (Entity == value) return;
+                Entity = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        [ImportingConstructor]
+        public ListProductViewModel(Product product, IRepository repository)
+            : base(product, repository)
+        {
+            Products = Repository.GetList<Product>().ToList();
         }
 
         public override void InitializeServices()

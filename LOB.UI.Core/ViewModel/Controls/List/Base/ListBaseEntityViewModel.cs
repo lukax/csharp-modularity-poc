@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
@@ -30,18 +31,17 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListEntity where T : BaseEntity
     {
         public T LocalEntity;
-        [Import] protected IRepository Repository;
+        protected IRepository Repository;
         private T _entity;
         private IList<T> _list;
 
         [ImportingConstructor]
-        public ListBaseEntityViewModel(T entity)
+        public ListBaseEntityViewModel(T entity, IRepository repository)
         {
+            Repository = repository;
             Entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
-            SaveToFileCommand = new DelegateCommand(SaveToFile);
-            LoadFromFileCommand = new DelegateCommand(LoadFromFile, CanLoadFromFile);
             FetchCommand = new DelegateCommand(Fetch);
 
             Fetch();
@@ -99,24 +99,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         public void Fetch(object arg = null)
         {
-            //GetList = Repository.GetList().ToList();
-        }
-
-        public void SaveToFile(object arg)
-        {
-            //Debug.WriteLine("INFO: Trying to save file at: " + (String)arg);
-            //Business.Data.PersistFactory<IList<T>>.GetInstance(PersistType.File).Save(GetList);
-        }
-
-        public void LoadFromFile(object arg)
-        {
-            //Debug.WriteLine("INFO: Trying to load file at: " + (String)arg);
-            //this.GetList = Business.Data.PersistFactory<IList<T>>.GetInstance(PersistType.File).GetList().First();
-        }
-
-        public bool CanLoadFromFile(object arg)
-        {
-            return File.Exists("local.bin");
+            List = Repository.GetList<T>().ToList();
         }
 
         public override void InitializeServices()
