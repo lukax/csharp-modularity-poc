@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region Usings
+
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.Dao.Interface;
@@ -6,12 +8,15 @@ using LOB.Domain;
 using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
+#endregion
+
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
     public class AlterProductViewModel : AlterBaseEntityViewModel<Product>
     {
         #region Props
+
         public string Name
         {
             get { return Entity.Name; }
@@ -25,6 +30,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 }
             }
         }
+
         public int UnitsInStock
         {
             get { return Entity.UnitsInStock; }
@@ -35,6 +41,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         public string QuantityPerUnit
         {
             get { return Entity.QuantityPerUnity; }
@@ -45,6 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         public double UnitSalePrice
         {
             get { return Entity.UnitSalePrice; }
@@ -55,12 +63,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         public IList<Supplier> Suppliers
         {
-            get
-            {
-                return Entity.Suppliers ?? new List<Supplier>();
-            }
+            get { return Entity.Suppliers ?? new List<Supplier>(); }
             set
             {
                 if (Suppliers == value) return;
@@ -68,6 +74,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         public string Description
         {
             get { return Entity.Description; }
@@ -78,12 +85,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         public IList<Store> StockedStores
         {
-            get
-            {
-                return Entity.StockedStores ?? new List<Store>();
-            }
+            get { return Entity.StockedStores ?? new List<Store>(); }
             set
             {
                 if (StockedStores == value) return;
@@ -91,11 +96,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
-        #endregion
 
-        //public ICommand CancelCommand { get; set; }
-        //public ICommand SaveChangesCommand { get; set; }
-        public ICommand ClearEntityCommand { get; set; }
+        #endregion
 
         [ImportingConstructor]
         public AlterProductViewModel(Product product, IRepository repository)
@@ -104,19 +106,31 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
 
+        public ICommand ClearEntityCommand { get; set; }
+
         private void ClearEntity(object args)
         {
             Entity = new Product();
         }
 
+        public override bool CanSaveChanges(object arg)
+        {
+            //TODO: Business logic
+            return true;
+        }
+
+        public override bool CanCancel(object arg)
+        {
+            //TODO: Business logic
+            return true;
+        }
+
         public override void InitializeServices()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Refresh()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

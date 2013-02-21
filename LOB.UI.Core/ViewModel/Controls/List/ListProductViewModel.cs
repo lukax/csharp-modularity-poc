@@ -15,7 +15,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     public class ListProductViewModel : ListBaseEntityViewModel<Product>
     {
         #region Props
+
         private IList<Product> _products;
+
         public IList<Product> Products
         {
             get { return _products; }
@@ -26,6 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                 OnPropertyChanged();
             }
         }
+
         public Product Product
         {
             get { return Entity; }
@@ -36,6 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                 OnPropertyChanged();
             }
         }
+
         #endregion
 
         [ImportingConstructor]
@@ -45,14 +49,24 @@ namespace LOB.UI.Core.ViewModel.Controls.List
             Products = Repository.GetList<Product>().ToList();
         }
 
+        public override bool CanUpdate(object arg)
+        {
+            //TODO: Business logic
+            return true;
+        }
+
+        public override bool CanDelete(object arg)
+        {
+            //TODO: Business logic
+            return true;
+        }
+
         public override void InitializeServices()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Refresh()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

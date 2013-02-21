@@ -1,4 +1,8 @@
-﻿using LOB.Domain.Base;
+﻿#region Usings
+
+using LOB.Domain.Base;
+
+#endregion
 
 namespace LOB.Dao.Nhibernate.Mapping.Base
 {

@@ -1,5 +1,9 @@
-﻿using LOB.Dao.Nhibernate.Mapping.Base;
+﻿#region Usings
+
+using LOB.Dao.Nhibernate.Mapping.Base;
 using LOB.Domain.SubEntity;
+
+#endregion
 
 namespace LOB.Dao.Nhibernate.Mapping.SubEntity
 {

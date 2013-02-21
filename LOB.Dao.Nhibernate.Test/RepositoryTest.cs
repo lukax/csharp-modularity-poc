@@ -88,7 +88,15 @@ namespace LOB.Dao.Nhibernate.Test
         public void SaveGetPolymorphismTest()
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
-            var person = new LegalPerson() { Cnpj = 123456, Ie = 1234, FirstName = "Dude", LastName = "Martin", NickName = "Doesn't have" , BirthDate = DateTime.Now};
+            var person = new LegalPerson()
+                {
+                    Cnpj = 123456,
+                    Ie = 1234,
+                    FirstName = "Dude",
+                    LastName = "Martin",
+                    NickName = "Doesn't have",
+                    BirthDate = DateTime.Now
+                };
             var client = new Client
                 {
                     Person = person,
@@ -107,7 +115,7 @@ namespace LOB.Dao.Nhibernate.Test
 
                 Assert.IsTrue(person2 is LegalPerson);
                 Assert.IsTrue(person.Id.Equals(person2.Id));
-                Assert.IsTrue(((LegalPerson)person2).Cnpj == person.Cnpj);
+                Assert.IsTrue(((LegalPerson) person2).Cnpj == person.Cnpj);
             }
         }
 
@@ -115,13 +123,29 @@ namespace LOB.Dao.Nhibernate.Test
         public void GetListCriteriaTest()
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
-            var person1 = new LegalPerson() { Cnpj = 123456, Ie = 1234, FirstName = "Dude1", LastName = "Martin", NickName = "Doesn't have1", BirthDate = DateTime.Now };
-            var person2 = new LegalPerson() { Cnpj = 12345678, Ie = 12345, FirstName = "Dude2", LastName = "Martin", NickName = "Doesn't have2", BirthDate = DateTime.Now };
+            var person1 = new LegalPerson()
+                {
+                    Cnpj = 123456,
+                    Ie = 1234,
+                    FirstName = "Dude1",
+                    LastName = "Martin",
+                    NickName = "Doesn't have1",
+                    BirthDate = DateTime.Now
+                };
+            var person2 = new LegalPerson()
+                {
+                    Cnpj = 12345678,
+                    Ie = 12345,
+                    FirstName = "Dude2",
+                    LastName = "Martin",
+                    NickName = "Doesn't have2",
+                    BirthDate = DateTime.Now
+                };
             var client1 = new Client
-            {
-                Person = person1,
-                Status = ClientStatus.New
-            };
+                {
+                    Person = person1,
+                    Status = ClientStatus.New
+                };
             var client2 = new Client()
                 {
                     Person = person2,
@@ -136,7 +160,7 @@ namespace LOB.Dao.Nhibernate.Test
 
                 var list1 = repo.GetList<LegalPerson>(x => x.LastName == "Martin");
                 Assert.IsTrue(list1.Any());
-                var list2 = repo.GetList<Client>(x=> x.Status == ClientStatus.New);
+                var list2 = repo.GetList<Client>(x => x.Status == ClientStatus.New);
                 Assert.IsTrue(list1.Count() > 1);
             }
         }

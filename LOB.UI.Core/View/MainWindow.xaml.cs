@@ -2,14 +2,10 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
-using LOB.Core;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using MahApps.Metro;
@@ -36,14 +32,30 @@ namespace LOB.UI.Core.View
             MiLightGrey();
         }
 
+        public void InitializeServices()
+        {
+            DataContext = _viewModel;
+
+            //Registrations
+            //Messenger.Default.Register<int?>(DataContext, "Cancel", o=> TabControlMain.Items.Remove(TabControlMain.SelectedItem) );
+            Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
+            Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
+        }
+
+        public void Refresh()
+        {
+            base.DataContext = _viewModel;
+            base.UpdateLayout();
+        }
+
         public void OpenTab(object content)
         {
             if (content == null) throw new ArgumentNullException();
             if (!(content is ITabProp)) throw new ArgumentException("Content isn't a ITabProp");
 
-            var t = new TabItem { Content = content, Header = ((ITabProp)content).Header };
+            var t = new TabItem {Content = content, Header = ((ITabProp) content).Header};
 
-            ((ITabProp)t.Content).Index = TabControlMain.Items.Add(t);
+            ((ITabProp) t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
         }
 
@@ -55,21 +67,6 @@ namespace LOB.UI.Core.View
         public void OpenSellFlyout(object sender, EventArgs eventArgs)
         {
             Flyouts[1].IsOpen = !Flyouts[1].IsOpen;
-        }
-
-        public void InitializeServices()
-        {
-            DataContext = _viewModel;
-
-            //Registrations
-            Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
-            Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
-        }
-
-        public void Refresh()
-        {
-            base.DataContext = _viewModel;
-            base.UpdateLayout();
         }
 
         #region Themes
@@ -130,6 +127,5 @@ namespace LOB.UI.Core.View
         }
 
         #endregion
-
     }
 }

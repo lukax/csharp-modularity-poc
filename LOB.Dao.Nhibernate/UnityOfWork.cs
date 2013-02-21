@@ -96,7 +96,7 @@ namespace LOB.Dao.Nhibernate
         {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
-            else if(!_transaction.IsActive)
+            else if (!_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
             _transaction.Commit();
         }
@@ -105,7 +105,7 @@ namespace LOB.Dao.Nhibernate
         {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
-            if(!_transaction.IsActive)
+            if (!_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
             _transaction.Rollback();
         }

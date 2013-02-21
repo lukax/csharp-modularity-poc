@@ -1,10 +1,8 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
@@ -75,41 +73,33 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         public ICommand SaveToFileCommand { get; set; }
         public ICommand FetchCommand { get; set; }
 
-        public void Update(object arg)
+        public virtual void Update(object arg)
         {
             Messenger.Default.Send(Entity, "UpdateCommand");
             Debug.WriteLine("Updatecalled");
         }
 
-        public bool CanUpdate(object arg)
-        {
-            return Entity != null;
-        }
+        public abstract bool CanUpdate(object arg);
 
-        public void Delete(object arg)
+        public virtual void Delete(object arg)
         {
             Messenger.Default.Send(arg ?? _entity, "DeleteCommand");
             Repository.Delete(_entity);
         }
 
-        public bool CanDelete(object arg)
-        {
-            return Entity != null;
-        }
+        public abstract bool CanDelete(object arg);
 
-        public void Fetch(object arg = null)
+        public virtual void Fetch(object arg = null)
         {
             List = Repository.GetList<T>().ToList();
         }
 
         public override void InitializeServices()
         {
-            throw new NotImplementedException();
         }
 
         public override void Refresh()
         {
-            throw new NotImplementedException();
         }
     }
 }

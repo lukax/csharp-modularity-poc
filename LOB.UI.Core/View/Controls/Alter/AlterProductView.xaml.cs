@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
@@ -28,7 +27,6 @@ namespace LOB.UI.Core.View.Controls.Alter
         public string Header
         {
             get { return "Alterar Produto"; }
-            set { }
         }
 
         public int? Index
@@ -39,12 +37,10 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void InitializeServices()
         {
-            throw new NotImplementedException();
         }
 
         public void Refresh()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using FluentNHibernate.Mapping;
+﻿#region Usings
+
 using LOB.Dao.Nhibernate.Mapping.Base;
 using LOB.Domain;
+
+#endregion
 
 namespace LOB.Dao.Nhibernate.Mapping
 {

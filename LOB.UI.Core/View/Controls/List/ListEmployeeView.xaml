@@ -14,15 +14,17 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
-            <TextBox MinWidth="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True"/>
+            <TextBox MinWidth="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                     controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
-            <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18" Background="Transparent">
+            <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
+                           Background="Transparent">
                 <Image Source="/LOB.UI.Core;component/View/Resources/Add48.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
@@ -31,7 +33,8 @@
             <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
                 <Image Source="/LOB.UI.Core;component/View/Resources/delete.png" />
             </controls:Tile>
-            <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18" Background="Transparent">
+            <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
+                           Background="Transparent">
                 <Image Source="/LOB.UI.Core;component/View/Resources/Refresh48.png" />
             </controls:Tile>
         </StackPanel>
@@ -40,9 +43,10 @@
                 <StackPanel>
                     <StackPanel>
                         <DataGrid ItemsSource="{Binding List, Mode=OneWay}" x:Name="DataGridProduct"
-                      SelectedItem="{Binding Entity, Mode=OneWayToSource}" IsReadOnly="True"
-                      Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
-                      Background="{DynamicResource WhiteColorBrush}" Foreground="{DynamicResource BlackColorBrush}">
+                                  SelectedItem="{Binding Entity, Mode=OneWayToSource}" IsReadOnly="True"
+                                  Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
+                                  Background="{DynamicResource WhiteColorBrush}"
+                                  Foreground="{DynamicResource BlackColorBrush}">
                             <DataGrid.ColumnHeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Bold" />

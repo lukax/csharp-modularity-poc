@@ -2,9 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List;
-using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface;
 
 #endregion

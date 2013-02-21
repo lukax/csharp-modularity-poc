@@ -18,6 +18,7 @@ namespace LOB.Business
 
         [Import]
         public IUnityOfWork UnityOfWork { get; private set; }
+
         public T Entity { get; private set; }
     }
 }

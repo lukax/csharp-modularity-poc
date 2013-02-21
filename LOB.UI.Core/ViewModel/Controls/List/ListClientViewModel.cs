@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using LOB.Dao.Interface;
+using LOB.Domain.Base;
+
+#endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListClientViewModel
+    public class ListClientViewModel : ListPersonViewModel
     {
+        public ListClientViewModel(Person entity, IRepository repository)
+            : base(entity, repository)
+        {
+        }
     }
 }

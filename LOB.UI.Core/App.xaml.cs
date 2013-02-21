@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.IO;
@@ -24,11 +23,11 @@ namespace LOB.UI.Core
     /// </summary>
     public partial class App : Application
     {
-        private IUnityContainer _unityContainer;
+        private ComposablePartCatalog _catalog;
         private INavigator _navigator;
         private IRegionAdapter _regionAdapter;
         private ISessionCreator _sessionCreator;
-        private ComposablePartCatalog _catalog;
+        private IUnityContainer _unityContainer;
 
         static App()
         {
@@ -55,7 +54,7 @@ namespace LOB.UI.Core
 
             //Full integration with MEF:
             _unityContainer.RegisterCatalog(_catalog);
-            
+
             _navigator = _unityContainer.Resolve<INavigator>();
             _regionAdapter = _unityContainer.Resolve<IRegionAdapter>();
             _sessionCreator = _unityContainer.Resolve<ISessionCreator>();
@@ -67,6 +66,7 @@ namespace LOB.UI.Core
 
             ComposablePartCatalog daoDll = null;
             ComposablePartCatalog currentDll = null;
+            ComposablePartCatalog domainDll = null;
             try
             {
                 daoDll = new AssemblyCatalog("LOB.DAO.Nhibernate.dll");
@@ -89,10 +89,10 @@ namespace LOB.UI.Core
             finally
             {
                 currentDll = new AssemblyCatalog(Assembly.GetExecutingAssembly());
+                domainDll = new AssemblyCatalog(Assembly.Load("LOB.Domain"));
             }
 
             return new AggregateCatalog(daoDll, currentDll);
         }
-
     }
 }

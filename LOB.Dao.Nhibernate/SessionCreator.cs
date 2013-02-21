@@ -69,7 +69,7 @@ namespace LOB.Dao.Nhibernate
             return Mapping().Database(MySQLConfiguration.Standard
                                                         .ConnectionString(ConnectionString)
                                                         .ShowSql)
-                .BuildConfiguration();
+                            .BuildConfiguration();
         }
 
         private Configuration StoreInMsSqlConfiguration()

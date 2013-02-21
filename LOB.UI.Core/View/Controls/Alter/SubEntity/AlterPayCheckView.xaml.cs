@@ -1,5 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿#region Usings
+
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
+
+#endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {

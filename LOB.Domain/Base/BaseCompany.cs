@@ -1,4 +1,8 @@
-﻿using LOB.Domain.SubEntity;
+﻿#region Usings
+
+using LOB.Domain.SubEntity;
+
+#endregion
 
 namespace LOB.Domain.Base
 {

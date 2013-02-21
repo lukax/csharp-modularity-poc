@@ -1,7 +1,11 @@
-﻿using System.ComponentModel.Composition;
+﻿#region Usings
+
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
+
+#endregion
 
 namespace LOB.UI.Core.View.Controls.Alter
 {
@@ -15,7 +19,12 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        public string Header { get { return "Alterar Venda"; } set{} }
+        public string Header
+        {
+            get { return "Alterar Venda"; }
+            set { }
+        }
+
         public int? Index { get; set; }
     }
 }

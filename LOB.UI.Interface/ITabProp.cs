@@ -10,7 +10,7 @@ namespace LOB.UI.Interface
     [InheritedExport]
     public interface ITabProp
     {
-        String Header { get; set; }
+        String Header { get; }
         int? Index { get; set; }
     }
 }

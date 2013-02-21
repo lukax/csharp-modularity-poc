@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+
+#endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
@@ -10,6 +14,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     public class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>
     {
         #region Props
+
         public string Title
         {
             get { return Entity.Title; }
@@ -20,6 +25,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         public DateTime HireDate
         {
             get { return Entity.HireDate; }
@@ -30,23 +36,33 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 OnPropertyChanged();
             }
         }
+
         #endregion
 
         [ImportingConstructor]
         public AlterEmployeeViewModel(Employee employee, IRepository repository)
             : base(employee, repository)
         {
-            
+        }
+
+        public override bool CanSaveChanges(object arg)
+        {
+            //TODO: Business logic
+            return true;
+        }
+
+        public override bool CanCancel(object arg)
+        {
+            //TODO: Business logic
+            return true;
         }
 
         public override void InitializeServices()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Refresh()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
