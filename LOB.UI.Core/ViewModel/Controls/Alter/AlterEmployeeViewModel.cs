@@ -20,7 +20,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.Title; }
             set
             {
-                if (Title == value) return;
+                if (Entity.Title == value) return;
                 Entity.Title = value;
                 OnPropertyChanged();
             }
@@ -31,7 +31,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.HireDate; }
             set
             {
-                if (HireDate == value) return;
+                if (Entity.HireDate == value) return;
                 Entity.HireDate = value;
                 OnPropertyChanged();
             }

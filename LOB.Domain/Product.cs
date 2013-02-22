@@ -18,7 +18,7 @@ namespace LOB.Domain
         public virtual double UnitCostPrice { get; set; }
         public virtual double UnitSalePrice { get; set; }
         public virtual double ProfitMargin { get; set; }
-        public virtual string QuantityPerUnity { get; set; }
+        public virtual string QuantityPerUnit { get; set; }
         public virtual IList<Store> StockedStores { get; set; }
         public virtual IList<Sale> Sales { get; set; }
         public virtual IList<Supplier> Suppliers { get; set; }

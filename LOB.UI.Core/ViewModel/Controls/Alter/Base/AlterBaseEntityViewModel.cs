@@ -46,7 +46,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             get { return _entity; }
             set
             {
-                if (Entity == value) return;
+                if (_entity == value) return;
                 _entity = value;
                 OnPropertyChanged();
             }

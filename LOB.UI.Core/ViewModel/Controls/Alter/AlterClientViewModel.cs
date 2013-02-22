@@ -15,35 +15,37 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     {
         #region Props
 
+        protected Client Client { get; set; }
+        
         public IList<Store> ClientOf
         {
-            get { return _client.ClientOf; }
+            get { return Client.ClientOf; }
             set
             {
-                if (_client.ClientOf == value) return;
-                _client.ClientOf = value;
+                if (Client.ClientOf == value) return;
+                Client.ClientOf = value;
                 OnPropertyChanged();
             }
         }
 
         public ClientStatus ClientStatus
         {
-            get { return _client.Status; }
+            get { return Client.Status; }
             set
             {
-                if (_client.Status == value) return;
-                _client.Status = value;
+                if (Client.Status == value) return;
+                Client.Status = value;
                 OnPropertyChanged();
             }
         }
 
         public IList<Sale> BoughtHistory
         {
-            get { return _client.BoughtHistory; }
+            get { return Client.BoughtHistory; }
             set
             {
-                if (_client.BoughtHistory == value) return;
-                _client.BoughtHistory = value;
+                if (Client.BoughtHistory == value) return;
+                Client.BoughtHistory = value;
                 OnPropertyChanged();
             }
         }
@@ -51,12 +53,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         #endregion
 
         [ImportingConstructor]
-        public AlterClientViewModel(Client entity, IRepository repository)
-            : base(entity.Person, repository)
+        public AlterClientViewModel(Client client, IRepository repository)
+            : base(client.Person, repository)
         {
-            _client = entity;
+            Client = client;
         }
 
-        private Client _client { get; set; }
     }
 }

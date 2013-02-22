@@ -22,7 +22,7 @@ namespace LOB.UI.Core
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application , IDisposable
+    public partial class App : Application
     {
         private ComposablePartCatalog _catalog;
         private INavigator _navigator;
@@ -96,9 +96,5 @@ namespace LOB.UI.Core
             return new AggregateCatalog(daoDll, currentDll);
         }
 
-        public void Dispose()
-        {
-            _unityContainer.Dispose();
-        }
     }
 }

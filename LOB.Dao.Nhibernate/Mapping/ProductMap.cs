@@ -17,7 +17,7 @@ namespace LOB.Dao.Nhibernate.Mapping
             Map(x => x.UnitCostPrice);
             Map(x => x.UnitSalePrice);
             Map(x => x.ProfitMargin);
-            Map(x => x.QuantityPerUnity);
+            Map(x => x.QuantityPerUnit);
             HasManyToMany(x => x.StockedStores)
                 .Cascade.All()
                 .Inverse()

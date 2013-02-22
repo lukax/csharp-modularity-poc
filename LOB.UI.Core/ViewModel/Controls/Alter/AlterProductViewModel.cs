@@ -22,9 +22,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.Name; }
             set
             {
-                if (Name != value)
+                if (Entity.Name != value)
                 {
-                    if (Name == value) return;
+                    if (Entity.Name == value) return;
                     Entity.Name = value;
                     OnPropertyChanged();
                 }
@@ -36,7 +36,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.UnitsInStock; }
             set
             {
-                if (UnitsInStock == value) return;
+                if (Entity.UnitsInStock == value) return;
                 Entity.UnitsInStock = value;
                 OnPropertyChanged();
             }
@@ -44,11 +44,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public string QuantityPerUnit
         {
-            get { return Entity.QuantityPerUnity; }
+            get { return Entity.QuantityPerUnit; }
             set
             {
-                if (QuantityPerUnit == value) return;
-                Entity.QuantityPerUnity = value;
+                if (Entity.QuantityPerUnit == value) return;
+                Entity.QuantityPerUnit = value;
                 OnPropertyChanged();
             }
         }
@@ -58,7 +58,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.UnitSalePrice; }
             set
             {
-                if (UnitSalePrice == value) return;
+                if (Entity.UnitSalePrice == value) return;
                 Entity.UnitSalePrice = value;
                 OnPropertyChanged();
             }
@@ -69,7 +69,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.Suppliers ?? new List<Supplier>(); }
             set
             {
-                if (Suppliers == value) return;
+                if (Entity.Suppliers == value) return;
                 Entity.Suppliers = value;
                 OnPropertyChanged();
             }
@@ -80,8 +80,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.Description; }
             set
             {
-                if (Description == value) return;
-                Description = value;
+                if (Entity.Description == value) return;
+                Entity.Description = value;
                 OnPropertyChanged();
             }
         }
@@ -91,7 +91,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.StockedStores ?? new List<Store>(); }
             set
             {
-                if (StockedStores == value) return;
+                if (Entity.StockedStores == value) return;
                 Entity.StockedStores = value;
                 OnPropertyChanged();
             }
