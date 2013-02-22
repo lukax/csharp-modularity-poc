@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.IO;
@@ -21,7 +22,7 @@ namespace LOB.UI.Core
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : Application , IDisposable
     {
         private ComposablePartCatalog _catalog;
         private INavigator _navigator;
@@ -93,6 +94,11 @@ namespace LOB.UI.Core
             }
 
             return new AggregateCatalog(daoDll, currentDll);
+        }
+
+        public void Dispose()
+        {
+            _unityContainer.Dispose();
         }
     }
 }

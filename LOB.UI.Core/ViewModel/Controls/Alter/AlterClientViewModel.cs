@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 #endregion
 

@@ -116,7 +116,7 @@
     <Compile Include="ViewModel\Controls\Alter\AlterLegalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterNaturalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\AlterPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\AlterPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\AlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListBaseEntityViewModel.cs" />

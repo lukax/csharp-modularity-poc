@@ -4,11 +4,10 @@ using System;
 using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter
+namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
     [Export]
     public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>
@@ -48,14 +47,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
-        public DateTime BirthDate
+        public string BirthDate
         {
-            get { return Entity.BirthDate; }
+            get
+            {
+                return (Entity.BirthDate == default(DateTime) ? DateTime.Now : Entity.BirthDate).ToShortDateString();
+            }
             set
             {
-                if (BirthDate == value) return;
-                Entity.BirthDate = value;
-                OnPropertyChanged();
+                string backup = string.Empty;
+                try
+                {
+                    if (BirthDate == value) return;
+                    backup = BirthDate;
+                    Entity.BirthDate = DateTime.Parse(value);
+                    OnPropertyChanged();
+                }
+                catch (FormatException)
+                {
+                    BirthDate = backup;
+                }
+
             }
         }
 

@@ -36,7 +36,7 @@
             </controls:Tile>
         </DockPanel>
 
-        <ScrollViewer CanContentScroll="True" Grid.Row="1">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
