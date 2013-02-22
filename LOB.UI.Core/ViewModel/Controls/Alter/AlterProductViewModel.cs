@@ -1,10 +1,13 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.SubEntity;
 using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
@@ -97,20 +100,42 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
+        public Category Category
+        {
+            get { return Entity.Category; }
+            set
+            {
+                if (Entity.Category == value) return;
+                Entity.Category = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Lazy<IList<Category>> _categories; 
+        public IList<Category> Categories
+        {
+            get { return _categories.Value; }
+        }
+        
+        public ProductStatus Status
+        {
+            get { return Entity.Status; }
+            set
+            {
+                if (Entity.Status == value) return;
+                Entity.Status = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
+        public ICommand ClearEntityCommand { get; set; }
 
         [ImportingConstructor]
         public AlterProductViewModel(Product product, IRepository repository)
             : base(product, repository)
         {
+            _categories = new Lazy<IList<Category>>(Repository.GetList<Category>().ToList);
             ClearEntityCommand = new DelegateCommand(ClearEntity);
-        }
-
-        public ICommand ClearEntityCommand { get; set; }
-
-        private void ClearEntity(object args)
-        {
-            Entity = new Product();
         }
 
         public override void SaveChanges(object arg)
@@ -119,7 +144,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             using (Repository.Uow)
             {
                 Repository.Uow.BeginTransaction();
-                Repository.SaveOrUpdate(buildProduct());
+                Repository.SaveOrUpdate(BuildProduct());
                 Repository.Uow.CommitTransaction();
             }
         }
@@ -136,6 +161,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             return true;
         }
 
+        private void ClearEntity(object args)
+        {
+            Entity = new Product();
+        }
+
         public override void InitializeServices()
         {
         }
@@ -144,7 +174,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         {
         }
 
-        private Product buildProduct()
+        private Product BuildProduct()
         {
             return new Product()
             {
@@ -154,7 +184,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 Description = Description,
                 QuantityPerUnit = QuantityPerUnit,
                 UnitsInStock = UnitsInStock,
-                Suppliers = Suppliers
+                Suppliers = Suppliers,
+                Category = Category, 
+                Status = Status
             };
         }
     }
