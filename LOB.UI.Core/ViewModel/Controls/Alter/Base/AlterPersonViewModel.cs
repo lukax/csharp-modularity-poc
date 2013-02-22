@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
@@ -84,13 +85,29 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         #endregion
 
-        private new Person Entity;
+        protected new Person Entity;
+        protected AlterAddressViewModel AlterAddressViewModel;
+        protected AlterContactInfoViewModel AlterContactInfoViewModel;
 
         [ImportingConstructor]
-        public AlterPersonViewModel(Person entity, IRepository repository)
-            : base(entity, repository)
+        public AlterPersonViewModel(Person entity, IRepository repository,
+            AlterAddressViewModel alterAdressViewModel,
+            AlterContactInfoViewModel alterContactInfoViewModel)
+                : base(entity, repository)
         {
+            AlterAddressViewModel = alterAdressViewModel;
+            AlterContactInfoViewModel = alterContactInfoViewModel;
             Entity = entity;
+        }
+
+        public override void SaveChanges(object arg)
+        {
+            using (Repository.Uow)
+            {
+                Repository.Uow.BeginTransaction();
+                Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
         }
 
         public override bool CanSaveChanges(object arg)

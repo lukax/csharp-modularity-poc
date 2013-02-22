@@ -5,59 +5,90 @@ using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
-    public class AlterClientViewModel : AlterPersonViewModel
+    public sealed class AlterClientViewModel : AlterBaseEntityViewModel<Client>
     {
         #region Props
-
-        protected Client Client { get; set; }
         
         public IList<Store> ClientOf
         {
-            get { return Client.ClientOf; }
+            get { return Entity.ClientOf; }
             set
             {
-                if (Client.ClientOf == value) return;
-                Client.ClientOf = value;
+                if (Entity.ClientOf == value) return;
+                Entity.ClientOf = value;
                 OnPropertyChanged();
             }
         }
 
         public ClientStatus ClientStatus
         {
-            get { return Client.Status; }
+            get { return Entity.Status; }
             set
             {
-                if (Client.Status == value) return;
-                Client.Status = value;
+                if (Entity.Status == value) return;
+                Entity.Status = value;
                 OnPropertyChanged();
             }
         }
 
         public IList<Sale> BoughtHistory
         {
-            get { return Client.BoughtHistory; }
+            get { return Entity.BoughtHistory; }
             set
             {
-                if (Client.BoughtHistory == value) return;
-                Client.BoughtHistory = value;
+                if (Entity.BoughtHistory == value) return;
+                Entity.BoughtHistory = value;
                 OnPropertyChanged();
             }
         }
 
         #endregion
 
+        private new Client Entity { get; set; }
+
         [ImportingConstructor]
-        public AlterClientViewModel(Client client, IRepository repository)
-            : base(client.Person, repository)
+        public AlterClientViewModel(Client client, IRepository repository, 
+            AlterPersonViewModel alterPersonViewModel,
+            AlterAddressViewModel alterAddressViewModel,
+            AlterContactInfoViewModel alterContactInfoViewModel)
+            : base(client, repository)
         {
-            Client = client;
+            Entity = client;
         }
 
+        public override bool CanSaveChanges(object arg)
+        {
+            return true;
+        }
+
+        public override bool CanCancel(object arg)
+        {
+            return true;
+        }
+
+        public override void SaveChanges(object arg)
+        {
+            using (Repository.Uow)
+            {
+                Repository.Uow.BeginTransaction();
+                Repository.Uow.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
+        }
+
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+        }
     }
 }

@@ -35,7 +35,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -150,6 +150,9 @@
     <Compile Include="View\Controls\Alter\AlterClientView.xaml.cs">
       <DependentUpon>AlterClientView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\List\SubEntity\ListBaseEntity.xaml.cs">
+      <DependentUpon>ListBaseEntity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\List\ListClientView.xaml.cs">
       <DependentUpon>ListClientView.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
     <Page Include="View\Controls\Alter\AlterClientView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\List\SubEntity\ListBaseEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\List\ListClientView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -322,9 +329,7 @@
   <ItemGroup>
     <Resource Include="View\Resources\Shoppingcart48.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Controls\List\SubEntity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="View\Resources\Search48.png" />
   </ItemGroup>

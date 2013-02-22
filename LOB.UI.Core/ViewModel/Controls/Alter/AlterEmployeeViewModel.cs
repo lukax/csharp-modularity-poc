@@ -26,14 +26,25 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
-        public DateTime HireDate
+        public string HireDate
         {
-            get { return Entity.HireDate; }
-            set
+            get
             {
-                if (Entity.HireDate == value) return;
-                Entity.HireDate = value;
-                OnPropertyChanged();
+                return Entity.HireDate == default(DateTime) ? DateTime.Now.ToShortDateString() : Entity.HireDate.ToShortDateString();
+            }
+            set 
+            {
+                var backup = Entity.HireDate;
+                try
+                {
+                    if (HireDate == value) return;
+                    Entity.HireDate = DateTime.Parse(value);
+                    OnPropertyChanged();
+                }
+                catch (FormatException)
+                {
+                    Entity.HireDate = backup;
+                }
             }
         }
 

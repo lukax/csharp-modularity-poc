@@ -26,7 +26,6 @@ namespace LOB.UI.Core.View.Controls.Alter
         public string Header
         {
             get { return "Alterar Cliente"; }
-            set { }
         }
 
         public int? Index { get; set; }
