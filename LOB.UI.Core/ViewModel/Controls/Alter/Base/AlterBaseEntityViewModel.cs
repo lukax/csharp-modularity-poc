@@ -28,6 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         public AlterBaseEntityViewModel(T entity, IRepository repository)
         {
             Entity = entity;
+            Repository = repository;
 
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);

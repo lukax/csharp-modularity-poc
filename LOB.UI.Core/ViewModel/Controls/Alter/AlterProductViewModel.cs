@@ -113,6 +113,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             Entity = new Product();
         }
 
+        public override void SaveChanges(object arg)
+        {
+            //base.SaveChanges(arg);
+            using (Repository.Uow)
+            {
+                Repository.Uow.BeginTransaction();
+                Repository.SaveOrUpdate(buildProduct());
+                Repository.Uow.CommitTransaction();
+            }
+        }
+
         public override bool CanSaveChanges(object arg)
         {
             //TODO: Business logic
@@ -131,6 +142,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override void Refresh()
         {
+        }
+
+        private Product buildProduct()
+        {
+            return new Product()
+            {
+                Name = Name,
+                UnitSalePrice = UnitSalePrice,
+                StockedStores = StockedStores,
+                Description = Description,
+                QuantityPerUnit = QuantityPerUnit,
+                UnitsInStock = UnitsInStock,
+                Suppliers = Suppliers
+            };
         }
     }
 }
