@@ -36,13 +36,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         [ImportingConstructor]
         public ListBaseEntityViewModel(T entity, IRepository repository)
         {
-            Repository = repository;
-            Entity = entity;
+            //Repository = repository;
+            //Entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
-
-            Fetch();
         }
 
         public CrudOperationType OperationType { get; set; }

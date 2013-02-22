@@ -16,6 +16,8 @@ namespace LOB.Dao.Nhibernate
     public class SessionCreator : ISessionCreator
     {
         private String _connectionString;
+        private String _mySqlConnectionString = @"Server=192.168.0.150;
+                        Database=LOB;Uid=root;Pwd=xx;";
 
         public SessionCreator()
             : this(PersistType.Sql, null)
@@ -67,7 +69,7 @@ namespace LOB.Dao.Nhibernate
         private Configuration StoreInMySqlConfiguration()
         {
             return Mapping().Database(MySQLConfiguration.Standard
-                                                        .ConnectionString(ConnectionString)
+                                                        .ConnectionString(_mySqlConnectionString)
                                                         .ShowSql)
                             .BuildConfiguration();
         }

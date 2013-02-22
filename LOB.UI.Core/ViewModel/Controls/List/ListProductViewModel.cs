@@ -12,7 +12,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public class ListProductViewModel : ListBaseEntityViewModel<Product>
+    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>
     {
         #region Props
 
