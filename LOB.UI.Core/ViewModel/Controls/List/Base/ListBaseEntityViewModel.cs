@@ -26,7 +26,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
     }
 
     [InheritedExport]
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListEntity where T : BaseEntity
+    public class ListBaseEntityViewModel<T> : BaseViewModel, IListEntity where T : BaseEntity
     {
         public T LocalEntity;
         protected IRepository Repository;
@@ -36,8 +36,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         [ImportingConstructor]
         public ListBaseEntityViewModel(T entity, IRepository repository)
         {
-            //Repository = repository;
-            //Entity = entity;
+            Repository = repository;
+            _entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
@@ -77,7 +77,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             Debug.WriteLine("Updatecalled");
         }
 
-        public abstract bool CanUpdate(object arg);
+        public virtual bool CanUpdate(object arg)
+        {
+            return Entity != null;
+        }
 
         public virtual void Delete(object arg)
         {
@@ -85,7 +88,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             Repository.Delete(_entity);
         }
 
-        public abstract bool CanDelete(object arg);
+        public virtual bool CanDelete(object arg)
+        {
+            return Entity != null;
+        }
 
         public virtual void Fetch(object arg = null)
         {

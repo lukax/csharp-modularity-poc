@@ -55,7 +55,7 @@ namespace LOB.UI.Core.View
             v.Title = "Quick Search...";
             v.Frame.Content = new ListBaseEntityView()
                 {
-                    //DataContext = _container.Resolve<AlterBaseEntityViewModel<BaseEntity>>()
+                        DataContext = arg ?? _container.Resolve<ListBaseEntityViewModel<BaseEntity>>()
                 };
             v.ShowDialog();
         }

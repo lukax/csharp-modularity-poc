@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -16,18 +17,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     {
         #region Props
 
-        private IList<Product> _products;
-
-        public IList<Product> Products
-        {
-            get { return _products; }
-            set
-            {
-                if (Products == value) return;
-                _products = value;
-                OnPropertyChanged();
-            }
-        }
+        private Lazy<IQueryable<Product>> _products;
+        public IList<Product> Products { get { return _products.Value.ToList(); } }
 
         public Product Product
         {
@@ -42,11 +33,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List
 
         #endregion
 
+
+
         [ImportingConstructor]
         public ListProductViewModel(Product product, IRepository repository)
             : base(product, repository)
         {
-            Products = Repository.GetList<Product>().ToList();
+            _products = new Lazy<IQueryable<Product>>(Repository.GetList<Product>);
         }
 
         public override bool CanUpdate(object arg)

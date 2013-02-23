@@ -20,6 +20,7 @@ namespace LOB.UI.Core.View
         public FrameWindow()
         {
             InitializeComponent();
+            MiLightGrey();
         }
 
         public Object Content
@@ -33,6 +34,11 @@ namespace LOB.UI.Core.View
         }
 
         #region Themes
+
+        private void MiLightGrey()
+        {
+            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"), Theme.Light);
+        }
 
         private void MiLightRed(object sender, RoutedEventArgs e)
         {

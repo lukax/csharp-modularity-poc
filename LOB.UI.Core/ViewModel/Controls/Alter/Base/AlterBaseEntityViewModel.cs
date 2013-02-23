@@ -20,7 +20,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
     }
 
     [InheritedExport]
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterEntity where T : BaseEntity
+    public class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterEntity where T : BaseEntity
     {
         private CrudOperationType _typeOfOperation;
         #region Props
@@ -46,7 +46,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         #endregion
 
         [ImportingConstructor]
-        protected AlterBaseEntityViewModel(T entity, IRepository repository)
+        public AlterBaseEntityViewModel(T entity, IRepository repository)
         {
             _entity = entity;
             Repository = repository;
@@ -59,8 +59,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         public ICommand CancelCommand { get; set; }
         public ICommand SaveChangesCommand { get; set; }
         public ICommand QuickSearchCommand { get; set; }
-        public abstract bool CanSaveChanges(object arg);
-        public abstract bool CanCancel(object arg);
+        public virtual bool CanSaveChanges(object arg)
+        {
+            return Entity != null;
+        }
+        public virtual bool CanCancel(object arg)
+        {
+            return Entity != null;
+        }
         public int? CancelIndex { get; set; }
 
         public virtual void SaveChanges(object arg)
@@ -80,7 +86,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             Messenger.Default.Send(arg, "QuickSearchCommand");
         }
 
-        public abstract override void InitializeServices();
-        public abstract override void Refresh();
+        public override void InitializeServices()
+        {
+            
+        }
+        public override void Refresh()
+        {
+            
+        }
     }
 }

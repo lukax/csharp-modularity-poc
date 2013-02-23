@@ -329,7 +329,9 @@
   <ItemGroup>
     <Resource Include="View\Resources\Shoppingcart48.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\Controls\List\SubEntity\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\Search48.png" />
   </ItemGroup>
