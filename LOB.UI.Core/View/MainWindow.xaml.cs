@@ -6,7 +6,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
+using LOB.Domain.Base;
+using LOB.UI.Core.View.Controls;
 using LOB.UI.Core.ViewModel;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
@@ -40,6 +44,20 @@ namespace LOB.UI.Core.View
             //Messenger.Default.Register<int?>(DataContext, "Cancel", o=> TabControlMain.Items.Remove(TabControlMain.SelectedItem) );
             Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
             Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
+            Messenger.Default.Register<object>(DataContext, "QuickSearchCommand", OpenQuickSearch);
+        }
+
+
+        private void OpenQuickSearch(object arg)
+        {
+            //var v = navigator.ResolveView("");
+            var v = new FrameWindow();
+            v.Title = "Quick Search...";
+            v.Frame.Content = new ListBaseEntityView()
+                {
+                    //DataContext = _container.Resolve<AlterBaseEntityViewModel<BaseEntity>>()
+                };
+            v.ShowDialog();
         }
 
         public void Refresh()

@@ -19,15 +19,15 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 namespace LOB.UI.Core.View.Controls
 {
     [Export]
-    public partial class ListBaseEntity : UserControl
+    public partial class ListBaseEntityView : UserControl
     {
-        public ListBaseEntity()
+        public ListBaseEntityView()
         {
             InitializeComponent();
         }
 
         [ImportingConstructor]
-        public ListBaseEntity(ListBaseEntityViewModel<BaseEntity> viewModel)
+        public ListBaseEntityView(ListBaseEntityViewModel<BaseEntity> viewModel)
             :this()
         {
             DataContext = viewModel;

@@ -150,8 +150,8 @@
     <Compile Include="View\Controls\Alter\AlterClientView.xaml.cs">
       <DependentUpon>AlterClientView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\List\SubEntity\ListBaseEntity.xaml.cs">
-      <DependentUpon>ListBaseEntity.xaml</DependentUpon>
+    <Compile Include="View\Controls\List\SubEntity\ListBaseEntityView.xaml.cs">
+      <DependentUpon>ListBaseEntityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\List\ListClientView.xaml.cs">
       <DependentUpon>ListClientView.xaml</DependentUpon>
@@ -220,7 +220,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Controls\List\SubEntity\ListBaseEntity.xaml">
+    <Page Include="View\Controls\List\SubEntity\ListBaseEntityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -52,11 +52,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             Repository = repository;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
+            QuickSearchCommand = new DelegateCommand(QuickSearch);
         }
 
         protected IRepository Repository { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand SaveChangesCommand { get; set; }
+        public ICommand QuickSearchCommand { get; set; }
         public abstract bool CanSaveChanges(object arg);
         public abstract bool CanCancel(object arg);
         public int? CancelIndex { get; set; }
@@ -71,6 +73,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         public virtual void Cancel(object arg)
         {
             Messenger.Default.Send(CancelIndex, "Cancel");
+        }
+
+        public virtual void QuickSearch(object arg)
+        {
+            Messenger.Default.Send(arg, "QuickSearchCommand");
         }
 
         public abstract override void InitializeServices();

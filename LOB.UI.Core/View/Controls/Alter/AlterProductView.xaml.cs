@@ -15,13 +15,16 @@ namespace LOB.UI.Core.View.Controls.Alter
     [Export]
     public partial class AlterProductView : UserControl, ITabProp, IView
     {
+        private INavigator navigator;
+
         [ImportingConstructor]
-        public AlterProductView(AlterProductViewModel dataContext)
+        public AlterProductView(AlterProductViewModel dataContext, INavigator navigator)
         {
             InitializeComponent();
-            DataContext = dataContext;
+            this.DataContext = dataContext;
 
             Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            //Messenger.Default.Register<object>(DataContext, "QuickSearchCommand", o=> {});
         }
 
         public string Header

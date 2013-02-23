@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
@@ -140,13 +141,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override void SaveChanges(object arg)
         {
-            //base.SaveChanges(arg);
             using (Repository.Uow)
             {
                 Repository.Uow.BeginTransaction();
                 Repository.SaveOrUpdate(BuildProduct());
                 Repository.Uow.CommitTransaction();
             }
+
+            Messenger.Default.Send("SaveChangedCommand");
         }
 
         public override bool CanSaveChanges(object arg)
