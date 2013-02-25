@@ -23,6 +23,7 @@ namespace LOB.Dao.Nhibernate.Test
         public void TransactionTest()
         {
             var sCreator = new SessionCreator();
+            
 
             var address = new Address
                 {

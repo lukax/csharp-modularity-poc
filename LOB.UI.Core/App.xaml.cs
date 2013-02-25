@@ -44,16 +44,12 @@ namespace LOB.UI.Core
             _navigator.Startup<MainWindow>();
         }
 
-        protected void OnStartup()
+        private void OnStartup()
         {
             _catalog = LoadDlls();
             _unityContainer = new UnityContainer();
 
             //Make container resolve types known to MEF:
-            //_unityContainer.AddNewExtension<CompositionIntegration>();
-            //_unityContainer.Configure<CompositionIntegration>().Catalogs.Add(_catalog);
-
-            //Full integration with MEF:
             _unityContainer.RegisterCatalog(_catalog);
 
             _navigator = _unityContainer.Resolve<INavigator>();
@@ -64,7 +60,6 @@ namespace LOB.UI.Core
         private AggregateCatalog LoadDlls()
         {
             //USING LOB.DAO.NHIBERNATE IN SESSIONCREATOR IMPLEMENTATION
-
             ComposablePartCatalog daoDll = null;
             ComposablePartCatalog currentDll = null;
             ComposablePartCatalog domainDll = null;
@@ -104,11 +99,9 @@ namespace LOB.UI.Core
 
         private void Dispose(bool b)
         {
-            if (b)
-            {
-                _unityContainer.Dispose();
-                GC.SuppressFinalize(this);
-            }
+            if (!b) return;
+            _unityContainer.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -16,8 +16,8 @@ namespace LOB.Dao.Nhibernate
     public class SessionCreator : ISessionCreator
     {
         private String _connectionString;
-        private String _mySqlConnectionString = @"Server=192.168.0.150;
-                        Database=LOB;Uid=root;Pwd=xx;";
+        private const String _mySqlConnectionString = @"Server=192.168.0.150;
+                        Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 
         public SessionCreator()
             : this(PersistType.Sql, null)
@@ -36,10 +36,8 @@ namespace LOB.Dao.Nhibernate
         {
             get
             {
-                if (_connectionString == null)
-                    return @"Data Source=VSWINSERVER;Initial Catalog=LOB;
-                           Persist Security Info=True;User ID=LOB;Password=LOBSYSTEMDB";
-                return _connectionString;
+                return _connectionString ??
+                       @"Data Source=VSWINSERVER;Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
             }
             set { _connectionString = value; }
         }
@@ -52,7 +50,7 @@ namespace LOB.Dao.Nhibernate
             switch (persistIn)
             {
                 case PersistType.Sql:
-                    cfg = StoreInMsSqlConfiguration();
+                    cfg = StoreInMySqlConfiguration();
                     break;
                 case PersistType.File:
                     cfg = StoreInFileConfiguration();

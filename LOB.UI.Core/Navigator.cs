@@ -4,8 +4,10 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
+using LOB.UI.Core.View.Controls;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.List;
+using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Interface;
 using Microsoft.Practices.Unity;
 
@@ -59,7 +61,7 @@ namespace LOB.UI.Core
             _regionAdapter.AddView(view, regionName, model.Title);
         }
 
-        public object ResolveView(string param)
+        public object ResolveView(string param)  
         {
             switch (param)
             {
@@ -77,6 +79,8 @@ namespace LOB.UI.Core
                     return _container.Resolve<ListClientView>();
                 case "AlterSale":
                     return _container.Resolve<AlterSaleView>();
+                case "QuickSearch":
+                    return _container.Resolve<ListBaseEntityView>();
             }
             throw new ArgumentException("Parameter not implemented yet, ", "param");
         }

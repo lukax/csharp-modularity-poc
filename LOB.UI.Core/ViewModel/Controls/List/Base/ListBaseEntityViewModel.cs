@@ -73,7 +73,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         public virtual void Update(object arg)
         {
-            Messenger.Default.Send(Entity, "UpdateCommand");
+            Messenger.Default.Send(Entity, "Update");
             Debug.WriteLine("Updatecalled");
         }
 
@@ -84,7 +84,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         public virtual void Delete(object arg)
         {
-            Messenger.Default.Send(arg ?? _entity, "DeleteCommand");
+            Messenger.Default.Send(arg ?? _entity, "Delete");
             Repository.Delete(_entity);
         }
 

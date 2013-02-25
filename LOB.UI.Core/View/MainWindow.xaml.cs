@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Domain.Base;
 using LOB.UI.Core.View.Controls;
+using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
@@ -25,12 +26,15 @@ namespace LOB.UI.Core.View
     {
         private IUnityContainer _container;
         private MainWindowViewModel _viewModel;
+        private INavigator _navigator;
 
         [ImportingConstructor]
-        public MainWindow(IUnityContainer container, MainWindowViewModel viewModel)
+        public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, INavigator navigator)
         {
             _container = container;
             _viewModel = viewModel;
+            _navigator = navigator;
+
 
             InitializeComponent();
             MiLightGrey();
@@ -40,41 +44,33 @@ namespace LOB.UI.Core.View
         {
             DataContext = _viewModel;
 
-            //Registrations
-            //Messenger.Default.Register<int?>(DataContext, "Cancel", o=> TabControlMain.Items.Remove(TabControlMain.SelectedItem) );
             Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
             Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
-            Messenger.Default.Register<object>(DataContext, "QuickSearchCommand", OpenQuickSearch);
+            Messenger.Default.Register<object>(DataContext, "QuickSearch", vM => OpenView("QuickSearch", vM));
         }
 
-
-        private void OpenQuickSearch(object arg)
+        private void OpenView(object arg, object viewModel)
         {
-            //var v = navigator.ResolveView("");
-            var v = new FrameWindow();
-            v.Title = "Quick Search...";
-            v.Frame.Content = new ListBaseEntityView()
-                {
-                        DataContext = arg ?? _container.Resolve<ListBaseEntityViewModel<BaseEntity>>()
-                };
-            v.ShowDialog();
+            dynamic view = _navigator.ResolveView(arg.ToString());
+            view.DataContext = viewModel;
+            view.ShowDialog();
+        }
+
+        public void OpenTab(object view)
+        {
+            if (view == null) throw new ArgumentNullException();
+            if (!(view is ITabProp)) throw new ArgumentException("Content isn't a ITabProp");
+
+            var t = new TabItem {Content = view, Header = ((ITabProp) view).Header};
+
+            ((ITabProp) t.Content).Index = TabControlMain.Items.Add(t);
+            TabControlMain.SelectedItem = t;
         }
 
         public void Refresh()
         {
             base.DataContext = _viewModel;
             base.UpdateLayout();
-        }
-
-        public void OpenTab(object content)
-        {
-            if (content == null) throw new ArgumentNullException();
-            if (!(content is ITabProp)) throw new ArgumentException("Content isn't a ITabProp");
-
-            var t = new TabItem {Content = content, Header = ((ITabProp) content).Header};
-
-            ((ITabProp) t.Content).Index = TabControlMain.Items.Add(t);
-            TabControlMain.SelectedItem = t;
         }
 
         public void OpenOperationFlyout(object sender, EventArgs eventArgs)

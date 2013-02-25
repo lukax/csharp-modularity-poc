@@ -83,7 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         public virtual void QuickSearch(object arg)
         {
-            Messenger.Default.Send(arg, "QuickSearchCommand");
+            Messenger.Default.Send(arg, "QuickSearch");
         }
 
         public override void InitializeServices()
