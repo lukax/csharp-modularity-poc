@@ -9,8 +9,7 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class ClientMap : BaseEntityMap<Client>
     {
-        public ClientMap()
-        {
+        public ClientMap() {
             HasManyToMany(x => x.ClientOf);
             Map(x => x.Status);
             HasMany(x => x.BoughtHistory);

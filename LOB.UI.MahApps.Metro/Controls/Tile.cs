@@ -29,31 +29,26 @@ namespace MahApps.Metro.Controls
         public static readonly DependencyProperty TiltFactorProperty =
             DependencyProperty.Register("TiltFactor", typeof (int), typeof (Tile), new PropertyMetadata(5));
 
-        public Tile()
-        {
+        public Tile() {
             DefaultStyleKey = typeof (Tile);
         }
 
-        public string Title
-        {
+        public string Title {
             get { return (string) GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
 
-        public string Count
-        {
+        public string Count {
             get { return (string) GetValue(CountProperty); }
             set { SetValue(CountProperty, value); }
         }
 
-        public bool KeepDragging
-        {
+        public bool KeepDragging {
             get { return (bool) GetValue(KeepDraggingProperty); }
             set { SetValue(KeepDraggingProperty, value); }
         }
 
-        public int TiltFactor
-        {
+        public int TiltFactor {
             get { return (Int32) GetValue(TiltFactorProperty); }
             set { SetValue(TiltFactorProperty, value); }
         }

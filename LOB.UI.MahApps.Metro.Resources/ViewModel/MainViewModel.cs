@@ -23,8 +23,7 @@ namespace MahApps.Metro.Resources.ViewModel
         /// <summary>
         ///     Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
-        {
+        public MainViewModel() {
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

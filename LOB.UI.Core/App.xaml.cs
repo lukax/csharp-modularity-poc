@@ -22,7 +22,7 @@ namespace LOB.UI.Core
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public sealed partial class App : Application , IDisposable
+    public sealed partial class App : Application, IDisposable
     {
         private ComposablePartCatalog _catalog;
         private INavigator _navigator;
@@ -30,13 +30,15 @@ namespace LOB.UI.Core
         private ISessionCreator _sessionCreator;
         private IUnityContainer _unityContainer;
 
-        static App()
-        {
+        static App() {
             DispatcherHelper.Initialize();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
+        public void Dispose() {
+            Dispose(true);
+        }
+
+        protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
             OnStartup();
 
@@ -44,8 +46,7 @@ namespace LOB.UI.Core
             _navigator.Startup<MainWindow>();
         }
 
-        private void OnStartup()
-        {
+        private void OnStartup() {
             _catalog = LoadDlls();
             _unityContainer = new UnityContainer();
 
@@ -57,22 +58,21 @@ namespace LOB.UI.Core
             _sessionCreator = _unityContainer.Resolve<ISessionCreator>();
         }
 
-        private AggregateCatalog LoadDlls()
-        {
+        private AggregateCatalog LoadDlls() {
             //USING LOB.DAO.NHIBERNATE IN SESSIONCREATOR IMPLEMENTATION
             ComposablePartCatalog daoDll = null;
             ComposablePartCatalog currentDll = null;
             ComposablePartCatalog domainDll = null;
-            try
-            {
+            try {
                 daoDll = new AssemblyCatalog("LOB.DAO.Nhibernate.dll");
             }
-            catch (FileNotFoundException)
-            {
+            catch (FileNotFoundException) {
                 MessageBox.Show("No DAO was found please refer to dll");
-                var dlg = new OpenFileDialog();
-                dlg.FileName = "LOB.DAO.Nhibernate.dll";
-                dlg.Filter = "Class Library (.dll)|*.dll"; // Filter files by extension 
+                var dlg = new OpenFileDialog
+                    {
+                        FileName = "LOB.DAO.Nhibernate.dll",
+                        Filter = "Class Library (.dll)|*.dll"
+                    };
                 bool? check = dlg.ShowDialog();
 
                 //Stop thread if no DAO was selected
@@ -82,8 +82,7 @@ namespace LOB.UI.Core
                 string filename = dlg.FileName;
                 daoDll = new DirectoryCatalog(filename);
             }
-            finally
-            {
+            finally {
                 currentDll = new AssemblyCatalog(Assembly.GetExecutingAssembly());
                 domainDll = new AssemblyCatalog(Assembly.Load("LOB.Domain"));
             }
@@ -92,13 +91,7 @@ namespace LOB.UI.Core
         }
 
 
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private void Dispose(bool b)
-        {
+        private void Dispose(bool b) {
             if (!b) return;
             _unityContainer.Dispose();
             GC.SuppressFinalize(this);

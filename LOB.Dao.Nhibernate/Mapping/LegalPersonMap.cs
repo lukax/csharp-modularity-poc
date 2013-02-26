@@ -9,8 +9,7 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class LegalPersonMap : SubclassMap<LegalPerson>
     {
-        public LegalPersonMap()
-        {
+        public LegalPersonMap() {
             Map(x => x.Cnpj);
             Map(x => x.Ie);
         }

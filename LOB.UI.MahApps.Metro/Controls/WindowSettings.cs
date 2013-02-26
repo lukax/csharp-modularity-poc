@@ -25,28 +25,23 @@ namespace MahApps.Metro.Controls
         private Window _window;
         private WindowApplicationSettings _windowApplicationSettings;
 
-        public WindowSettings(Window window)
-        {
+        public WindowSettings(Window window) {
             _window = window;
         }
 
         [Browsable(false)]
-        internal WindowApplicationSettings Settings
-        {
-            get
-            {
+        internal WindowApplicationSettings Settings {
+            get {
                 return _windowApplicationSettings ??
                        (_windowApplicationSettings = CreateWindowApplicationSettingsInstance());
             }
         }
 
-        public static void SetSave(DependencyObject dependencyObject, bool enabled)
-        {
+        public static void SetSave(DependencyObject dependencyObject, bool enabled) {
             dependencyObject.SetValue(SaveProperty, enabled);
         }
 
-        private static void OnSaveInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
+        private static void OnSaveInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e) {
             var window = dependencyObject as Window;
             if (window == null || !((bool) e.NewValue))
                 return;
@@ -55,15 +50,13 @@ namespace MahApps.Metro.Controls
             settings.Attach();
         }
 
-        protected virtual void LoadWindowState()
-        {
+        protected virtual void LoadWindowState() {
             Settings.Reload();
 
             if (Settings.Placement == null)
                 return;
 
-            try
-            {
+            try {
                 var wp = Settings.Placement.Value;
 
                 wp.length = Marshal.SizeOf(typeof (WINDOWPLACEMENT));
@@ -72,14 +65,12 @@ namespace MahApps.Metro.Controls
                 var hwnd = new WindowInteropHelper(_window).Handle;
                 UnsafeNativeMethods.SetWindowPlacement(hwnd, ref wp);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Debug.WriteLine(string.Format("Failed to load window state:\r\n{0}", ex));
             }
         }
 
-        protected virtual void SaveWindowState()
-        {
+        protected virtual void SaveWindowState() {
             WINDOWPLACEMENT wp;
             var hwnd = new WindowInteropHelper(_window).Handle;
             UnsafeNativeMethods.GetWindowPlacement(hwnd, out wp);
@@ -87,45 +78,37 @@ namespace MahApps.Metro.Controls
             Settings.Save();
         }
 
-        private void Attach()
-        {
+        private void Attach() {
             if (_window == null) return;
             _window.Closing += WindowClosing;
             _window.SourceInitialized += WindowSourceInitialized;
         }
 
-        private void WindowSourceInitialized(object sender, EventArgs e)
-        {
+        private void WindowSourceInitialized(object sender, EventArgs e) {
             LoadWindowState();
         }
 
-        private void WindowClosing(object sender, CancelEventArgs e)
-        {
+        private void WindowClosing(object sender, CancelEventArgs e) {
             SaveWindowState();
             _window.Closing -= WindowClosing;
             _window.SourceInitialized -= WindowSourceInitialized;
             _window = null;
         }
 
-        internal virtual WindowApplicationSettings CreateWindowApplicationSettingsInstance()
-        {
+        internal virtual WindowApplicationSettings CreateWindowApplicationSettingsInstance() {
             return new WindowApplicationSettings(this);
         }
 
         internal class WindowApplicationSettings : ApplicationSettingsBase
         {
             public WindowApplicationSettings(WindowSettings windowSettings)
-                : base(windowSettings._window.GetType().FullName)
-            {
+                : base(windowSettings._window.GetType().FullName) {
             }
 
             [UserScopedSetting]
-            public WINDOWPLACEMENT? Placement
-            {
-                get
-                {
-                    if (this["Placement"] != null)
-                    {
+            public WINDOWPLACEMENT? Placement {
+                get {
+                    if (this["Placement"] != null) {
                         return ((WINDOWPLACEMENT) this["Placement"]);
                     }
                     return null;

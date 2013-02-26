@@ -34,8 +34,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         private IList<T> _list;
 
         [ImportingConstructor]
-        public ListBaseEntityViewModel(T entity, IRepository repository)
-        {
+        public ListBaseEntityViewModel(T entity, IRepository repository) {
             Repository = repository;
             _entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
@@ -45,21 +44,17 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         public CrudOperationType OperationType { get; set; }
 
-        public IList<T> List
-        {
+        public IList<T> List {
             get { return _list; }
-            set
-            {
+            set {
                 _list = value;
                 OnPropertyChanged();
             }
         }
 
-        protected T Entity
-        {
+        protected T Entity {
             get { return _entity; }
-            set
-            {
+            set {
                 _entity = value;
                 OnPropertyChanged();
             }
@@ -71,39 +66,32 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         public ICommand SaveToFileCommand { get; set; }
         public ICommand FetchCommand { get; set; }
 
-        public virtual void Update(object arg)
-        {
+        public virtual void Update(object arg) {
             Messenger.Default.Send(Entity, "Update");
             Debug.WriteLine("Updatecalled");
         }
 
-        public virtual bool CanUpdate(object arg)
-        {
+        public virtual bool CanUpdate(object arg) {
             return Entity != null;
         }
 
-        public virtual void Delete(object arg)
-        {
+        public virtual void Delete(object arg) {
             Messenger.Default.Send(arg ?? _entity, "Delete");
             Repository.Delete(_entity);
         }
 
-        public virtual bool CanDelete(object arg)
-        {
+        public virtual bool CanDelete(object arg) {
             return Entity != null;
         }
 
-        public virtual void Fetch(object arg = null)
-        {
+        public virtual void Fetch(object arg = null) {
             List = Repository.GetList<T>().ToList();
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
         }
     }
 }

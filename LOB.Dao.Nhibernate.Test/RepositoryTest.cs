@@ -15,8 +15,7 @@ namespace LOB.Dao.Nhibernate.Test
     public class RepositoryTest
     {
         [TestMethod]
-        public void AddDeleteTest()
-        {
+        public void AddDeleteTest() {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
 
             var p1 = new Product
@@ -25,8 +24,7 @@ namespace LOB.Dao.Nhibernate.Test
                     UnitsInStock = 1234
                 };
 
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 p1 = repo.Save(p1);
                 Assert.AreNotEqual(0, p1.Id);
@@ -34,8 +32,7 @@ namespace LOB.Dao.Nhibernate.Test
                 Assert.IsTrue(repo.Contains(p1));
                 Assert.IsTrue(repo.Contains<Product>(x => x.Description == p1.Description));
             }
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Delete(p1);
                 repo.Uow.CommitTransaction();
@@ -45,8 +42,7 @@ namespace LOB.Dao.Nhibernate.Test
 
 
         [TestMethod]
-        public void GetTest()
-        {
+        public void GetTest() {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
 
             var p1 = new Product
@@ -62,12 +58,10 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void SaveOrUpdateTest()
-        {
+        public void SaveOrUpdateTest() {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var entity = new Product() {Description = "Test description service", Name = "Test Name"};
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.SaveOrUpdate(entity);
                 repo.Uow.CommitTransaction();
@@ -85,8 +79,7 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void SaveGetPolymorphismTest()
-        {
+        public void SaveGetPolymorphismTest() {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var person = new LegalPerson()
                 {
@@ -103,8 +96,7 @@ namespace LOB.Dao.Nhibernate.Test
                     Status = ClientStatus.New
                 };
 
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Save(client);
                 repo.Uow.CommitTransaction();
@@ -120,8 +112,7 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void GetListCriteriaTest()
-        {
+        public void GetListCriteriaTest() {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var person1 = new LegalPerson()
                 {
@@ -151,8 +142,7 @@ namespace LOB.Dao.Nhibernate.Test
                     Person = person2,
                     Status = ClientStatus.New
                 };
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Save(person1);
                 repo.Save(person2);

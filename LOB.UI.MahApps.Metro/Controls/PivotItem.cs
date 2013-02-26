@@ -14,19 +14,16 @@ namespace MahApps.Metro.Controls
                                                                                                new PropertyMetadata(
                                                                                                    default(string)));
 
-        static PivotItem()
-        {
+        static PivotItem() {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (PivotItem),
                                                      new FrameworkPropertyMetadata(typeof (PivotItem)));
         }
 
-        public PivotItem()
-        {
+        public PivotItem() {
             RequestBringIntoView += (s, e) => { e.Handled = true; };
         }
 
-        public string Header
-        {
+        public string Header {
             get { return (string) GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }

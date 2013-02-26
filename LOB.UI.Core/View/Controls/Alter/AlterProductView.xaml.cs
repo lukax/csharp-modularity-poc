@@ -15,35 +15,31 @@ namespace LOB.UI.Core.View.Controls.Alter
     [Export]
     public partial class AlterProductView : UserControl, ITabProp, IView
     {
+        private string _header;
         private INavigator navigator;
 
         [ImportingConstructor]
-        public AlterProductView(AlterProductViewModel dataContext, INavigator navigator)
-        {
+        public AlterProductView(AlterProductViewModel dataContext, INavigator navigator) {
             InitializeComponent();
             this.DataContext = dataContext;
 
             Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
-            //Messenger.Default.Register<object>(DataContext, "QuickSearchCommand", o=> {});
         }
 
-        public string Header
-        {
-            get { return "Alterar Produto"; }
+        public string Header {
+            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Produto" : _header; }
+            set { _header = value; }
         }
 
-        public int? Index
-        {
+        public int? Index {
             get { return ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex; }
             set { ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex = value; }
         }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
         }
     }
 }

@@ -26,20 +26,17 @@ namespace MahApps.Metro.Actions
                                                                                                 new PropertyMetadata(
                                                                                                     default(TabItem)));
 
-        public TabControl TabControl
-        {
+        public TabControl TabControl {
             get { return (TabControl) GetValue(TabControlProperty); }
             set { SetValue(TabControlProperty, value); }
         }
 
-        public TabItem TabItem
-        {
+        public TabItem TabItem {
             get { return (TabItem) GetValue(TabItemProperty); }
             set { SetValue(TabItemProperty, value); }
         }
 
-        protected override void Invoke(object parameter)
-        {
+        protected override void Invoke(object parameter) {
             //.CONTENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!! custou horas pra descobrir
             TabControl.Items.Remove(TabItem.Content);
             TabControl.Items.Remove(TabItem);

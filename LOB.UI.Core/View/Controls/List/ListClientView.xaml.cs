@@ -12,29 +12,25 @@ namespace LOB.UI.Core.View.Controls.List
     [Export]
     public partial class ListClientView : UserControl, ITabProp, IView
     {
+        private string _header;
+
         [ImportingConstructor]
-        public ListClientView(ListClientViewModel dataContext)
-        {
+        public ListClientView(ListClientViewModel dataContext) {
             InitializeComponent();
             DataContext = dataContext;
         }
 
-        public string Header
-        {
-            get { return "Funcionarios"; }
-            set { }
+        public string Header {
+            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
+            set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices()
-        {
-            throw new System.NotImplementedException();
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
-            throw new System.NotImplementedException();
+        public void Refresh() {
         }
     }
 }

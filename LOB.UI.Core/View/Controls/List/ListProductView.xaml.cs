@@ -12,28 +12,26 @@ namespace LOB.UI.Core.View.Controls.List
     [Export]
     public partial class ListProductView : UserControl, ITabProp, IView
     {
+        private string _header;
+
         [ImportingConstructor]
-        public ListProductView(ListProductViewModel dataContext)
-        {
+        public ListProductView(ListProductViewModel dataContext) {
             InitializeComponent();
             DataContext = dataContext;
         }
 
-        public string Header
-        {
-            get { return "Produtos"; }
-            set { }
+        public string Header {
+            get { return (string.IsNullOrEmpty(_header)) ? "Produtos" : _header; }
+            set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
             throw new System.NotImplementedException();
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
             throw new System.NotImplementedException();
         }
     }

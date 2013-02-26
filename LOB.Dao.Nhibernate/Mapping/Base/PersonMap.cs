@@ -8,8 +8,7 @@ namespace LOB.Dao.Nhibernate.Mapping.Base
 {
     public class PersonMap : BaseEntityMap<Person>
     {
-        public PersonMap()
-        {
+        public PersonMap() {
             UseUnionSubclassForInheritanceMapping();
             Map(x => x.FirstName);
             Map(x => x.LastName);

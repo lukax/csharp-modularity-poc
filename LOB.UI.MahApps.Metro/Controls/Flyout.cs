@@ -43,61 +43,51 @@ namespace MahApps.Metro.Controls
         public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(
             "HeaderTemplate", typeof (DataTemplate), typeof (Flyout));
 
-        static Flyout()
-        {
+        static Flyout() {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (Flyout), new FrameworkPropertyMetadata(typeof (Flyout)));
         }
 
-        public DataTemplate HeaderTemplate
-        {
+        public DataTemplate HeaderTemplate {
             get { return (DataTemplate) GetValue(HeaderTemplateProperty); }
             set { SetValue(HeaderTemplateProperty, value); }
         }
 
-        public bool IsOpen
-        {
+        public bool IsOpen {
             get { return (bool) GetValue(IsOpenProperty); }
             set { SetValue(IsOpenProperty, value); }
         }
 
-        public bool IsPinnable
-        {
+        public bool IsPinnable {
             get { return (bool) GetValue(IsPinnableProperty); }
             set { SetValue(IsPinnableProperty, value); }
         }
 
-        public Position Position
-        {
+        public Position Position {
             get { return (Position) GetValue(PositionProperty); }
             set { SetValue(PositionProperty, value); }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return (string) GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
-        private static void IsOpenedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
+        private static void IsOpenedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e) {
             var flyout = (Flyout) dependencyObject;
             VisualStateManager.GoToState(flyout, (bool) e.NewValue == false ? "Hide" : "Show", true);
         }
 
-        private static void PositionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
+        private static void PositionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e) {
             var flyout = (Flyout) dependencyObject;
             flyout.ApplyAnimation((Position) e.NewValue);
         }
 
-        public override void OnApplyTemplate()
-        {
+        public override void OnApplyTemplate() {
             base.OnApplyTemplate();
             ApplyAnimation(Position);
         }
 
-        internal void ApplyAnimation(Position position)
-        {
+        internal void ApplyAnimation(Position position) {
             var root = (Grid) GetTemplateChild("root");
             if (root == null)
                 return;
@@ -114,26 +104,22 @@ namespace MahApps.Metro.Controls
             if (position == Position.Right)
                 HorizontalAlignment = HorizontalAlignment.Right;
 
-            if (position == Position.Right)
-            {
+            if (position == Position.Right) {
                 hideFrame.Value = root.DesiredSize.Width;
                 root.RenderTransform = new TranslateTransform(root.DesiredSize.Width, 0);
             }
-            else
-            {
+            else {
                 hideFrame.Value = -root.DesiredSize.Width;
                 root.RenderTransform = new TranslateTransform(-root.DesiredSize.Width, 0);
             }
         }
 
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo) {
             base.OnRenderSizeChanged(sizeInfo);
 
             if (!sizeInfo.WidthChanged) return;
 
-            if (!IsOpen)
-            {
+            if (!IsOpen) {
                 ApplyAnimation(Position);
                 return;
             }
@@ -149,12 +135,10 @@ namespace MahApps.Metro.Controls
                 return;
 
             showFrame.Value = 0;
-            if (Position == Position.Right)
-            {
+            if (Position == Position.Right) {
                 hideFrame.Value = root.DesiredSize.Width;
             }
-            else
-            {
+            else {
                 hideFrame.Value = -root.DesiredSize.Width;
             }
         }

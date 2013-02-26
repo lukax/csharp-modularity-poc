@@ -17,8 +17,7 @@ namespace MahApps.Metro.Controls
                                         new FrameworkPropertyMetadata(false));
 
 
-        public MetroContentControl()
-        {
+        public MetroContentControl() {
             DefaultStyleKey = typeof (MetroContentControl);
 
             Loaded += MetroContentControlLoaded;
@@ -27,39 +26,32 @@ namespace MahApps.Metro.Controls
             IsVisibleChanged += MetroContentControlIsVisibleChanged;
         }
 
-        public bool ReverseTransition
-        {
+        public bool ReverseTransition {
             get { return (bool) GetValue(ReverseTransitionProperty); }
             set { SetValue(ReverseTransitionProperty, value); }
         }
 
-        private void MetroContentControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
+        private void MetroContentControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
             if (!IsVisible)
                 VisualStateManager.GoToState(this, ReverseTransition ? "AfterUnLoadedReverse" : "AfterUnLoaded", false);
             else
                 VisualStateManager.GoToState(this, ReverseTransition ? "AfterLoadedReverse" : "AfterLoaded", true);
         }
 
-        private void MetroContentControlUnloaded(object sender, RoutedEventArgs e)
-        {
+        private void MetroContentControlUnloaded(object sender, RoutedEventArgs e) {
             VisualStateManager.GoToState(this, ReverseTransition ? "AfterUnLoadedReverse" : "AfterUnLoaded", false);
         }
 
-        private void MetroContentControlLoaded(object sender, RoutedEventArgs e)
-        {
+        private void MetroContentControlLoaded(object sender, RoutedEventArgs e) {
             VisualStateManager.GoToState(this, ReverseTransition ? "AfterLoadedReverse" : "AfterLoaded", true);
         }
 
-        public void Reload()
-        {
-            if (ReverseTransition)
-            {
+        public void Reload() {
+            if (ReverseTransition) {
                 VisualStateManager.GoToState(this, "BeforeLoaded", true);
                 VisualStateManager.GoToState(this, "AfterUnLoadedReverse", true);
             }
-            else
-            {
+            else {
                 VisualStateManager.GoToState(this, "BeforeLoaded", true);
                 VisualStateManager.GoToState(this, "AfterLoaded", true);
             }

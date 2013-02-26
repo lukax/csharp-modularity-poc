@@ -11,8 +11,7 @@ namespace LOB.Domain
     [Serializable]
     public class Client : BaseEntity
     {
-        public Client()
-        {
+        public Client() {
             Person = new Person();
         }
 

@@ -9,8 +9,7 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class CompanyMap : SubclassMap<Company>
     {
-        public CompanyMap()
-        {
+        public CompanyMap() {
             HasMany(x => x.Stores)
                 .Cascade.All();
         }

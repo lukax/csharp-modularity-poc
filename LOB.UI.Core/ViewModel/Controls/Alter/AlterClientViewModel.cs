@@ -15,34 +15,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     public sealed class AlterClientViewModel : AlterBaseEntityViewModel<Client>
     {
         #region Props
-        
-        public IList<Store> ClientOf
-        {
+
+        public IList<Store> ClientOf {
             get { return Entity.ClientOf; }
-            set
-            {
+            set {
                 if (Entity.ClientOf == value) return;
                 Entity.ClientOf = value;
                 OnPropertyChanged();
             }
         }
 
-        public ClientStatus ClientStatus
-        {
+        public ClientStatus ClientStatus {
             get { return Entity.Status; }
-            set
-            {
+            set {
                 if (Entity.Status == value) return;
                 Entity.Status = value;
                 OnPropertyChanged();
             }
         }
 
-        public IList<Sale> BoughtHistory
-        {
+        public IList<Sale> BoughtHistory {
             get { return Entity.BoughtHistory; }
-            set
-            {
+            set {
                 if (Entity.BoughtHistory == value) return;
                 Entity.BoughtHistory = value;
                 OnPropertyChanged();
@@ -51,44 +45,37 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         #endregion
 
-        private new Client Entity { get; set; }
-
         [ImportingConstructor]
-        public AlterClientViewModel(Client client, IRepository repository, 
-            AlterPersonViewModel alterPersonViewModel,
-            AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel)
-            : base(client, repository)
-        {
+        public AlterClientViewModel(Client client, IRepository repository,
+                                    AlterPersonViewModel alterPersonViewModel,
+                                    AlterAddressViewModel alterAddressViewModel,
+                                    AlterContactInfoViewModel alterContactInfoViewModel)
+            : base(client, repository) {
             Entity = client;
         }
 
-        public override bool CanSaveChanges(object arg)
-        {
+        private new Client Entity { get; set; }
+
+        public override bool CanSaveChanges(object arg) {
             return true;
         }
 
-        public override bool CanCancel(object arg)
-        {
+        public override bool CanCancel(object arg) {
             return true;
         }
 
-        public override void SaveChanges(object arg)
-        {
-            using (Repository.Uow)
-            {
+        public override void SaveChanges(object arg) {
+            using (Repository.Uow) {
                 Repository.Uow.BeginTransaction();
                 Repository.Uow.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
         }
     }
 }

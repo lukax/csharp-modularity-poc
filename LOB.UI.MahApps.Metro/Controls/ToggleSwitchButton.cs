@@ -48,66 +48,52 @@ namespace MahApps.Metro.Controls
         private bool _wasDragged;
 
 
-        public ToggleSwitchButton()
-        {
+        public ToggleSwitchButton() {
             DefaultStyleKey = typeof (ToggleSwitchButton);
         }
 
-        public Brush SwitchForeground
-        {
+        public Brush SwitchForeground {
             get { return (Brush) GetValue(SwitchForegroundProperty); }
             set { SetValue(SwitchForegroundProperty, value); }
         }
 
-        private double Translation
-        {
+        private double Translation {
             get { return _backgroundTranslation == null ? _thumbTranslation.X : _backgroundTranslation.X; }
-            set
-            {
-                if (_backgroundTranslation != null)
-                {
+            set {
+                if (_backgroundTranslation != null) {
                     _backgroundTranslation.X = value;
                 }
 
-                if (_thumbTranslation != null)
-                {
+                if (_thumbTranslation != null) {
                     _thumbTranslation.X = value;
                 }
             }
         }
 
-        private void ChangeVisualState(bool useTransitions)
-        {
+        private void ChangeVisualState(bool useTransitions) {
             VisualStateManager.GoToState(this, IsEnabled ? NormalState : DisabledState, useTransitions);
 
-            if (_isDragging)
-            {
+            if (_isDragging) {
                 VisualStateManager.GoToState(this, DraggingState, useTransitions);
             }
-            else if (IsChecked == true)
-            {
+            else if (IsChecked == true) {
                 VisualStateManager.GoToState(this, CheckedState, useTransitions);
             }
-            else
-            {
+            else {
                 VisualStateManager.GoToState(this, UncheckedState, useTransitions);
             }
         }
 
-        protected override void OnToggle()
-        {
+        protected override void OnToggle() {
             IsChecked = IsChecked != true;
             ChangeVisualState(true);
         }
 
-        public override void OnApplyTemplate()
-        {
-            if (_track != null)
-            {
+        public override void OnApplyTemplate() {
+            if (_track != null) {
                 _track.SizeChanged -= SizeChangedHandler;
             }
-            if (_thumb != null)
-            {
+            if (_thumb != null) {
                 _thumb.SizeChanged -= SizeChangedHandler;
             }
             base.OnApplyTemplate();
@@ -118,8 +104,7 @@ namespace MahApps.Metro.Controls
             _thumb = GetTemplateChild(SwitchThumbPart) as Border;
             _thumbTranslation = _thumb == null ? null : _thumb.RenderTransform as TranslateTransform;
             if (_root != null && _track != null && _thumb != null &&
-                (_backgroundTranslation != null || _thumbTranslation != null))
-            {
+                (_backgroundTranslation != null || _thumbTranslation != null)) {
                 /*GestureListener gestureListener = GestureService.GetGestureListener(_root);
                 gestureListener.DragStarted += DragStartedHandler;
                 gestureListener.DragDelta += DragDeltaHandler;
@@ -130,8 +115,7 @@ namespace MahApps.Metro.Controls
             ChangeVisualState(false);
         }
 
-        private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
-        {
+        private void SizeChangedHandler(object sender, SizeChangedEventArgs e) {
             _track.Clip = new RectangleGeometry {Rect = new Rect(0, 0, _track.ActualWidth, _track.ActualHeight)};
             _checkedTranslation = _track.ActualWidth - _thumb.ActualWidth - _thumb.Margin.Left - _thumb.Margin.Right;
         }

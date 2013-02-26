@@ -5,14 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d"
+             Height="Auto"
+             Width="Auto"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary Source="../../../../Skins/MetroSkin.xaml" />
     </UserControl.Resources>
     
-    <StackPanel>
-        <TextBox MinWidth="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True" />
-        <DataGrid ItemsSource="{Binding List}"/>
+    <StackPanel Width="Auto" Height="Auto">
+        <TextBox MinWidth="200" 
+                 Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                 controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True" />
+        <DataGrid IsReadOnly="True" GridLinesVisibility="None" ItemsSource="{Binding List}"/>
     </StackPanel>
 </UserControl>

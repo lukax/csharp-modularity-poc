@@ -62,35 +62,29 @@ namespace MahApps.Metro.Controls
         private Viewport3D _viewport3D;
         private FrameworkElement _visualChild;
 
-        public double RotationX
-        {
+        public double RotationX {
             get { return (double) GetValue(RotationXProperty); }
             set { SetValue(RotationXProperty, value); }
         }
 
-        public double RotationY
-        {
+        public double RotationY {
             get { return (double) GetValue(RotationYProperty); }
             set { SetValue(RotationYProperty, value); }
         }
 
-        public double RotationZ
-        {
+        public double RotationZ {
             get { return (double) GetValue(RotationZProperty); }
             set { SetValue(RotationZProperty, value); }
         }
 
-        public double FieldOfView
-        {
+        public double FieldOfView {
             get { return (double) GetValue(FieldOfViewProperty); }
             set { SetValue(FieldOfViewProperty, value); }
         }
 
-        public FrameworkElement Child
-        {
+        public FrameworkElement Child {
             get { return _originalChild; }
-            set
-            {
+            set {
                 if (_originalChild == value)
                     return;
                 RemoveVisualChild(_visualChild);
@@ -111,32 +105,26 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        protected override int VisualChildrenCount
-        {
+        protected override int VisualChildrenCount {
             get { return _visualChild == null ? 0 : 1; }
         }
 
-        protected override Size MeasureOverride(Size availableSize)
-        {
+        protected override Size MeasureOverride(Size availableSize) {
             Size result;
-            if (_logicalChild != null)
-            {
+            if (_logicalChild != null) {
                 // Measure based on the size of the logical child, since we want to align with it.
                 _logicalChild.Measure(availableSize);
                 result = _logicalChild.DesiredSize;
                 _visualChild.Measure(result);
             }
-            else
-            {
+            else {
                 result = new Size(0, 0);
             }
             return result;
         }
 
-        protected override Size ArrangeOverride(Size finalSize)
-        {
-            if (_logicalChild != null)
-            {
+        protected override Size ArrangeOverride(Size finalSize) {
+            if (_logicalChild != null) {
                 _logicalChild.Arrange(new Rect(finalSize));
                 _visualChild.Arrange(new Rect(finalSize));
                 Update3D();
@@ -144,13 +132,11 @@ namespace MahApps.Metro.Controls
             return base.ArrangeOverride(finalSize);
         }
 
-        protected override Visual GetVisualChild(int index)
-        {
+        protected override Visual GetVisualChild(int index) {
             return _visualChild;
         }
 
-        private FrameworkElement CreateVisualChild()
-        {
+        private FrameworkElement CreateVisualChild() {
             var simpleQuad = new MeshGeometry3D
                 {
                     Positions = new Point3DCollection(Mesh),
@@ -211,15 +197,13 @@ namespace MahApps.Metro.Controls
             return _viewport3D;
         }
 
-        private void SetCachingForObject(DependencyObject d)
-        {
+        private void SetCachingForObject(DependencyObject d) {
             RenderOptions.SetCachingHint(d, CachingHint.Cache);
             RenderOptions.SetCacheInvalidationThresholdMinimum(d, 0.5);
             RenderOptions.SetCacheInvalidationThresholdMaximum(d, 2.0);
         }
 
-        private void UpdateRotation()
-        {
+        private void UpdateRotation() {
             var qx = new Quaternion(XAxis, RotationX);
             var qy = new Quaternion(YAxis, RotationY);
             var qz = new Quaternion(ZAxis, RotationZ);
@@ -227,8 +211,7 @@ namespace MahApps.Metro.Controls
             _quaternionRotation.Quaternion = qx*qy*qz;
         }
 
-        private void Update3D()
-        {
+        private void Update3D() {
             // Use GetDescendantBounds for sizing and centering since DesiredSize includes layout whitespace, whereas GetDescendantBounds 
             // is tighter
             Rect logicalBounds = VisualTreeHelper.GetDescendantBounds(_logicalChild);

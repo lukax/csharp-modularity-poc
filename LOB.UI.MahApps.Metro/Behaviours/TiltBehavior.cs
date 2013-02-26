@@ -34,31 +34,26 @@ namespace MahApps.Metro.Behaviours
         private Point current = new Point(-99, -99);
         private Int32 times = -1;
 
-        public bool KeepDragging
-        {
+        public bool KeepDragging {
             get { return (bool) GetValue(KeepDraggingProperty); }
             set { SetValue(KeepDraggingProperty, value); }
         }
 
-        public Int32 TiltFactor
-        {
+        public Int32 TiltFactor {
             get { return (Int32) GetValue(TiltFactorProperty); }
             set { SetValue(TiltFactorProperty, value); }
         }
 
         public Planerator RotatorParent { get; set; }
 
-        protected override void OnAttached()
-        {
+        protected override void OnAttached() {
             attachedElement = AssociatedObject;
-            if (attachedElement is ListBox)
-            {
+            if (attachedElement is ListBox) {
                 var l = (ListBox) attachedElement;
                 l.Items.CurrentChanging += (s, e) => { Console.WriteLine("foo"); };
                 return;
             }
-            if (attachedElement as Panel != null)
-            {
+            if (attachedElement as Panel != null) {
                 var y = (attachedElement as ItemsControl);
                 y.Items.CurrentChanging += (s, e) => { Console.WriteLine("foo"); };
                 (attachedElement as Panel).Loaded += (sl, el) =>
@@ -66,8 +61,7 @@ namespace MahApps.Metro.Behaviours
                         List<UIElement> elements = new List<UIElement>();
 
                         foreach (
-                            UIElement ui in (attachedElement as Panel).Children)
-                        {
+                            UIElement ui in (attachedElement as Panel).Children) {
                             elements.Add(ui);
                         }
                         elements.ForEach(
@@ -122,42 +116,32 @@ namespace MahApps.Metro.Behaviours
             CompositionTarget.Rendering += CompositionTargetRendering;
         }
 
-        protected override void OnDetaching()
-        {
+        protected override void OnDetaching() {
             base.OnDetaching();
             CompositionTarget.Rendering -= CompositionTargetRendering;
         }
 
-        private void CompositionTargetRendering(object sender, EventArgs e)
-        {
-            if (KeepDragging)
-            {
+        private void CompositionTargetRendering(object sender, EventArgs e) {
+            if (KeepDragging) {
                 current = Mouse.GetPosition(RotatorParent.Child);
-                if (Mouse.LeftButton == MouseButtonState.Pressed)
-                {
+                if (Mouse.LeftButton == MouseButtonState.Pressed) {
                     if (current.X > 0 && current.X < (attachedElement).ActualWidth && current.Y > 0 &&
-                        current.Y < (attachedElement).ActualHeight)
-                    {
+                        current.Y < (attachedElement).ActualHeight) {
                         RotatorParent.RotationY = -1*TiltFactor + current.X*2*TiltFactor/(attachedElement).ActualWidth;
                         RotatorParent.RotationX = -1*TiltFactor + current.Y*2*TiltFactor/(attachedElement).ActualHeight;
                     }
                 }
-                else
-                {
+                else {
                     RotatorParent.RotationY = RotatorParent.RotationY - 5 < 0 ? 0 : RotatorParent.RotationY - 5;
                     RotatorParent.RotationX = RotatorParent.RotationX - 5 < 0 ? 0 : RotatorParent.RotationX - 5;
                 }
             }
-            else
-            {
-                if (Mouse.LeftButton == MouseButtonState.Pressed)
-                {
-                    if (!IsPressed)
-                    {
+            else {
+                if (Mouse.LeftButton == MouseButtonState.Pressed) {
+                    if (!IsPressed) {
                         current = Mouse.GetPosition(RotatorParent.Child);
                         if (current.X > 0 && current.X < (attachedElement).ActualWidth && current.Y > 0 &&
-                            current.Y < (attachedElement).ActualHeight)
-                        {
+                            current.Y < (attachedElement).ActualHeight) {
                             RotatorParent.RotationY = -1*TiltFactor +
                                                       current.X*2*TiltFactor/(attachedElement).ActualWidth;
                             RotatorParent.RotationX = -1*TiltFactor +
@@ -167,18 +151,15 @@ namespace MahApps.Metro.Behaviours
                     }
 
 
-                    if (IsPressed && times == 7)
-                    {
+                    if (IsPressed && times == 7) {
                         RotatorParent.RotationY = RotatorParent.RotationY - 5 < 0 ? 0 : RotatorParent.RotationY - 5;
                         RotatorParent.RotationX = RotatorParent.RotationX - 5 < 0 ? 0 : RotatorParent.RotationX - 5;
                     }
-                    else if (IsPressed && times < 7)
-                    {
+                    else if (IsPressed && times < 7) {
                         times++;
                     }
                 }
-                else
-                {
+                else {
                     IsPressed = false;
                     times = -1;
                     RotatorParent.RotationY = RotatorParent.RotationY - 5 < 0 ? 0 : RotatorParent.RotationY - 5;
@@ -187,8 +168,7 @@ namespace MahApps.Metro.Behaviours
             }
         }
 
-        private static Panel GetParentPanel(DependencyObject element)
-        {
+        private static Panel GetParentPanel(DependencyObject element) {
             var parent = VisualTreeHelper.GetParent(element);
             if (parent is Panel)
                 return (Panel) parent;

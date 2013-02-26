@@ -19,8 +19,7 @@ namespace LOB.Domain.Base
         ///     Avisar mudança de valores numa property.
         /// </summary>
         /// <param name="propertyName">Implementando nova ferramenta do .NET 4.5, Atributo que passa o nome do metodo caller em string</param>
-        protected internal virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
+        protected internal virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -17,83 +17,68 @@ namespace LOB.Dao.Nhibernate
         private ITransaction _transaction;
 
         [ImportingConstructor]
-        public UnityOfWork(ISessionCreator sessionCreator)
-        {
+        public UnityOfWork(ISessionCreator sessionCreator) {
             Orm = sessionCreator.Orm;
         }
 
         public object Orm { get; private set; }
 
-        public void Save<T>(T entity) where T : BaseEntity
-        {
+        public void Save<T>(T entity) where T : BaseEntity {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try
-            {
+            try {
                 ((ISession) Orm).Save(entity);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw;
             }
         }
 
-        public void SaveOrUpdate<T>(T entity) where T : BaseEntity
-        {
+        public void SaveOrUpdate<T>(T entity) where T : BaseEntity {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try
-            {
+            try {
                 ((ISession) Orm).SaveOrUpdate(entity);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw;
             }
         }
 
-        public void Update<T>(T entity) where T : BaseEntity
-        {
+        public void Update<T>(T entity) where T : BaseEntity {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try
-            {
+            try {
                 ((ISession) Orm).Update(entity);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw;
             }
         }
 
-        public void Delete<T>(T entity) where T : BaseEntity
-        {
+        public void Delete<T>(T entity) where T : BaseEntity {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try
-            {
+            try {
                 ((ISession) Orm).Delete(entity);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw;
             }
         }
 
-        public void BeginTransaction()
-        {
+        public void BeginTransaction() {
             if (_transaction == null)
                 _transaction = ((ISession) Orm).BeginTransaction();
             else if (_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has already been initialized, dispose first");
         }
 
-        public void CommitTransaction()
-        {
+        public void CommitTransaction() {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
             else if (!_transaction.IsActive)
@@ -101,8 +86,7 @@ namespace LOB.Dao.Nhibernate
             _transaction.Commit();
         }
 
-        public void RollbackTransaction()
-        {
+        public void RollbackTransaction() {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
             if (!_transaction.IsActive)
@@ -110,8 +94,7 @@ namespace LOB.Dao.Nhibernate
             _transaction.Rollback();
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             _transaction.Dispose();
             _transaction = null;
         }

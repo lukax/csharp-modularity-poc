@@ -11,8 +11,7 @@ namespace LOB.Business
 {
     public class EntityFacade<T> : IEntityFacade<T> where T : BaseEntity
     {
-        public EntityFacade(T entity)
-        {
+        public EntityFacade(T entity) {
             Entity = entity;
         }
 

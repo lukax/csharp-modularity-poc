@@ -13,32 +13,25 @@ namespace MahApps.Metro.Converters
     [MarkupExtensionReturnType(typeof (IValueConverter))]
     public abstract class MarkupConverter : MarkupExtension, IValueConverter
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            try
-            {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            try {
                 return Convert(value, targetType, parameter, culture);
             }
-            catch
-            {
+            catch {
                 return DependencyProperty.UnsetValue;
             }
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            try
-            {
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            try {
                 return ConvertBack(value, targetType, parameter, culture);
             }
-            catch
-            {
+            catch {
                 return DependencyProperty.UnsetValue;
             }
         }
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
+        public override object ProvideValue(IServiceProvider serviceProvider) {
             return this;
         }
 

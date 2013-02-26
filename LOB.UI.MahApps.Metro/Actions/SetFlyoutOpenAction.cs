@@ -16,14 +16,12 @@ namespace MahApps.Metro.Actions
                                                                                               new PropertyMetadata(
                                                                                                   default(bool)));
 
-        public bool Value
-        {
+        public bool Value {
             get { return (bool) GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
-        protected override void Invoke(object parameter)
-        {
+        protected override void Invoke(object parameter) {
             ((Flyout) TargetObject).IsOpen = Value;
         }
     }

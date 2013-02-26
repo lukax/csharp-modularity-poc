@@ -37,37 +37,32 @@ namespace MahApps.Metro.Behaviours
         private IntPtr _mHWND;
         private HwndSource _mHWNDSource;
 
-        public bool ResizeWithGrip
-        {
+        public bool ResizeWithGrip {
             get { return (bool) GetValue(ResizeWithGripProperty); }
             set { SetValue(ResizeWithGripProperty, value); }
         }
 
-        public bool AutoSizeToContent
-        {
+        public bool AutoSizeToContent {
             get { return (bool) GetValue(AutoSizeToContentProperty); }
             set { SetValue(AutoSizeToContentProperty, value); }
         }
 
         public Border Border { get; set; }
 
-        private static IntPtr SetClassLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong)
-        {
+        private static IntPtr SetClassLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong) {
             if (IntPtr.Size > 4)
                 return UnsafeNativeMethods.SetClassLongPtr64(hWnd, nIndex, dwNewLong);
 
             return new IntPtr(UnsafeNativeMethods.SetClassLongPtr32(hWnd, nIndex, unchecked((uint) dwNewLong.ToInt32())));
         }
 
-        private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
-        {
+        private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam) {
             var mmi = (MINMAXINFO) Marshal.PtrToStructure(lParam, typeof (MINMAXINFO));
 
             // Adjust the maximized size and position to fit the work area of the correct monitor
             IntPtr monitor = UnsafeNativeMethods.MonitorFromWindow(hwnd, Constants.MONITOR_DEFAULTTONEAREST);
 
-            if (monitor != IntPtr.Zero)
-            {
+            if (monitor != IntPtr.Zero) {
                 var monitorInfo = new MONITORINFO();
                 UnsafeNativeMethods.GetMonitorInfo(monitor, monitorInfo);
                 RECT rcWorkArea = monitorInfo.rcWork;
@@ -81,8 +76,7 @@ namespace MahApps.Metro.Behaviours
             Marshal.StructureToPtr(mmi, lParam, true);
         }
 
-        protected override void OnAttached()
-        {
+        protected override void OnAttached() {
             if (PresentationSource.FromVisual(AssociatedObject) != null)
                 AddHwndHook();
             else
@@ -91,8 +85,7 @@ namespace MahApps.Metro.Behaviours
             AssociatedObject.WindowStyle = WindowStyle.None;
             AssociatedObject.StateChanged += AssociatedObjectStateChanged;
 
-            if (AssociatedObject is MetroWindow)
-            {
+            if (AssociatedObject is MetroWindow) {
                 var window = ((MetroWindow) AssociatedObject);
                 //MetroWindow already has a border we can use
                 AssociatedObject.Loaded += (s, e) =>
@@ -103,8 +96,7 @@ namespace MahApps.Metro.Behaviours
                             AddBorder();
                     };
 
-                switch (AssociatedObject.ResizeMode)
-                {
+                switch (AssociatedObject.ResizeMode) {
                     case ResizeMode.NoResize:
                         window.ShowMaxRestoreButton = false;
                         window.ShowMinButton = false;
@@ -122,8 +114,7 @@ namespace MahApps.Metro.Behaviours
                         break;
                 }
             }
-            else
-            {
+            else {
                 //Other windows may not, easiest to just inject one!
                 var content = (UIElement) AssociatedObject.Content;
                 AssociatedObject.Content = null;
@@ -154,19 +145,15 @@ namespace MahApps.Metro.Behaviours
             base.OnAttached();
         }
 
-        private void AssociatedObjectStateChanged(object sender, EventArgs e)
-        {
-            if (AssociatedObject.WindowState == WindowState.Maximized)
-            {
+        private void AssociatedObjectStateChanged(object sender, EventArgs e) {
+            if (AssociatedObject.WindowState == WindowState.Maximized) {
                 HandleMaximize();
             }
         }
 
-        private void HandleMaximize()
-        {
+        private void HandleMaximize() {
             IntPtr monitor = UnsafeNativeMethods.MonitorFromWindow(_mHWND, Constants.MONITOR_DEFAULTTONEAREST);
-            if (monitor != IntPtr.Zero)
-            {
+            if (monitor != IntPtr.Zero) {
                 var monitorInfo = new MONITORINFO();
                 UnsafeNativeMethods.GetMonitorInfo(monitor, monitorInfo);
                 bool ignoreTaskBar = AssociatedObject as MetroWindow != null &&
@@ -179,14 +166,12 @@ namespace MahApps.Metro.Behaviours
             }
         }
 
-        protected override void OnDetaching()
-        {
+        protected override void OnDetaching() {
             RemoveHwndHook();
             base.OnDetaching();
         }
 
-        private void AddHwndHook()
-        {
+        private void AddHwndHook() {
             _mHWNDSource = PresentationSource.FromVisual(AssociatedObject) as HwndSource;
             if (_mHWNDSource != null)
                 _mHWNDSource.AddHook(HwndHook);
@@ -194,20 +179,17 @@ namespace MahApps.Metro.Behaviours
             _mHWND = new WindowInteropHelper(AssociatedObject).Handle;
         }
 
-        private void RemoveHwndHook()
-        {
+        private void RemoveHwndHook() {
             AssociatedObject.SourceInitialized -= AssociatedObject_SourceInitialized;
             _mHWNDSource.RemoveHook(HwndHook);
         }
 
-        private void AssociatedObject_SourceInitialized(object sender, EventArgs e)
-        {
+        private void AssociatedObject_SourceInitialized(object sender, EventArgs e) {
             AddHwndHook();
             SetDefaultBackgroundColor();
         }
 
-        private bool ShouldHaveBorder()
-        {
+        private bool ShouldHaveBorder() {
             if (Environment.OSVersion.Version.Major < 6)
                 return true;
 
@@ -217,8 +199,7 @@ namespace MahApps.Metro.Behaviours
             return false;
         }
 
-        private void AddBorder()
-        {
+        private void AddBorder() {
             if (Border == null)
                 return;
 
@@ -226,8 +207,7 @@ namespace MahApps.Metro.Behaviours
             Border.BorderBrush = _borderColour;
         }
 
-        private void RemoveBorder()
-        {
+        private void RemoveBorder() {
             if (Border == null)
                 return;
 
@@ -235,12 +215,10 @@ namespace MahApps.Metro.Behaviours
             Border.BorderBrush = null;
         }
 
-        private void SetDefaultBackgroundColor()
-        {
+        private void SetDefaultBackgroundColor() {
             var bgSolidColorBrush = AssociatedObject.Background as SolidColorBrush;
 
-            if (bgSolidColorBrush != null)
-            {
+            if (bgSolidColorBrush != null) {
                 var rgb = bgSolidColorBrush.Color.R | (bgSolidColorBrush.Color.G << 8) |
                           (bgSolidColorBrush.Color.B << 16);
 
@@ -253,19 +231,16 @@ namespace MahApps.Metro.Behaviours
             }
         }
 
-        private IntPtr HwndHook(IntPtr hWnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
+        private IntPtr HwndHook(IntPtr hWnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled) {
             IntPtr returnval = IntPtr.Zero;
-            switch (message)
-            {
+            switch (message) {
                 case Constants.WM_NCCALCSIZE:
                     /* Hides the border */
                     handled = true;
                     break;
                 case Constants.WM_NCPAINT:
                     {
-                        if (!ShouldHaveBorder())
-                        {
+                        if (!ShouldHaveBorder()) {
                             var val = 2;
                             UnsafeNativeMethods.DwmSetWindowAttribute(_mHWND, 2, ref val, 4);
                             var m = new MARGINS {bottomHeight = 1, leftWidth = 1, rightWidth = 1, topHeight = 1};
@@ -274,8 +249,7 @@ namespace MahApps.Metro.Behaviours
                             if (Border != null)
                                 Border.BorderThickness = new Thickness(0);
                         }
-                        else
-                        {
+                        else {
                             AddBorder();
                         }
                         handled = true;
@@ -368,14 +342,12 @@ namespace MahApps.Metro.Behaviours
                 case Constants.WM_INITMENU:
                     var window = AssociatedObject as MetroWindow;
 
-                    if (window != null)
-                    {
+                    if (window != null) {
                         if (!window.ShowMaxRestoreButton)
                             UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(hWnd, false),
                                                                Constants.SC_MAXIMIZE,
                                                                Constants.MF_GRAYED | Constants.MF_BYCOMMAND);
-                        else if (window.WindowState == WindowState.Maximized)
-                        {
+                        else if (window.WindowState == WindowState.Maximized) {
                             UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(hWnd, false),
                                                                Constants.SC_MAXIMIZE,
                                                                Constants.MF_GRAYED | Constants.MF_BYCOMMAND);
@@ -386,8 +358,7 @@ namespace MahApps.Metro.Behaviours
                                                                Constants.SC_MOVE,
                                                                Constants.MF_GRAYED | Constants.MF_BYCOMMAND);
                         }
-                        else
-                        {
+                        else {
                             UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(hWnd, false),
                                                                Constants.SC_MAXIMIZE,
                                                                Constants.MF_ENABLED | Constants.MF_BYCOMMAND);

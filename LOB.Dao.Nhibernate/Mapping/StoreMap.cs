@@ -9,8 +9,7 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class StoreMap : BaseEntityMap<Store>
     {
-        public StoreMap()
-        {
+        public StoreMap() {
             Map(x => x.Name);
             HasMany(x => x.Employees)
                 .Cascade.All();

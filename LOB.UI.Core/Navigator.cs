@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
-using LOB.UI.Core.View.Controls;
+using LOB.UI.Core.View;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Core.View.Controls.List.SubEntity;
@@ -19,70 +19,99 @@ namespace LOB.UI.Core
     {
         private readonly IUnityContainer _container;
         private readonly IRegionAdapter _regionAdapter;
+        private dynamic _resolvedView;
 
         [ImportingConstructor]
-        public Navigator(IUnityContainer container, IRegionAdapter regionAdapter)
-        {
+        public Navigator(IUnityContainer container, IRegionAdapter regionAdapter) {
             _container = container;
             _regionAdapter = regionAdapter;
         }
 
-        public void Startup<TView>() where TView : class
-        {
+        public void Startup<TView>(object viewModel = null) where TView : class {
             var view = _container.Resolve<TView>() as Window;
             if (view == null) return;
+            if (viewModel != null) view.DataContext = viewModel;
             if (view is IView) ((IView) view).InitializeServices();
             view.Show();
         }
 
-        public void Startup<TView>(object viewModel) where TView : class
-        {
-            var view = _container.Resolve<TView>() as Window;
-            if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
-            view.DataContext = viewModel;
-            view.Show();
-        }
-
-        public void OpenView<TView>(string regionName) where TView : class
-        {
+        public void OpenView<TView>(string regionName, object viewModel = null) where TView : class {
+            dynamic vModel;
             var view = _container.Resolve<TView>() as UserControl;
             if (view == null) return;
+            if (viewModel != null) vModel = viewModel;
+
             if (view is IView) ((IView) view).InitializeServices();
             _regionAdapter.AddView(view, regionName);
         }
 
-        public void OpenView<TView>(string regionName, object viewModel) where TView : class
-        {
-            var view = _container.Resolve<TView>() as UserControl;
-            if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
-            dynamic model = viewModel;
-            _regionAdapter.AddView(view, regionName, model.Title);
+        public object GetView {
+            get { return _resolvedView; }
         }
 
-        public object ResolveView(string param)  
-        {
-            switch (param)
-            {
+        public INavigator ResolveView(string param, object viewModel = null) {
+            switch (param) {
                 case "AlterProduct":
-                    return _container.Resolve<AlterProductView>();
+                    _resolvedView = _container.Resolve<AlterProductView>();
+                    break;
                 case "ListProduct":
-                    return _container.Resolve<ListProductView>();
+                    _resolvedView = _container.Resolve<ListProductView>();
+                    break;
                 case "AlterEmployee":
-                    return _container.Resolve<AlterEmployeeView>();
+                    _resolvedView = _container.Resolve<AlterEmployeeView>();
+                    break;
                 case "ListEmployee":
-                    return _container.Resolve<ListEmployeeView>();
+                    _resolvedView = _container.Resolve<ListEmployeeView>();
+                    break;
                 case "AlterClient":
-                    return _container.Resolve<AlterClientView>();
+                    _resolvedView = _container.Resolve<AlterClientView>();
+                    break;
                 case "ListClient":
-                    return _container.Resolve<ListClientView>();
+                    _resolvedView = _container.Resolve<ListClientView>();
+                    break;
                 case "AlterSale":
-                    return _container.Resolve<AlterSaleView>();
+                    _resolvedView = _container.Resolve<AlterSaleView>();
+                    break;
                 case "QuickSearch":
-                    return _container.Resolve<ListBaseEntityView>();
+                    _resolvedView = _container.Resolve<ListBaseEntityView>();
+                    break;
+                default:
+                    throw new ArgumentException("Parameter not implemented yet, ", "param");
             }
-            throw new ArgumentException("Parameter not implemented yet, ", "param");
+            if (viewModel != null) {
+                _resolvedView.DataContext = viewModel;
+            }
+            return this;
         }
+
+        public void StartView(bool asDialog = false) {
+            if (_resolvedView == null) return;
+            if (_resolvedView is UserControl) {
+                var window = new FrameWindow()
+                    {
+                        Content = _resolvedView
+                    };
+                if (asDialog) window.ShowDialog();
+                else window.Show();
+                return;
+            }
+            if (_resolvedView is Window) {
+                ((Window) _resolvedView).Show();
+                return;
+            }
+        }
+
+        public void Startup(string viewName, object viewModel = null) {
+            var view = ResolveView(viewName) as Window;
+            if (view == null) return;
+            if (view is IView) ((IView) view).InitializeServices();
+            view.Show();
+        }
+
+        //public Window AsWindow(object resolvedView)
+        //{
+        //    if (_resolvedView is Window) return ((Window)_resolvedView);
+        //    return new FrameWindow() { Content = resolvedView };
+        //}
     }
 }

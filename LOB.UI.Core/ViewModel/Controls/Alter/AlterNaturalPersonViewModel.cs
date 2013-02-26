@@ -13,22 +13,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     {
         #region Props
 
-        public int Rg
-        {
+        public int Rg {
             get { return ((NaturalPerson) Entity).Rg; }
-            set
-            {
+            set {
                 if (Rg == value) return;
                 ((NaturalPerson) Entity).Rg = value;
                 OnPropertyChanged();
             }
         }
 
-        public int Cpf
-        {
+        public int Cpf {
             get { return ((NaturalPerson) Entity).Cpf; }
-            set
-            {
+            set {
                 if (Cpf == value) return;
                 ((NaturalPerson) Entity).Cpf = value;
                 OnPropertyChanged();
@@ -37,11 +33,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         #endregion
 
-        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository, 
-            AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel)
-            : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel)
-        {
+        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
+                                           AlterAddressViewModel alterAddressViewModel,
+                                           AlterContactInfoViewModel alterContactInfoViewModel)
+            : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel) {
         }
     }
 }

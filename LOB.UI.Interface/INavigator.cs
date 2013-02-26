@@ -9,10 +9,10 @@ namespace LOB.UI.Interface
     [InheritedExport]
     public interface INavigator
     {
-        void Startup<TView>() where TView : class;
-        void Startup<TView>(object viewModel) where TView : class;
-        void OpenView<TView>(string regionName) where TView : class;
-        void OpenView<TView>(string regionName, object viewModel) where TView : class;
-        object ResolveView(string param);
+        object GetView { get; }
+        void Startup<TView>(object viewModel = null) where TView : class;
+        void OpenView<TView>(string regionName, object viewModel = null) where TView : class;
+        INavigator ResolveView(string param, object viewModel = null);
+        void StartView(bool asDialog = false);
     }
 }

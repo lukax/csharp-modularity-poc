@@ -94,14 +94,12 @@ namespace MahApps.Metro.Controls
         private Thumb _rightThumb;
         private StackPanel _visualElementsContainer;
 
-        static RangeSlider()
-        {
+        static RangeSlider() {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (RangeSlider),
                                                      new FrameworkPropertyMetadata(typeof (RangeSlider)));
         }
 
-        public RangeSlider()
-        {
+        public RangeSlider() {
             CommandBindings.Add(new CommandBinding(MoveBack, MoveBackHandler));
             CommandBindings.Add(new CommandBinding(MoveForward, MoveForwardHandler));
             CommandBindings.Add(new CommandBinding(MoveAllForward, MoveAllForwardHandler));
@@ -111,46 +109,39 @@ namespace MahApps.Metro.Controls
                                         .AddValueChanged(this, delegate { ReCalculateWidths(); });
         }
 
-        public long RangeStart
-        {
+        public long RangeStart {
             get { return (long) GetValue(RangeStartProperty); }
             set { SetValue(RangeStartProperty, value); }
         }
 
-        public long RangeStop
-        {
+        public long RangeStop {
             get { return (long) GetValue(RangeStopProperty); }
             set { SetValue(RangeStopProperty, value); }
         }
 
-        public long RangeStartSelected
-        {
+        public long RangeStartSelected {
             get { return (long) GetValue(RangeStartSelectedProperty); }
             set { SetValue(RangeStartSelectedProperty, value); }
         }
 
-        public long RangeStopSelected
-        {
+        public long RangeStopSelected {
             get { return (long) GetValue(RangeStopSelectedProperty); }
             set { SetValue(RangeStopSelectedProperty, value); }
         }
 
-        public long MinRange
-        {
+        public long MinRange {
             get { return (long) GetValue(MinRangeProperty); }
             set { SetValue(MinRangeProperty, value); }
         }
 
 
-        public event RangeSelectionChangedEventHandler RangeSelectionChanged
-        {
+        public event RangeSelectionChangedEventHandler RangeSelectionChanged {
             add { AddHandler(RangeSelectionChangedEvent, value); }
             remove { RemoveHandler(RangeSelectionChangedEvent, value); }
         }
 
         private static void RangeChanged(DependencyObject dependencyObject,
-                                         DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-        {
+                                         DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
             var slider = (RangeSlider) dependencyObject;
             if (slider._internalUpdate)
                 return;
@@ -160,8 +151,7 @@ namespace MahApps.Metro.Controls
         }
 
         private static void RangesChanged(DependencyObject dependencyObject,
-                                          DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-        {
+                                          DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
             var slider = (RangeSlider) dependencyObject;
             if (slider._internalUpdate)
                 return;
@@ -170,8 +160,7 @@ namespace MahApps.Metro.Controls
             slider.OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(slider));
         }
 
-        private static void MinRangeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
+        private static void MinRangeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) {
             if ((long) e.NewValue < 0)
                 throw new ArgumentOutOfRangeException("value", "value for MinRange cannot be less than 0");
 
@@ -188,56 +177,46 @@ namespace MahApps.Metro.Controls
             slider.ReCalculateWidths();
         }
 
-        private void MoveAllBackHandler(object sender, ExecutedRoutedEventArgs e)
-        {
+        private void MoveAllBackHandler(object sender, ExecutedRoutedEventArgs e) {
             ResetSelection(true);
         }
 
-        private void MoveAllForwardHandler(object sender, ExecutedRoutedEventArgs e)
-        {
+        private void MoveAllForwardHandler(object sender, ExecutedRoutedEventArgs e) {
             ResetSelection(false);
         }
 
-        private void MoveBackHandler(object sender, ExecutedRoutedEventArgs e)
-        {
+        private void MoveBackHandler(object sender, ExecutedRoutedEventArgs e) {
             MoveSelection(true);
         }
 
-        private void MoveForwardHandler(object sender, ExecutedRoutedEventArgs e)
-        {
+        private void MoveForwardHandler(object sender, ExecutedRoutedEventArgs e) {
             MoveSelection(false);
         }
 
-        private void RightThumbDragDelta(object sender, DragDeltaEventArgs e)
-        {
+        private void RightThumbDragDelta(object sender, DragDeltaEventArgs e) {
             MoveThumb(_centerThumb, _rightButton, e.HorizontalChange);
             ReCalculateRangeSelected(false, true);
         }
 
-        private void LeftThumbDragDelta(object sender, DragDeltaEventArgs e)
-        {
+        private void LeftThumbDragDelta(object sender, DragDeltaEventArgs e) {
             MoveThumb(_leftButton, _centerThumb, e.HorizontalChange);
             ReCalculateRangeSelected(true, false);
         }
 
-        private void LeftButtonClick(object sender, RoutedEventArgs e)
-        {
+        private void LeftButtonClick(object sender, RoutedEventArgs e) {
             MoveSelection(true);
         }
 
-        private void RightButtonClick(object sender, RoutedEventArgs e)
-        {
+        private void RightButtonClick(object sender, RoutedEventArgs e) {
             MoveSelection(false);
         }
 
-        private void CenterThumbDragDelta(object sender, DragDeltaEventArgs e)
-        {
+        private void CenterThumbDragDelta(object sender, DragDeltaEventArgs e) {
             MoveThumb(_leftButton, _rightButton, e.HorizontalChange);
             ReCalculateRangeSelected(true, true);
         }
 
-        private static void MoveThumb(FrameworkElement x, FrameworkElement y, double horizonalChange)
-        {
+        private static void MoveThumb(FrameworkElement x, FrameworkElement y, double horizonalChange) {
             double change = 0;
             if (horizonalChange < 0) //slider went left
                 change = GetChangeKeepPositive(x.Width, horizonalChange);
@@ -248,20 +227,16 @@ namespace MahApps.Metro.Controls
             y.Width -= change;
         }
 
-        private static double GetChangeKeepPositive(double width, double increment)
-        {
+        private static double GetChangeKeepPositive(double width, double increment) {
             return Math.Max(width + increment, 0) - width;
         }
 
-        private void ReCalculateRanges()
-        {
+        private void ReCalculateRanges() {
             _movableRange = RangeStop - RangeStart - MinRange;
         }
 
-        private void ReCalculateWidths()
-        {
-            if (_leftButton != null && _rightButton != null && _centerThumb != null)
-            {
+        private void ReCalculateWidths() {
+            if (_leftButton != null && _rightButton != null && _centerThumb != null) {
                 _movableWidth =
                     Math.Max(ActualWidth - _rightThumb.ActualWidth - _leftThumb.ActualWidth - _centerThumb.MinWidth, 1);
                 _leftButton.Width = Math.Max(_movableWidth*(RangeStartSelected - RangeStart)/_movableRange, 0);
@@ -273,11 +248,9 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private void ReCalculateRangeSelected(bool reCalculateStart, bool reCalculateStop)
-        {
+        private void ReCalculateRangeSelected(bool reCalculateStart, bool reCalculateStop) {
             _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
-            if (reCalculateStart)
-            {
+            if (reCalculateStart) {
                 // Make sure to get exactly rangestart if thumb is at the start
                 RangeStartSelected = _leftButton.Width == 0.0
                                          ? RangeStart
@@ -285,8 +258,7 @@ namespace MahApps.Metro.Controls
                                                     (long) (RangeStart + _movableRange*_leftButton.Width/_movableWidth));
             }
 
-            if (reCalculateStop)
-            {
+            if (reCalculateStop) {
                 // Make sure to get exactly rangestop if thumb is at the end
                 RangeStopSelected = _rightButton.Width == 0.0
                                         ? RangeStop
@@ -301,8 +273,7 @@ namespace MahApps.Metro.Controls
                 OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
 
-        public void MoveSelection(bool isLeft)
-        {
+        public void MoveSelection(bool isLeft) {
             double widthChange = RepeatButtonMoveRatio*(RangeStopSelected - RangeStartSelected)
                                  *_movableWidth/_movableRange;
 
@@ -311,8 +282,7 @@ namespace MahApps.Metro.Controls
             ReCalculateRangeSelected(true, true);
         }
 
-        public void ResetSelection(bool isStart)
-        {
+        public void ResetSelection(bool isStart) {
             double widthChange = RangeStop - RangeStart;
             widthChange = isStart ? -widthChange : widthChange;
 
@@ -320,15 +290,12 @@ namespace MahApps.Metro.Controls
             ReCalculateRangeSelected(true, true);
         }
 
-        public void MoveSelection(long span)
-        {
-            if (span > 0)
-            {
+        public void MoveSelection(long span) {
+            if (span > 0) {
                 if (RangeStopSelected + span > RangeStop)
                     span = RangeStop - RangeStopSelected;
             }
-            else
-            {
+            else {
                 if (RangeStartSelected + span < RangeStart)
                     span = RangeStart - RangeStartSelected;
             }
@@ -345,8 +312,7 @@ namespace MahApps.Metro.Controls
             OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
 
-        public void SetSelectedRange(long selectionStart, long selectionStop)
-        {
+        public void SetSelectedRange(long selectionStart, long selectionStop) {
             long start = Math.Max(RangeStart, selectionStart);
             long stop = Math.Min(selectionStop, RangeStop);
             start = Math.Min(start, RangeStop - MinRange);
@@ -362,8 +328,7 @@ namespace MahApps.Metro.Controls
             OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
 
-        public void ZoomToSpan(long span)
-        {
+        public void ZoomToSpan(long span) {
             _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
             // Ensure new span is within the valid range
             span = Math.Min(span, RangeStop - RangeStart);
@@ -393,14 +358,12 @@ namespace MahApps.Metro.Controls
             OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
 
-        private void OnRangeSelectionChanged(RangeSelectionChangedEventArgs e)
-        {
+        private void OnRangeSelectionChanged(RangeSelectionChangedEventArgs e) {
             e.RoutedEvent = RangeSelectionChangedEvent;
             RaiseEvent(e);
         }
 
-        public override void OnApplyTemplate()
-        {
+        public override void OnApplyTemplate() {
             base.OnApplyTemplate();
 
             _visualElementsContainer = EnforceInstance<StackPanel>("PART_RangeSliderContainer");
@@ -413,15 +376,13 @@ namespace MahApps.Metro.Controls
             ReCalculateWidths();
         }
 
-        private T EnforceInstance<T>(string partName) where T : FrameworkElement, new()
-        {
+        private T EnforceInstance<T>(string partName) where T : FrameworkElement, new() {
             T element = GetTemplateChild(partName) as T ?? new T();
             return element;
         }
 
         //adds all visual element to the conatiner
-        private void InitializeVisualElementsContainer()
-        {
+        private void InitializeVisualElementsContainer() {
             _visualElementsContainer.Orientation = Orientation.Horizontal;
             _leftThumb.Width = DefaultSplittersThumbWidth;
             _leftThumb.Tag = "left";

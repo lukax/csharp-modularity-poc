@@ -13,22 +13,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     {
         #region Props
 
-        public int Ie
-        {
+        public int Ie {
             get { return ((LegalPerson) Entity).Ie; }
-            set
-            {
+            set {
                 if (Ie == value) return;
                 ((LegalPerson) Entity).Ie = value;
                 OnPropertyChanged();
             }
         }
 
-        public int Cnpj
-        {
+        public int Cnpj {
             get { return ((LegalPerson) Entity).Cnpj; }
-            set
-            {
+            set {
                 if (Cnpj == value) return;
                 ((LegalPerson) Entity).Cnpj = value;
                 OnPropertyChanged();
@@ -37,11 +33,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         #endregion
 
-        public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository, 
-            AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel)
-            : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel)
-        {
+        public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository,
+                                         AlterAddressViewModel alterAddressViewModel,
+                                         AlterContactInfoViewModel alterContactInfoViewModel)
+            : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel) {
         }
     }
 }

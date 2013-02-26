@@ -15,23 +15,26 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     {
         #region Props
 
-        private Lazy<IQueryable<Client>> _clients;
-        public IList<Client> Clients { get { return _clients.Value.ToList(); } }
-
         private Client _client;
-        public Client Client
-        {
+        private Lazy<IQueryable<Client>> _clients;
+
+        public IList<Client> Clients {
+            get { return _clients.Value.ToList(); }
+        }
+
+        public Client Client {
             get { return _client; }
-            set
-            {
-                if (_client == value) return; _client = value; OnPropertyChanged();
+            set {
+                if (_client == value) return;
+                _client = value;
+                OnPropertyChanged();
             }
         }
 
         #endregion
+
         public ListClientViewModel(Client client, Person entity, IRepository repository)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
             Client = client;
             Client.Person = entity;
 

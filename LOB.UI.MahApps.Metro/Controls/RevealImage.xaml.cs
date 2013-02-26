@@ -23,26 +23,22 @@ namespace MahApps.Metro.Controls
                                                                                               new UIPropertyMetadata(
                                                                                                   null));
 
-        public RevealImage()
-        {
+        public RevealImage() {
             InitializeComponent();
         }
 
-        public string Text
-        {
+        public string Text {
             get { return (string) GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
-        public ImageSource Image
-        {
+        public ImageSource Image {
             get { return (ImageSource) GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
 
 
-        private static void TypewriteTextblock(string textToAnimate, TextBlock txt, TimeSpan timeSpan)
-        {
+        private static void TypewriteTextblock(string textToAnimate, TextBlock txt, TimeSpan timeSpan) {
             var story = new Storyboard
                 {
                     FillBehavior = FillBehavior.HoldEnd
@@ -55,8 +51,7 @@ namespace MahApps.Metro.Controls
                 };
 
             var tmp = string.Empty;
-            foreach (var c in textToAnimate)
-            {
+            foreach (var c in textToAnimate) {
                 discreteStringKeyFrame = new DiscreteStringKeyFrame
                     {
                         KeyTime = KeyTime.Paced
@@ -72,8 +67,7 @@ namespace MahApps.Metro.Controls
             story.Begin(txt);
         }
 
-        private void GridMouseEnter(object sender, MouseEventArgs e)
-        {
+        private void GridMouseEnter(object sender, MouseEventArgs e) {
             TypewriteTextblock(Text.ToUpper(), textBlock, TimeSpan.FromSeconds(.25));
         }
     }

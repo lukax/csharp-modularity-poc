@@ -13,31 +13,27 @@ namespace LOB.UI.Core.View.Controls.Alter
     [Export]
     public partial class AlterClientView : UserControl, ITabProp, IView
     {
+        private string _header;
+
         [ImportingConstructor]
-        public AlterClientView(AlterClientViewModel dataContext)
-        {
+        public AlterClientView(AlterClientViewModel dataContext) {
             InitializeComponent();
             DataContext = dataContext;
 
-            //Registrations
             Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
-        public string Header
-        {
-            get { return "Alterar Cliente"; }
+        public string Header {
+            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Cliente" : _header; }
+            set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices()
-        {
-            throw new System.NotImplementedException();
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
-            throw new System.NotImplementedException();
+        public void Refresh() {
         }
     }
 }

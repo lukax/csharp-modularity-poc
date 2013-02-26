@@ -19,49 +19,45 @@ namespace LOB.UI.Core.ViewModel.Controls.List
         #region Props
 
         private Lazy<IQueryable<Employee>> _employees;
-        public IList<Employee> Employees { get { return _employees.Value.ToList(); } }
 
-        public Employee Employee
-        {
+        public IList<Employee> Employees {
+            get { return _employees.Value.ToList(); }
+        }
+
+        public Employee Employee {
             get { return Entity; }
-            set
-            {
+            set {
                 if (Entity == value) return;
-                Entity = value; OnPropertyChanged();
+                Entity = value;
+                OnPropertyChanged();
             }
         }
 
         #endregion
 
-
         [ImportingConstructor]
         public ListEmployeeViewModel(Employee employee, IRepository repository, Person person)
-            : base(employee, repository)
-        {
+            : base(employee, repository) {
             if (person != null)
                 Employee.Person = person;
 
             _employees = new Lazy<IQueryable<Employee>>(Repository.GetList<Employee>);
         }
 
-        public override bool CanUpdate(object arg)
-        {
+        public override bool CanUpdate(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanDelete(object arg)
-        {
+        public override bool CanDelete(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
         }
     }
 }

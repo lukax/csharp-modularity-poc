@@ -9,8 +9,7 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class ProductMap : SubclassMap<Product>
     {
-        public ProductMap()
-        {
+        public ProductMap() {
             References(x => x.Category);
             Map(x => x.Status);
             Map(x => x.UnitsInStock);

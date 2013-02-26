@@ -16,13 +16,11 @@ namespace MahApps.Metro.Controls
             DependencyProperty.Register("MetroImageSource", typeof (Visual), typeof (AppBarButton),
                                         new PropertyMetadata(default(Visual)));
 
-        public AppBarButton()
-        {
+        public AppBarButton() {
             DefaultStyleKey = typeof (AppBarButton);
         }
 
-        public Visual MetroImageSource
-        {
+        public Visual MetroImageSource {
             get { return (Visual) GetValue(MetroImageSourceProperty); }
             set { SetValue(MetroImageSourceProperty, value); }
         }

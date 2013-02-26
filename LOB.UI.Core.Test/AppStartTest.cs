@@ -10,8 +10,7 @@ namespace LOB.UI.Core.Test
     public class AppStartTest
     {
         [TestMethod]
-        public void StartComposed()
-        {
+        public void StartComposed() {
             var app = new App();
         }
     }
