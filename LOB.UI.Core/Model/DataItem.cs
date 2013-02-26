@@ -2,8 +2,7 @@
 {
     public class DataItem
     {
-        public DataItem(string title)
-        {
+        public DataItem(string title) {
             Title = title;
         }
 
