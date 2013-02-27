@@ -47,36 +47,44 @@ namespace MahApps.Metro.Controls
                                                                                                          new FrameworkPropertyMetadata
                                                                                                              (false));
 
-        public bool HasText {
+        public bool HasText
+        {
             get { return (bool) GetValue(hasTextProperty); }
         }
 
-        public static void SetSelectAllOnFocus(DependencyObject obj, bool value) {
+        public static void SetSelectAllOnFocus(DependencyObject obj, bool value)
+        {
             obj.SetValue(SelectAllOnFocusProperty, value);
         }
 
-        public static bool GetSelectAllOnFocus(DependencyObject obj) {
+        public static bool GetSelectAllOnFocus(DependencyObject obj)
+        {
             return (bool) obj.GetValue(SelectAllOnFocusProperty);
         }
 
-        public static void SetIsMonitoring(DependencyObject obj, bool value) {
+        public static void SetIsMonitoring(DependencyObject obj, bool value)
+        {
             obj.SetValue(IsMonitoringProperty, value);
         }
 
-        public static string GetWatermark(DependencyObject obj) {
+        public static string GetWatermark(DependencyObject obj)
+        {
             return (string) obj.GetValue(WatermarkProperty);
         }
 
-        public static void SetWatermark(DependencyObject obj, string value) {
+        public static void SetWatermark(DependencyObject obj, string value)
+        {
             obj.SetValue(WatermarkProperty, value);
         }
 
-        private static void SetTextLength(DependencyObject obj, int value) {
+        private static void SetTextLength(DependencyObject obj, int value)
+        {
             obj.SetValue(TextLengthProperty, value);
             obj.SetValue(hasTextProperty, value >= 1);
         }
 
-        private static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+        private static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
             if (d is TextBox) {
                 var txtBox = d as TextBox;
 
@@ -103,21 +111,24 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private static void TextChanged(object sender, TextChangedEventArgs e) {
+        private static void TextChanged(object sender, TextChangedEventArgs e)
+        {
             var txtBox = sender as TextBox;
             if (txtBox == null)
                 return;
             SetTextLength(txtBox, txtBox.Text.Length);
         }
 
-        private static void PasswordChanged(object sender, RoutedEventArgs e) {
+        private static void PasswordChanged(object sender, RoutedEventArgs e)
+        {
             var passBox = sender as PasswordBox;
             if (passBox == null)
                 return;
             SetTextLength(passBox, passBox.Password.Length);
         }
 
-        private static void TextBoxGotFocus(object sender, RoutedEventArgs e) {
+        private static void TextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
             var txtBox = sender as TextBox;
             if (txtBox == null)
                 return;
@@ -126,7 +137,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private static void PasswordGotFocus(object sender, RoutedEventArgs e) {
+        private static void PasswordGotFocus(object sender, RoutedEventArgs e)
+        {
             var passBox = sender as PasswordBox;
             if (passBox == null)
                 return;
@@ -135,15 +147,18 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        public static bool GetClearTextButton(DependencyObject d) {
+        public static bool GetClearTextButton(DependencyObject d)
+        {
             return (bool) d.GetValue(ClearTextButtonProperty);
         }
 
-        public static void SetClearTextButton(DependencyObject obj, bool value) {
+        public static void SetClearTextButton(DependencyObject obj, bool value)
+        {
             obj.SetValue(ClearTextButtonProperty, value);
         }
 
-        private static void ClearTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+        private static void ClearTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
             var textbox = d as TextBox;
             if (textbox != null) {
                 if ((bool) e.NewValue) {
@@ -164,7 +179,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private static void PassBoxLoaded(object sender, RoutedEventArgs e) {
+        private static void PassBoxLoaded(object sender, RoutedEventArgs e)
+        {
             if (!(sender is PasswordBox))
                 return;
 
@@ -189,7 +205,8 @@ namespace MahApps.Metro.Controls
         }
 
 
-        private static void TextBoxLoaded(object sender, RoutedEventArgs e) {
+        private static void TextBoxLoaded(object sender, RoutedEventArgs e)
+        {
             if (!(sender is TextBox))
                 return;
 
@@ -213,7 +230,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private static void ClearTextClicked(object sender, RoutedEventArgs e) {
+        private static void ClearTextClicked(object sender, RoutedEventArgs e)
+        {
             var button = ((Button) sender);
             var parent = VisualTreeHelper.GetParent(button);
             while (!(parent is TextBox)) {
@@ -223,7 +241,8 @@ namespace MahApps.Metro.Controls
             ((TextBox) parent).Clear();
         }
 
-        private static void ClearPassClicked(object sender, RoutedEventArgs e) {
+        private static void ClearPassClicked(object sender, RoutedEventArgs e)
+        {
             var button = ((Button) sender);
             var parent = VisualTreeHelper.GetParent(button);
             while (!(parent is PasswordBox)) {

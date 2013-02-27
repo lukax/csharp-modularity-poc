@@ -17,7 +17,8 @@ namespace LOB.Business.Framework
 
     public static class ReferenceMap
     {
-        static ReferenceMap() {
+        static ReferenceMap()
+        {
             //Container = new UnityContainer();
             ////Model
             //Container.RegisterType<BaseEntity, Product>("Product");
@@ -62,15 +63,18 @@ namespace LOB.Business.Framework
 
         public static UnityContainer Container { get; private set; }
 
-        public static Object Resolve<T>(String parameter) {
+        public static Object Resolve<T>(String parameter)
+        {
             return Container.Resolve(typeof (T), parameter);
         }
 
-        public static Object ResolveView(String indentifier) {
+        public static Object ResolveView(String indentifier)
+        {
             return Container.Resolve<UserControl>(indentifier);
         }
 
-        public static Object ResolveView<T>(T entity) where T : BaseEntity {
+        public static Object ResolveView<T>(T entity) where T : BaseEntity
+        {
             UserControl control = null;
             //if (typeof(T) == typeof(Product))
             //    control = Container.Resolve<UserControl>("UpdateProduct");

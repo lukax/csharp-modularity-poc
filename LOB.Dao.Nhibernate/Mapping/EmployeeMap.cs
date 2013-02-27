@@ -9,7 +9,8 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class EmployeeMap : BaseEntityMap<Employee>
     {
-        public EmployeeMap() {
+        public EmployeeMap()
+        {
             References(x => x.Person);
             References(x => x.Store);
             Map(x => x.Title);

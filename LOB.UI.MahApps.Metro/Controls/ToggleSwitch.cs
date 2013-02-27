@@ -59,37 +59,44 @@ namespace MahApps.Metro.Controls
         private ToggleButton _toggleButton;
         private bool _wasContentSet;
 
-        public ToggleSwitch() {
+        public ToggleSwitch()
+        {
             DefaultStyleKey = typeof (ToggleSwitch);
         }
 
-        public string OnLabel {
+        public string OnLabel
+        {
             get { return (string) GetValue(OnProperty); }
             set { SetValue(OnProperty, value); }
         }
 
-        public string OffLabel {
+        public string OffLabel
+        {
             get { return (string) GetValue(OffProperty); }
             set { SetValue(OffProperty, value); }
         }
 
-        public object Header {
+        public object Header
+        {
             get { return GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
-        public DataTemplate HeaderTemplate {
+        public DataTemplate HeaderTemplate
+        {
             get { return (DataTemplate) GetValue(HeaderTemplateProperty); }
             set { SetValue(HeaderTemplateProperty, value); }
         }
 
-        public Brush SwitchForeground {
+        public Brush SwitchForeground
+        {
             get { return (Brush) GetValue(SwitchForegroundProperty); }
             set { SetValue(SwitchForegroundProperty, value); }
         }
 
         [TypeConverter(typeof (NullableBoolConverter))]
-        public bool? IsChecked {
+        public bool? IsChecked
+        {
             get { return (bool?) GetValue(IsCheckedProperty); }
             set { SetValue(IsCheckedProperty, value); }
         }
@@ -99,14 +106,16 @@ namespace MahApps.Metro.Controls
         public event EventHandler<RoutedEventArgs> Indeterminate;
         public event EventHandler<RoutedEventArgs> Click;
 
-        private static void OnIsCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+        private static void OnIsCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
             var toggleSwitch = (ToggleSwitch) d;
             if (toggleSwitch._toggleButton != null) {
                 toggleSwitch._toggleButton.IsChecked = (bool?) e.NewValue;
             }
         }
 
-        private void SetDefaultContent() {
+        private void SetDefaultContent()
+        {
             Binding binding = new Binding("IsChecked")
                 {
                     Source = this,
@@ -116,16 +125,19 @@ namespace MahApps.Metro.Controls
             SetBinding(ContentProperty, binding);
         }
 
-        private void ChangeVisualState(bool useTransitions) {
+        private void ChangeVisualState(bool useTransitions)
+        {
             VisualStateManager.GoToState(this, IsEnabled ? NormalState : DisabledState, useTransitions);
         }
 
-        protected override void OnContentChanged(object oldContent, object newContent) {
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
             base.OnContentChanged(oldContent, newContent);
             _wasContentSet = true;
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             base.OnApplyTemplate();
 
             if (!_wasContentSet && GetBindingExpression(ContentProperty) == null) {
@@ -149,26 +161,31 @@ namespace MahApps.Metro.Controls
             ChangeVisualState(false);
         }
 
-        private void CheckedHandler(object sender, RoutedEventArgs e) {
+        private void CheckedHandler(object sender, RoutedEventArgs e)
+        {
             IsChecked = true;
             SafeRaise.Raise(Checked, this, e);
         }
 
-        private void UncheckedHandler(object sender, RoutedEventArgs e) {
+        private void UncheckedHandler(object sender, RoutedEventArgs e)
+        {
             IsChecked = false;
             SafeRaise.Raise(Unchecked, this, e);
         }
 
-        private void IndeterminateHandler(object sender, RoutedEventArgs e) {
+        private void IndeterminateHandler(object sender, RoutedEventArgs e)
+        {
             IsChecked = null;
             SafeRaise.Raise(Indeterminate, this, e);
         }
 
-        private void ClickHandler(object sender, RoutedEventArgs e) {
+        private void ClickHandler(object sender, RoutedEventArgs e)
+        {
             SafeRaise.Raise(Click, this, e);
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return string.Format(
                 CultureInfo.InvariantCulture,
                 "{{ToggleSwitch IsChecked={0}, Content={1}}}",

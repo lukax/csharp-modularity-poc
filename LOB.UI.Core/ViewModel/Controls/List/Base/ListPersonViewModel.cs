@@ -4,23 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Dao.Interface;
-using LOB.Domain;
 using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List
+namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
-    public sealed class ListClientViewModel : ListBaseEntityViewModel<Client>
+    public class ListPersonViewModel : ListBaseEntityViewModel<Person>
     {
         #region Props
 
-
         #endregion
 
-        public ListClientViewModel(Client client, IRepository repository)
-            : base(client, repository)
+        public ListPersonViewModel(Person entity, IRepository repository)
+            : base(entity, repository)
         {
         }
 

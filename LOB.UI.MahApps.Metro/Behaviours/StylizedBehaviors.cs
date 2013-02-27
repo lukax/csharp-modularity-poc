@@ -19,19 +19,23 @@ namespace MahApps.Metro.Behaviours
             typeof (StylizedBehaviors),
             new FrameworkPropertyMetadata(null, OnPropertyChanged));
 
-        public static StylizedBehaviorCollection GetBehaviors(DependencyObject uie) {
+        public static StylizedBehaviorCollection GetBehaviors(DependencyObject uie)
+        {
             return (StylizedBehaviorCollection) uie.GetValue(BehaviorsProperty);
         }
 
-        public static void SetBehaviors(DependencyObject uie, StylizedBehaviorCollection value) {
+        public static void SetBehaviors(DependencyObject uie, StylizedBehaviorCollection value)
+        {
             uie.SetValue(BehaviorsProperty, value);
         }
 
-        private static Behavior GetOriginalBehavior(DependencyObject obj) {
+        private static Behavior GetOriginalBehavior(DependencyObject obj)
+        {
             return obj.GetValue(OriginalBehaviorProperty) as Behavior;
         }
 
-        private static int GetIndexOf(BehaviorCollection itemBehaviors, Behavior behavior) {
+        private static int GetIndexOf(BehaviorCollection itemBehaviors, Behavior behavior)
+        {
             int index = -1;
 
             Behavior orignalBehavior = GetOriginalBehavior(behavior);
@@ -57,7 +61,8 @@ namespace MahApps.Metro.Behaviours
             return index;
         }
 
-        private static void OnPropertyChanged(DependencyObject dpo, DependencyPropertyChangedEventArgs e) {
+        private static void OnPropertyChanged(DependencyObject dpo, DependencyPropertyChangedEventArgs e)
+        {
             var uie = dpo as UIElement;
 
             if (uie == null) {
@@ -96,7 +101,8 @@ namespace MahApps.Metro.Behaviours
             }
         }
 
-        private static void SetOriginalBehavior(DependencyObject obj, Behavior value) {
+        private static void SetOriginalBehavior(DependencyObject obj, Behavior value)
+        {
             obj.SetValue(OriginalBehaviorProperty, value);
         }
     }

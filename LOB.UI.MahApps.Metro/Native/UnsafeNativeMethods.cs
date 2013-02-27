@@ -113,25 +113,30 @@ namespace MahApps.Metro.Native
         [DllImport("user32.dll")]
         internal static extern uint EnableMenuItem(IntPtr hMenu, uint itemId, uint uEnable);
 
-        internal static void PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam) {
+        internal static void PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam)
+        {
             if (!_PostMessage(hWnd, Msg, wParam, lParam)) {
                 throw new Win32Exception();
             }
         }
 
-        internal static int GET_X_LPARAM(IntPtr lParam) {
+        internal static int GET_X_LPARAM(IntPtr lParam)
+        {
             return LOWORD(lParam.ToInt32());
         }
 
-        internal static int GET_Y_LPARAM(IntPtr lParam) {
+        internal static int GET_Y_LPARAM(IntPtr lParam)
+        {
             return HIWORD(lParam.ToInt32());
         }
 
-        private static int HIWORD(int i) {
+        private static int HIWORD(int i)
+        {
             return (short) (i >> 16);
         }
 
-        private static int LOWORD(int i) {
+        private static int LOWORD(int i)
+        {
             return (short) (i & 0xFFFF);
         }
 

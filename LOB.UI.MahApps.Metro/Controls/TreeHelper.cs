@@ -29,7 +29,8 @@ namespace MahApps.Metro.Controls
         ///     reference is being returned.
         /// </returns>
         public static T TryFindParent<T>(this DependencyObject child)
-            where T : DependencyObject {
+            where T : DependencyObject
+        {
             //get parent item
             DependencyObject parentObject = GetParentObject(child);
 
@@ -58,7 +59,8 @@ namespace MahApps.Metro.Controls
         ///     The submitted item's parent, if available. Otherwise
         ///     null.
         /// </returns>
-        public static DependencyObject GetParentObject(this DependencyObject child) {
+        public static DependencyObject GetParentObject(this DependencyObject child)
+        {
             if (child == null) return null;
 
             //handle content elements separately
@@ -98,7 +100,8 @@ namespace MahApps.Metro.Controls
         /// <returns>
         ///     All descendants of <paramref name="source" /> that match the requested type.
         /// </returns>
-        public static IEnumerable<T> FindChildren<T>(this DependencyObject source) where T : DependencyObject {
+        public static IEnumerable<T> FindChildren<T>(this DependencyObject source) where T : DependencyObject
+        {
             if (source != null) {
                 var childs = GetChildObjects(source);
                 foreach (DependencyObject child in childs) {
@@ -124,7 +127,8 @@ namespace MahApps.Metro.Controls
         /// </summary>
         /// <param name="parent">The item to be processed.</param>
         /// <returns>The submitted item's child elements, if available.</returns>
-        public static IEnumerable<DependencyObject> GetChildObjects(this DependencyObject parent) {
+        public static IEnumerable<DependencyObject> GetChildObjects(this DependencyObject parent)
+        {
             if (parent == null) yield break;
 
             if (parent is ContentElement || parent is FrameworkElement) {
@@ -161,7 +165,8 @@ namespace MahApps.Metro.Controls
         /// </param>
         /// <param name="point">The position to be evaluated on the origin.</param>
         public static T TryFindFromPoint<T>(UIElement reference, Point point)
-            where T : DependencyObject {
+            where T : DependencyObject
+        {
             DependencyObject element = reference.InputHitTest(point) as DependencyObject;
 
             if (element == null) return null;

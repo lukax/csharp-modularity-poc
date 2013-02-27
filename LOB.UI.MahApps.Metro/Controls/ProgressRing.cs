@@ -64,60 +64,69 @@ namespace MahApps.Metro.Controls
 
         private List<Action> _deferredActions = new List<Action>();
 
-        static ProgressRing() {
+        static ProgressRing()
+        {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (ProgressRing),
                                                      new FrameworkPropertyMetadata(typeof (ProgressRing)));
         }
 
-        public ProgressRing() {
+        public ProgressRing()
+        {
             SizeChanged += OnSizeChanged;
         }
 
-        public double MaxSideLength {
+        public double MaxSideLength
+        {
             get { return (double) GetValue(MaxSideLengthProperty); }
             private set { SetValue(MaxSideLengthProperty, value); }
         }
 
-        public double EllipseDiameter {
+        public double EllipseDiameter
+        {
             get { return (double) GetValue(EllipseDiameterProperty); }
             private set { SetValue(EllipseDiameterProperty, value); }
         }
 
-        public Thickness EllipseOffset {
+        public Thickness EllipseOffset
+        {
             get { return (Thickness) GetValue(EllipseOffsetProperty); }
             private set { SetValue(EllipseOffsetProperty, value); }
         }
 
-        public double BindableWidth {
+        public double BindableWidth
+        {
             get { return (double) GetValue(BindableWidthProperty); }
             private set { SetValue(BindableWidthProperty, value); }
         }
 
-        public bool IsActive {
+        public bool IsActive
+        {
             get { return (bool) GetValue(IsActiveProperty); }
             set { SetValue(IsActiveProperty, value); }
         }
 
-        public bool IsLarge {
+        public bool IsLarge
+        {
             get { return (bool) GetValue(IsLargeProperty); }
             set { SetValue(IsLargeProperty, value); }
         }
 
         private static void BindableWidthCallback(DependencyObject dependencyObject,
-                                                  DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+                                                  DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
             var ring = dependencyObject as ProgressRing;
             if (ring == null)
                 return;
 
             var action = new Action(() =>
-                {
-                    ring.SetEllipseDiameter(
-                        (double) dependencyPropertyChangedEventArgs.NewValue);
-                    ring.SetEllipseOffset(
-                        (double) dependencyPropertyChangedEventArgs.NewValue);
-                    ring.SetMaxSideLength(
-                        (double) dependencyPropertyChangedEventArgs.NewValue);
-                });
+            {
+                ring.SetEllipseDiameter(
+                    (double) dependencyPropertyChangedEventArgs.NewValue);
+                ring.SetEllipseOffset(
+                    (double) dependencyPropertyChangedEventArgs.NewValue);
+                ring.SetMaxSideLength(
+                    (double) dependencyPropertyChangedEventArgs.NewValue);
+            });
 
             if (ring._deferredActions != null)
                 ring._deferredActions.Add(action);
@@ -125,11 +134,13 @@ namespace MahApps.Metro.Controls
                 action();
         }
 
-        private void SetMaxSideLength(double width) {
+        private void SetMaxSideLength(double width)
+        {
             MaxSideLength = width <= 60 ? 60.0 : width;
         }
 
-        private void SetEllipseDiameter(double width) {
+        private void SetEllipseDiameter(double width)
+        {
             if (width <= 60) {
                 EllipseDiameter = 6.0;
             }
@@ -139,7 +150,8 @@ namespace MahApps.Metro.Controls
         }
 
 
-        private void SetEllipseOffset(double width) {
+        private void SetEllipseOffset(double width)
+        {
             if (width <= 60) {
                 EllipseOffset = new Thickness(0, 24, 0, 0);
             }
@@ -149,7 +161,8 @@ namespace MahApps.Metro.Controls
         }
 
         private static void IsLargeChangedCallback(DependencyObject dependencyObject,
-                                                   DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+                                                   DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
             var ring = dependencyObject as ProgressRing;
             if (ring == null)
                 return;
@@ -157,7 +170,8 @@ namespace MahApps.Metro.Controls
             ring.UpdateLargeState();
         }
 
-        private void UpdateLargeState() {
+        private void UpdateLargeState()
+        {
             Action action;
 
             if (IsLarge)
@@ -172,12 +186,14 @@ namespace MahApps.Metro.Controls
                 action();
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs) {
+        private void OnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
+        {
             BindableWidth = ActualWidth;
         }
 
         private static void IsActiveChanged(DependencyObject dependencyObject,
-                                            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+                                            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
             var ring = dependencyObject as ProgressRing;
             if (ring == null)
                 return;
@@ -185,7 +201,8 @@ namespace MahApps.Metro.Controls
             ring.UpdateActiveState();
         }
 
-        private void UpdateActiveState() {
+        private void UpdateActiveState()
+        {
             Action action;
 
             if (IsActive)
@@ -200,7 +217,8 @@ namespace MahApps.Metro.Controls
                 action();
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             //make sure the states get updated
             UpdateLargeState();
             UpdateActiveState();
@@ -214,7 +232,8 @@ namespace MahApps.Metro.Controls
 
     internal class WidthToMaxSideLengthConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
             if (value is double) {
                 var width = (double) value;
                 return width <= 60 ? 60.0 : width;
@@ -223,7 +242,8 @@ namespace MahApps.Metro.Controls
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
             throw new NotImplementedException();
         }
     }

@@ -48,18 +48,22 @@ namespace MahApps.Metro.Controls
         private bool _wasDragged;
 
 
-        public ToggleSwitchButton() {
+        public ToggleSwitchButton()
+        {
             DefaultStyleKey = typeof (ToggleSwitchButton);
         }
 
-        public Brush SwitchForeground {
+        public Brush SwitchForeground
+        {
             get { return (Brush) GetValue(SwitchForegroundProperty); }
             set { SetValue(SwitchForegroundProperty, value); }
         }
 
-        private double Translation {
+        private double Translation
+        {
             get { return _backgroundTranslation == null ? _thumbTranslation.X : _backgroundTranslation.X; }
-            set {
+            set
+            {
                 if (_backgroundTranslation != null) {
                     _backgroundTranslation.X = value;
                 }
@@ -70,7 +74,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private void ChangeVisualState(bool useTransitions) {
+        private void ChangeVisualState(bool useTransitions)
+        {
             VisualStateManager.GoToState(this, IsEnabled ? NormalState : DisabledState, useTransitions);
 
             if (_isDragging) {
@@ -84,12 +89,14 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        protected override void OnToggle() {
+        protected override void OnToggle()
+        {
             IsChecked = IsChecked != true;
             ChangeVisualState(true);
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             if (_track != null) {
                 _track.SizeChanged -= SizeChangedHandler;
             }
@@ -115,7 +122,8 @@ namespace MahApps.Metro.Controls
             ChangeVisualState(false);
         }
 
-        private void SizeChangedHandler(object sender, SizeChangedEventArgs e) {
+        private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
+        {
             _track.Clip = new RectangleGeometry {Rect = new Rect(0, 0, _track.ActualWidth, _track.ActualHeight)};
             _checkedTranslation = _track.ActualWidth - _thumb.ActualWidth - _thumb.Margin.Left - _thumb.Margin.Right;
         }

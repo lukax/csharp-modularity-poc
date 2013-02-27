@@ -8,7 +8,8 @@ namespace LOB.Dao.Nhibernate.Mapping.Base
 {
     public class BaseCompanyMap : BaseEntityMap<BaseCompany>
     {
-        public BaseCompanyMap() {
+        public BaseCompanyMap()
+        {
             UseUnionSubclassForInheritanceMapping();
             Map(x => x.CorporateName);
             Map(x => x.TradingName);

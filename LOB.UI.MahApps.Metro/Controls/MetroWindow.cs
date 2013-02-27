@@ -67,12 +67,14 @@ namespace MahApps.Metro.Controls
 
         private bool isDragging;
 
-        static MetroWindow() {
+        static MetroWindow()
+        {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (MetroWindow),
                                                      new FrameworkPropertyMetadata(typeof (MetroWindow)));
         }
 
-        public MetroWindow() {
+        public MetroWindow()
+        {
             Flyouts = new ObservableCollection<Flyout>();
         }
 
@@ -80,61 +82,73 @@ namespace MahApps.Metro.Controls
 
         public WindowCommands WindowCommands { get; set; }
 
-        public bool IgnoreTaskbarOnMaximize {
+        public bool IgnoreTaskbarOnMaximize
+        {
             get { return (bool) this.GetValue(IgnoreTaskbarOnMaximizeProperty); }
             set { SetValue(IgnoreTaskbarOnMaximizeProperty, value); }
         }
 
-        public Brush TitleForeground {
+        public Brush TitleForeground
+        {
             get { return (Brush) GetValue(TitleForegroundProperty); }
             set { SetValue(TitleForegroundProperty, value); }
         }
 
-        public bool SaveWindowPosition {
+        public bool SaveWindowPosition
+        {
             get { return (bool) GetValue(SavePositionProperty); }
             set { SetValue(SavePositionProperty, value); }
         }
 
-        public bool ShowIconOnTitleBar {
+        public bool ShowIconOnTitleBar
+        {
             get { return (bool) GetValue(ShowIconOnTitleBarProperty); }
             set { SetValue(ShowIconOnTitleBarProperty, value); }
         }
 
-        public bool ShowTitleBar {
+        public bool ShowTitleBar
+        {
             get { return (bool) GetValue(ShowTitleBarProperty); }
             set { SetValue(ShowTitleBarProperty, value); }
         }
 
-        public bool ShowMinButton {
+        public bool ShowMinButton
+        {
             get { return (bool) GetValue(ShowMinButtonProperty); }
             set { SetValue(ShowMinButtonProperty, value); }
         }
 
-        public bool ShowCloseButton {
+        public bool ShowCloseButton
+        {
             get { return (bool) GetValue(ShowCloseButtonProperty); }
             set { SetValue(ShowCloseButtonProperty, value); }
         }
 
-        public int TitlebarHeight {
+        public int TitlebarHeight
+        {
             get { return (int) GetValue(TitlebarHeightProperty); }
             set { SetValue(TitlebarHeightProperty, value); }
         }
 
-        public bool ShowMaxRestoreButton {
+        public bool ShowMaxRestoreButton
+        {
             get { return (bool) GetValue(ShowMaxRestoreButtonProperty); }
             set { SetValue(ShowMaxRestoreButtonProperty, value); }
         }
 
-        public bool TitleCaps {
+        public bool TitleCaps
+        {
             get { return (bool) GetValue(TitleCapsProperty); }
             set { SetValue(TitleCapsProperty, value); }
         }
 
-        public string WindowTitle {
+        public string WindowTitle
+        {
             get { return TitleCaps ? Title.ToUpper() : Title; }
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             base.OnApplyTemplate();
 
             if (WindowCommands == null)
@@ -152,7 +166,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        protected override void OnStateChanged(EventArgs e) {
+        protected override void OnStateChanged(EventArgs e)
+        {
             if (WindowCommands != null) {
                 WindowCommands.RefreshMaximiseIconState();
             }
@@ -160,7 +175,8 @@ namespace MahApps.Metro.Controls
             base.OnStateChanged(e);
         }
 
-        protected void TitleBarMouseDown(object sender, MouseButtonEventArgs e) {
+        protected void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
+        {
             var mousePosition = e.GetPosition(this);
             bool isIconClick = ShowIconOnTitleBar && mousePosition.X <= TitlebarHeight &&
                                mousePosition.Y <= TitlebarHeight;
@@ -192,11 +208,13 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        protected void TitleBarMouseUp(object sender, MouseButtonEventArgs e) {
+        protected void TitleBarMouseUp(object sender, MouseButtonEventArgs e)
+        {
             isDragging = false;
         }
 
-        private void TitleBarMouseMove(object sender, MouseEventArgs e) {
+        private void TitleBarMouseMove(object sender, MouseEventArgs e)
+        {
             if (e.LeftButton != MouseButtonState.Pressed) {
                 isDragging = false;
             }
@@ -227,11 +245,13 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        internal T GetPart<T>(string name) where T : DependencyObject {
+        internal T GetPart<T>(string name) where T : DependencyObject
+        {
             return (T) GetTemplateChild(name);
         }
 
-        private static void ShowSystemMenuPhysicalCoordinates(Window window, Point physicalScreenLocation) {
+        private static void ShowSystemMenuPhysicalCoordinates(Window window, Point physicalScreenLocation)
+        {
             if (window == null) return;
 
             var hwnd = new WindowInteropHelper(window).Handle;

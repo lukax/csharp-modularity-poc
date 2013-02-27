@@ -30,15 +30,18 @@ namespace LOB.UI.Core
         private ISessionCreator _sessionCreator;
         private IUnityContainer _unityContainer;
 
-        static App() {
+        static App()
+        {
             DispatcherHelper.Initialize();
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
         }
 
-        protected override void OnStartup(StartupEventArgs e) {
+        protected override void OnStartup(StartupEventArgs e)
+        {
             base.OnStartup(e);
             OnStartup();
 
@@ -46,7 +49,8 @@ namespace LOB.UI.Core
             _navigator.Startup<MainWindow>();
         }
 
-        private void OnStartup() {
+        private void OnStartup()
+        {
             _catalog = LoadDlls();
             _unityContainer = new UnityContainer();
 
@@ -58,7 +62,8 @@ namespace LOB.UI.Core
             _sessionCreator = _unityContainer.Resolve<ISessionCreator>();
         }
 
-        private AggregateCatalog LoadDlls() {
+        private AggregateCatalog LoadDlls()
+        {
             //USING LOB.DAO.NHIBERNATE IN SESSIONCREATOR IMPLEMENTATION
             ComposablePartCatalog daoDll = null;
             ComposablePartCatalog currentDll = null;
@@ -91,7 +96,8 @@ namespace LOB.UI.Core
         }
 
 
-        private void Dispose(bool b) {
+        private void Dispose(bool b)
+        {
             if (!b) return;
             _unityContainer.Dispose();
             GC.SuppressFinalize(this);

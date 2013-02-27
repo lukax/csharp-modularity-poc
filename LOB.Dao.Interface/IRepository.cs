@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using LOB.Domain.Base;
 
 #endregion
@@ -23,5 +24,7 @@ namespace LOB.Dao.Interface
         bool Contains<T>(T entity) where T : BaseEntity;
         IQueryable<T> GetList<T>() where T : BaseEntity;
         IQueryable<T> GetList<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
+        Task<IQueryable<T>> GetListAsync<T>() where T : BaseEntity;
+        Task<IQueryable<T>> GetListAsync<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
     }
 }

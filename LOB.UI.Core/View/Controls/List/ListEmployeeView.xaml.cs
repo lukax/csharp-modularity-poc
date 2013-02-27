@@ -15,22 +15,26 @@ namespace LOB.UI.Core.View.Controls.List
         private string _header;
 
         [ImportingConstructor]
-        public ListEmployeeView(ListEmployeeViewModel dataContext) {
+        public ListEmployeeView(ListEmployeeViewModel dataContext)
+        {
             InitializeComponent();
             DataContext = dataContext;
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string.IsNullOrEmpty(_header)) ? "Funcionarios" : _header; }
             set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
     }
 }

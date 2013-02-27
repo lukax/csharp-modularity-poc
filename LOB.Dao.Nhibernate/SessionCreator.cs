@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Dao.Interface;
@@ -17,29 +18,34 @@ namespace LOB.Dao.Nhibernate
     {
         private const String MySqlDefaultConnectionString = @"Server=192.168.0.150;
                         Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
-        private const String MsSqlDefaultConnectionString = @"Data Source=VSWINSERVER;
+        private const String MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
         private String _connectionString;
 
+        [ImportingConstructor]
         public SessionCreator()
-            : this(PersistType.Sql, null) {
+            : this(PersistType.Sql, null)
+        {
         }
 
-        public SessionCreator(PersistType persistIn, String connectionString) {
+        public SessionCreator(PersistType persistIn, String connectionString)
+        {
             if (connectionString != null)
                 ConnectionString = connectionString;
 
             Orm = SessionCreatorFactory(persistIn).OpenSession();
         }
 
-        public String ConnectionString {
+        public String ConnectionString
+        {
             get { return _connectionString ?? MySqlDefaultConnectionString; }
             set { _connectionString = value; }
         }
 
         public Object Orm { get; private set; }
 
-        private ISessionFactory SessionCreatorFactory(PersistType persistIn) {
+        private ISessionFactory SessionCreatorFactory(PersistType persistIn)
+        {
             Configuration cfg;
             switch (persistIn) {
                 case PersistType.Sql:
@@ -57,44 +63,52 @@ namespace LOB.Dao.Nhibernate
             return cfg.BuildSessionFactory();
         }
 
-        private Configuration StoreInMySqlConfiguration() {
+        private Configuration StoreInMySqlConfiguration()
+        {
             return Mapping().Database(MySQLConfiguration.Standard
                                                         .ConnectionString(ConnectionString)
                                                         .ShowSql)
                             .BuildConfiguration();
         }
 
-        private Configuration StoreInMsSqlConfiguration() {
+        private Configuration StoreInMsSqlConfiguration()
+        {
             return Mapping().Database(MsSqlConfiguration.MsSql2008
                                                         .ConnectionString(ConnectionString)
                                                         .ShowSql())
                             .BuildConfiguration();
         }
 
-        private Configuration StoreInMemoryConfiguration() {
+        private Configuration StoreInMemoryConfiguration()
+        {
             return Mapping().Database(SQLiteConfiguration.Standard
                                                          .InMemory()
                                                          .ShowSql())
                             .BuildConfiguration();
         }
 
-        private Configuration StoreInFileConfiguration() {
+        private Configuration StoreInFileConfiguration()
+        {
             return Mapping().Database(SQLiteConfiguration.Standard
                                                          .UsingFile("local.db")
                                                          .ShowSql())
                             .BuildConfiguration();
         }
 
-        private FluentConfiguration Mapping() {
+        private FluentConfiguration Mapping()
+        {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
                 //Generate Tables
                            .ExposeConfiguration(SchemaCreator);
         }
 
-        private void SchemaCreator(Configuration cfg) {
-            var schema = new SchemaExport(cfg);
-            schema.Drop(false, true);
-            schema.Create(false, true);
+        private SchemaExport _sqlSchema;
+        private void SchemaCreator(Configuration cfg)
+        {
+            _sqlSchema = new SchemaExport(cfg);
+            _sqlSchema.Drop(false, true);
+            _sqlSchema.Create(false, true);
+            //_sqlSchema.Execute(false, true, false);
         }
     }
 }

@@ -57,13 +57,15 @@
         <TextBox Text="{Binding State, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="200"
                  Grid.Column="4" Grid.Row="2" MaxWidth="250" />
 
+        <Label Content="Country:" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3" />
+        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+                 MinWidth="150" MaxWidth="400" Grid.Column="2" Grid.Row="3" />
+        
         <Label Content="ZIP Code:" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="3" />
         <TextBox Text="{Binding Zip, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100"
                  MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
-        <Label Content="Country:" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3" />
-        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                 MinWidth="150" MaxWidth="400" Grid.Column="2" Grid.Row="3" />
+
 
         <Label Content="Status:" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" />
         <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"

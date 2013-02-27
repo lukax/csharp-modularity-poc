@@ -15,36 +15,44 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
     {
         #region Props
 
-        public string FirstName {
+        public string FirstName
+        {
             get { return Entity.FirstName; }
-            set {
+            set
+            {
                 if (FirstName == value) return;
                 Entity.FirstName = value;
                 OnPropertyChanged();
             }
         }
 
-        public string LastName {
+        public string LastName
+        {
             get { return Entity.LastName; }
-            set {
+            set
+            {
                 if (LastName == value) return;
                 Entity.LastName = value;
                 OnPropertyChanged();
             }
         }
 
-        public string NickName {
+        public string NickName
+        {
             get { return Entity.NickName; }
-            set {
+            set
+            {
                 if (NickName == value) return;
                 Entity.NickName = value;
                 OnPropertyChanged();
             }
         }
 
-        public string BirthDate {
+        public string BirthDate
+        {
             get { return (Entity.BirthDate == default(DateTime) ? DateTime.Now : Entity.BirthDate).ToShortDateString(); }
-            set {
+            set
+            {
                 string backup = string.Empty;
                 try {
                     if (BirthDate == value) return;
@@ -58,9 +66,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             }
         }
 
-        public string Notes {
+        public string Notes
+        {
             get { return Entity.Notes; }
-            set {
+            set
+            {
                 if (Notes == value) return;
                 Entity.Notes = value;
                 OnPropertyChanged();
@@ -71,19 +81,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         protected AlterAddressViewModel AlterAddressViewModel;
         protected AlterContactInfoViewModel AlterContactInfoViewModel;
-        protected new Person Entity;
 
         [ImportingConstructor]
         public AlterPersonViewModel(Person entity, IRepository repository,
                                     AlterAddressViewModel alterAdressViewModel,
                                     AlterContactInfoViewModel alterContactInfoViewModel)
-            : base(entity, repository) {
+            : base(entity, repository)
+        {
             AlterAddressViewModel = alterAdressViewModel;
             AlterContactInfoViewModel = alterContactInfoViewModel;
-            Entity = entity;
         }
 
-        public override void SaveChanges(object arg) {
+        public override void SaveChanges(object arg)
+        {
             using (Repository.Uow) {
                 Repository.Uow.BeginTransaction();
                 Repository.SaveOrUpdate(Entity);
@@ -91,20 +101,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             }
         }
 
-        public override bool CanSaveChanges(object arg) {
+        public override bool CanSaveChanges(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg) {
+        public override bool CanCancel(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }

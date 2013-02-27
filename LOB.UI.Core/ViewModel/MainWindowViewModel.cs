@@ -16,7 +16,8 @@ namespace LOB.UI.Core.ViewModel
     public class MainWindowViewModel : BaseViewModel
     {
         [ImportingConstructor]
-        public MainWindowViewModel(IUnityContainer container, INavigator navigator) {
+        public MainWindowViewModel(IUnityContainer container, INavigator navigator)
+        {
             _container = container;
             _navigator = navigator;
 
@@ -27,14 +28,17 @@ namespace LOB.UI.Core.ViewModel
         private IUnityContainer _container { get; set; }
         private INavigator _navigator { get; set; }
 
-        private void OpenTab(object arg) {
+        private void OpenTab(object arg)
+        {
             Messenger.Default.Send(_navigator.ResolveView(arg.ToString()).GetView, "OpenTab");
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }

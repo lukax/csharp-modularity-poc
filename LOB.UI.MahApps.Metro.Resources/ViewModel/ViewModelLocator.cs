@@ -30,7 +30,8 @@ namespace MahApps.Metro.Resources.ViewModel
         /// <summary>
         ///     Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-        public ViewModelLocator() {
+        public ViewModelLocator()
+        {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -47,11 +48,13 @@ namespace MahApps.Metro.Resources.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main {
+        public MainViewModel Main
+        {
             get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
         }
 
-        public static void Cleanup() {
+        public static void Cleanup()
+        {
             // TODO Clear the ViewModels
         }
     }

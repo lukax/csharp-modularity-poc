@@ -42,10 +42,10 @@
             <Grid>
                 <StackPanel>
                     <StackPanel>
-                        <DataGrid ItemsSource="{Binding Employees, Mode=OneWay}" x:Name="DataGridProduct"
+                        <DataGrid ItemsSource="{Binding List, Mode=OneWay}" x:Name="DataGridProduct"
                                   SelectedItem="{Binding Employee, Mode=OneWayToSource}" IsReadOnly="True"
                                   Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
-                                  Background="{DynamicResource WhiteColorBrush}"
+                                  Background="{DynamicResource WhiteColorBrush}" SelectionMode="Single"
                                   Foreground="{DynamicResource BlackColorBrush}">
                             <DataGrid.ColumnHeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">

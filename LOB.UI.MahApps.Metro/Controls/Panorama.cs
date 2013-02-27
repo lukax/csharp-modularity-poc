@@ -54,11 +54,13 @@ namespace MahApps.Metro.Controls
         private IPanoramaTile tile;
         private Vector velocity;
 
-        static Panorama() {
+        static Panorama()
+        {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (Panorama), new FrameworkPropertyMetadata(typeof (Panorama)));
         }
 
-        public Panorama() {
+        public Panorama()
+        {
             friction = 0.85;
 
             animationTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
@@ -66,42 +68,50 @@ namespace MahApps.Metro.Controls
             animationTimer.Start();
         }
 
-        public double Friction {
+        public double Friction
+        {
             get { return 1.0 - friction; }
             set { friction = Math.Min(Math.Max(1.0 - value, 0), 1.0); }
         }
 
-        public double ItemBox {
+        public double ItemBox
+        {
             get { return (double) GetValue(ItemBoxProperty); }
             set { SetValue(ItemBoxProperty, value); }
         }
 
-        public double GroupHeight {
+        public double GroupHeight
+        {
             get { return (double) GetValue(GroupHeightProperty); }
             set { SetValue(GroupHeightProperty, value); }
         }
 
-        public double HeaderFontSize {
+        public double HeaderFontSize
+        {
             get { return (double) GetValue(HeaderFontSizeProperty); }
             set { SetValue(HeaderFontSizeProperty, value); }
         }
 
-        public Brush HeaderFontColor {
+        public Brush HeaderFontColor
+        {
             get { return (Brush) GetValue(HeaderFontColorProperty); }
             set { SetValue(HeaderFontColorProperty, value); }
         }
 
-        public FontFamily HeaderFontFamily {
+        public FontFamily HeaderFontFamily
+        {
             get { return (FontFamily) GetValue(HeaderFontFamilyProperty); }
             set { SetValue(HeaderFontFamilyProperty, value); }
         }
 
-        public bool UseSnapBackScrolling {
+        public bool UseSnapBackScrolling
+        {
             get { return (bool) GetValue(UseSnapBackScrollingProperty); }
             set { SetValue(UseSnapBackScrollingProperty, value); }
         }
 
-        private void DoStandardScrolling() {
+        private void DoStandardScrolling()
+        {
             sv.ScrollToHorizontalOffset(scrollTarget.X);
             sv.ScrollToVerticalOffset(scrollTarget.Y);
             scrollTarget.X += velocity.X;
@@ -109,7 +119,8 @@ namespace MahApps.Metro.Controls
             velocity *= friction;
         }
 
-        private void HandleWorldTimerTick(object sender, EventArgs e) {
+        private void HandleWorldTimerTick(object sender, EventArgs e)
+        {
             if (sv == null)
                 return;
             var prop = DesignerProperties.IsInDesignModeProperty;
@@ -144,12 +155,14 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             sv = (ScrollViewer) Template.FindName("PART_ScrollViewer", this);
             base.OnApplyTemplate();
         }
 
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e) {
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
             if (sv.IsMouseOver) {
                 tile = null;
 
@@ -178,7 +191,8 @@ namespace MahApps.Metro.Controls
             base.OnPreviewMouseDown(e);
         }
 
-        protected override void OnPreviewMouseMove(MouseEventArgs e) {
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 Point currentPoint = e.GetPosition(this);
 
@@ -201,7 +215,8 @@ namespace MahApps.Metro.Controls
             base.OnPreviewMouseMove(e);
         }
 
-        protected override void OnPreviewMouseUp(MouseButtonEventArgs e) {
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
             if (IsMouseCaptured) {
                 ReleaseMouseCapture();
             }

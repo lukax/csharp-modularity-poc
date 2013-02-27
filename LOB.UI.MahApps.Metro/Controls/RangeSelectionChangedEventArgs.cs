@@ -8,13 +8,15 @@ namespace MahApps.Metro.Controls
 {
     public class RangeSelectionChangedEventArgs : RoutedEventArgs
     {
-        internal RangeSelectionChangedEventArgs(long newRangeStart, long newRangeStop) {
+        internal RangeSelectionChangedEventArgs(long newRangeStart, long newRangeStop)
+        {
             NewRangeStart = newRangeStart;
             NewRangeStop = newRangeStop;
         }
 
         internal RangeSelectionChangedEventArgs(RangeSlider slider)
-            : this(slider.RangeStartSelected, slider.RangeStopSelected) {
+            : this(slider.RangeStartSelected, slider.RangeStopSelected)
+        {
         }
 
         public long NewRangeStart { get; set; }

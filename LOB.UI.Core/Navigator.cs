@@ -22,12 +22,14 @@ namespace LOB.UI.Core
         private dynamic _resolvedView;
 
         [ImportingConstructor]
-        public Navigator(IUnityContainer container, IRegionAdapter regionAdapter) {
+        public Navigator(IUnityContainer container, IRegionAdapter regionAdapter)
+        {
             _container = container;
             _regionAdapter = regionAdapter;
         }
 
-        public void Startup<TView>(object viewModel = null) where TView : class {
+        public void Startup<TView>(object viewModel = null) where TView : class
+        {
             var view = _container.Resolve<TView>() as Window;
             if (view == null) return;
             if (viewModel != null) view.DataContext = viewModel;
@@ -35,7 +37,16 @@ namespace LOB.UI.Core
             view.Show();
         }
 
-        public void OpenView<TView>(string regionName, object viewModel = null) where TView : class {
+        public void Startup(string viewName, object viewModel = null)
+        {
+            var view = ResolveView(viewName) as Window;
+            if (view == null) return;
+            if (view is IView) ((IView)view).InitializeServices();
+            view.Show();
+        }
+
+        public void OpenView<TView>(string regionName, object viewModel = null) where TView : class
+        {
             dynamic vModel;
             var view = _container.Resolve<TView>() as UserControl;
             if (view == null) return;
@@ -45,11 +56,13 @@ namespace LOB.UI.Core
             _regionAdapter.AddView(view, regionName);
         }
 
-        public object GetView {
+        public object GetView
+        {
             get { return _resolvedView; }
         }
 
-        public INavigator ResolveView(string param, object viewModel = null) {
+        public INavigator ResolveView(string param, object viewModel = null)
+        {
             switch (param) {
                 case "AlterProduct":
                     _resolvedView = _container.Resolve<AlterProductView>();
@@ -84,7 +97,8 @@ namespace LOB.UI.Core
             return this;
         }
 
-        public void StartView(bool asDialog = false) {
+        public void StartView(bool asDialog = false)
+        {
             if (_resolvedView == null) return;
             if (_resolvedView is UserControl) {
                 var window = new FrameWindow()
@@ -100,14 +114,7 @@ namespace LOB.UI.Core
                 return;
             }
         }
-
-        public void Startup(string viewName, object viewModel = null) {
-            var view = ResolveView(viewName) as Window;
-            if (view == null) return;
-            if (view is IView) ((IView) view).InitializeServices();
-            view.Show();
-        }
-
+        
         //public Window AsWindow(object resolvedView)
         //{
         //    if (_resolvedView is Window) return ((Window)_resolvedView);

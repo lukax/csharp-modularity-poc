@@ -20,11 +20,13 @@ namespace LOB.Dao.Nhibernate.Test
         public IRepository Repository { get; set; }
 
         [TestMethod]
-        public void GetInstanceTest() {
+        public void GetInstanceTest()
+        {
             new PersistFactory(this);
             Assert.IsNotNull(Repository);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
         private class PersistFactory
         {
             private readonly AggregateCatalog _catalog;
@@ -33,7 +35,8 @@ namespace LOB.Dao.Nhibernate.Test
             [Export] private IUnityContainer ccontainer = new UnityContainer();
             [Import] private Inner inner;
 
-            public PersistFactory(object obj) {
+            public PersistFactory(object obj)
+            {
                 Debug.WriteLine("Tryng to load dll from: " + Assembly.GetExecutingAssembly().Location);
 
                 _catalog = new AggregateCatalog(
@@ -52,11 +55,13 @@ namespace LOB.Dao.Nhibernate.Test
             ///     Compose a part, making the imports work
             /// </summary>
             /// <param name="obj">Object to compose</param>
-            public void Compose(object obj) {
+            public void Compose(object obj)
+            {
                 _container.ComposeParts(obj);
             }
 
-            public IRepository GetInstance(PersistType type = PersistType.Sql) {
+            public IRepository GetInstance(PersistType type = PersistType.Sql)
+            {
                 if (type == PersistType.Sql)
                     return _container.GetExportedValue<IRepository>("Sql");
 
@@ -75,7 +80,8 @@ namespace LOB.Dao.Nhibernate.Test
                 public IUnityContainer container;
 
                 [ImportingConstructor]
-                public Inner(IUnityContainer container) {
+                public Inner(IUnityContainer container)
+                {
                     this.container = container;
                 }
             }

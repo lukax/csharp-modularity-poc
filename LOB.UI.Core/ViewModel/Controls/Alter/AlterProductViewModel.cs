@@ -17,15 +17,17 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
-    public class AlterProductViewModel : AlterBaseEntityViewModel<Product>
+    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>
     {
         #region Props
 
         private Lazy<IList<Category>> _categories;
 
-        public string Name {
+        public string Name
+        {
             get { return Entity.Name; }
-            set {
+            set
+            {
                 if (Entity.Name != value) {
                     if (Entity.Name == value) return;
                     Entity.Name = value;
@@ -34,76 +36,93 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
-        public int UnitsInStock {
+        public int UnitsInStock
+        {
             get { return Entity.UnitsInStock; }
-            set {
+            set
+            {
                 if (Entity.UnitsInStock == value) return;
                 Entity.UnitsInStock = value;
                 OnPropertyChanged();
             }
         }
 
-        public string QuantityPerUnit {
+        public string QuantityPerUnit
+        {
             get { return Entity.QuantityPerUnit; }
-            set {
+            set
+            {
                 if (Entity.QuantityPerUnit == value) return;
                 Entity.QuantityPerUnit = value;
                 OnPropertyChanged();
             }
         }
 
-        public double UnitSalePrice {
+        public double UnitSalePrice
+        {
             get { return Entity.UnitSalePrice; }
-            set {
+            set
+            {
                 if (Entity.UnitSalePrice == value) return;
                 Entity.UnitSalePrice = value;
                 OnPropertyChanged();
             }
         }
 
-        public IList<Supplier> Suppliers {
+        public IList<Supplier> Suppliers
+        {
             get { return Entity.Suppliers ?? new List<Supplier>(); }
-            set {
+            set
+            {
                 if (Entity.Suppliers == value) return;
                 Entity.Suppliers = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Description {
+        public string Description
+        {
             get { return Entity.Description; }
-            set {
+            set
+            {
                 if (Entity.Description == value) return;
                 Entity.Description = value;
                 OnPropertyChanged();
             }
         }
 
-        public IList<Store> StockedStores {
+        public IList<Store> StockedStores
+        {
             get { return Entity.StockedStores ?? new List<Store>(); }
-            set {
+            set
+            {
                 if (Entity.StockedStores == value) return;
                 Entity.StockedStores = value;
                 OnPropertyChanged();
             }
         }
 
-        public Category Category {
+        public Category Category
+        {
             get { return Entity.Category; }
-            set {
+            set
+            {
                 if (Entity.Category == value) return;
                 Entity.Category = value;
                 OnPropertyChanged();
             }
         }
 
-        public IList<Category> Categories {
+        public IList<Category> Categories
+        {
             get { return _categories.Value; }
         }
 
-        public ProductStatus Status {
+        public ProductStatus Status
+        {
             get { return Entity.Status; }
-            set {
+            set
+            {
                 if (Entity.Status == value) return;
                 Entity.Status = value;
                 OnPropertyChanged();
@@ -114,56 +133,69 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         [ImportingConstructor]
         public AlterProductViewModel(Product product, IRepository repository)
-            : base(product, repository) {
+            : base(product, repository)
+        {
             _categories = new Lazy<IList<Category>>(Repository.GetList<Category>().ToList);
             ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
 
         public ICommand ClearEntityCommand { get; set; }
 
-        public override void SaveChanges(object arg) {
+        public override void SaveChanges(object arg)
+        {
             using (Repository.Uow) {
                 Repository.Uow.BeginTransaction();
-                Repository.SaveOrUpdate(BuildProduct());
+                Entity = Repository.SaveOrUpdate(BuildProduct);
                 Repository.Uow.CommitTransaction();
             }
 
             Messenger.Default.Send("SaveChangedCommand");
         }
 
-        public override bool CanSaveChanges(object arg) {
+        public override bool CanSaveChanges(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg) {
+        public override bool CanCancel(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        private void ClearEntity(object args) {
+        private void ClearEntity(object args)
+        {
             Entity = new Product();
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
 
-        private Product BuildProduct() {
-            return new Product()
-                {
-                    Name = Name,
-                    UnitSalePrice = UnitSalePrice,
-                    StockedStores = StockedStores,
-                    Description = Description,
-                    QuantityPerUnit = QuantityPerUnit,
-                    UnitsInStock = UnitsInStock,
-                    Suppliers = Suppliers,
-                    Category = Category,
-                    Status = Status
-                };
+        private Product BuildProduct 
+        {
+            get
+            {
+                return base.Entity ??
+                    new Product()
+                    {
+                        Name = Name,
+                        UnitSalePrice = UnitSalePrice,
+                        StockedStores = StockedStores,
+                        Description = Description,
+                        QuantityPerUnit = QuantityPerUnit,
+                        UnitsInStock = UnitsInStock,
+                        Suppliers = Suppliers,
+                        Category = Category,
+                        Status = Status
+                    };
+            }
+            set { Entity = value; }
         }
     }
 }

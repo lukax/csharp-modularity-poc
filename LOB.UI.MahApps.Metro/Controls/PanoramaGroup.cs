@@ -13,17 +13,20 @@ namespace MahApps.Metro.Controls
     /// </summary>
     public class PanoramaGroup : INotifyPropertyChanged
     {
-        public PanoramaGroup(string header, ICollectionView tiles) {
+        public PanoramaGroup(string header, ICollectionView tiles)
+        {
             Header = header;
             Tiles = tiles;
         }
 
-        public PanoramaGroup(string header, IEnumerable<object> tiles) {
+        public PanoramaGroup(string header, IEnumerable<object> tiles)
+        {
             Header = header;
             Tiles = CollectionViewSource.GetDefaultView(tiles);
         }
 
-        public PanoramaGroup(string header) {
+        public PanoramaGroup(string header)
+        {
             Header = header;
         }
 
@@ -31,12 +34,14 @@ namespace MahApps.Metro.Controls
         public ICollectionView Tiles { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void SetSource(IEnumerable<object> tiles) {
+        public void SetSource(IEnumerable<object> tiles)
+        {
             Tiles = CollectionViewSource.GetDefaultView(tiles);
             OnPropertyChanged("Tiles");
         }
 
-        protected void OnPropertyChanged(string name) {
+        protected void OnPropertyChanged(string name)
+        {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) {
                 handler(this, new PropertyChangedEventArgs(name));

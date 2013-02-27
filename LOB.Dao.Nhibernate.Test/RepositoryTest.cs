@@ -15,7 +15,8 @@ namespace LOB.Dao.Nhibernate.Test
     public class RepositoryTest
     {
         [TestMethod]
-        public void AddDeleteTest() {
+        public void AddDeleteTest()
+        {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
 
             var p1 = new Product
@@ -42,7 +43,8 @@ namespace LOB.Dao.Nhibernate.Test
 
 
         [TestMethod]
-        public void GetTest() {
+        public void GetTest()
+        {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
 
             var p1 = new Product
@@ -58,7 +60,8 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void SaveOrUpdateTest() {
+        public void SaveOrUpdateTest()
+        {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var entity = new Product() {Description = "Test description service", Name = "Test Name"};
             using (repo.Uow) {
@@ -79,7 +82,8 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void SaveGetPolymorphismTest() {
+        public void SaveGetPolymorphismTest()
+        {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var person = new LegalPerson()
                 {
@@ -112,7 +116,8 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void GetListCriteriaTest() {
+        public void GetListCriteriaTest()
+        {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var person1 = new LegalPerson()
                 {

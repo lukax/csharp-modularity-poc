@@ -45,31 +45,37 @@ namespace MahApps.Metro.Controls
         private ScrollViewer scroller;
         private PivotItem selectedItem;
 
-        static Pivot() {
+        static Pivot()
+        {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (Pivot), new FrameworkPropertyMetadata(typeof (Pivot)));
         }
 
-        public DataTemplate HeaderTemplate {
+        public DataTemplate HeaderTemplate
+        {
             get { return (DataTemplate) GetValue(HeaderTemplateProperty); }
             set { SetValue(HeaderTemplateProperty, value); }
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string) GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
-        public int SelectedIndex {
+        public int SelectedIndex
+        {
             get { return (int) GetValue(SelectedIndexProperty); }
             set { SetValue(SelectedIndexProperty, value); }
         }
 
-        public event RoutedEventHandler SelectionChanged {
+        public event RoutedEventHandler SelectionChanged
+        {
             add { AddHandler(SelectionChangedEvent, value); }
             remove { RemoveHandler(SelectionChangedEvent, value); }
         }
 
-        public void GoToItem(PivotItem item) {
+        public void GoToItem(PivotItem item)
+        {
             if (item == null || item == selectedItem)
                 return;
 
@@ -94,11 +100,13 @@ namespace MahApps.Metro.Controls
             RaiseEvent(new RoutedEventArgs(SelectionChangedEvent));
         }
 
-        private void sb_Completed(object sender, EventArgs e) {
+        private void sb_Completed(object sender, EventArgs e)
+        {
             SelectedIndex = internalIndex;
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             base.OnApplyTemplate();
             scroller = (ScrollViewer) GetTemplateChild("PART_Scroll");
             headers = (ListView) GetTemplateChild("PART_Headers");
@@ -112,15 +120,18 @@ namespace MahApps.Metro.Controls
                 headers.SelectionChanged += headers_SelectionChanged;
         }
 
-        private void scroller_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e) {
+        private void scroller_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
             scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + -e.Delta);
         }
 
-        private void headers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+        private void headers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
             GoToItem((PivotItem) headers.SelectedItem);
         }
 
-        private void scroller_ScrollChanged(object sender, ScrollChangedEventArgs e) {
+        private void scroller_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
             var position = 0.0;
             for (int i = 0; i < Items.Count; i++) {
                 var pivotItem = ((PivotItem) Items[i]);
@@ -141,7 +152,8 @@ namespace MahApps.Metro.Controls
         }
 
         private static void SelectedItemChanged(DependencyObject dependencyObject,
-                                                DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+                                                DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
             var p = (Pivot) dependencyObject;
             if (p == null)
                 return;

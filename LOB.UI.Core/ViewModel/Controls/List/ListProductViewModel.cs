@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
@@ -17,43 +18,33 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     {
         #region Props
 
-        private Lazy<IQueryable<Product>> _products;
-
-        public IList<Product> Products {
-            get { return _products.Value.ToList(); }
-        }
-
-        public Product Product {
-            get { return Entity; }
-            set {
-                if (Entity == value) return;
-                Entity = value;
-                OnPropertyChanged();
-            }
-        }
 
         #endregion
 
         [ImportingConstructor]
         public ListProductViewModel(Product product, IRepository repository)
-            : base(product, repository) {
-            _products = new Lazy<IQueryable<Product>>(Repository.GetList<Product>);
+            : base(product, repository)
+        {
         }
 
-        public override bool CanUpdate(object arg) {
+        public override bool CanUpdate(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanDelete(object arg) {
+        public override bool CanDelete(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }

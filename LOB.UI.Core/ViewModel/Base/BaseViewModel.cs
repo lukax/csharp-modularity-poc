@@ -12,9 +12,11 @@ namespace LOB.UI.Core.ViewModel.Base
     {
         private String _title;
 
-        public String Title {
+        public String Title
+        {
             get { return _title; }
-            set {
+            set
+            {
                 _title = value;
                 OnPropertyChanged();
             }

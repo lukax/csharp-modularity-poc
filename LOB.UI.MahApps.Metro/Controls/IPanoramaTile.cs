@@ -20,7 +20,8 @@ namespace MahApps.Metro.Controls
         public string Text { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand TileClickedCommand {
+        public ICommand TileClickedCommand
+        {
             get { return null; }
         }
     }

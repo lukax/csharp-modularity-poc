@@ -9,7 +9,8 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity
 {
     public class CategoryMap : SubclassMap<Category>
     {
-        public CategoryMap() {
+        public CategoryMap()
+        {
         }
     }
 }

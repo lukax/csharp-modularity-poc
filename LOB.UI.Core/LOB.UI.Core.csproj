@@ -120,7 +120,7 @@
     <Compile Include="ViewModel\Controls\Alter\AlterProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\AlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListBaseEntityViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\ListPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\Base\ListPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\Controls\Alter\AlterProductView.xaml.cs">

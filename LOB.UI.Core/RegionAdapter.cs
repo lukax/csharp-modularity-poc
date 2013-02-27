@@ -16,17 +16,20 @@ namespace LOB.UI.Core
         private readonly IDictionary<string, object> _regions = new Dictionary<string, object>();
 
         [ImportingConstructor]
-        public RegionAdapter(IUnityContainer container) {
+        public RegionAdapter(IUnityContainer container)
+        {
             _container = container;
         }
 
-        public IRegionAdapter RegisterRegion(string name, object region) {
+        public IRegionAdapter RegisterRegion(string name, object region)
+        {
             _regions.Add(name, region);
             return this;
         }
 
         public IRegionAdapter AddView<TView>(TView view, string regionName, string title = "IsDefault")
-            where TView : class {
+            where TView : class
+        {
             object region = _regions[regionName];
             if (region is ITabProp) {
                 ((ITabProp) region).Header = title;

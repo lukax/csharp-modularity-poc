@@ -9,7 +9,8 @@ namespace MahApps.Metro.Behaviours
 {
     public class WindowsSettingBehaviour : Behavior<MetroWindow>
     {
-        protected override void OnAttached() {
+        protected override void OnAttached()
+        {
             WindowSettings.SetSave(AssociatedObject, AssociatedObject.SaveWindowPosition);
         }
     }

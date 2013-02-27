@@ -15,27 +15,32 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
     {
         private string _header;
 
-        public ListBaseEntityView() {
+        public ListBaseEntityView()
+        {
             InitializeComponent();
         }
 
         [ImportingConstructor]
         public ListBaseEntityView(ListBaseEntityViewModel<BaseEntity> viewModel)
-            : this() {
+            : this()
+        {
             DataContext = viewModel;
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string.IsNullOrEmpty(_header)) ? "Códigos" : _header; }
             set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
     }
 }

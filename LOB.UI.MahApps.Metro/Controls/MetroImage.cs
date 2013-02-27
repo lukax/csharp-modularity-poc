@@ -17,11 +17,13 @@ namespace MahApps.Metro.Controls
                                                                                                new PropertyMetadata(
                                                                                                    default(Visual)));
 
-        public MetroImage() {
+        public MetroImage()
+        {
             DefaultStyleKey = typeof (MetroImage);
         }
 
-        public Visual Source {
+        public Visual Source
+        {
             get { return (Visual) GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
         }

@@ -47,13 +47,13 @@
         <TextBox Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
 
-        <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" Content="CPF/CNPJ:" />
-        <TextBox Text="{Binding NationalId, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                 MinWidth="120" MaxWidth="350" Grid.Column="4" Grid.Row="2" />
-
         <Label Grid.Row="2" HorizontalAlignment="Right" Content="RG/IE:" Grid.Column="1" />
         <TextBox Text="{Binding NationalReg, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="120" MaxWidth="250" Grid.Column="2" Grid.Row="2" />
+        
+        <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" Content="CPF/CNPJ:" />
+        <TextBox Text="{Binding NationalId, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+                 MinWidth="120" MaxWidth="350" Grid.Column="4" Grid.Row="2" />
 
         <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="250"
                  MaxWidth="600" metrocontrols:TextboxHelper.Watermark="Notes" MinLines="2" Grid.Column="2" Grid.Row="3"

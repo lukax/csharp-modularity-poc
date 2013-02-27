@@ -18,27 +18,32 @@ namespace LOB.UI.Core.View.Controls.Alter
         private string _header;
 
         [ImportingConstructor]
-        public AlterEmployeeView(AlterEmployeeViewModel dataContext) {
+        public AlterEmployeeView(AlterEmployeeViewModel dataContext)
+        {
             InitializeComponent();
             DataContext = dataContext;
 
             Messenger.Default.Register<object>(dataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string.IsNullOrEmpty(_header)) ? "Alterar Funcionário" : _header; }
             set { _header = value; }
         }
 
-        public int? Index {
+        public int? Index
+        {
             get { return ((AlterBaseEntityViewModel<Employee>) DataContext).CancelIndex; }
             set { ((AlterBaseEntityViewModel<Employee>) DataContext).CancelIndex = value; }
         }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
     }
 }

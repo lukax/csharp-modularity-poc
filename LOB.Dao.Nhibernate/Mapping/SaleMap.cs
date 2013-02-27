@@ -9,7 +9,8 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class SaleMap : BaseEntityMap<Sale>
     {
-        public SaleMap() {
+        public SaleMap()
+        {
             Map(x => x.State);
             Map(x => x.SaleDate);
             References(x => x.Buyer);

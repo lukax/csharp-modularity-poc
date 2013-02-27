@@ -16,6 +16,7 @@
         <TextBox MinWidth="200" 
                  Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
                  controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True" />
-        <DataGrid IsReadOnly="True" GridLinesVisibility="None" ItemsSource="{Binding List}"/>
+        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" 
+                  SelectedItem="{Binding Entity}" ItemsSource="{Binding List}"/>
     </StackPanel>
 </UserControl>

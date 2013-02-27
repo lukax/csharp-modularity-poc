@@ -17,13 +17,15 @@ namespace LOB.Dao.Nhibernate
         private ITransaction _transaction;
 
         [ImportingConstructor]
-        public UnityOfWork(ISessionCreator sessionCreator) {
+        public UnityOfWork(ISessionCreator sessionCreator)
+        {
             Orm = sessionCreator.Orm;
         }
 
         public object Orm { get; private set; }
 
-        public void Save<T>(T entity) where T : BaseEntity {
+        public void Save<T>(T entity) where T : BaseEntity
+        {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
@@ -35,7 +37,8 @@ namespace LOB.Dao.Nhibernate
             }
         }
 
-        public void SaveOrUpdate<T>(T entity) where T : BaseEntity {
+        public void SaveOrUpdate<T>(T entity) where T : BaseEntity
+        {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
@@ -47,7 +50,8 @@ namespace LOB.Dao.Nhibernate
             }
         }
 
-        public void Update<T>(T entity) where T : BaseEntity {
+        public void Update<T>(T entity) where T : BaseEntity
+        {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
@@ -59,7 +63,8 @@ namespace LOB.Dao.Nhibernate
             }
         }
 
-        public void Delete<T>(T entity) where T : BaseEntity {
+        public void Delete<T>(T entity) where T : BaseEntity
+        {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
@@ -71,14 +76,16 @@ namespace LOB.Dao.Nhibernate
             }
         }
 
-        public void BeginTransaction() {
+        public void BeginTransaction()
+        {
             if (_transaction == null)
                 _transaction = ((ISession) Orm).BeginTransaction();
             else if (_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has already been initialized, dispose first");
         }
 
-        public void CommitTransaction() {
+        public void CommitTransaction()
+        {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
             else if (!_transaction.IsActive)
@@ -86,7 +93,8 @@ namespace LOB.Dao.Nhibernate
             _transaction.Commit();
         }
 
-        public void RollbackTransaction() {
+        public void RollbackTransaction()
+        {
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
             if (!_transaction.IsActive)
@@ -94,7 +102,15 @@ namespace LOB.Dao.Nhibernate
             _transaction.Rollback();
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing) return; 
             _transaction.Dispose();
             _transaction = null;
         }

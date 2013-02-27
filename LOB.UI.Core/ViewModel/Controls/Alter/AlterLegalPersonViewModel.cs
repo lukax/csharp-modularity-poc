@@ -9,22 +9,26 @@ using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public class AlterLegalPersonViewModel : AlterPersonViewModel
+    public sealed class AlterLegalPersonViewModel : AlterPersonViewModel
     {
         #region Props
 
-        public int Ie {
+        public int Ie
+        {
             get { return ((LegalPerson) Entity).Ie; }
-            set {
+            set
+            {
                 if (Ie == value) return;
                 ((LegalPerson) Entity).Ie = value;
                 OnPropertyChanged();
             }
         }
 
-        public int Cnpj {
+        public int Cnpj
+        {
             get { return ((LegalPerson) Entity).Cnpj; }
-            set {
+            set
+            {
                 if (Cnpj == value) return;
                 ((LegalPerson) Entity).Cnpj = value;
                 OnPropertyChanged();
@@ -36,7 +40,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository,
                                          AlterAddressViewModel alterAddressViewModel,
                                          AlterContactInfoViewModel alterContactInfoViewModel)
-            : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel) {
+            : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel)
+        {
         }
     }
 }

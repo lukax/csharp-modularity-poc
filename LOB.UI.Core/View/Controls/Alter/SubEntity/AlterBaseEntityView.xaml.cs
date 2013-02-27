@@ -15,27 +15,32 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
     {
         private string _header;
 
-        public AlterBaseEntityView() {
+        public AlterBaseEntityView()
+        {
             InitializeComponent();
         }
 
         [ImportingConstructor]
         public AlterBaseEntityView(AlterBaseEntityViewModel<BaseEntity> viewModel)
-            : this() {
+            : this()
+        {
             DataContext = viewModel;
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
             set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
     }
 }

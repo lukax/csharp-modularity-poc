@@ -8,85 +8,105 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public class AlterAddressViewModel : AlterBaseEntityViewModel<Address>
+    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>
     {
         #region Props
 
-        public string Street {
+        public string Street
+        {
             get { return Entity.Street; }
-            set {
+            set
+            {
                 Entity.Street = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Complement {
+        public string Complement
+        {
             get { return Entity.StreetComplement; }
-            set {
+            set
+            {
                 Entity.StreetComplement = value;
                 OnPropertyChanged();
             }
         }
 
-        public string City {
+        public string City
+        {
             get { return Entity.City; }
-            set {
+            set
+            {
                 Entity.City = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Country {
+        public string Country
+        {
             get { return Entity.City; }
-            set {
+            set
+            {
                 Entity.City = value;
                 OnPropertyChanged();
             }
         }
 
-        public AdressStatus Status {
+        public AdressStatus Status
+        {
             get { return Entity.Status; }
-            set {
+            set
+            {
                 Entity.Status = value;
                 OnPropertyChanged();
             }
         }
 
-        public int StreetNumber {
+        public int StreetNumber
+        {
             get { return Entity.StreetNumber; }
-            set {
+            set
+            {
                 Entity.StreetNumber = value;
                 OnPropertyChanged();
             }
         }
 
-        public string District {
+        public string District
+        {
             get { return Entity.District; }
-            set {
+            set
+            {
                 Entity.District = value;
                 OnPropertyChanged();
             }
         }
 
-        public string State {
+        public string State
+        {
             get { return Entity.State; }
-            set {
+            set
+            {
                 Entity.State = value;
                 OnPropertyChanged();
             }
         }
 
-        public int Zip {
+        public int Zip
+        {
             get { return Entity.ZipCode; }
-            set {
+            set
+            {
                 Entity.ZipCode = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool Default {
+        public bool Default
+        {
             get { return Entity.IsDefault; }
-            set {
+            set
+            {
                 Entity.IsDefault = value;
                 OnPropertyChanged();
             }
@@ -94,35 +114,39 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         #endregion
 
-        private new Address Entity;
-
         public AlterAddressViewModel(Address entity, IRepository repository)
-            : base(entity, repository) {
-            Entity = entity;
+            : base(entity, repository)
+        {
         }
 
-        public override void SaveChanges(object arg) {
-            using (Repository.Uow) {
+        public override void SaveChanges(object arg)
+        {
+            using (Repository.Uow)
+            {
                 Repository.Uow.BeginTransaction();
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
-        public override bool CanSaveChanges(object arg) {
+        public override bool CanSaveChanges(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg) {
+        public override bool CanCancel(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }

@@ -34,19 +34,22 @@ namespace MahApps.Metro.Behaviours
         private Point current = new Point(-99, -99);
         private Int32 times = -1;
 
-        public bool KeepDragging {
+        public bool KeepDragging
+        {
             get { return (bool) GetValue(KeepDraggingProperty); }
             set { SetValue(KeepDraggingProperty, value); }
         }
 
-        public Int32 TiltFactor {
+        public Int32 TiltFactor
+        {
             get { return (Int32) GetValue(TiltFactorProperty); }
             set { SetValue(TiltFactorProperty, value); }
         }
 
         public Planerator RotatorParent { get; set; }
 
-        protected override void OnAttached() {
+        protected override void OnAttached()
+        {
             attachedElement = AssociatedObject;
             if (attachedElement is ListBox) {
                 var l = (ListBox) attachedElement;
@@ -57,22 +60,22 @@ namespace MahApps.Metro.Behaviours
                 var y = (attachedElement as ItemsControl);
                 y.Items.CurrentChanging += (s, e) => { Console.WriteLine("foo"); };
                 (attachedElement as Panel).Loaded += (sl, el) =>
-                    {
-                        List<UIElement> elements = new List<UIElement>();
+                {
+                    List<UIElement> elements = new List<UIElement>();
 
-                        foreach (
-                            UIElement ui in (attachedElement as Panel).Children) {
-                            elements.Add(ui);
-                        }
-                        elements.ForEach(
-                            (element) =>
-                            Interaction.GetBehaviors(element).Add(
-                                new TiltBehavior
-                                    {
-                                        KeepDragging = KeepDragging,
-                                        TiltFactor = TiltFactor
-                                    }));
-                    };
+                    foreach (
+                        UIElement ui in (attachedElement as Panel).Children) {
+                        elements.Add(ui);
+                    }
+                    elements.ForEach(
+                        (element) =>
+                        Interaction.GetBehaviors(element).Add(
+                            new TiltBehavior
+                                {
+                                    KeepDragging = KeepDragging,
+                                    TiltFactor = TiltFactor
+                                }));
+                };
 
                 return;
             }
@@ -116,12 +119,14 @@ namespace MahApps.Metro.Behaviours
             CompositionTarget.Rendering += CompositionTargetRendering;
         }
 
-        protected override void OnDetaching() {
+        protected override void OnDetaching()
+        {
             base.OnDetaching();
             CompositionTarget.Rendering -= CompositionTargetRendering;
         }
 
-        private void CompositionTargetRendering(object sender, EventArgs e) {
+        private void CompositionTargetRendering(object sender, EventArgs e)
+        {
             if (KeepDragging) {
                 current = Mouse.GetPosition(RotatorParent.Child);
                 if (Mouse.LeftButton == MouseButtonState.Pressed) {
@@ -168,7 +173,8 @@ namespace MahApps.Metro.Behaviours
             }
         }
 
-        private static Panel GetParentPanel(DependencyObject element) {
+        private static Panel GetParentPanel(DependencyObject element)
+        {
             var parent = VisualTreeHelper.GetParent(element);
             if (parent is Panel)
                 return (Panel) parent;

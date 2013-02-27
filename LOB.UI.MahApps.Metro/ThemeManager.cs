@@ -23,8 +23,10 @@ namespace MahApps.Metro
 
         private static IEnumerable<Accent> _accents;
 
-        public static IEnumerable<Accent> DefaultAccents {
-            get {
+        public static IEnumerable<Accent> DefaultAccents
+        {
+            get
+            {
                 return _accents ?? (_accents =
                                     new List<Accent>
                                         {
@@ -52,22 +54,26 @@ namespace MahApps.Metro
 
         public static bool ThemeIsDark { get; private set; }
 
-        public static void ChangeTheme(Application app, Accent accent, Theme theme) {
+        public static void ChangeTheme(Application app, Accent accent, Theme theme)
+        {
             ChangeTheme(app.Resources, accent, theme);
         }
 
-        public static void ChangeTheme(Window window, Accent accent, Theme theme) {
+        public static void ChangeTheme(Window window, Accent accent, Theme theme)
+        {
             ChangeTheme(window.Resources, accent, theme);
         }
 
-        public static void ChangeTheme(ResourceDictionary r, Accent accent, Theme theme) {
+        public static void ChangeTheme(ResourceDictionary r, Accent accent, Theme theme)
+        {
             ThemeIsDark = (theme == Theme.Dark);
             var themeResource = (theme == Theme.Light) ? LightResource : DarkResource;
             ApplyResourceDictionary(themeResource, r);
             ApplyResourceDictionary(accent.Resources, r);
         }
 
-        private static void ApplyResourceDictionary(ResourceDictionary newRd, ResourceDictionary oldRd) {
+        private static void ApplyResourceDictionary(ResourceDictionary newRd, ResourceDictionary oldRd)
+        {
             foreach (DictionaryEntry r in newRd) {
                 if (oldRd.Contains(r.Key))
                     oldRd.Remove(r.Key);

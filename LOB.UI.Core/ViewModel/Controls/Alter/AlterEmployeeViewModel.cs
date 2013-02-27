@@ -11,26 +11,31 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
-    public class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>
+    public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>
     {
         #region Props
 
-        public string Title {
+        public new string Title
+        {
             get { return Entity.Title; }
-            set {
+            set
+            {
                 if (Entity.Title == value) return;
                 Entity.Title = value;
                 OnPropertyChanged();
             }
         }
 
-        public string HireDate {
-            get {
+        public string HireDate
+        {
+            get
+            {
                 return Entity.HireDate == default(DateTime)
                            ? DateTime.Now.ToShortDateString()
                            : Entity.HireDate.ToShortDateString();
             }
-            set {
+            set
+            {
                 var backup = Entity.HireDate;
                 try {
                     if (HireDate == value) return;
@@ -47,23 +52,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         [ImportingConstructor]
         public AlterEmployeeViewModel(Employee employee, IRepository repository)
-            : base(employee, repository) {
+            : base(employee, repository)
+        {
         }
 
-        public override bool CanSaveChanges(object arg) {
+        public override bool CanSaveChanges(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg) {
+        public override bool CanCancel(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }

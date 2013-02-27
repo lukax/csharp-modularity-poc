@@ -28,37 +28,46 @@ namespace MahApps.Metro.Controls
         private Button min;
         private IntPtr user32 = IntPtr.Zero;
 
-        static WindowCommands() {
+        static WindowCommands()
+        {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (WindowCommands),
                                                      new FrameworkPropertyMetadata(typeof (WindowCommands)));
         }
 
-        public string Minimize {
-            get {
+        public string Minimize
+        {
+            get
+            {
                 if (string.IsNullOrEmpty(minimize))
                     minimize = GetCaption(900);
                 return minimize;
             }
         }
 
-        public string Maximize {
-            get {
+        public string Maximize
+        {
+            get
+            {
                 if (string.IsNullOrEmpty(maximize))
                     maximize = GetCaption(901);
                 return maximize;
             }
         }
 
-        public string Close {
-            get {
+        public string Close
+        {
+            get
+            {
                 if (string.IsNullOrEmpty(closeText))
                     closeText = GetCaption(905);
                 return closeText;
             }
         }
 
-        public string Restore {
-            get {
+        public string Restore
+        {
+            get
+            {
                 if (string.IsNullOrEmpty(restore))
                     restore = GetCaption(903);
                 return restore;
@@ -67,12 +76,14 @@ namespace MahApps.Metro.Controls
 
         public event ClosingWindowEventHandler ClosingWindow;
 
-        ~WindowCommands() {
+        ~WindowCommands()
+        {
             if (user32 != IntPtr.Zero)
                 UnsafeNativeMethods.FreeLibrary(user32);
         }
 
-        private string GetCaption(int id) {
+        private string GetCaption(int id)
+        {
             if (user32 == IntPtr.Zero)
                 user32 = UnsafeNativeMethods.LoadLibrary(Environment.SystemDirectory + "\\User32.dll");
 
@@ -81,7 +92,8 @@ namespace MahApps.Metro.Controls
             return sb.ToString().Replace("&", "");
         }
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             base.OnApplyTemplate();
             close = Template.FindName("PART_Close", this) as Button;
             if (close != null)
@@ -98,19 +110,22 @@ namespace MahApps.Metro.Controls
             RefreshMaximiseIconState();
         }
 
-        protected void OnClosingWindow(ClosingWindowEventHandlerArgs args) {
+        protected void OnClosingWindow(ClosingWindowEventHandlerArgs args)
+        {
             var handler = ClosingWindow;
             if (handler != null)
                 handler(this, args);
         }
 
-        private void MinimiseClick(object sender, RoutedEventArgs e) {
+        private void MinimiseClick(object sender, RoutedEventArgs e)
+        {
             var parentWindow = GetParentWindow();
             if (parentWindow != null)
                 parentWindow.WindowState = WindowState.Minimized;
         }
 
-        private void MaximiseClick(object sender, RoutedEventArgs e) {
+        private void MaximiseClick(object sender, RoutedEventArgs e)
+        {
             var parentWindow = GetParentWindow();
             if (parentWindow == null)
                 return;
@@ -121,11 +136,13 @@ namespace MahApps.Metro.Controls
             RefreshMaximiseIconState(parentWindow);
         }
 
-        public void RefreshMaximiseIconState() {
+        public void RefreshMaximiseIconState()
+        {
             RefreshMaximiseIconState(GetParentWindow());
         }
 
-        private void RefreshMaximiseIconState(Window parentWindow) {
+        private void RefreshMaximiseIconState(Window parentWindow)
+        {
             if (parentWindow == null)
                 return;
 
@@ -148,7 +165,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private void CloseClick(object sender, RoutedEventArgs e) {
+        private void CloseClick(object sender, RoutedEventArgs e)
+        {
             var closingWindowEventHandlerArgs = new ClosingWindowEventHandlerArgs();
             OnClosingWindow(closingWindowEventHandlerArgs);
 
@@ -161,7 +179,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private Window GetParentWindow() {
+        private Window GetParentWindow()
+        {
             var parent = VisualTreeHelper.GetParent(this);
 
             while (parent != null && !(parent is Window)) {

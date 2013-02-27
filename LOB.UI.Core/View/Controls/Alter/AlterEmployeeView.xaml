@@ -61,7 +61,7 @@
                 <DockPanel Grid.Row="2">
                     <TabControl>
                         <TabItem Header=">" />
-                        <TabItem Header="Person Details">
+                        <TabItem Header="Entity Details">
                             <base:AlterPersonView />
                         </TabItem>
                     </TabControl>

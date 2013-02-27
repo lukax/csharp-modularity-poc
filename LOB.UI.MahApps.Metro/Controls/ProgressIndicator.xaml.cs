@@ -14,12 +14,14 @@ namespace MahApps.Metro.Controls
 {
     public class WidthPercentageConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
             var percentage = Double.Parse(parameter.ToString(), new CultureInfo("en-US"));
             return ((double) value)*percentage;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
             throw new NotImplementedException();
         }
     }
@@ -30,7 +32,8 @@ namespace MahApps.Metro.Controls
             DependencyProperty.RegisterAttached("ProgressColour", typeof (Brush), typeof (ProgressIndicator),
                                                 new UIPropertyMetadata(null));
 
-        public ProgressIndicator() {
+        public ProgressIndicator()
+        {
             InitializeComponent();
             this.DataContext = this;
             IsVisibleChanged += (s, e) => ((ProgressIndicator) s).StartStopAnimation();
@@ -38,23 +41,25 @@ namespace MahApps.Metro.Controls
             dpd.AddValueChanged(this, (s, e) => ((ProgressIndicator) s).StartStopAnimation());
         }
 
-        public Brush ProgressColour {
+        public Brush ProgressColour
+        {
             get { return (Brush) GetValue(ProgressColourProperty); }
             set { SetValue(ProgressColourProperty, value); }
         }
 
-        private void StartStopAnimation() {
+        private void StartStopAnimation()
+        {
             bool shouldAnimate = (Visibility == Visibility.Visible && IsVisible);
             Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    var s = Resources["animate"] as Storyboard;
-                    if (s != null) {
-                        if (shouldAnimate)
-                            s.Begin();
-                        else
-                            s.Stop();
-                    }
-                }));
+            {
+                var s = Resources["animate"] as Storyboard;
+                if (s != null) {
+                    if (shouldAnimate)
+                        s.Begin();
+                    else
+                        s.Stop();
+                }
+            }));
         }
     }
 }

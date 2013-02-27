@@ -14,22 +14,26 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
         private string _header;
 
         [ImportingConstructor]
-        public AlterPersonView() {
+        public AlterPersonView()
+        {
             InitializeComponent();
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string.IsNullOrEmpty(_header)) ? "Alterar Pessoa" : _header; }
             set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
             throw new System.NotImplementedException();
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
             throw new System.NotImplementedException();
         }
     }

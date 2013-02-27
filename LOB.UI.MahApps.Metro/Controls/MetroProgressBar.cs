@@ -21,26 +21,31 @@ namespace MahApps.Metro.Controls
             DependencyProperty.Register("EllipseOffset", typeof (double), typeof (MetroProgressBar),
                                         new PropertyMetadata(default(double)));
 
-        static MetroProgressBar() {
+        static MetroProgressBar()
+        {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (MetroProgressBar),
                                                      new FrameworkPropertyMetadata(typeof (MetroProgressBar)));
         }
 
-        public MetroProgressBar() {
+        public MetroProgressBar()
+        {
             SizeChanged += SizeChangedHandler;
         }
 
-        public double EllipseDiameter {
+        public double EllipseDiameter
+        {
             get { return (double) GetValue(EllipseDiameterProperty); }
             set { SetValue(EllipseDiameterProperty, value); }
         }
 
-        public double EllipseOffset {
+        public double EllipseOffset
+        {
             get { return (double) GetValue(EllipseOffsetProperty); }
             set { SetValue(EllipseOffsetProperty, value); }
         }
 
-        private void SizeChangedHandler(object sender, SizeChangedEventArgs e) {
+        private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
+        {
             double actualWidth = ActualWidth;
             MetroProgressBar bar = this;
             bar.SetEllipseDiameter(actualWidth);
@@ -50,7 +55,8 @@ namespace MahApps.Metro.Controls
         }
 
 
-        private void ResetStoryboard(double width) {
+        private void ResetStoryboard(double width)
+        {
             lock (this) {
                 //perform calculations
                 double containerAnimStart = CalcContainerAnimStart(width);
@@ -111,7 +117,8 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private VisualState GetIndeterminate() {
+        private VisualState GetIndeterminate()
+        {
             DependencyObject templateGrid = GetTemplateChild("ContainingGrid");
             IList groups = VisualStateManager.GetVisualStateGroups((FrameworkElement) templateGrid);
             return groups != null
@@ -122,7 +129,8 @@ namespace MahApps.Metro.Controls
         }
 
 
-        private void SetEllipseDiameter(double width) {
+        private void SetEllipseDiameter(double width)
+        {
             if (width <= 180) {
                 EllipseDiameter = 4;
                 return;
@@ -135,7 +143,8 @@ namespace MahApps.Metro.Controls
             EllipseDiameter = 6;
         }
 
-        private void SetEllipseOffset(double width) {
+        private void SetEllipseOffset(double width)
+        {
             if (width <= 180) {
                 EllipseOffset = 4;
                 return;
@@ -148,7 +157,8 @@ namespace MahApps.Metro.Controls
             EllipseOffset = 9;
         }
 
-        private double CalcContainerAnimStart(double width) {
+        private double CalcContainerAnimStart(double width)
+        {
             if (width <= 180)
                 return -34;
             if (width <= 280)
@@ -157,7 +167,8 @@ namespace MahApps.Metro.Controls
             return -63;
         }
 
-        private double CalcContainerAnimEnd(double width) {
+        private double CalcContainerAnimEnd(double width)
+        {
             double firstPart = 0.4352*width;
             if (width <= 180)
                 return firstPart - 25.731;
@@ -167,16 +178,19 @@ namespace MahApps.Metro.Controls
             return firstPart + 58.862;
         }
 
-        private double CalcEllipseAnimWell(double width) {
+        private double CalcEllipseAnimWell(double width)
+        {
             return width*1.0/3.0;
         }
 
-        private double CalcEllipseAnimEnd(double width) {
+        private double CalcEllipseAnimEnd(double width)
+        {
             return width*2.0/3.0;
         }
 
 
-        public override void OnApplyTemplate() {
+        public override void OnApplyTemplate()
+        {
             base.OnApplyTemplate();
             SizeChangedHandler(null, null);
         }

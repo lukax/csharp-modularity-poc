@@ -15,22 +15,26 @@ namespace LOB.UI.Core.View.Controls.List
         private string _header;
 
         [ImportingConstructor]
-        public ListClientView(ListClientViewModel dataContext) {
+        public ListClientView(ListClientViewModel dataContext)
+        {
             InitializeComponent();
             DataContext = dataContext;
         }
 
-        public string Header {
+        public string Header
+        {
             get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
             set { _header = value; }
         }
 
         public int? Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
     }
 }

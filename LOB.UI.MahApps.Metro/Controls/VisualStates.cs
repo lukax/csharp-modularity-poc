@@ -71,7 +71,8 @@ namespace MahApps.Metro.Controls
         public const string StateHidden = "Hidden";
         public const string GroupVisibility = "VisibilityStates";
 
-        public static void GoToState(Control control, bool useTransitions, params string[] stateNames) {
+        public static void GoToState(Control control, bool useTransitions, params string[] stateNames)
+        {
             Debug.Assert(control != null, "control should not be null!");
             Debug.Assert(stateNames != null, "stateNames should not be null!");
             Debug.Assert(stateNames.Length > 0, "stateNames should not be empty!");
@@ -83,14 +84,16 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        public static FrameworkElement GetImplementationRoot(DependencyObject dependencyObject) {
+        public static FrameworkElement GetImplementationRoot(DependencyObject dependencyObject)
+        {
             Debug.Assert(dependencyObject != null, "DependencyObject should not be null.");
             return (1 == VisualTreeHelper.GetChildrenCount(dependencyObject))
                        ? VisualTreeHelper.GetChild(dependencyObject, 0) as FrameworkElement
                        : null;
         }
 
-        public static VisualStateGroup TryGetVisualStateGroup(DependencyObject dependencyObject, string groupName) {
+        public static VisualStateGroup TryGetVisualStateGroup(DependencyObject dependencyObject, string groupName)
+        {
             FrameworkElement root = GetImplementationRoot(dependencyObject);
             if (root == null) {
                 return null;
