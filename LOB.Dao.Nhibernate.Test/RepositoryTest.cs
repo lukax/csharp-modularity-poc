@@ -92,15 +92,11 @@ namespace LOB.Dao.Nhibernate.Test
                 {
                     Cnpj = 123456,
                     Iestadual = 1234,
-                    FirstName = "Dude",
-                    LastName = "Martin",
-                    NickName = "Doesn't have",
-                    BirthDate = DateTime.Now
                 };
-            var client = new Client
+            var client = new Customer
                 {
                     Person = person,
-                    Status = ClientStatus.New
+                    Status = CustomerStatus.New
                 };
 
             using (repo.Uow)
@@ -123,33 +119,29 @@ namespace LOB.Dao.Nhibernate.Test
         public void GetListCriteriaTest()
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
-            var person1 = new LegalPerson()
+            var person1 = new NaturalPerson()
                 {
-                    Cnpj = 123456,
-                    Iestadual = 1234,
                     FirstName = "Dude1",
                     LastName = "Martin",
                     NickName = "Doesn't have1",
                     BirthDate = DateTime.Now
                 };
-            var person2 = new LegalPerson()
+            var person2 = new NaturalPerson()
                 {
-                    Cnpj = 12345678,
-                    Iestadual = 12345,
                     FirstName = "Dude2",
                     LastName = "Martin",
                     NickName = "Doesn't have2",
                     BirthDate = DateTime.Now
                 };
-            var client1 = new Client
+            var client1 = new Customer
                 {
                     Person = person1,
-                    Status = ClientStatus.New
+                    Status = CustomerStatus.New
                 };
-            var client2 = new Client()
+            var client2 = new Customer()
                 {
                     Person = person2,
-                    Status = ClientStatus.New
+                    Status = CustomerStatus.New
                 };
             using (repo.Uow)
             {
@@ -158,9 +150,9 @@ namespace LOB.Dao.Nhibernate.Test
                 repo.Save(person2);
                 repo.Uow.CommitTransaction();
 
-                var list1 = repo.GetList<LegalPerson>(x => x.LastName == "Martin");
+                var list1 = repo.GetList<NaturalPerson>(x => x.LastName == "Martin");
                 Assert.IsTrue(list1.Any());
-                var list2 = repo.GetList<Client>(x => x.Status == ClientStatus.New);
+                var list2 = repo.GetList<Customer>(x => x.Status == CustomerStatus.New);
                 Assert.IsTrue(list1.Count() > 1);
             }
         }

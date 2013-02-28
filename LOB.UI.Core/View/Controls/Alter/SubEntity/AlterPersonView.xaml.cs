@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
@@ -21,7 +22,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
         }
 
         [ImportingConstructor]
-        public AlterPersonView(AlterPersonViewModel viewModel)
+        public AlterPersonView(AlterPersonViewModel<Person> viewModel)
             : this()
         {
             DataContext = viewModel;

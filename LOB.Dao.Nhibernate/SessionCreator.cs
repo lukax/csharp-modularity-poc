@@ -109,7 +109,7 @@ namespace LOB.Dao.Nhibernate
             _sqlSchema = new SchemaExport(cfg);
             _sqlSchema.Drop(false, true);
             _sqlSchema.Create(false, true);
-            //_sqlSchema.Execute(false, true, false);
+            //_sqlSchema.Execute(false, true, true);
         }
     }
 }

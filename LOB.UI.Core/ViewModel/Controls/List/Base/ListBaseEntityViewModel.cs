@@ -20,7 +20,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
     [InheritedExport]
-    public class ListBaseEntityViewModel<T> : BaseViewModel where T : BaseEntity
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel where T : BaseEntity
     {
         #region Props
 
@@ -60,9 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             set { _searchCriteria = value; }
         }
 
-        public CrudOperationType OperationType { get; set; }
-
-        public IList<T> List
+        public IList<T> Entitys
         {
             get { return _list; }
             set
@@ -101,11 +99,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         public ICommand SaveToFileCommand { get; set; }
         public ICommand FetchCommand { get; set; }
 
+        private int _updateInterval;
+        public int UpdateInterval { get { return _updateInterval == default(int) ? 1000 : _updateInterval; } set { _updateInterval = value; } }
         /// <summary>
         ///     Constantly update the list async every 1000 miliseconds
         /// </summary>
-        /// <param name="interval">Interval time in miliseconds</param>
-        private async void UpdateList(int interval = 1000)
+        private async void UpdateList()
         {
             //TODO: Dynamic set true/false based on selected tab
             while (true)
@@ -114,40 +113,40 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
                 localList = string.IsNullOrEmpty(Search)
                                 ? (await Repository.GetListAsync<T>()).ToList()
                                 : (await Repository.GetListAsync<T>(SearchCriteria)).ToList();
-                if (List == null || !localList.SequenceEqual(List))
+                if (Entitys == null || !localList.SequenceEqual(Entitys))
                 {
-                    List = localList;
+                    Entitys = localList;
                 }
 
-                await Task.Delay(interval);
+                await Task.Delay(UpdateInterval);
             }
         }
 
-        public virtual void Update(object arg)
+        protected virtual void Update(object arg)
         {
             Messenger.Default.Send(Entity, "Update");
             Debug.WriteLine("Updatecalled");
         }
 
-        public virtual bool CanUpdate(object arg)
+        protected virtual bool CanUpdate(object arg)
         {
             return Entity != null;
         }
 
-        public virtual void Delete(object arg)
+        protected virtual void Delete(object arg)
         {
             Messenger.Default.Send(arg ?? _entity, "Delete");
             Repository.Delete(_entity);
         }
 
-        public virtual bool CanDelete(object arg)
+        protected virtual bool CanDelete(object arg)
         {
             return Entity != null;
         }
 
-        public virtual void Fetch(object arg = null)
+        protected virtual void Fetch(object arg = null)
         {
-            List = Repository.GetList<T>().ToList();
+            Entitys = Repository.GetList<T>().ToList();
         }
 
         public override void InitializeServices()

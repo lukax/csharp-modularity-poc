@@ -13,7 +13,7 @@ namespace LOB.Domain
     {
         public virtual SaleState State { get; set; }
         public virtual DateTime SaleDate { get; set; }
-        public virtual Client Buyer { get; set; }
+        public virtual Customer Buyer { get; set; }
         public virtual IList<Product> Products { get; set; }
         public virtual double TotalValue { get; set; }
         public virtual double UnitValue { get; set; }

@@ -18,77 +18,53 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
     [InheritedExport]
-    public class AlterBaseEntityViewModel<T> : BaseViewModel where T : BaseEntity
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel where T : BaseEntity
     {
-        #region Props
-
-        private T _entity;
-        private CrudOperationType _typeOfOperation;
-
-        public T Entity
-        {
-            get { return _entity; }
-            set
-            {
-                if (_entity == value) return;
-                _entity = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int Code
-        {
-            get { return Entity != null ? Entity.Code : default(int); }
-        }
-
-        #endregion
-
+        public T Entity { get; set; }
+        
         [ImportingConstructor]
         public AlterBaseEntityViewModel(T entity, IRepository repository)
         {
-            _entity = entity;
+            Entity = entity;
             Repository = repository;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
             QuickSearchCommand = new DelegateCommand(QuickSearch);
+            ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
 
+        public DelegateCommand ClearEntityCommand { get; set; }
         protected IRepository Repository { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand QuickSearchCommand { get; set; }
         public int? CancelIndex { get; set; }
         public ICommand SaveChangesCommand { get; set; }
 
-        public virtual bool CanSaveChanges(object arg)
+        protected virtual bool CanSaveChanges(object arg)
         {
             return Entity != null;
         }
 
-        public virtual bool CanCancel(object arg)
+        protected virtual bool CanCancel(object arg)
         {
             return Entity != null;
         }
 
-        public virtual void SaveChanges(object arg)
+        protected virtual void SaveChanges(object arg)
         {
             Debug.Write("Saving changes...");
-            Repository.SaveOrUpdate(Entity);
+            Entity = Repository.SaveOrUpdate(Entity);
             Cancel(arg);
         }
 
-        public virtual void Cancel(object arg)
+        protected virtual void Cancel(object arg)
         {
             Messenger.Default.Send(CancelIndex, "Cancel");
         }
 
-        public virtual void QuickSearch(object arg)
-        {
-            object vm = new ListBaseEntityViewModel<T>(Entity, Repository)
-                {
-                    List = new List<T>(Repository.GetList<T>().ToList())
-                };
-            Messenger.Default.Send(vm, "QuickSearch");
-        }
+        protected abstract void QuickSearch(object arg);
+
+        protected abstract void ClearEntity(object arg);
 
         public override void InitializeServices()
         {

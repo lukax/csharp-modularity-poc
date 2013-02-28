@@ -8,9 +8,8 @@ using LOB.Domain.Base;
 namespace LOB.Domain
 {
     [Serializable]
-    public class Employee : BaseEntity
+    public class Employee : NaturalPerson
     {
-        public virtual NaturalPerson Person { get; set; }
         public virtual Store WorksIn { get; set; }
         public virtual string Title { get; set; }
         public virtual DateTime HireDate { get; set; }

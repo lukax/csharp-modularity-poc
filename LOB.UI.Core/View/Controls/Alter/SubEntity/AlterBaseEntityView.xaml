@@ -9,7 +9,7 @@
 
     <StackPanel Orientation="Horizontal">
         <TextBlock VerticalAlignment="Center" TextAlignment="Center"
-                   Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40" />
+                   Text="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40" />
         
         <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="Quick Search" Width="18" Height="18"
                            Background="Transparent">

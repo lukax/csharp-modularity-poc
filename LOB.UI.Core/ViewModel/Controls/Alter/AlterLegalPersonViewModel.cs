@@ -9,39 +9,24 @@ using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public sealed class AlterLegalPersonViewModel : AlterPersonViewModel
+    public sealed class AlterLegalPersonViewModel : AlterPersonViewModel<LegalPerson>
     {
-        #region Props
-
-        public int Ie
-        {
-            get { return ((LegalPerson) Entity).Iestadual; }
-            set
-            {
-                if (Ie == value) return;
-                ((LegalPerson) Entity).Iestadual = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int Cnpj
-        {
-            get { return ((LegalPerson) Entity).Cnpj; }
-            set
-            {
-                if (Cnpj == value) return;
-                ((LegalPerson) Entity).Cnpj = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
 
         public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository,
                                          AlterAddressViewModel alterAddressViewModel,
                                          AlterContactInfoViewModel alterContactInfoViewModel)
             : base(entity, repository, alterAddressViewModel, alterContactInfoViewModel)
         {
+        }
+
+        protected override void QuickSearch(object arg)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void ClearEntity(object arg)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

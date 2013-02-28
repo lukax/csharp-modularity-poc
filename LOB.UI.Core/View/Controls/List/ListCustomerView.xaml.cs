@@ -10,17 +10,17 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.List
 {
     [Export]
-    public partial class ListClientView : UserControl, ITabProp, IView
+    public partial class ListCustomerView : UserControl, ITabProp, IView
     {
         private string _header;
 
-        public ListClientView()
+        public ListCustomerView()
         {
             InitializeComponent();
         }
 
         [ImportingConstructor]
-        public ListClientView(ListClientViewModel dataContext)
+        public ListCustomerView(ListClientViewModel dataContext)
             : this()
         {
             DataContext = dataContext;

@@ -13,69 +13,32 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     [Export]
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>
     {
-        #region Props
-
-        public new string Title
-        {
-            get { return Entity.Title; }
-            set
-            {
-                if (Entity.Title == value) return;
-                Entity.Title = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string HireDate
-        {
-            get
-            {
-                return Entity.HireDate == default(DateTime)
-                           ? DateTime.Now.ToShortDateString()
-                           : Entity.HireDate.ToShortDateString();
-            }
-            set
-            {
-                var backup = Entity.HireDate;
-                try
-                {
-                    if (HireDate == value) return;
-                    Entity.HireDate = DateTime.Parse(value);
-                    OnPropertyChanged();
-                }
-                catch (FormatException)
-                {
-                    Entity.HireDate = backup;
-                }
-            }
-        }
-
-        #endregion
-
         [ImportingConstructor]
         public AlterEmployeeViewModel(Employee employee, IRepository repository)
             : base(employee, repository)
         {
         }
 
-        public override bool CanSaveChanges(object arg)
+        protected override bool CanSaveChanges(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg)
+        protected override bool CanCancel(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices()
+        protected override void QuickSearch(object arg)
         {
+            throw new NotImplementedException();
         }
 
-        public override void Refresh()
+        protected override void ClearEntity(object arg)
         {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,34 +12,22 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     [Export]
     public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>
     {
-        #region Props
-
-        #endregion
-
         [ImportingConstructor]
         public ListProductViewModel(Product product, IRepository repository)
             : base(product, repository)
         {
         }
 
-        public override bool CanUpdate(object arg)
+        protected override bool CanUpdate(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanDelete(object arg)
+        protected override bool CanDelete(object arg)
         {
             //TODO: Business logic
             return true;
-        }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
         }
     }
 }

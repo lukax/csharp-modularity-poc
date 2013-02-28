@@ -64,8 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainRepository.cs" />
-    <Compile Include="Mapping\Base\BaseCompanyMap.cs" />
-    <Compile Include="Mapping\ClientMap.cs" />
+    <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\SubEntity\PhoneNumberMap.cs" />
     <Compile Include="Mapping\SubEntity\EmailMap.cs" />
     <Compile Include="Mapping\EmployeeMap.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="Mapping\SubEntity\ShipmentInfoMap.cs" />
     <Compile Include="Mapping\SubEntity\CategoryMap.cs" />
     <Compile Include="Mapping\SubEntity\AdressMap.cs" />
-    <Compile Include="Mapping\CompanyMap.cs" />
     <Compile Include="Mapping\SubEntity\ContactInfoMap.cs" />
     <Compile Include="Mapping\SaleMap.cs" />
     <Compile Include="Mapping\Base\PersonMap.cs" />

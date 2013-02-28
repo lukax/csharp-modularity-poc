@@ -70,10 +70,10 @@ namespace LOB.UI.Core
                     _resolvedView = _container.Resolve<ListEmployeeView>();
                     break;
                 case "AlterClient":
-                    _resolvedView = _container.Resolve<AlterClientView>();
+                    _resolvedView = _container.Resolve<AlterCustomerView>();
                     break;
                 case "ListClient":
-                    _resolvedView = _container.Resolve<ListClientView>();
+                    _resolvedView = _container.Resolve<ListCustomerView>();
                     break;
                 case "AlterSale":
                     _resolvedView = _container.Resolve<AlterSaleView>();
@@ -117,6 +117,11 @@ namespace LOB.UI.Core
             if (view == null) return;
             if (view is IView) ((IView) view).InitializeServices();
             view.Show();
+        }
+
+        public bool PromptUser(string message)
+        {
+            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
 
         //public Window AsWindow(object resolvedView)

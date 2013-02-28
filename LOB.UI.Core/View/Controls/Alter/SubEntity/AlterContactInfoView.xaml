@@ -9,7 +9,7 @@
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../../../../Skins/MetroSkin.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="../../../../Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
     <Grid>

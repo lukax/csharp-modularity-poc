@@ -15,24 +15,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         {
         }
 
-        public override bool CanSaveChanges(object arg)
+        protected override bool CanSaveChanges(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg)
+        protected override bool CanCancel(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices()
+        protected override void QuickSearch(object arg)
         {
+            throw new System.NotImplementedException();
         }
 
-        public override void Refresh()
+        protected override void ClearEntity(object arg)
         {
+            throw new System.NotImplementedException();
         }
+
     }
 }

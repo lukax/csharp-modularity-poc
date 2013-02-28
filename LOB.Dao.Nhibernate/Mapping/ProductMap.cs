@@ -14,6 +14,8 @@ namespace LOB.Dao.Nhibernate.Mapping
             References(x => x.Category);
             Map(x => x.Status);
             Map(x => x.UnitsInStock);
+            Map(x => x.MaxUnitsOfStock);
+            Map(x => x.MinUnitsOfStock);
             Map(x => x.UnitCostPrice);
             Map(x => x.UnitSalePrice);
             Map(x => x.ProfitMargin);

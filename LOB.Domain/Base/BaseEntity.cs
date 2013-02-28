@@ -7,7 +7,7 @@ using System;
 namespace LOB.Domain.Base
 {
     [Serializable]
-    public class BaseEntity : BaseNotifyChange
+    public abstract class BaseEntity : BaseNotifyChange
     {
         public virtual Guid Id { get; private set; }
         public virtual int Code { get; private set; }

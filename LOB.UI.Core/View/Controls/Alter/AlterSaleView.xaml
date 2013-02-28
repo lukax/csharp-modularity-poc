@@ -53,7 +53,7 @@
 
 
 
-                <GroupBox Header="Client" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4">
+                <GroupBox Header="Customer" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4">
                     <DockPanel>
                         <Label Content="Code:" HorizontalAlignment="Right" />
                         <TextBox Text="{Binding ClientCode}" HorizontalAlignment="Left" MinWidth="80" />
@@ -64,7 +64,7 @@
                         <Label Content="LastName:" HorizontalAlignment="Right" />
                         <TextBox Text="{Binding ClientLastName}" HorizontalAlignment="Left" MinWidth="200" />
 
-                        <metrocontrols:Tile Background="Transparent" Width="20" Height="20" ToolTip="Editar Cliente">
+                        <metrocontrols:Tile Background="Transparent" Width="20" Height="20" ToolTip="Editar Customere">
                             <Image Source="../../Resources/Edit48.png" />
                         </metrocontrols:Tile>
                     </DockPanel>

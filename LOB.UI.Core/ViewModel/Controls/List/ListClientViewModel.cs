@@ -8,24 +8,21 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public sealed class ListClientViewModel : ListBaseEntityViewModel<Client>
+    public sealed class ListClientViewModel : ListBaseEntityViewModel<Customer>
     {
-        #region Props
 
-        #endregion
-
-        public ListClientViewModel(Client client, IRepository repository)
+        public ListClientViewModel(Customer client, IRepository repository)
             : base(client, repository)
         {
         }
 
-        public override bool CanUpdate(object arg)
+        protected override bool CanUpdate(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanDelete(object arg)
+        protected override bool CanDelete(object arg)
         {
             //TODO: Business logic
             return true;

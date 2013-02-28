@@ -13,5 +13,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         public AlterSaleViewModel(Sale entity, IRepository repository) : base(entity, repository)
         {
         }
+
+        protected override void QuickSearch(object arg)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void ClearEntity(object arg)
+        {
+            Entity = new Sale();
+        }
     }
 }

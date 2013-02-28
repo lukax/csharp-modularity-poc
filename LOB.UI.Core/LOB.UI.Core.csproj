@@ -106,21 +106,21 @@
     <Compile Include="Navigator.cs" />
     <Compile Include="RegionAdapter.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\AlterSaleViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\ListClientViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterAddressViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\AlterClientViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\AlterCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterLegalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterNaturalPersonViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\Base\AlterPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\AlterSaleViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\AlterBaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\AlterPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterAddressViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListClientViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\Controls\Alter\AlterProductView.xaml.cs">
@@ -153,14 +153,14 @@
     <Compile Include="View\Controls\Alter\AlterLegalPersonView.xaml.cs">
       <DependentUpon>AlterLegalPersonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Alter\AlterClientView.xaml.cs">
-      <DependentUpon>AlterClientView.xaml</DependentUpon>
+    <Compile Include="View\Controls\Alter\AlterCustomerView.xaml.cs">
+      <DependentUpon>AlterCustomerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\List\SubEntity\ListBaseEntityView.xaml.cs">
       <DependentUpon>ListBaseEntityView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\List\ListClientView.xaml.cs">
-      <DependentUpon>ListClientView.xaml</DependentUpon>
+    <Compile Include="View\Controls\List\ListCustomerView.xaml.cs">
+      <DependentUpon>ListCustomerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\List\ListProductView.xaml.cs">
       <DependentUpon>ListProductView.xaml</DependentUpon>
@@ -230,7 +230,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Alter\AlterClientView.xaml">
+    <Page Include="View\Controls\Alter\AlterCustomerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -238,7 +238,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\List\ListClientView.xaml">
+    <Page Include="View\Controls\List\ListCustomerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

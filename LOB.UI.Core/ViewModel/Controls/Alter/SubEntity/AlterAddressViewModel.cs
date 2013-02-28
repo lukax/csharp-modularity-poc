@@ -10,134 +10,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>
     {
-        #region Props
-
-        public string Street
-        {
-            get { return Entity.Street; }
-            set
-            {
-                Entity.Street = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Complement
-        {
-            get { return Entity.StreetComplement; }
-            set
-            {
-                Entity.StreetComplement = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string City
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Country
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public AdressStatus Status
-        {
-            get { return Entity.Status; }
-            set
-            {
-                Entity.Status = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int StreetNumber
-        {
-            get { return Entity.StreetNumber; }
-            set
-            {
-                Entity.StreetNumber = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string District
-        {
-            get { return Entity.District; }
-            set
-            {
-                Entity.District = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string State
-        {
-            get { return Entity.State; }
-            set
-            {
-                Entity.State = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int Zip
-        {
-            get { return Entity.ZipCode; }
-            set
-            {
-                Entity.ZipCode = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Default
-        {
-            get { return Entity.IsDefault; }
-            set
-            {
-                Entity.IsDefault = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
 
         public AlterAddressViewModel(Address entity, IRepository repository)
             : base(entity, repository)
         {
         }
 
-        public Address BuildEntity()
-        {
-            return new Address()
-                {
-                    City = this.City,
-                    Country = this.Country,
-                    District = this.District,
-                    ZipCode = this.Zip,
-                    IsDefault = this.Default,
-                    State = this.State,
-                    Status = this.Status,
-                    Street = this.Street,
-                    StreetComplement = this.Complement,
-                    StreetNumber = this.StreetNumber,
-                };
-
-        }
-
-        public override void SaveChanges(object arg)
+        protected override void SaveChanges(object arg)
         {
             using (Repository.Uow)
             {
@@ -147,24 +26,26 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             }
         }
 
-        public override bool CanSaveChanges(object arg)
+        protected override bool CanSaveChanges(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanCancel(object arg)
+        protected override bool CanCancel(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override void InitializeServices()
+        protected override void QuickSearch(object arg)
         {
+            throw new System.NotImplementedException();
         }
 
-        public override void Refresh()
+        protected override void ClearEntity(object arg)
         {
+            throw new System.NotImplementedException();
         }
     }
 }

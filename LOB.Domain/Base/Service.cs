@@ -7,7 +7,7 @@ using System;
 namespace LOB.Domain.Base
 {
     [Serializable]
-    public class Service : BaseEntity
+    public abstract class Service : BaseEntity
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }

@@ -9,16 +9,16 @@ using LOB.Domain.Base;
 namespace LOB.Domain
 {
     [Serializable]
-    public class Client : BaseEntity
+    public class Customer : BaseEntity
     {
         public virtual Person Person { get; set; }
-        public virtual IList<Store> ClientOf { get; set; }
-        public virtual ClientStatus Status { get; set; }
+        public virtual IList<Store> CustomerOf { get; set; }
+        public virtual CustomerStatus Status { get; set; }
         public virtual IList<Sale> BoughtHistory { get; set; }
     }
 
     [Serializable]
-    public enum ClientStatus
+    public enum CustomerStatus
     {
         New,
         Active,

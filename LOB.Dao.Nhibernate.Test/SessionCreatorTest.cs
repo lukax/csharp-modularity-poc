@@ -66,11 +66,10 @@ namespace LOB.Dao.Nhibernate.Test
                     new Store {Name = "Fresh Bar"},
                     new Store {Name = "Total Drinks"}
                 };
-            var entity = new Company()
+            var entity = new LegalPerson()
                 {
                     TradingName = "Coke",
                     CorporateName = "The Coca-Cola Company",
-                    Address = address,
                     ContactInfo = contact,
                     // Stores = stores,
                 };

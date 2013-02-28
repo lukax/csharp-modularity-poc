@@ -13,36 +13,23 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     [Export]
     public sealed class ListEmployeeViewModel : ListBaseEntityViewModel<Employee>
     {
-        #region Props
-
-        #endregion
 
         [ImportingConstructor]
-        public ListEmployeeViewModel(Employee employee, IRepository repository, Person person)
+        public ListEmployeeViewModel(Employee employee, IRepository repository)
             : base(employee, repository)
         {
-            if (person != null)
-                base.Entity.Person = person;
         }
 
-        public override bool CanUpdate(object arg)
+        protected override bool CanUpdate(object arg)
         {
             //TODO: Business logic
             return true;
         }
 
-        public override bool CanDelete(object arg)
+        protected override bool CanDelete(object arg)
         {
             //TODO: Business logic
             return true;
-        }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
         }
     }
 }

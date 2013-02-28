@@ -115,7 +115,7 @@
 
                 <TabControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="3">
                     <TabItem Header=">"></TabItem>
-                    <TabItem Header="WorksInd In">
+                    <TabItem Header="Stores">
                         <DockPanel>
                             <Label Content="Available in store:" />
                             <ListView ItemsSource="{Binding StockedStores}"></ListView>

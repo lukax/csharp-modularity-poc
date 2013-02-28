@@ -9,7 +9,7 @@ using LOB.Domain.SubEntity;
 namespace LOB.Domain.Base
 {
     [Serializable]
-    public class Person : BaseEntity
+    public abstract class Person : BaseEntity
     {
         public virtual IList<Address> Address { get; set; }
         public virtual ContactInfo ContactInfo { get; set; }

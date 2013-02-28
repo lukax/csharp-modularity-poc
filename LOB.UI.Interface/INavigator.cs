@@ -14,5 +14,6 @@ namespace LOB.UI.Interface
         void OpenView<TView>(string regionName, object viewModel = null) where TView : class;
         INavigator ResolveView(string param, object viewModel = null);
         void StartView(bool asDialog = false);
+        bool PromptUser(string message);
     }
 }
