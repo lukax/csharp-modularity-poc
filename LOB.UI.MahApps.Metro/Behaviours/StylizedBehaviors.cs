@@ -40,11 +40,13 @@ namespace MahApps.Metro.Behaviours
 
             Behavior orignalBehavior = GetOriginalBehavior(behavior);
 
-            for (int i = 0; i < itemBehaviors.Count; i++) {
+            for (int i = 0; i < itemBehaviors.Count; i++)
+            {
                 Behavior currentBehavior = itemBehaviors[i];
 
                 if (currentBehavior == behavior
-                    || currentBehavior == orignalBehavior) {
+                    || currentBehavior == orignalBehavior)
+                {
                     index = i;
                     break;
                 }
@@ -52,7 +54,8 @@ namespace MahApps.Metro.Behaviours
                 Behavior currentOrignalBehavior = GetOriginalBehavior(currentBehavior);
 
                 if (currentOrignalBehavior == behavior
-                    || currentOrignalBehavior == orignalBehavior) {
+                    || currentOrignalBehavior == orignalBehavior)
+                {
                     index = i;
                     break;
                 }
@@ -65,7 +68,8 @@ namespace MahApps.Metro.Behaviours
         {
             var uie = dpo as UIElement;
 
-            if (uie == null) {
+            if (uie == null)
+            {
                 return;
             }
 
@@ -74,25 +78,32 @@ namespace MahApps.Metro.Behaviours
             var newBehaviors = e.NewValue as StylizedBehaviorCollection;
             var oldBehaviors = e.OldValue as StylizedBehaviorCollection;
 
-            if (newBehaviors == oldBehaviors) {
+            if (newBehaviors == oldBehaviors)
+            {
                 return;
             }
 
-            if (oldBehaviors != null) {
-                foreach (var behavior in oldBehaviors) {
+            if (oldBehaviors != null)
+            {
+                foreach (var behavior in oldBehaviors)
+                {
                     int index = GetIndexOf(itemBehaviors, behavior);
 
-                    if (index >= 0) {
+                    if (index >= 0)
+                    {
                         itemBehaviors.RemoveAt(index);
                     }
                 }
             }
 
-            if (newBehaviors != null) {
-                foreach (var behavior in newBehaviors) {
+            if (newBehaviors != null)
+            {
+                foreach (var behavior in newBehaviors)
+                {
                     int index = GetIndexOf(itemBehaviors, behavior);
 
-                    if (index < 0) {
+                    if (index < 0)
+                    {
                         var clone = (Behavior) behavior.Clone();
                         SetOriginalBehavior(clone, behavior);
                         itemBehaviors.Add(clone);

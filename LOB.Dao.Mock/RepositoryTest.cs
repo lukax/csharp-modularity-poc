@@ -33,10 +33,10 @@ namespace LOB.Dao.Mock
 
             uow.Setup(x => x.Orm).Returns(() => operations);
             repo.Setup(x => x.Save(product)).Returns(() =>
-            {
-                uow.Object.Save(product);
-                return product;
-            });
+                {
+                    uow.Object.Save(product);
+                    return product;
+                });
 
             //repo.Setup(x=> x.)
         }

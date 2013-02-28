@@ -1,11 +1,7 @@
 ﻿#region Usings
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 #endregion
@@ -15,7 +11,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     public sealed class ListClientViewModel : ListBaseEntityViewModel<Client>
     {
         #region Props
-
 
         #endregion
 

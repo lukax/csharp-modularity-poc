@@ -12,7 +12,7 @@ namespace LOB.Dao.Nhibernate.Mapping
         public EmployeeMap()
         {
             References(x => x.Person);
-            References(x => x.Store);
+            References(x => x.WorksIn);
             Map(x => x.Title);
             Map(x => x.HireDate);
             References(x => x.PayCheck)

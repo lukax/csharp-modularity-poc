@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SubEntity\Address.cs" />
-    <Compile Include="Base\BaseCompany.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\BaseNotifyChange.cs" />
     <Compile Include="SubEntity\Category.cs" />
@@ -57,7 +56,6 @@
     <Compile Include="Employee.cs" />
     <Compile Include="Base\Person.cs" />
     <Compile Include="Base\Service.cs" />
-    <Compile Include="Company.cs" />
     <Compile Include="SubEntity\ContactInfo.cs" />
     <Compile Include="SubEntity\EntityGroup.cs" />
     <Compile Include="LegalPerson.cs" />

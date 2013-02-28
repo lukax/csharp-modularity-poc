@@ -1,8 +1,3 @@
-// (c) Copyright Microsoft Corporation.
-// This source is subject to the Microsoft Public License (Ms-PL).
-// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
-// All other rights reserved.
-
 #region Usings
 
 using System;
@@ -83,13 +78,15 @@ namespace MahApps.Metro.Controls
             set
             {
                 // decouple event
-                if (_currentTransition != null) {
+                if (_currentTransition != null)
+                {
                     _currentTransition.Completed -= OnTransitionCompleted;
                 }
 
                 _currentTransition = value;
 
-                if (_currentTransition != null) {
+                if (_currentTransition != null)
+                {
                     _currentTransition.Completed += OnTransitionCompleted;
                 }
             }
@@ -101,7 +98,8 @@ namespace MahApps.Metro.Controls
         {
             var source = (TransitioningContentControl) d;
 
-            if (!source._allowIsTransitioningWrite) {
+            if (!source._allowIsTransitioningWrite)
+            {
                 source.IsTransitioning = (bool) e.OldValue;
                 throw new InvalidOperationException();
             }
@@ -113,7 +111,8 @@ namespace MahApps.Metro.Controls
             var oldTransition = e.OldValue as string;
             var newTransition = e.NewValue as string;
 
-            if (source.IsTransitioning) {
+            if (source.IsTransitioning)
+            {
                 source.AbortTransition();
             }
 
@@ -121,13 +120,16 @@ namespace MahApps.Metro.Controls
             Storyboard newStoryboard = source.GetStoryboard(newTransition);
 
             // unable to find the transition.
-            if (newStoryboard == null) {
+            if (newStoryboard == null)
+            {
                 // could be during initialization of xaml that presentationgroups was not yet defined
-                if (VisualStates.TryGetVisualStateGroup(source, PresentationGroup) == null) {
+                if (VisualStates.TryGetVisualStateGroup(source, PresentationGroup) == null)
+                {
                     // will delay check
                     source.CurrentTransition = null;
                 }
-                else {
+                else
+                {
                     // revert to old value
                     source.SetValue(TransitionProperty, oldTransition);
 
@@ -135,7 +137,8 @@ namespace MahApps.Metro.Controls
                         string.Format(CultureInfo.CurrentCulture, "Temporary removed exception message", newTransition));
                 }
             }
-            else {
+            else
+            {
                 source.CurrentTransition = newStoryboard;
             }
         }
@@ -153,7 +156,8 @@ namespace MahApps.Metro.Controls
 
         public override void OnApplyTemplate()
         {
-            if (IsTransitioning) {
+            if (IsTransitioning)
+            {
                 AbortTransition();
             }
 
@@ -164,14 +168,16 @@ namespace MahApps.Metro.Controls
             CurrentContentPresentationSite =
                 GetTemplateChild(CurrentContentPresentationSitePartName) as ContentPresenter;
 
-            if (CurrentContentPresentationSite != null) {
+            if (CurrentContentPresentationSite != null)
+            {
                 CurrentContentPresentationSite.Content = Content;
             }
 
             // hookup currenttransition
             Storyboard transition = GetStoryboard(Transition);
             CurrentTransition = transition;
-            if (transition == null) {
+            if (transition == null)
+            {
                 string invalidTransition = Transition;
                 // revert to default
                 Transition = DefaultTransitionState;
@@ -194,8 +200,10 @@ namespace MahApps.Metro.Controls
         private void StartTransition(object oldContent, object newContent)
         {
             // both presenters must be available, otherwise a transition is useless.
-            if (CurrentContentPresentationSite != null && PreviousContentPresentationSite != null) {
-                if (RestartTransitionOnContentChange) {
+            if (CurrentContentPresentationSite != null && PreviousContentPresentationSite != null)
+            {
+                if (RestartTransitionOnContentChange)
+                {
                     CurrentTransition.Completed -= OnTransitionCompleted;
                 }
 
@@ -204,8 +212,10 @@ namespace MahApps.Metro.Controls
                 PreviousContentPresentationSite.Content = oldContent;
 
                 // and start a new transition
-                if (!IsTransitioning || RestartTransitionOnContentChange) {
-                    if (RestartTransitionOnContentChange) {
+                if (!IsTransitioning || RestartTransitionOnContentChange)
+                {
+                    if (RestartTransitionOnContentChange)
+                    {
                         CurrentTransition.Completed += OnTransitionCompleted;
                     }
                     IsTransitioning = true;
@@ -220,7 +230,8 @@ namespace MahApps.Metro.Controls
             AbortTransition();
 
             RoutedEventHandler handler = TransitionCompleted;
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, new RoutedEventArgs());
             }
         }
@@ -230,7 +241,8 @@ namespace MahApps.Metro.Controls
             // go to normal state and release our hold on the old content.
             VisualStateManager.GoToState(this, NormalState, false);
             IsTransitioning = false;
-            if (PreviousContentPresentationSite != null) {
+            if (PreviousContentPresentationSite != null)
+            {
                 PreviousContentPresentationSite.Content = null;
             }
         }
@@ -239,7 +251,8 @@ namespace MahApps.Metro.Controls
         {
             VisualStateGroup presentationGroup = VisualStates.TryGetVisualStateGroup(this, PresentationGroup);
             Storyboard newStoryboard = null;
-            if (presentationGroup != null) {
+            if (presentationGroup != null)
+            {
                 newStoryboard = presentationGroup.States
                                                  .OfType<VisualState>()
                                                  .Where(state => state.Name == newTransition)

@@ -53,11 +53,13 @@ namespace MahApps.Metro.Controls
 
         public void Reload()
         {
-            if (ReverseTransition) {
+            if (ReverseTransition)
+            {
                 VisualStateManager.GoToState(this, "BeforeLoaded", true);
                 VisualStateManager.GoToState(this, "AfterUnLoadedReverse", true);
             }
-            else {
+            else
+            {
                 VisualStateManager.GoToState(this, "BeforeLoaded", true);
                 VisualStateManager.GoToState(this, "AfterLoaded", true);
             }

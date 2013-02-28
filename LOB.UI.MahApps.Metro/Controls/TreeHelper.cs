@@ -39,10 +39,12 @@ namespace MahApps.Metro.Controls
 
             //check if the parent matches the type we're looking for
             T parent = parentObject as T;
-            if (parent != null) {
+            if (parent != null)
+            {
                 return parent;
             }
-            else {
+            else
+            {
                 //use recursion to proceed with next level
                 return TryFindParent<T>(parentObject);
             }
@@ -65,7 +67,8 @@ namespace MahApps.Metro.Controls
 
             //handle content elements separately
             ContentElement contentElement = child as ContentElement;
-            if (contentElement != null) {
+            if (contentElement != null)
+            {
                 DependencyObject parent = ContentOperations.GetParent(contentElement);
                 if (parent != null) return parent;
 
@@ -75,7 +78,8 @@ namespace MahApps.Metro.Controls
 
             //also try searching for parent in framework elements (such as DockPanel, etc)
             FrameworkElement frameworkElement = child as FrameworkElement;
-            if (frameworkElement != null) {
+            if (frameworkElement != null)
+            {
                 DependencyObject parent = frameworkElement.Parent;
                 if (parent != null) return parent;
             }
@@ -102,16 +106,20 @@ namespace MahApps.Metro.Controls
         /// </returns>
         public static IEnumerable<T> FindChildren<T>(this DependencyObject source) where T : DependencyObject
         {
-            if (source != null) {
+            if (source != null)
+            {
                 var childs = GetChildObjects(source);
-                foreach (DependencyObject child in childs) {
+                foreach (DependencyObject child in childs)
+                {
                     //analyze if children match the requested type
-                    if (child != null && child is T) {
+                    if (child != null && child is T)
+                    {
                         yield return (T) child;
                     }
 
                     //recurse tree
-                    foreach (T descendant in FindChildren<T>(child)) {
+                    foreach (T descendant in FindChildren<T>(child))
+                    {
                         yield return descendant;
                     }
                 }
@@ -131,17 +139,21 @@ namespace MahApps.Metro.Controls
         {
             if (parent == null) yield break;
 
-            if (parent is ContentElement || parent is FrameworkElement) {
+            if (parent is ContentElement || parent is FrameworkElement)
+            {
                 //use the logical tree for content / framework elements
-                foreach (object obj in LogicalTreeHelper.GetChildren(parent)) {
+                foreach (object obj in LogicalTreeHelper.GetChildren(parent))
+                {
                     var depObj = obj as DependencyObject;
                     if (depObj != null) yield return (DependencyObject) obj;
                 }
             }
-            else {
+            else
+            {
                 //use the visual tree per default
                 int count = VisualTreeHelper.GetChildrenCount(parent);
-                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++)
+                {
                     yield return VisualTreeHelper.GetChild(parent, i);
                 }
             }

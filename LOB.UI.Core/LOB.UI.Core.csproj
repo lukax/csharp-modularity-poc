@@ -132,6 +132,9 @@
     <Compile Include="View\Controls\Alter\AlterSaleView.xaml.cs">
       <DependentUpon>AlterSaleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\Alter\AlterNaturalPersonView.xaml.cs">
+      <DependentUpon>AlterNaturalPersonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\Alter\SubEntity\AlterAddressView.xaml.cs">
       <DependentUpon>AlterAddressView.xaml</DependentUpon>
     </Compile>
@@ -141,11 +144,14 @@
     <Compile Include="View\Controls\Alter\SubEntity\AlterContactInfoView.xaml.cs">
       <DependentUpon>AlterContactInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\Alter\SubEntity\AlterPersonView.xaml.cs">
+      <DependentUpon>AlterPersonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\Alter\SubEntity\AlterPayCheckView.xaml.cs">
       <DependentUpon>AlterPayCheckView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterPersonView.xaml.cs">
-      <DependentUpon>AlterPersonView.xaml</DependentUpon>
+    <Compile Include="View\Controls\Alter\AlterLegalPersonView.xaml.cs">
+      <DependentUpon>AlterLegalPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\Alter\AlterClientView.xaml.cs">
       <DependentUpon>AlterClientView.xaml</DependentUpon>
@@ -196,6 +202,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Controls\Alter\AlterNaturalPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Controls\Alter\SubEntity\AlterAddressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,11 +218,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Controls\Alter\SubEntity\AlterPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Controls\Alter\SubEntity\AlterPayCheckView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterPersonView.xaml">
+    <Page Include="View\Controls\Alter\AlterLegalPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

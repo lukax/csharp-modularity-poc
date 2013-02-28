@@ -1,9 +1,4 @@
-﻿// (c) Copyright Microsoft Corporation.
-// This source is subject to the Microsoft Public License (Ms-PL).
-// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
-// All other rights reserved.
-
-#region Usings
+﻿#region Usings
 
 using System;
 using System.ComponentModel;
@@ -109,7 +104,8 @@ namespace MahApps.Metro.Controls
         private static void OnIsCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var toggleSwitch = (ToggleSwitch) d;
-            if (toggleSwitch._toggleButton != null) {
+            if (toggleSwitch._toggleButton != null)
+            {
                 toggleSwitch._toggleButton.IsChecked = (bool?) e.NewValue;
             }
         }
@@ -140,18 +136,21 @@ namespace MahApps.Metro.Controls
         {
             base.OnApplyTemplate();
 
-            if (!_wasContentSet && GetBindingExpression(ContentProperty) == null) {
+            if (!_wasContentSet && GetBindingExpression(ContentProperty) == null)
+            {
                 SetDefaultContent();
             }
 
-            if (_toggleButton != null) {
+            if (_toggleButton != null)
+            {
                 _toggleButton.Checked -= CheckedHandler;
                 _toggleButton.Unchecked -= UncheckedHandler;
                 _toggleButton.Indeterminate -= IndeterminateHandler;
                 _toggleButton.Click -= ClickHandler;
             }
             _toggleButton = GetTemplateChild(SwitchPart) as ToggleButton;
-            if (_toggleButton != null) {
+            if (_toggleButton != null)
+            {
                 _toggleButton.Checked += CheckedHandler;
                 _toggleButton.Unchecked += UncheckedHandler;
                 _toggleButton.Indeterminate += IndeterminateHandler;

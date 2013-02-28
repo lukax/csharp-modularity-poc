@@ -19,10 +19,9 @@
         </Grid.RowDefinitions>
 
 
-        <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
-                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
-                           Grid.Column="5">
+                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent">
                 <Image Source="../../Resources/File48.png"></Image>
             </controls:Tile>
 
@@ -31,10 +30,10 @@
                 <Image Source="../../Resources/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
-                           Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
+                           Command="{Binding SaveChangesCommand}" BorderThickness="0">
                 <Image Source="../../Resources/Accept48.png" />
             </controls:Tile>
-        </DockPanel>
+        </StackPanel>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid>
@@ -43,27 +42,30 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <DockPanel VerticalAlignment="Top" Grid.Row="1">
-                    <base:AlterBaseEntityView></base:AlterBaseEntityView>
+                    <base:AlterBaseEntityView x:Name="AlterBaseEntity" />
 
                     <Label Content="Status:" HorizontalAlignment="Right" Grid.Row="1" />
                     <TextBlock Text="{Binding Status}" HorizontalAlignment="Left" MinWidth="100" Grid.Row="1"
                                MaxWidth="150" />
+                    
+                    <Label Content="PersonType:" HorizontalAlignment="Right" Grid.Row="1" />
+                    <controls:ToggleSwitchButton Content="ToggleSwitchButton"
+                                     IsChecked="{Binding PersonType, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" HorizontalAlignment="Left" MinWidth="50"/>
                 </DockPanel>
 
                 <DockPanel Grid.Row="2">
                     <TabControl>
                         <TabItem Header=">" />
-                        <TabItem Header="Entity Details">
-                            <base:AlterPersonView />
+                        <TabItem Header="Person Details" x:Name="TabPersonDetails">
+                            <!--Load based on PersonType-->
                         </TabItem>
                     </TabControl>
                 </DockPanel>
 
+               
                 <DockPanel Grid.Row="3">
                     <TabControl>
                         <TabItem Header=">" />
@@ -75,19 +77,7 @@
                         </TabItem>
                     </TabControl>
                 </DockPanel>
-
-                <DockPanel Grid.Row="4">
-                    <TabControl>
-                        <TabItem Header=">" />
-                        <TabItem Header="Contact Info">
-                            <base:AlterContactInfoView />
-                        </TabItem>
-                        <TabItem Header="Address">
-                            <base:AlterAddressView />
-                        </TabItem>
-                    </TabControl>
-                </DockPanel>
-
+                
             </Grid>
         </ScrollViewer>
     </Grid>

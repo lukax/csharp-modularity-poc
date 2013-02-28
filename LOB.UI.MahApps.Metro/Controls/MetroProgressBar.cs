@@ -57,17 +57,20 @@ namespace MahApps.Metro.Controls
 
         private void ResetStoryboard(double width)
         {
-            lock (this) {
+            lock (this)
+            {
                 //perform calculations
                 double containerAnimStart = CalcContainerAnimStart(width);
                 double containerAnimEnd = CalcContainerAnimEnd(width);
                 double ellipseAnimWell = CalcEllipseAnimWell(width);
                 double ellipseAnimEnd = CalcEllipseAnimEnd(width);
                 //reset the main double animation
-                try {
+                try
+                {
                     VisualState indeterminate = GetIndeterminate();
 
-                    if (indeterminate != null) {
+                    if (indeterminate != null)
+                    {
                         Storyboard newStoryboard = indeterminate.Storyboard.Clone();
                         Timeline doubleAnim = newStoryboard.Children.First(t => t.Name == "MainDoubleAnim");
                         doubleAnim.SetValue(DoubleAnimation.FromProperty, containerAnimStart);
@@ -77,17 +80,20 @@ namespace MahApps.Metro.Controls
                         //indeterminate.Storyboard.Begin();
 
                         var namesOfElements = new[] {"E1", "E2", "E3", "E4", "E5"};
-                        foreach (string elemName in namesOfElements) {
+                        foreach (string elemName in namesOfElements)
+                        {
                             var doubleAnimParent =
                                 (DoubleAnimationUsingKeyFrames)
                                 newStoryboard.Children.First(t => t.Name == elemName + "Anim");
                             DoubleKeyFrame first, second, third;
-                            if (elemName == "E1") {
+                            if (elemName == "E1")
+                            {
                                 first = doubleAnimParent.KeyFrames[1];
                                 second = doubleAnimParent.KeyFrames[2];
                                 third = doubleAnimParent.KeyFrames[3];
                             }
-                            else {
+                            else
+                            {
                                 first = doubleAnimParent.KeyFrames[2];
                                 second = doubleAnimParent.KeyFrames[3];
                                 third = doubleAnimParent.KeyFrames[4];
@@ -106,12 +112,14 @@ namespace MahApps.Metro.Controls
                         }
                         indeterminate.Storyboard.Remove();
                         indeterminate.Storyboard = newStoryboard;
-                        if (IsIndeterminate) {
+                        if (IsIndeterminate)
+                        {
                             indeterminate.Storyboard.Begin((FrameworkElement) GetTemplateChild("ContainingGrid"));
                         }
                     }
                 }
-                catch (Exception) {
+                catch (Exception)
+                {
                     //we just ignore 
                 }
             }
@@ -131,11 +139,13 @@ namespace MahApps.Metro.Controls
 
         private void SetEllipseDiameter(double width)
         {
-            if (width <= 180) {
+            if (width <= 180)
+            {
                 EllipseDiameter = 4;
                 return;
             }
-            if (width <= 280) {
+            if (width <= 280)
+            {
                 EllipseDiameter = 5;
                 return;
             }
@@ -145,11 +155,13 @@ namespace MahApps.Metro.Controls
 
         private void SetEllipseOffset(double width)
         {
-            if (width <= 180) {
+            if (width <= 180)
+            {
                 EllipseOffset = 4;
                 return;
             }
-            if (width <= 280) {
+            if (width <= 280)
+            {
                 EllipseOffset = 7;
                 return;
             }

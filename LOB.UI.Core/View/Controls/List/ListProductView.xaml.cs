@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Controls.List;
@@ -14,10 +15,15 @@ namespace LOB.UI.Core.View.Controls.List
     {
         private string _header;
 
-        [ImportingConstructor]
-        public ListProductView(ListProductViewModel dataContext)
+        public ListProductView()
         {
             InitializeComponent();
+        }
+
+        [ImportingConstructor]
+        public ListProductView(ListProductViewModel dataContext)
+            : this()
+        {
             DataContext = dataContext;
         }
 
@@ -31,12 +37,12 @@ namespace LOB.UI.Core.View.Controls.List
 
         public void InitializeServices()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Refresh()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

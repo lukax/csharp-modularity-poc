@@ -15,6 +15,8 @@ namespace LOB.Domain
         public virtual Category Category { get; set; }
         public virtual ProductStatus Status { get; set; }
         public virtual int UnitsInStock { get; set; }
+        public virtual int MaxUnitsOfStock { get; set; }
+        public virtual int MinUnitsOfStock { get; set; }
         public virtual double UnitCostPrice { get; set; }
         public virtual double UnitSalePrice { get; set; }
         public virtual double ProfitMargin { get; set; }

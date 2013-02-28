@@ -37,14 +37,6 @@ namespace LOB.UI.Core
             view.Show();
         }
 
-        public void Startup(string viewName, object viewModel = null)
-        {
-            var view = ResolveView(viewName) as Window;
-            if (view == null) return;
-            if (view is IView) ((IView)view).InitializeServices();
-            view.Show();
-        }
-
         public void OpenView<TView>(string regionName, object viewModel = null) where TView : class
         {
             dynamic vModel;
@@ -63,7 +55,8 @@ namespace LOB.UI.Core
 
         public INavigator ResolveView(string param, object viewModel = null)
         {
-            switch (param) {
+            switch (param)
+            {
                 case "AlterProduct":
                     _resolvedView = _container.Resolve<AlterProductView>();
                     break;
@@ -91,7 +84,8 @@ namespace LOB.UI.Core
                 default:
                     throw new ArgumentException("Parameter not implemented yet, ", "param");
             }
-            if (viewModel != null) {
+            if (viewModel != null)
+            {
                 _resolvedView.DataContext = viewModel;
             }
             return this;
@@ -100,7 +94,8 @@ namespace LOB.UI.Core
         public void StartView(bool asDialog = false)
         {
             if (_resolvedView == null) return;
-            if (_resolvedView is UserControl) {
+            if (_resolvedView is UserControl)
+            {
                 var window = new FrameWindow()
                     {
                         Content = _resolvedView
@@ -109,12 +104,21 @@ namespace LOB.UI.Core
                 else window.Show();
                 return;
             }
-            if (_resolvedView is Window) {
+            if (_resolvedView is Window)
+            {
                 ((Window) _resolvedView).Show();
                 return;
             }
         }
-        
+
+        public void Startup(string viewName, object viewModel = null)
+        {
+            var view = ResolveView(viewName) as Window;
+            if (view == null) return;
+            if (view is IView) ((IView) view).InitializeServices();
+            view.Show();
+        }
+
         //public Window AsWindow(object resolvedView)
         //{
         //    if (_resolvedView is Window) return ((Window)_resolvedView);

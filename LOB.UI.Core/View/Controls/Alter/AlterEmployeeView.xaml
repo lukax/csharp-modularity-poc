@@ -62,7 +62,7 @@
                     <TabControl>
                         <TabItem Header=">" />
                         <TabItem Header="Entity Details">
-                            <base:AlterPersonView />
+                            <base:AlterNaturalPersonView />
                         </TabItem>
                     </TabControl>
                 </DockPanel>

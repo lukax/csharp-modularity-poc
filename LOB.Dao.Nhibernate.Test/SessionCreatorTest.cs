@@ -77,7 +77,8 @@ namespace LOB.Dao.Nhibernate.Test
 
 
             var session = ((ISession) sCreator.Orm);
-            using (session) {
+            using (session)
+            {
                 session.BeginTransaction();
                 session.Save(entity);
                 Assert.IsTrue((session).Contains(entity));

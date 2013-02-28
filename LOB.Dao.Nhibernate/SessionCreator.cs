@@ -21,6 +21,7 @@ namespace LOB.Dao.Nhibernate
         private const String MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
         private String _connectionString;
+        private SchemaExport _sqlSchema;
 
         [ImportingConstructor]
         public SessionCreator()
@@ -47,7 +48,8 @@ namespace LOB.Dao.Nhibernate
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
             Configuration cfg;
-            switch (persistIn) {
+            switch (persistIn)
+            {
                 case PersistType.Sql:
                     cfg = StoreInMySqlConfiguration();
                     break;
@@ -102,7 +104,6 @@ namespace LOB.Dao.Nhibernate
                            .ExposeConfiguration(SchemaCreator);
         }
 
-        private SchemaExport _sqlSchema;
         private void SchemaCreator(Configuration cfg)
         {
             _sqlSchema = new SchemaExport(cfg);

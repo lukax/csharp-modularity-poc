@@ -119,14 +119,14 @@ namespace MahApps.Metro.Controls
                 return;
 
             var action = new Action(() =>
-            {
-                ring.SetEllipseDiameter(
-                    (double) dependencyPropertyChangedEventArgs.NewValue);
-                ring.SetEllipseOffset(
-                    (double) dependencyPropertyChangedEventArgs.NewValue);
-                ring.SetMaxSideLength(
-                    (double) dependencyPropertyChangedEventArgs.NewValue);
-            });
+                {
+                    ring.SetEllipseDiameter(
+                        (double) dependencyPropertyChangedEventArgs.NewValue);
+                    ring.SetEllipseOffset(
+                        (double) dependencyPropertyChangedEventArgs.NewValue);
+                    ring.SetMaxSideLength(
+                        (double) dependencyPropertyChangedEventArgs.NewValue);
+                });
 
             if (ring._deferredActions != null)
                 ring._deferredActions.Add(action);
@@ -141,10 +141,12 @@ namespace MahApps.Metro.Controls
 
         private void SetEllipseDiameter(double width)
         {
-            if (width <= 60) {
+            if (width <= 60)
+            {
                 EllipseDiameter = 6.0;
             }
-            else {
+            else
+            {
                 EllipseDiameter = width*0.1 + 6;
             }
         }
@@ -152,10 +154,12 @@ namespace MahApps.Metro.Controls
 
         private void SetEllipseOffset(double width)
         {
-            if (width <= 60) {
+            if (width <= 60)
+            {
                 EllipseOffset = new Thickness(0, 24, 0, 0);
             }
-            else {
+            else
+            {
                 EllipseOffset = new Thickness(0, width*0.4 + 24, 0, 0);
             }
         }
@@ -234,7 +238,8 @@ namespace MahApps.Metro.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double) {
+            if (value is double)
+            {
                 var width = (double) value;
                 return width <= 60 ? 60.0 : width;
             }

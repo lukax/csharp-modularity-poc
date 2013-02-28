@@ -17,14 +17,20 @@ namespace LOB.UI.Core.View.Controls.Alter
     {
         private string _header;
 
-        [ImportingConstructor]
-        public AlterEmployeeView(AlterEmployeeViewModel dataContext)
+        public AlterEmployeeView()
         {
             InitializeComponent();
-            DataContext = dataContext;
 
-            Messenger.Default.Register<object>(dataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
+
+        [ImportingConstructor]
+        public AlterEmployeeView(AlterEmployeeViewModel viewModel)
+            : this()
+        {
+            DataContext = viewModel;
+        }
+
 
         public string Header
         {

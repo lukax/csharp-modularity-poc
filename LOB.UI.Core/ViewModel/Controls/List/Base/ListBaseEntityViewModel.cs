@@ -25,8 +25,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         #region Props
 
         protected IRepository Repository;
+        private T _entity;
+        private IList<T> _list;
 
         private string _search;
+
+        private Expression<Func<T, bool>> _searchCriteria;
+
         public virtual string Search
         {
             get { return _search; }
@@ -38,16 +43,17 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             }
         }
 
-        private Expression<Func<T, bool>> _searchCriteria;
         public virtual Expression<Func<T, bool>> SearchCriteria
         {
             get
             {
-                try {
+                try
+                {
                     var converted = Convert.ToInt32(Search);
                     return _searchCriteria ?? (arg => arg.Code == converted);
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     return arg => false;
                 }
             }
@@ -56,7 +62,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         public CrudOperationType OperationType { get; set; }
 
-        private IList<T> _list;
         public IList<T> List
         {
             get { return _list; }
@@ -67,7 +72,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             }
         }
 
-        private T _entity;
         public T Entity
         {
             get { return _entity; }
@@ -98,7 +102,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         public ICommand FetchCommand { get; set; }
 
         /// <summary>
-        /// Constantly update the list async every 1000 miliseconds
+        ///     Constantly update the list async every 1000 miliseconds
         /// </summary>
         /// <param name="interval">Interval time in miliseconds</param>
         private async void UpdateList(int interval = 1000)
@@ -107,7 +111,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             while (true)
             {
                 IList<T> localList = null;
-                localList = string.IsNullOrEmpty(Search) ? (await Repository.GetListAsync<T>()).ToList() : (await Repository.GetListAsync<T>(SearchCriteria)).ToList();
+                localList = string.IsNullOrEmpty(Search)
+                                ? (await Repository.GetListAsync<T>()).ToList()
+                                : (await Repository.GetListAsync<T>(SearchCriteria)).ToList();
                 if (List == null || !localList.SequenceEqual(List))
                 {
                     List = localList;

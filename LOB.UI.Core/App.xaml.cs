@@ -68,10 +68,12 @@ namespace LOB.UI.Core
             ComposablePartCatalog daoDll = null;
             ComposablePartCatalog currentDll = null;
             ComposablePartCatalog domainDll = null;
-            try {
+            try
+            {
                 daoDll = new AssemblyCatalog("LOB.DAO.Nhibernate.dll");
             }
-            catch (FileNotFoundException) {
+            catch (FileNotFoundException)
+            {
                 MessageBox.Show("No DAO was found please refer to dll");
                 var dlg = new OpenFileDialog
                     {
@@ -87,7 +89,8 @@ namespace LOB.UI.Core
                 string filename = dlg.FileName;
                 daoDll = new DirectoryCatalog(filename);
             }
-            finally {
+            finally
+            {
                 currentDll = new AssemblyCatalog(Assembly.GetExecutingAssembly());
                 domainDll = new AssemblyCatalog(Assembly.Load("LOB.Domain"));
             }

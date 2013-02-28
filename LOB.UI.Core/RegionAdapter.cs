@@ -31,10 +31,12 @@ namespace LOB.UI.Core
             where TView : class
         {
             object region = _regions[regionName];
-            if (region is ITabProp) {
+            if (region is ITabProp)
+            {
                 ((ITabProp) region).Header = title;
             }
-            if (region is ContentControl) {
+            if (region is ContentControl)
+            {
                 ((ContentControl) region).Content = view;
             }
 

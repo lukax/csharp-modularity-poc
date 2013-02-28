@@ -15,6 +15,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         {
         }
 
+        public override void QuickSearch(object arg)
+        {
+            base.QuickSearch(arg);
+        }
+
         public override bool CanSaveChanges(object arg)
         {
             //TODO: Business logic

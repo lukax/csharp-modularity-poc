@@ -3,6 +3,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 #endregion
@@ -81,8 +82,10 @@ namespace MahApps.Metro.Controls
 
             var widthToScroll = 0.0;
             int index;
-            for (index = 0; index < Items.Count; index++) {
-                if (Items[index] == item) {
+            for (index = 0; index < Items.Count; index++)
+            {
+                if (Items[index] == item)
+                {
                     internalIndex = index;
                     break;
                 }
@@ -112,7 +115,8 @@ namespace MahApps.Metro.Controls
             headers = (ListView) GetTemplateChild("PART_Headers");
             mediator = GetTemplateChild("PART_Mediator") as ScrollViewerOffsetMediator;
 
-            if (scroller != null) {
+            if (scroller != null)
+            {
                 scroller.ScrollChanged += scroller_ScrollChanged;
                 scroller.PreviewMouseWheel += scroller_MouseWheel;
             }
@@ -120,7 +124,7 @@ namespace MahApps.Metro.Controls
                 headers.SelectionChanged += headers_SelectionChanged;
         }
 
-        private void scroller_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void scroller_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + -e.Delta);
         }
@@ -133,12 +137,15 @@ namespace MahApps.Metro.Controls
         private void scroller_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             var position = 0.0;
-            for (int i = 0; i < Items.Count; i++) {
+            for (int i = 0; i < Items.Count; i++)
+            {
                 var pivotItem = ((PivotItem) Items[i]);
                 var widthOfItem = pivotItem.ActualWidth;
-                if (e.HorizontalOffset <= (position + widthOfItem - 1)) {
+                if (e.HorizontalOffset <= (position + widthOfItem - 1))
+                {
                     selectedItem = pivotItem;
-                    if (headers.SelectedItem != selectedItem) {
+                    if (headers.SelectedItem != selectedItem)
+                    {
                         headers.SelectedItem = selectedItem;
                         internalIndex = i;
                         SelectedIndex = i;

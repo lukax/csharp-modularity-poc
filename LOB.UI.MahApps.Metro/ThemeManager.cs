@@ -74,7 +74,8 @@ namespace MahApps.Metro
 
         private static void ApplyResourceDictionary(ResourceDictionary newRd, ResourceDictionary oldRd)
         {
-            foreach (DictionaryEntry r in newRd) {
+            foreach (DictionaryEntry r in newRd)
+            {
                 if (oldRd.Contains(r.Key))
                     oldRd.Remove(r.Key);
 

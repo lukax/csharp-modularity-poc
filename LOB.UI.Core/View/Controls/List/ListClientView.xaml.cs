@@ -14,10 +14,15 @@ namespace LOB.UI.Core.View.Controls.List
     {
         private string _header;
 
-        [ImportingConstructor]
-        public ListClientView(ListClientViewModel dataContext)
+        public ListClientView()
         {
             InitializeComponent();
+        }
+
+        [ImportingConstructor]
+        public ListClientView(ListClientViewModel dataContext)
+            : this()
+        {
             DataContext = dataContext;
         }
 

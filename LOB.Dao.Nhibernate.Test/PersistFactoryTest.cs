@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using LOB.Dao.Interface;
 using Microsoft.Practices.Unity;
@@ -26,7 +27,7 @@ namespace LOB.Dao.Nhibernate.Test
             Assert.IsNotNull(Repository);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
         private class PersistFactory
         {
             private readonly AggregateCatalog _catalog;

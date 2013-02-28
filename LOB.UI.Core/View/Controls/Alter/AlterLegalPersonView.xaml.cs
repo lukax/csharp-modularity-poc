@@ -1,34 +1,35 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.UI.Core.ViewModel.Controls.List;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.List
+namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {
     [Export]
-    public partial class ListEmployeeView : UserControl, ITabProp, IView
+    public partial class AlterLegalPersonView : UserControl, IView, ITabProp
     {
         private string _header;
 
-        public ListEmployeeView()
+        public AlterLegalPersonView()
         {
             InitializeComponent();
         }
 
         [ImportingConstructor]
-        public ListEmployeeView(ListEmployeeViewModel dataContext)
+        public AlterLegalPersonView(AlterPersonViewModel viewModel)
             : this()
         {
-            DataContext = dataContext;
+            DataContext = viewModel;
         }
 
         public string Header
         {
-            get { return (string.IsNullOrEmpty(_header)) ? "Funcionarios" : _header; }
+            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Pessoa" : _header; }
             set { _header = value; }
         }
 
@@ -36,10 +37,12 @@ namespace LOB.UI.Core.View.Controls.List
 
         public void InitializeServices()
         {
+            throw new NotImplementedException();
         }
 
         public void Refresh()
         {
+            throw new NotImplementedException();
         }
     }
 }

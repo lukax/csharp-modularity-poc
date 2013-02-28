@@ -77,7 +77,8 @@ namespace MahApps.Metro.Behaviours
         private static IEnumerable<DependencyObject> Ancestors(DependencyObject obj)
         {
             var parent = VisualTreeHelper.GetParent(obj);
-            while (parent != null) {
+            while (parent != null)
+            {
                 yield return parent;
                 obj = parent;
                 parent = VisualTreeHelper.GetParent(obj);

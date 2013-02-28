@@ -1,6 +1,10 @@
-﻿using LOB.Dao.Interface;
+﻿#region Usings
+
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+
+#endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {

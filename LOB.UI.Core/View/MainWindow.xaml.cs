@@ -47,13 +47,13 @@ namespace LOB.UI.Core.View
         {
             base.DataContext = _viewModel;
             base.UpdateLayout();
-            ChangeFlyouts(null,null);
+            ChangeFlyouts(null, null);
         }
 
         private void OpenView(object arg, object viewModel, bool asDialog = true)
         {
             _navigator.ResolveView(arg.ToString(), viewModel).StartView(asDialog);
-            ChangeFlyouts(null,null);
+            ChangeFlyouts(null, null);
         }
 
         public void OpenTab(object view)
@@ -65,13 +65,14 @@ namespace LOB.UI.Core.View
 
             ((ITabProp) t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
-            ChangeFlyouts(null,null);
+            ChangeFlyouts(null, null);
         }
 
 
         public void ChangeFlyouts(object sender, EventArgs eventArgs, bool isOpen = false)
         {
-            foreach (var flyout in Flyouts) {
+            foreach (var flyout in Flyouts)
+            {
                 flyout.IsOpen = isOpen;
             }
         }

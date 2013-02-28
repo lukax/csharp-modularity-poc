@@ -54,13 +54,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             set
             {
                 string backup = string.Empty;
-                try {
+                try
+                {
                     if (BirthDate == value) return;
                     backup = BirthDate;
                     Entity.BirthDate = DateTime.Parse(value);
                     OnPropertyChanged();
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     BirthDate = backup;
                 }
             }
@@ -94,7 +96,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         public override void SaveChanges(object arg)
         {
-            using (Repository.Uow) {
+            using (Repository.Uow)
+            {
                 Repository.Uow.BeginTransaction();
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();

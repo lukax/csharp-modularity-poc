@@ -85,26 +85,32 @@ namespace MahApps.Metro.Controls
 
         private static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TextBox) {
+            if (d is TextBox)
+            {
                 var txtBox = d as TextBox;
 
-                if ((bool) e.NewValue) {
+                if ((bool) e.NewValue)
+                {
                     txtBox.TextChanged += TextChanged;
                     txtBox.GotFocus += TextBoxGotFocus;
                 }
-                else {
+                else
+                {
                     txtBox.TextChanged -= TextChanged;
                     txtBox.GotFocus -= TextBoxGotFocus;
                 }
             }
-            else if (d is PasswordBox) {
+            else if (d is PasswordBox)
+            {
                 var passBox = d as PasswordBox;
 
-                if ((bool) e.NewValue) {
+                if ((bool) e.NewValue)
+                {
                     passBox.PasswordChanged += PasswordChanged;
                     passBox.GotFocus += PasswordGotFocus;
                 }
-                else {
+                else
+                {
                     passBox.PasswordChanged -= PasswordChanged;
                     passBox.GotFocus -= PasswordGotFocus;
                 }
@@ -132,7 +138,8 @@ namespace MahApps.Metro.Controls
             var txtBox = sender as TextBox;
             if (txtBox == null)
                 return;
-            if (GetSelectAllOnFocus(txtBox)) {
+            if (GetSelectAllOnFocus(txtBox))
+            {
                 txtBox.Dispatcher.BeginInvoke((Action) (txtBox.SelectAll));
             }
         }
@@ -142,7 +149,8 @@ namespace MahApps.Metro.Controls
             var passBox = sender as PasswordBox;
             if (passBox == null)
                 return;
-            if (GetSelectAllOnFocus(passBox)) {
+            if (GetSelectAllOnFocus(passBox))
+            {
                 passBox.Dispatcher.BeginInvoke((Action) (passBox.SelectAll));
             }
         }
@@ -160,20 +168,26 @@ namespace MahApps.Metro.Controls
         private static void ClearTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var textbox = d as TextBox;
-            if (textbox != null) {
-                if ((bool) e.NewValue) {
+            if (textbox != null)
+            {
+                if ((bool) e.NewValue)
+                {
                     textbox.Loaded += TextBoxLoaded;
                 }
-                else {
+                else
+                {
                     textbox.Loaded -= TextBoxLoaded;
                 }
             }
             var passbox = d as PasswordBox;
-            if (passbox != null) {
-                if ((bool) e.NewValue) {
+            if (passbox != null)
+            {
+                if ((bool) e.NewValue)
+                {
                     passbox.Loaded += PassBoxLoaded;
                 }
-                else {
+                else
+                {
                     passbox.Loaded -= PassBoxLoaded;
                 }
             }
@@ -196,10 +210,12 @@ namespace MahApps.Metro.Controls
             if (button == null)
                 return;
 
-            if (GetClearTextButton(passbox)) {
+            if (GetClearTextButton(passbox))
+            {
                 button.Click += ClearPassClicked;
             }
-            else {
+            else
+            {
                 button.Click -= ClearPassClicked;
             }
         }
@@ -222,10 +238,12 @@ namespace MahApps.Metro.Controls
             if (button == null)
                 return;
 
-            if (GetClearTextButton(textbox)) {
+            if (GetClearTextButton(textbox))
+            {
                 button.Click += ClearTextClicked;
             }
-            else {
+            else
+            {
                 button.Click -= ClearTextClicked;
             }
         }
@@ -234,7 +252,8 @@ namespace MahApps.Metro.Controls
         {
             var button = ((Button) sender);
             var parent = VisualTreeHelper.GetParent(button);
-            while (!(parent is TextBox)) {
+            while (!(parent is TextBox))
+            {
                 parent = VisualTreeHelper.GetParent(parent);
             }
 
@@ -245,7 +264,8 @@ namespace MahApps.Metro.Controls
         {
             var button = ((Button) sender);
             var parent = VisualTreeHelper.GetParent(button);
-            while (!(parent is PasswordBox)) {
+            while (!(parent is PasswordBox))
+            {
                 parent = VisualTreeHelper.GetParent(parent);
             }
 

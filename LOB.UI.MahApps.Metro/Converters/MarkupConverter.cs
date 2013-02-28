@@ -15,20 +15,24 @@ namespace MahApps.Metro.Converters
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try {
+            try
+            {
                 return Convert(value, targetType, parameter, culture);
             }
-            catch {
+            catch
+            {
                 return DependencyProperty.UnsetValue;
             }
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try {
+            try
+            {
                 return ConvertBack(value, targetType, parameter, culture);
             }
-            catch {
+            catch
+            {
                 return DependencyProperty.UnsetValue;
             }
         }

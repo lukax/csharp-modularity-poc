@@ -260,7 +260,8 @@ namespace MahApps.Metro.Controls
 
         private void ReCalculateWidths()
         {
-            if (_leftButton != null && _rightButton != null && _centerThumb != null) {
+            if (_leftButton != null && _rightButton != null && _centerThumb != null)
+            {
                 _movableWidth =
                     Math.Max(ActualWidth - _rightThumb.ActualWidth - _leftThumb.ActualWidth - _centerThumb.MinWidth, 1);
                 _leftButton.Width = Math.Max(_movableWidth*(RangeStartSelected - RangeStart)/_movableRange, 0);
@@ -275,7 +276,8 @@ namespace MahApps.Metro.Controls
         private void ReCalculateRangeSelected(bool reCalculateStart, bool reCalculateStop)
         {
             _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
-            if (reCalculateStart) {
+            if (reCalculateStart)
+            {
                 // Make sure to get exactly rangestart if thumb is at the start
                 RangeStartSelected = _leftButton.Width == 0.0
                                          ? RangeStart
@@ -283,7 +285,8 @@ namespace MahApps.Metro.Controls
                                                     (long) (RangeStart + _movableRange*_leftButton.Width/_movableWidth));
             }
 
-            if (reCalculateStop) {
+            if (reCalculateStop)
+            {
                 // Make sure to get exactly rangestop if thumb is at the end
                 RangeStopSelected = _rightButton.Width == 0.0
                                         ? RangeStop
@@ -319,11 +322,13 @@ namespace MahApps.Metro.Controls
 
         public void MoveSelection(long span)
         {
-            if (span > 0) {
+            if (span > 0)
+            {
                 if (RangeStopSelected + span > RangeStop)
                     span = RangeStop - RangeStopSelected;
             }
-            else {
+            else
+            {
                 if (RangeStartSelected + span < RangeStart)
                     span = RangeStart - RangeStartSelected;
             }

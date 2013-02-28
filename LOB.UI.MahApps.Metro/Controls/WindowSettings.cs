@@ -62,7 +62,8 @@ namespace MahApps.Metro.Controls
             if (Settings.Placement == null)
                 return;
 
-            try {
+            try
+            {
                 var wp = Settings.Placement.Value;
 
                 wp.length = Marshal.SizeOf(typeof (WINDOWPLACEMENT));
@@ -71,7 +72,8 @@ namespace MahApps.Metro.Controls
                 var hwnd = new WindowInteropHelper(_window).Handle;
                 UnsafeNativeMethods.SetWindowPlacement(hwnd, ref wp);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Debug.WriteLine(string.Format("Failed to load window state:\r\n{0}", ex));
             }
         }
@@ -122,7 +124,8 @@ namespace MahApps.Metro.Controls
             {
                 get
                 {
-                    if (this["Placement"] != null) {
+                    if (this["Placement"] != null)
+                    {
                         return ((WINDOWPLACEMENT) this["Placement"]);
                     }
                     return null;

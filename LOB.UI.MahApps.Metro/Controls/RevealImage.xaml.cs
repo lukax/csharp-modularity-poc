@@ -55,7 +55,8 @@ namespace MahApps.Metro.Controls
                 };
 
             var tmp = string.Empty;
-            foreach (var c in textToAnimate) {
+            foreach (var c in textToAnimate)
+            {
                 discreteStringKeyFrame = new DiscreteStringKeyFrame
                     {
                         KeyTime = KeyTime.Paced

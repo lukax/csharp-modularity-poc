@@ -51,15 +51,16 @@ namespace MahApps.Metro.Controls
         {
             bool shouldAnimate = (Visibility == Visibility.Visible && IsVisible);
             Dispatcher.BeginInvoke(new Action(() =>
-            {
-                var s = Resources["animate"] as Storyboard;
-                if (s != null) {
-                    if (shouldAnimate)
-                        s.Begin();
-                    else
-                        s.Stop();
-                }
-            }));
+                {
+                    var s = Resources["animate"] as Storyboard;
+                    if (s != null)
+                    {
+                        if (shouldAnimate)
+                            s.Begin();
+                        else
+                            s.Stop();
+                    }
+                }));
         }
     }
 }

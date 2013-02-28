@@ -64,11 +64,13 @@ namespace MahApps.Metro.Controls
             get { return _backgroundTranslation == null ? _thumbTranslation.X : _backgroundTranslation.X; }
             set
             {
-                if (_backgroundTranslation != null) {
+                if (_backgroundTranslation != null)
+                {
                     _backgroundTranslation.X = value;
                 }
 
-                if (_thumbTranslation != null) {
+                if (_thumbTranslation != null)
+                {
                     _thumbTranslation.X = value;
                 }
             }
@@ -78,13 +80,16 @@ namespace MahApps.Metro.Controls
         {
             VisualStateManager.GoToState(this, IsEnabled ? NormalState : DisabledState, useTransitions);
 
-            if (_isDragging) {
+            if (_isDragging)
+            {
                 VisualStateManager.GoToState(this, DraggingState, useTransitions);
             }
-            else if (IsChecked == true) {
+            else if (IsChecked == true)
+            {
                 VisualStateManager.GoToState(this, CheckedState, useTransitions);
             }
-            else {
+            else
+            {
                 VisualStateManager.GoToState(this, UncheckedState, useTransitions);
             }
         }
@@ -97,10 +102,12 @@ namespace MahApps.Metro.Controls
 
         public override void OnApplyTemplate()
         {
-            if (_track != null) {
+            if (_track != null)
+            {
                 _track.SizeChanged -= SizeChangedHandler;
             }
-            if (_thumb != null) {
+            if (_thumb != null)
+            {
                 _thumb.SizeChanged -= SizeChangedHandler;
             }
             base.OnApplyTemplate();
@@ -111,7 +118,8 @@ namespace MahApps.Metro.Controls
             _thumb = GetTemplateChild(SwitchThumbPart) as Border;
             _thumbTranslation = _thumb == null ? null : _thumb.RenderTransform as TranslateTransform;
             if (_root != null && _track != null && _thumb != null &&
-                (_backgroundTranslation != null || _thumbTranslation != null)) {
+                (_backgroundTranslation != null || _thumbTranslation != null))
+            {
                 /*GestureListener gestureListener = GestureService.GetGestureListener(_root);
                 gestureListener.DragStarted += DragStartedHandler;
                 gestureListener.DragDelta += DragDeltaHandler;

@@ -59,7 +59,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             : base(client, repository)
         {
         }
-        
+
         public override bool CanSaveChanges(object arg)
         {
             return true;
@@ -72,7 +72,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override void SaveChanges(object arg)
         {
-            using (Repository.Uow) {
+            using (Repository.Uow)
+            {
                 Repository.Uow.BeginTransaction();
                 Repository.Uow.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();

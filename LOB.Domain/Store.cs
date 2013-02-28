@@ -10,6 +10,7 @@ namespace LOB.Domain
 {
     public class Store : BaseEntity
     {
+        public virtual LegalPerson LegalPerson { get; set; }
         public virtual string Name { get; set; }
         public virtual IList<Employee> Employees { get; set; }
         public virtual IList<Product> Products { get; set; }

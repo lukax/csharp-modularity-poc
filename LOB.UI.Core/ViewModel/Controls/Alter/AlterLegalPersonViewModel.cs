@@ -15,11 +15,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public int Ie
         {
-            get { return ((LegalPerson) Entity).Ie; }
+            get { return ((LegalPerson) Entity).Iestadual; }
             set
             {
                 if (Ie == value) return;
-                ((LegalPerson) Entity).Ie = value;
+                ((LegalPerson) Entity).Iestadual = value;
                 OnPropertyChanged();
             }
         }

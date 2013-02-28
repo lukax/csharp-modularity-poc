@@ -119,6 +119,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         {
         }
 
+        public Address BuildEntity()
+        {
+            return new Address()
+                {
+                    City = this.City,
+                    Country = this.Country,
+                    District = this.District,
+                    ZipCode = this.Zip,
+                    IsDefault = this.Default,
+                    State = this.State,
+                    Status = this.Status,
+                    Street = this.Street,
+                    StreetComplement = this.Complement,
+                    StreetNumber = this.StreetNumber,
+                };
+
+        }
+
         public override void SaveChanges(object arg)
         {
             using (Repository.Uow)

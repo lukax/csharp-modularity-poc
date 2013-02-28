@@ -12,7 +12,7 @@ namespace LOB.Dao.Nhibernate.Mapping
         public LegalPersonMap()
         {
             Map(x => x.Cnpj);
-            Map(x => x.Ie);
+            Map(x => x.Iestadual);
         }
     }
 }

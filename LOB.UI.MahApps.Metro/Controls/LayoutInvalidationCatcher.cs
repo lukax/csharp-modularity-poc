@@ -17,7 +17,8 @@ namespace MahApps.Metro.Controls
         protected override Size MeasureOverride(Size constraint)
         {
             Planerator pl = PlaParent;
-            if (pl != null) {
+            if (pl != null)
+            {
                 pl.InvalidateMeasure();
             }
             return base.MeasureOverride(constraint);
@@ -26,7 +27,8 @@ namespace MahApps.Metro.Controls
         protected override Size ArrangeOverride(Size arrangeSize)
         {
             Planerator pl = PlaParent;
-            if (pl != null) {
+            if (pl != null)
+            {
                 pl.InvalidateArrange();
             }
             return base.ArrangeOverride(arrangeSize);

@@ -15,7 +15,7 @@ namespace LOB.Domain.SubEntity
         public virtual IList<PhoneNumber> PhoneNumbers { get; set; }
         public virtual IList<Email> Emails { get; set; }
         public virtual string WebSite { get; set; }
-        public virtual IList<Person> SpeakWith { get; set; }
+        public virtual string SpeakWith { get; set; }
         public virtual string Ps { get; set; }
     }
 

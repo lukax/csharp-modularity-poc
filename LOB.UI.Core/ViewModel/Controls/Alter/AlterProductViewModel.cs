@@ -28,7 +28,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return Entity.Name; }
             set
             {
-                if (Entity.Name != value) {
+                if (Entity.Name != value)
+                {
                     if (Entity.Name == value) return;
                     Entity.Name = value;
                     OnPropertyChanged();
@@ -141,11 +142,33 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public ICommand ClearEntityCommand { get; set; }
 
+        public Product BuildEntity
+        {
+            get
+            {
+                return base.Entity ??
+                       new Product()
+                           {
+                               Name = Name,
+                               UnitSalePrice = UnitSalePrice,
+                               StockedStores = StockedStores,
+                               Description = Description,
+                               QuantityPerUnit = QuantityPerUnit,
+                               UnitsInStock = UnitsInStock,
+                               Suppliers = Suppliers,
+                               Category = Category,
+                               Status = Status
+                           };
+            }
+            set { Entity = value; }
+        }
+
         public override void SaveChanges(object arg)
         {
-            using (Repository.Uow) {
+            using (Repository.Uow)
+            {
                 Repository.Uow.BeginTransaction();
-                Entity = Repository.SaveOrUpdate(BuildProduct);
+                Entity = Repository.SaveOrUpdate(BuildEntity);
                 Repository.Uow.CommitTransaction();
             }
 
@@ -175,27 +198,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override void Refresh()
         {
-        }
-
-        private Product BuildProduct 
-        {
-            get
-            {
-                return base.Entity ??
-                    new Product()
-                    {
-                        Name = Name,
-                        UnitSalePrice = UnitSalePrice,
-                        StockedStores = StockedStores,
-                        Description = Description,
-                        QuantityPerUnit = QuantityPerUnit,
-                        UnitsInStock = UnitsInStock,
-                        Suppliers = Suppliers,
-                        Category = Category,
-                        Status = Status
-                    };
-            }
-            set { Entity = value; }
         }
     }
 }

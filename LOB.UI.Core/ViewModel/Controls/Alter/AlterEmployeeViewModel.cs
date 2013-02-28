@@ -37,12 +37,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             set
             {
                 var backup = Entity.HireDate;
-                try {
+                try
+                {
                     if (HireDate == value) return;
                     Entity.HireDate = DateTime.Parse(value);
                     OnPropertyChanged();
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     Entity.HireDate = backup;
                 }
             }

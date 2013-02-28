@@ -1,9 +1,6 @@
 ﻿#region Usings
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.Base;
@@ -18,7 +15,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List
     {
         #region Props
 
-
         #endregion
 
         [ImportingConstructor]
@@ -27,7 +23,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List
         {
             if (person != null)
                 base.Entity.Person = person;
-
         }
 
         public override bool CanUpdate(object arg)

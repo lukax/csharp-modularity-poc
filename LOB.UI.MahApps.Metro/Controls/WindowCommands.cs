@@ -146,7 +146,8 @@ namespace MahApps.Metro.Controls
             if (parentWindow == null)
                 return;
 
-            if (parentWindow.WindowState == WindowState.Normal) {
+            if (parentWindow.WindowState == WindowState.Normal)
+            {
                 var maxpath = (Path) max.FindName("MaximisePath");
                 maxpath.Visibility = Visibility.Visible;
 
@@ -155,7 +156,8 @@ namespace MahApps.Metro.Controls
 
                 max.ToolTip = Maximize;
             }
-            else {
+            else
+            {
                 var restorepath = (Path) max.FindName("RestorePath");
                 restorepath.Visibility = Visibility.Visible;
 
@@ -174,7 +176,8 @@ namespace MahApps.Metro.Controls
                 return;
 
             var parentWindow = GetParentWindow();
-            if (parentWindow != null) {
+            if (parentWindow != null)
+            {
                 parentWindow.Close();
             }
         }
@@ -183,7 +186,8 @@ namespace MahApps.Metro.Controls
         {
             var parent = VisualTreeHelper.GetParent(this);
 
-            while (parent != null && !(parent is Window)) {
+            while (parent != null && !(parent is Window))
+            {
                 parent = VisualTreeHelper.GetParent(parent);
             }
 

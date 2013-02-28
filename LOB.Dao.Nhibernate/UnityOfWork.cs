@@ -29,10 +29,12 @@ namespace LOB.Dao.Nhibernate
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try {
+            try
+            {
                 ((ISession) Orm).Save(entity);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -42,10 +44,12 @@ namespace LOB.Dao.Nhibernate
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try {
+            try
+            {
                 ((ISession) Orm).SaveOrUpdate(entity);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -55,10 +59,12 @@ namespace LOB.Dao.Nhibernate
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try {
+            try
+            {
                 ((ISession) Orm).Update(entity);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -68,10 +74,12 @@ namespace LOB.Dao.Nhibernate
             if (_transaction == null)
                 throw new InvalidOperationException("Transaction not initialized");
 
-            try {
+            try
+            {
                 ((ISession) Orm).Delete(entity);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -110,7 +118,7 @@ namespace LOB.Dao.Nhibernate
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposing) return; 
+            if (!disposing) return;
             _transaction.Dispose();
             _transaction = null;
         }

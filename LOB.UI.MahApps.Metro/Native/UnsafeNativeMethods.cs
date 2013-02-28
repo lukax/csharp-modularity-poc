@@ -115,7 +115,8 @@ namespace MahApps.Metro.Native
 
         internal static void PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam)
         {
-            if (!_PostMessage(hWnd, Msg, wParam, lParam)) {
+            if (!_PostMessage(hWnd, Msg, wParam, lParam))
+            {
                 throw new Win32Exception();
             }
         }

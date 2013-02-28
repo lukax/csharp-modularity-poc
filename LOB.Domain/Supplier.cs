@@ -6,7 +6,7 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain
 {
-    public class Supplier : BaseCompany
+    public class Supplier : LegalPerson
     {
     }
 }

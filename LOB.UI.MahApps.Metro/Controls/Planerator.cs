@@ -119,13 +119,15 @@ namespace MahApps.Metro.Controls
         protected override Size MeasureOverride(Size availableSize)
         {
             Size result;
-            if (_logicalChild != null) {
+            if (_logicalChild != null)
+            {
                 // Measure based on the size of the logical child, since we want to align with it.
                 _logicalChild.Measure(availableSize);
                 result = _logicalChild.DesiredSize;
                 _visualChild.Measure(result);
             }
-            else {
+            else
+            {
                 result = new Size(0, 0);
             }
             return result;
@@ -133,7 +135,8 @@ namespace MahApps.Metro.Controls
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            if (_logicalChild != null) {
+            if (_logicalChild != null)
+            {
                 _logicalChild.Arrange(new Rect(finalSize));
                 _visualChild.Arrange(new Rect(finalSize));
                 Update3D();

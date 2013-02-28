@@ -114,11 +114,13 @@ namespace MahApps.Metro.Controls
             if (position == Position.Right)
                 HorizontalAlignment = HorizontalAlignment.Right;
 
-            if (position == Position.Right) {
+            if (position == Position.Right)
+            {
                 hideFrame.Value = root.DesiredSize.Width;
                 root.RenderTransform = new TranslateTransform(root.DesiredSize.Width, 0);
             }
-            else {
+            else
+            {
                 hideFrame.Value = -root.DesiredSize.Width;
                 root.RenderTransform = new TranslateTransform(-root.DesiredSize.Width, 0);
             }
@@ -130,7 +132,8 @@ namespace MahApps.Metro.Controls
 
             if (!sizeInfo.WidthChanged) return;
 
-            if (!IsOpen) {
+            if (!IsOpen)
+            {
                 ApplyAnimation(Position);
                 return;
             }
@@ -146,10 +149,12 @@ namespace MahApps.Metro.Controls
                 return;
 
             showFrame.Value = 0;
-            if (Position == Position.Right) {
+            if (Position == Position.Right)
+            {
                 hideFrame.Value = root.DesiredSize.Width;
             }
-            else {
+            else
+            {
                 hideFrame.Value = -root.DesiredSize.Width;
             }
         }

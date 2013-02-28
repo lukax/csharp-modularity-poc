@@ -25,7 +25,8 @@ namespace LOB.Dao.Nhibernate.Test
                     UnitsInStock = 1234
                 };
 
-            using (repo.Uow) {
+            using (repo.Uow)
+            {
                 repo.Uow.BeginTransaction();
                 p1 = repo.Save(p1);
                 Assert.AreNotEqual(0, p1.Id);
@@ -33,7 +34,8 @@ namespace LOB.Dao.Nhibernate.Test
                 Assert.IsTrue(repo.Contains(p1));
                 Assert.IsTrue(repo.Contains<Product>(x => x.Description == p1.Description));
             }
-            using (repo.Uow) {
+            using (repo.Uow)
+            {
                 repo.Uow.BeginTransaction();
                 repo.Delete(p1);
                 repo.Uow.CommitTransaction();
@@ -64,7 +66,8 @@ namespace LOB.Dao.Nhibernate.Test
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
             var entity = new Product() {Description = "Test description service", Name = "Test Name"};
-            using (repo.Uow) {
+            using (repo.Uow)
+            {
                 repo.Uow.BeginTransaction();
                 repo.SaveOrUpdate(entity);
                 repo.Uow.CommitTransaction();
@@ -88,7 +91,7 @@ namespace LOB.Dao.Nhibernate.Test
             var person = new LegalPerson()
                 {
                     Cnpj = 123456,
-                    Ie = 1234,
+                    Iestadual = 1234,
                     FirstName = "Dude",
                     LastName = "Martin",
                     NickName = "Doesn't have",
@@ -100,7 +103,8 @@ namespace LOB.Dao.Nhibernate.Test
                     Status = ClientStatus.New
                 };
 
-            using (repo.Uow) {
+            using (repo.Uow)
+            {
                 repo.Uow.BeginTransaction();
                 repo.Save(client);
                 repo.Uow.CommitTransaction();
@@ -122,7 +126,7 @@ namespace LOB.Dao.Nhibernate.Test
             var person1 = new LegalPerson()
                 {
                     Cnpj = 123456,
-                    Ie = 1234,
+                    Iestadual = 1234,
                     FirstName = "Dude1",
                     LastName = "Martin",
                     NickName = "Doesn't have1",
@@ -131,7 +135,7 @@ namespace LOB.Dao.Nhibernate.Test
             var person2 = new LegalPerson()
                 {
                     Cnpj = 12345678,
-                    Ie = 12345,
+                    Iestadual = 12345,
                     FirstName = "Dude2",
                     LastName = "Martin",
                     NickName = "Doesn't have2",
@@ -147,7 +151,8 @@ namespace LOB.Dao.Nhibernate.Test
                     Person = person2,
                     Status = ClientStatus.New
                 };
-            using (repo.Uow) {
+            using (repo.Uow)
+            {
                 repo.Uow.BeginTransaction();
                 repo.Save(person1);
                 repo.Save(person2);

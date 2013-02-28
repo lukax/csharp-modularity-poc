@@ -22,9 +22,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
     {
         #region Props
 
+        private T _entity;
         private CrudOperationType _typeOfOperation;
 
-        private T _entity;
         public T Entity
         {
             get { return _entity; }

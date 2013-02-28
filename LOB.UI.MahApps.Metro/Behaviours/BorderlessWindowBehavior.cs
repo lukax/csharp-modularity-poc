@@ -66,7 +66,8 @@ namespace MahApps.Metro.Behaviours
             // Adjust the maximized size and position to fit the work area of the correct monitor
             IntPtr monitor = UnsafeNativeMethods.MonitorFromWindow(hwnd, Constants.MONITOR_DEFAULTTONEAREST);
 
-            if (monitor != IntPtr.Zero) {
+            if (monitor != IntPtr.Zero)
+            {
                 var monitorInfo = new MONITORINFO();
                 UnsafeNativeMethods.GetMonitorInfo(monitor, monitorInfo);
                 RECT rcWorkArea = monitorInfo.rcWork;
@@ -90,18 +91,20 @@ namespace MahApps.Metro.Behaviours
             AssociatedObject.WindowStyle = WindowStyle.None;
             AssociatedObject.StateChanged += AssociatedObjectStateChanged;
 
-            if (AssociatedObject is MetroWindow) {
+            if (AssociatedObject is MetroWindow)
+            {
                 var window = ((MetroWindow) AssociatedObject);
                 //MetroWindow already has a border we can use
                 AssociatedObject.Loaded += (s, e) =>
-                {
-                    var ancestors = window.GetPart<Border>("PART_Border");
-                    Border = ancestors;
-                    if (ShouldHaveBorder())
-                        AddBorder();
-                };
+                    {
+                        var ancestors = window.GetPart<Border>("PART_Border");
+                        Border = ancestors;
+                        if (ShouldHaveBorder())
+                            AddBorder();
+                    };
 
-                switch (AssociatedObject.ResizeMode) {
+                switch (AssociatedObject.ResizeMode)
+                {
                     case ResizeMode.NoResize:
                         window.ShowMaxRestoreButton = false;
                         window.ShowMinButton = false;
@@ -119,7 +122,8 @@ namespace MahApps.Metro.Behaviours
                         break;
                 }
             }
-            else {
+            else
+            {
                 //Other windows may not, easiest to just inject one!
                 var content = (UIElement) AssociatedObject.Content;
                 AssociatedObject.Content = null;
@@ -138,13 +142,13 @@ namespace MahApps.Metro.Behaviours
 
             if (AutoSizeToContent)
                 AssociatedObject.Loaded += (s, e) =>
-                {
-                    //Temp fix, thanks @lynnx
-                    AssociatedObject.SizeToContent = SizeToContent.Height;
-                    AssociatedObject.SizeToContent = AutoSizeToContent
-                                                         ? SizeToContent.WidthAndHeight
-                                                         : SizeToContent.Manual;
-                };
+                    {
+                        //Temp fix, thanks @lynnx
+                        AssociatedObject.SizeToContent = SizeToContent.Height;
+                        AssociatedObject.SizeToContent = AutoSizeToContent
+                                                             ? SizeToContent.WidthAndHeight
+                                                             : SizeToContent.Manual;
+                    };
 
 
             base.OnAttached();
@@ -152,7 +156,8 @@ namespace MahApps.Metro.Behaviours
 
         private void AssociatedObjectStateChanged(object sender, EventArgs e)
         {
-            if (AssociatedObject.WindowState == WindowState.Maximized) {
+            if (AssociatedObject.WindowState == WindowState.Maximized)
+            {
                 HandleMaximize();
             }
         }
@@ -160,7 +165,8 @@ namespace MahApps.Metro.Behaviours
         private void HandleMaximize()
         {
             IntPtr monitor = UnsafeNativeMethods.MonitorFromWindow(_mHWND, Constants.MONITOR_DEFAULTTONEAREST);
-            if (monitor != IntPtr.Zero) {
+            if (monitor != IntPtr.Zero)
+            {
                 var monitorInfo = new MONITORINFO();
                 UnsafeNativeMethods.GetMonitorInfo(monitor, monitorInfo);
                 bool ignoreTaskBar = AssociatedObject as MetroWindow != null &&
@@ -233,7 +239,8 @@ namespace MahApps.Metro.Behaviours
         {
             var bgSolidColorBrush = AssociatedObject.Background as SolidColorBrush;
 
-            if (bgSolidColorBrush != null) {
+            if (bgSolidColorBrush != null)
+            {
                 var rgb = bgSolidColorBrush.Color.R | (bgSolidColorBrush.Color.G << 8) |
                           (bgSolidColorBrush.Color.B << 16);
 
@@ -249,43 +256,46 @@ namespace MahApps.Metro.Behaviours
         private IntPtr HwndHook(IntPtr hWnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             IntPtr returnval = IntPtr.Zero;
-            switch (message) {
+            switch (message)
+            {
                 case Constants.WM_NCCALCSIZE:
                     /* Hides the border */
                     handled = true;
                     break;
                 case Constants.WM_NCPAINT:
-                {
-                    if (!ShouldHaveBorder()) {
-                        var val = 2;
-                        UnsafeNativeMethods.DwmSetWindowAttribute(_mHWND, 2, ref val, 4);
-                        var m = new MARGINS {bottomHeight = 1, leftWidth = 1, rightWidth = 1, topHeight = 1};
-                        UnsafeNativeMethods.DwmExtendFrameIntoClientArea(_mHWND, ref m);
+                    {
+                        if (!ShouldHaveBorder())
+                        {
+                            var val = 2;
+                            UnsafeNativeMethods.DwmSetWindowAttribute(_mHWND, 2, ref val, 4);
+                            var m = new MARGINS {bottomHeight = 1, leftWidth = 1, rightWidth = 1, topHeight = 1};
+                            UnsafeNativeMethods.DwmExtendFrameIntoClientArea(_mHWND, ref m);
 
-                        if (Border != null)
-                            Border.BorderThickness = new Thickness(0);
+                            if (Border != null)
+                                Border.BorderThickness = new Thickness(0);
+                        }
+                        else
+                        {
+                            AddBorder();
+                        }
+                        handled = true;
                     }
-                    else {
-                        AddBorder();
-                    }
-                    handled = true;
-                }
                     break;
                 case Constants.WM_NCACTIVATE:
-                {
-                    /* As per http://msdn.microsoft.com/en-us/library/ms632633(VS.85).aspx , "-1" lParam
+                    {
+                        /* As per http://msdn.microsoft.com/en-us/library/ms632633(VS.85).aspx , "-1" lParam
                          * "does not repaint the nonclient area to reflect the state change." */
-                    returnval = UnsafeNativeMethods.DefWindowProc(hWnd, message, wParam, new IntPtr(-1));
+                        returnval = UnsafeNativeMethods.DefWindowProc(hWnd, message, wParam, new IntPtr(-1));
 
-                    if (!ShouldHaveBorder())
+                        if (!ShouldHaveBorder())
 
-                        if (wParam == IntPtr.Zero)
-                            AddBorder();
-                        else
-                            RemoveBorder();
+                            if (wParam == IntPtr.Zero)
+                                AddBorder();
+                            else
+                                RemoveBorder();
 
-                    handled = true;
-                }
+                        handled = true;
+                    }
                     break;
                 case Constants.WM_GETMINMAXINFO:
                     /* http://blogs.msdn.com/b/llobo/archive/2006/08/01/maximizing-window-_2800_with-windowstyle_3d00_none_2900_-considering-taskbar.aspx */
@@ -358,12 +368,14 @@ namespace MahApps.Metro.Behaviours
                 case Constants.WM_INITMENU:
                     var window = AssociatedObject as MetroWindow;
 
-                    if (window != null) {
+                    if (window != null)
+                    {
                         if (!window.ShowMaxRestoreButton)
                             UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(hWnd, false),
                                                                Constants.SC_MAXIMIZE,
                                                                Constants.MF_GRAYED | Constants.MF_BYCOMMAND);
-                        else if (window.WindowState == WindowState.Maximized) {
+                        else if (window.WindowState == WindowState.Maximized)
+                        {
                             UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(hWnd, false),
                                                                Constants.SC_MAXIMIZE,
                                                                Constants.MF_GRAYED | Constants.MF_BYCOMMAND);
@@ -374,7 +386,8 @@ namespace MahApps.Metro.Behaviours
                                                                Constants.SC_MOVE,
                                                                Constants.MF_GRAYED | Constants.MF_BYCOMMAND);
                         }
-                        else {
+                        else
+                        {
                             UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(hWnd, false),
                                                                Constants.SC_MAXIMIZE,
                                                                Constants.MF_ENABLED | Constants.MF_BYCOMMAND);

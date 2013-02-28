@@ -2,6 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface;
 
 #endregion
@@ -13,10 +14,15 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
     {
         private string _header;
 
-        [ImportingConstructor]
         public AlterAddressView()
         {
             InitializeComponent();
+        }
+
+        [ImportingConstructor]
+        public AlterAddressView(AlterAddressViewModel viewModel) : this()
+        {
+            DataContext = viewModel;
         }
 
         public string Header

@@ -77,8 +77,10 @@ namespace MahApps.Metro.Controls
             Debug.Assert(stateNames != null, "stateNames should not be null!");
             Debug.Assert(stateNames.Length > 0, "stateNames should not be empty!");
 
-            foreach (string name in stateNames) {
-                if (VisualStateManager.GoToState(control, name, useTransitions)) {
+            foreach (string name in stateNames)
+            {
+                if (VisualStateManager.GoToState(control, name, useTransitions))
+                {
                     break;
                 }
             }
@@ -95,7 +97,8 @@ namespace MahApps.Metro.Controls
         public static VisualStateGroup TryGetVisualStateGroup(DependencyObject dependencyObject, string groupName)
         {
             FrameworkElement root = GetImplementationRoot(dependencyObject);
-            if (root == null) {
+            if (root == null)
+            {
                 return null;
             }
 
