@@ -16,7 +16,7 @@ namespace LOB.Dao.Nhibernate.Mapping
             HasManyToMany(x => x.CustomerOf);
             Map(x => x.Status);
             HasMany(x => x.BoughtHistory);
-
+            Map(x => x.PersonType);
         }
     }
 }

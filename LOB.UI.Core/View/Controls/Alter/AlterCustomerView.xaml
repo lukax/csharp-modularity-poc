@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
+             xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -52,8 +54,19 @@
                                MaxWidth="150" />
                     
                     <Label Content="PersonType:" HorizontalAlignment="Right" Grid.Row="1" />
-                    <controls:ToggleSwitchButton Content="ToggleSwitchButton" HorizontalContentAlignment="Left"
-                                     IsChecked="{Binding PersonType, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" HorizontalAlignment="Left" MinWidth="50"/>
+                    <StackPanel HorizontalAlignment="Left" MinWidth="150" MaxWidth="350" Grid.Column="0" Grid.Row="0">
+                        <StackPanel.Resources>
+                            <ObjectDataProvider x:Key="DataFromEnum"
+                                MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                                <ObjectDataProvider.MethodParameters>
+                                    <x:Type TypeName="domain:PersonType"/>
+                                </ObjectDataProvider.MethodParameters>
+                            </ObjectDataProvider>
+                        </StackPanel.Resources>
+                        <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
+                          SelectedItem="{Binding Entity.PersonType}" IsDropDownOpen="True" />
+                    </StackPanel>
+
                 </DockPanel>
 
                 <DockPanel Grid.Row="2">

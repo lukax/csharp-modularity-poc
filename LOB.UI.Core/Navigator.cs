@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using LOB.UI.Core.View;
 using LOB.UI.Core.View.Controls.Alter;
+using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Interface;
@@ -59,6 +60,12 @@ namespace LOB.UI.Core
             {
                 case "AlterProduct":
                     _resolvedView = _container.Resolve<AlterProductView>();
+                    break;
+                case "AlterLegalPerson":
+                    _resolvedView = _container.Resolve<AlterLegalPersonView>();
+                    break;
+                case "AlterNaturalPerson":
+                    _resolvedView = _container.Resolve<AlterNaturalPersonView>();
                     break;
                 case "ListProduct":
                     _resolvedView = _container.Resolve<ListProductView>();

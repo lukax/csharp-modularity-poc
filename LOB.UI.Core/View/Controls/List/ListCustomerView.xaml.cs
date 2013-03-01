@@ -2,6 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 

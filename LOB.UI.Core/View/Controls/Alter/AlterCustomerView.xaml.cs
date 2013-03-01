@@ -1,10 +1,12 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Domain.Base;
+using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
@@ -25,7 +27,12 @@ namespace LOB.UI.Core.View.Controls.Alter
         {
             InitializeComponent();
 
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            //Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o =>
+            //    {
+            //        TabAlterPersonDetails.Content = o;
+            //        MessageBox.Show("dsapokas");
+            //    });
         }
 
         [ImportingConstructor]
@@ -35,14 +42,11 @@ namespace LOB.UI.Core.View.Controls.Alter
             DataContext = dataContext;
             _container = container;
 
-            if (navigator.PromptUser("YES => NATURAL PERSON \n NO => LEGAL PERSON"))
-                TabAlterBaseEntity.DataContext = _container.Resolve<AlterNaturalPersonViewModel>();
-            else
-                TabAlterBaseEntity.DataContext = _container.Resolve<AlterLegalPersonViewModel>();
-
-            //TODO: Legal or natural based on selection
-            //TabAlterBaseEntity.DataContext = _container.Resolve<AlterBaseEntityViewModel<BaseEntity>>();
-            //TabAlterPersonDetails.DataContext = _container.Resolve<AlterPersonViewModel<Person>>();
+            Messenger.Default.Register<object>(dataContext, "PersonTypeChanged", o =>
+            {
+                TabAlterPersonDetails.Content = o;
+            });
+            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public string Header
