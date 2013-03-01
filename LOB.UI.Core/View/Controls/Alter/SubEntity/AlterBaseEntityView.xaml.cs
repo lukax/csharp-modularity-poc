@@ -20,11 +20,16 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
+        public AlterBaseEntityViewModel<BaseEntity> ViewModel
+        {
+            set { this.DataContext = value; }
+        }
+
         [ImportingConstructor]
         public AlterBaseEntityView(AlterBaseEntityViewModel<BaseEntity> viewModel)
             : this()
         {
-            DataContext = viewModel;
+            ViewModel = viewModel;
         }
 
         public string Header

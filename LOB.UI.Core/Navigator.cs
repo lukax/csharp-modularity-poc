@@ -137,4 +137,105 @@ namespace LOB.UI.Core
         //    return new FrameWindow() { Content = resolvedView };
         //}
     }
+
+    public class FluentNavigator : IFluentNavigator
+    {
+        private readonly IUnityContainer _container;
+        private readonly IRegionAdapter _regionAdapter;
+        private dynamic _resolvedView;
+
+        [ImportingConstructor]
+        public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter)
+        {
+            _container = container;
+            _regionAdapter = regionAdapter;
+        }
+
+
+        public object Get()
+        {
+            return _resolvedView;
+        }
+
+        public IFluentNavigator Resolve(string param, object viewModel = null)
+        {
+            switch (param)
+            {
+                case "AlterProduct":
+                    _resolvedView = _container.Resolve<AlterProductView>();
+                    break;
+                case "AlterLegalPerson":
+                    _resolvedView = _container.Resolve<AlterLegalPersonView>();
+                    break;
+                case "AlterNaturalPerson":
+                    _resolvedView = _container.Resolve<AlterNaturalPersonView>();
+                    break;
+                case "ListProduct":
+                    _resolvedView = _container.Resolve<ListProductView>();
+                    break;
+                case "AlterEmployee":
+                    _resolvedView = _container.Resolve<AlterEmployeeView>();
+                    break;
+                case "ListEmployee":
+                    _resolvedView = _container.Resolve<ListEmployeeView>();
+                    break;
+                case "AlterClient":
+                    _resolvedView = _container.Resolve<AlterCustomerView>();
+                    break;
+                case "ListClient":
+                    _resolvedView = _container.Resolve<ListCustomerView>();
+                    break;
+                case "AlterSale":
+                    _resolvedView = _container.Resolve<AlterSaleView>();
+                    break;
+                case "QuickSearch":
+                    _resolvedView = _container.Resolve<ListBaseEntityView>();
+                    break;
+                default:
+                    throw new ArgumentException("Parameter not implemented yet, ", "param");
+            }
+            if (viewModel != null)
+            {
+                _resolvedView.DataContext = viewModel;
+            }
+            return this;
+        }
+
+        public IFluentNavigator SetViewModel(object viewModel)
+        {
+            _resolvedView.DataContext = viewModel;
+            return this;
+        }
+
+        public void Show(bool asDialog = false)
+        {
+            if (_resolvedView == null) return;
+            if (_resolvedView is UserControl)
+            {
+                var window = new FrameWindow()
+                {
+                    Content = _resolvedView
+                };
+                if (asDialog) window.ShowDialog();
+                else window.Show();
+                return;
+            }
+            if (_resolvedView is Window)
+            {
+                ((Window)_resolvedView).Show();
+                return;
+            }
+        }
+        
+        public bool PromptUser(string message)
+        {
+            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+        }
+
+        //public Window AsWindow(object resolvedView)
+        //{
+        //    if (_resolvedView is Window) return ((Window)_resolvedView);
+        //    return new FrameWindow() { Content = resolvedView };
+        //}
+    }
 }

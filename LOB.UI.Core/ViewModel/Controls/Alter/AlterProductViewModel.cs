@@ -34,11 +34,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             using (Repository.Uow)
             {
                 Repository.Uow.BeginTransaction();
-                Repository.SaveOrUpdate(Entity);
+                Entity = Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
 
-            Messenger.Default.Send("SaveChangedCommand");
+            Messenger.Default.Send("SaveChangesCommand");
         }
 
         protected override bool CanSaveChanges(object arg)

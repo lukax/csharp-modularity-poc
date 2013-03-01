@@ -34,46 +34,46 @@
         <base:AlterBaseEntityView Width="Auto" Grid.Column="0" />
 
         <Label Content="Street:" HorizontalAlignment="Right" Grid.Column="1" />
-        <TextBox Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.Street, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  Grid.Column="2" MinWidth="350" MaxWidth="400" />
 
         <Label Content="Number:" Grid.Column="3" HorizontalAlignment="Right" />
-        <TextBox Text="{Binding StreetNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.StreetNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  Grid.Column="4" MinWidth="80" MaxWidth="250" />
 
         <Label Content="Complement:" Grid.Column="1" Grid.Row="1" />
-        <TextBox Text="{Binding StreetComplement, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.StreetComplement, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  Grid.Column="2" Grid.Row="1" MinWidth="350" MaxWidth="400" />
 
         <Label Content="District:" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" />
-        <TextBox Text="{Binding District, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.District, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  Grid.Column="4" Grid.Row="1" MinWidth="200" MaxWidth="250" />
 
         <Label Content="City:" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2" />
-        <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="150"
+        <TextBox Text="{Binding Entity.City, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="150"
                  MaxWidth="400" Grid.Column="2" Grid.Row="2" />
 
         <Label Content="State:" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" />
-        <TextBox Text="{Binding State, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="200"
+        <TextBox Text="{Binding Entity.State, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="200"
                  Grid.Column="4" Grid.Row="2" MaxWidth="250" />
 
         <Label Content="Country:" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3" />
-        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.Country, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="150" MaxWidth="400" Grid.Column="2" Grid.Row="3" />
         
         <Label Content="ZIP Code:" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="3" />
-        <TextBox Text="{Binding Zip, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100"
+        <TextBox Text="{Binding Entity.ZipCode, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100"
                  MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
 
 
         <Label Content="Status:" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" />
-        <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBlock Text="{Binding Entity.Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                    MinWidth="100" MaxWidth="400" Grid.Column="2" Grid.Row="4" />
 
         <Label Content="Default:" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="4" />
         <controls:ToggleSwitchButton Content="ToggleSwitchButton"
-                                     IsChecked="{Binding Default, UpdateSourceTrigger=PropertyChanged}"
+                                     IsChecked="{Binding Entity.IsDefault, UpdateSourceTrigger=PropertyChanged}"
                                      HorizontalAlignment="Left" Grid.Column="4" Grid.Row="4" />
 
 

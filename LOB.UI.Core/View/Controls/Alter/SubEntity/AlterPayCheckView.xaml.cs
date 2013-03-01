@@ -19,11 +19,13 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
+        public AlterPayCheckViewModel ViewModel { set { this.DataContext = value; } }
+
         [ImportingConstructor]
         public AlterPayCheckView(AlterPayCheckViewModel viewModel)
             : this()
         {
-            DataContext = viewModel;
+            ViewModel = viewModel;
         }
 
         public string Header

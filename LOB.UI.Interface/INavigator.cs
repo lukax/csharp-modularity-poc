@@ -16,4 +16,13 @@ namespace LOB.UI.Interface
         void StartView(bool asDialog = false);
         bool PromptUser(string message);
     }
+
+    [InheritedExport]
+    public interface IFluentNavigator
+    {
+        IFluentNavigator Resolve(string param, object viewModel = null);
+        IFluentNavigator SetViewModel(object viewModel);
+        void Show(bool asDialog = false);
+        object Get();
+    }
 }

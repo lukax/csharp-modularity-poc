@@ -10,6 +10,6 @@ namespace LOB.Domain.Base
     public abstract class BaseEntity : BaseNotifyChange
     {
         public virtual Guid Id { get; private set; }
-        public virtual int Code { get; private set; }
+        public virtual int Code { get; set; }
     }
 }

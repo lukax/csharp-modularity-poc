@@ -4,12 +4,11 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Controls.Alter;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.SubEntity
+namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
     public partial class AlterNaturalPersonView : UserControl, IView, ITabProp
@@ -21,11 +20,19 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
+        public AlterNaturalPersonViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+                this.TabAlterPersonView.DataContext = value;
+            }
+        }
         [ImportingConstructor]
         public AlterNaturalPersonView(AlterNaturalPersonViewModel viewModel)
             : this()
         {
-            DataContext = viewModel;
+            ViewModel = viewModel;
         }
 
         public string Header

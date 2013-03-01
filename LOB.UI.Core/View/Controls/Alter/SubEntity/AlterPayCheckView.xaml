@@ -29,15 +29,15 @@
 
         <base:AlterBaseEntityView />
         <Label Content="Current Salary:" HorizontalAlignment="Right" Grid.Column="1" />
-        <TextBox Text="{Binding CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
+        <TextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
                  MinWidth="150" MaxWidth="250" Grid.Column="2" />
 
         <Label Grid.Row="1" Content="Bonus:" HorizontalAlignment="Right" Grid.Column="1" />
-        <TextBox Text="{Binding Bonus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="150"
+        <TextBox Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="150"
                  MaxWidth="250" Grid.Row="1" Grid.Column="2" />
 
         <TextBox controls:TextboxHelper.Watermark="PS" MinLines="3"
-                 Text="{Binding Ps, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"
+                 Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"
                  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
     </Grid>
 </UserControl>

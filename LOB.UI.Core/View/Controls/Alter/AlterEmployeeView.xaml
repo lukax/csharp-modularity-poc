@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
+             xmlns:alter="clr-namespace:LOB.UI.Core.View.Controls.Alter"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -55,22 +56,22 @@
                 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                     <Label Content="Title:" HorizontalAlignment="Right" />
-                    <TextBox Text="{Binding Title}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
+                    <TextBox Text="{Binding Entity.Title}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
 
                     <Label Content="Hiredate:" HorizontalAlignment="Right" />
-                    <TextBox Text="{Binding HireDate}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
+                    <TextBox Text="{Binding Entity.HireDate}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                     <Label Content="Work In Store:" HorizontalAlignment="Right" />
-                    <ComboBox SelectedItem="{Binding WorksIn}" ItemsSource="{Binding Stores}" HorizontalAlignment="Left" MinWidth="150" MaxWidth="400" />
+                    <ComboBox SelectedItem="{Binding Entity.WorksIn}" ItemsSource="{Binding Stores}" HorizontalAlignment="Left" MinWidth="150" MaxWidth="400" />
                 </StackPanel>
                 
                 <DockPanel Grid.Row="2" Grid.Column="1">
                     <TabControl>
                         <TabItem Header=">" />
                         <TabItem Header="Person Details">
-                            <base:AlterNaturalPersonView />
+                            <alter:AlterNaturalPersonView />
                         </TabItem>
                     </TabControl>
                 </DockPanel>

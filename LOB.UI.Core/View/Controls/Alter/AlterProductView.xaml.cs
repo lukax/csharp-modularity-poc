@@ -21,16 +21,23 @@ namespace LOB.UI.Core.View.Controls.Alter
         public AlterProductView()
         {
             InitializeComponent();
+        }
 
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+        public AlterProductViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+                this.TabAlterBaseEntityView.DataContext = value;
+            }
         }
 
         [ImportingConstructor]
-        public AlterProductView(AlterProductViewModel dataContext, INavigator navigator)
+        public AlterProductView(AlterProductViewModel viewModel, INavigator navigator)
             : this()
         {
-            this.DataContext = dataContext;
             _navigator = navigator;
+            ViewModel = viewModel;
         }
 
         public string Header
@@ -41,12 +48,13 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public int? Index
         {
-            get { return ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex; }
-            set { ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex = value; }
+            get { return ((AlterBaseEntityViewModel<Product>)DataContext).CancelIndex; }
+            set { ((AlterBaseEntityViewModel<Product>)DataContext).CancelIndex = value; }
         }
 
         public void InitializeServices()
         {
+            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()

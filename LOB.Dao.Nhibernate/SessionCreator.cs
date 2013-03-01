@@ -25,10 +25,11 @@ namespace LOB.Dao.Nhibernate
 
         [ImportingConstructor]
         public SessionCreator()
-            : this(PersistType.Sql, null)
+            : this(PersistType.MySql, null)
         {
         }
 
+        private PersistType _persistType;
         public SessionCreator(PersistType persistIn, String connectionString)
         {
             if (connectionString != null)
@@ -39,7 +40,14 @@ namespace LOB.Dao.Nhibernate
 
         public String ConnectionString
         {
-            get { return _connectionString ?? MySqlDefaultConnectionString; }
+            get
+            {
+                if (_persistType == PersistType.MySql)
+                    return _connectionString ?? MySqlDefaultConnectionString;
+                if (_persistType == PersistType.MsSql)
+                    return _connectionString ?? MsSqlDefaultConnectionString;
+                return _connectionString;
+            }
             set { _connectionString = value; }
         }
 
@@ -47,11 +55,15 @@ namespace LOB.Dao.Nhibernate
 
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
+            _persistType = persistIn;
             Configuration cfg;
-            switch (persistIn)
+            switch (_persistType)
             {
-                case PersistType.Sql:
+                case PersistType.MySql:
                     cfg = StoreInMySqlConfiguration();
+                    break;
+                case PersistType.MsSql:
+                    cfg = StoreInMsSqlConfiguration();
                     break;
                 case PersistType.File:
                     cfg = StoreInFileConfiguration();
@@ -106,6 +118,8 @@ namespace LOB.Dao.Nhibernate
 
         private void SchemaCreator(Configuration cfg)
         {
+            if (_persistType == PersistType.Memory) return;
+
             _sqlSchema = new SchemaExport(cfg);
             _sqlSchema.Drop(false, true);
             _sqlSchema.Create(false, true);

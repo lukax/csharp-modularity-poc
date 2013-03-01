@@ -26,21 +26,22 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private INavigator _navigator;
 
         [ImportingConstructor]
-        public AlterCustomerViewModel(Customer client, IRepository repository,
+        public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container, INavigator navigator,
             AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel, AlterAddressViewModel alterAddressViewModel,
-                                    AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container, INavigator navigator)
+            AlterNaturalPersonViewModel alterNaturalPersonViewModel )
             : base(client, repository)
         {
             _navigator = navigator;
             _container = container;
+            _alterLegalPersonViewModel = alterLegalPersonViewModel;
+            _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             PersonTypeChanged();
         }
 
 
         private void PersonTypeChanged()
         {
-            ((BaseNotifyChange)Entity).PropertyChanged += (s, e) =>
+            Entity.PropertyChanged += (s, e) =>
             {
                 switch (Entity.PersonType)
                 {
@@ -48,11 +49,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                         dynamic viewL = _navigator.ResolveView("AlterLegalPerson").GetView;
                         viewL.DataContext = _alterLegalPersonViewModel;
                         Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
+                        
+                        Entity.Person = _alterLegalPersonViewModel.Entity;
                         break;
                     case PersonType.Natural:
                         dynamic viewN = _navigator.ResolveView("AlterNaturalPerson").GetView;
                         viewN.DataContext = _alterNaturalPersonViewModel;
                         Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
+
+                        Entity.Person = _alterNaturalPersonViewModel.Entity;
                         break;
                 }
             };

@@ -61,9 +61,9 @@ namespace LOB.Dao.Nhibernate.Test
                 _container.ComposeParts(obj);
             }
 
-            public IRepository GetInstance(PersistType type = PersistType.Sql)
+            public IRepository GetInstance(PersistType type = PersistType.MySql)
             {
-                if (type == PersistType.Sql)
+                if (type == PersistType.MySql)
                     return _container.GetExportedValue<IRepository>("Sql");
 
                 if (type == PersistType.Memory)

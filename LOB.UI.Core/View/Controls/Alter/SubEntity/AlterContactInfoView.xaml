@@ -32,7 +32,7 @@
         <base:AlterBaseEntityView Grid.Row="0" />
 
         <GroupBox Header="PhoneNumbers:" Grid.Column="1" Grid.Row="0">
-            <ListBox ItemsSource="{Binding Numbers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Number}"
+            <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding PhoneNumber}"
                       SelectionMode="Single"/>
         </GroupBox>
 
@@ -48,7 +48,7 @@
         </StackPanel>
 
         <GroupBox Header="Emails:" Grid.Column="1" Grid.Row="1">
-            <ListBox ItemsSource="{Binding Emails, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Email}"
+            <ListBox ItemsSource="{Binding Entity.Emails, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Email}"
                       SelectionMode="Single" />
         </GroupBox>
 
@@ -64,13 +64,13 @@
         </StackPanel>
 
         <Label HorizontalAlignment="Right" Content="WebSite" Grid.Row="2" />
-        <TextBox Text="{Binding WebSite, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="250" MaxWidth="400" Grid.Row="2" Grid.Column="1" />
 
         <Label Grid.Row="3" HorizontalAlignment="Right" Content="Contact:" />
-        <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250" Text="{Binding SpeakWith}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250" Text="{Binding Entity.SpeakWith}" HorizontalAlignment="Left"/>
 
-        <TextBox controls:TextboxHelper.Watermark="PS" Text="{Binding Ps, UpdateSourceTrigger=PropertyChanged}"
+        <TextBox controls:TextboxHelper.Watermark="PS" Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left" MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="4" Grid.Column="1" />
 
     </Grid>

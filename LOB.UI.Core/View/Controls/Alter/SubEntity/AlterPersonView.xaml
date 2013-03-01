@@ -22,14 +22,14 @@
         <TabControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
             <TabItem Header=">"/>
             <TabItem Header="Address">
-                <base:AlterAddressView/>
+                <base:AlterAddressView x:Name="TabAlterAddressView"/>
             </TabItem>
             <TabItem Header="ContactInfo">
-                <base:AlterContactInfoView/>
+                <base:AlterContactInfoView x:Name="TabAlterContactInfoView"/>
             </TabItem>
         </TabControl>
         
-        <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" metrocontrols:TextboxHelper.Watermark="Notes"
+        <TextBox Text="{Binding Entity.Notes, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" metrocontrols:TextboxHelper.Watermark="Notes"
                  MinWidth="300" MaxWidth="450" MinLines="2" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" />
 
 

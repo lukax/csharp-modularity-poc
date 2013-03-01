@@ -26,27 +26,17 @@ namespace LOB.UI.Core.View.Controls.Alter
         public AlterCustomerView()
         {
             InitializeComponent();
-
-            //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
-            //Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o =>
-            //    {
-            //        TabAlterPersonDetails.Content = o;
-            //        MessageBox.Show("dsapokas");
-            //    });
         }
 
+        public AlterCustomerViewModel ViewModel { set { this.DataContext = value; } }
         [ImportingConstructor]
-        public AlterCustomerView(AlterCustomerViewModel dataContext, IUnityContainer container, INavigator navigator)
+        public AlterCustomerView(AlterCustomerViewModel viewModel, IUnityContainer container, INavigator navigator)
             : this()
         {
-            DataContext = dataContext;
+            ViewModel = viewModel;
             _container = container;
 
-            Messenger.Default.Register<object>(dataContext, "PersonTypeChanged", o =>
-            {
-                TabAlterPersonDetails.Content = o;
-            });
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            InitializeServices();
         }
 
         public string Header
@@ -59,6 +49,8 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void InitializeServices()
         {
+            Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o => { TabAlterPersonDetails.Content = o; });
+            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()

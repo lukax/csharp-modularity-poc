@@ -8,8 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <StackPanel Orientation="Horizontal">
-        <TextBlock VerticalAlignment="Center" TextAlignment="Center"
-                   Text="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40" />
+        <TextBox VerticalAlignment="Center" TextAlignment="Center"
+                   Text="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40" BorderThickness="0" />
         
         <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="Quick Search" Width="18" Height="18"
                            Background="Transparent">

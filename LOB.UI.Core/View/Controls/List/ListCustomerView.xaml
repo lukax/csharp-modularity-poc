@@ -43,7 +43,7 @@
             <Grid>
                 <StackPanel>
                     <StackPanel>
-                        <DataGrid ItemsSource="{Binding List, Mode=OneWay}" x:Name="DataGridProduct"
+                        <DataGrid ItemsSource="{Binding Entitys, Mode=OneWay}" x:Name="DataGridProduct"
                                   SelectedItem="{Binding Entity, Mode=OneWayToSource}" IsReadOnly="True"
                                   Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
                                   Background="{DynamicResource WhiteColorBrush}" SelectionMode="Single"

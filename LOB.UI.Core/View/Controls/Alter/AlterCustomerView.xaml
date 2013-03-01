@@ -50,7 +50,7 @@
                     <base:AlterBaseEntityView x:Name="TabAlterBaseEntity" />
 
                     <Label Content="Status:" HorizontalAlignment="Right" Grid.Row="1" />
-                    <TextBlock Text="{Binding Status}" HorizontalAlignment="Left" MinWidth="200" Grid.Row="1"
+                    <TextBlock Text="{Binding Entity.Status}" HorizontalAlignment="Left" MinWidth="200" Grid.Row="1"
                                MaxWidth="150" />
                     
                     <Label Content="PersonType:" HorizontalAlignment="Right" Grid.Row="1" />
@@ -83,10 +83,10 @@
                     <TabControl>
                         <TabItem Header=">" />
                         <TabItem Header="Bought History">
-                            <DataGrid ItemsSource="{Binding BoughtHistory}" MinHeight="200"></DataGrid>
+                            <DataGrid ItemsSource="{Binding Entity.BoughtHistory}" MinHeight="200"></DataGrid>
                         </TabItem>
                         <TabItem Header="CustomerOf">
-                            <DataGrid ItemsSource="{Binding ClientOf}" MinHeight="200"></DataGrid>
+                            <DataGrid ItemsSource="{Binding Entity.ClientOf}" MinHeight="200"></DataGrid>
                         </TabItem>
                     </TabControl>
                 </DockPanel>

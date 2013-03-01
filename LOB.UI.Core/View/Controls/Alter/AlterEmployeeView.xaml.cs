@@ -20,15 +20,15 @@ namespace LOB.UI.Core.View.Controls.Alter
         public AlterEmployeeView()
         {
             InitializeComponent();
-
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
+        public AlterEmployeeViewModel ViewModel { set { this.DataContext = value; } }
         [ImportingConstructor]
         public AlterEmployeeView(AlterEmployeeViewModel viewModel)
             : this()
         {
-            DataContext = viewModel;
+            ViewModel = viewModel;
+            InitializeServices();
         }
 
 
@@ -46,6 +46,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void InitializeServices()
         {
+            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()
