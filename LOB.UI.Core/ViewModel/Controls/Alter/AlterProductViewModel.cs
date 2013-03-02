@@ -58,7 +58,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListProductViewModel>(), "QuickSearch");
+            Messenger.Default.Send<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object args)

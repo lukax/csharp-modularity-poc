@@ -32,13 +32,15 @@ namespace LOB.UI.Core.View.Controls.Alter
                 this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
                 this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
                 Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+                Messenger.Default.Register<object>(DataContext, "QuickSearchCommand", o => _navigator.Resolve("QuickSearch", o).Show(true));
             }
         }
 
         [ImportingConstructor]
-        public AlterEmployeeView(AlterEmployeeViewModel viewModel)
+        public AlterEmployeeView(AlterEmployeeViewModel viewModel, IFluentNavigator navigator)
             : this()
         {
+            _navigator = navigator;
             ViewModel = viewModel;
         }
 
@@ -62,5 +64,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         public void Refresh()
         {
         }
+
+        private IFluentNavigator _navigator;
     }
 }

@@ -13,13 +13,13 @@ using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
     [Export]
-    public abstract class AlterPersonViewModel<T> : AlterBaseEntityViewModel<Person> where T:Person
+    public abstract class AlterPersonViewModel<T> : AlterBaseEntityViewModel<T> where T:Person
     {
         public AlterAddressViewModel AlterAddressViewModel { get; set; }
         public AlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         [ImportingConstructor]
-        public AlterPersonViewModel(Person entity, Address entityAddress, ContactInfo entityContactInfo, IRepository repository,
+        public AlterPersonViewModel(T entity, Address entityAddress, ContactInfo entityContactInfo, IRepository repository,
             AlterAddressViewModel alterAddressViewModel, AlterContactInfoViewModel alterContactInfoViewModel)
             : base(entity, repository)
         {

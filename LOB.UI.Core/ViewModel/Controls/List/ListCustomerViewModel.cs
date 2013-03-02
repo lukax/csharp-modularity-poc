@@ -8,10 +8,10 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public sealed class ListClientViewModel : ListBaseEntityViewModel<Customer>
+    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>
     {
 
-        public ListClientViewModel(Customer client, IRepository repository)
+        public ListCustomerViewModel(Customer client, IRepository repository)
             : base(client, repository)
         {
         }

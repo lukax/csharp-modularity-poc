@@ -20,9 +20,9 @@ namespace LOB.UI.Core.View.Controls.List
             InitializeComponent();
         }
 
-        public ListClientViewModel ViewModel { set { this.DataContext = value; } }
+        public ListCustomerViewModel ViewModel { set { this.DataContext = value; } }
         [ImportingConstructor]
-        public ListCustomerView(ListClientViewModel viewModel)
+        public ListCustomerView(ListCustomerViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
