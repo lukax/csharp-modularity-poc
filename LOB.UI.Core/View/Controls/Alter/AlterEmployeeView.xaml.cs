@@ -22,13 +22,23 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        public AlterEmployeeViewModel ViewModel { set { this.DataContext = value; } }
+        public AlterEmployeeViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+                TabAlterNaturalPersonView.DataContext = value;
+                TabAlterNaturalPersonView.TabAlterPersonView.TabAlterAddressView.DataContext = value.AlterAddressViewModel;
+                TabAlterNaturalPersonView.TabAlterPersonView.TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            }
+        }
+
         [ImportingConstructor]
         public AlterEmployeeView(AlterEmployeeViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
-            InitializeServices();
         }
 
 
@@ -40,13 +50,12 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public int? Index
         {
-            get { return ((AlterBaseEntityViewModel<Employee>) DataContext).CancelIndex; }
-            set { ((AlterBaseEntityViewModel<Employee>) DataContext).CancelIndex = value; }
+            get { return ((AlterEmployeeViewModel)DataContext).CancelIndex; }
+            set { ((AlterEmployeeViewModel)DataContext).CancelIndex = value; }
         }
 
         public void InitializeServices()
         {
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()

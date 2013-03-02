@@ -5,6 +5,7 @@ using System.ComponentModel.Composition;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
@@ -18,12 +19,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         public AlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         [ImportingConstructor]
-        public AlterPersonViewModel(Person entity, IRepository repository,
+        public AlterPersonViewModel(Person entity, Address entityAddress, ContactInfo entityContactInfo, IRepository repository,
             AlterAddressViewModel alterAddressViewModel, AlterContactInfoViewModel alterContactInfoViewModel)
             : base(entity, repository)
         {
             AlterAddressViewModel = alterAddressViewModel;
             AlterContactInfoViewModel = alterContactInfoViewModel;
+
+            Entity.Address = entityAddress;
+            Entity.ContactInfo = entityContactInfo;
 
             AlterAddressViewModel.Entity = this.Entity.Address;
             AlterContactInfoViewModel.Entity = this.Entity.ContactInfo;

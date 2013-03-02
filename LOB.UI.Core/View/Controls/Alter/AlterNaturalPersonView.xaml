@@ -57,12 +57,7 @@
         <TextBox Text="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="120" MaxWidth="350" Grid.Column="4" Grid.Row="2" />
 
-        <TabControl Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4">
-
-            <TabItem Header="Person Details">
-                <base:AlterPersonView x:Name="TabAlterPersonView"/>
-            </TabItem>
-        </TabControl>
+            <base:AlterPersonView x:Name="TabAlterPersonView" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"/>
         
     </Grid>
 </UserControl>

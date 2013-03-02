@@ -24,7 +24,7 @@
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
                            HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
                            Grid.Column="5">
-                <Image Source="../../../View/Resources/Cancel48.png"></Image>
+                <Image Source="../../../View/Resources/File48.png"></Image>
             </controls:Tile>
 
             <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
@@ -33,7 +33,7 @@
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="../../../View/Resources/Cancel48.png" />
+                <Image Source="../../../View/Resources/Accept48.png" />
             </controls:Tile>
         </DockPanel>
 
@@ -71,7 +71,7 @@
                     <TabControl>
                         <TabItem Header=">" />
                         <TabItem Header="Person Details">
-                            <alter:AlterNaturalPersonView />
+                            <alter:AlterNaturalPersonView x:Name="TabAlterNaturalPersonView" />
                         </TabItem>
                     </TabControl>
                 </DockPanel>
