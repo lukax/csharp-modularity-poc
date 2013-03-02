@@ -25,7 +25,7 @@ namespace LOB.Dao.Nhibernate
 
         [ImportingConstructor]
         public SessionCreator()
-            : this(PersistType.MySql, null)
+            : this(PersistType.Memory, null)
         {
         }
 
@@ -118,7 +118,7 @@ namespace LOB.Dao.Nhibernate
 
         private void SchemaCreator(Configuration cfg)
         {
-            if (_persistType == PersistType.Memory) return;
+            if (_persistType == PersistType.Memory) new SchemaExport(cfg).Create(false,true);
 
             _sqlSchema = new SchemaExport(cfg);
             _sqlSchema.Drop(false, true);
