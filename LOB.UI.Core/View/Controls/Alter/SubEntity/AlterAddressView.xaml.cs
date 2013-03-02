@@ -21,11 +21,16 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 
         public AlterAddressViewModel ViewModel
         {
-           set { this.DataContext = value; }
+            set
+            {
+                this.DataContext = value;
+                this.UcAlterBaseEntityView.DataContext = value;
+            }
         }
 
         [ImportingConstructor]
-        public AlterAddressView(AlterAddressViewModel viewModel) : this()
+        public AlterAddressView(AlterAddressViewModel viewModel)
+            : this()
         {
             ViewModel = viewModel;
         }

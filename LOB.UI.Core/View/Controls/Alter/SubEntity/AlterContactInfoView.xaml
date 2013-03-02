@@ -29,7 +29,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <base:AlterBaseEntityView Grid.Row="0" />
+        <base:AlterBaseEntityView Grid.Row="0" x:Name="UcAlterBaseEntityView" />
 
         <GroupBox Header="PhoneNumbers:" Grid.Column="1" Grid.Row="0">
             <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding PhoneNumber}"

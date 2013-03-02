@@ -15,8 +15,9 @@ namespace LOB.UI.Core.View.Controls.Alter
     [Export]
     public partial class AlterProductView : UserControl, ITabProp, IView
     {
+        private IFluentNavigator _navigator;
+
         private string _header;
-        private INavigator _navigator;
 
         public AlterProductView()
         {
@@ -28,12 +29,14 @@ namespace LOB.UI.Core.View.Controls.Alter
             set
             {
                 this.DataContext = value;
-                this.TabAlterBaseEntityView.DataContext = value;
+                this.UcAlterBaseEntityView.DataContext = value;
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+                Messenger.Default.Register<object>(DataContext, "QuickSearchCommand", o => _navigator.Resolve("QuickSearch", o).Show(true) );
             }
         }
 
         [ImportingConstructor]
-        public AlterProductView(AlterProductViewModel viewModel, INavigator navigator)
+        public AlterProductView(AlterProductViewModel viewModel, IFluentNavigator navigator)
             : this()
         {
             _navigator = navigator;
@@ -54,7 +57,6 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void InitializeServices()
         {
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()

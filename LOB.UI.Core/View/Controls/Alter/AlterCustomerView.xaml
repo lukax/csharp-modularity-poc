@@ -47,11 +47,11 @@
                 </Grid.RowDefinitions>
 
                 <DockPanel VerticalAlignment="Top" Grid.Row="1">
-                    <base:AlterBaseEntityView x:Name="TabAlterBaseEntity" />
+                    <base:AlterBaseEntityView x:Name="UcAlterBaseEntity" />
 
                     <Label Content="Status:" HorizontalAlignment="Right" Grid.Row="1" />
                     <TextBlock Text="{Binding Entity.Status}" HorizontalAlignment="Left" MinWidth="200" Grid.Row="1"
-                               MaxWidth="150" />
+                               MaxWidth="150" VerticalAlignment="Center" />
                     
                     <Label Content="PersonType:" HorizontalAlignment="Right" Grid.Row="1" />
                     <StackPanel HorizontalAlignment="Left" MinWidth="150" MaxWidth="350" Grid.Column="0" Grid.Row="0">
@@ -64,7 +64,7 @@
                             </ObjectDataProvider>
                         </StackPanel.Resources>
                         <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
-                          SelectedItem="{Binding Entity.PersonType}" IsDropDownOpen="True" />
+                          SelectedItem="{Binding Entity.PersonType}" />
                     </StackPanel>
 
                 </DockPanel>
@@ -72,7 +72,7 @@
                 <DockPanel Grid.Row="2">
                     <TabControl>
                         <TabItem Header=">" />
-                        <TabItem Header="Person Details" x:Name="TabAlterPersonDetails">
+                        <TabItem Header="Person Details" x:Name="UcAlterPersonDetails">
                             <!--Load based on PersonType-->
                         </TabItem>
                     </TabControl>

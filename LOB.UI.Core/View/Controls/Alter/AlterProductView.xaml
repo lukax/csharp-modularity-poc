@@ -60,7 +60,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <basecontrols:AlterBaseEntityView Grid.Row="1" x:Name="TabAlterBaseEntityView"/>
+                <basecontrols:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView"/>
 
                 <Label Grid.Column="1" Grid.Row="1" Content="Name:" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"

@@ -27,9 +27,10 @@ namespace LOB.UI.Core.View.Controls.Alter
             set
             {
                 this.DataContext = value;
-                TabAlterNaturalPersonView.DataContext = value;
-                TabAlterNaturalPersonView.TabAlterPersonView.TabAlterAddressView.DataContext = value.AlterAddressViewModel;
-                TabAlterNaturalPersonView.TabAlterPersonView.TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
+                this.UcAlterBaseEntityView.DataContext = value;
+                this.UcAlterNaturalPersonView.DataContext = value;
+                this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
+                this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
                 Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }

@@ -28,8 +28,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             set
             {
                 this.DataContext = value;
-                TabAlterAddressView.DataContext = value.AlterAddressViewModel;
-                TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
+                this.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
+                this.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
             }
         }
 

@@ -19,7 +19,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
-        public AlterContactInfoViewModel ViewModel { set { this.DataContext = value; } }
+        public AlterContactInfoViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+                this.UcAlterBaseEntityView.DataContext = value;
+            }
+        }
 
         [ImportingConstructor]
         public AlterContactInfoView(AlterContactInfoViewModel viewModel)

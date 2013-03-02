@@ -25,9 +25,10 @@ namespace LOB.UI.Core.View.Controls.Alter
             set
             {
                 this.DataContext = value;
-                this.TabAlterPersonView.DataContext = value;
-                this.TabAlterPersonView.TabAlterAddressView.DataContext = value.AlterAddressViewModel;
-                this.TabAlterPersonView.TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
+                this.UcAlterBaseEntityView.DataContext = value;
+                this.UcAlterPersonView.DataContext = value;
+                this.UcAlterPersonView.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
+                this.UcAlterPersonView.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
             }
         }
         [ImportingConstructor]

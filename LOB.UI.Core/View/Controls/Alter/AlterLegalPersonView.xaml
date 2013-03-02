@@ -30,7 +30,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <base:AlterBaseEntityView x:Name="AlterBaseEntityView" />
+        <base:AlterBaseEntityView x:Name="UcAlterBaseEntityView" />
 
         <Label Grid.Column="1" HorizontalAlignment="Right" Content="CorporateName:" />
         <TextBox Text="{Binding Entity.CorporateName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
@@ -57,7 +57,7 @@
                  MinWidth="120" MaxWidth="350" Grid.Column="4" Grid.Row="3" />
 
 
-        <base:AlterPersonView x:Name="TabAlterPersonView" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <base:AlterPersonView x:Name="UcAlterPersonView" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"/>
 
     </Grid>
 </UserControl>

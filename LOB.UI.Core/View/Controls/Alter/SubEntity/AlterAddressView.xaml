@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
 
-        <base:AlterBaseEntityView Width="Auto" Grid.Column="0" />
+        <base:AlterBaseEntityView Width="Auto" Grid.Column="0" x:Name="UcAlterBaseEntityView"/>
 
         <Label Content="Street:" HorizontalAlignment="Right" Grid.Column="1" />
         <TextBox Text="{Binding Entity.Street, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"

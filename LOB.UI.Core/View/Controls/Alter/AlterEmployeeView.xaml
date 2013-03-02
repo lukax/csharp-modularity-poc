@@ -52,7 +52,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <base:AlterBaseEntityView HorizontalAlignment="Left" />
+                <base:AlterBaseEntityView HorizontalAlignment="Left" x:Name="UcAlterBaseEntityView"  />
                 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                     <Label Content="Title:" HorizontalAlignment="Right" />
@@ -71,7 +71,7 @@
                     <TabControl>
                         <TabItem Header=">" />
                         <TabItem Header="Person Details">
-                            <alter:AlterNaturalPersonView x:Name="TabAlterNaturalPersonView" />
+                            <alter:AlterNaturalPersonView x:Name="UcAlterNaturalPersonView" />
                         </TabItem>
                     </TabControl>
                 </DockPanel>
