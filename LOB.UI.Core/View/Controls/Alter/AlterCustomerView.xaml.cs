@@ -28,15 +28,22 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        public AlterCustomerViewModel ViewModel { set { this.DataContext = value; } }
+        public AlterCustomerViewModel ViewModel
+        {
+            set
+            {
+                DataContext = value;
+                Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o => { TabAlterPersonDetails.Content = o; });
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+            }
+        }
+
         [ImportingConstructor]
         public AlterCustomerView(AlterCustomerViewModel viewModel, IUnityContainer container, INavigator navigator)
             : this()
         {
             ViewModel = viewModel;
             _container = container;
-
-            InitializeServices();
         }
 
         public string Header
@@ -49,8 +56,6 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void InitializeServices()
         {
-            Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o => { TabAlterPersonDetails.Content = o; });
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()
