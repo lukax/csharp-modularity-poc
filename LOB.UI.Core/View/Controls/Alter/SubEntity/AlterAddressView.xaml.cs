@@ -19,6 +19,13 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
+        [ImportingConstructor]
+        public AlterAddressView(AlterAddressViewModel viewModel)
+            : this()
+        {
+            ViewModel = viewModel;
+        }
+
         public AlterAddressViewModel ViewModel
         {
             set
@@ -26,13 +33,6 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
                 this.DataContext = value;
                 this.UcAlterBaseEntityView.DataContext = value;
             }
-        }
-
-        [ImportingConstructor]
-        public AlterAddressView(AlterAddressViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
         }
 
         public string Header

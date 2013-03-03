@@ -1,18 +1,15 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using Microsoft.Practices.Unity;
 using LOB.UI.Core.ViewModel.Controls.List;
+using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -22,7 +19,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>
     {
         private IUnityContainer _container;
-        public IList<Category> Categories { get; set; }
 
         [ImportingConstructor]
         public AlterProductViewModel(Product product, IRepository repository, IUnityContainer container)
@@ -31,6 +27,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             _container = container;
             Categories = Repository.GetList<Category>().ToList();
         }
+
+        public IList<Category> Categories { get; set; }
 
         protected override void SaveChanges(object arg)
         {
@@ -65,6 +63,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         {
             Entity = new Product();
         }
-
     }
 }

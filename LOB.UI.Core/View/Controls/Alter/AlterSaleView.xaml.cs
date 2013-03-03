@@ -19,12 +19,16 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        public AlterSaleViewModel ViewModel { set { this.DataContext = value; } }
         [ImportingConstructor]
         public AlterSaleView(AlterSaleViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
+        }
+
+        public AlterSaleViewModel ViewModel
+        {
+            set { this.DataContext = value; }
         }
 
         public string Header

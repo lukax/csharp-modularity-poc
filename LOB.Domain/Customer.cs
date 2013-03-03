@@ -21,7 +21,8 @@ namespace LOB.Domain
     [Serializable]
     public enum PersonType
     {
-        Natural, Legal
+        Natural,
+        Legal
     }
 
     [Serializable]

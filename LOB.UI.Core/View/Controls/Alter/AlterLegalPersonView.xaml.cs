@@ -20,6 +20,13 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
+        [ImportingConstructor]
+        public AlterLegalPersonView(AlterLegalPersonViewModel viewModel)
+            : this()
+        {
+            ViewModel = viewModel;
+        }
+
         public AlterLegalPersonViewModel ViewModel
         {
             set
@@ -30,13 +37,6 @@ namespace LOB.UI.Core.View.Controls.Alter
                 this.UcAlterPersonView.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
                 this.UcAlterPersonView.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
             }
-        }
-
-        [ImportingConstructor]
-        public AlterLegalPersonView(AlterLegalPersonViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
         }
 
         public string Header

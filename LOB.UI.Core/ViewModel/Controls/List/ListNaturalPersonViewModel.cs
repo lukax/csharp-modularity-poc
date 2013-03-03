@@ -1,11 +1,12 @@
-﻿using LOB.Dao.Interface;
+﻿#region Usings
+
+using System;
+using System.Linq.Expressions;
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+
+#endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
@@ -23,7 +24,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                 try
                 {
                     return (arg =>
-                               arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
+                            arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.FirstName.ToUpper().Contains(Search.ToUpper())
                             || arg.LastName.ToUpper().Contains(Search.ToUpper())
                             || arg.NickName.ToString().ToUpper().Contains(Search.ToUpper())

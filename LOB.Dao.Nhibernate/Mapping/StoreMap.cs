@@ -12,7 +12,7 @@ namespace LOB.Dao.Nhibernate.Mapping
         public StoreMap()
         {
             HasMany(x => x.Employees)
-                    .Cascade.All();
+                .Cascade.All();
             Map(x => x.Name);
             HasManyToMany(x => x.Products)
                 .Table("ProductStore")

@@ -1,8 +1,12 @@
 ﻿#region Usings
 
+using System;
+using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -10,9 +14,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
     public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>
     {
-        public AlterPayCheckViewModel(PayCheck payCheck, IRepository repository)
+        private IUnityContainer _container;
+
+        public AlterPayCheckViewModel(PayCheck payCheck, IRepository repository, IUnityContainer container)
             : base(payCheck, repository)
         {
+            _container = container;
         }
 
         protected override bool CanSaveChanges(object arg)
@@ -29,13 +36,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            throw new System.NotImplementedException();
+            Messenger.Default.Send<object>(_container.Resolve<ListPayCheckViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-
     }
 }

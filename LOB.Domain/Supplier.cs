@@ -1,6 +1,6 @@
 ﻿#region Usings
 
-using LOB.Domain.Base;
+
 
 #endregion
 

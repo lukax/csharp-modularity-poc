@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using LOB.UI.Core.View;
 using LOB.UI.Core.View.Controls.Alter;
-using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Interface;
@@ -34,7 +33,7 @@ namespace LOB.UI.Core
             var view = _container.Resolve<TView>() as Window;
             if (view == null) return;
             if (viewModel != null) view.DataContext = viewModel;
-            if (view is IView) ((IView)view).InitializeServices();
+            if (view is IView) ((IView) view).InitializeServices();
             view.Show();
         }
 
@@ -45,7 +44,7 @@ namespace LOB.UI.Core
             if (view == null) return;
             if (viewModel != null) vModel = viewModel;
 
-            if (view is IView) ((IView)view).InitializeServices();
+            if (view is IView) ((IView) view).InitializeServices();
             _regionAdapter.AddView(view, regionName);
         }
 
@@ -97,34 +96,43 @@ namespace LOB.UI.Core
                 switch (param)
                 {
                     case "AlterProduct":
-                        _resolvedView = _container.Resolve<AlterProductView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterProductView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterLegalPerson":
-                        _resolvedView = _container.Resolve<AlterLegalPersonView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterLegalPersonView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterNaturalPerson":
-                        _resolvedView = _container.Resolve<AlterNaturalPersonView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterNaturalPersonView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListProduct":
-                        _resolvedView = _container.Resolve<ListProductView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListProductView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterEmployee":
-                        _resolvedView = _container.Resolve<AlterEmployeeView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterEmployeeView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListEmployee":
-                        _resolvedView = _container.Resolve<ListEmployeeView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListEmployeeView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterClient":
-                        _resolvedView = _container.Resolve<AlterCustomerView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterCustomerView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListClient":
-                        _resolvedView = _container.Resolve<ListCustomerView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListCustomerView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterSale":
                         _resolvedView = _container.Resolve<AlterSaleView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "QuickSearch":
-                        _resolvedView = _container.Resolve<ListBaseEntityView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListBaseEntityView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     default:
                         throw new ArgumentException("Parameter not implemented yet, ", "param");
@@ -147,22 +155,22 @@ namespace LOB.UI.Core
             }
             if (_resolvedView is Window)
             {
-                ((Window)_resolvedView).Show();
+                ((Window) _resolvedView).Show();
                 return;
             }
+        }
+
+        public bool PromptUser(string message)
+        {
+            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
 
         public void Startup(string viewName, object viewModel = null)
         {
             var view = ResolveView(viewName) as Window;
             if (view == null) return;
-            if (view is IView) ((IView)view).InitializeServices();
+            if (view is IView) ((IView) view).InitializeServices();
             view.Show();
-        }
-
-        public bool PromptUser(string message)
-        {
-            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
 
         //public Window AsWindow(object resolvedView)
@@ -234,34 +242,43 @@ namespace LOB.UI.Core
                 switch (param)
                 {
                     case "AlterProduct":
-                        _resolvedView = _container.Resolve<AlterProductView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterProductView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterLegalPerson":
-                        _resolvedView = _container.Resolve<AlterLegalPersonView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterLegalPersonView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterNaturalPerson":
-                        _resolvedView = _container.Resolve<AlterNaturalPersonView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterNaturalPersonView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListProduct":
-                        _resolvedView = _container.Resolve<ListProductView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListProductView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterEmployee":
-                        _resolvedView = _container.Resolve<AlterEmployeeView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterEmployeeView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListEmployee":
-                        _resolvedView = _container.Resolve<ListEmployeeView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListEmployeeView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterClient":
-                        _resolvedView = _container.Resolve<AlterCustomerView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterCustomerView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListClient":
-                        _resolvedView = _container.Resolve<ListCustomerView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListCustomerView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterSale":
                         _resolvedView = _container.Resolve<AlterSaleView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "QuickSearch":
-                        _resolvedView = _container.Resolve<ListBaseEntityView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListBaseEntityView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     default:
                         throw new ArgumentException("Parameter not implemented yet, ", "param");
@@ -281,16 +298,16 @@ namespace LOB.UI.Core
             if (_resolvedView is UserControl)
             {
                 var window = new FrameWindow()
-                {
-                    Content = _resolvedView
-                };
+                    {
+                        Content = _resolvedView
+                    };
                 if (asDialog) window.ShowDialog();
                 else window.Show();
                 return;
             }
             if (_resolvedView is Window)
             {
-                ((Window)_resolvedView).Show();
+                ((Window) _resolvedView).Show();
                 return;
             }
         }

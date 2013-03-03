@@ -1,18 +1,14 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.Base;
-using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using Microsoft.Practices.Unity;
-using System.Threading.Tasks;
 
 #endregion
 
@@ -27,9 +23,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private INavigator _navigator;
 
         [ImportingConstructor]
-        public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container, INavigator navigator,
-            AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel )
+        public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container,
+                                      INavigator navigator,
+                                      AlterLegalPersonViewModel alterLegalPersonViewModel,
+                                      AlterNaturalPersonViewModel alterNaturalPersonViewModel)
             : base(client, repository)
         {
             _navigator = navigator;
@@ -63,17 +60,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private void PersonTypeChanged()
         {
             Entity.PropertyChanged += (s, e) =>
-            {
-                switch (Entity.PersonType)
                 {
-                    case PersonType.Legal:
-                        NaturalPersonCfg();
-                        break;
-                    case PersonType.Natural:
-                        LegalPersonCfg();
-                        break;
-                }
-            };
+                    switch (Entity.PersonType)
+                    {
+                        case PersonType.Legal:
+                            NaturalPersonCfg();
+                            break;
+                        case PersonType.Natural:
+                            LegalPersonCfg();
+                            break;
+                    }
+                };
         }
 
 
@@ -99,7 +96,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            throw new System.NotImplementedException();
+            Messenger.Default.Send<object>(_container.Resolve<ListCustomerViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

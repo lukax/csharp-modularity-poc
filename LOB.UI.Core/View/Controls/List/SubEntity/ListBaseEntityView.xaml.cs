@@ -2,12 +2,8 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.List.Base;
-using LOB.UI.Interface;
-using LOB.UI.Core.ViewModel.Controls.List;
-using LOB.Domain;
 using LOB.UI.Core.ViewModel.Base;
+using LOB.UI.Interface;
 
 #endregion
 
@@ -23,13 +19,16 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
             InitializeComponent();
         }
 
-        public BaseViewModel ViewModel { set { this.DataContext = value; } }
         [ImportingConstructor]
         public ListBaseEntityView(BaseViewModel viewModel)
             : this()
         {
-
             ViewModel = viewModel;
+        }
+
+        public BaseViewModel ViewModel
+        {
+            set { this.DataContext = value; }
         }
 
         public string Header
