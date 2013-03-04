@@ -69,7 +69,6 @@
                 
                 <DockPanel Grid.Row="2" Grid.Column="1">
                     <TabControl>
-                        <TabItem Header=">" />
                         <TabItem Header="Person Details">
                             <alter:AlterNaturalPersonView x:Name="UcAlterNaturalPersonView" />
                         </TabItem>

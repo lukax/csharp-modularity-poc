@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
@@ -10,9 +11,11 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListNaturalPersonViewModel : ListPersonViewModel<NaturalPerson>
+    [Export]
+    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T> where T: NaturalPerson
     {
-        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
+        [ImportingConstructor]
+        public ListNaturalPersonViewModel(T entity, IRepository repository)
             : base(entity, repository)
         {
         }

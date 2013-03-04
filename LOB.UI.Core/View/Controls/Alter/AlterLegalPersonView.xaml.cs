@@ -32,7 +32,7 @@ namespace LOB.UI.Core.View.Controls.Alter
             set
             {
                 this.DataContext = value;
-                this.UcAlterBaseEntityView.DataContext = value;
+                //this.UcAlterBaseEntityView.DataContext = value;
                 this.UcAlterPersonView.DataContext = value;
                 this.UcAlterPersonView.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
                 this.UcAlterPersonView.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;

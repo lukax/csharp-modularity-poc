@@ -35,26 +35,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             NaturalPersonCfg();
             PersonTypeChanged();
-        }
-
-        private async void NaturalPersonCfg()
-        {
-            await Task.Delay(500);
-            dynamic viewL = _navigator.ResolveView("AlterLegalPerson").GetView;
-            viewL.DataContext = _alterLegalPersonViewModel;
-            Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
-
-            Entity.Person = _alterLegalPersonViewModel.Entity;
-        }
-
-        private async void LegalPersonCfg()
-        {
-            await Task.Delay(500);
-            dynamic viewN = _navigator.ResolveView("AlterNaturalPerson").GetView;
-            viewN.DataContext = _alterNaturalPersonViewModel;
-            Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
-
-            Entity.Person = _alterNaturalPersonViewModel.Entity;
+            
         }
 
         private void PersonTypeChanged()
@@ -63,16 +44,34 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 {
                     switch (Entity.PersonType)
                     {
-                        case PersonType.Legal:
+                        case PersonType.Natural:
                             NaturalPersonCfg();
                             break;
-                        case PersonType.Natural:
+                        case PersonType.Legal:
                             LegalPersonCfg();
                             break;
                     }
                 };
         }
 
+        private async void LegalPersonCfg()
+        {
+            await Task.Delay(500);
+            dynamic viewL = _navigator.ResolveView("AlterLegalPerson").GetView;
+            viewL.DataContext = _alterLegalPersonViewModel;
+            Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
+
+            Entity.Person = _alterLegalPersonViewModel.Entity;
+        }
+        private async void NaturalPersonCfg()
+        {
+            await Task.Delay(500);
+            dynamic viewN = _navigator.ResolveView("AlterNaturalPerson").GetView;
+            viewN.DataContext = _alterNaturalPersonViewModel;
+            Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
+
+            Entity.Person = _alterNaturalPersonViewModel.Entity;
+        }
 
         protected override bool CanSaveChanges(object arg)
         {
