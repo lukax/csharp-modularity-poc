@@ -1,25 +1,25 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.Base;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    [Export]
-    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel<Employee>
+    public sealed class ListCustomerViewModel : ListPersonViewModel<Person>
     {
-        [ImportingConstructor]
-        public ListEmployeeViewModel(Employee employee, IRepository repository)
-            : base(employee, repository)
+        public ListCustomerViewModel(Customer client, IRepository repository)
+            : base(client.Person, repository)
         {
+            Entity = client;
         }
+
+        public new Customer Entity { get; set; }
 
         public new Expression<Func<Employee, bool>> SearchCriteria
         {
@@ -28,7 +28,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                 try
                 {
                     return (arg =>
-                            arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
+                            arg.Title.ToUpper().Contains(Search.ToUpper())
+                            || arg.HireDate.ToString().ToUpper().Contains(Search.ToUpper())
+                            || arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Title.ToUpper().Contains(Search.ToUpper())
                             || arg.FirstName.ToUpper().Contains(Search.ToUpper())
                             || arg.LastName.ToUpper().Contains(Search.ToUpper())

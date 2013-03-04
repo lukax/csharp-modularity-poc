@@ -22,14 +22,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition Width="Auto" MinWidth="600" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
 
-        <base:AlterBaseEntityView Grid.Row="0" />
+        <base:AlterBaseEntityView Grid.Row="0" x:Name="UcAlterBaseEntityView" />
 
         <GroupBox Header="PhoneNumbers:" Grid.Column="1" Grid.Row="0">
             <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding PhoneNumber}"

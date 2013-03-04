@@ -1,15 +1,12 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.Base;
-using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using Microsoft.Practices.Unity;
 
@@ -26,43 +23,55 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private INavigator _navigator;
 
         [ImportingConstructor]
-        public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container, INavigator navigator,
-            AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel )
+        public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container,
+                                      INavigator navigator,
+                                      AlterLegalPersonViewModel alterLegalPersonViewModel,
+                                      AlterNaturalPersonViewModel alterNaturalPersonViewModel)
             : base(client, repository)
         {
             _navigator = navigator;
             _container = container;
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
+            NaturalPersonCfg();
             PersonTypeChanged();
+            
         }
-
 
         private void PersonTypeChanged()
         {
             Entity.PropertyChanged += (s, e) =>
-            {
-                switch (Entity.PersonType)
                 {
-                    case PersonType.Legal:
-                        dynamic viewL = _navigator.ResolveView("AlterLegalPerson").GetView;
-                        viewL.DataContext = _alterLegalPersonViewModel;
-                        Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
-                        
-                        Entity.Person = _alterLegalPersonViewModel.Entity;
-                        break;
-                    case PersonType.Natural:
-                        dynamic viewN = _navigator.ResolveView("AlterNaturalPerson").GetView;
-                        viewN.DataContext = _alterNaturalPersonViewModel;
-                        Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
-
-                        Entity.Person = _alterNaturalPersonViewModel.Entity;
-                        break;
-                }
-            };
+                    switch (Entity.PersonType)
+                    {
+                        case PersonType.Natural:
+                            NaturalPersonCfg();
+                            break;
+                        case PersonType.Legal:
+                            LegalPersonCfg();
+                            break;
+                    }
+                };
         }
 
+        private async void LegalPersonCfg()
+        {
+            await Task.Delay(500);
+            dynamic viewL = _navigator.ResolveView("AlterLegalPerson").GetView;
+            viewL.DataContext = _alterLegalPersonViewModel;
+            Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
+
+            Entity.Person = _alterLegalPersonViewModel.Entity;
+        }
+        private async void NaturalPersonCfg()
+        {
+            await Task.Delay(500);
+            dynamic viewN = _navigator.ResolveView("AlterNaturalPerson").GetView;
+            viewN.DataContext = _alterNaturalPersonViewModel;
+            Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
+
+            Entity.Person = _alterNaturalPersonViewModel.Entity;
+        }
 
         protected override bool CanSaveChanges(object arg)
         {
@@ -86,7 +95,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            throw new System.NotImplementedException();
+            Messenger.Default.Send<object>(_container.Resolve<ListCustomerViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

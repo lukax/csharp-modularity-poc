@@ -117,10 +117,15 @@
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterAddressViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\ListAddressViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\ListContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\ListPayCheckViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListPersonViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\ListClientViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListLegalPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListNaturalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\Controls\Alter\AlterProductView.xaml.cs">
@@ -343,9 +348,7 @@
   <ItemGroup>
     <Resource Include="View\Resources\Shoppingcart48.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\Controls\List\SubEntity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="View\Resources\Search48.png" />
   </ItemGroup>

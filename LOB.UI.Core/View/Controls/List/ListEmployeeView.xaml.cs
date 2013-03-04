@@ -20,10 +20,15 @@ namespace LOB.UI.Core.View.Controls.List
         }
 
         [ImportingConstructor]
-        public ListEmployeeView(ListEmployeeViewModel dataContext)
+        public ListEmployeeView(ListEmployeeViewModel viewModel)
             : this()
         {
-            DataContext = dataContext;
+            ViewModel = viewModel;
+        }
+
+        public ListEmployeeViewModel ViewModel
+        {
+            set { this.DataContext = value; }
         }
 
         public string Header

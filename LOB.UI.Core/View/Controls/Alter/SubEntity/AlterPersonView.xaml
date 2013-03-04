@@ -18,14 +18,17 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <TabControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
             <TabItem Header=">"/>
             <TabItem Header="Address">
-                <base:AlterAddressView x:Name="TabAlterAddressView"/>
+                <base:AlterAddressView x:Name="UcAlterAddressView"/>
             </TabItem>
             <TabItem Header="ContactInfo">
-                <base:AlterContactInfoView x:Name="TabAlterContactInfoView"/>
+                <base:AlterContactInfoView x:Name="UcAlterContactInfoView"/>
             </TabItem>
         </TabControl>
         

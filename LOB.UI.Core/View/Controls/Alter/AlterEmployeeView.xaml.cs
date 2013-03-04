@@ -3,9 +3,7 @@
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
-using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
 #endregion
@@ -16,10 +14,19 @@ namespace LOB.UI.Core.View.Controls.Alter
     public partial class AlterEmployeeView : UserControl, ITabProp, IView
     {
         private string _header;
+        private IFluentNavigator _navigator;
 
         public AlterEmployeeView()
         {
             InitializeComponent();
+        }
+
+        [ImportingConstructor]
+        public AlterEmployeeView(AlterEmployeeViewModel viewModel, IFluentNavigator navigator)
+            : this()
+        {
+            _navigator = navigator;
+            ViewModel = viewModel;
         }
 
         public AlterEmployeeViewModel ViewModel
@@ -27,18 +34,17 @@ namespace LOB.UI.Core.View.Controls.Alter
             set
             {
                 this.DataContext = value;
-                TabAlterNaturalPersonView.DataContext = value;
-                TabAlterNaturalPersonView.TabAlterPersonView.TabAlterAddressView.DataContext = value.AlterAddressViewModel;
-                TabAlterNaturalPersonView.TabAlterPersonView.TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
-                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+                this.UcAlterBaseEntityView.DataContext = value;
+                this.UcAlterNaturalPersonView.DataContext = value;
+                this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
+                    value.AlterAddressViewModel;
+                this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
+                    value.AlterContactInfoViewModel;
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
+                                                   o => Messenger.Default.Send("Cancel"));
+                Messenger.Default.Register<object>(DataContext, "QuickSearchCommand",
+                                                   o => _navigator.Resolve("QuickSearch", o).Show(true));
             }
-        }
-
-        [ImportingConstructor]
-        public AlterEmployeeView(AlterEmployeeViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
         }
 
 
@@ -50,8 +56,8 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public int? Index
         {
-            get { return ((AlterEmployeeViewModel)DataContext).CancelIndex; }
-            set { ((AlterEmployeeViewModel)DataContext).CancelIndex = value; }
+            get { return ((AlterEmployeeViewModel) DataContext).CancelIndex; }
+            set { ((AlterEmployeeViewModel) DataContext).CancelIndex = value; }
         }
 
         public void InitializeServices()

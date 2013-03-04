@@ -14,33 +14,28 @@
         <ResourceDictionary Source="../../../Skins/MetroSkin.xaml"></ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
-        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Right">
-            <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
+        <StackPanel>
+            <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Right">
+                <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
                            HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
                            Grid.Column="5">
-                <Image Source="../../Resources/File48.png"></Image>
-            </controls:Tile>
+                    <Image Source="../../Resources/File48.png"></Image>
+                </controls:Tile>
 
-            <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
+                <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="../../Resources/Cancel48.png" />
-            </controls:Tile>
-            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
+                    <Image Source="../../Resources/Cancel48.png" />
+                </controls:Tile>
+                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="../../Resources/Accept48.png" />
-            </controls:Tile>
-        </DockPanel>
+                    <Image Source="../../Resources/Accept48.png" />
+                </controls:Tile>
+            </StackPanel>
 
-        <ScrollViewer Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -50,8 +45,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -59,8 +53,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-
-                <basecontrols:AlterBaseEntityView Grid.Row="1" x:Name="TabAlterBaseEntityView"/>
+                <basecontrols:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView"/>
 
                 <Label Grid.Column="1" Grid.Row="1" Content="Name:" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
@@ -69,11 +62,11 @@
                 <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" Content="Unit Sale price:" />
                 <TextBox Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                          MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
-                
+
                 <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right" Content="Units in stock:" />
                 <TextBox Text="{Binding Entity.UnitsInStock, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                          MinWidth="100" MaxWidth="150" Grid.Row="2" Grid.Column="4" />
-                
+
                 <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Content="Quantity per unity:" />
                 <TextBox Text="{Binding Entity.QuantityPerUnity, UpdateSourceTrigger=PropertyChanged}"
                          HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" Grid.Row="3" />
@@ -104,43 +97,38 @@
                             </ObjectDataProvider.MethodParameters>
                         </ObjectDataProvider>
                     </StackPanel.Resources>
-                    <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" 
-                          SelectedItem="{Binding Entity.Status}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Entity.Status}" />
                 </StackPanel>
 
-                <TextBox controls:TextboxHelper.Watermark="Description"
-                         Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MinWidth="360" MinLines="2"
-                         VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5"
-                         Grid.ColumnSpan="2" MaxWidth="400" />
-
-                <TabControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="3">
-                    <TabItem Header=">"/>
-                    <TabItem Header="Stores">
-                        <DockPanel>
-                            <Label Content="Available in store:" />
-                            <ListView ItemsSource="{Binding Entity.StockedStores}"></ListView>
-                        </DockPanel>
-                    </TabItem>
-                    <TabItem Header="Suppliers">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="200" MaxWidth="350" Grid.Column="2" Grid.Row="2">
-                            <ListBox ItemsSource="{Binding Entity.Suppliers}" MinWidth="150"/>
-                            <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
-                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
-                           Grid.Column="5">
-                                <Image Source="../../Resources/edit.png" />
-                            </controls:Tile>
-                            <controls:Tile Width="18" Height="18" Background="Transparent"
-                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                                <Image Source="../../Resources/Search48.png" />
-                            </controls:Tile>
-                        </StackPanel>
-                    </TabItem>
-                </TabControl>
-
-                
-
+                <TextBox controls:TextboxHelper.Watermark="Description" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" MaxWidth="400"
+                         Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MinWidth="360" MinLines="2"/>
 
             </Grid>
-        </ScrollViewer>
-    </Grid>
+
+            <TabControl>
+                <TabItem Header=">"/>
+                <TabItem Header="Stores">
+                    <DockPanel>
+                        <Label Content="Available in store:" />
+                        <ListView ItemsSource="{Binding Entity.StockedStores}"></ListView>
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="Suppliers">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="200" MaxWidth="350" Grid.Column="2" Grid.Row="2">
+                        <ListBox ItemsSource="{Binding Entity.Suppliers}" MinWidth="150"/>
+                        <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
+                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
+                           Grid.Column="5">
+                            <Image Source="../../Resources/edit.png" />
+                        </controls:Tile>
+                        <controls:Tile Width="18" Height="18" Background="Transparent"
+                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                            <Image Source="../../Resources/Search48.png" />
+                        </controls:Tile>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+
+    </ScrollViewer>
 </UserControl>

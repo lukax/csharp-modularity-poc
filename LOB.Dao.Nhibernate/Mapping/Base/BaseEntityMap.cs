@@ -13,7 +13,7 @@ namespace LOB.Dao.Nhibernate.Mapping.Base
         {
             Id(x => x.Id).UniqueKey("PK_" + typeof (T).Name)
                          .GeneratedBy.Guid();
-            Map(x => x.Code); //.Not.Nullable().Generated.Insert();
+            Map(x => x.Code).Not.Nullable().Generated.Insert();
         }
     }
 }

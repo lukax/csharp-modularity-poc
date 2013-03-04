@@ -1,16 +1,15 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.List;
+using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -19,15 +18,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     [Export]
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>
     {
-
-        public IList<Category> Categories { get; set; }
+        private IUnityContainer _container;
 
         [ImportingConstructor]
-        public AlterProductViewModel(Product product, IRepository repository)
+        public AlterProductViewModel(Product product, IRepository repository, IUnityContainer container)
             : base(product, repository)
         {
+            _container = container;
             Categories = Repository.GetList<Category>().ToList();
         }
+
+        public IList<Category> Categories { get; set; }
 
         protected override void SaveChanges(object arg)
         {
@@ -55,13 +56,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object args)
         {
             Entity = new Product();
         }
-
     }
 }

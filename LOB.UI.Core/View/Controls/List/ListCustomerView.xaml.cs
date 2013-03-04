@@ -2,7 +2,6 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 
@@ -21,10 +20,15 @@ namespace LOB.UI.Core.View.Controls.List
         }
 
         [ImportingConstructor]
-        public ListCustomerView(ListClientViewModel dataContext)
+        public ListCustomerView(ListCustomerViewModel viewModel)
             : this()
         {
-            DataContext = dataContext;
+            ViewModel = viewModel;
+        }
+
+        public ListCustomerViewModel ViewModel
+        {
+            set { this.DataContext = value; }
         }
 
         public string Header

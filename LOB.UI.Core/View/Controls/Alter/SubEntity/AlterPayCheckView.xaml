@@ -21,13 +21,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <base:AlterBaseEntityView />
+        <base:AlterBaseEntityView x:Name="UcAlterBaseEntityView"/>
+        
         <Label Content="Current Salary:" HorizontalAlignment="Right" Grid.Column="1" />
         <TextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
                  MinWidth="150" MaxWidth="250" Grid.Column="2" />

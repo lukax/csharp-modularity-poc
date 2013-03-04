@@ -13,7 +13,6 @@ using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface;
 
 #endregion
 
@@ -82,6 +81,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         #endregion
 
+        private int _updateInterval;
+
         [ImportingConstructor]
         public ListBaseEntityViewModel(T entity, IRepository repository)
         {
@@ -99,8 +100,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         public ICommand SaveToFileCommand { get; set; }
         public ICommand FetchCommand { get; set; }
 
-        private int _updateInterval;
-        public int UpdateInterval { get { return _updateInterval == default(int) ? 1000 : _updateInterval; } set { _updateInterval = value; } }
+        public int UpdateInterval
+        {
+            get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
+            set { _updateInterval = value; }
+        }
+
         /// <summary>
         ///     Constantly update the list async every 1000 miliseconds
         /// </summary>

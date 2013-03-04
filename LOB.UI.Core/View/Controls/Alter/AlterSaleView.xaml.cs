@@ -23,7 +23,12 @@ namespace LOB.UI.Core.View.Controls.Alter
         public AlterSaleView(AlterSaleViewModel viewModel)
             : this()
         {
-            DataContext = viewModel;
+            ViewModel = viewModel;
+        }
+
+        public AlterSaleViewModel ViewModel
+        {
+            set { this.DataContext = value; }
         }
 
         public string Header

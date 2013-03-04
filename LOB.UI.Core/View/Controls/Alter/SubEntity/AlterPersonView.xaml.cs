@@ -3,10 +3,8 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface;
 
 #endregion
@@ -23,21 +21,21 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
-        public AlterPersonViewModel<Person> ViewModel
-        {
-            set
-            {
-                this.DataContext = value;
-                TabAlterAddressView.DataContext = value.AlterAddressViewModel;
-                TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
-            }
-        }
-
         [ImportingConstructor]
         public AlterPersonView(AlterPersonViewModel<Person> viewModel)
             : this()
         {
             ViewModel = viewModel;
+        }
+
+        public AlterPersonViewModel<Person> ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+                this.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
+                this.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
+            }
         }
 
         public string Header

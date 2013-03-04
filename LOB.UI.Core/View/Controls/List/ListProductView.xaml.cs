@@ -21,10 +21,15 @@ namespace LOB.UI.Core.View.Controls.List
         }
 
         [ImportingConstructor]
-        public ListProductView(ListProductViewModel dataContext)
+        public ListProductView(ListProductViewModel viewModel)
             : this()
         {
-            DataContext = dataContext;
+            ViewModel = viewModel;
+        }
+
+        public ListProductViewModel ViewModel
+        {
+            set { this.DataContext = value; }
         }
 
         public string Header

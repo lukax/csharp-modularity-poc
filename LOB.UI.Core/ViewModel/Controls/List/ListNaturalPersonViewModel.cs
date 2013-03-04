@@ -1,27 +1,26 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel<Employee>
+    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T> where T: NaturalPerson
     {
         [ImportingConstructor]
-        public ListEmployeeViewModel(Employee employee, IRepository repository)
-            : base(employee, repository)
+        public ListNaturalPersonViewModel(T entity, IRepository repository)
+            : base(entity, repository)
         {
         }
 
-        public new Expression<Func<Employee, bool>> SearchCriteria
+        public new Expression<Func<NaturalPerson, bool>> SearchCriteria
         {
             get
             {
@@ -29,7 +28,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                 {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.Title.ToUpper().Contains(Search.ToUpper())
                             || arg.FirstName.ToUpper().Contains(Search.ToUpper())
                             || arg.LastName.ToUpper().Contains(Search.ToUpper())
                             || arg.NickName.ToString().ToUpper().Contains(Search.ToUpper())
@@ -42,18 +40,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                     return arg => false;
                 }
             }
-        }
-
-        protected override bool CanUpdate(object arg)
-        {
-            //TODO: Business logic
-            return true;
-        }
-
-        protected override bool CanDelete(object arg)
-        {
-            //TODO: Business logic
-            return true;
         }
     }
 }

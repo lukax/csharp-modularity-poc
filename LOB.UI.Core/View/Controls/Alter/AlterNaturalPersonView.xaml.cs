@@ -20,21 +20,23 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        public AlterNaturalPersonViewModel ViewModel
-        {
-            set
-            {
-                this.DataContext = value;
-                this.TabAlterPersonView.DataContext = value;
-                this.TabAlterPersonView.TabAlterAddressView.DataContext = value.AlterAddressViewModel;
-                this.TabAlterPersonView.TabAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
-            }
-        }
         [ImportingConstructor]
         public AlterNaturalPersonView(AlterNaturalPersonViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
+        }
+
+        public AlterNaturalPersonViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+                //this.UcAlterBaseEntityView.DataContext = value;
+                this.UcAlterPersonView.DataContext = value;
+                this.UcAlterPersonView.UcAlterAddressView.DataContext = value.AlterAddressViewModel;
+                this.UcAlterPersonView.UcAlterContactInfoView.DataContext = value.AlterContactInfoViewModel;
+            }
         }
 
         public string Header

@@ -1,17 +1,13 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Core.ViewModel.Controls.List.Base;
-using LOB.UI.Interface;
 
 #endregion
 
@@ -20,8 +16,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
     [InheritedExport]
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel where T : BaseEntity
     {
-        public T Entity { get; set; }
-        
         [ImportingConstructor]
         public AlterBaseEntityViewModel(T entity, IRepository repository)
         {
@@ -32,6 +26,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             QuickSearchCommand = new DelegateCommand(QuickSearch);
             ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
+
+        public T Entity { get; set; }
 
         public DelegateCommand ClearEntityCommand { get; set; }
         protected IRepository Repository { get; set; }

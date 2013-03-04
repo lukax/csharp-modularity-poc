@@ -16,11 +16,19 @@ namespace LOB.UI.Core.View.Controls.Alter
     public partial class AlterProductView : UserControl, ITabProp, IView
     {
         private string _header;
-        private INavigator _navigator;
+        private IFluentNavigator _navigator;
 
         public AlterProductView()
         {
             InitializeComponent();
+        }
+
+        [ImportingConstructor]
+        public AlterProductView(AlterProductViewModel viewModel, IFluentNavigator navigator)
+            : this()
+        {
+            _navigator = navigator;
+            ViewModel = viewModel;
         }
 
         public AlterProductViewModel ViewModel
@@ -28,16 +36,12 @@ namespace LOB.UI.Core.View.Controls.Alter
             set
             {
                 this.DataContext = value;
-                this.TabAlterBaseEntityView.DataContext = value;
+                this.UcAlterBaseEntityView.DataContext = value;
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
+                                                   o => Messenger.Default.Send("Cancel"));
+                Messenger.Default.Register<object>(DataContext, "QuickSearchCommand",
+                                                   o => _navigator.Resolve("QuickSearch", o).Show(true));
             }
-        }
-
-        [ImportingConstructor]
-        public AlterProductView(AlterProductViewModel viewModel, INavigator navigator)
-            : this()
-        {
-            _navigator = navigator;
-            ViewModel = viewModel;
         }
 
         public string Header
@@ -48,13 +52,12 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public int? Index
         {
-            get { return ((AlterBaseEntityViewModel<Product>)DataContext).CancelIndex; }
-            set { ((AlterBaseEntityViewModel<Product>)DataContext).CancelIndex = value; }
+            get { return ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex; }
+            set { ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex = value; }
         }
 
         public void InitializeServices()
         {
-            Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
         }
 
         public void Refresh()
