@@ -114,6 +114,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             //TODO: Dynamic set true/false based on selected tab
             while (true)
             {
+                await Task.Delay(UpdateInterval);
                 IList<T> localList = null;
                 localList = string.IsNullOrEmpty(Search)
                                 ? (await Repository.GetListAsync<T>()).ToList()
@@ -122,8 +123,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
                 {
                     Entitys = localList;
                 }
-
-                await Task.Delay(UpdateInterval);
             }
         }
 

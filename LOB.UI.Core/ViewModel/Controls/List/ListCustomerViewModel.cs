@@ -11,15 +11,15 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public sealed class ListCustomerViewModel : ListPersonViewModel<Person>
+    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>
     {
         public ListCustomerViewModel(Customer client, IRepository repository)
-            : base(client.Person, repository)
+            : base(client, repository)
         {
             Entity = client;
+            if (Entity.Person == null)
+                throw new ArgumentException("Entity has not defined a person");
         }
-
-        public new Customer Entity { get; set; }
 
         public new Expression<Func<Employee, bool>> SearchCriteria
         {
