@@ -1,11 +1,7 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
-
-#endregion
 
 namespace MahApps.Metro.Converters
 {
@@ -16,10 +12,10 @@ namespace MahApps.Metro.Converters
             var itemBox = double.Parse(values[0].ToString());
             var groupHeight = double.Parse(values[1].ToString());
 
-            double ratio = groupHeight/itemBox;
-            var list = (ListBox) values[2];
+            double ratio = groupHeight / itemBox;
+            var list = (ListBox)values[2];
 
-            double width = Math.Ceiling(list.Items.Count/ratio) + 1;
+            double width = Math.Ceiling(list.Items.Count / ratio) + 1;
             width *= itemBox;
             return width < itemBox ? itemBox : width;
         }

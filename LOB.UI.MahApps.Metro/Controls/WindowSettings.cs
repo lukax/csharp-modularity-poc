@@ -1,6 +1,4 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -9,64 +7,78 @@ using System.Windows;
 using System.Windows.Interop;
 using MahApps.Metro.Native;
 
-#endregion
-
 namespace MahApps.Metro.Controls
 {
-    public class WindowSettings
+    public interface IWindowPlacementSettings
     {
-        public static readonly DependencyProperty SaveProperty = DependencyProperty.RegisterAttached("Save",
-                                                                                                     typeof (bool),
-                                                                                                     typeof (
-                                                                                                         WindowSettings),
-                                                                                                     new FrameworkPropertyMetadata
-                                                                                                         (OnSaveInvalidated));
+        WINDOWPLACEMENT? Placement { get; set; }
+        void Reload();
+        void Save();
+    }
 
-        private Window _window;
-        private WindowApplicationSettings _windowApplicationSettings;
-
-        public WindowSettings(Window window)
-        {
-            _window = window;
+    /// <summary>
+    /// this settings class is the default way to save the placement of the window
+    /// </summary>
+    internal class WindowApplicationSettings : ApplicationSettingsBase, IWindowPlacementSettings
+    {
+        public WindowApplicationSettings(Window window)
+            : base(window.GetType().FullName) {
         }
 
-        [Browsable(false)]
-        internal WindowApplicationSettings Settings
-        {
-            get
-            {
-                return _windowApplicationSettings ??
-                       (_windowApplicationSettings = CreateWindowApplicationSettingsInstance());
+        [UserScopedSetting]
+        public WINDOWPLACEMENT? Placement {
+            get {
+                if (this["Placement"] != null) {
+                    return ((WINDOWPLACEMENT)this["Placement"]);
+                }
+                return null;
+            }
+            set {
+                this["Placement"] = value;
             }
         }
+    }
+    
+    public class WindowSettings
+    {
+        public static readonly DependencyProperty WindowPlacementSettingsProperty = DependencyProperty.RegisterAttached("WindowPlacementSettings", typeof(IWindowPlacementSettings), typeof(WindowSettings), new FrameworkPropertyMetadata(OnWindowPlacementSettingsInvalidated));
 
-        public static void SetSave(DependencyObject dependencyObject, bool enabled)
+        public static void SetSave(DependencyObject dependencyObject, IWindowPlacementSettings windowPlacementSettings)
         {
-            dependencyObject.SetValue(SaveProperty, enabled);
+            dependencyObject.SetValue(WindowPlacementSettingsProperty, windowPlacementSettings);
         }
 
-        private static void OnSaveInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
+        private static void OnWindowPlacementSettingsInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e) {
             var window = dependencyObject as Window;
-            if (window == null || !((bool) e.NewValue))
+            if (window == null || !(e.NewValue is IWindowPlacementSettings))
                 return;
 
-            var settings = new WindowSettings(window);
-            settings.Attach();
+            var windowSettings = new WindowSettings(window, (IWindowPlacementSettings)e.NewValue);
+            windowSettings.Attach();
+        }
+
+        private Window _window;
+        private IWindowPlacementSettings _settings;
+
+        public WindowSettings(Window window, IWindowPlacementSettings windowPlacementSettings)
+        {
+            _window = window;
+            _settings = windowPlacementSettings;
         }
 
         protected virtual void LoadWindowState()
         {
-            Settings.Reload();
+            if (_settings == null) return;
+            _settings.Reload();
 
-            if (Settings.Placement == null)
+            if (_settings.Placement == null) 
                 return;
 
             try
             {
-                var wp = Settings.Placement.Value;
+                var wp = _settings.Placement.Value;
 
-                wp.length = Marshal.SizeOf(typeof (WINDOWPLACEMENT));
+                wp.length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
                 wp.flags = 0;
                 wp.showCmd = (wp.showCmd == Constants.SW_SHOWMINIMIZED ? Constants.SW_SHOWNORMAL : wp.showCmd);
                 var hwnd = new WindowInteropHelper(_window).Handle;
@@ -80,11 +92,12 @@ namespace MahApps.Metro.Controls
 
         protected virtual void SaveWindowState()
         {
+            if (_settings == null) return;
             WINDOWPLACEMENT wp;
             var hwnd = new WindowInteropHelper(_window).Handle;
             UnsafeNativeMethods.GetWindowPlacement(hwnd, out wp);
-            Settings.Placement = wp;
-            Settings.Save();
+            _settings.Placement = wp;
+            _settings.Save();
         }
 
         private void Attach()
@@ -94,7 +107,7 @@ namespace MahApps.Metro.Controls
             _window.SourceInitialized += WindowSourceInitialized;
         }
 
-        private void WindowSourceInitialized(object sender, EventArgs e)
+        void WindowSourceInitialized(object sender, EventArgs e)
         {
             LoadWindowState();
         }
@@ -105,33 +118,7 @@ namespace MahApps.Metro.Controls
             _window.Closing -= WindowClosing;
             _window.SourceInitialized -= WindowSourceInitialized;
             _window = null;
-        }
-
-        internal virtual WindowApplicationSettings CreateWindowApplicationSettingsInstance()
-        {
-            return new WindowApplicationSettings(this);
-        }
-
-        internal class WindowApplicationSettings : ApplicationSettingsBase
-        {
-            public WindowApplicationSettings(WindowSettings windowSettings)
-                : base(windowSettings._window.GetType().FullName)
-            {
-            }
-
-            [UserScopedSetting]
-            public WINDOWPLACEMENT? Placement
-            {
-                get
-                {
-                    if (this["Placement"] != null)
-                    {
-                        return ((WINDOWPLACEMENT) this["Placement"]);
-                    }
-                    return null;
-                }
-                set { this["Placement"] = value; }
-            }
+            _settings = null;
         }
     }
 }

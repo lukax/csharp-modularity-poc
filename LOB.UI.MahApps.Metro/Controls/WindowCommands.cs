@@ -1,6 +1,5 @@
-﻿#region Usings
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,31 +7,15 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using MahApps.Metro.Native;
 
-#endregion
-
 namespace MahApps.Metro.Controls
 {
-    [TemplatePart(Name = "PART_Max", Type = typeof (Button))]
-    [TemplatePart(Name = "PART_Close", Type = typeof (Button))]
-    [TemplatePart(Name = "PART_Min", Type = typeof (Button))]
+    [TemplatePart(Name = "PART_Max", Type = typeof(Button))]
+    [TemplatePart(Name = "PART_Close", Type = typeof(Button))]
+    [TemplatePart(Name = "PART_Min", Type = typeof(Button))]
     public class WindowCommands : ItemsControl
     {
+        public event ClosingWindowEventHandler ClosingWindow;
         public delegate void ClosingWindowEventHandler(object sender, ClosingWindowEventHandlerArgs args);
-
-        private static string minimize;
-        private static string maximize;
-        private static string closeText;
-        private static string restore;
-        private Button close;
-        private Button max;
-        private Button min;
-        private IntPtr user32 = IntPtr.Zero;
-
-        static WindowCommands()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof (WindowCommands),
-                                                     new FrameworkPropertyMetadata(typeof (WindowCommands)));
-        }
 
         public string Minimize
         {
@@ -74,7 +57,19 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        public event ClosingWindowEventHandler ClosingWindow;
+        private static string minimize;
+        private static string maximize;
+        private static string closeText;
+        private static string restore;
+        private Button min;
+        private Button max;
+        private Button close;
+        private IntPtr user32 = IntPtr.Zero;
+
+        static WindowCommands()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(WindowCommands), new FrameworkPropertyMetadata(typeof(WindowCommands)));
+        }
 
         ~WindowCommands()
         {
@@ -88,7 +83,7 @@ namespace MahApps.Metro.Controls
                 user32 = UnsafeNativeMethods.LoadLibrary(Environment.SystemDirectory + "\\User32.dll");
 
             var sb = new StringBuilder(256);
-            UnsafeNativeMethods.LoadString(user32, (uint) id, sb, sb.Capacity);
+            UnsafeNativeMethods.LoadString(user32, (uint)id, sb, sb.Capacity);
             return sb.ToString().Replace("&", "");
         }
 
@@ -130,9 +125,7 @@ namespace MahApps.Metro.Controls
             if (parentWindow == null)
                 return;
 
-            parentWindow.WindowState = parentWindow.WindowState == WindowState.Maximized
-                                           ? WindowState.Normal
-                                           : WindowState.Maximized;
+            parentWindow.WindowState = parentWindow.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
             RefreshMaximiseIconState(parentWindow);
         }
 
@@ -148,20 +141,20 @@ namespace MahApps.Metro.Controls
 
             if (parentWindow.WindowState == WindowState.Normal)
             {
-                var maxpath = (Path) max.FindName("MaximisePath");
+                var maxpath = (Path)max.FindName("MaximisePath");
                 maxpath.Visibility = Visibility.Visible;
 
-                var restorepath = (Path) max.FindName("RestorePath");
+                var restorepath = (Path)max.FindName("RestorePath");
                 restorepath.Visibility = Visibility.Collapsed;
 
                 max.ToolTip = Maximize;
             }
             else
             {
-                var restorepath = (Path) max.FindName("RestorePath");
+                var restorepath = (Path)max.FindName("RestorePath");
                 restorepath.Visibility = Visibility.Visible;
 
-                var maxpath = (Path) max.FindName("MaximisePath");
+                var maxpath = (Path)max.FindName("MaximisePath");
                 maxpath.Visibility = Visibility.Collapsed;
                 max.ToolTip = Restore;
             }

@@ -1,88 +1,83 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-#endregion
-
 namespace MahApps.Metro.Controls
 {
     /// <summary>
-    ///     Based on Greg Schechter's Planerator
-    ///     http://blogs.msdn.com/b/greg_schechter/archive/2007/10/26/enter-the-planerator-dead-simple-3d-in-wpf-with-a-stupid-name.aspx
+    ///   Based on Greg Schechter's Planerator
+    ///   http://blogs.msdn.com/b/greg_schechter/archive/2007/10/26/enter-the-planerator-dead-simple-3d-in-wpf-with-a-stupid-name.aspx
     /// </summary>
     [ContentProperty("Child")]
     public class Planerator : FrameworkElement
     {
         public static readonly DependencyProperty RotationXProperty =
-            DependencyProperty.Register("RotationX", typeof (double), typeof (Planerator),
-                                        new UIPropertyMetadata(0.0, (d, args) => ((Planerator) d).UpdateRotation()));
+            DependencyProperty.Register("RotationX", typeof(double), typeof(Planerator),
+                                        new UIPropertyMetadata(0.0, (d, args) => ((Planerator)d).UpdateRotation()));
 
         public static readonly DependencyProperty RotationYProperty =
-            DependencyProperty.Register("RotationY", typeof (double), typeof (Planerator),
-                                        new UIPropertyMetadata(0.0, (d, args) => ((Planerator) d).UpdateRotation()));
+            DependencyProperty.Register("RotationY", typeof(double), typeof(Planerator),
+                                        new UIPropertyMetadata(0.0, (d, args) => ((Planerator)d).UpdateRotation()));
 
         public static readonly DependencyProperty RotationZProperty =
-            DependencyProperty.Register("RotationZ", typeof (double), typeof (Planerator),
-                                        new UIPropertyMetadata(0.0, (d, args) => ((Planerator) d).UpdateRotation()));
+            DependencyProperty.Register("RotationZ", typeof(double), typeof(Planerator),
+                                        new UIPropertyMetadata(0.0, (d, args) => ((Planerator)d).UpdateRotation()));
 
         public static readonly DependencyProperty FieldOfViewProperty =
-            DependencyProperty.Register("FieldOfView", typeof (double), typeof (Planerator),
-                                        new UIPropertyMetadata(45.0, (d, args) => ((Planerator) d).Update3D(),
-                                                               (d, val) => Math.Min(Math.Max((double) val, 0.5), 179.9)));
-
+            DependencyProperty.Register("FieldOfView", typeof(double), typeof(Planerator),
+                                        new UIPropertyMetadata(45.0, (d, args) => ((Planerator)d).Update3D(),
+                                                               (d, val) => Math.Min(Math.Max((double)val, 0.5), 179.9)));
         // clamp to a meaningful range
 
         private static readonly Point3D[] Mesh = new[]
-            {
-                new Point3D(0, 0, 0), new Point3D(0, 1, 0), new Point3D(1, 1, 0),
-                new Point3D(1, 0, 0)
-            };
+                                                      {
+                                                          new Point3D(0, 0, 0), new Point3D(0, 1, 0), new Point3D(1, 1, 0),
+                                                          new Point3D(1, 0, 0)
+                                                      };
 
         private static readonly Point[] TexCoords = new[]
-            {
-                new Point(0, 1), new Point(0, 0), new Point(1, 0),
-                new Point(1, 1)
-            };
+                                                         {
+                                                             new Point(0, 1), new Point(0, 0), new Point(1, 0),
+                                                             new Point(1, 1)
+                                                         };
 
-        private static readonly int[] Indices = new[] {0, 2, 1, 0, 3, 2};
+        private static readonly int[] Indices = new[] { 0, 2, 1, 0, 3, 2 };
         private static readonly Vector3D XAxis = new Vector3D(1, 0, 0);
         private static readonly Vector3D YAxis = new Vector3D(0, 1, 0);
         private static readonly Vector3D ZAxis = new Vector3D(0, 0, 1);
         private readonly QuaternionRotation3D _quaternionRotation = new QuaternionRotation3D();
         private readonly RotateTransform3D _rotationTransform = new RotateTransform3D();
         private readonly ScaleTransform3D _scaleTransform = new ScaleTransform3D();
-        private Viewport2DVisual3D _frontModel;
         private FrameworkElement _logicalChild;
         private FrameworkElement _originalChild;
         private Viewport3D _viewport3D;
         private FrameworkElement _visualChild;
+        private Viewport2DVisual3D _frontModel;
 
         public double RotationX
         {
-            get { return (double) GetValue(RotationXProperty); }
+            get { return (double)GetValue(RotationXProperty); }
             set { SetValue(RotationXProperty, value); }
         }
 
         public double RotationY
         {
-            get { return (double) GetValue(RotationYProperty); }
+            get { return (double)GetValue(RotationYProperty); }
             set { SetValue(RotationYProperty, value); }
         }
 
         public double RotationZ
         {
-            get { return (double) GetValue(RotationZProperty); }
+            get { return (double)GetValue(RotationZProperty); }
             set { SetValue(RotationZProperty, value); }
         }
 
         public double FieldOfView
         {
-            get { return (double) GetValue(FieldOfViewProperty); }
+            get { return (double)GetValue(FieldOfViewProperty); }
             set { SetValue(FieldOfViewProperty, value); }
         }
 
@@ -98,7 +93,7 @@ namespace MahApps.Metro.Controls
 
                 // Wrap child with special decorator that catches layout invalidations. 
                 _originalChild = value;
-                _logicalChild = new LayoutInvalidationCatcher {Child = _originalChild};
+                _logicalChild = new LayoutInvalidationCatcher { Child = _originalChild };
                 _visualChild = CreateVisualChild();
 
                 AddVisualChild(_visualChild);
@@ -152,11 +147,11 @@ namespace MahApps.Metro.Controls
         private FrameworkElement CreateVisualChild()
         {
             var simpleQuad = new MeshGeometry3D
-                {
-                    Positions = new Point3DCollection(Mesh),
-                    TextureCoordinates = new PointCollection(TexCoords),
-                    TriangleIndices = new Int32Collection(Indices)
-                };
+            {
+                Positions = new Point3DCollection(Mesh),
+                TextureCoordinates = new PointCollection(TexCoords),
+                TriangleIndices = new Int32Collection(Indices)
+            };
 
             // Front material is interactive, back material is not.
             Material frontMaterial = new DiffuseMaterial(Brushes.White);
@@ -167,44 +162,39 @@ namespace MahApps.Metro.Controls
             Material backMaterial = new DiffuseMaterial(vb);
 
             _rotationTransform.Rotation = _quaternionRotation;
-            var xfGroup = new Transform3DGroup {Children = {_scaleTransform, _rotationTransform}};
+            var xfGroup = new Transform3DGroup { Children = { _scaleTransform, _rotationTransform } };
 
-            GeometryModel3D backModel = new GeometryModel3D
-                {
-                    Geometry = simpleQuad,
-                    Transform = xfGroup,
-                    BackMaterial = backMaterial
-                };
+            GeometryModel3D backModel = new GeometryModel3D { Geometry = simpleQuad, Transform = xfGroup, BackMaterial = backMaterial };
             Model3DGroup m3dGroup = new Model3DGroup
-                {
-                    Children =
-                        {
-                            new DirectionalLight(Colors.White, new Vector3D(0, 0, -1)),
-                            new DirectionalLight(Colors.White, new Vector3D(0.1, -0.1, 1)),
-                            backModel
-                        }
-                };
+            {
+                Children =
+                            {
+                                new DirectionalLight(Colors.White, new Vector3D(0, 0, -1)),
+                                new DirectionalLight(Colors.White, new Vector3D(0.1, -0.1, 1)),
+                                backModel
+                            }
+            };
 
             // Non-interactive Visual3D consisting of the backside, and two lights.
-            ModelVisual3D mv3d = new ModelVisual3D {Content = m3dGroup};
+            ModelVisual3D mv3d = new ModelVisual3D { Content = m3dGroup };
 
             if (_frontModel != null)
                 _frontModel.Visual = null;
 
             // Interactive frontside Visual3D
             _frontModel = new Viewport2DVisual3D
-                {
-                    Geometry = simpleQuad,
-                    Visual = _logicalChild,
-                    Material = frontMaterial,
-                    Transform = xfGroup
-                };
+            {
+                Geometry = simpleQuad,
+                Visual = _logicalChild,
+                Material = frontMaterial,
+                Transform = xfGroup
+            };
 
             // Cache the brush in the VP2V3 by setting caching on it.  Big perf wins.
             SetCachingForObject(_frontModel);
 
             // Scene consists of both the above Visual3D's.
-            _viewport3D = new Viewport3D {ClipToBounds = false, Children = {mv3d, _frontModel}};
+            _viewport3D = new Viewport3D { ClipToBounds = false, Children = { mv3d, _frontModel } };
 
             UpdateRotation();
 
@@ -224,7 +214,7 @@ namespace MahApps.Metro.Controls
             var qy = new Quaternion(YAxis, RotationY);
             var qz = new Quaternion(ZAxis, RotationZ);
 
-            _quaternionRotation.Quaternion = qx*qy*qz;
+            _quaternionRotation.Quaternion = qx * qy * qz;
         }
 
         private void Update3D()
@@ -239,9 +229,9 @@ namespace MahApps.Metro.Controls
             // and back along Z the right distance based on the field-of-view is the same projected size as the 2D content
             // that it's looking at.  See http://blogs.msdn.com/greg_schechter/archive/2007/04/03/camera-construction-in-parallaxui.aspx
             // for derivation of this camera.
-            double fovInRadians = FieldOfView*(Math.PI/180);
-            double zValue = w/Math.Tan(fovInRadians/2)/2;
-            _viewport3D.Camera = new PerspectiveCamera(new Point3D(w/2, h/2, zValue),
+            double fovInRadians = FieldOfView * (Math.PI / 180);
+            double zValue = w / Math.Tan(fovInRadians / 2) / 2;
+            _viewport3D.Camera = new PerspectiveCamera(new Point3D(w / 2, h / 2, zValue),
                                                        -ZAxis,
                                                        YAxis,
                                                        FieldOfView);
@@ -249,8 +239,8 @@ namespace MahApps.Metro.Controls
 
             _scaleTransform.ScaleX = w;
             _scaleTransform.ScaleY = h;
-            _rotationTransform.CenterX = w/2;
-            _rotationTransform.CenterY = h/2;
+            _rotationTransform.CenterX = w / 2;
+            _rotationTransform.CenterY = h / 2;
         }
     }
 }

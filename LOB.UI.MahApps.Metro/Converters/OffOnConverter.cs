@@ -1,11 +1,7 @@
-#region Usings
-
 using System;
 using System.Globalization;
 using System.Windows.Data;
 using MahApps.Metro.Controls;
-
-#endregion
 
 namespace MahApps.Metro.Converters
 {
@@ -13,7 +9,7 @@ namespace MahApps.Metro.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var t = (ToggleSwitch) parameter;
+            var t = (ToggleSwitch)parameter;
 
             return t.IsChecked == true ? t.OnLabel : t.OffLabel;
         }

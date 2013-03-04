@@ -6,7 +6,8 @@
 
     <Style x:Key="MetroGroupBox"
            TargetType="{x:Type GroupBox}">
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Foreground" Value="{DynamicResource BlackBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
@@ -18,7 +19,7 @@
                         <Border Grid.Row="0"
                                 Background="{DynamicResource AccentColorBrush}"
                                 BorderBrush="{DynamicResource AccentColorBrush}"
-                                BorderThickness="0">
+                                BorderThickness="1">
                             <ContentPresenter Margin="{TemplateBinding Margin}"
                                               ContentSource="Header"
                                               RecognizesAccessKey="True">

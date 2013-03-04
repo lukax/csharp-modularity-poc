@@ -1,15 +1,9 @@
-#region Usings
-
 using System;
-
-#endregion
 
 namespace MahApps.Metro.Controls
 {
     internal static class SafeRaise
     {
-        public delegate T GetEventArgs<T>() where T : EventArgs;
-
         public static void Raise(EventHandler eventToRaise, object sender)
         {
             if (eventToRaise != null)
@@ -31,8 +25,9 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        public static void Raise<T>(EventHandler<T> eventToRaise, object sender, GetEventArgs<T> getEventArgs)
-            where T : EventArgs
+        public delegate T GetEventArgs<T>() where T : EventArgs;
+
+        public static void Raise<T>(EventHandler<T> eventToRaise, object sender, GetEventArgs<T> getEventArgs) where T : EventArgs
         {
             if (eventToRaise != null)
             {

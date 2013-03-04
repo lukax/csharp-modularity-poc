@@ -1,11 +1,8 @@
-#region Usings
-
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-
-#endregion
 
 namespace MahApps.Metro.Controls
 {
@@ -14,10 +11,10 @@ namespace MahApps.Metro.Controls
     [TemplateVisualState(Name = CheckedState, GroupName = CheckStates)]
     [TemplateVisualState(Name = DraggingState, GroupName = CheckStates)]
     [TemplateVisualState(Name = UncheckedState, GroupName = CheckStates)]
-    [TemplatePart(Name = SwitchRootPart, Type = typeof (Grid))]
-    [TemplatePart(Name = SwitchBackgroundPart, Type = typeof (UIElement))]
-    [TemplatePart(Name = SwitchTrackPart, Type = typeof (Grid))]
-    [TemplatePart(Name = SwitchThumbPart, Type = typeof (FrameworkElement))]
+    [TemplatePart(Name = SwitchRootPart, Type = typeof(Grid))]
+    [TemplatePart(Name = SwitchBackgroundPart, Type = typeof(UIElement))]
+    [TemplatePart(Name = SwitchTrackPart, Type = typeof(Grid))]
+    [TemplatePart(Name = SwitchThumbPart, Type = typeof(FrameworkElement))]
     public class ToggleSwitchButton : ToggleButton
     {
         private const string CommonStates = "CommonStates";
@@ -31,49 +28,31 @@ namespace MahApps.Metro.Controls
         private const string SwitchBackgroundPart = "SwitchBackground";
         private const string SwitchTrackPart = "SwitchTrack";
         private const string SwitchThumbPart = "SwitchThumb";
-        private const double _uncheckedTranslation = 0;
-
-        public static readonly DependencyProperty SwitchForegroundProperty =
-            DependencyProperty.Register("SwitchForeground", typeof (Brush), typeof (ToggleSwitchButton),
-                                        new PropertyMetadata(null));
-
+        
         private TranslateTransform _backgroundTranslation;
-        private double _checkedTranslation;
-        private double _dragTranslation;
-        private bool _isDragging;
-        private Grid _root;
-        private FrameworkElement _thumb;
         private TranslateTransform _thumbTranslation;
+        private Grid _root;
         private Grid _track;
-        private bool _wasDragged;
+        private FrameworkElement _thumb;
+        private bool _isDragging = false;
 
-
-        public ToggleSwitchButton()
-        {
-            DefaultStyleKey = typeof (ToggleSwitchButton);
-        }
+        public static readonly DependencyProperty SwitchForegroundProperty = DependencyProperty.Register("SwitchForeground", typeof(Brush), typeof(ToggleSwitchButton), new PropertyMetadata(null));
 
         public Brush SwitchForeground
         {
-            get { return (Brush) GetValue(SwitchForegroundProperty); }
-            set { SetValue(SwitchForegroundProperty, value); }
-        }
-
-        private double Translation
-        {
-            get { return _backgroundTranslation == null ? _thumbTranslation.X : _backgroundTranslation.X; }
+            get
+            {
+                return (Brush)GetValue(SwitchForegroundProperty);
+            }
             set
             {
-                if (_backgroundTranslation != null)
-                {
-                    _backgroundTranslation.X = value;
-                }
-
-                if (_thumbTranslation != null)
-                {
-                    _thumbTranslation.X = value;
-                }
+                SetValue(SwitchForegroundProperty, value);
             }
+        }
+
+        public ToggleSwitchButton()
+        {
+            DefaultStyleKey = typeof(ToggleSwitchButton);
         }
 
         private void ChangeVisualState(bool useTransitions)
@@ -82,6 +61,7 @@ namespace MahApps.Metro.Controls
 
             if (_isDragging)
             {
+                // TODO: _isDragging is never set to true, so we never enter this state
                 VisualStateManager.GoToState(this, DraggingState, useTransitions);
             }
             else if (IsChecked == true)
@@ -112,18 +92,13 @@ namespace MahApps.Metro.Controls
             }
             base.OnApplyTemplate();
             _root = GetTemplateChild(SwitchRootPart) as Grid;
-            UIElement background = GetTemplateChild(SwitchBackgroundPart) as UIElement;
+            var background = GetTemplateChild(SwitchBackgroundPart) as UIElement;
             _backgroundTranslation = background == null ? null : background.RenderTransform as TranslateTransform;
             _track = GetTemplateChild(SwitchTrackPart) as Grid;
             _thumb = GetTemplateChild(SwitchThumbPart) as Border;
             _thumbTranslation = _thumb == null ? null : _thumb.RenderTransform as TranslateTransform;
-            if (_root != null && _track != null && _thumb != null &&
-                (_backgroundTranslation != null || _thumbTranslation != null))
+            if (_root != null && _track != null && _thumb != null && (_backgroundTranslation != null || _thumbTranslation != null))
             {
-                /*GestureListener gestureListener = GestureService.GetGestureListener(_root);
-                gestureListener.DragStarted += DragStartedHandler;
-                gestureListener.DragDelta += DragDeltaHandler;
-                gestureListener.DragCompleted += DragCompletedHandler;*/
                 _track.SizeChanged += SizeChangedHandler;
                 _thumb.SizeChanged += SizeChangedHandler;
             }
@@ -132,8 +107,9 @@ namespace MahApps.Metro.Controls
 
         private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
         {
-            _track.Clip = new RectangleGeometry {Rect = new Rect(0, 0, _track.ActualWidth, _track.ActualHeight)};
-            _checkedTranslation = _track.ActualWidth - _thumb.ActualWidth - _thumb.Margin.Left - _thumb.Margin.Right;
+            _track.Clip = new RectangleGeometry { Rect = new Rect(0, 0, _track.ActualWidth, _track.ActualHeight) };
+            // TODO: this value is being assigned on each callback but not used anywhere
+            var checkedTranslation = _track.ActualWidth - _thumb.ActualWidth - _thumb.Margin.Left - _thumb.Margin.Right;
         }
     }
 }

@@ -12,16 +12,13 @@
     <Color x:Key="AccentColor4">#33cb0000</Color>
 
     <LinearGradientBrush x:Key="BrandingBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
-        <GradientStop Color="{DynamicResource HighlightDarkColor}" Offset="0" />
-        <GradientStop Color="#FFD4D115" Offset="1" />
+        <GradientStop Color="{DynamicResource HighlightDarkColor}" Offset="0"/>
+        <GradientStop Color="#FFD4D115" Offset="1"/>
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="AccentColorBrush"
-                     Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="AccentColorBrush2"
-                     Color="{DynamicResource AccentColor2}" />
-    <SolidColorBrush x:Key="AccentColorBrush3"
-                     Color="{DynamicResource AccentColor3}" />
+                     Color="{StaticResource AccentColor}" />
+
 
 
 </ResourceDictionary>

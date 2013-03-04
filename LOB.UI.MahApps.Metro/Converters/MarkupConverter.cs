@@ -1,18 +1,22 @@
-#region Usings
-
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-#endregion
-
 namespace MahApps.Metro.Converters
 {
-    [MarkupExtensionReturnType(typeof (IValueConverter))]
+    [MarkupExtensionReturnType(typeof(IValueConverter))]
     public abstract class MarkupConverter : MarkupExtension, IValueConverter
     {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        protected abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+        protected abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
+
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -36,13 +40,5 @@ namespace MahApps.Metro.Converters
                 return DependencyProperty.UnsetValue;
             }
         }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-
-        protected abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
-        protected abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
     }
 }

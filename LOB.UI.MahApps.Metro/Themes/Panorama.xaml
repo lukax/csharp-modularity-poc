@@ -7,12 +7,16 @@
     <converters:PanoramaGroupHeightConverter x:Key="PanoramaGroupHeightConverter" />
 
     <Style x:Key="headerLabelStyle" TargetType="Label">
-        <Setter Property="FontSize"
-                Value="{Binding RelativeSource={RelativeSource  AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}, Path=HeaderFontSize}" />
-        <Setter Property="Foreground"
-                Value="{Binding RelativeSource={RelativeSource  AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}, Path=HeaderFontColor}" />
-        <Setter Property="FontFamily"
-                Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}, Path=HeaderFontFamily}" />
+        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}, Path=HeaderFontSize}" />
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}, Path=HeaderFontColor}" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Label}, Path=Foreground}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}, Path=HeaderFontFamily}" />
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -37,7 +41,7 @@
                    Content="{Binding Header}"
                    x:Name="header"
                    DockPanel.Dock="Top" />
-            <ListBox ItemsSource="{Binding Tiles}"
+            <ListBox ItemsSource="{Binding Tiles}" 
                      x:Name="items"
                      SelectionMode="Single"
                      BorderThickness="0"
@@ -52,21 +56,17 @@
                         <WrapPanel>
                             <WrapPanel.Height>
                                 <MultiBinding Converter="{StaticResource PanoramaGroupHeightConverter}">
-                                    <Binding Path="ItemBox"
-                                             RelativeSource="{RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}" />
-                                    <Binding Path="ActualHeight"
-                                             RelativeSource="{RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}" />
-                                    <Binding Path="ActualHeight" ElementName="header" />
+                                    <Binding Path="ItemBox" RelativeSource="{RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}" />
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}" />
+                                    <Binding Path="ActualHeight" ElementName="header"/>
                                 </MultiBinding>
                             </WrapPanel.Height>
                             <WrapPanel.Width>
                                 <MultiBinding Converter="{StaticResource conv}">
-                                    <Binding Path="ItemBox"
-                                             RelativeSource="{RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}" />
-                                    <Binding Path="ActualHeight" ElementName="items" />
-                                    <Binding
-                                        RelativeSource="{RelativeSource AncestorType={x:Type ListBox}, Mode=FindAncestor}" />
-                                    <Binding Path="Items.Count" ElementName="items" />
+                                    <Binding Path="ItemBox" RelativeSource="{RelativeSource AncestorType={x:Type Controls:Panorama}, Mode=FindAncestor}" />
+                                    <Binding Path="ActualHeight" ElementName="items"/>
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type ListBox}, Mode=FindAncestor}" />
+                                    <Binding Path="Items.Count" ElementName="items"/>
                                 </MultiBinding>
                             </WrapPanel.Width>
                         </WrapPanel>
@@ -88,8 +88,7 @@
                         </Style>
                     </ControlTemplate.Resources>
 
-                    <ScrollViewer x:Name="PART_ScrollViewer" Background="{TemplateBinding Background}"
-                                  Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                    <ScrollViewer x:Name="PART_ScrollViewer" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
                         <ItemsPresenter Margin="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </ScrollViewer>
                 </ControlTemplate>

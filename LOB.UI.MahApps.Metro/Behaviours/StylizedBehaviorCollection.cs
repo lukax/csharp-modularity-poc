@@ -1,9 +1,5 @@
-#region Usings
-
 using System.Windows;
 using System.Windows.Interactivity;
-
-#endregion
 
 namespace MahApps.Metro.Behaviours
 {

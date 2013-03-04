@@ -1,10 +1,6 @@
-#region Usings
-
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-
-#endregion
 
 namespace MahApps.Metro.Native
 {
@@ -20,7 +16,7 @@ namespace MahApps.Metro.Native
 
         public int Width
         {
-            get { return Math.Abs(right - left); } // Abs needed for BIDI OS
+            get { return Math.Abs(right - left); }  // Abs needed for BIDI OS
         }
 
         public int Height
@@ -55,7 +51,7 @@ namespace MahApps.Metro.Native
 
         public override string ToString()
         {
-            if (this == Empty)
+            if (this == Empty) 
                 return "RECT {Empty}";
             return "RECT { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom + " }";
         }
@@ -63,11 +59,8 @@ namespace MahApps.Metro.Native
         /// <summary> Determine if 2 RECT are equal (deep compare) </summary>
         public override bool Equals(object obj)
         {
-            if (!(obj is Rect))
-            {
-                return false;
-            }
-            return (this == (RECT) obj);
+            if (!(obj is Rect)) { return false; }
+            return (this == (RECT)obj);
         }
 
         /// <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>
@@ -78,13 +71,14 @@ namespace MahApps.Metro.Native
 
         public static bool operator ==(RECT rect1, RECT rect2)
         {
-            return (rect1.left == rect2.left && rect1.top == rect2.top && rect1.right == rect2.right &&
-                    rect1.bottom == rect2.bottom);
+            return (rect1.left == rect2.left && rect1.top == rect2.top && rect1.right == rect2.right && rect1.bottom == rect2.bottom);
         }
 
         public static bool operator !=(RECT rect1, RECT rect2)
         {
             return !(rect1 == rect2);
         }
+
+
     }
 }

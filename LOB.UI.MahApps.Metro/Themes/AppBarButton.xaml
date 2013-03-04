@@ -3,7 +3,7 @@
                     xmlns:Controls="clr-namespace:MahApps.Metro.Controls">
     <Style TargetType="Controls:AppBarButton">
         <Setter Property="Background" Value="{DynamicResource ButtonNormalBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ButtonNormalBorder}" />
+        <Setter Property="BorderBrush"  Value="{DynamicResource ButtonNormalBorder}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -38,9 +38,8 @@
                                            Height="28"
                                            Fill="{TemplateBinding Foreground}">
                                     <Rectangle.OpacityMask>
-                                        <VisualBrush
-                                            Visual="{Binding MetroImageSource, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Stretch="Fill" />
+                                        <VisualBrush Visual="{Binding MetroImageSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                                     Stretch="Fill" />
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
                             </Grid>

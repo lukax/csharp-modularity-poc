@@ -15,9 +15,4 @@
 
     <Color x:Key="GrayNormal">#FF7D7D7D</Color>
     <Color x:Key="GrayHover">#FFAAAAAA</Color>
-
-    <SolidColorBrush x:Key="BlackColorBrush"
-                     Color="{DynamicResource BlackColor}" />
-    <SolidColorBrush x:Key="WhiteColorBrush2"
-                     Color="{DynamicResource WhiteColor}" />
 </ResourceDictionary>

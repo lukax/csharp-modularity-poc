@@ -9,11 +9,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Controls:MetroImage">
-                    <Rectangle Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                               Fill="{TemplateBinding Foreground}">
+                    <Rectangle Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="{TemplateBinding Foreground}">
                         <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{Binding Source, RelativeSource={RelativeSource TemplatedParent}}"
-                                         Stretch="Fill" />
+                            <VisualBrush Visual="{Binding Source, RelativeSource={RelativeSource TemplatedParent}}" Stretch="Fill" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </ControlTemplate>

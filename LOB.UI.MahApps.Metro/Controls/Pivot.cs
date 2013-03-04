@@ -1,71 +1,40 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
-
-#endregion
 
 namespace MahApps.Metro.Controls
 {
-    [TemplatePart(Name = "PART_Scroll", Type = typeof (ScrollViewer))]
-    [TemplatePart(Name = "PART_Headers", Type = typeof (ListView))]
-    [TemplatePart(Name = "PART_Mediator", Type = typeof (ScrollViewerOffsetMediator))]
+    [TemplatePart(Name = "PART_Scroll", Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = "PART_Headers", Type = typeof(ListView))]
+    [TemplatePart(Name = "PART_Mediator", Type = typeof(ScrollViewerOffsetMediator))]
     public class Pivot : ItemsControl
     {
-        public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent("SelectionChanged",
-                                                                                                    RoutingStrategy
-                                                                                                        .Bubble,
-                                                                                                    typeof (
-                                                                                                        RoutedEventHandler
-                                                                                                        ),
-                                                                                                    typeof (Pivot));
-
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof (string),
-                                                                                               typeof (Pivot),
-                                                                                               new PropertyMetadata(
-                                                                                                   default(string)));
-
-        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(
-            "HeaderTemplate", typeof (DataTemplate), typeof (Pivot));
-
-        public static readonly DependencyProperty SelectedIndexProperty = DependencyProperty.Register("SelectedIndex",
-                                                                                                      typeof (int),
-                                                                                                      typeof (Pivot),
-                                                                                                      new FrameworkPropertyMetadata
-                                                                                                          (0,
-                                                                                                           FrameworkPropertyMetadataOptions
-                                                                                                               .BindsTwoWayByDefault,
-                                                                                                           SelectedItemChanged));
-
-        private ListView headers;
-        internal int internalIndex;
-        private ScrollViewerOffsetMediator mediator;
         private ScrollViewer scroller;
+        private ListView headers;
         private PivotItem selectedItem;
-
-        static Pivot()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof (Pivot), new FrameworkPropertyMetadata(typeof (Pivot)));
-        }
+        private ScrollViewerOffsetMediator mediator;
+        internal int internalIndex;
+        public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent("SelectionChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Pivot));
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(string), typeof(Pivot), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(Pivot));
+        public static readonly DependencyProperty SelectedIndexProperty = DependencyProperty.Register("SelectedIndex", typeof(int), typeof(Pivot), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedItemChanged));
 
         public DataTemplate HeaderTemplate
         {
-            get { return (DataTemplate) GetValue(HeaderTemplateProperty); }
+            get { return (DataTemplate)GetValue(HeaderTemplateProperty); }
             set { SetValue(HeaderTemplateProperty, value); }
         }
 
         public string Header
         {
-            get { return (string) GetValue(HeaderProperty); }
+            get { return (string)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
         public int SelectedIndex
         {
-            get { return (int) GetValue(SelectedIndexProperty); }
+            get { return (int)GetValue(SelectedIndexProperty); }
             set { SetValue(SelectedIndexProperty, value); }
         }
 
@@ -89,30 +58,36 @@ namespace MahApps.Metro.Controls
                     internalIndex = index;
                     break;
                 }
-                widthToScroll += ((PivotItem) Items[index]).ActualWidth;
+                widthToScroll += ((PivotItem)Items[index]).ActualWidth;
             }
 
             mediator.HorizontalOffset = scroller.HorizontalOffset;
             var sb = mediator.Resources["Storyboard1"] as Storyboard;
-            var frame = (EasingDoubleKeyFrame) mediator.FindName("edkf");
+            var frame = (EasingDoubleKeyFrame)mediator.FindName("edkf");
             frame.Value = widthToScroll;
             sb.Completed -= sb_Completed;
             sb.Completed += sb_Completed;
             sb.Begin();
 
             RaiseEvent(new RoutedEventArgs(SelectionChangedEvent));
+
         }
 
-        private void sb_Completed(object sender, EventArgs e)
+        void sb_Completed(object sender, EventArgs e)
         {
             SelectedIndex = internalIndex;
+        }
+
+        static Pivot()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Pivot), new FrameworkPropertyMetadata(typeof(Pivot)));
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            scroller = (ScrollViewer) GetTemplateChild("PART_Scroll");
-            headers = (ListView) GetTemplateChild("PART_Headers");
+            scroller = (ScrollViewer)GetTemplateChild("PART_Scroll");
+            headers = (ListView)GetTemplateChild("PART_Headers");
             mediator = GetTemplateChild("PART_Mediator") as ScrollViewerOffsetMediator;
 
             if (scroller != null)
@@ -124,22 +99,22 @@ namespace MahApps.Metro.Controls
                 headers.SelectionChanged += headers_SelectionChanged;
         }
 
-        private void scroller_MouseWheel(object sender, MouseWheelEventArgs e)
+        void scroller_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + -e.Delta);
         }
 
-        private void headers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void headers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GoToItem((PivotItem) headers.SelectedItem);
+            GoToItem((PivotItem)headers.SelectedItem);
         }
 
-        private void scroller_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        void scroller_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             var position = 0.0;
             for (int i = 0; i < Items.Count; i++)
             {
-                var pivotItem = ((PivotItem) Items[i]);
+                var pivotItem = ((PivotItem)Items[i]);
                 var widthOfItem = pivotItem.ActualWidth;
                 if (e.HorizontalOffset <= (position + widthOfItem - 1))
                 {
@@ -158,15 +133,14 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private static void SelectedItemChanged(DependencyObject dependencyObject,
-                                                DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void SelectedItemChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var p = (Pivot) dependencyObject;
+            var p = (Pivot)dependencyObject;
             if (p == null)
                 return;
 
             if (p.internalIndex != p.SelectedIndex)
-                p.GoToItem((PivotItem) p.Items[(int) dependencyPropertyChangedEventArgs.NewValue]);
+                p.GoToItem((PivotItem)p.Items[(int)dependencyPropertyChangedEventArgs.NewValue]);
         }
     }
 }

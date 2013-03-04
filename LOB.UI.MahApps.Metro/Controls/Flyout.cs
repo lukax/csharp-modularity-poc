@@ -1,93 +1,66 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-#endregion
-
 namespace MahApps.Metro.Controls
 {
-    [TemplatePart(Name = "PART_BackButton", Type = typeof (Button))]
-    [TemplatePart(Name = "PART_Header", Type = typeof (ContentPresenter))]
+    [TemplatePart(Name = "PART_BackButton", Type = typeof(Button))]
+    [TemplatePart(Name = "PART_Header", Type = typeof(ContentPresenter))]
     public class Flyout : ContentControl
     {
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof (string),
-                                                                                               typeof (Flyout),
-                                                                                               new PropertyMetadata(
-                                                                                                   default(string)));
-
-        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position",
-                                                                                                 typeof (Position),
-                                                                                                 typeof (Flyout),
-                                                                                                 new PropertyMetadata(
-                                                                                                     Position.Left,
-                                                                                                     PositionChanged));
-
-        public static readonly DependencyProperty IsPinnableProperty = DependencyProperty.Register("IsPinnable",
-                                                                                                   typeof (bool),
-                                                                                                   typeof (Flyout),
-                                                                                                   new PropertyMetadata(
-                                                                                                       default(bool)));
-
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register("IsOpen", typeof (bool),
-                                                                                               typeof (Flyout),
-                                                                                               new FrameworkPropertyMetadata
-                                                                                                   (default(bool),
-                                                                                                    FrameworkPropertyMetadataOptions
-                                                                                                        .BindsTwoWayByDefault,
-                                                                                                    IsOpenedChanged));
-
-        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(
-            "HeaderTemplate", typeof (DataTemplate), typeof (Flyout));
-
-        static Flyout()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof (Flyout), new FrameworkPropertyMetadata(typeof (Flyout)));
-        }
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(string), typeof(Flyout), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position", typeof(Position), typeof(Flyout), new PropertyMetadata(Position.Left, PositionChanged));
+        public static readonly DependencyProperty IsPinnableProperty = DependencyProperty.Register("IsPinnable", typeof(bool), typeof(Flyout), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register("IsOpen", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, IsOpenedChanged));
+        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(Flyout));
 
         public DataTemplate HeaderTemplate
         {
-            get { return (DataTemplate) GetValue(HeaderTemplateProperty); }
+            get { return (DataTemplate)GetValue(HeaderTemplateProperty); }
             set { SetValue(HeaderTemplateProperty, value); }
         }
 
         public bool IsOpen
         {
-            get { return (bool) GetValue(IsOpenProperty); }
+            get { return (bool)GetValue(IsOpenProperty); }
             set { SetValue(IsOpenProperty, value); }
         }
 
         public bool IsPinnable
         {
-            get { return (bool) GetValue(IsPinnableProperty); }
+            get { return (bool)GetValue(IsPinnableProperty); }
             set { SetValue(IsPinnableProperty, value); }
         }
 
         public Position Position
         {
-            get { return (Position) GetValue(PositionProperty); }
+            get { return (Position)GetValue(PositionProperty); }
             set { SetValue(PositionProperty, value); }
         }
 
         public string Header
         {
-            get { return (string) GetValue(HeaderProperty); }
+            get { return (string)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
         private static void IsOpenedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var flyout = (Flyout) dependencyObject;
+            var flyout = (Flyout)dependencyObject;
             VisualStateManager.GoToState(flyout, (bool) e.NewValue == false ? "Hide" : "Show", true);
         }
 
         private static void PositionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             var flyout = (Flyout) dependencyObject;
-            flyout.ApplyAnimation((Position) e.NewValue);
+            flyout.ApplyAnimation((Position)e.NewValue);
+        }
+
+        static Flyout()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Flyout), new FrameworkPropertyMetadata(typeof(Flyout)));
         }
 
         public override void OnApplyTemplate()
@@ -98,12 +71,12 @@ namespace MahApps.Metro.Controls
 
         internal void ApplyAnimation(Position position)
         {
-            var root = (Grid) GetTemplateChild("root");
+            var root = (Grid)GetTemplateChild("root");
             if (root == null)
                 return;
 
-            var hideFrame = (EasingDoubleKeyFrame) GetTemplateChild("hideFrame");
-            var showFrame = (EasingDoubleKeyFrame) GetTemplateChild("showFrame");
+            var hideFrame = (EasingDoubleKeyFrame)GetTemplateChild("hideFrame");
+            var showFrame = (EasingDoubleKeyFrame)GetTemplateChild("showFrame");
 
             if (hideFrame == null || showFrame == null)
                 return;
@@ -138,12 +111,12 @@ namespace MahApps.Metro.Controls
                 return;
             }
 
-            var root = (Grid) GetTemplateChild("root");
+            var root = (Grid)GetTemplateChild("root");
             if (root == null)
                 return;
 
-            var hideFrame = (EasingDoubleKeyFrame) GetTemplateChild("hideFrame");
-            var showFrame = (EasingDoubleKeyFrame) GetTemplateChild("showFrame");
+            var hideFrame = (EasingDoubleKeyFrame)GetTemplateChild("hideFrame");
+            var showFrame = (EasingDoubleKeyFrame)GetTemplateChild("showFrame");
 
             if (hideFrame == null || showFrame == null)
                 return;

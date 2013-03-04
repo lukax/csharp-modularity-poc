@@ -1,72 +1,22 @@
-#region Usings
-
 using System;
-using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Threading;
+using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
-
-#endregion
 
 namespace MahApps.Metro.Controls
 {
-    [TemplatePart(Name = "PART_ScrollViewer", Type = typeof (ScrollViewer))]
+    [TemplatePart(Name = "PART_ScrollViewer", Type = typeof(ScrollViewer))]
     public class Panorama : ItemsControl
     {
-        public static readonly DependencyProperty ItemBoxProperty = DependencyProperty.Register("ItemHeight",
-                                                                                                typeof (double),
-                                                                                                typeof (Panorama),
-                                                                                                new FrameworkPropertyMetadata
-                                                                                                    (120.0));
-
-        public static readonly DependencyProperty GroupHeightProperty = DependencyProperty.Register("GroupHeight",
-                                                                                                    typeof (double),
-                                                                                                    typeof (Panorama),
-                                                                                                    new FrameworkPropertyMetadata
-                                                                                                        (640.0));
-
-        public static readonly DependencyProperty HeaderFontSizeProperty = DependencyProperty.Register(
-            "HeaderFontSize", typeof (double), typeof (Panorama), new FrameworkPropertyMetadata(40.0));
-
-        public static readonly DependencyProperty HeaderFontColorProperty =
-            DependencyProperty.Register("HeaderFontColor", typeof (Brush), typeof (Panorama),
-                                        new FrameworkPropertyMetadata(Brushes.White));
-
-        public static readonly DependencyProperty HeaderFontFamilyProperty =
-            DependencyProperty.Register("HeaderFontFamily", typeof (FontFamily), typeof (Panorama),
-                                        new FrameworkPropertyMetadata(new FontFamily("Segoe UI Light")));
-
-        public static readonly DependencyProperty UseSnapBackScrollingProperty =
-            DependencyProperty.Register("UseSnapBackScrolling", typeof (bool), typeof (Panorama),
-                                        new FrameworkPropertyMetadata(true));
-
-        private static int PixelsToMoveToBeConsideredScroll = 5;
-        private static int PixelsToMoveToBeConsideredClick = 2;
-        private DispatcherTimer animationTimer = new DispatcherTimer(DispatcherPriority.DataBind);
-        private double friction;
-        private Point previousPoint;
-        private Point scrollStartOffset;
-        private Point scrollStartPoint;
-        private Point scrollTarget;
-        private ScrollViewer sv;
-        private IPanoramaTile tile;
-        private Vector velocity;
-
-        static Panorama()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof (Panorama), new FrameworkPropertyMetadata(typeof (Panorama)));
-        }
-
-        public Panorama()
-        {
-            friction = 0.85;
-
-            animationTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-            animationTimer.Tick += HandleWorldTimerTick;
-            animationTimer.Start();
-        }
+        public static readonly DependencyProperty ItemBoxProperty = DependencyProperty.Register("ItemHeight", typeof(double), typeof(Panorama), new FrameworkPropertyMetadata(120.0));
+        public static readonly DependencyProperty GroupHeightProperty = DependencyProperty.Register("GroupHeight", typeof(double), typeof(Panorama), new FrameworkPropertyMetadata(640.0));
+        public static readonly DependencyProperty HeaderFontSizeProperty = DependencyProperty.Register("HeaderFontSize", typeof(double), typeof(Panorama), new FrameworkPropertyMetadata(40.0));
+        public static readonly DependencyProperty HeaderFontColorProperty = DependencyProperty.Register("HeaderFontColor", typeof(Brush), typeof(Panorama), new FrameworkPropertyMetadata(Brushes.White));
+        public static readonly DependencyProperty HeaderFontFamilyProperty = DependencyProperty.Register("HeaderFontFamily", typeof(FontFamily), typeof(Panorama), new FrameworkPropertyMetadata(new FontFamily("Segoe UI Light")));
+        public static readonly DependencyProperty UseSnapBackScrollingProperty = DependencyProperty.Register("UseSnapBackScrolling", typeof(bool), typeof(Panorama), new FrameworkPropertyMetadata(true));
 
         public double Friction
         {
@@ -76,38 +26,73 @@ namespace MahApps.Metro.Controls
 
         public double ItemBox
         {
-            get { return (double) GetValue(ItemBoxProperty); }
+            get { return (double)GetValue(ItemBoxProperty); }
             set { SetValue(ItemBoxProperty, value); }
         }
 
         public double GroupHeight
         {
-            get { return (double) GetValue(GroupHeightProperty); }
+            get { return (double)GetValue(GroupHeightProperty); }
             set { SetValue(GroupHeightProperty, value); }
         }
 
         public double HeaderFontSize
         {
-            get { return (double) GetValue(HeaderFontSizeProperty); }
+            get { return (double)GetValue(HeaderFontSizeProperty); }
             set { SetValue(HeaderFontSizeProperty, value); }
         }
 
         public Brush HeaderFontColor
         {
-            get { return (Brush) GetValue(HeaderFontColorProperty); }
+            get { return (Brush)GetValue(HeaderFontColorProperty); }
             set { SetValue(HeaderFontColorProperty, value); }
         }
 
         public FontFamily HeaderFontFamily
         {
-            get { return (FontFamily) GetValue(HeaderFontFamilyProperty); }
+            get { return (FontFamily)GetValue(HeaderFontFamilyProperty); }
             set { SetValue(HeaderFontFamilyProperty, value); }
         }
 
         public bool UseSnapBackScrolling
         {
-            get { return (bool) GetValue(UseSnapBackScrollingProperty); }
+            get { return (bool)GetValue(UseSnapBackScrollingProperty); }
             set { SetValue(UseSnapBackScrollingProperty, value); }
+        }
+
+        private ScrollViewer sv;
+        private Point scrollTarget;
+        private Point scrollStartPoint;
+        private Point scrollStartOffset;
+        private Point previousPoint;
+        private Vector velocity;
+        private double friction;
+        private DispatcherTimer animationTimer = new DispatcherTimer(DispatcherPriority.DataBind);
+        private static int PixelsToMoveToBeConsideredScroll = 5;
+        private static int PixelsToMoveToBeConsideredClick = 2;
+        private IPanoramaTile tile;
+
+        public Panorama()
+        {
+            friction = 0.85;
+
+            animationTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            animationTimer.Tick += HandleWorldTimerTick;
+
+            this.Loaded += (sender, e) =>
+            {
+                animationTimer.Start();
+            };
+
+            this.Unloaded += (sender, e) =>
+            {
+                animationTimer.Stop();
+            };
+        }
+
+        static Panorama()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Panorama), new FrameworkPropertyMetadata(typeof(Panorama)));
         }
 
         private void DoStandardScrolling()
@@ -124,8 +109,7 @@ namespace MahApps.Metro.Controls
             if (sv == null)
                 return;
             var prop = DesignerProperties.IsInDesignModeProperty;
-            var isInDesignMode =
-                (bool) DependencyPropertyDescriptor.FromProperty(prop, typeof (FrameworkElement)).Metadata.DefaultValue;
+            var isInDesignMode = (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
 
             if (isInDesignMode)
                 return;
@@ -146,12 +130,12 @@ namespace MahApps.Metro.Controls
                 {
                     if (UseSnapBackScrolling)
                     {
-                        int mx = (int) sv.HorizontalOffset%(int) ActualWidth;
+                        int mx = (int)sv.HorizontalOffset % (int)ActualWidth;
                         if (mx == 0)
                             return;
-                        int ix = (int) sv.HorizontalOffset/(int) ActualWidth;
-                        double snapBackX = mx > ActualWidth/2 ? (ix + 1)*ActualWidth : ix*ActualWidth;
-                        sv.ScrollToHorizontalOffset(sv.HorizontalOffset + (snapBackX - sv.HorizontalOffset)/4.0);
+                        int ix = (int)sv.HorizontalOffset / (int)ActualWidth;
+                        double snapBackX = mx > ActualWidth / 2 ? (ix + 1) * ActualWidth : ix * ActualWidth;
+                        sv.ScrollToHorizontalOffset(sv.HorizontalOffset + (snapBackX - sv.HorizontalOffset) / 4.0);
                     }
                     else
                     {
@@ -163,7 +147,7 @@ namespace MahApps.Metro.Controls
 
         public override void OnApplyTemplate()
         {
-            sv = (ScrollViewer) Template.FindName("PART_ScrollViewer", this);
+            sv = (ScrollViewer)Template.FindName("PART_ScrollViewer", this);
             base.OnApplyTemplate();
         }
 
@@ -179,20 +163,18 @@ namespace MahApps.Metro.Controls
                 scrollStartOffset.Y = sv.VerticalOffset;
 
                 // Update the cursor if can scroll or not.
-                Cursor = (sv.ExtentWidth > sv.ViewportWidth) || (sv.ExtentHeight > sv.ViewportHeight)
-                             ? Cursors.ScrollAll
-                             : Cursors.Arrow;
+                Cursor = (sv.ExtentWidth > sv.ViewportWidth) || (sv.ExtentHeight > sv.ViewportHeight) ? Cursors.ScrollAll : Cursors.Arrow;
 
                 //store Control if one was found, so we can call its command later
                 var x = TreeHelper.TryFindFromPoint<ListBoxItem>(this, scrollStartPoint);
                 if (x != null)
                 {
-                    x.IsSelected = true;
+                    x.IsSelected = !x.IsSelected;
                     ItemsControl tiles = ItemsControlFromItemContainer(x);
                     var data = tiles.ItemContainerGenerator.ItemFromContainer(x);
                     if (data != null && data is IPanoramaTile)
                     {
-                        tile = (IPanoramaTile) data;
+                        tile = (IPanoramaTile)data;
                     }
                 }
             }
@@ -250,5 +232,6 @@ namespace MahApps.Metro.Controls
 
             base.OnPreviewMouseUp(e);
         }
+
     }
 }

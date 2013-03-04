@@ -14,9 +14,4 @@
 
     <Color x:Key="GrayNormal">#FFBEBEBE</Color>
     <Color x:Key="GrayHover">#FF333333</Color>
-
-    <SolidColorBrush x:Key="BlackColorBrush"
-                     Color="{DynamicResource BlackColor}" />
-    <SolidColorBrush x:Key="WhiteColorBrush2"
-                     Color="{DynamicResource WhiteColor}" />
 </ResourceDictionary>

@@ -1,33 +1,29 @@
-﻿#region Usings
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-#endregion
-
+/// <summary>
+/// This class was obtained from Philip Sumi (a fellow WPF Discples blog)
+/// http://www.hardcodet.net/uploads/2009/06/UIHelper.cs
+/// </summary>
 namespace MahApps.Metro.Controls
 {
     /// <summary>
-    ///     Helper methods for UI-related tasks.
+    /// Helper methods for UI-related tasks.
     /// </summary>
     public static class TreeHelper
     {
         #region find parent
 
         /// <summary>
-        ///     Finds a parent of a given item on the visual tree.
+        /// Finds a parent of a given item on the visual tree.
         /// </summary>
         /// <typeparam name="T">The type of the queried item.</typeparam>
-        /// <param name="child">
-        ///     A direct or indirect child of the
-        ///     queried item.
-        /// </param>
-        /// <returns>
-        ///     The first parent item that matches the submitted
-        ///     type parameter. If not matching item can be found, a null
-        ///     reference is being returned.
-        /// </returns>
+        /// <param name="child">A direct or indirect child of the
+        /// queried item.</param>
+        /// <returns>The first parent item that matches the submitted
+        /// type parameter. If not matching item can be found, a null
+        /// reference is being returned.</returns>
         public static T TryFindParent<T>(this DependencyObject child)
             where T : DependencyObject
         {
@@ -51,16 +47,14 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
-        ///     This method is an alternative to WPF's
-        ///     <see cref="VisualTreeHelper.GetParent" /> method, which also
-        ///     supports content elements. Keep in mind that for content element,
-        ///     this method falls back to the logical tree of the element!
+        /// This method is an alternative to WPF's
+        /// <see cref="VisualTreeHelper.GetParent"/> method, which also
+        /// supports content elements. Keep in mind that for content element,
+        /// this method falls back to the logical tree of the element!
         /// </summary>
         /// <param name="child">The item to be processed.</param>
-        /// <returns>
-        ///     The submitted item's parent, if available. Otherwise
-        ///     null.
-        /// </returns>
+        /// <returns>The submitted item's parent, if available. Otherwise
+        /// null.</returns>
         public static DependencyObject GetParentObject(this DependencyObject child)
         {
             if (child == null) return null;
@@ -93,17 +87,13 @@ namespace MahApps.Metro.Controls
         #region find children
 
         /// <summary>
-        ///     Analyzes both visual and logical tree in order to find all elements of a given
-        ///     type that are descendants of the <paramref name="source" /> item.
+        /// Analyzes both visual and logical tree in order to find all elements of a given
+        /// type that are descendants of the <paramref name="source"/> item.
         /// </summary>
         /// <typeparam name="T">The type of the queried items.</typeparam>
-        /// <param name="source">
-        ///     The root element that marks the source of the search. If the
-        ///     source is already of the requested type, it will not be included in the result.
-        /// </param>
-        /// <returns>
-        ///     All descendants of <paramref name="source" /> that match the requested type.
-        /// </returns>
+        /// <param name="source">The root element that marks the source of the search. If the
+        /// source is already of the requested type, it will not be included in the result.</param>
+        /// <returns>All descendants of <paramref name="source"/> that match the requested type.</returns>
         public static IEnumerable<T> FindChildren<T>(this DependencyObject source) where T : DependencyObject
         {
             if (source != null)
@@ -114,7 +104,7 @@ namespace MahApps.Metro.Controls
                     //analyze if children match the requested type
                     if (child != null && child is T)
                     {
-                        yield return (T) child;
+                        yield return (T)child;
                     }
 
                     //recurse tree
@@ -128,10 +118,10 @@ namespace MahApps.Metro.Controls
 
 
         /// <summary>
-        ///     This method is an alternative to WPF's
-        ///     <see cref="VisualTreeHelper.GetChild" /> method, which also
-        ///     supports content elements. Keep in mind that for content elements,
-        ///     this method falls back to the logical tree of the element.
+        /// This method is an alternative to WPF's
+        /// <see cref="VisualTreeHelper.GetChild"/> method, which also
+        /// supports content elements. Keep in mind that for content elements,
+        /// this method falls back to the logical tree of the element.
         /// </summary>
         /// <param name="parent">The item to be processed.</param>
         /// <returns>The submitted item's child elements, if available.</returns>
@@ -145,7 +135,7 @@ namespace MahApps.Metro.Controls
                 foreach (object obj in LogicalTreeHelper.GetChildren(parent))
                 {
                     var depObj = obj as DependencyObject;
-                    if (depObj != null) yield return (DependencyObject) obj;
+                    if (depObj != null) yield return (DependencyObject)obj;
                 }
             }
             else
@@ -164,17 +154,13 @@ namespace MahApps.Metro.Controls
         #region find from point
 
         /// <summary>
-        ///     Tries to locate a given item within the visual tree,
-        ///     starting with the dependency object at a given position.
+        /// Tries to locate a given item within the visual tree,
+        /// starting with the dependency object at a given position. 
         /// </summary>
-        /// <typeparam name="T">
-        ///     The type of the element to be found
-        ///     on the visual tree of the element at the given location.
-        /// </typeparam>
-        /// <param name="reference">
-        ///     The main element which is used to perform
-        ///     hit testing.
-        /// </param>
+        /// <typeparam name="T">The type of the element to be found
+        /// on the visual tree of the element at the given location.</typeparam>
+        /// <param name="reference">The main element which is used to perform
+        /// hit testing.</param>
         /// <param name="point">The position to be evaluated on the origin.</param>
         public static T TryFindFromPoint<T>(UIElement reference, Point point)
             where T : DependencyObject
@@ -182,7 +168,7 @@ namespace MahApps.Metro.Controls
             DependencyObject element = reference.InputHitTest(point) as DependencyObject;
 
             if (element == null) return null;
-            else if (element is T) return (T) element;
+            else if (element is T) return (T)element;
             else return TryFindParent<T>(element);
         }
 

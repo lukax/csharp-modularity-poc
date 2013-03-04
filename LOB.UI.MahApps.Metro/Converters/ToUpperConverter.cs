@@ -1,10 +1,6 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-
-#endregion
 
 namespace MahApps.Metro.Converters
 {

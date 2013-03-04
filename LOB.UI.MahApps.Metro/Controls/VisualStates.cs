@@ -1,12 +1,8 @@
-#region Usings
-
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
-#endregion
 
 namespace MahApps.Metro.Controls
 {
@@ -89,9 +85,9 @@ namespace MahApps.Metro.Controls
         public static FrameworkElement GetImplementationRoot(DependencyObject dependencyObject)
         {
             Debug.Assert(dependencyObject != null, "DependencyObject should not be null.");
-            return (1 == VisualTreeHelper.GetChildrenCount(dependencyObject))
-                       ? VisualTreeHelper.GetChild(dependencyObject, 0) as FrameworkElement
-                       : null;
+            return (1 == VisualTreeHelper.GetChildrenCount(dependencyObject)) ?
+                VisualTreeHelper.GetChild(dependencyObject, 0) as FrameworkElement :
+                null;
         }
 
         public static VisualStateGroup TryGetVisualStateGroup(DependencyObject dependencyObject, string groupName)
@@ -103,8 +99,7 @@ namespace MahApps.Metro.Controls
             }
 
             return VisualStateManager.GetVisualStateGroups(root)
-                                     .OfType<VisualStateGroup>()
-                                     .FirstOrDefault(group => string.CompareOrdinal(groupName, @group.Name) == 0);
+                .OfType<VisualStateGroup>().FirstOrDefault(group => string.CompareOrdinal(groupName, @group.Name) == 0);
         }
     }
 }
