@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using LOB.Domain.Base;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface;
 
 #endregion
@@ -22,7 +23,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
         }
 
         [ImportingConstructor]
-        public AlterCategoryView(AlterBaseEntityViewModel<Category> viewModel)
+        public AlterCategoryView(AlterCategoryViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;

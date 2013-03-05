@@ -73,9 +73,15 @@ namespace LOB.UI.Core
                         _resolvedView = _container.Resolve<ListCustomerView>();
                         break;
                     case "AlterCategory":
-                        _resolvedView = _container.Resolve<AlterServiceView>();
+                        _resolvedView = _container.Resolve<AlterCategoryView>();
                         break;
                     case "AlterService":
+                        _resolvedView = _container.Resolve<AlterServiceView>();
+                        break;
+                    case "ListCategory":
+                        _resolvedView = _container.Resolve<AlterCategoryView>();
+                        break;
+                    case "ListService":
                         _resolvedView = _container.Resolve<AlterServiceView>();
                         break;
                     case "AlterSale":
@@ -124,10 +130,16 @@ namespace LOB.UI.Core
                             _container.Resolve<ListCustomerView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterCategory":
-                        _resolvedView = _container.Resolve<AlterServiceView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView = _container.Resolve<AlterCategoryView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterService":
                         _resolvedView = _container.Resolve<AlterServiceView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "ListCategory":
+                        _resolvedView = _container.Resolve<ListCategoryView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "ListService":
+                        _resolvedView = _container.Resolve<ListServiceView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterSale":
                         _resolvedView = _container.Resolve<AlterSaleView>(new ParameterOverride("viewModel", viewModel));

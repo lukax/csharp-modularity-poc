@@ -115,9 +115,13 @@
     <Compile Include="ViewModel\Controls\Alter\Base\AlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\AlterPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterAddressViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterCategoryViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterServiceViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\ListServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListAddressViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\ListCategoryViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListContactInfoViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListPayCheckViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListBaseEntityViewModel.cs" />
@@ -166,6 +170,12 @@
     </Compile>
     <Compile Include="View\Controls\Alter\SubEntity\AlterServiceView.xaml.cs">
       <DependentUpon>AlterServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\List\SubEntity\ListCategoryView.xaml.cs">
+      <DependentUpon>ListCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\List\SubEntity\ListServiceView.xaml.cs">
+      <DependentUpon>ListServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\List\SubEntity\ListBaseEntityView.xaml.cs">
       <DependentUpon>ListBaseEntityView.xaml</DependentUpon>
@@ -250,6 +260,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Controls\Alter\SubEntity\AlterServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\List\SubEntity\ListCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\List\SubEntity\ListServiceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
