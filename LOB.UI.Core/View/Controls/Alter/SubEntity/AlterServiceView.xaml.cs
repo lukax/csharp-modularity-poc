@@ -28,14 +28,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             ViewModel = viewModel;
         }
 
-        public AlterBaseEntityViewModel<Service> ViewModel
+        public AlterServiceViewModel ViewModel
         {
             set { this.DataContext = value; }
         }
 
         public string Header
         {
-            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
+            get { return (string.IsNullOrEmpty(_header)) ? "Service" : _header; }
             set { _header = value; }
         }
 

@@ -1,8 +1,7 @@
 ﻿using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.List.Base;
 
-namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
+namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
     public class ListServiceViewModel :ListBaseEntityViewModel<Service>
     {

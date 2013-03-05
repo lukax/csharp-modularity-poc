@@ -79,10 +79,10 @@ namespace LOB.UI.Core
                         _resolvedView = _container.Resolve<AlterServiceView>();
                         break;
                     case "ListCategory":
-                        _resolvedView = _container.Resolve<AlterCategoryView>();
+                        _resolvedView = _container.Resolve<ListCategoryView>();
                         break;
                     case "ListService":
-                        _resolvedView = _container.Resolve<AlterServiceView>();
+                        _resolvedView = _container.Resolve<ListServiceView>();
                         break;
                     case "AlterSale":
                         _resolvedView = _container.Resolve<AlterSaleView>();
@@ -168,10 +168,8 @@ namespace LOB.UI.Core
             var local = Get();
             if (local is UserControl)
             {
-                var window = new FrameWindow()
-                    {
-                        Content = _resolvedView
-                    };
+                var window = new FrameWindow{ Content = _resolvedView};
+                if (_resolvedView is ITabProp) window.Title = ((ITabProp) _resolvedView).Header;
                 if (asDialog) window.ShowDialog();
                 else window.Show();
                 return;

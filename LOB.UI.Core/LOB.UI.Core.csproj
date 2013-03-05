@@ -118,8 +118,8 @@
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterCategoryViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterServiceViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\SubEntity\ListServiceViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\AlterServiceViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\Base\ListServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListAddressViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListCategoryViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListContactInfoViewModel.cs" />

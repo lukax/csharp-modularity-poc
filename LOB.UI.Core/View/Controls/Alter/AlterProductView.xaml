@@ -76,12 +76,12 @@
                     <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory"
                           SelectedItem="{Binding Entity.Category}" MinWidth="150" />
                     <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
-                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
+                           HorizontalAlignment="Left" ToolTip="Edit" Focusable="False" Background="Transparent"
                            Grid.Column="5">
                         <Image Source="../../Resources/edit.png" />
                     </controls:Tile>
                     <controls:Tile Width="18" Height="18" Background="Transparent" CommandParameter="ListCategory"
-                           Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0">
+                           Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0" ToolTip="QuickSearch">
                         <Image Source="../../Resources/Search48.png" />
                     </controls:Tile>
                 </StackPanel>

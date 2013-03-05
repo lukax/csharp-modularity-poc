@@ -3,6 +3,8 @@
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Base;
+using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface;
 
 #endregion
@@ -20,20 +22,20 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
         }
 
         [ImportingConstructor]
-        public ListServiceView(BaseViewModel viewModel)
+        public ListServiceView(ListServiceViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
         }
 
-        public BaseViewModel ViewModel
+        public ListServiceViewModel ViewModel
         {
             set { this.DataContext = value; }
         }
 
         public string Header
         {
-            get { return (string.IsNullOrEmpty(_header)) ? "Códigos" : _header; }
+            get { return (string.IsNullOrEmpty(_header)) ? "Services" : _header; }
             set { _header = value; }
         }
 

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
+namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
     public class AlterServiceViewModel : AlterBaseEntityViewModel<Service>
     {

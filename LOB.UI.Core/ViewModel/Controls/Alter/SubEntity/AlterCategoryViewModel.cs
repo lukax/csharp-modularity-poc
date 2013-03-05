@@ -9,7 +9,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>
+    public class AlterCategoryViewModel : AlterServiceViewModel
     {
         public AlterCategoryViewModel(Category entity, IRepository repository) : base(entity, repository)
         {
