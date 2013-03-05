@@ -25,7 +25,7 @@ namespace LOB.UI.Core
     public sealed partial class App : Application, IDisposable
     {
         private ComposablePartCatalog _catalog;
-        private INavigator _navigator;
+        private IFluentNavigator _navigator;
         private IRegionAdapter _regionAdapter;
         private ISessionCreator _sessionCreator;
         private IUnityContainer _unityContainer;
@@ -46,7 +46,7 @@ namespace LOB.UI.Core
             OnStartup();
 
             //Startup MainWindow
-            _navigator.Startup<MainWindow>();
+            _navigator.Resolve<MainWindow>().Show();
         }
 
         private void OnStartup()
@@ -57,7 +57,7 @@ namespace LOB.UI.Core
             //Make container resolve types known to MEF:
             _unityContainer.RegisterCatalog(_catalog);
 
-            _navigator = _unityContainer.Resolve<INavigator>();
+            _navigator = _unityContainer.Resolve<IFluentNavigator>();
             _regionAdapter = _unityContainer.Resolve<IRegionAdapter>();
             _sessionCreator = _unityContainer.Resolve<ISessionCreator>();
         }

@@ -49,12 +49,10 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void InitializeServices()
         {
-            throw new NotImplementedException();
         }
 
         public void Refresh()
         {
-            throw new NotImplementedException();
         }
     }
 }

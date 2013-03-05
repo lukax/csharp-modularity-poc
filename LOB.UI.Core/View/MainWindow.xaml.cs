@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
@@ -20,11 +21,11 @@ namespace LOB.UI.Core.View
     public partial class MainWindow : MetroWindow, IView
     {
         private IUnityContainer _container;
-        private INavigator _navigator;
+        private IFluentNavigator _navigator;
         private MainWindowViewModel _viewModel;
 
         [ImportingConstructor]
-        public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, INavigator navigator)
+        public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, IFluentNavigator navigator)
         {
             _container = container;
             _viewModel = viewModel;
@@ -52,7 +53,7 @@ namespace LOB.UI.Core.View
 
         private void OpenView(object arg, object viewModel, bool asDialog = true)
         {
-            _navigator.ResolveView(arg.ToString(), viewModel).StartView(asDialog);
+            _navigator.Resolve(arg.ToString()).SetViewModel(viewModel).Show(asDialog);
             ChangeFlyouts(null, null);
         }
 

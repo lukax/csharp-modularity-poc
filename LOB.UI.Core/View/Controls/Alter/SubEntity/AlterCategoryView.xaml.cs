@@ -1,40 +1,41 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.UI.Core.ViewModel.Controls.List;
+using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.List
+namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {
     [Export]
-    public partial class ListProductView : UserControl, ITabProp, IView
+    public partial class AlterCategoryView : UserControl, IView, ITabProp
     {
         private string _header;
 
-        public ListProductView()
+        public AlterCategoryView()
         {
             InitializeComponent();
         }
 
         [ImportingConstructor]
-        public ListProductView(ListProductViewModel viewModel)
+        public AlterCategoryView(AlterBaseEntityViewModel<Category> viewModel)
             : this()
         {
             ViewModel = viewModel;
         }
 
-        public ListProductViewModel ViewModel
+        public AlterBaseEntityViewModel<Category> ViewModel
         {
             set { this.DataContext = value; }
         }
 
         public string Header
         {
-            get { return (string.IsNullOrEmpty(_header)) ? "Produtos" : _header; }
+            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
             set { _header = value; }
         }
 

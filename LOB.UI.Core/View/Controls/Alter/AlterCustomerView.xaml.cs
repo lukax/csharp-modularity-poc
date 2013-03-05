@@ -23,7 +23,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         }
 
         [ImportingConstructor]
-        public AlterCustomerView(AlterCustomerViewModel viewModel, IUnityContainer container, INavigator navigator)
+        public AlterCustomerView(AlterCustomerViewModel viewModel, IUnityContainer container, IFluentNavigator navigator)
             : this()
         {
             ViewModel = viewModel;

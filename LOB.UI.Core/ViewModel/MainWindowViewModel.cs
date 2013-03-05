@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.Command;
@@ -16,7 +17,7 @@ namespace LOB.UI.Core.ViewModel
     public class MainWindowViewModel : BaseViewModel
     {
         [ImportingConstructor]
-        public MainWindowViewModel(IUnityContainer container, INavigator navigator)
+        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator)
         {
             _container = container;
             _navigator = navigator;
@@ -26,11 +27,11 @@ namespace LOB.UI.Core.ViewModel
 
         public ICommand OpenTabCommand { get; set; }
         private IUnityContainer _container { get; set; }
-        private INavigator _navigator { get; set; }
+        private IFluentNavigator _navigator { get; set; }
 
         private void OpenTab(object arg)
         {
-            Messenger.Default.Send(_navigator.ResolveView(arg.ToString()).GetView, "OpenTab");
+            Messenger.Default.Send(_navigator.Resolve(arg.ToString()).Get(), "OpenTab");
         }
 
         public override void InitializeServices()

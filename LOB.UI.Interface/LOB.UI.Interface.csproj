@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="CrudOperationType.cs" />
     <Compile Include="Dialog\IDialog.cs" />
-    <Compile Include="INavigator.cs" />
+    <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
     <Compile Include="ITabProp.cs" />
     <Compile Include="IView.cs" />

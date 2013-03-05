@@ -20,11 +20,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
         private IUnityContainer _container;
-        private INavigator _navigator;
+        private IFluentNavigator _navigator;
 
         [ImportingConstructor]
         public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container,
-                                      INavigator navigator,
+                                      IFluentNavigator navigator,
                                       AlterLegalPersonViewModel alterLegalPersonViewModel,
                                       AlterNaturalPersonViewModel alterNaturalPersonViewModel)
             : base(client, repository)
@@ -57,8 +57,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private async void LegalPersonCfg()
         {
             await Task.Delay(500);
-            dynamic viewL = _navigator.ResolveView("AlterLegalPerson").GetView;
-            viewL.DataContext = _alterLegalPersonViewModel;
+            var viewL = _navigator.Resolve("AlterLegalPerson").SetViewModel(_alterLegalPersonViewModel).Get();
             Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
 
             Entity.Person = _alterLegalPersonViewModel.Entity;
@@ -66,8 +65,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private async void NaturalPersonCfg()
         {
             await Task.Delay(500);
-            dynamic viewN = _navigator.ResolveView("AlterNaturalPerson").GetView;
-            viewN.DataContext = _alterNaturalPersonViewModel;
+            var viewN = _navigator.Resolve("AlterNaturalPerson").SetViewModel(_alterNaturalPersonViewModel).Get();
             Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
 
             Entity.Person = _alterNaturalPersonViewModel.Entity;
