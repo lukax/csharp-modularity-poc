@@ -168,7 +168,7 @@ namespace LOB.UI.Core
             var local = Get();
             if (local is UserControl)
             {
-                var window = new FrameWindow{ Content = _resolvedView};
+                var window = new FrameWindow{ Content = _resolvedView, DataContext = _resolvedView.DataContext};
                 if (_resolvedView is ITabProp) window.Title = ((ITabProp) _resolvedView).Header;
                 if (asDialog) window.ShowDialog();
                 else window.Show();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
     {
         public AlterCategoryViewModel(Category entity, IRepository repository) : base(entity, repository)
         {
+        }
+
+        protected override void SaveChanges(object arg)
+        {
+            using (Repository.Uow.BeginTransaction())
+            {
+                Debug.Write("Saving changes...");
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
         }
 
         protected override void QuickSearch(object arg)

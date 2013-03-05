@@ -84,12 +84,13 @@ namespace LOB.Dao.Nhibernate
             }
         }
 
-        public void BeginTransaction()
+        public IUnityOfWork BeginTransaction()
         {
             if (_transaction == null)
                 _transaction = ((ISession) Orm).BeginTransaction();
             else if (_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has already been initialized, dispose first");
+            return this;
         }
 
         public void CommitTransaction()

@@ -20,7 +20,7 @@ namespace LOB.Dao.Interface
         void SaveOrUpdate<T>(T entity) where T : BaseEntity;
         void Update<T>(T entity) where T : BaseEntity;
         void Delete<T>(T entity) where T : BaseEntity;
-        void BeginTransaction();
+        IUnityOfWork BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
     }

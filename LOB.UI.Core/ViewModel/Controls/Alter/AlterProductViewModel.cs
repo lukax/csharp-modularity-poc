@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
@@ -36,7 +37,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             _navigator = navigator;
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
-            Categories = Repository.GetList<Category>().ToList();
+            UpdateCategoryList();
+        }
+
+        private async void UpdateCategoryList(int delay = 2000)
+        {
+            while (true)
+            {
+                await Task.Delay(2000);
+                this.Categories = Repository.GetList<Category>().ToList();
+            }
         }
 
         private void ExecuteListCategory(object o)
@@ -52,7 +62,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             //Messenger.Default.Send<object>(_container.Resolve<AlterCategoryViewModel>());
         }
 
-        public IList<Category> Categories { get; set; }
+        private IList<Category> _categories;
+        public IList<Category> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                if (value == null) return; 
+                if(value.Equals(_categories)) return; 
+                _categories = value; OnPropertyChanged();
+                if (Entity.Category == null) Entity.Category = value.FirstOrDefault();
+            }
+        }
 
         protected override void SaveChanges(object arg)
         {

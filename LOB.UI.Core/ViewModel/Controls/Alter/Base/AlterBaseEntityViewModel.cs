@@ -48,8 +48,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         protected virtual void SaveChanges(object arg)
         {
-            Debug.Write("Saving changes...");
-            Entity = Repository.SaveOrUpdate(Entity);
+            using (Repository.Uow.BeginTransaction())
+            {
+                Debug.Write("Saving changes...");
+                Entity = Repository.SaveOrUpdate(Entity);
+            }
             Cancel(arg);
         }
 

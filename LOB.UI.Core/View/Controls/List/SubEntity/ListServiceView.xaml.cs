@@ -2,6 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
@@ -22,13 +23,13 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
         }
 
         [ImportingConstructor]
-        public ListServiceView(ListServiceViewModel viewModel)
+        public ListServiceView(ListServiceViewModel<Service> viewModel)
             : this()
         {
             ViewModel = viewModel;
         }
 
-        public ListServiceViewModel ViewModel
+        public ListServiceViewModel<Service> ViewModel
         {
             set { this.DataContext = value; }
         }
