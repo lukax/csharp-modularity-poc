@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:metrocontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
+             xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
@@ -49,6 +51,13 @@
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
                 <TextBox Text="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="120" MaxWidth="250" />
                 <ComboBox MinWidth="50" MaxWidth="100" ItemsSource="{Binding UfList}" SelectedItem="{Binding Entity.RgUf}"/>
+                <StackPanel.Resources>
+                    <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                        <ObjectDataProvider.MethodParameters>
+                            <x:Type TypeName="domainSub:UfBr"/>
+                        </ObjectDataProvider.MethodParameters>
+                    </ObjectDataProvider>
+                </StackPanel.Resources>
             </StackPanel>
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" Content="CPF:" />
