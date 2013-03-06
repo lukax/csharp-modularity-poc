@@ -73,6 +73,7 @@
     <Compile Include="Sale.cs" />
     <Compile Include="SubEntity\ShipmentInfo.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="SubEntity\Uf.cs" />
     <Compile Include="Supplier.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
