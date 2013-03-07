@@ -33,9 +33,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             _container = container;
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
+            //default init customer as natural person
             NaturalPersonCfg();
             PersonTypeChanged();
-            
         }
 
         private void PersonTypeChanged()

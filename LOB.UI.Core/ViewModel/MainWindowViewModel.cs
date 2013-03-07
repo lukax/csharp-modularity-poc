@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
+using LOB.Core;
 using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface;
@@ -16,6 +17,8 @@ namespace LOB.UI.Core.ViewModel
     [Export]
     public class MainWindowViewModel : BaseViewModel
     {
+        public string LicenseInformation { get { return ProductLicense.LicenseInformation(); } }
+
         [ImportingConstructor]
         public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator)
         {

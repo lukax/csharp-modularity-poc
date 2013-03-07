@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
+using LOB.Core;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using MahApps.Metro;
@@ -146,5 +147,16 @@ namespace LOB.UI.Core.View
         }
 
         #endregion
+
+        private void ButtonLicense_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenuLicense.PlacementTarget = this;
+            ContextMenuLicense.IsOpen = !ContextMenuLicense.IsOpen;
+        }
+        private void ButtonThemes_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenuThemes.PlacementTarget = this;
+            ContextMenuThemes.IsOpen = !ContextMenuThemes.IsOpen;
+        }
     }
 }

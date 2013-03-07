@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
@@ -17,6 +18,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     [Export]
     public class AlterNaturalPersonViewModel : AlterPersonViewModel<NaturalPerson>
     {
+        public string BirthDate
+        {
+            get { return Entity.BirthDate.ToShortDateString(); }
+            set
+            {
+                if (Entity.BirthDate.ToShortDateString() == value) return;
+
+                DateTime parsed;
+                if (DateTime.TryParse(value, out parsed))
+                {
+                    Entity.BirthDate = parsed;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
         private IUnityContainer _container;
 
         [ImportingConstructor]

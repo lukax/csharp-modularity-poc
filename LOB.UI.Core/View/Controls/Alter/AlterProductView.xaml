@@ -90,14 +90,14 @@
 
                 <StackPanel HorizontalAlignment="Left" MinWidth="150" MaxWidth="350" Grid.Column="4" Grid.Row="4">
                     <StackPanel.Resources>
-                        <ObjectDataProvider x:Key="dataFromEnum"
+                        <ObjectDataProvider x:Key="DataFromEnum"
                                 MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                             <ObjectDataProvider.MethodParameters>
                                 <x:Type TypeName="domain:ProductStatus"/>
                             </ObjectDataProvider.MethodParameters>
                         </ObjectDataProvider>
                     </StackPanel.Resources>
-                    <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Entity.Status}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}" SelectedItem="{Binding Entity.Status}" />
                 </StackPanel>
 
                 <TextBox controls:TextboxHelper.Watermark="Description" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" MaxWidth="400"

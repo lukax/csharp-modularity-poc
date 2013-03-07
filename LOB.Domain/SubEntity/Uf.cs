@@ -37,13 +37,11 @@ namespace LOB.Domain.SubEntity
         TO
     }
 
-    public sealed class UfBrDictionary
+    public static class UfBrDictionary
     {
-        private static readonly Lazy<IDictionary<UfBr, string>> lazy =
+        private static readonly Lazy<IDictionary<UfBr, string>> Lazy =
             new Lazy<IDictionary<UfBr, string>>(
-                () =>
-                {
-                    return new Dictionary<UfBr, string>
+                () => new Dictionary<UfBr, string>
                     {
                         {UfBr.AC, "Acre"},
                         {UfBr.AL, "Alagoas"},
@@ -72,14 +70,9 @@ namespace LOB.Domain.SubEntity
                         {UfBr.SP, "São Paulo"},
                         {UfBr.SE, "Sergipe"},
                         {UfBr.TO, "Tocantins"}
-                    };
-                });
+                    });
 
-        private UfBrDictionary()
-        {
-        }
-
-        public static IDictionary<UfBr, string> Ufs { get { return lazy.Value; } }
+        public static IDictionary<UfBr, string> Ufs { get { return Lazy.Value; } }
     }
 }
 

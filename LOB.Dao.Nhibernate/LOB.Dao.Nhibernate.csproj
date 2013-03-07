@@ -81,6 +81,7 @@
     <Compile Include="Mapping\Base\ServiceMap.cs" />
     <Compile Include="Mapping\Base\BaseEntityMap.cs" />
     <Compile Include="Mapping\StoreMap.cs" />
+    <Compile Include="Mapping\SubEntity\UfMap.cs" />
     <Compile Include="Mapping\SupplierMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionCreator.cs" />

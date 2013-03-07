@@ -18,9 +18,26 @@
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.WindowCommands>
         <controls:WindowCommands>
-            <Button Content="Temas">
+            
+            <Button Click="ButtonLicense_OnClick">
+                <StackPanel>
+                    <TextBlock Text="{Binding LicenseInformation}" Foreground="{DynamicResource Foreground}"/>
+                </StackPanel>
                 <Button.ContextMenu>
-                    <ContextMenu>
+                    <ContextMenu x:Name="ContextMenuLicense">
+                        <MenuItem Header="Add License"/>
+                        <MenuItem Header="Buy License"/>
+                        <MenuItem Header="License Information"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            
+            <Button Click="ButtonThemes_OnClick">
+                <StackPanel>
+                    <TextBlock Text="Themes" Foreground="{DynamicResource Foreground}"/>
+                </StackPanel>
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="ContextMenuThemes">
                         <MenuItem Header="Dark">
                             <MenuItem x:Name="MenuItemDarkRed" Header="Dark Red" Click="MiDarkRed" />
                             <MenuItem x:Name="MenuItemDarkGreen" Header="Dark Green" Click="MiDarkGreen" />
@@ -39,7 +56,6 @@
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>
-
 
         </controls:WindowCommands>
     </controls:MetroWindow.WindowCommands>
@@ -116,9 +132,9 @@
                 </MenuItem>
                 <MenuItem Header="RELATÓRIOS">
 
-                </MenuItem>
+                </MenuItem>    
             </Menu>
-
+            
 
             <Grid>
                 <Grid.ColumnDefinitions>

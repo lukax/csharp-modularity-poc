@@ -22,6 +22,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _container = container;
         }
 
+        //TODO: Wrap with business logic
+        public string State { get { return Entity.State; } set
+        {
+            if (value.Length == 2)
+            {
+                try
+                {
+                    UfBr parsed;
+                    Enum.TryParse(value, out parsed);
+                    Entity.State = UfBrDictionary.Ufs[parsed];
+                }
+                catch (ArgumentNullException)
+                {
+                    Entity.State = value;
+                }
+            }
+        } }
         protected override void SaveChanges(object arg)
         {
             using (Repository.Uow)
