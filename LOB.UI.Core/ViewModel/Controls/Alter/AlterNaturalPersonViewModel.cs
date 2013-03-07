@@ -18,6 +18,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     [Export]
     public class AlterNaturalPersonViewModel : AlterPersonViewModel<NaturalPerson>
     {
+        private IUnityContainer _container;
+
+        [ImportingConstructor]
+        public AlterNaturalPersonViewModel(NaturalPerson entity, Address address, ContactInfo contactInfo,
+                                           IRepository repository,
+                                           AlterAddressViewModel alterAddressViewModel,
+                                           AlterContactInfoViewModel alterContactInfoViewModel,
+                                           IUnityContainer container)
+            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container
+                )
+        {
+            _container = container;
+        }
+
         public string BirthDate
         {
             get { return Entity.BirthDate.ToShortDateString(); }
@@ -31,21 +45,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                     Entity.BirthDate = parsed;
                     OnPropertyChanged();
                 }
-
             }
-        }
-
-        private IUnityContainer _container;
-
-        [ImportingConstructor]
-        public AlterNaturalPersonViewModel(NaturalPerson entity, Address address, ContactInfo contactInfo,
-                                           IRepository repository,
-                                           AlterAddressViewModel alterAddressViewModel,
-                                           AlterContactInfoViewModel alterContactInfoViewModel,
-                                           IUnityContainer container)
-            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container)
-        {
-            _container = container;
         }
 
         protected override void SaveChanges(object arg)
@@ -60,7 +60,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel<NaturalPerson>>(), "QuickSearchCommand");
+            Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel<NaturalPerson>>(),
+                                           "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

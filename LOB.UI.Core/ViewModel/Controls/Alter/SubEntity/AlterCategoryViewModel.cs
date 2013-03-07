@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+
+#endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {

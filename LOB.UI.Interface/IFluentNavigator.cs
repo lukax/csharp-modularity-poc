@@ -1,4 +1,8 @@
+#region Usings
+
 using System.ComponentModel.Composition;
+
+#endregion
 
 namespace LOB.UI.Interface
 {

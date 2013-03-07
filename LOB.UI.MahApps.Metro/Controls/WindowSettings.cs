@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -6,6 +8,8 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using MahApps.Metro.Native;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
@@ -17,48 +21,39 @@ namespace MahApps.Metro.Controls
     }
 
     /// <summary>
-    /// this settings class is the default way to save the placement of the window
+    ///     this settings class is the default way to save the placement of the window
     /// </summary>
     internal class WindowApplicationSettings : ApplicationSettingsBase, IWindowPlacementSettings
     {
         public WindowApplicationSettings(Window window)
-            : base(window.GetType().FullName) {
+            : base(window.GetType().FullName)
+        {
         }
 
         [UserScopedSetting]
-        public WINDOWPLACEMENT? Placement {
-            get {
-                if (this["Placement"] != null) {
-                    return ((WINDOWPLACEMENT)this["Placement"]);
+        public WINDOWPLACEMENT? Placement
+        {
+            get
+            {
+                if (this["Placement"] != null)
+                {
+                    return ((WINDOWPLACEMENT) this["Placement"]);
                 }
                 return null;
             }
-            set {
-                this["Placement"] = value;
-            }
+            set { this["Placement"] = value; }
         }
     }
-    
+
     public class WindowSettings
     {
-        public static readonly DependencyProperty WindowPlacementSettingsProperty = DependencyProperty.RegisterAttached("WindowPlacementSettings", typeof(IWindowPlacementSettings), typeof(WindowSettings), new FrameworkPropertyMetadata(OnWindowPlacementSettingsInvalidated));
+        public static readonly DependencyProperty WindowPlacementSettingsProperty =
+            DependencyProperty.RegisterAttached("WindowPlacementSettings", typeof (IWindowPlacementSettings),
+                                                typeof (WindowSettings),
+                                                new FrameworkPropertyMetadata(OnWindowPlacementSettingsInvalidated));
 
-        public static void SetSave(DependencyObject dependencyObject, IWindowPlacementSettings windowPlacementSettings)
-        {
-            dependencyObject.SetValue(WindowPlacementSettingsProperty, windowPlacementSettings);
-        }
-
-        private static void OnWindowPlacementSettingsInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e) {
-            var window = dependencyObject as Window;
-            if (window == null || !(e.NewValue is IWindowPlacementSettings))
-                return;
-
-            var windowSettings = new WindowSettings(window, (IWindowPlacementSettings)e.NewValue);
-            windowSettings.Attach();
-        }
-
-        private Window _window;
         private IWindowPlacementSettings _settings;
+        private Window _window;
 
         public WindowSettings(Window window, IWindowPlacementSettings windowPlacementSettings)
         {
@@ -66,19 +61,35 @@ namespace MahApps.Metro.Controls
             _settings = windowPlacementSettings;
         }
 
+        public static void SetSave(DependencyObject dependencyObject, IWindowPlacementSettings windowPlacementSettings)
+        {
+            dependencyObject.SetValue(WindowPlacementSettingsProperty, windowPlacementSettings);
+        }
+
+        private static void OnWindowPlacementSettingsInvalidated(DependencyObject dependencyObject,
+                                                                 DependencyPropertyChangedEventArgs e)
+        {
+            var window = dependencyObject as Window;
+            if (window == null || !(e.NewValue is IWindowPlacementSettings))
+                return;
+
+            var windowSettings = new WindowSettings(window, (IWindowPlacementSettings) e.NewValue);
+            windowSettings.Attach();
+        }
+
         protected virtual void LoadWindowState()
         {
             if (_settings == null) return;
             _settings.Reload();
 
-            if (_settings.Placement == null) 
+            if (_settings.Placement == null)
                 return;
 
             try
             {
                 var wp = _settings.Placement.Value;
 
-                wp.length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+                wp.length = Marshal.SizeOf(typeof (WINDOWPLACEMENT));
                 wp.flags = 0;
                 wp.showCmd = (wp.showCmd == Constants.SW_SHOWMINIMIZED ? Constants.SW_SHOWNORMAL : wp.showCmd);
                 var hwnd = new WindowInteropHelper(_window).Handle;
@@ -107,7 +118,7 @@ namespace MahApps.Metro.Controls
             _window.SourceInitialized += WindowSourceInitialized;
         }
 
-        void WindowSourceInitialized(object sender, EventArgs e)
+        private void WindowSourceInitialized(object sender, EventArgs e)
         {
             LoadWindowState();
         }

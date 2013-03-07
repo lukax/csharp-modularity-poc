@@ -1,26 +1,34 @@
+#region Usings
+
 using System.Windows;
 using System.Windows.Controls;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
     public class PivotItem : ContentControl
     {
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(string), typeof(PivotItem), new PropertyMetadata(default(string)));
-
-        public string Header
-        {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
-        }
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof (string),
+                                                                                               typeof (PivotItem),
+                                                                                               new PropertyMetadata(
+                                                                                                   default(string)));
 
         static PivotItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(PivotItem), new FrameworkPropertyMetadata(typeof(PivotItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof (PivotItem),
+                                                     new FrameworkPropertyMetadata(typeof (PivotItem)));
         }
 
         public PivotItem()
         {
             RequestBringIntoView += (s, e) => { e.Handled = true; };
+        }
+
+        public string Header
+        {
+            get { return (string) GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
         }
     }
 }

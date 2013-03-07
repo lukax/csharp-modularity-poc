@@ -6,11 +6,12 @@
              xmlns:metrocontrols="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:lobcontrols="clr-namespace:LOB.UI.Core.View.Controls"
              xmlns:lobbasecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../../../Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
     <Grid>
@@ -37,7 +38,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <lobbasecontrols:AlterBaseEntityView Grid.Row="0" />
+                <base:AlterBaseEntityView Grid.Row="0" />
 
                 <Label Content="State:" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" />
                 <TextBlock Text="{Binding State}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" Grid.Row="0"

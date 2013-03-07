@@ -1,26 +1,34 @@
+#region Usings
+
 using System.Windows;
 using System.Windows.Interactivity;
+
+#endregion
 
 namespace MahApps.Metro.Behaviours
 {
     public class StylizedBehaviors
     {
-        private static readonly DependencyProperty OriginalBehaviorProperty = DependencyProperty.RegisterAttached(@"OriginalBehaviorInternal", typeof(Behavior), typeof(StylizedBehaviors), new UIPropertyMetadata(null));
+        private static readonly DependencyProperty OriginalBehaviorProperty =
+            DependencyProperty.RegisterAttached(@"OriginalBehaviorInternal", typeof (Behavior),
+                                                typeof (StylizedBehaviors), new UIPropertyMetadata(null));
 
         public static readonly DependencyProperty BehaviorsProperty = DependencyProperty.RegisterAttached(
             @"Behaviors",
-            typeof(StylizedBehaviorCollection),
-            typeof(StylizedBehaviors),
+            typeof (StylizedBehaviorCollection),
+            typeof (StylizedBehaviors),
             new FrameworkPropertyMetadata(null, OnPropertyChanged));
+
         public static StylizedBehaviorCollection GetBehaviors(DependencyObject uie)
         {
-            return (StylizedBehaviorCollection)uie.GetValue(BehaviorsProperty);
+            return (StylizedBehaviorCollection) uie.GetValue(BehaviorsProperty);
         }
 
         public static void SetBehaviors(DependencyObject uie, StylizedBehaviorCollection value)
         {
             uie.SetValue(BehaviorsProperty, value);
         }
+
         private static Behavior GetOriginalBehavior(DependencyObject obj)
         {
             return obj.GetValue(OriginalBehaviorProperty) as Behavior;
@@ -96,7 +104,7 @@ namespace MahApps.Metro.Behaviours
 
                     if (index < 0)
                     {
-                        var clone = (Behavior)behavior.Clone();
+                        var clone = (Behavior) behavior.Clone();
                         SetOriginalBehavior(clone, behavior);
                         itemBehaviors.Add(clone);
                     }

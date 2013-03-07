@@ -6,7 +6,6 @@ using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
-using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Unity;
 
@@ -18,6 +17,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
     public abstract class AlterPersonViewModel<T> : AlterBaseEntityViewModel<T> where T : Person
     {
         private IUnityContainer _container;
+
         [ImportingConstructor]
         public AlterPersonViewModel(T entity, Address entityAddress, ContactInfo entityContactInfo,
                                     IRepository repository,

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LOB.UI.Core.View.Controls.Alter.SubEntity.AlterServiceView"
+<UserControl x:Class="LOB.UI.Core.View.Controls.Alter.Base.AlterServiceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,6 +6,10 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
+    </UserControl.Resources>
 
     <StackPanel>
         <StackPanel Orientation="Horizontal">

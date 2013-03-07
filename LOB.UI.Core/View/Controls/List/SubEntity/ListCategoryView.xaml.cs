@@ -2,7 +2,6 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface;
 

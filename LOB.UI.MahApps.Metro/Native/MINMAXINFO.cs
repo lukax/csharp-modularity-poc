@@ -1,4 +1,8 @@
+#region Usings
+
 using System.Runtime.InteropServices;
+
+#endregion
 
 namespace MahApps.Metro.Native
 {

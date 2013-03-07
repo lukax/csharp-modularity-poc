@@ -1,18 +1,15 @@
-// (c) Copyright Microsoft Corporation.
-// This source is subject to the Microsoft Public License (Ms-PL).
-// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
-// All other rights reserved.
+#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
@@ -22,27 +19,51 @@ namespace MahApps.Metro.Controls
         internal const string NormalState = "Normal";
         internal const string PreviousContentPresentationSitePartName = "PreviousContentPresentationSite";
         internal const string CurrentContentPresentationSitePartName = "CurrentContentPresentationSite";
-        private ContentPresenter CurrentContentPresentationSite { get; set; }
-        private ContentPresenter PreviousContentPresentationSite { get; set; }
+        public const string DefaultTransitionState = "DefaultTransition";
+
+        public static readonly DependencyProperty IsTransitioningProperty =
+            DependencyProperty.Register("IsTransitioning", typeof (bool), typeof (TransitioningContentControl),
+                                        new PropertyMetadata(OnIsTransitioningPropertyChanged));
+
+        public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register("Transition",
+                                                                                                   typeof (string),
+                                                                                                   typeof (
+                                                                                                       TransitioningContentControl
+                                                                                                       ),
+                                                                                                   new PropertyMetadata(
+                                                                                                       DefaultTransitionState,
+                                                                                                       OnTransitionPropertyChanged));
+
+        public static readonly DependencyProperty RestartTransitionOnContentChangeProperty =
+            DependencyProperty.Register("RestartTransitionOnContentChange", typeof (bool),
+                                        typeof (TransitioningContentControl),
+                                        new PropertyMetadata(false, OnRestartTransitionOnContentChangePropertyChanged));
+
+        public static readonly DependencyProperty CustomVisualStatesProperty =
+            DependencyProperty.Register("CustomVisualStates", typeof (ObservableCollection<VisualState>),
+                                        typeof (TransitioningContentControl), new PropertyMetadata(null));
+
         private bool _allowIsTransitioningWrite;
         private Storyboard _currentTransition;
 
-        public event RoutedEventHandler TransitionCompleted;
-        public const string DefaultTransitionState = "DefaultTransition";
-       
-        public static readonly DependencyProperty IsTransitioningProperty = DependencyProperty.Register("IsTransitioning", typeof(bool), typeof(TransitioningContentControl), new PropertyMetadata(OnIsTransitioningPropertyChanged));
-        public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register("Transition", typeof(string), typeof(TransitioningContentControl), new PropertyMetadata(DefaultTransitionState, OnTransitionPropertyChanged));
-        public static readonly DependencyProperty RestartTransitionOnContentChangeProperty = DependencyProperty.Register("RestartTransitionOnContentChange", typeof(bool), typeof(TransitioningContentControl), new PropertyMetadata(false, OnRestartTransitionOnContentChangePropertyChanged));
-        public static readonly DependencyProperty CustomVisualStatesProperty = DependencyProperty.Register("CustomVisualStates", typeof(ObservableCollection<VisualState>), typeof(TransitioningContentControl), new PropertyMetadata(null));
+        public TransitioningContentControl()
+        {
+            this.CustomVisualStates = new ObservableCollection<VisualState>();
+            DefaultStyleKey = typeof (TransitioningContentControl);
+        }
 
-        public ObservableCollection<VisualState> CustomVisualStates {
-          get { return (ObservableCollection<VisualState>)this.GetValue(CustomVisualStatesProperty); }
+        private ContentPresenter CurrentContentPresentationSite { get; set; }
+        private ContentPresenter PreviousContentPresentationSite { get; set; }
+
+        public ObservableCollection<VisualState> CustomVisualStates
+        {
+            get { return (ObservableCollection<VisualState>) this.GetValue(CustomVisualStatesProperty); }
             set { this.SetValue(CustomVisualStatesProperty, value); }
         }
 
         public bool IsTransitioning
         {
-            get { return (bool)GetValue(IsTransitioningProperty); }
+            get { return (bool) GetValue(IsTransitioningProperty); }
             private set
             {
                 _allowIsTransitioningWrite = true;
@@ -59,19 +80,8 @@ namespace MahApps.Metro.Controls
 
         public bool RestartTransitionOnContentChange
         {
-            get { return (bool)GetValue(RestartTransitionOnContentChangeProperty); }
+            get { return (bool) GetValue(RestartTransitionOnContentChangeProperty); }
             set { SetValue(RestartTransitionOnContentChangeProperty, value); }
-        }
-
-        private static void OnIsTransitioningPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var source = (TransitioningContentControl)d;
-
-            if (!source._allowIsTransitioningWrite)
-            {
-                source.IsTransitioning = (bool)e.OldValue;
-                throw new InvalidOperationException();
-            }
         }
 
         private Storyboard CurrentTransition
@@ -94,9 +104,22 @@ namespace MahApps.Metro.Controls
             }
         }
 
+        public event RoutedEventHandler TransitionCompleted;
+
+        private static void OnIsTransitioningPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var source = (TransitioningContentControl) d;
+
+            if (!source._allowIsTransitioningWrite)
+            {
+                source.IsTransitioning = (bool) e.OldValue;
+                throw new InvalidOperationException();
+            }
+        }
+
         private static void OnTransitionPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var source = (TransitioningContentControl)d;
+            var source = (TransitioningContentControl) d;
             var oldTransition = e.OldValue as string;
             var newTransition = e.NewValue as string;
 
@@ -132,19 +155,15 @@ namespace MahApps.Metro.Controls
             }
         }
 
-        private static void OnRestartTransitionOnContentChangePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnRestartTransitionOnContentChangePropertyChanged(DependencyObject d,
+                                                                              DependencyPropertyChangedEventArgs e)
         {
-            ((TransitioningContentControl)d).OnRestartTransitionOnContentChangeChanged((bool)e.OldValue, (bool)e.NewValue);
+            ((TransitioningContentControl) d).OnRestartTransitionOnContentChangeChanged((bool) e.OldValue,
+                                                                                        (bool) e.NewValue);
         }
 
         protected virtual void OnRestartTransitionOnContentChangeChanged(bool oldValue, bool newValue)
         {
-        }
-
-        public TransitioningContentControl()
-        {
-            this.CustomVisualStates = new ObservableCollection<VisualState>();
-            DefaultStyleKey = typeof(TransitioningContentControl);
         }
 
         public override void OnApplyTemplate()
@@ -154,10 +173,13 @@ namespace MahApps.Metro.Controls
                 AbortTransition();
             }
 
-            if (this.CustomVisualStates != null && this.CustomVisualStates.Any()) {
+            if (this.CustomVisualStates != null && this.CustomVisualStates.Any())
+            {
                 var presentationGroup = VisualStates.TryGetVisualStateGroup(this, PresentationGroup);
-                if (presentationGroup != null) {
-                    foreach (var state in this.CustomVisualStates) {
+                if (presentationGroup != null)
+                {
+                    foreach (var state in this.CustomVisualStates)
+                    {
                         presentationGroup.States.Add(state);
                     }
                 }
@@ -165,8 +187,10 @@ namespace MahApps.Metro.Controls
 
             base.OnApplyTemplate();
 
-            PreviousContentPresentationSite = GetTemplateChild(PreviousContentPresentationSitePartName) as ContentPresenter;
-            CurrentContentPresentationSite = GetTemplateChild(CurrentContentPresentationSitePartName) as ContentPresenter;
+            PreviousContentPresentationSite =
+                GetTemplateChild(PreviousContentPresentationSitePartName) as ContentPresenter;
+            CurrentContentPresentationSite =
+                GetTemplateChild(CurrentContentPresentationSitePartName) as ContentPresenter;
 
             if (CurrentContentPresentationSite != null)
             {
@@ -195,13 +219,15 @@ namespace MahApps.Metro.Controls
             StartTransition(oldContent, newContent);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "newContent", Justification = "Should be used in the future.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "newContent",
+            Justification = "Should be used in the future.")]
         private void StartTransition(object oldContent, object newContent)
         {
             // both presenters must be available, otherwise a transition is useless.
             if (CurrentContentPresentationSite != null && PreviousContentPresentationSite != null)
             {
-                if (RestartTransitionOnContentChange) {
+                if (RestartTransitionOnContentChange)
+                {
                     CurrentTransition.Completed -= OnTransitionCompleted;
                 }
 
@@ -212,7 +238,8 @@ namespace MahApps.Metro.Controls
                 // and start a new transition
                 if (!IsTransitioning || RestartTransitionOnContentChange)
                 {
-                    if (RestartTransitionOnContentChange) {
+                    if (RestartTransitionOnContentChange)
+                    {
                         CurrentTransition.Completed += OnTransitionCompleted;
                     }
                     IsTransitioning = true;
@@ -251,10 +278,10 @@ namespace MahApps.Metro.Controls
             if (presentationGroup != null)
             {
                 newStoryboard = presentationGroup.States
-                    .OfType<VisualState>()
-                    .Where(state => state.Name == newTransition)
-                    .Select(state => state.Storyboard)
-                    .FirstOrDefault();
+                                                 .OfType<VisualState>()
+                                                 .Where(state => state.Name == newTransition)
+                                                 .Select(state => state.Storyboard)
+                                                 .FirstOrDefault();
             }
             return newStoryboard;
         }

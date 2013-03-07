@@ -2,40 +2,38 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.SubEntity
+namespace LOB.UI.Core.View.Controls.List.SubEntity
 {
     [Export]
-    public partial class AlterServiceView : UserControl, IView, ITabProp
+    public partial class ListEmailView : UserControl, IView, ITabProp
     {
         private string _header;
 
-        public AlterServiceView()
+        public ListEmailView()
         {
             InitializeComponent();
         }
 
         [ImportingConstructor]
-        public AlterServiceView(AlterServiceViewModel viewModel)
+        public ListEmailView(ListEmailViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
         }
 
-        public AlterServiceViewModel ViewModel
+        public ListEmailViewModel ViewModel
         {
             set { this.DataContext = value; }
         }
 
         public string Header
         {
-            get { return (string.IsNullOrEmpty(_header)) ? "Service" : _header; }
+            get { return (string.IsNullOrEmpty(_header)) ? "Códigos" : _header; }
             set { _header = value; }
         }
 

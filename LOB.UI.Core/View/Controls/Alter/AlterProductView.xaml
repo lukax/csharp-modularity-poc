@@ -7,11 +7,12 @@
              xmlns:basecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../../../Skins/MetroSkin.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -53,7 +54,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <basecontrols:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView"/>
+                <base:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView"/>
 
                 <Label Grid.Column="1" Grid.Row="1" Content="Name:" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"

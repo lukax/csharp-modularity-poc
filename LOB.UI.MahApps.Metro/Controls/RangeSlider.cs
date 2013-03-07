@@ -1,62 +1,142 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
+#endregion
+
 namespace MahApps.Metro.Controls
 {
     public delegate void RangeSelectionChangedEventHandler(object sender, RangeSelectionChangedEventArgs e);
 
     [DefaultEvent("RangeSelectionChanged"),
-    TemplatePart(Name = "PART_RangeSliderContainer", Type = typeof(StackPanel)),
-    TemplatePart(Name = "PART_LeftEdge", Type = typeof(RepeatButton)),
-    TemplatePart(Name = "PART_RightEdge", Type = typeof(RepeatButton)),
-    TemplatePart(Name = "PART_LeftThumb", Type = typeof(Thumb)),
-    TemplatePart(Name = "PART_MiddleThumb", Type = typeof(Thumb)),
-    TemplatePart(Name = "PART_RightThumb", Type = typeof(Thumb))]
+     TemplatePart(Name = "PART_RangeSliderContainer", Type = typeof (StackPanel)),
+     TemplatePart(Name = "PART_LeftEdge", Type = typeof (RepeatButton)),
+     TemplatePart(Name = "PART_RightEdge", Type = typeof (RepeatButton)),
+     TemplatePart(Name = "PART_LeftThumb", Type = typeof (Thumb)),
+     TemplatePart(Name = "PART_MiddleThumb", Type = typeof (Thumb)),
+     TemplatePart(Name = "PART_RightThumb", Type = typeof (Thumb))]
     public sealed class RangeSlider : Control
     {
-        public static readonly RoutedEvent RangeSelectionChangedEvent = EventManager.RegisterRoutedEvent("RangeSelectionChanged", RoutingStrategy.Bubble, typeof(RangeSelectionChangedEventHandler), typeof(RangeSlider));
-        public static RoutedUICommand MoveBack = new RoutedUICommand("MoveBack", "MoveBack", typeof(RangeSlider), new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.B, ModifierKeys.Control) }));
-        public static RoutedUICommand MoveForward = new RoutedUICommand("MoveForward", "MoveForward", typeof(RangeSlider), new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.F, ModifierKeys.Control) }));
-        public static RoutedUICommand MoveAllForward = new RoutedUICommand("MoveAllForward", "MoveAllForward", typeof(RangeSlider), new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.F, ModifierKeys.Alt) }));
-        public static RoutedUICommand MoveAllBack = new RoutedUICommand("MoveAllBack", "MoveAllBack", typeof(RangeSlider), new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.B, ModifierKeys.Alt) }));
+        private const double RepeatButtonMoveRatio = 0.1;
+        private const double DefaultSplittersThumbWidth = 10;
 
-        public static readonly DependencyProperty RangeStartProperty = DependencyProperty.Register("RangeStart", typeof(long), typeof(RangeSlider), new UIPropertyMetadata((long)0, RangeChanged));
-        public static readonly DependencyProperty RangeStopProperty = DependencyProperty.Register("RangeStop", typeof(long), typeof(RangeSlider), new UIPropertyMetadata((long)1, RangeChanged));
-        public static readonly DependencyProperty RangeStartSelectedProperty = DependencyProperty.Register("RangeStartSelected", typeof(long), typeof(RangeSlider), new UIPropertyMetadata((long)0, RangesChanged));
-        public static readonly DependencyProperty RangeStopSelectedProperty = DependencyProperty.Register("RangeStopSelected", typeof(long), typeof(RangeSlider), new UIPropertyMetadata((long)1, RangesChanged));
-        public static readonly DependencyProperty MinRangeProperty = DependencyProperty.Register("MinRange", typeof(long), typeof(RangeSlider), new UIPropertyMetadata((long)0, MinRangeChanged));
+        public static readonly RoutedEvent RangeSelectionChangedEvent =
+            EventManager.RegisterRoutedEvent("RangeSelectionChanged", RoutingStrategy.Bubble,
+                                             typeof (RangeSelectionChangedEventHandler), typeof (RangeSlider));
+
+        public static RoutedUICommand MoveBack = new RoutedUICommand("MoveBack", "MoveBack", typeof (RangeSlider),
+                                                                     new InputGestureCollection(new InputGesture[]
+                                                                         {new KeyGesture(Key.B, ModifierKeys.Control)}));
+
+        public static RoutedUICommand MoveForward = new RoutedUICommand("MoveForward", "MoveForward",
+                                                                        typeof (RangeSlider),
+                                                                        new InputGestureCollection(new InputGesture[]
+                                                                            {
+                                                                                new KeyGesture(Key.F, ModifierKeys.Control)
+                                                                            }));
+
+        public static RoutedUICommand MoveAllForward = new RoutedUICommand("MoveAllForward", "MoveAllForward",
+                                                                           typeof (RangeSlider),
+                                                                           new InputGestureCollection(
+                                                                               new InputGesture[]
+                                                                                   {
+                                                                                       new KeyGesture(Key.F,
+                                                                                                      ModifierKeys.Alt)
+                                                                                   }));
+
+        public static RoutedUICommand MoveAllBack = new RoutedUICommand("MoveAllBack", "MoveAllBack",
+                                                                        typeof (RangeSlider),
+                                                                        new InputGestureCollection(new InputGesture[]
+                                                                            {new KeyGesture(Key.B, ModifierKeys.Alt)}));
+
+        public static readonly DependencyProperty RangeStartProperty = DependencyProperty.Register("RangeStart",
+                                                                                                   typeof (long),
+                                                                                                   typeof (RangeSlider),
+                                                                                                   new UIPropertyMetadata
+                                                                                                       ((long) 0,
+                                                                                                        RangeChanged));
+
+        public static readonly DependencyProperty RangeStopProperty = DependencyProperty.Register("RangeStop",
+                                                                                                  typeof (long),
+                                                                                                  typeof (RangeSlider),
+                                                                                                  new UIPropertyMetadata
+                                                                                                      ((long) 1,
+                                                                                                       RangeChanged));
+
+        public static readonly DependencyProperty RangeStartSelectedProperty =
+            DependencyProperty.Register("RangeStartSelected", typeof (long), typeof (RangeSlider),
+                                        new UIPropertyMetadata((long) 0, RangesChanged));
+
+        public static readonly DependencyProperty RangeStopSelectedProperty =
+            DependencyProperty.Register("RangeStopSelected", typeof (long), typeof (RangeSlider),
+                                        new UIPropertyMetadata((long) 1, RangesChanged));
+
+        public static readonly DependencyProperty MinRangeProperty = DependencyProperty.Register("MinRange",
+                                                                                                 typeof (long),
+                                                                                                 typeof (RangeSlider),
+                                                                                                 new UIPropertyMetadata(
+                                                                                                     (long) 0,
+                                                                                                     MinRangeChanged));
+
+        private Thumb _centerThumb;
+        private bool _internalUpdate;
+        private RepeatButton _leftButton;
+        private Thumb _leftThumb;
+        private long _movableRange;
+        private double _movableWidth;
+        private RepeatButton _rightButton;
+        private Thumb _rightThumb;
+        private StackPanel _visualElementsContainer;
+
+        static RangeSlider()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof (RangeSlider),
+                                                     new FrameworkPropertyMetadata(typeof (RangeSlider)));
+        }
+
+        public RangeSlider()
+        {
+            CommandBindings.Add(new CommandBinding(MoveBack, MoveBackHandler));
+            CommandBindings.Add(new CommandBinding(MoveForward, MoveForwardHandler));
+            CommandBindings.Add(new CommandBinding(MoveAllForward, MoveAllForwardHandler));
+            CommandBindings.Add(new CommandBinding(MoveAllBack, MoveAllBackHandler));
+
+            DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof (RangeSlider))
+                                        .AddValueChanged(this, delegate { ReCalculateWidths(); });
+        }
 
         public long RangeStart
         {
-            get { return (long)GetValue(RangeStartProperty); }
+            get { return (long) GetValue(RangeStartProperty); }
             set { SetValue(RangeStartProperty, value); }
         }
 
         public long RangeStop
         {
-            get { return (long)GetValue(RangeStopProperty); }
+            get { return (long) GetValue(RangeStopProperty); }
             set { SetValue(RangeStopProperty, value); }
         }
 
         public long RangeStartSelected
         {
-            get { return (long)GetValue(RangeStartSelectedProperty); }
+            get { return (long) GetValue(RangeStartSelectedProperty); }
             set { SetValue(RangeStartSelectedProperty, value); }
         }
 
         public long RangeStopSelected
         {
-            get { return (long)GetValue(RangeStopSelectedProperty); }
+            get { return (long) GetValue(RangeStopSelectedProperty); }
             set { SetValue(RangeStopSelectedProperty, value); }
         }
 
         public long MinRange
         {
-            get { return (long)GetValue(MinRangeProperty); }
+            get { return (long) GetValue(MinRangeProperty); }
             set { SetValue(MinRangeProperty, value); }
         }
 
@@ -67,36 +147,10 @@ namespace MahApps.Metro.Controls
             remove { RemoveHandler(RangeSelectionChangedEvent, value); }
         }
 
-        private const double RepeatButtonMoveRatio = 0.1;
-        private const double DefaultSplittersThumbWidth = 10;
-        private bool _internalUpdate;
-        private Thumb _centerThumb;
-        private Thumb _leftThumb;
-        private Thumb _rightThumb;
-        private RepeatButton _leftButton;
-        private RepeatButton _rightButton;
-        private StackPanel _visualElementsContainer;
-        private long _movableRange;
-        private double _movableWidth;
-
-        public RangeSlider()
+        private static void RangeChanged(DependencyObject dependencyObject,
+                                         DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            CommandBindings.Add(new CommandBinding(MoveBack, MoveBackHandler));
-            CommandBindings.Add(new CommandBinding(MoveForward, MoveForwardHandler));
-            CommandBindings.Add(new CommandBinding(MoveAllForward, MoveAllForwardHandler));
-            CommandBindings.Add(new CommandBinding(MoveAllBack, MoveAllBackHandler));
-
-            DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(RangeSlider)).AddValueChanged(this, delegate { ReCalculateWidths(); });
-        }
-
-        static RangeSlider()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RangeSlider), new FrameworkPropertyMetadata(typeof(RangeSlider)));
-        }
-
-        private static void RangeChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-        {
-            var slider = (RangeSlider)dependencyObject;
+            var slider = (RangeSlider) dependencyObject;
             if (slider._internalUpdate)
                 return;
 
@@ -104,9 +158,10 @@ namespace MahApps.Metro.Controls
             slider.ReCalculateWidths();
         }
 
-        private static void RangesChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void RangesChanged(DependencyObject dependencyObject,
+                                          DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var slider = (RangeSlider)dependencyObject;
+            var slider = (RangeSlider) dependencyObject;
             if (slider._internalUpdate)
                 return;
 
@@ -116,15 +171,15 @@ namespace MahApps.Metro.Controls
 
         private static void MinRangeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((long)e.NewValue < 0)
+            if ((long) e.NewValue < 0)
                 throw new ArgumentOutOfRangeException("value", "value for MinRange cannot be less than 0");
 
-            var slider = (RangeSlider)sender;
+            var slider = (RangeSlider) sender;
             if (slider._internalUpdate)
                 return;
 
             slider._internalUpdate = true;
-            slider.RangeStopSelected = Math.Max(slider.RangeStopSelected, slider.RangeStartSelected + (long)e.NewValue);
+            slider.RangeStopSelected = Math.Max(slider.RangeStopSelected, slider.RangeStartSelected + (long) e.NewValue);
             slider.RangeStop = Math.Max(slider.RangeStop, slider.RangeStopSelected);
             slider._internalUpdate = false;
 
@@ -132,22 +187,22 @@ namespace MahApps.Metro.Controls
             slider.ReCalculateWidths();
         }
 
-        void MoveAllBackHandler(object sender, ExecutedRoutedEventArgs e)
+        private void MoveAllBackHandler(object sender, ExecutedRoutedEventArgs e)
         {
             ResetSelection(true);
         }
 
-        void MoveAllForwardHandler(object sender, ExecutedRoutedEventArgs e)
+        private void MoveAllForwardHandler(object sender, ExecutedRoutedEventArgs e)
         {
             ResetSelection(false);
         }
 
-        void MoveBackHandler(object sender, ExecutedRoutedEventArgs e)
+        private void MoveBackHandler(object sender, ExecutedRoutedEventArgs e)
         {
             MoveSelection(true);
         }
 
-        void MoveForwardHandler(object sender, ExecutedRoutedEventArgs e)
+        private void MoveForwardHandler(object sender, ExecutedRoutedEventArgs e)
         {
             MoveSelection(false);
         }
@@ -206,29 +261,39 @@ namespace MahApps.Metro.Controls
         {
             if (_leftButton != null && _rightButton != null && _centerThumb != null)
             {
-                _movableWidth = Math.Max(ActualWidth - _rightThumb.ActualWidth - _leftThumb.ActualWidth - _centerThumb.MinWidth, 1);
-                _leftButton.Width = Math.Max(_movableWidth * (RangeStartSelected - RangeStart) / _movableRange, 0);
-                _rightButton.Width = Math.Max(_movableWidth * (RangeStop - RangeStopSelected) / _movableRange, 0);
-                _centerThumb.Width = Math.Max(ActualWidth - _leftButton.Width - _rightButton.Width - _rightThumb.ActualWidth - _leftThumb.ActualWidth, 0);
+                _movableWidth =
+                    Math.Max(ActualWidth - _rightThumb.ActualWidth - _leftThumb.ActualWidth - _centerThumb.MinWidth, 1);
+                _leftButton.Width = Math.Max(_movableWidth*(RangeStartSelected - RangeStart)/_movableRange, 0);
+                _rightButton.Width = Math.Max(_movableWidth*(RangeStop - RangeStopSelected)/_movableRange, 0);
+                _centerThumb.Width =
+                    Math.Max(
+                        ActualWidth - _leftButton.Width - _rightButton.Width - _rightThumb.ActualWidth -
+                        _leftThumb.ActualWidth, 0);
             }
         }
 
         private void ReCalculateRangeSelected(bool reCalculateStart, bool reCalculateStop)
         {
-            _internalUpdate = true;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
             if (reCalculateStart)
             {
                 // Make sure to get exactly rangestart if thumb is at the start
-                RangeStartSelected = _leftButton.Width == 0.0 ? RangeStart : Math.Max(RangeStart, (long)(RangeStart + _movableRange * _leftButton.Width / _movableWidth));
+                RangeStartSelected = _leftButton.Width == 0.0
+                                         ? RangeStart
+                                         : Math.Max(RangeStart,
+                                                    (long) (RangeStart + _movableRange*_leftButton.Width/_movableWidth));
             }
 
             if (reCalculateStop)
             {
                 // Make sure to get exactly rangestop if thumb is at the end
-                RangeStopSelected = _rightButton.Width == 0.0 ? RangeStop : Math.Min(RangeStop, (long)(RangeStop - _movableRange * _rightButton.Width / _movableWidth));
+                RangeStopSelected = _rightButton.Width == 0.0
+                                        ? RangeStop
+                                        : Math.Min(RangeStop,
+                                                   (long) (RangeStop - _movableRange*_rightButton.Width/_movableWidth));
             }
 
-            _internalUpdate = false;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
 
             if (reCalculateStart || reCalculateStop)
                 //raise the RangeSelectionChanged event
@@ -237,8 +302,8 @@ namespace MahApps.Metro.Controls
 
         public void MoveSelection(bool isLeft)
         {
-            double widthChange = RepeatButtonMoveRatio * (RangeStopSelected - RangeStartSelected)
-                * _movableWidth / _movableRange;
+            double widthChange = RepeatButtonMoveRatio*(RangeStopSelected - RangeStartSelected)
+                                 *_movableWidth/_movableRange;
 
             widthChange = isLeft ? -widthChange : widthChange;
             MoveThumb(_leftButton, _rightButton, widthChange);
@@ -270,11 +335,11 @@ namespace MahApps.Metro.Controls
             if (span == 0)
                 return;
 
-            _internalUpdate = true;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
             RangeStartSelected += span;
             RangeStopSelected += span;
             ReCalculateWidths();
-            _internalUpdate = false;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
 
             OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
@@ -288,17 +353,17 @@ namespace MahApps.Metro.Controls
             if (stop < start + MinRange)
                 return;
 
-            _internalUpdate = true;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
             RangeStartSelected = start;
             RangeStopSelected = stop;
             ReCalculateWidths();
-            _internalUpdate = false;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
             OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
 
         public void ZoomToSpan(long span)
         {
-            _internalUpdate = true;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
             // Ensure new span is within the valid range
             span = Math.Min(span, RangeStop - RangeStart);
             span = Math.Max(span, MinRange);
@@ -306,7 +371,7 @@ namespace MahApps.Metro.Controls
                 return; // No change
 
             // First zoom half of it to the right
-            long rightChange = (span - (RangeStopSelected - RangeStartSelected)) / 2;
+            long rightChange = (span - (RangeStopSelected - RangeStartSelected))/2;
             long leftChange = rightChange;
 
             // If we will hit the right edge, spill over the leftover change to the other side
@@ -323,7 +388,7 @@ namespace MahApps.Metro.Controls
                 RangeStopSelected = Math.Min(RangeStopSelected + rightChange, RangeStop);
 
             ReCalculateWidths();
-            _internalUpdate = false;//set flag to signal that the properties are being set by the object itself
+            _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
             OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(this));
         }
 
@@ -347,7 +412,7 @@ namespace MahApps.Metro.Controls
             ReCalculateWidths();
         }
 
-        T EnforceInstance<T>(string partName) where T : FrameworkElement, new()
+        private T EnforceInstance<T>(string partName) where T : FrameworkElement, new()
         {
             T element = GetTemplateChild(partName) as T ?? new T();
             return element;
@@ -368,7 +433,6 @@ namespace MahApps.Metro.Controls
             _rightThumb.DragDelta += RightThumbDragDelta;
             _leftButton.Click += LeftButtonClick;
             _rightButton.Click += RightButtonClick;
-
         }
     }
 }

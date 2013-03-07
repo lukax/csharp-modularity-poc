@@ -9,7 +9,7 @@
 
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../../../Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
     <Grid>

@@ -1,9 +1,13 @@
+#region Usings
+
 using System;
 using System.Runtime.InteropServices;
 
+#endregion
+
 namespace MahApps.Metro.Native
 {
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     internal struct CREATESTRUCT
     {
         public IntPtr lpCreateParams;

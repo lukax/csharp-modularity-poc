@@ -18,10 +18,12 @@
     <Color x:Key="AccentColor4">#33119EDA</Color>
 
     <!--  Custom based brushes -->
-    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
-    <SolidColorBrush x:Key="AccentBrush2" Color="{StaticResource AccentColor2}" />
-    <SolidColorBrush x:Key="AccentBrush3" Color="{StaticResource AccentColor3}" />
-    <SolidColorBrush x:Key="AccentBrush4" Color="{StaticResource AccentColor4}" />
+    <SolidColorBrush x:Key="HighlightDarkColorBrush" Color="{DynamicResource HighlightDarkColor}"/>
+    <SolidColorBrush x:Key="HighlightLightColorBrush" Color="{DynamicResource HighlightLightColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="AccentBrush2" Color="{DynamicResource AccentColor2}" />
+    <SolidColorBrush x:Key="AccentBrush3" Color="{DynamicResource AccentColor3}" />
+    <SolidColorBrush x:Key="AccentBrush4" Color="{DynamicResource AccentColor4}" />
     
     <!--BASE COLORS-->
     <Color x:Key="BlackColor">#FF000000</Color>

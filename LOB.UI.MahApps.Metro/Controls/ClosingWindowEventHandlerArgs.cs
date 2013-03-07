@@ -1,4 +1,8 @@
+#region Usings
+
 using System;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {

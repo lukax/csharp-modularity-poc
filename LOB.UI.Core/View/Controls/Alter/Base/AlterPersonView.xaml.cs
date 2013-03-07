@@ -1,4 +1,4 @@
-﻿#region Usings
+#region Usings
 
 using System;
 using System.ComponentModel.Composition;
@@ -9,7 +9,7 @@ using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.SubEntity
+namespace LOB.UI.Core.View.Controls.Alter.Base
 {
     [Export]
     public partial class AlterPersonView : UserControl, IView, ITabProp

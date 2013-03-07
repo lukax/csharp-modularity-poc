@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
+
+#endregion
 
 namespace MahApps.Metro.Native
 {
@@ -22,11 +26,13 @@ namespace MahApps.Metro.Native
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/aa969524%28v=vs.85%29.aspx</devdoc>
         [DllImport("dwmapi", PreserveSig = true, CallingConvention = CallingConvention.Winapi, ExactSpelling = true)]
-        internal static extern int DwmSetWindowAttribute([In] IntPtr hwnd, [In] int attr, [In] ref int attrValue, [In] int attrSize);
+        internal static extern int DwmSetWindowAttribute([In] IntPtr hwnd, [In] int attr, [In] ref int attrValue,
+                                                         [In] int attrSize);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms633572%28v=vs.85%29.aspx</devdoc>
         [DllImport("user32", CallingConvention = CallingConvention.Winapi)]
-        internal static extern IntPtr DefWindowProc([In] IntPtr hwnd, [In] int msg, [In] IntPtr wParam, [In] IntPtr lParam);
+        internal static extern IntPtr DefWindowProc([In] IntPtr hwnd, [In] int msg, [In] IntPtr wParam,
+                                                    [In] IntPtr lParam);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/dd144901%28v=VS.85%29.aspx</devdoc>
         [DllImport("user32", EntryPoint = "GetMonitorInfoW", ExactSpelling = true, CharSet = CharSet.Unicode)]
@@ -40,11 +46,14 @@ namespace MahApps.Metro.Native
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms633545(v=vs.85).aspx</devdoc>
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
-        
+        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy,
+                                                 uint uFlags);
+
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms647486%28v=vs.85%29.aspx</devdoc>
-        [DllImport("user32", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "LoadStringW", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        internal static extern int LoadString([In] [Optional] IntPtr hInstance, [In] uint uID, [Out] StringBuilder lpBuffer, [In] int nBufferMax);
+        [DllImport("user32", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "LoadStringW",
+            SetLastError = true, CallingConvention = CallingConvention.Winapi)]
+        internal static extern int LoadString([In] [Optional] IntPtr hInstance, [In] uint uID,
+                                              [Out] StringBuilder lpBuffer, [In] int nBufferMax);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms633528(v=vs.85).aspx</devdoc>
         [DllImport("user32", CharSet = CharSet.Auto, ExactSpelling = true)]
@@ -56,11 +65,13 @@ namespace MahApps.Metro.Native
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms648003(v=vs.85).aspx</devdoc>
         [DllImport("user32")]
-        internal static extern uint TrackPopupMenuEx([In] IntPtr hmenu, [In] uint fuFlags, [In] int x, [In] int y, [In] IntPtr hwnd, [In] [Optional] IntPtr lptpm);
+        internal static extern uint TrackPopupMenuEx([In] IntPtr hmenu, [In] uint fuFlags, [In] int x, [In] int y,
+                                                     [In] IntPtr hwnd, [In] [Optional] IntPtr lptpm);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms644944(v=vs.85).aspx</devdoc>
         [DllImport("user32", EntryPoint = "PostMessage", SetLastError = true)]
-        private static extern bool _PostMessage([In] [Optional] IntPtr hWnd, [In] uint Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+        private static extern bool _PostMessage([In] [Optional] IntPtr hWnd, [In] uint Msg, [In] IntPtr wParam,
+                                                [In] IntPtr lParam);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms648390(v=vs.85).aspx</devdoc>
         [DllImport("user32")]
@@ -71,7 +82,8 @@ namespace MahApps.Metro.Native
         internal static extern int GetDoubleClickTime();
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms684175%28v=vs.85%29.aspx</devdoc>
-        [DllImport("kernel32", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "LoadLibraryW", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
+        [DllImport("kernel32", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "LoadLibraryW",
+            SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         internal static extern IntPtr LoadLibrary([In] [MarshalAs(UnmanagedType.LPWStr)] string lpFileName);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms683152%28v=vs.85%29.aspx</devdoc>
@@ -109,13 +121,6 @@ namespace MahApps.Metro.Native
             }
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point
-        {
-            public readonly Int32 X;
-            public readonly Int32 Y;
-        };
-
         internal static int GET_X_LPARAM(IntPtr lParam)
         {
             return LOWORD(lParam.ToInt32());
@@ -128,12 +133,19 @@ namespace MahApps.Metro.Native
 
         private static int HIWORD(int i)
         {
-            return (short)(i >> 16);
+            return (short) (i >> 16);
         }
 
         private static int LOWORD(int i)
         {
-            return (short)(i & 0xFFFF);
+            return (short) (i & 0xFFFF);
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Win32Point
+        {
+            public readonly Int32 X;
+            public readonly Int32 Y;
+        };
     }
 }

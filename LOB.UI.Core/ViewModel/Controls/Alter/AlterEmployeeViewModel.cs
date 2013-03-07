@@ -19,17 +19,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     {
         private IUnityContainer _container;
 
-        public new Employee Entity { get; set; }
-        
         [ImportingConstructor]
         public AlterEmployeeViewModel(Employee entity, Address address, ContactInfo contactInfo,
                                       IRepository repository, AlterAddressViewModel alterAddressViewModel,
                                       AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container)
-            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container)
+            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container
+                )
         {
             _container = container;
             Entity = entity;
         }
+
+        public new Employee Entity { get; set; }
 
         protected override bool CanSaveChanges(object arg)
         {

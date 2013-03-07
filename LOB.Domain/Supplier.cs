@@ -1,10 +1,4 @@
-﻿#region Usings
-
-
-
-#endregion
-
-namespace LOB.Domain
+﻿namespace LOB.Domain
 {
     public class Supplier : LegalPerson
     {

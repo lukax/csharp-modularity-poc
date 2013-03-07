@@ -1,30 +1,58 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
+
+#endregion
 
 namespace MahApps.Metro
 {
     public static class ThemeManager
     {
-        private static readonly ResourceDictionary LightResource = new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml") };
-        private static readonly ResourceDictionary DarkResource = new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml") };
+        private static readonly ResourceDictionary LightResource = new ResourceDictionary
+            {
+                Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml")
+            };
+
+        private static readonly ResourceDictionary DarkResource = new ResourceDictionary
+            {
+                Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml")
+            };
 
         private static IEnumerable<Accent> _accents;
+
         public static IEnumerable<Accent> DefaultAccents
         {
             get
             {
                 return _accents ?? (_accents =
-                    new List<Accent>{
-                        new Accent("Red", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml")),
-                        new Accent("Green", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml")),
-                        new Accent("Blue", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml")),
-                        new Accent("Purple", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Purple.xaml")),
-                        new Accent("Orange", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml")),
-                    	new Accent("Grey",new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Grey.xaml"))});
+                                    new List<Accent>
+                                        {
+                                            new Accent("Red",
+                                                       new Uri(
+                                                           "pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml")),
+                                            new Accent("Green",
+                                                       new Uri(
+                                                           "pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml")),
+                                            new Accent("Blue",
+                                                       new Uri(
+                                                           "pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml")),
+                                            new Accent("Purple",
+                                                       new Uri(
+                                                           "pack://application:,,,/MahApps.Metro;component/Styles/Accents/Purple.xaml")),
+                                            new Accent("Orange",
+                                                       new Uri(
+                                                           "pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml")),
+                                            new Accent("Grey",
+                                                       new Uri(
+                                                           "pack://application:,,,/MahApps.Metro;component/Styles/Accents/Grey.xaml"))
+                                        });
             }
         }
+
+        public static bool ThemeIsDark { get; private set; }
 
         public static void ChangeTheme(Application app, Accent accent, Theme theme)
         {
@@ -43,8 +71,6 @@ namespace MahApps.Metro
             ApplyResourceDictionary(themeResource, r);
             ApplyResourceDictionary(accent.Resources, r);
         }
-
-        public static bool ThemeIsDark { get; private set; }
 
         private static void ApplyResourceDictionary(ResourceDictionary newRd, ResourceDictionary oldRd)
         {

@@ -1,25 +1,25 @@
-﻿using System.Windows;
+﻿#region Usings
+
+using System.Windows;
 using System.Windows.Controls;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
     /// <summary>
-    /// Originally from http://xamlcoder.com/blog/2010/11/04/creating-a-metro-ui-style-control/
+    ///     Originally from http://xamlcoder.com/blog/2010/11/04/creating-a-metro-ui-style-control/
     /// </summary>
     public class MetroContentControl : ContentControl
     {
-        public static readonly DependencyProperty ReverseTransitionProperty = DependencyProperty.Register("ReverseTransition", typeof(bool), typeof(MetroContentControl), new FrameworkPropertyMetadata(false));
-
-        public bool ReverseTransition
-        {
-            get { return (bool)GetValue(ReverseTransitionProperty); }
-            set { SetValue(ReverseTransitionProperty, value); }
-        }
+        public static readonly DependencyProperty ReverseTransitionProperty =
+            DependencyProperty.Register("ReverseTransition", typeof (bool), typeof (MetroContentControl),
+                                        new FrameworkPropertyMetadata(false));
 
 
         public MetroContentControl()
         {
-            DefaultStyleKey = typeof(MetroContentControl);
+            DefaultStyleKey = typeof (MetroContentControl);
 
             Loaded += MetroContentControlLoaded;
             Unloaded += MetroContentControlUnloaded;
@@ -27,7 +27,13 @@ namespace MahApps.Metro.Controls
             IsVisibleChanged += MetroContentControlIsVisibleChanged;
         }
 
-        void MetroContentControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        public bool ReverseTransition
+        {
+            get { return (bool) GetValue(ReverseTransitionProperty); }
+            set { SetValue(ReverseTransitionProperty, value); }
+        }
+
+        private void MetroContentControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (!IsVisible)
                 VisualStateManager.GoToState(this, ReverseTransition ? "AfterUnLoadedReverse" : "AfterUnLoaded", false);
@@ -50,14 +56,13 @@ namespace MahApps.Metro.Controls
             if (ReverseTransition)
             {
                 VisualStateManager.GoToState(this, "BeforeLoaded", true);
-                VisualStateManager.GoToState(this, "AfterUnLoadedReverse", true);            
+                VisualStateManager.GoToState(this, "AfterUnLoadedReverse", true);
             }
             else
             {
                 VisualStateManager.GoToState(this, "BeforeLoaded", true);
-                VisualStateManager.GoToState(this, "AfterLoaded", true);                
+                VisualStateManager.GoToState(this, "AfterLoaded", true);
             }
-            
         }
     }
 }

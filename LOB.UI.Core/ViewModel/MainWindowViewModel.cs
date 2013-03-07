@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Core;
@@ -17,8 +16,6 @@ namespace LOB.UI.Core.ViewModel
     [Export]
     public class MainWindowViewModel : BaseViewModel
     {
-        public string LicenseInformation { get { return ProductLicense.LicenseInformation(); } }
-
         [ImportingConstructor]
         public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator)
         {
@@ -26,6 +23,11 @@ namespace LOB.UI.Core.ViewModel
             _navigator = navigator;
 
             OpenTabCommand = new DelegateCommand(OpenTab);
+        }
+
+        public string LicenseInformation
+        {
+            get { return ProductLicense.LicenseInformation(); }
         }
 
         public ICommand OpenTabCommand { get; set; }

@@ -7,11 +7,12 @@
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../../../../Skins/MetroSkin.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
     <Grid>
@@ -33,7 +34,7 @@
         </Grid.RowDefinitions>
 
 
-        <base:AlterBaseEntityView Width="Auto" Grid.Column="0" x:Name="UcAlterBaseEntityView"/>
+        <base2:AlterBaseEntityView Width="Auto" Grid.Column="0" x:Name="UcAlterBaseEntityView"/>
 
         <Label Content="Street:" HorizontalAlignment="Right" Grid.Column="1" />
         <TextBox Text="{Binding Entity.Street, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"

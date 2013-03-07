@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
@@ -21,7 +25,6 @@ namespace MahApps.Metro.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof (MetroProgressBar),
                                                      new FrameworkPropertyMetadata(typeof (MetroProgressBar)));
-
         }
 
         public MetroProgressBar()
@@ -52,8 +55,7 @@ namespace MahApps.Metro.Controls
 
         private void ResetStoryboard(double width)
         {
-            
-            lock(this)
+            lock (this)
             {
                 //perform calculations
                 double containerAnimStart = CalcContainerAnimStart(width);
@@ -78,7 +80,6 @@ namespace MahApps.Metro.Controls
                         var namesOfElements = new[] {"E1", "E2", "E3", "E4", "E5"};
                         foreach (string elemName in namesOfElements)
                         {
-
                             var doubleAnimParent =
                                 (DoubleAnimationUsingKeyFrames)
                                 newStoryboard.Children.First(t => t.Name == elemName + "Anim");
@@ -104,11 +105,8 @@ namespace MahApps.Metro.Controls
                             third.InvalidateProperty(DoubleKeyFrame.ValueProperty);
 
 
-
                             doubleAnimParent.InvalidateProperty(Storyboard.TargetPropertyProperty);
                             doubleAnimParent.InvalidateProperty(Storyboard.TargetNameProperty);
-
-
                         }
                         indeterminate.Storyboard.Remove();
                         indeterminate.Storyboard = newStoryboard;
@@ -116,9 +114,6 @@ namespace MahApps.Metro.Controls
                         {
                             indeterminate.Storyboard.Begin((FrameworkElement) GetTemplateChild("ContainingGrid"));
                         }
-
-
-
                     }
                 }
                 catch (Exception)
@@ -134,8 +129,8 @@ namespace MahApps.Metro.Controls
             IList groups = VisualStateManager.GetVisualStateGroups((FrameworkElement) templateGrid);
             return groups != null
                        ? groups.Cast<VisualStateGroup>().SelectMany(@group => @group.States.Cast<VisualState>()).
-                             FirstOrDefault(state =>
-                                            state.Name == "Indeterminate")
+                                FirstOrDefault(state =>
+                                               state.Name == "Indeterminate")
                        : null;
         }
 
@@ -209,7 +204,7 @@ namespace MahApps.Metro.Controls
             base.OnApplyTemplate();
             SizeChangedHandler(null, null);
         }
-        
+
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);

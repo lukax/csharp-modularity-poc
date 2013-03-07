@@ -2,39 +2,38 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.Domain.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.SubEntity
+namespace LOB.UI.Core.View.Controls.List.SubEntity
 {
     [Export]
-    public partial class AlterBaseEntityView : UserControl, IView, ITabProp
+    public partial class ListPhoneNumberView : UserControl, IView, ITabProp
     {
         private string _header;
 
-        public AlterBaseEntityView()
+        public ListPhoneNumberView()
         {
             InitializeComponent();
         }
 
         [ImportingConstructor]
-        public AlterBaseEntityView(AlterBaseEntityViewModel<BaseEntity> viewModel)
+        public ListPhoneNumberView(ListPhoneNumberViewModel viewModel)
             : this()
         {
             ViewModel = viewModel;
         }
 
-        public AlterBaseEntityViewModel<BaseEntity> ViewModel
+        public ListPhoneNumberViewModel ViewModel
         {
             set { this.DataContext = value; }
         }
 
         public string Header
         {
-            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
+            get { return (string.IsNullOrEmpty(_header)) ? "Códigos" : _header; }
             set { _header = value; }
         }
 

@@ -6,8 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using LOB.UI.Core.View;
 using LOB.UI.Core.View.Controls.Alter;
+using LOB.UI.Core.View.Controls.Alter.Base;
 using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Controls.List;
+using LOB.UI.Core.View.Controls.List.Base;
 using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Interface;
 using Microsoft.Practices.Unity;
@@ -28,21 +30,22 @@ namespace LOB.UI.Core
             _container = container;
             _regionAdapter = regionAdapter;
         }
+
         public object Get()
         {
             if (_resolvedView == null)
                 throw new ArgumentException("First resolveView the view", "Resolve");
-            //if (_resolvedView.DataContext == null)
-            //    throw new ArgumentException("First add a viewModel to the respective view");
             if (_resolvedView is IView)
-                ((IView)_resolvedView).InitializeServices();
+                ((IView) _resolvedView).InitializeServices();
 
             return _resolvedView;
         }
+
         public TView As<TView>() where TView : class
         {
-            return (TView)Get();
+            return (TView) Get();
         }
+
         public IFluentNavigator Resolve(string param, object viewModel = null)
         {
             if (viewModel == null)
@@ -75,17 +78,34 @@ namespace LOB.UI.Core
                     case "AlterCategory":
                         _resolvedView = _container.Resolve<AlterCategoryView>();
                         break;
-                    case "AlterService":
-                        _resolvedView = _container.Resolve<AlterServiceView>();
-                        break;
                     case "ListCategory":
                         _resolvedView = _container.Resolve<ListCategoryView>();
+                        break;
+                    case "AlterService":
+                        _resolvedView = _container.Resolve<AlterServiceView>();
                         break;
                     case "ListService":
                         _resolvedView = _container.Resolve<ListServiceView>();
                         break;
                     case "AlterSale":
                         _resolvedView = _container.Resolve<AlterSaleView>();
+                        break;
+                    case "ListSale":
+                        throw new NotImplementedException();
+                    case "AlterEmail":
+                        _resolvedView = _container.Resolve<AlterEmailView>();
+                        break;
+                    case "ListEmail":
+                        _resolvedView = _container.Resolve<ListEmailView>();
+                        break;
+                    case "AlterPhoneNumber":
+                        _resolvedView = _container.Resolve<AlterPhoneNumberView>();
+                        break;
+                    case "ListPhoneNumber":
+                        _resolvedView = _container.Resolve<ListPhoneNumberView>();
+                        break;
+                    case "AlterContactInfo":
+                        _resolvedView = _container.Resolve<AlterContactInfoView>();
                         break;
                     case "QuickSearch":
                         _resolvedView = _container.Resolve<ListBaseEntityView>();
@@ -94,7 +114,7 @@ namespace LOB.UI.Core
                         throw new ArgumentException("Parameter not implemented yet, ", "param");
                 }
 
-            else if (viewModel != null)
+            else
                 switch (param)
                 {
                     case "AlterProduct":
@@ -130,19 +150,42 @@ namespace LOB.UI.Core
                             _container.Resolve<ListCustomerView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterCategory":
-                        _resolvedView = _container.Resolve<AlterCategoryView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterCategoryView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterService":
-                        _resolvedView = _container.Resolve<AlterServiceView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<AlterServiceView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListCategory":
-                        _resolvedView = _container.Resolve<ListCategoryView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListCategoryView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "ListService":
-                        _resolvedView = _container.Resolve<ListServiceView>(new ParameterOverride("viewModel", viewModel));
+                        _resolvedView =
+                            _container.Resolve<ListServiceView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "AlterSale":
                         _resolvedView = _container.Resolve<AlterSaleView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "ListSale":
+                        throw new NotImplementedException();
+                    case "AlterEmail":
+                        _resolvedView = _container.Resolve<AlterEmailView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "ListEmail":
+                        _resolvedView = _container.Resolve<ListEmailView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "AlterPhoneNumber":
+                        _resolvedView =
+                            _container.Resolve<AlterPhoneNumberView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "ListPhoneNumber":
+                        _resolvedView =
+                            _container.Resolve<ListPhoneNumberView>(new ParameterOverride("viewModel", viewModel));
+                        break;
+                    case "AlterContactInfo":
+                        _resolvedView = _container.Resolve<AlterContactInfoView>(new ParameterOverride("viewModel", viewModel));
                         break;
                     case "QuickSearch":
                         _resolvedView =
@@ -153,22 +196,25 @@ namespace LOB.UI.Core
                 }
             return this;
         }
+
         public IFluentNavigator Resolve<TView>(object viewModel = null)
         {
             _resolvedView = _container.Resolve<TView>();
             return this;
         }
+
         public IFluentNavigator SetViewModel(object viewModel)
         {
             _resolvedView.DataContext = viewModel;
             return this;
         }
+
         public void Show(bool asDialog = false)
         {
             var local = Get();
             if (local is UserControl)
             {
-                var window = new FrameWindow{ Content = _resolvedView, DataContext = _resolvedView.DataContext};
+                var window = new FrameWindow {Content = _resolvedView, DataContext = _resolvedView.DataContext};
                 if (_resolvedView is ITabProp) window.Title = ((ITabProp) _resolvedView).Header;
                 if (asDialog) window.ShowDialog();
                 else window.Show();
@@ -176,10 +222,11 @@ namespace LOB.UI.Core
             }
             if (_resolvedView is Window)
             {
-                ((Window)_resolvedView).Show();
+                ((Window) _resolvedView).Show();
                 return;
             }
         }
+
         public bool PromptUser(string message)
         {
             return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;

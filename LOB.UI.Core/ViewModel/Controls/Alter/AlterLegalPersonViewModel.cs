@@ -24,7 +24,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                                          IRepository repository,
                                          AlterAddressViewModel alterAddressViewModel,
                                          AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container)
-            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container)
+            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container
+                )
         {
             _container = container;
         }

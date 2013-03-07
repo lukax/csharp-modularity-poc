@@ -4,7 +4,6 @@ using System;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 
 #endregion

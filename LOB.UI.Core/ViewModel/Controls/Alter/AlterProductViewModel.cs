@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -24,13 +23,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
     [Export]
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>
     {
+        private IList<Category> _categories;
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
 
-        public ICommand AlterCategoryCommand { get; set; }
-        public ICommand ListCategoryCommand { get; set; }
         [ImportingConstructor]
-        public AlterProductViewModel(Product product, IRepository repository, IUnityContainer container, IFluentNavigator navigator)
+        public AlterProductViewModel(Product product, IRepository repository, IUnityContainer container,
+                                     IFluentNavigator navigator)
             : base(product, repository)
         {
             _container = container;
@@ -38,6 +37,22 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
             UpdateCategoryList();
+        }
+
+        public ICommand AlterCategoryCommand { get; set; }
+        public ICommand ListCategoryCommand { get; set; }
+
+        public IList<Category> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                if (value == null) return;
+                if (value.Equals(_categories)) return;
+                _categories = value;
+                OnPropertyChanged();
+                if (Entity.Category == null) Entity.Category = value.FirstOrDefault();
+            }
         }
 
         private async void UpdateCategoryList(int delay = 2000)
@@ -57,22 +72,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private void ExecuteAlterCategory(object o)
         {
             if (Entity.Category != null)
-                _navigator.Resolve(o.ToString(), _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category", Entity.Category))).Show(true);
+                _navigator.Resolve(o.ToString(),
+                                   _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
+                                                                                                    Entity.Category)))
+                          .Show(true);
             _navigator.Resolve(o.ToString()).Show(true);
             //Messenger.Default.Send<object>(_container.Resolve<AlterCategoryViewModel>());
-        }
-
-        private IList<Category> _categories;
-        public IList<Category> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                if (value == null) return; 
-                if(value.Equals(_categories)) return; 
-                _categories = value; OnPropertyChanged();
-                if (Entity.Category == null) Entity.Category = value.FirstOrDefault();
-            }
         }
 
         protected override void SaveChanges(object arg)

@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:subcontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
+    </UserControl.Resources>
+    
     <StackPanel>
         <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
@@ -26,7 +31,7 @@
         </StackPanel>
 
         <StackPanel>
-            <subcontrols:AlterServiceView x:Name="UcAlterServiceView"/>
+            <base:AlterServiceView x:Name="UcAlterServiceView"/>
         </StackPanel>
     </StackPanel>
 

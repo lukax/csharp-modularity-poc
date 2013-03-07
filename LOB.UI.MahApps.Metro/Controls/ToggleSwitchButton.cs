@@ -1,8 +1,11 @@
-using System;
+#region Usings
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
@@ -11,10 +14,10 @@ namespace MahApps.Metro.Controls
     [TemplateVisualState(Name = CheckedState, GroupName = CheckStates)]
     [TemplateVisualState(Name = DraggingState, GroupName = CheckStates)]
     [TemplateVisualState(Name = UncheckedState, GroupName = CheckStates)]
-    [TemplatePart(Name = SwitchRootPart, Type = typeof(Grid))]
-    [TemplatePart(Name = SwitchBackgroundPart, Type = typeof(UIElement))]
-    [TemplatePart(Name = SwitchTrackPart, Type = typeof(Grid))]
-    [TemplatePart(Name = SwitchThumbPart, Type = typeof(FrameworkElement))]
+    [TemplatePart(Name = SwitchRootPart, Type = typeof (Grid))]
+    [TemplatePart(Name = SwitchBackgroundPart, Type = typeof (UIElement))]
+    [TemplatePart(Name = SwitchTrackPart, Type = typeof (Grid))]
+    [TemplatePart(Name = SwitchThumbPart, Type = typeof (FrameworkElement))]
     public class ToggleSwitchButton : ToggleButton
     {
         private const string CommonStates = "CommonStates";
@@ -28,31 +31,27 @@ namespace MahApps.Metro.Controls
         private const string SwitchBackgroundPart = "SwitchBackground";
         private const string SwitchTrackPart = "SwitchTrack";
         private const string SwitchThumbPart = "SwitchThumb";
-        
+
+        public static readonly DependencyProperty SwitchForegroundProperty =
+            DependencyProperty.Register("SwitchForeground", typeof (Brush), typeof (ToggleSwitchButton),
+                                        new PropertyMetadata(null));
+
         private TranslateTransform _backgroundTranslation;
-        private TranslateTransform _thumbTranslation;
-        private Grid _root;
-        private Grid _track;
-        private FrameworkElement _thumb;
         private bool _isDragging = false;
-
-        public static readonly DependencyProperty SwitchForegroundProperty = DependencyProperty.Register("SwitchForeground", typeof(Brush), typeof(ToggleSwitchButton), new PropertyMetadata(null));
-
-        public Brush SwitchForeground
-        {
-            get
-            {
-                return (Brush)GetValue(SwitchForegroundProperty);
-            }
-            set
-            {
-                SetValue(SwitchForegroundProperty, value);
-            }
-        }
+        private Grid _root;
+        private FrameworkElement _thumb;
+        private TranslateTransform _thumbTranslation;
+        private Grid _track;
 
         public ToggleSwitchButton()
         {
-            DefaultStyleKey = typeof(ToggleSwitchButton);
+            DefaultStyleKey = typeof (ToggleSwitchButton);
+        }
+
+        public Brush SwitchForeground
+        {
+            get { return (Brush) GetValue(SwitchForegroundProperty); }
+            set { SetValue(SwitchForegroundProperty, value); }
         }
 
         private void ChangeVisualState(bool useTransitions)
@@ -97,7 +96,8 @@ namespace MahApps.Metro.Controls
             _track = GetTemplateChild(SwitchTrackPart) as Grid;
             _thumb = GetTemplateChild(SwitchThumbPart) as Border;
             _thumbTranslation = _thumb == null ? null : _thumb.RenderTransform as TranslateTransform;
-            if (_root != null && _track != null && _thumb != null && (_backgroundTranslation != null || _thumbTranslation != null))
+            if (_root != null && _track != null && _thumb != null &&
+                (_backgroundTranslation != null || _thumbTranslation != null))
             {
                 _track.SizeChanged += SizeChangedHandler;
                 _thumb.SizeChanged += SizeChangedHandler;
@@ -107,7 +107,7 @@ namespace MahApps.Metro.Controls
 
         private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
         {
-            _track.Clip = new RectangleGeometry { Rect = new Rect(0, 0, _track.ActualWidth, _track.ActualHeight) };
+            _track.Clip = new RectangleGeometry {Rect = new Rect(0, 0, _track.ActualWidth, _track.ActualHeight)};
             // TODO: this value is being assigned on each callback but not used anywhere
             var checkedTranslation = _track.ActualWidth - _thumb.ActualWidth - _thumb.Margin.Left - _thumb.Margin.Right;
         }

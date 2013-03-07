@@ -12,7 +12,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T> where T: NaturalPerson
+    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T> where T : NaturalPerson
     {
         [ImportingConstructor]
         public ListNaturalPersonViewModel(T entity, IRepository repository)

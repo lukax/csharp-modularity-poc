@@ -1,56 +1,66 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
+#endregion
+
 namespace MahApps.Metro.Controls
 {
     public partial class RevealImage
     {
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(RevealImage), new UIPropertyMetadata(""));
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(ImageSource), typeof(RevealImage), new UIPropertyMetadata(null));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof (string),
+                                                                                             typeof (RevealImage),
+                                                                                             new UIPropertyMetadata(""));
 
-        public string Text
-        {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
-        }
-
-        public ImageSource Image
-        {
-            get { return (ImageSource)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
-        }
-
-        
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image",
+                                                                                              typeof (ImageSource),
+                                                                                              typeof (RevealImage),
+                                                                                              new UIPropertyMetadata(
+                                                                                                  null));
 
         public RevealImage()
         {
             InitializeComponent();
         }
 
+        public string Text
+        {
+            get { return (string) GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        public ImageSource Image
+        {
+            get { return (ImageSource) GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
+        }
+
+
         private static void TypewriteTextblock(string textToAnimate, TextBlock txt, TimeSpan timeSpan)
         {
             var story = new Storyboard
-            {
-                FillBehavior = FillBehavior.HoldEnd
-            };
+                {
+                    FillBehavior = FillBehavior.HoldEnd
+                };
 
             DiscreteStringKeyFrame discreteStringKeyFrame;
             var stringAnimationUsingKeyFrames = new StringAnimationUsingKeyFrames
-            {
-                Duration = new Duration(timeSpan)
-            };
+                {
+                    Duration = new Duration(timeSpan)
+                };
 
             var tmp = string.Empty;
             foreach (var c in textToAnimate)
             {
                 discreteStringKeyFrame = new DiscreteStringKeyFrame
-                {
-                    KeyTime = KeyTime.Paced
-                };
+                    {
+                        KeyTime = KeyTime.Paced
+                    };
                 tmp += c;
                 discreteStringKeyFrame.Value = tmp;
                 stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
@@ -64,7 +74,6 @@ namespace MahApps.Metro.Controls
 
         private void GridMouseEnter(object sender, MouseEventArgs e)
         {
-
             TypewriteTextblock(Text.ToUpper(), textBlock, TimeSpan.FromSeconds(.25));
         }
     }

@@ -1,5 +1,9 @@
+#region Usings
+
 using System;
 using System.Runtime.InteropServices;
+
+#endregion
 
 namespace MahApps.Metro.Native
 {
@@ -32,12 +36,13 @@ namespace MahApps.Metro.Native
         {
             if (obj is POINT)
             {
-                var point = (POINT)obj;
+                var point = (POINT) obj;
 
                 return point._x == _x && point._y == _y;
             }
             return base.Equals(obj);
         }
+
         public override int GetHashCode()
         {
             return _x.GetHashCode() ^ _y.GetHashCode();

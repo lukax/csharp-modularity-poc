@@ -23,22 +23,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         }
 
         //TODO: Wrap with business logic
-        public string State { get { return Entity.State; } set
+        public string State
         {
-            if (value.Length == 2)
+            get { return Entity.State; }
+            set
             {
-                try
+                if (value.Length == 2)
                 {
-                    UfBr parsed;
-                    Enum.TryParse(value, out parsed);
-                    Entity.State = UfBrDictionary.Ufs[parsed];
-                }
-                catch (ArgumentNullException)
-                {
-                    Entity.State = value;
+                    try
+                    {
+                        UfBr parsed;
+                        Enum.TryParse(value, out parsed);
+                        Entity.State = UfBrDictionary.Ufs[parsed];
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        Entity.State = value;
+                    }
                 }
             }
-        } }
+        }
+
         protected override void SaveChanges(object arg)
         {
             using (Repository.Uow)

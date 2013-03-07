@@ -1,3 +1,5 @@
+#region Usings
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -5,16 +7,28 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
 
+#endregion
+
 namespace MahApps.Metro.Behaviours
 {
     public static class ReloadBehavior
     {
         public static DependencyProperty OnDataContextChangedProperty =
-            DependencyProperty.RegisterAttached("OnDataContextChanged", typeof(bool), typeof(ReloadBehavior), new PropertyMetadata(OnDataContextChanged));
+            DependencyProperty.RegisterAttached("OnDataContextChanged", typeof (bool), typeof (ReloadBehavior),
+                                                new PropertyMetadata(OnDataContextChanged));
+
+        public static DependencyProperty OnSelectedTabChangedProperty =
+            DependencyProperty.RegisterAttached("OnSelectedTabChanged", typeof (bool), typeof (ReloadBehavior),
+                                                new PropertyMetadata(OnSelectedTabChanged));
+
+        public static readonly DependencyProperty MetroContentControlProperty =
+            DependencyProperty.RegisterAttached("MetroContentControl", typeof (MetroContentControl),
+                                                typeof (ReloadBehavior),
+                                                new PropertyMetadata(default(MetroContentControl)));
 
         public static bool GetOnDataContextChanged(MetroContentControl element)
         {
-            return (bool)element.GetValue(OnDataContextChangedProperty);
+            return (bool) element.GetValue(OnDataContextChangedProperty);
         }
 
         public static void SetOnDataContextChanged(MetroContentControl element, bool value)
@@ -24,20 +38,17 @@ namespace MahApps.Metro.Behaviours
 
         private static void OnDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((MetroContentControl)d).DataContextChanged += ReloadDataContextChanged;
+            ((MetroContentControl) d).DataContextChanged += ReloadDataContextChanged;
         }
 
-        static void ReloadDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private static void ReloadDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ((MetroContentControl)sender).Reload();
+            ((MetroContentControl) sender).Reload();
         }
-
-        public static DependencyProperty OnSelectedTabChangedProperty =
-            DependencyProperty.RegisterAttached("OnSelectedTabChanged", typeof(bool), typeof(ReloadBehavior), new PropertyMetadata(OnSelectedTabChanged));
 
         public static bool GetOnSelectedTabChanged(MetroContentControl element)
         {
-            return (bool)element.GetValue(OnDataContextChangedProperty);
+            return (bool) element.GetValue(OnDataContextChangedProperty);
         }
 
         public static void SetOnSelectedTabChanged(MetroContentControl element, bool value)
@@ -47,12 +58,12 @@ namespace MahApps.Metro.Behaviours
 
         private static void OnSelectedTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((MetroContentControl)d).Loaded += ReloadLoaded;
+            ((MetroContentControl) d).Loaded += ReloadLoaded;
         }
 
-        static void ReloadLoaded(object sender, RoutedEventArgs e)
+        private static void ReloadLoaded(object sender, RoutedEventArgs e)
         {
-            var metroContentControl = ((MetroContentControl)sender);
+            var metroContentControl = ((MetroContentControl) sender);
             var tab = Ancestors(metroContentControl)
                 .OfType<TabControl>()
                 .FirstOrDefault();
@@ -74,16 +85,13 @@ namespace MahApps.Metro.Behaviours
             }
         }
 
-        static void ReloadSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private static void ReloadSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.OriginalSource != sender)
                 return;
 
-            GetMetroContentControl((TabControl)sender).Reload();
+            GetMetroContentControl((TabControl) sender).Reload();
         }
-
-        public static readonly DependencyProperty MetroContentControlProperty =
-            DependencyProperty.RegisterAttached("MetroContentControl", typeof(MetroContentControl), typeof(ReloadBehavior), new PropertyMetadata(default(MetroContentControl)));
 
         public static void SetMetroContentControl(UIElement element, MetroContentControl value)
         {
@@ -92,7 +100,7 @@ namespace MahApps.Metro.Behaviours
 
         public static MetroContentControl GetMetroContentControl(UIElement element)
         {
-            return (MetroContentControl)element.GetValue(MetroContentControlProperty);
+            return (MetroContentControl) element.GetValue(MetroContentControlProperty);
         }
     }
 }

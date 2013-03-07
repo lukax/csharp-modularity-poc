@@ -1,10 +1,14 @@
-﻿using System.ComponentModel;
+﻿#region Usings
+
+using System.ComponentModel;
 using System.Windows.Input;
+
+#endregion
 
 namespace MahApps.Metro.Controls
 {
     /// <summary>
-    /// The minimum specification that a tile needs to support  
+    ///     The minimum specification that a tile needs to support
     /// </summary>
     public interface IPanoramaTile
     {
@@ -13,7 +17,8 @@ namespace MahApps.Metro.Controls
 
     public class PanoramaTile : INotifyPropertyChanged, IPanoramaTile
     {
-        string text;
+        private string text;
+
         public string Text
         {
             get { return text; }
@@ -24,15 +29,15 @@ namespace MahApps.Metro.Controls
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand TileClickedCommand
         {
             get { return null; }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
-        /// Raises the PropertyChanged event if needed.
+        ///     Raises the PropertyChanged event if needed.
         /// </summary>
         /// <param name="propertyName">The name of the property that changed.</param>
         protected virtual void RaisePropertyChanged(string propertyName)

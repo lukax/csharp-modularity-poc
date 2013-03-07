@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Controls.List;

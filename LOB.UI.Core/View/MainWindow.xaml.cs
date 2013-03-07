@@ -3,11 +3,9 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
-using LOB.Core;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using MahApps.Metro;
@@ -42,6 +40,7 @@ namespace LOB.UI.Core.View
 
             Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
             Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
+            Messenger.Default.Register<object>(DataContext, "OpenView", o=> OpenView(o.ToString(), _navigator.Resolve(o.ToString()).Get()));
             Messenger.Default.Register<object>(DataContext, "QuickSearch", vM => OpenView("QuickSearch", vM));
         }
 
@@ -87,6 +86,18 @@ namespace LOB.UI.Core.View
         public void OpenSellFlyout(object sender, EventArgs eventArgs)
         {
             Flyouts[1].IsOpen = !Flyouts[1].IsOpen;
+        }
+
+        private void ButtonLicense_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenuLicense.PlacementTarget = this;
+            ContextMenuLicense.IsOpen = !ContextMenuLicense.IsOpen;
+        }
+
+        private void ButtonThemes_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenuThemes.PlacementTarget = this;
+            ContextMenuThemes.IsOpen = !ContextMenuThemes.IsOpen;
         }
 
         #region Themes
@@ -147,16 +158,5 @@ namespace LOB.UI.Core.View
         }
 
         #endregion
-
-        private void ButtonLicense_OnClick(object sender, RoutedEventArgs e)
-        {
-            ContextMenuLicense.PlacementTarget = this;
-            ContextMenuLicense.IsOpen = !ContextMenuLicense.IsOpen;
-        }
-        private void ButtonThemes_OnClick(object sender, RoutedEventArgs e)
-        {
-            ContextMenuThemes.PlacementTarget = this;
-            ContextMenuThemes.IsOpen = !ContextMenuThemes.IsOpen;
-        }
     }
 }

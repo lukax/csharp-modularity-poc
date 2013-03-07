@@ -7,10 +7,12 @@
              xmlns:metrocontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
+             xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
+    
     <UserControl.Resources>
-        <ResourceDictionary Source="../../../Skins/MetroSkin.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
     <StackPanel>
@@ -66,7 +68,7 @@
         </Grid>
 
         <StackPanel>
-            <base:AlterPersonView x:Name="UcAlterPersonView" />
+            <base2:AlterPersonView x:Name="UcAlterPersonView" />
         </StackPanel>
         
     </StackPanel>

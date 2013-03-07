@@ -1,6 +1,10 @@
+#region Usings
+
 using System;
 using System.Globalization;
 using System.Windows.Data;
+
+#endregion
 
 namespace MahApps.Metro.Converters
 {
@@ -12,7 +16,7 @@ namespace MahApps.Metro.Converters
             var groupHeight = double.Parse(values[1].ToString());
             var headerHeight = double.Parse(values[2].ToString());
 
-            return (Math.Floor((groupHeight - headerHeight) / itemBox) * itemBox);
+            return (Math.Floor((groupHeight - headerHeight)/itemBox)*itemBox);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

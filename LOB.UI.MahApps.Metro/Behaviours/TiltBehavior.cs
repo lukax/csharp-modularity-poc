@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,16 +9,18 @@ using System.Windows.Interactivity;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
 
+#endregion
+
 namespace MahApps.Metro.Behaviours
 {
     public class TiltBehavior : Behavior<FrameworkElement>
     {
         public static readonly DependencyProperty KeepDraggingProperty =
-            DependencyProperty.Register("KeepDragging", typeof(bool), typeof(TiltBehavior), new PropertyMetadata(true));
+            DependencyProperty.Register("KeepDragging", typeof (bool), typeof (TiltBehavior), new PropertyMetadata(true));
 
 
         public static readonly DependencyProperty TiltFactorProperty =
-            DependencyProperty.Register("TiltFactor", typeof(Int32), typeof(TiltBehavior), new PropertyMetadata(20));
+            DependencyProperty.Register("TiltFactor", typeof (Int32), typeof (TiltBehavior), new PropertyMetadata(20));
 
         private bool IsPressed;
 
@@ -32,13 +36,13 @@ namespace MahApps.Metro.Behaviours
 
         public bool KeepDragging
         {
-            get { return (bool)GetValue(KeepDraggingProperty); }
+            get { return (bool) GetValue(KeepDraggingProperty); }
             set { SetValue(KeepDraggingProperty, value); }
         }
 
         public Int32 TiltFactor
         {
-            get { return (Int32)GetValue(TiltFactorProperty); }
+            get { return (Int32) GetValue(TiltFactorProperty); }
             set { SetValue(TiltFactorProperty, value); }
         }
 
@@ -50,37 +54,31 @@ namespace MahApps.Metro.Behaviours
             if (attachedElement is ListBox)
             {
                 var l = (ListBox) attachedElement;
-                l.Items.CurrentChanging += (s, e) =>
-                {
-                    Console.WriteLine("foo");
-                };
+                l.Items.CurrentChanging += (s, e) => { Console.WriteLine("foo"); };
                 return;
             }
             if (attachedElement as Panel != null)
             {
                 var y = (attachedElement as ItemsControl);
-                y.Items.CurrentChanging += (s, e) =>
-                                               {
-                                                   Console.WriteLine("foo");
-                                               };
+                y.Items.CurrentChanging += (s, e) => { Console.WriteLine("foo"); };
                 (attachedElement as Panel).Loaded += (sl, el) =>
-                                                         {
-                                                             List<UIElement> elements = new List<UIElement>();
+                    {
+                        List<UIElement> elements = new List<UIElement>();
 
-                                                             foreach (
-                                                                 UIElement ui in (attachedElement as Panel).Children)
-                                                             {
-                                                                 elements.Add(ui);
-                                                             }
-                                                             elements.ForEach(
-                                                                 (element) =>
-                                                                 Interaction.GetBehaviors(element).Add(
-                                                                     new TiltBehavior
-                                                                         {
-                                                                             KeepDragging = KeepDragging,
-                                                                             TiltFactor = TiltFactor
-                                                                         }));
-                                                         };
+                        foreach (
+                            UIElement ui in (attachedElement as Panel).Children)
+                        {
+                            elements.Add(ui);
+                        }
+                        elements.ForEach(
+                            (element) =>
+                            Interaction.GetBehaviors(element).Add(
+                                new TiltBehavior
+                                    {
+                                        KeepDragging = KeepDragging,
+                                        TiltFactor = TiltFactor
+                                    }));
+                    };
 
                 return;
             }
@@ -99,13 +97,13 @@ namespace MahApps.Metro.Behaviours
 
 
             RotatorParent = new Planerator
-                                {
-                                    Margin = OriginalMargin,
-                                    Width = OriginalSize.Width,
-                                    Height = OriginalSize.Height,
-                                    VerticalAlignment = va,
-                                    HorizontalAlignment = ha
-                                };
+                {
+                    Margin = OriginalMargin,
+                    Width = OriginalSize.Width,
+                    Height = OriginalSize.Height,
+                    VerticalAlignment = va,
+                    HorizontalAlignment = ha
+                };
 
             RotatorParent.SetValue(Canvas.LeftProperty, left);
             RotatorParent.SetValue(Canvas.RightProperty, right);
@@ -140,8 +138,8 @@ namespace MahApps.Metro.Behaviours
                     if (current.X > 0 && current.X < (attachedElement).ActualWidth && current.Y > 0 &&
                         current.Y < (attachedElement).ActualHeight)
                     {
-                        RotatorParent.RotationY = -1 * TiltFactor + current.X * 2 * TiltFactor / (attachedElement).ActualWidth;
-                        RotatorParent.RotationX = -1 * TiltFactor + current.Y * 2 * TiltFactor / (attachedElement).ActualHeight;
+                        RotatorParent.RotationY = -1*TiltFactor + current.X*2*TiltFactor/(attachedElement).ActualWidth;
+                        RotatorParent.RotationX = -1*TiltFactor + current.Y*2*TiltFactor/(attachedElement).ActualHeight;
                     }
                 }
                 else
@@ -160,10 +158,10 @@ namespace MahApps.Metro.Behaviours
                         if (current.X > 0 && current.X < (attachedElement).ActualWidth && current.Y > 0 &&
                             current.Y < (attachedElement).ActualHeight)
                         {
-                            RotatorParent.RotationY = -1 * TiltFactor +
-                                                      current.X * 2 * TiltFactor / (attachedElement).ActualWidth;
-                            RotatorParent.RotationX = -1 * TiltFactor +
-                                                      current.Y * 2 * TiltFactor / (attachedElement).ActualHeight;
+                            RotatorParent.RotationY = -1*TiltFactor +
+                                                      current.X*2*TiltFactor/(attachedElement).ActualWidth;
+                            RotatorParent.RotationX = -1*TiltFactor +
+                                                      current.Y*2*TiltFactor/(attachedElement).ActualHeight;
                         }
                         IsPressed = true;
                     }
@@ -193,10 +191,8 @@ namespace MahApps.Metro.Behaviours
         {
             var parent = VisualTreeHelper.GetParent(element);
             if (parent is Panel)
-                return (Panel)parent;
+                return (Panel) parent;
             return parent == null ? null : GetParentPanel(parent);
         }
     }
-
-
 }

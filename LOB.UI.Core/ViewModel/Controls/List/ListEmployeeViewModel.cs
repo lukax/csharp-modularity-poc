@@ -1,9 +1,7 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;

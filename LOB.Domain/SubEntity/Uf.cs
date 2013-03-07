@@ -1,8 +1,9 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace LOB.Domain.SubEntity
 {
@@ -72,7 +73,9 @@ namespace LOB.Domain.SubEntity
                         {UfBr.TO, "Tocantins"}
                     });
 
-        public static IDictionary<UfBr, string> Ufs { get { return Lazy.Value; } }
+        public static IDictionary<UfBr, string> Ufs
+        {
+            get { return Lazy.Value; }
+        }
     }
 }
-

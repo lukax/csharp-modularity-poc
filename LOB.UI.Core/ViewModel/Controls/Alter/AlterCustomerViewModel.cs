@@ -62,6 +62,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
             Entity.Person = _alterLegalPersonViewModel.Entity;
         }
+
         private async void NaturalPersonCfg()
         {
             await Task.Delay(500);
