@@ -12,7 +12,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity
         public PhoneNumberMap()
         {
             Map(x => x.Number);
-            Map(x => x.NumberType);
+            Map(x => x.PhoneNumberType);
             Map(x => x.Description);
         }
     }

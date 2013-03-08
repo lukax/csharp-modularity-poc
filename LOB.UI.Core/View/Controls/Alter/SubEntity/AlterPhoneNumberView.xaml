@@ -4,35 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="110" Width="300">
 
     <UserControl.Resources>
         <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
 
+    <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <Label Content="PhoneType:" Grid.Row="1" HorizontalAlignment="Right"/>
-        <ComboBox Text="{Binding Entity.PhoneType}" MinWidth="100" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left"/>
+            <Label VerticalAlignment="Center" Content="PhoneNumber:" MinWidth="40" Grid.Row="2" HorizontalAlignment="Right" />
+            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left">
+                <StackPanel.Resources>
+                    <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+                        <ObjectDataProvider.MethodParameters>
+                            <x:Type TypeName="domainSub:PhoneNumberType"/>
+                        </ObjectDataProvider.MethodParameters>
+                    </ObjectDataProvider>
+                </StackPanel.Resources>
+                <TextBox Text="{Binding Entity.PhoneNumber}" MinWidth="100" />
+                <ComboBox SelectedItem="{Binding Entity.PhoneType}" ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
+            </StackPanel>
 
-
-        <Label VerticalAlignment="Center" Content="PhoneNumber:" MinWidth="40" Grid.Row="2" HorizontalAlignment="Right" />
-        <TextBox Text="{Binding Entity.PhoneNumber}" MinWidth="100" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left"/>
-
-        <TextBox Text="{Binding Entity.Description}" controls:TextboxHelper.Watermark="Description" Grid.Row="3" Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
-    </Grid>
+            <TextBox Text="{Binding Entity.Description}" controls:TextboxHelper.Watermark="Description" Grid.Row="3" Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
+                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                <Image Source="/View\Resources/Cancel48.png" />
+            </controls:Tile>
+            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
+                           Command="{Binding SaveChangesCommand}" BorderThickness="0">
+                <Image Source="/View\Resources/Accept48.png" />
+            </controls:Tile>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

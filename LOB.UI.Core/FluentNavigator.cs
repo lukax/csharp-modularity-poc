@@ -36,14 +36,14 @@ namespace LOB.UI.Core
             if (_resolvedView == null)
                 throw new ArgumentException("First resolveView the view", "Resolve");
             if (_resolvedView is IView)
-                ((IView) _resolvedView).InitializeServices();
+                ((IView)_resolvedView).InitializeServices();
 
             return _resolvedView;
         }
 
         public TView As<TView>() where TView : class
         {
-            return (TView) Get();
+            return (TView)Get();
         }
 
         public IFluentNavigator Resolve(string param, object viewModel = null)
@@ -211,18 +211,19 @@ namespace LOB.UI.Core
 
         public void Show(bool asDialog = false)
         {
-            var local = Get();
-            if (local is UserControl)
+            var asUc = Get() as UserControl;
+            if (asUc != null)
             {
-                var window = new FrameWindow {Content = _resolvedView, DataContext = _resolvedView.DataContext};
-                if (_resolvedView is ITabProp) window.Title = ((ITabProp) _resolvedView).Header;
+                var window = new FrameWindow { Content = asUc, DataContext = _resolvedView.DataContext, Height = asUc.Height +50, Width = asUc.Width+50 };
+                if (_resolvedView is ITabProp) window.Title = ((ITabProp)_resolvedView).Header;
                 if (asDialog) window.ShowDialog();
                 else window.Show();
                 return;
             }
-            if (_resolvedView is Window)
+            var asW = _resolvedView as Window;
+            if (asW != null)
             {
-                ((Window) _resolvedView).Show();
+                asW.Show();
                 return;
             }
         }

@@ -11,7 +11,7 @@ namespace LOB.Domain.SubEntity
     public class PhoneNumber : BaseEntity
     {
         public virtual int Number { get; set; }
-        public virtual NumberType NumberType { get; set; }
+        public virtual PhoneNumberType PhoneNumberType { get; set; }
         public virtual string Description { get; set; }
 
         public override string ToString()
@@ -21,7 +21,7 @@ namespace LOB.Domain.SubEntity
     }
 
     [Serializable]
-    public enum NumberType
+    public enum PhoneNumberType
     {
         Telephone,
         Cellphone,

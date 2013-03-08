@@ -2,15 +2,14 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Title="FrameWindow" Height="Auto" Width="Auto" SaveWindowPosition="True">
+                      Height="Auto" Width="Auto"
+                      SaveWindowPosition="True">
 
     <Window.Resources>
         <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </Window.Resources>
 
     <controls:MetroContentControl Name="Control">
-        <Grid>
-            <Frame Name="Frame"></Frame>
-        </Grid>
+            <Frame Name="Frame"/>
     </controls:MetroContentControl>
 </controls:MetroWindow>

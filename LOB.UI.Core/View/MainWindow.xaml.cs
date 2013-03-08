@@ -31,7 +31,7 @@ namespace LOB.UI.Core.View
             _navigator = navigator;
 
             InitializeComponent();
-            MiLightGrey();
+            //MiLightGrey();
         }
 
         public void InitializeServices()

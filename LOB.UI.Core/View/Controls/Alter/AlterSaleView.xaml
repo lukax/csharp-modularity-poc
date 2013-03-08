@@ -14,13 +14,8 @@
         <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <ScrollViewer Grid.Row="1">
+    <StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  CanContentScroll="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -83,5 +78,5 @@
 
             </Grid>
         </ScrollViewer>
-    </Grid>
+    </StackPanel>
 </UserControl>

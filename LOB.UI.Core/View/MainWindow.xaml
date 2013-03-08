@@ -37,7 +37,7 @@
                 </StackPanel>
                 <Button.ContextMenu>
                     <ContextMenu x:Name="ContextMenuThemes">
-                        <MenuItem Header="Dark">
+                        <MenuItem Header="Dark" IsEnabled="False">
                             <MenuItem x:Name="MenuItemDarkRed" Header="Dark Red" Click="MiDarkRed" />
                             <MenuItem x:Name="MenuItemDarkGreen" Header="Dark Green" Click="MiDarkGreen" />
                             <MenuItem x:Name="MenuItemDarkBlue" Header="Dark Blue" Click="MiDarkBlue" />

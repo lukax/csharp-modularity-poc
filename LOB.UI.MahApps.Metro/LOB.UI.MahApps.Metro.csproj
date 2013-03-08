@@ -407,7 +407,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="LOB.UI.MahApps.Metro.snk" />
-    <None Include="mahapps.metro.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,13 +44,13 @@ namespace LOB.Dao.Nhibernate.Test
                                 {
                                     Number = 123456,
                                     Description = "Casa",
-                                    NumberType = NumberType.Telephone
+                                    PhoneNumberType = PhoneNumberType.Telephone
                                 },
                             new PhoneNumber
                                 {
                                     Number = 1234567,
                                     Description = "Trabalho",
-                                    NumberType = NumberType.Cellphone
+                                    PhoneNumberType = PhoneNumberType.Cellphone
                                 }
                         },
                     WebSite = "www.thisdude.com",

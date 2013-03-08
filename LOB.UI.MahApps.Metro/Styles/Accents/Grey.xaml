@@ -7,13 +7,13 @@
     <Color x:Key="AccentDarkColor">#404040</Color>
 
     <!--80%-->
-    <Color x:Key="AccentColor">#303030</Color>
+    <Color x:Key="AccentColor">#434343</Color>
     <!--60%-->
-    <Color x:Key="AccentColor2">#606060</Color>
+    <Color x:Key="AccentColor2">#6E6E6E</Color>
     <!--40%-->
-    <Color x:Key="AccentColor3">#909090</Color>
+    <Color x:Key="AccentColor3">#9C9C9C</Color>
     <!--20%-->
-    <Color x:Key="AccentColor4">#99999999</Color>
+    <Color x:Key="AccentColor4">#99A7A7A7</Color>
 
     <LinearGradientBrush x:Key="BrandingBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
         <GradientStop Color="{DynamicResource HighlightDarkColor}" Offset="0" />

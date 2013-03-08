@@ -14,14 +14,9 @@
         <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <StackPanel>
 
-
-        <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+        <DockPanel HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
                            HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
                            Grid.Column="5">
@@ -38,7 +33,6 @@
             </controls:Tile>
         </DockPanel>
 
-        <ScrollViewer CanContentScroll="True" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -87,6 +81,5 @@
 
 
             </Grid>
-        </ScrollViewer>
-    </Grid>
+    </StackPanel>
 </UserControl>
