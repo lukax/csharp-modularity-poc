@@ -69,10 +69,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IComposableComponent.cs" />
     <Compile Include="ProductLicense.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrialMaker.cs" />
+    <Compile Include="Util\RegistryUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Interface.csproj">
