@@ -6,9 +6,9 @@ using LOB.Domain;
 
 namespace LOB.Business
 {
-    public class ProductFacade : EntityFacade<Product>
+    public class CustomerFacade : EntityFacade<Customer>
     {
-        public ProductFacade(Product entity)
+        public CustomerFacade(Customer entity)
             : base(entity)
         {
         }
