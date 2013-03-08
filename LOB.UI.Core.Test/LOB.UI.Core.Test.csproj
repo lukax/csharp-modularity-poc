@@ -89,6 +89,10 @@
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>
       <Name>LOB.UI.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.UI.Core.View\LOB.UI.Core.View.csproj">
+      <Project>{b0968403-1f39-4128-b3f4-8d283d541071}</Project>
+      <Name>LOB.UI.Core.View</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

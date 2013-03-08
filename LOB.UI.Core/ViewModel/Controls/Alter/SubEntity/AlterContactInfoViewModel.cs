@@ -18,11 +18,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
     {
         private IUnityContainer _container;
 
-        public ICommand AddEmailCommand { get; set; }
-        public ICommand DeleteEmailCommand { get; set; }
-        public ICommand AddPhoneNumberCommand { get; set; }
-        public ICommand DeletePhoneNumberCommand { get; set; }
-
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IUnityContainer container)
             : base(entity, repository)
         {
@@ -33,6 +28,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             DeletePhoneNumberCommand = new DelegateCommand(DeletePhoneNumber);
         }
 
+        public ICommand AddEmailCommand { get; set; }
+        public ICommand DeleteEmailCommand { get; set; }
+        public ICommand AddPhoneNumberCommand { get; set; }
+        public ICommand DeletePhoneNumberCommand { get; set; }
+
         private void AddEmail(object arg)
         {
             Messenger.Default.Send<object>("AlterEmail", "OpenView");
@@ -40,15 +40,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void DeleteEmail(object arg)
         {
-
         }
+
         private void AddPhoneNumber(object arg)
         {
             Messenger.Default.Send<object>("AlterPhoneNumber", "OpenView");
         }
+
         private void DeletePhoneNumber(object arg)
         {
-
         }
 
         protected override void QuickSearch(object arg)

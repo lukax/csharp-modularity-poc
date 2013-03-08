@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8FBD60E2-7E77-41DB-BAC2-6883A4209EA3}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LOB.UI.Core</RootNamespace>
     <AssemblyName>LOB.UI.Core</AssemblyName>
@@ -66,6 +66,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>LOB.UI.Core.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Extras.WPF45, Version=4.1.26.28981, Culture=neutral, PublicKeyToken=0e27b6f8be9b2ef7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,12 +84,9 @@
     <Reference Include="MefContrib.Integration.Unity">
       <HintPath>..\packages\MefContrib.Integration.Unity.1.2.2.1\lib\net40-Client\MefContrib.Integration.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Blend.Interctivity.WPF.v4.0.1.0.2\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=59d6d24383174ac4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\MvvmLight.4.1.26.1\lib\net45\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,6 +100,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLight.4.1.26.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
@@ -115,17 +116,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="FluentNavigator.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
-    <Compile Include="RegionAdapter.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterEmployeeViewModel.cs" />
@@ -156,212 +151,9 @@
     <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListNaturalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="View\Controls\Alter\Base\AlterBaseEntityView.xaml.cs">
-      <DependentUpon>AlterBaseEntityView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\Base\AlterPersonView.xaml.cs">
-      <DependentUpon>AlterPersonView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\Base\AlterServiceView.xaml.cs">
-      <DependentUpon>AlterServiceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterCategoryView.xaml.cs">
-      <DependentUpon>AlterCategoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\AlterProductView.xaml.cs">
-      <DependentUpon>AlterProductView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\AlterEmployeeView.xaml.cs">
-      <DependentUpon>AlterEmployeeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\AlterSaleView.xaml.cs">
-      <DependentUpon>AlterSaleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\AlterNaturalPersonView.xaml.cs">
-      <DependentUpon>AlterNaturalPersonView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterAddressView.xaml.cs">
-      <DependentUpon>AlterAddressView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterContactInfoView.xaml.cs">
-      <DependentUpon>AlterContactInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterPayCheckView.xaml.cs">
-      <DependentUpon>AlterPayCheckView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\AlterLegalPersonView.xaml.cs">
-      <DependentUpon>AlterLegalPersonView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\AlterCustomerView.xaml.cs">
-      <DependentUpon>AlterCustomerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterEmailView.xaml.cs">
-      <DependentUpon>AlterEmailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Alter\SubEntity\AlterPhoneNumberView.xaml.cs">
-      <DependentUpon>AlterPhoneNumberView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\Base\ListBaseEntityView.xaml.cs">
-      <DependentUpon>ListBaseEntityView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\Base\ListServiceView.xaml.cs">
-      <DependentUpon>ListServiceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\SubEntity\ListPhoneNumberView.xaml.cs">
-      <DependentUpon>ListPhoneNumberView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\SubEntity\ListEmailView.xaml.cs">
-      <DependentUpon>ListEmailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\SubEntity\ListCategoryView.xaml.cs">
-      <DependentUpon>ListCategoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\ListCustomerView.xaml.cs">
-      <DependentUpon>ListCustomerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\ListProductView.xaml.cs">
-      <DependentUpon>ListProductView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\List\ListEmployeeView.xaml.cs">
-      <DependentUpon>ListEmployeeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Sale\SellProductView.xaml.cs">
-      <DependentUpon>SellProductView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\Sale\SellServiceView.xaml.cs">
-      <DependentUpon>SellServiceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FrameWindow.xaml.cs">
-      <DependentUpon>FrameWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Skins\MetroSkin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\MetroVSSkin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\MainSkin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\Base\AlterBaseEntityView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\Base\AlterPersonView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\Base\AlterServiceView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterCategoryView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\AlterProductView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\AlterEmployeeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\AlterSaleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\Alter\AlterNaturalPersonView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterAddressView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterContactInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterPayCheckView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\Alter\AlterLegalPersonView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\Alter\AlterCustomerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterEmailView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Alter\SubEntity\AlterPhoneNumberView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\Base\ListBaseEntityView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\Base\ListServiceView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\SubEntity\ListPhoneNumberView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\SubEntity\ListEmailView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\SubEntity\ListCategoryView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\ListCustomerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\ListProductView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\List\ListEmployeeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\Sale\SellProductView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\Sale\SellServiceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\FrameWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -381,7 +173,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="LOB.UI.Core.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -421,34 +212,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Resources\delete.png" />
-    <Resource Include="View\Resources\edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\save_as.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\Add48.png" />
-    <Resource Include="View\Resources\Cancel48.png" />
-    <Resource Include="View\Resources\Edit48.png" />
-    <Resource Include="View\Resources\File48.png" />
-    <Resource Include="View\Resources\File_delete48.png" />
-    <Resource Include="View\Resources\Refresh48.png" />
-    <Resource Include="View\Resources\Save48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\Accept48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\File_edit48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\Shoppingcart48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -464,9 +227,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\Search48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

@@ -1,31 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using System;
 using Microsoft.Win32;
+
+#endregion
 
 namespace LOB.Core.Util
 {
     public class RegistryUtility
     {
         /// <summary>
-        /// An useful class to read/write/delete/count registry keys
+        ///     An useful class to read/write/delete/count registry keys
         /// </summary>
         public class ModifyRegistry
         {
-            /// <summary>
-            /// A property to show or hide error messages 
-            /// (default = false)
-            /// </summary>
-            public bool ShowError { get; set; }
-
-            /// <summary>
-            /// A property to set the SubKey value
-            /// (default = "SOFTWARE\\" + Application.ProductName.ToUpper())
-            /// </summary>
-            public string SubKey { get; set; }
-
             private RegistryKey _baseRegistryKey = Registry.LocalMachine;
 
             public ModifyRegistry()
@@ -35,8 +23,20 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// A property to set the BaseRegistryKey value.
-            /// (default = Registry.LocalMachine)
+            ///     A property to show or hide error messages
+            ///     (default = false)
+            /// </summary>
+            public bool ShowError { get; set; }
+
+            /// <summary>
+            ///     A property to set the SubKey value
+            ///     (default = "SOFTWARE\\" + Application.ProductName.ToUpper())
+            /// </summary>
+            public string SubKey { get; set; }
+
+            /// <summary>
+            ///     A property to set the BaseRegistryKey value.
+            ///     (default = Registry.LocalMachine)
             /// </summary>
             public RegistryKey BaseRegistryKey
             {
@@ -45,9 +45,9 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// To read a registry key.
-            /// input: KeyName (string)
-            /// output: value (string) 
+            ///     To read a registry key.
+            ///     input: KeyName (string)
+            ///     output: value (string)
             /// </summary>
             public string Read(string keyName)
             {
@@ -66,7 +66,7 @@ namespace LOB.Core.Util
                     {
                         // If the RegistryKey exists I get its value
                         // or null is returned.
-                        return (string)sk1.GetValue(keyName.ToUpper());
+                        return (string) sk1.GetValue(keyName.ToUpper());
                     }
                     catch (Exception e)
                     {
@@ -78,9 +78,9 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// To write into a registry key.
-            /// input: KeyName (string) , Value (object)
-            /// output: true or false 
+            ///     To write into a registry key.
+            ///     input: KeyName (string) , Value (object)
+            ///     output: true or false
             /// </summary>
             public bool Write(string keyName, object value)
             {
@@ -106,9 +106,9 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// To delete a registry key.
-            /// input: KeyName (string)
-            /// output: true or false 
+            ///     To delete a registry key.
+            ///     input: KeyName (string)
+            ///     output: true or false
             /// </summary>
             public bool DeleteKey(string keyName)
             {
@@ -134,9 +134,9 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// To delete a sub key and any child.
-            /// input: void
-            /// output: true or false 
+            ///     To delete a sub key and any child.
+            ///     input: void
+            ///     output: true or false
             /// </summary>
             public bool DeleteSubKeyTree()
             {
@@ -160,9 +160,9 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// Retrive the count of subkeys at the current key.
-            /// input: void
-            /// output: number of subkeys
+            ///     Retrive the count of subkeys at the current key.
+            ///     input: void
+            ///     output: number of subkeys
             /// </summary>
             public int SubKeyCount()
             {
@@ -186,9 +186,9 @@ namespace LOB.Core.Util
             }
 
             /// <summary>
-            /// Retrive the count of values in the key.
-            /// input: void
-            /// output: number of keys
+            ///     Retrive the count of values in the key.
+            ///     input: void
+            ///     output: number of keys
             /// </summary>
             public int ValueCount()
             {

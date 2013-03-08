@@ -118,10 +118,10 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)LOB.UI.Core\bin\Debug\"
-xcopy /y "$(ProjectDir)$(OutDir)FluentNHibernate.dll" "$(SolutionDir)LOB.UI.Core\bin\Debug\"
-xcopy /y "$(ProjectDir)$(OutDir)Iesi.Collections.dll" "$(SolutionDir)LOB.UI.Core\bin\Debug\"
-xcopy /y "$(ProjectDir)$(OutDir)NHibernate.dll" "$(SolutionDir)LOB.UI.Core\bin\Debug\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
+xcopy /y "$(ProjectDir)$(OutDir)FluentNHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
+xcopy /y "$(ProjectDir)$(OutDir)Iesi.Collections.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
+xcopy /y "$(ProjectDir)$(OutDir)NHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

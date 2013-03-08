@@ -37,7 +37,8 @@ namespace MahApps.Metro.Controls
                                                                         typeof (RangeSlider),
                                                                         new InputGestureCollection(new InputGesture[]
                                                                             {
-                                                                                new KeyGesture(Key.F, ModifierKeys.Control)
+                                                                                new KeyGesture(Key.F,
+                                                                                               ModifierKeys.Control)
                                                                             }));
 
         public static RoutedUICommand MoveAllForward = new RoutedUICommand("MoveAllForward", "MoveAllForward",
