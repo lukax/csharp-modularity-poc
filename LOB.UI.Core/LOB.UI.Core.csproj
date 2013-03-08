@@ -226,6 +226,12 @@
     <Compile Include="View\Controls\List\ListEmployeeView.xaml.cs">
       <DependentUpon>ListEmployeeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\Sale\SellProductView.xaml.cs">
+      <DependentUpon>SellProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\Sale\SellServiceView.xaml.cs">
+      <DependentUpon>SellServiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FrameWindow.xaml.cs">
       <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
@@ -339,6 +345,14 @@
     <Page Include="View\Controls\List\ListEmployeeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\Sale\SellProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\Sale\SellServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FrameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
