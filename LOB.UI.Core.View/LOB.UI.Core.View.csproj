@@ -412,51 +412,51 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Accept48.png">
+    <Resource Include="Resources\Accept48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Add48.png">
+    </Resource>
+    <Resource Include="Resources\Add48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Cancel48.png">
+    </Resource>
+    <Resource Include="Resources\Cancel48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\delete.png">
+    </Resource>
+    <Resource Include="Resources\delete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\edit.png">
+    </Resource>
+    <Resource Include="Resources\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Edit48.png">
+    </Resource>
+    <Resource Include="Resources\Edit48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\File48.png">
+    </Resource>
+    <Resource Include="Resources\File48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\File_delete48.png">
+    </Resource>
+    <Resource Include="Resources\File_delete48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\File_edit48.png">
+    </Resource>
+    <Resource Include="Resources\File_edit48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\logo.png">
+    </Resource>
+    <Resource Include="Resources\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Refresh48.png">
+    </Resource>
+    <Resource Include="Resources\Refresh48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Save48.png">
+    </Resource>
+    <Resource Include="Resources\Save48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\save_as.png">
+    </Resource>
+    <Resource Include="Resources\save_as.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Search48.png">
+    </Resource>
+    <Resource Include="Resources\Search48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Shoppingcart48.png">
+    </Resource>
+    <Resource Include="Resources\Shoppingcart48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
