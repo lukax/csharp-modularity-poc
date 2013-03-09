@@ -4,14 +4,15 @@ using System;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>
+    public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel
     {
-        public AlterPhoneNumberViewModel(PhoneNumber entity, IRepository repository) : base(entity, repository)
+        public AlterPhoneNumberViewModel(PhoneNumber entity, IRepository repository) : base(entity,repository)
         {
         }
 

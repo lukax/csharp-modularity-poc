@@ -5,17 +5,27 @@ using System.Diagnostics;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public class AlterCategoryViewModel : AlterServiceViewModel
+    public class AlterCategoryViewModel : AlterServiceViewModel<Category>, IAlterCategoryViewModel
     {
-        public AlterCategoryViewModel(Category entity, IRepository repository) : base(entity, repository)
-        {
-        }
+        private ICommandService _commandService;
+        private IUnityContainer _container;
 
+        public AlterCategoryViewModel(Category entity, IRepository repository, IUnityContainer container,
+                                      ICommandService commandService) : base(entity, repository)
+        {
+            _commandService = commandService;
+            _container = container;
+        }
+        
         protected override void SaveChanges(object arg)
         {
             using (Repository.Uow.BeginTransaction())
@@ -28,7 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            throw new NotImplementedException();
+            _commandService["QuickSearch"].Execute(_container.Resolve<ListCategoryViewModel>());
         }
 
         protected override void ClearEntity(object arg)

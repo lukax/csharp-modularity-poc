@@ -5,11 +5,11 @@ using System.Windows.Input;
 
 #endregion
 
-namespace LOB.UI.Core.Command
+namespace LOB.UI.Interface.Command
 {
     public class DelegateCommand : ICommand
     {
-        private readonly Predicate<Object> _canExecute;
+        private readonly Predicate<object> _canExecute;
         private readonly Action<Object> _execute;
 
         public DelegateCommand(Action<Object> execute, Predicate<Object> canExecute = null)

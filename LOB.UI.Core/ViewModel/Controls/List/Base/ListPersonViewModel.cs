@@ -4,12 +4,13 @@ using System;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.UI.Interface.ViewModel.Controls.List.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
-    public abstract class ListPersonViewModel<T> : ListBaseEntityViewModel<T> where T : Person
+    public abstract class ListPersonViewModel<T> : ListBaseEntityViewModel<T>, IListPersonViewModel where T : Person
     {
         public ListPersonViewModel(T entity, IRepository repository)
             : base(entity, repository)

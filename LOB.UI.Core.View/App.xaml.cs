@@ -42,7 +42,14 @@ namespace LOB.UI.Core.View
             OnStartup();
 
             //Startup MainWindow
-            _navigator.Resolve<MainWindow>().Show();
+            try
+            {
+                _navigator.ResolveView<MainWindow>().Show();
+            }
+            catch(Exception ex)
+            {
+                _navigator.PromptUser("Erro: "+ex.Message);
+            }
         }
 
         private void OnStartup()
@@ -52,6 +59,9 @@ namespace LOB.UI.Core.View
 
             //Make container resolve types known to MEF:
             _unityContainer.RegisterCatalog(_catalog);
+
+            //Register CommandService
+            _unityContainer.RegisterInstance(CommandService.Default);
 
             _navigator = _unityContainer.Resolve<IFluentNavigator>();
             _regionAdapter = _unityContainer.Resolve<IRegionAdapter>();

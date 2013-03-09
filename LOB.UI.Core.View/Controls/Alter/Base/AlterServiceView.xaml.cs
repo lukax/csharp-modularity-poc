@@ -2,6 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 
@@ -10,7 +11,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.Alter.Base
 {
     [Export]
-    public partial class AlterServiceView : UserControl, IView, ITabProp
+    public partial class AlterServiceView : UserControl, IView
     {
         private string _header;
 
@@ -20,13 +21,13 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
         }
 
         [ImportingConstructor]
-        public AlterServiceView(AlterServiceViewModel viewModel)
+        public AlterServiceView(AlterServiceViewModel<Service> viewModel)
             : this()
         {
             ViewModel = viewModel;
         }
 
-        public AlterServiceViewModel ViewModel
+        public AlterServiceViewModel<Service> ViewModel
         {
             set { this.DataContext = value; }
         }

@@ -6,13 +6,15 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T> where T : NaturalPerson
+    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T>, IListNaturalPersonViewModel
+        where T : NaturalPerson
     {
         [ImportingConstructor]
         public ListNaturalPersonViewModel(T entity, IRepository repository)

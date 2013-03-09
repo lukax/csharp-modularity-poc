@@ -5,12 +5,13 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
 {
-    public class ListAddressViewModel : ListBaseEntityViewModel<Address>
+    public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel
     {
         public ListAddressViewModel(Address entity, IRepository repository) : base(entity, repository)
         {

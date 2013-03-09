@@ -10,7 +10,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.List
 {
     [Export]
-    public partial class ListProductView : UserControl, ITabProp, IView
+    public partial class ListProductView : UserControl, IView
     {
         private string _header;
 

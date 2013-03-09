@@ -6,18 +6,19 @@ using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>
+    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel
     {
         private IUnityContainer _container;
 
-        public AlterPayCheckViewModel(PayCheck payCheck, IRepository repository, IUnityContainer container)
-            : base(payCheck, repository)
+        public AlterPayCheckViewModel(PayCheck entity, IRepository repository, IUnityContainer container)
+            : base(entity,repository)
         {
             _container = container;
         }

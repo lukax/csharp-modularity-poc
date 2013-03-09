@@ -3,15 +3,17 @@
 using System;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
-    public class AlterServiceViewModel : AlterBaseEntityViewModel<Service>
+    public abstract class AlterServiceViewModel<T> : AlterBaseEntityViewModel<T>, IAlterServiceViewModel<T>
+        where T : Service
     {
-        public AlterServiceViewModel(Service entity, IRepository repository)
-            : base(entity, repository)
+        public AlterServiceViewModel(T entity, IRepository repository)
+            : base(entity,repository)
         {
         }
 

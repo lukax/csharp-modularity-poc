@@ -13,7 +13,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
-    public partial class AlterProductView : UserControl, ITabProp, IView
+    public partial class AlterProductView : UserControl, IView
     {
         private string _header;
         private IFluentNavigator _navigator;
@@ -39,8 +39,6 @@ namespace LOB.UI.Core.View.Controls.Alter
                 this.UcAlterBaseEntityView.DataContext = value;
                 Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
                                                    o => Messenger.Default.Send("Cancel"));
-                Messenger.Default.Register<object>(DataContext, "QuickSearchCommand",
-                                                   o => _navigator.Resolve("QuickSearch", o).Show(true));
             }
         }
 

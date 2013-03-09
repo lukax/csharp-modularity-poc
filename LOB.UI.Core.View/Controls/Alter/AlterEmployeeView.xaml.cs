@@ -11,7 +11,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
-    public partial class AlterEmployeeView : UserControl, ITabProp, IView
+    public partial class AlterEmployeeView : UserControl, IView
     {
         private string _header;
         private IFluentNavigator _navigator;
@@ -43,7 +43,7 @@ namespace LOB.UI.Core.View.Controls.Alter
                 Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
                                                    o => Messenger.Default.Send("Cancel"));
                 Messenger.Default.Register<object>(DataContext, "QuickSearchCommand",
-                                                   o => _navigator.Resolve("QuickSearch", o).Show(true));
+                                                   o => _navigator.ResolveView("QuickSearch", o).Show(true));
             }
         }
 

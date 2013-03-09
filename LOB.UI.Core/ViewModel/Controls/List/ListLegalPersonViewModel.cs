@@ -5,12 +5,13 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListLegalPersonViewModel : ListPersonViewModel<LegalPerson>
+    public class ListLegalPersonViewModel : ListPersonViewModel<LegalPerson>, IListLegalPersonViewModel
     {
         public ListLegalPersonViewModel(LegalPerson entity, IRepository repository)
             : base(entity, repository)

@@ -10,7 +10,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
-    public partial class AlterNaturalPersonView : UserControl, IView, ITabProp
+    public partial class AlterNaturalPersonView : UserControl, IView
     {
         private string _header;
 

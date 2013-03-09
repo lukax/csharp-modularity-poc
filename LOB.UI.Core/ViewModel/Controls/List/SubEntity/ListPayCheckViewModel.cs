@@ -5,12 +5,13 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
 {
-    public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>
+    public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel
     {
         public ListPayCheckViewModel(PayCheck entity, IRepository repository) : base(entity, repository)
         {

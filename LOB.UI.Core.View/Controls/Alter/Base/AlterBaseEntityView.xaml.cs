@@ -11,7 +11,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.Alter.Base
 {
     [Export]
-    public partial class AlterBaseEntityView : UserControl, IView, ITabProp
+    public partial class AlterBaseEntityView : UserControl, IView
     {
         private string _header;
 

@@ -12,7 +12,7 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.View.Controls.Alter
 {
     [Export]
-    public partial class AlterCustomerView : UserControl, ITabProp, IView
+    public partial class AlterCustomerView : UserControl, IView
     {
         private IUnityContainer _container;
         private string _header;

@@ -8,6 +8,8 @@ using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -15,22 +17,25 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
-    public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>
+    public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel
     {
         private AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
+        private ICommandService _commandService;
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
 
         [ImportingConstructor]
-        public AlterCustomerViewModel(Customer client, IRepository repository, IUnityContainer container,
+        public AlterCustomerViewModel(Customer entity, IRepository repository, IUnityContainer container,
                                       IFluentNavigator navigator,
                                       AlterLegalPersonViewModel alterLegalPersonViewModel,
-                                      AlterNaturalPersonViewModel alterNaturalPersonViewModel)
-            : base(client, repository)
+                                      AlterNaturalPersonViewModel alterNaturalPersonViewModel,
+                                      ICommandService commandService)
+            : base(entity,repository)
         {
             _navigator = navigator;
             _container = container;
+            _commandService = commandService;
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             //default init customer as natural person
@@ -57,7 +62,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private async void LegalPersonCfg()
         {
             await Task.Delay(500);
-            var viewL = _navigator.Resolve("AlterLegalPerson").SetViewModel(_alterLegalPersonViewModel).Get();
+            var viewL = _navigator.ResolveView("AlterLegalPerson").SetViewModel(_alterLegalPersonViewModel).Get();
             Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
 
             Entity.Person = _alterLegalPersonViewModel.Entity;
@@ -66,7 +71,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private async void NaturalPersonCfg()
         {
             await Task.Delay(500);
-            var viewN = _navigator.Resolve("AlterNaturalPerson").SetViewModel(_alterNaturalPersonViewModel).Get();
+            var viewN = _navigator.ResolveView("AlterNaturalPerson").SetViewModel(_alterNaturalPersonViewModel).Get();
             Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
 
             Entity.Person = _alterNaturalPersonViewModel.Entity;
@@ -94,7 +99,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListCustomerViewModel>(), "QuickSearchCommand");
+            _commandService["QuickSearch"].Execute(
+                _container.Resolve<ListCustomerViewModel>(new ParameterOverride("entity", Entity)));
+            //Messenger.Default.Send<object>(_container.ResolveView<ListCustomerViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

@@ -10,7 +10,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.List.SubEntity
 {
     [Export]
-    public partial class ListPhoneNumberView : UserControl, IView, ITabProp
+    public partial class ListPhoneNumberView : UserControl, IView
     {
         private string _header;
 

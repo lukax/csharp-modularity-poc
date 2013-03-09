@@ -5,13 +5,14 @@ using System.ComponentModel.Composition;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel<Employee>
+    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel<Employee>, IListEmployeeViewModel
     {
         [ImportingConstructor]
         public ListEmployeeViewModel(Employee employee, IRepository repository)

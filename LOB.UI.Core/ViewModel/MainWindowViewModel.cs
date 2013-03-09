@@ -2,11 +2,10 @@
 
 using System.ComponentModel.Composition;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Core;
-using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -16,11 +15,14 @@ namespace LOB.UI.Core.ViewModel
     [Export]
     public class MainWindowViewModel : BaseViewModel
     {
+        private ICommandService _commandService;
+
         [ImportingConstructor]
-        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator)
+        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator, ICommandService commandService)
         {
             _container = container;
             _navigator = navigator;
+            _commandService = commandService;
 
             OpenTabCommand = new DelegateCommand(OpenTab);
         }
@@ -36,7 +38,8 @@ namespace LOB.UI.Core.ViewModel
 
         private void OpenTab(object arg)
         {
-            Messenger.Default.Send(_navigator.Resolve(arg.ToString()).Get(), "OpenTab");
+            _commandService["OpenTab"].Execute(_navigator.ResolveView(arg.ToString()).Get());
+            //Messenger.Default.Send(_navigator.ResolveView(arg.ToString()).Get(), "OpenTab");
         }
 
         public override void InitializeServices()

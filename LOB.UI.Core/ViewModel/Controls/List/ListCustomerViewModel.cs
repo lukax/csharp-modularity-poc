@@ -5,17 +5,18 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>
+    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel
     {
-        public ListCustomerViewModel(Customer client, IRepository repository)
-            : base(client, repository)
+        public ListCustomerViewModel(Customer entity, IRepository repository)
+            : base(entity, repository)
         {
-            Entity = client;
+            Entity = entity;
             if (Entity.Person == null)
                 throw new ArgumentException("Entity has not defined a person");
         }

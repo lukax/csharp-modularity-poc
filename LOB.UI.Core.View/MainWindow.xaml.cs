@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Unity;
@@ -19,6 +20,7 @@ namespace LOB.UI.Core.View
     [Export]
     public partial class MainWindow : MetroWindow, IView
     {
+        private ICommandService _commandService = CommandService.Default;
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
         private MainWindowViewModel _viewModel;
@@ -27,22 +29,35 @@ namespace LOB.UI.Core.View
         public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, IFluentNavigator navigator)
         {
             _container = container;
-            _viewModel = viewModel;
+            ViewModel = viewModel;
             _navigator = navigator;
 
             InitializeComponent();
-            //MiLightGrey();
         }
+
+        public MainWindowViewModel ViewModel
+        {
+            get { return _viewModel; }
+            set
+            {
+                _viewModel = value;
+                DataContext = value;
+                _commandService.RegisterCommand("OpenTab", new DelegateCommand(OpenTab));
+                _commandService.RegisterCommand("Cancel", new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
+                _commandService.RegisterCommand("OpenView", new DelegateCommand(o => OpenView(o, o)));
+                _commandService.RegisterCommand("QuickSearch", new DelegateCommand(o => OpenView("QuickSearch", o)));
+                Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
+                Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
+                Messenger.Default.Register<object>(DataContext, "OpenView", o => OpenView(o.ToString(), _navigator.ResolveView(o.ToString()).Get()));
+                Messenger.Default.Register<object>(DataContext, "QuickSearch", o => OpenView("QuickSearch", o));
+            }
+        }
+
+        public string Header { get; set; }
+        public int? Index { get; set; }
 
         public void InitializeServices()
         {
-            DataContext = _viewModel;
-
-            Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
-            Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
-            Messenger.Default.Register<object>(DataContext, "OpenView",
-                                               o => OpenView(o.ToString(), _navigator.Resolve(o.ToString()).Get()));
-            Messenger.Default.Register<object>(DataContext, "QuickSearch", vM => OpenView("QuickSearch", vM));
         }
 
         public void Refresh()
@@ -54,18 +69,23 @@ namespace LOB.UI.Core.View
 
         private void OpenView(object arg, object viewModel, bool asDialog = true)
         {
-            _navigator.Resolve(arg.ToString()).SetViewModel(viewModel).Show(asDialog);
+            if (viewModel is string)
+                _navigator.ResolveView(arg.ToString(), _navigator.ResolveView(viewModel.ToString()).Get())
+                          .Show(asDialog);
+            else
+                _navigator.ResolveView(arg.ToString(), viewModel);
+
             ChangeFlyouts(null, null);
         }
 
         public void OpenTab(object view)
         {
             if (view == null) throw new ArgumentNullException();
-            if (!(view is ITabProp)) throw new ArgumentException("Content isn't a ITabProp");
+            if (!(view is IView)) throw new ArgumentException("Content isn't a IView");
 
-            var t = new TabItem {Content = view, Header = ((ITabProp) view).Header};
+            var t = new TabItem {Content = view, Header = ((IView) view).Header};
 
-            ((ITabProp) t.Content).Index = TabControlMain.Items.Add(t);
+            ((IView) t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
             ChangeFlyouts(null, null);
         }

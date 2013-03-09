@@ -6,13 +6,14 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>
+    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel
     {
         [ImportingConstructor]
         public ListProductViewModel(Product product, IRepository repository)

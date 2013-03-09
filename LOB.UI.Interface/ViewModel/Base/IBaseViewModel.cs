@@ -5,12 +5,13 @@ using System.ComponentModel.Composition;
 
 #endregion
 
-namespace LOB.UI.Interface
+namespace LOB.UI.Interface.ViewModel.Base
 {
     [InheritedExport]
-    public interface ITabProp
+    public interface IBaseViewModel
     {
         String Header { get; set; }
-        int? Index { get; set; }
+        void InitializeServices();
+        void Refresh();
     }
 }

@@ -9,8 +9,8 @@ using LOB.UI.Interface;
 
 namespace LOB.UI.Core.View.Controls.Alter
 {
-    [Export]
-    public partial class AlterSaleView : UserControl, ITabProp, IView
+    [Export("")]
+    public partial class AlterSaleView : UserControl, IView
     {
         private string _header;
 

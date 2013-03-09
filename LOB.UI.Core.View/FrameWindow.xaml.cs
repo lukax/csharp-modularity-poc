@@ -92,6 +92,9 @@ namespace LOB.UI.Core.View
 
         #endregion
 
+        public string Header { get; set; }
+        public int? Index { get; set; }
+
         public void InitializeServices()
         {
             Messenger.Default.Register<object>(DataContext, "Cancel", o => this.Close());

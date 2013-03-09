@@ -65,10 +65,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
-      <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
-      <Name>LOB.Dao.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LOB.Dao.Nhibernate.Test\LOB.Dao.Nhibernate.Test.csproj">
       <Project>{63bbd8c9-0916-4563-bb05-bfc7359ff5b8}</Project>
       <Name>LOB.Dao.Nhibernate.Test</Name>
@@ -76,18 +72,6 @@
     <ProjectReference Include="..\LOB.Dao.Nhibernate\LOB.Dao.Nhibernate.csproj">
       <Project>{c2e495a5-600d-4881-a1f7-2d8ab7e5367e}</Project>
       <Name>LOB.Dao.Nhibernate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
-      <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
-      <Name>LOB.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.UI.Core\LOB.UI.Core.csproj">
-      <Project>{8FBD60E2-7E77-41DB-BAC2-6883A4209EA3}</Project>
-      <Name>LOB.UI.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Interface.csproj">
-      <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>
-      <Name>LOB.UI.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.UI.Core.View\LOB.UI.Core.View.csproj">
       <Project>{b0968403-1f39-4128-b3f4-8d283d541071}</Project>

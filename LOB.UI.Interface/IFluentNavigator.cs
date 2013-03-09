@@ -11,8 +11,8 @@ namespace LOB.UI.Interface
     {
         object Get();
         TView As<TView>() where TView : class;
-        IFluentNavigator Resolve(string param, object viewModel = null);
-        IFluentNavigator Resolve<TView>(object viewModel = null);
+        IFluentNavigator ResolveView(string param, object viewModel = null);
+        IFluentNavigator ResolveView<TView>(object viewModel = null);
         IFluentNavigator SetViewModel(object viewModel);
         void Show(bool asDialog = false);
         bool PromptUser(string message);

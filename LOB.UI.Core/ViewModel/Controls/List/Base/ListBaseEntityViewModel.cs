@@ -11,15 +11,16 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Base;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Controls.List.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
     [InheritedExport]
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel where T : BaseEntity
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity
     {
         #region Props
 

@@ -11,7 +11,7 @@ using LOB.UI.Interface;
 namespace LOB.UI.Core.View.Controls.List.Base
 {
     [Export]
-    public partial class ListServiceView : UserControl, IView, ITabProp
+    public partial class ListServiceView : UserControl, IView
     {
         private string _header;
 

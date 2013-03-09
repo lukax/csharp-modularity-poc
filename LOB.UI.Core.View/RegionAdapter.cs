@@ -31,9 +31,9 @@ namespace LOB.UI.Core.View
             where TView : class
         {
             object region = _regions[regionName];
-            if (region is ITabProp)
+            if (region is IView)
             {
-                ((ITabProp) region).Header = title;
+                ((IView) region).Header = title;
             }
             if (region is ContentControl)
             {

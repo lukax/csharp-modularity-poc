@@ -50,7 +50,7 @@
                 <base2:AlterBaseEntityView HorizontalAlignment="Left" x:Name="UcAlterBaseEntityView"  />
                 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                    <Label Content="Title:" HorizontalAlignment="Right" />
+                    <Label Content="Header:" HorizontalAlignment="Right" />
                     <TextBox Text="{Binding Entity.Title}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
 
                     <Label Content="Hiredate:" HorizontalAlignment="Right" />

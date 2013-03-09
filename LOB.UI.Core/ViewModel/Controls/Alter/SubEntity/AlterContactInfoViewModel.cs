@@ -2,26 +2,33 @@
 
 using System;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>
+    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel
     {
+        private ICommandService _commandService;
         private IUnityContainer _container;
+        private IFluentNavigator _navigator;
 
-        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IUnityContainer container)
-            : base(entity, repository)
+        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IUnityContainer container,
+                                         ICommandService commandService, IFluentNavigator navigator)
+            : base(entity,repository)
         {
             _container = container;
+            _commandService = commandService;
+            _navigator = navigator;
+            Entity = entity;
             AddEmailCommand = new DelegateCommand(AddEmail);
             DeleteEmailCommand = new DelegateCommand(DeleteEmail);
             AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber);
@@ -35,7 +42,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddEmail(object arg)
         {
-            Messenger.Default.Send<object>("AlterEmail", "OpenView");
+            _commandService["OpenView"].Execute(_container.Resolve<IAlterEmailViewModel>());
+            _navigator.ResolveView("AlterEmail").Show();
         }
 
         private void DeleteEmail(object arg)
@@ -44,7 +52,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddPhoneNumber(object arg)
         {
-            Messenger.Default.Send<object>("AlterPhoneNumber", "OpenView");
+            _commandService["OpenView"].Execute(_container.Resolve<IAlterPhoneNumberViewModel>());
+            //Messenger.Default.Send<object>("AlterPhoneNumber", "OpenView");
         }
 
         private void DeletePhoneNumber(object arg)
@@ -53,7 +62,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListContactInfoViewModel>(), "QuickSearchCommand");
+            _commandService["QuickSearch"].Execute(_container.Resolve<ListContactInfoViewModel>());
+            //Messenger.Default.Send<object>(_container.Resolve<ListContactInfoViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

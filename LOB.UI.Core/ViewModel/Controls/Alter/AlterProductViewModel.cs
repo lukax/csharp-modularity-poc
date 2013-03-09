@@ -9,11 +9,12 @@ using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Command;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -21,16 +22,17 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
-    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>
+    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel
     {
         private IList<Category> _categories;
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
+        private ICommandService commandService = CommandService.Default;
 
         [ImportingConstructor]
-        public AlterProductViewModel(Product product, IRepository repository, IUnityContainer container,
+        public AlterProductViewModel(Product entity, IRepository repository, IUnityContainer container,
                                      IFluentNavigator navigator)
-            : base(product, repository)
+            : base(entity,repository)
         {
             _container = container;
             _navigator = navigator;
@@ -66,18 +68,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         private void ExecuteListCategory(object o)
         {
-            _navigator.Resolve(o.ToString()).Show(true);
+            _navigator.ResolveView(o.ToString()).Show(true);
         }
 
         private void ExecuteAlterCategory(object o)
         {
             if (Entity.Category != null)
-                _navigator.Resolve(o.ToString(),
-                                   _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
-                                                                                                    Entity.Category)))
+                _navigator.ResolveView(o.ToString(),
+                                       _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
+                                                                                                        Entity.Category)))
                           .Show(true);
-            _navigator.Resolve(o.ToString()).Show(true);
-            //Messenger.Default.Send<object>(_container.Resolve<AlterCategoryViewModel>());
+            _navigator.ResolveView(o.ToString()).Show(true);
+            //Messenger.Default.Send<object>(_container.ResolveView<AlterCategoryViewModel>());
         }
 
         protected override void SaveChanges(object arg)
@@ -106,7 +108,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
+            commandService["QuickSearch"].Execute(_container.Resolve<ListProductViewModel>());
+            //Messenger.Default.Send<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object args)

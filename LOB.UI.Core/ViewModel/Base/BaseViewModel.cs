@@ -2,22 +2,22 @@
 
 using System;
 using LOB.Domain.Base;
-using LOB.UI.Interface;
+using LOB.UI.Interface.ViewModel.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Base
 {
-    public abstract class BaseViewModel : BaseNotifyChange, IView
+    public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel
     {
-        private String _title;
+        private String _header;
 
-        public String Title
+        public String Header
         {
-            get { return _title; }
+            get { return _header; }
             set
             {
-                _title = value;
+                _header = value;
                 OnPropertyChanged();
             }
         }

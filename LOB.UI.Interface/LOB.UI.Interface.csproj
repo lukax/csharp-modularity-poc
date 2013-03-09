@@ -44,26 +44,60 @@
     <AssemblyOriginatorKeyFile>LOB.UI.Interface.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="Command\ICommandService.cs" />
     <Compile Include="CrudOperationType.cs" />
     <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
-    <Compile Include="ITabProp.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Base\IBaseViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\IAlterPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\Base\IAlterServiceViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterCustomerViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterLegalPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterNaturalPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterSaleViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterAddressViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterEmailViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterPayCheckViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\Base\IListBaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\Base\IListPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\Base\IListServiceViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\IListCustomerViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\IListEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\IListLegalPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\IListNaturalPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\IListProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\IListAddressViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\IListCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\IListContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\IListEmailViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\IListPayCheckViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\SubEntity\IListPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LOB.UI.Interface.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
+      <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
+      <Name>LOB.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

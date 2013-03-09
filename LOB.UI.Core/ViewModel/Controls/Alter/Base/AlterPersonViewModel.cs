@@ -7,6 +7,8 @@ using LOB.Domain.Base;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -14,12 +16,13 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
     [Export]
-    public abstract class AlterPersonViewModel<T> : AlterBaseEntityViewModel<T> where T : Person
+    public abstract class AlterPersonViewModel<T> : AlterBaseEntityViewModel<T>, IAlterPersonViewModel<T>
+        where T : Person
     {
         private IUnityContainer _container;
 
         [ImportingConstructor]
-        public AlterPersonViewModel(T entity, Address entityAddress, ContactInfo entityContactInfo,
+        public AlterPersonViewModel(T entity, Address address, ContactInfo contactInfo,
                                     IRepository repository,
                                     AlterAddressViewModel alterAddressViewModel,
                                     AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container)
@@ -29,8 +32,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             AlterAddressViewModel = alterAddressViewModel;
             AlterContactInfoViewModel = alterContactInfoViewModel;
 
-            Entity.Address = entityAddress;
-            Entity.ContactInfo = entityContactInfo;
+            Entity.Address = address;
+            Entity.ContactInfo = contactInfo;
             //TODO: Use business logic to set default params
             if (Entity.Address.State == null && Entity.Address.Country == null)
             {
@@ -42,8 +45,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             AlterContactInfoViewModel.Entity = this.Entity.ContactInfo;
         }
 
-        public AlterAddressViewModel AlterAddressViewModel { get; set; }
-        public AlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+        }
 
         protected override void SaveChanges(object arg)
         {
@@ -70,14 +81,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         protected override void QuickSearch(object arg)
         {
             Messenger.Default.Send<object>(_container.Resolve<ListPersonViewModel<Person>>(), "QuickSearchCommand");
-        }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
         }
     }
 }

@@ -9,6 +9,7 @@ using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -16,7 +17,7 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
     [Export]
-    public class AlterNaturalPersonViewModel : AlterPersonViewModel<NaturalPerson>
+    public class AlterNaturalPersonViewModel : AlterPersonViewModel<NaturalPerson>, IAlterNaturalPersonViewModel
     {
         private IUnityContainer _container;
 

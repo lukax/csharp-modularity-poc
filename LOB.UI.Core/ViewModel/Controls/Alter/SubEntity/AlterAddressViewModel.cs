@@ -1,24 +1,28 @@
 ﻿#region Usings
 
 using System;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>
+    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel
     {
+        private ICommandService _commandService;
         private IUnityContainer _container;
 
-        public AlterAddressViewModel(Address entity, IRepository repository, IUnityContainer container)
-            : base(entity, repository)
+        public AlterAddressViewModel(Address entity, IRepository repository, IUnityContainer container,
+                                     ICommandService commandService)
+            : base(entity,repository)
         {
+            _commandService = commandService;
             _container = container;
         }
 
@@ -68,7 +72,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListAddressViewModel>(), "QuickSearchCommand");
+            _commandService["QuickSearch"].Execute(_container.Resolve<ListAddressViewModel>());
+            //Messenger.Default.Send<object>(_container.Resolve<ListAddressViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)
