@@ -17,7 +17,7 @@
         
         <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="Quick Search" Width="15" Height="15"
                            Background="Transparent">
-            <Image Source="/LOB.UI.Core;component/View/Resources/Search48.png" />
+            <Image Source="/Resources/Search48.png" />
         </controls:Tile>
     </StackPanel>
 

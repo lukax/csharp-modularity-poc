@@ -46,11 +46,11 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/View\Resources/Cancel48.png" />
+                <Image Source="/Resources/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                <Image Source="/View\Resources/Accept48.png" />
+                <Image Source="/Resources/Accept48.png" />
             </controls:Tile>
         </StackPanel>
     </StackPanel>

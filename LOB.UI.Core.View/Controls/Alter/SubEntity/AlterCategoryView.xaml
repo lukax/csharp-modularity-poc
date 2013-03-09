@@ -17,16 +17,16 @@
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
                            HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
                            Grid.Column="5">
-                <Image Source="/View\Resources/File48.png"></Image>
+                <Image Source="/Resources\File48.png"></Image>
             </controls:Tile>
 
             <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/View\Resources\Cancel48.png" />
+                <Image Source="/Resources\Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="/View\Resources\Accept48.png" />
+                <Image Source="/Resources\Accept48.png" />
             </controls:Tile>
         </StackPanel>
 

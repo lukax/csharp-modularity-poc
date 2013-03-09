@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500">
 
@@ -13,13 +14,7 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center"
-                   Text="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40"  />
-
-            <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="Quick Search" Width="15" Height="15"
-                           Background="Transparent">
-                <Image Source="/LOB.UI.Core;component/View/Resources/Search48.png" />
-            </controls:Tile>
+            <base:AlterBaseEntityView/>
         </StackPanel>
         
         <Grid>
@@ -44,5 +39,17 @@
                  Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"
                  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
         </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
+                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                    <Image Source="/Resources/Cancel48.png" />
+                </controls:Tile>
+                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
+                           Command="{Binding SaveChangesCommand}" BorderThickness="0">
+                    <Image Source="/Resources/Accept48.png" />
+                </controls:Tile>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 </UserControl>

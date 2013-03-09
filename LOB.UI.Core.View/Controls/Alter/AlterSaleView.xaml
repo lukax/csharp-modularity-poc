@@ -61,7 +61,7 @@
                         <TextBox Text="{Binding ClientLastName}" HorizontalAlignment="Left" MinWidth="200" />
 
                         <metrocontrols:Tile Background="Transparent" Width="20" Height="20" ToolTip="Editar Customere">
-                            <Image Source="../../Resources/Edit48.png" />
+                            <Image Source="/Resources/Edit48.png" />
                         </metrocontrols:Tile>
                     </DockPanel>
                 </GroupBox>
