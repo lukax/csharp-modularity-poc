@@ -12,7 +12,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
     public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel
     {
-        public AlterPhoneNumberViewModel(PhoneNumber entity, IRepository repository) : base(entity,repository)
+        public AlterPhoneNumberViewModel(PhoneNumber entity, IRepository repository) : base(entity, repository)
         {
         }
 

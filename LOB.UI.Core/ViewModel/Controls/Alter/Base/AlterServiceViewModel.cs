@@ -13,7 +13,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         where T : Service
     {
         public AlterServiceViewModel(T entity, IRepository repository)
-            : base(entity,repository)
+            : base(entity, repository)
         {
         }
 

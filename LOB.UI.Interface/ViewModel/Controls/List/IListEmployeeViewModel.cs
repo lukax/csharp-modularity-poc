@@ -1,6 +1,6 @@
 ﻿namespace LOB.UI.Interface.ViewModel.Controls.List
 {
-    public interface IListEmployeeViewModel
+    public interface IListEmployeeViewModel : IListNaturalPersonViewModel
     {
     }
 }

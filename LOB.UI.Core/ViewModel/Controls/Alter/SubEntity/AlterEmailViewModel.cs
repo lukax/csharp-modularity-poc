@@ -12,7 +12,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
     public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel
     {
-        public AlterEmailViewModel(Email entity, IRepository repository) : base(entity,repository)
+        public AlterEmailViewModel(Email entity, IRepository repository) : base(entity, repository)
         {
         }
 

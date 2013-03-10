@@ -88,7 +88,7 @@ namespace MahApps.Metro.Controls
 
         public bool IgnoreTaskbarOnMaximize
         {
-            get { return (bool) this.GetValue(IgnoreTaskbarOnMaximizeProperty); }
+            get { return (bool) GetValue(IgnoreTaskbarOnMaximizeProperty); }
             set { SetValue(IgnoreTaskbarOnMaximizeProperty, value); }
         }
 

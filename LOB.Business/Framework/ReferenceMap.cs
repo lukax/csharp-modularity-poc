@@ -17,50 +17,6 @@ namespace LOB.Business.Framework
 
     public static class ReferenceMap
     {
-        static ReferenceMap()
-        {
-            //Container = new UnityContainer();
-            ////Model
-            //Container.RegisterType<BaseEntity, Product>("Product");
-            //Container.RegisterType<BaseEntity, Employee>("Employee");
-            ////ViewModel
-            ////Container.RegisterType<IListEntity, ListProductViewModel>("ListProduct");
-            ////Container.RegisterType<IListEntity, ListWorkerViewModel>("ListWorker");
-            ////Container.RegisterType<IAlterEntity, AlterEntityViewModel<Product>>("AlterProduct");
-            ////Container.RegisterType<IAlterEntity, AlterEntityViewModel<Employee>>("AlterWorker");
-            ////Container.RegisterType<AlterEntityViewModel<Product>, AlterProductViewModel>();
-            ////Container.RegisterType<AlterEntityViewModel<Employee>, AlterWorkerViewModel>();
-            //Container.RegisterInstance(typeof (AlterEntityViewModel<Product>), "RegisterProduct",
-            //                           new AlterProductViewModel(ControlOperation.Register));
-            //Container.RegisterInstance(typeof (AlterEntityViewModel<Product>), "UpdateProduct",
-            //                           new AlterProductViewModel(ControlOperation.Update));
-            //Container.RegisterInstance(typeof(AlterEntityViewModel<Employee>), "RegisterWorker",
-            //                           new AlterWorkerViewModel(ControlOperation.Register));
-            //Container.RegisterInstance(typeof(AlterEntityViewModel<Employee>), "UpdateWorker",
-            //                           new AlterWorkerViewModel(ControlOperation.Update));
-
-            //Container.RegisterType<ListEntityViewModel<Product>, ListProductViewModel>();
-            //Container.RegisterType<ListEntityViewModel<Employee>, ListWorkerViewModel>();
-            ////View
-            //Container.RegisterType<UserControl,ListProductView>("ListProduct");
-            //Container.RegisterType<UserControl, ListWorkerView>("ListWorker");
-            ////Instances needed because of custom operations
-            //Container.RegisterInstance(typeof (UserControl), "RegisterProduct",
-            //                           new AlterProductView(new AlterProductViewModel(ControlOperation.Register)));
-            //Container.RegisterInstance(typeof (UserControl), "RegisterWorker",
-            //                           new AlterWorkerView(new AlterWorkerViewModel(ControlOperation.Register)));
-            //Container.RegisterInstance(typeof (UserControl), "UpdateProduct",
-            //                           new AlterProductView(new AlterProductViewModel(ControlOperation.Update)));
-            //Container.RegisterInstance(typeof (UserControl), "UpdateWorker",
-            //                           new AlterWorkerView(new AlterWorkerViewModel(ControlOperation.Update)));
-
-
-            //Container.RegisterType<UserControl, AlterProductView>("AlterProduct");
-            //Container.RegisterType<UserControl,AlterWorkerView>("AlterWorker");
-            //Container.RegisterType<Window, FrameWindow>("Window");
-            //Operations
-        }
-
         public static UnityContainer Container { get; private set; }
 
         public static Object Resolve<T>(String parameter)

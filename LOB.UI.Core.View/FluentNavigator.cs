@@ -4,14 +4,23 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
+using LOB.Domain.Base;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.Alter.Base;
 using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Core.View.Controls.List.Base;
 using LOB.UI.Core.View.Controls.List.SubEntity;
-using LOB.UI.Core.View.Controls.Sale;
+using LOB.UI.Core.View.Controls.Sell;
 using LOB.UI.Interface;
+using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
+using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Interface.ViewModel.Controls.List;
+using LOB.UI.Interface.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.ViewModel.Controls.Sell;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -22,7 +31,8 @@ namespace LOB.UI.Core.View
     {
         private readonly IUnityContainer _container;
         private readonly IRegionAdapter _regionAdapter;
-        private dynamic _resolvedView;
+        private IBaseView _resolvedView;
+        private IBaseViewModel _resolvedViewModel;
 
         [ImportingConstructor]
         public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter)
@@ -31,199 +41,206 @@ namespace LOB.UI.Core.View
             _regionAdapter = regionAdapter;
         }
 
-        public object Get()
+        public IBaseView GetView()
         {
             if (_resolvedView == null)
-                throw new ArgumentException("First resolveView the view", "Resolve");
-            if (_resolvedView is IView)
-                ((IView) _resolvedView).InitializeServices();
+                throw new ArgumentException("First resolveView the view", "ResolveView");
+            if (_resolvedView.ViewModel == null)
+                _resolvedView.ViewModel = _resolvedViewModel;
 
+            _resolvedView.InitializeServices();
             return _resolvedView;
         }
 
-        public TView As<TView>() where TView : class
+        public IBaseViewModel GetViewModel()
         {
-            return (TView) Get();
+            if (_resolvedViewModel == null)
+                throw new ArgumentException("First resolveView the ViewModel", "ResolveViewModel");
+            return _resolvedViewModel;
         }
 
-        public IFluentNavigator ResolveView(string param, object viewModel = null)
+        public IFluentNavigator ResolveViewModel(string param)
         {
-            if (viewModel == null)
+            switch (param)
             {
-                switch (param)
-                {
-                    case "SellProduct":
-                        _resolvedView = _container.Resolve<SellProductView>();
-                        break;
-                    case "SellService":
-                        _resolvedView = _container.Resolve<SellServiceView>();
-                        break;
-                    case "AlterProduct":
-                        _resolvedView = _container.Resolve<AlterProductView>();
-                        break;
-                    case "AlterLegalPerson":
-                        _resolvedView = _container.Resolve<AlterLegalPersonView>();
-                        break;
-                    case "AlterNaturalPerson":
-                        _resolvedView = _container.Resolve<AlterNaturalPersonView>();
-                        break;
-                    case "ListProduct":
-                        _resolvedView = _container.Resolve<ListProductView>();
-                        break;
-                    case "AlterEmployee":
-                        _resolvedView = _container.Resolve<AlterEmployeeView>();
-                        break;
-                    case "ListEmployee":
-                        _resolvedView = _container.Resolve<ListEmployeeView>();
-                        break;
-                    case "AlterClient":
-                        _resolvedView = _container.Resolve<AlterCustomerView>();
-                        break;
-                    case "ListClient":
-                        _resolvedView = _container.Resolve<ListCustomerView>();
-                        break;
-                    case "AlterCategory":
-                        _resolvedView = _container.Resolve<AlterCategoryView>();
-                        break;
-                    case "AlterService":
-                        _resolvedView = _container.Resolve<AlterServiceView>();
-                        break;
-                    case "ListCategory":
-                        _resolvedView = _container.Resolve<ListCategoryView>();
-                        break;
-                    case "ListService":
-                        _resolvedView = _container.Resolve<ListServiceView>();
-                        break;
-                    case "AlterSale":
-                        _resolvedView = _container.Resolve<AlterSaleView>();
-                        break;
-                    case "ListSale":
-                        throw new NotImplementedException();
-                    case "AlterEmail":
-                        _resolvedView = _container.Resolve<AlterEmailView>();
-                        break;
-                    case "ListEmail":
-                        _resolvedView = _container.Resolve<ListEmailView>();
-                        break;
-                    case "AlterPhoneNumber":
-                        _resolvedView = _container.Resolve<AlterPhoneNumberView>();
-                        break;
-                    case "ListPhoneNumber":
-                        _resolvedView = _container.Resolve<ListPhoneNumberView>();
-                        break;
-                    case "AlterContactInfo":
-                        _resolvedView = _container.Resolve<AlterContactInfoView>();
-                        break;
-                    case "QuickSearch":
-                        _resolvedView = _container.Resolve<ListBaseEntityView>();
-                        break;
-                    default:
-                        throw new ArgumentException("Parameter not implemented yet, ", "param");
-                }
-            }
-
-            else
-            {
-                var defaultOverrideParam = new ParameterOverride("viewModel", viewModel);
-                switch (param)
-                {
-                    case "SellProduct":
-                        _resolvedView = _container.Resolve<SellProductView>(defaultOverrideParam);
-                        break;
-                    case "SellService":
-                        _resolvedView = _container.Resolve<SellServiceView>(defaultOverrideParam);
-                        break;
-                    case "AlterProduct":
-                        _resolvedView = _container.Resolve<AlterProductView>(defaultOverrideParam);
-                        break;
-                    case "AlterLegalPerson":
-                        _resolvedView = _container.Resolve<AlterLegalPersonView>(defaultOverrideParam);
-                        break;
-                    case "AlterNaturalPerson":
-                        _resolvedView = _container.Resolve<AlterNaturalPersonView>(defaultOverrideParam);
-                        break;
-                    case "ListProduct":
-                        _resolvedView = _container.Resolve<ListProductView>(defaultOverrideParam);
-                        break;
-                    case "AlterEmployee":
-                        _resolvedView = _container.Resolve<AlterEmployeeView>(defaultOverrideParam);
-                        break;
-                    case "ListEmployee":
-                        _resolvedView = _container.Resolve<ListEmployeeView>(defaultOverrideParam);
-                        break;
-                    case "AlterClient":
-                        _resolvedView = _container.Resolve<AlterCustomerView>(defaultOverrideParam);
-                        break;
-                    case "ListClient":
-                        _resolvedView = _container.Resolve<ListCustomerView>(defaultOverrideParam);
-                        break;
-                    case "AlterCategory":
-                        _resolvedView = _container.Resolve<AlterCategoryView>(defaultOverrideParam);
-                        break;
-                    case "AlterService":
-                        _resolvedView = _container.Resolve<AlterServiceView>(defaultOverrideParam);
-                        break;
-                    case "ListCategory":
-                        _resolvedView = _container.Resolve<ListCategoryView>(defaultOverrideParam);
-                        break;
-                    case "ListService":
-                        _resolvedView = _container.Resolve<ListServiceView>(defaultOverrideParam);
-                        break;
-                    case "AlterSale":
-                        _resolvedView = _container.Resolve<AlterSaleView>(defaultOverrideParam);
-                        break;
-                    case "ListSale":
-                        throw new NotImplementedException();
-                    case "AlterEmail":
-                        _resolvedView = _container.Resolve<AlterEmailView>(defaultOverrideParam);
-                        break;
-                    case "ListEmail":
-                        _resolvedView = _container.Resolve<ListEmailView>(defaultOverrideParam);
-                        break;
-                    case "AlterPhoneNumber":
-                        _resolvedView = _container.Resolve<AlterPhoneNumberView>(defaultOverrideParam);
-                        break;
-                    case "ListPhoneNumber":
-                        _resolvedView = _container.Resolve<ListPhoneNumberView>(defaultOverrideParam);
-                        break;
-                    case "AlterContactInfo":
-                        _resolvedView = _container.Resolve<AlterContactInfoView>(defaultOverrideParam);
-                        break;
-                    case "QuickSearch":
-                        _resolvedView = _container.Resolve<ListBaseEntityView>(defaultOverrideParam);
-                        break;
-                    default:
-                        throw new ArgumentException("Parameter not implemented yet, ", "param");
-                }
+                case "SellProduct":
+                    _resolvedViewModel = _container.Resolve<ISellProductViewModel>();
+                    break;
+                case "SellService":
+                    _resolvedViewModel = _container.Resolve<ISellServiceViewModel>();
+                    break;
+                case "AlterProduct":
+                    _resolvedViewModel = _container.Resolve<IAlterProductViewModel>();
+                    break;
+                case "AlterLegalPerson":
+                    _resolvedViewModel = _container.Resolve<IAlterLegalPersonViewModel>();
+                    break;
+                case "AlterNaturalPerson":
+                    _resolvedViewModel = _container.Resolve<IAlterNaturalPersonViewModel>();
+                    break;
+                case "ListProduct":
+                    _resolvedViewModel = _container.Resolve<IListProductViewModel>();
+                    break;
+                case "AlterEmployee":
+                    _resolvedViewModel = _container.Resolve<IAlterEmployeeViewModel>();
+                    break;
+                case "ListEmployee":
+                    _resolvedViewModel = _container.Resolve<IListEmployeeViewModel>();
+                    break;
+                case "AlterClient":
+                    _resolvedViewModel = _container.Resolve<IAlterCustomerViewModel>();
+                    break;
+                case "ListClient":
+                    _resolvedViewModel = _container.Resolve<IListCustomerViewModel>();
+                    break;
+                case "AlterCategory":
+                    _resolvedViewModel = _container.Resolve<IAlterCategoryViewModel>();
+                    break;
+                case "AlterService":
+                    _resolvedViewModel = _container.Resolve<IAlterServiceViewModel<Service>>();
+                    break;
+                case "ListCategory":
+                    _resolvedViewModel = _container.Resolve<IListCategoryViewModel>();
+                    break;
+                case "ListService":
+                    _resolvedViewModel = _container.Resolve<IListServiceViewModel<Service>>();
+                    break;
+                case "AlterSale":
+                    _resolvedViewModel = _container.Resolve<IAlterSaleViewModel>();
+                    break;
+                case "ListSale":
+                    throw new NotImplementedException();
+                case "AlterEmail":
+                    _resolvedViewModel = _container.Resolve<IAlterEmailViewModel>();
+                    break;
+                case "ListEmail":
+                    _resolvedViewModel = _container.Resolve<IListEmailViewModel>();
+                    break;
+                case "AlterPhoneNumber":
+                    _resolvedViewModel = _container.Resolve<IAlterPhoneNumberViewModel>();
+                    break;
+                case "ListPhoneNumber":
+                    _resolvedViewModel = _container.Resolve<IListPhoneNumberViewModel>();
+                    break;
+                case "AlterContactInfo":
+                    _resolvedViewModel = _container.Resolve<IAlterContactInfoViewModel>();
+                    break;
+                case "QuickSearch":
+                    _resolvedViewModel = _container.Resolve<IListBaseEntityViewModel>();
+                    break;
+                default:
+                    throw new ArgumentException("Parameter not implemented yet, ", "param");
             }
             return this;
         }
 
-        public IFluentNavigator ResolveView<TView>(object viewModel = null)
+        public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel
+        {
+            _resolvedViewModel = _container.Resolve<TViewModel>();
+            return this;
+        }
+
+        public IFluentNavigator ResolveView(string param)
+        {
+            switch (param)
+            {
+                case "SellProduct":
+                    _resolvedView = _container.Resolve<SellProductView>();
+                    break;
+                case "SellService":
+                    _resolvedView = _container.Resolve<SellServiceView>();
+                    break;
+                case "AlterProduct":
+                    _resolvedView = _container.Resolve<AlterProductBaseView>();
+                    break;
+                case "AlterLegalPerson":
+                    _resolvedView = _container.Resolve<AlterLegalPersonBaseView>();
+                    break;
+                case "AlterNaturalPerson":
+                    _resolvedView = _container.Resolve<AlterNaturalPersonBaseView>();
+                    break;
+                case "ListProduct":
+                    _resolvedView = _container.Resolve<ListProductBaseView>();
+                    break;
+                case "AlterEmployee":
+                    _resolvedView = _container.Resolve<AlterEmployeeBaseView>();
+                    break;
+                case "ListEmployee":
+                    _resolvedView = _container.Resolve<ListEmployeeBaseView>();
+                    break;
+                case "AlterClient":
+                    _resolvedView = _container.Resolve<AlterCustomerBaseView>();
+                    break;
+                case "ListClient":
+                    _resolvedView = _container.Resolve<ListCustomerBaseView>();
+                    break;
+                case "AlterCategory":
+                    _resolvedView = _container.Resolve<AlterCategoryBaseView>();
+                    break;
+                case "AlterService":
+                    _resolvedView = _container.Resolve<AlterServiceBaseView>();
+                    break;
+                case "ListCategory":
+                    _resolvedView = _container.Resolve<ListCategoryBaseView>();
+                    break;
+                case "ListService":
+                    _resolvedView = _container.Resolve<ListServiceBaseView>();
+                    break;
+                case "AlterSale":
+                    _resolvedView = _container.Resolve<AlterSaleBaseView>();
+                    break;
+                case "ListSale":
+                    throw new NotImplementedException();
+                case "AlterEmail":
+                    _resolvedView = _container.Resolve<AlterEmailBaseView>();
+                    break;
+                case "ListEmail":
+                    _resolvedView = _container.Resolve<ListEmailBaseView>();
+                    break;
+                case "AlterPhoneNumber":
+                    _resolvedView = _container.Resolve<AlterPhoneNumberBaseView>();
+                    break;
+                case "ListPhoneNumber":
+                    _resolvedView = _container.Resolve<ListPhoneNumberBaseView>();
+                    break;
+                case "AlterContactInfo":
+                    _resolvedView = _container.Resolve<AlterContactInfoBaseView>();
+                    break;
+                case "QuickSearch":
+                    _resolvedView = _container.Resolve<ListBaseEntityBaseView>();
+                    break;
+                default:
+                    throw new ArgumentException("Parameter not implemented yet, ", "param");
+            }
+
+            return this;
+        }
+
+        public IFluentNavigator ResolveView<TView>() where TView : IBaseView
         {
             _resolvedView = _container.Resolve<TView>();
             return this;
         }
 
-        public IFluentNavigator SetViewModel(object viewModel)
+        public IFluentNavigator SetViewModel(IBaseViewModel viewModel)
         {
-            _resolvedView.DataContext = viewModel;
+            _resolvedView.ViewModel = viewModel;
             return this;
         }
 
         public void Show(bool asDialog = false)
         {
-            var asUc = Get() as UserControl;
+            var asUc = GetView() as UserControl;
             if (asUc != null)
             {
                 var window = new FrameWindow
                     {
                         Content = asUc,
-                        DataContext = _resolvedView.DataContext,
+                        DataContext = _resolvedView.ViewModel,
                         Height = asUc.Height + 50,
-                        Width = asUc.Width + 50
+                        Width = asUc.Width + 50,
+                        Title = (_resolvedView).Header
                     };
-                if (_resolvedView is IView) window.Title = ((IView) _resolvedView).Header;
                 if (asDialog) window.ShowDialog();
                 else window.Show();
                 return;

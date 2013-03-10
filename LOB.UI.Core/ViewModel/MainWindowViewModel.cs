@@ -38,8 +38,8 @@ namespace LOB.UI.Core.ViewModel
 
         private void OpenTab(object arg)
         {
-            _commandService["OpenTab"].Execute(_navigator.ResolveView(arg.ToString()).Get());
-            //Messenger.Default.Send(_navigator.ResolveView(arg.ToString()).Get(), "OpenTab");
+            _commandService["OpenTab"].Execute(_navigator.ResolveView(arg.ToString()).GetView());
+            //Messenger.Default.Send(_navigator.ResolveView(arg.ToString()).GetView(), "OpenTab");
         }
 
         public override void InitializeServices()

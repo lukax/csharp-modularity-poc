@@ -107,6 +107,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             set { _updateInterval = value; }
         }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+        }
+
         /// <summary>
         ///     Constantly update the list async every 1000 miliseconds
         /// </summary>
@@ -119,7 +127,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
                 IList<T> localList = null;
                 localList = string.IsNullOrEmpty(Search)
                                 ? (await Repository.GetListAsync<T>()).ToList()
-                                : (await Repository.GetListAsync<T>(SearchCriteria)).ToList();
+                                : (await Repository.GetListAsync(SearchCriteria)).ToList();
                 if (Entitys == null || !localList.SequenceEqual(Entitys))
                 {
                     Entitys = localList;
@@ -152,14 +160,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         protected virtual void Fetch(object arg = null)
         {
             Entitys = Repository.GetList<T>().ToList();
-        }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
         }
     }
 }

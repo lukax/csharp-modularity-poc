@@ -46,9 +46,9 @@ namespace LOB.UI.Core.View
             {
                 _navigator.ResolveView<MainWindow>().Show();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                _navigator.PromptUser("Erro: "+ex.Message);
+                _navigator.PromptUser("Erro: " + ex.Message);
             }
         }
 

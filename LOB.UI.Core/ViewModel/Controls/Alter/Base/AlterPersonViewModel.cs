@@ -41,8 +41,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
                 Entity.Address.State = UfBrDictionary.Ufs[UfBr.RJ];
             }
 
-            AlterAddressViewModel.Entity = this.Entity.Address;
-            AlterContactInfoViewModel.Entity = this.Entity.ContactInfo;
+            AlterAddressViewModel.Entity = Entity.Address;
+            AlterContactInfoViewModel.Entity = Entity.ContactInfo;
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }

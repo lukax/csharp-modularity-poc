@@ -48,7 +48,7 @@ namespace MahApps.Metro.Controls
 
         public TransitioningContentControl()
         {
-            this.CustomVisualStates = new ObservableCollection<VisualState>();
+            CustomVisualStates = new ObservableCollection<VisualState>();
             DefaultStyleKey = typeof (TransitioningContentControl);
         }
 
@@ -57,8 +57,8 @@ namespace MahApps.Metro.Controls
 
         public ObservableCollection<VisualState> CustomVisualStates
         {
-            get { return (ObservableCollection<VisualState>) this.GetValue(CustomVisualStatesProperty); }
-            set { this.SetValue(CustomVisualStatesProperty, value); }
+            get { return (ObservableCollection<VisualState>) GetValue(CustomVisualStatesProperty); }
+            set { SetValue(CustomVisualStatesProperty, value); }
         }
 
         public bool IsTransitioning
@@ -173,12 +173,12 @@ namespace MahApps.Metro.Controls
                 AbortTransition();
             }
 
-            if (this.CustomVisualStates != null && this.CustomVisualStates.Any())
+            if (CustomVisualStates != null && CustomVisualStates.Any())
             {
                 var presentationGroup = VisualStates.TryGetVisualStateGroup(this, PresentationGroup);
                 if (presentationGroup != null)
                 {
-                    foreach (var state in this.CustomVisualStates)
+                    foreach (var state in CustomVisualStates)
                     {
                         presentationGroup.States.Add(state);
                     }

@@ -9,8 +9,5 @@ namespace LOB.Dao.Nhibernate.Mapping
 {
     public class SupplierMap : SubclassMap<Supplier>
     {
-        public SupplierMap()
-        {
-        }
     }
 }

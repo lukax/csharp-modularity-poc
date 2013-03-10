@@ -1,10 +1,10 @@
 ﻿#region Usings
 
-using System;
 using System.Linq;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Interface;
+using LOB.UI.Interface.ViewModel.Base;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 
@@ -15,22 +15,12 @@ namespace LOB.UI.Core.View
     /// <summary>
     ///     Interaction logic for FrameWindow.xaml
     /// </summary>
-    public partial class FrameWindow : MetroWindow, IView
+    public partial class FrameWindow : MetroWindow, IBaseView
     {
         public FrameWindow()
         {
             InitializeComponent();
             MiLightGrey();
-        }
-
-        public Object Content
-        {
-            get { return Frame.Content; }
-            set
-            {
-                Frame.Content = value;
-                this.UpdateLayout();
-            }
         }
 
         #region Themes
@@ -92,12 +82,18 @@ namespace LOB.UI.Core.View
 
         #endregion
 
+        public IBaseViewModel ViewModel
+        {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
+
         public string Header { get; set; }
         public int? Index { get; set; }
 
         public void InitializeServices()
         {
-            Messenger.Default.Register<object>(DataContext, "Cancel", o => this.Close());
+            Messenger.Default.Register<object>(DataContext, "Cancel", o => Close());
         }
 
         public void Refresh()

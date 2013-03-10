@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.List.ListEmployeeBaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBox MinWidth="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                     controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
+            <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
+                           Background="Transparent">
+                <Image Source="/Resources/Add48.png" />
+            </controls:Tile>
+            <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
+                <Image Source="/Resources/Edit48.png" />
+            </controls:Tile>
+            <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
+                <Image Source="/Resources/delete.png" />
+            </controls:Tile>
+            <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
+                           Background="Transparent">
+                <Image Source="/Resources/Refresh48.png" />
+            </controls:Tile>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <Grid>
+                <StackPanel>
+                    <StackPanel>
+                        <DataGrid ItemsSource="{Binding Entitys, Mode=OneWay}" x:Name="DataGridProduct"
+                                  SelectedItem="{Binding Entity, Mode=OneWayToSource}" IsReadOnly="True"
+                                  Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
+                                  Background="{DynamicResource WhiteColorBrush}" SelectionMode="Single"
+                                  Foreground="{DynamicResource BlackColorBrush}">
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                        </DataGrid>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

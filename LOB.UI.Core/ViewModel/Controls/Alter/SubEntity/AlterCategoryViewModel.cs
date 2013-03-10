@@ -25,7 +25,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _commandService = commandService;
             _container = container;
         }
-        
+
         protected override void SaveChanges(object arg)
         {
             using (Repository.Uow.BeginTransaction())

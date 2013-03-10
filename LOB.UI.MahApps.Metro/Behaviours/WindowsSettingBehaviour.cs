@@ -14,8 +14,8 @@ namespace MahApps.Metro.Behaviours
             if (AssociatedObject != null && AssociatedObject.SaveWindowPosition)
             {
                 // save with custom settings class or use the default way
-                var windowPlacementSettings = this.AssociatedObject.WindowPlacementSettings ??
-                                              new WindowApplicationSettings(this.AssociatedObject);
+                var windowPlacementSettings = AssociatedObject.WindowPlacementSettings ??
+                                              new WindowApplicationSettings(AssociatedObject);
                 WindowSettings.SetSave(AssociatedObject, windowPlacementSettings);
             }
         }

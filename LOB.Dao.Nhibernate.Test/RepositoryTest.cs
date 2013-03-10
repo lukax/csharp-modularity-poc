@@ -65,7 +65,7 @@ namespace LOB.Dao.Nhibernate.Test
         public void SaveOrUpdateTest()
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
-            var entity = new Product() {Description = "Test description service", Name = "Test Name"};
+            var entity = new Product {Description = "Test description service", Name = "Test Name"};
             using (repo.Uow)
             {
                 repo.Uow.BeginTransaction();
@@ -88,7 +88,7 @@ namespace LOB.Dao.Nhibernate.Test
         public void SaveGetPolymorphismTest()
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
-            var person = new LegalPerson()
+            var person = new LegalPerson
                 {
                     Cnpj = 123456,
                     Iestadual = 1234,
@@ -119,14 +119,14 @@ namespace LOB.Dao.Nhibernate.Test
         public void GetListCriteriaTest()
         {
             var repo = new DomainRepository(new UnityOfWork(new SessionCreator()));
-            var person1 = new NaturalPerson()
+            var person1 = new NaturalPerson
                 {
                     FirstName = "Dude1",
                     LastName = "Martin",
                     NickName = "Doesn't have1",
                     BirthDate = DateTime.Now
                 };
-            var person2 = new NaturalPerson()
+            var person2 = new NaturalPerson
                 {
                     FirstName = "Dude2",
                     LastName = "Martin",
@@ -138,7 +138,7 @@ namespace LOB.Dao.Nhibernate.Test
                     Person = person1,
                     Status = CustomerStatus.New
                 };
-            var client2 = new Customer()
+            var client2 = new Customer
                 {
                     Person = person2,
                     Status = CustomerStatus.New

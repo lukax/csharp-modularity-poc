@@ -5,10 +5,10 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.ViewModel.Base;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Unity;
@@ -18,7 +18,7 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.View
 {
     [Export]
-    public partial class MainWindow : MetroWindow, IView
+    public partial class MainWindow : MetroWindow, IBaseView
     {
         private ICommandService _commandService = CommandService.Default;
         private IUnityContainer _container;
@@ -35,21 +35,25 @@ namespace LOB.UI.Core.View
             InitializeComponent();
         }
 
-        public MainWindowViewModel ViewModel
+        public IBaseViewModel ViewModel
         {
             get { return _viewModel; }
             set
             {
-                _viewModel = value;
+                var mainWindowViewModel = value as MainWindowViewModel;
+                if (mainWindowViewModel != null)
+                    _viewModel = mainWindowViewModel;
+
                 DataContext = value;
                 _commandService.RegisterCommand("OpenTab", new DelegateCommand(OpenTab));
-                _commandService.RegisterCommand("Cancel", new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
-                _commandService.RegisterCommand("OpenView", new DelegateCommand(o => OpenView(o, o)));
-                _commandService.RegisterCommand("QuickSearch", new DelegateCommand(o => OpenView("QuickSearch", o)));
-                Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
-                Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
-                Messenger.Default.Register<object>(DataContext, "OpenView", o => OpenView(o.ToString(), _navigator.ResolveView(o.ToString()).Get()));
-                Messenger.Default.Register<object>(DataContext, "QuickSearch", o => OpenView("QuickSearch", o));
+                _commandService.RegisterCommand("Cancel",
+                                                new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
+                _commandService.RegisterCommand("OpenView", new DelegateCommand(o => OpenView(o.ToString())));
+                _commandService.RegisterCommand("QuickSearch", new DelegateCommand(o => OpenView(o.ToString())));
+                //Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
+                //Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
+                ////Messenger.Default.Register<object>(DataContext, "OpenView", o => OpenView(o.ToString(), _navigator.ResolveView(o.ToString()).GetView()));
+                //Messenger.Default.Register<object>(DataContext, "QuickSearch", o => OpenView("QuickSearch", o));
             }
         }
 
@@ -67,25 +71,20 @@ namespace LOB.UI.Core.View
             ChangeFlyouts(null, null);
         }
 
-        private void OpenView(object arg, object viewModel, bool asDialog = true)
+        private void OpenView(string arg, bool asDialog = true)
         {
-            if (viewModel is string)
-                _navigator.ResolveView(arg.ToString(), _navigator.ResolveView(viewModel.ToString()).Get())
-                          .Show(asDialog);
-            else
-                _navigator.ResolveView(arg.ToString(), viewModel);
-
+            _navigator.ResolveView(arg).ResolveViewModel(arg).Show(asDialog);
             ChangeFlyouts(null, null);
         }
 
         public void OpenTab(object view)
         {
             if (view == null) throw new ArgumentNullException();
-            if (!(view is IView)) throw new ArgumentException("Content isn't a IView");
+            if (!(view is IBaseView)) throw new ArgumentException("Content isn't a IBaseView");
 
-            var t = new TabItem {Content = view, Header = ((IView) view).Header};
+            var t = new TabItem {Content = view, Header = ((IBaseView) view).Header};
 
-            ((IView) t.Content).Index = TabControlMain.Items.Add(t);
+            ((IBaseView) t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
             ChangeFlyouts(null, null);
         }

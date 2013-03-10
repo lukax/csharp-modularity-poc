@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.Alter.AlterEmployeeBaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
+             xmlns:alter="clr-namespace:LOB.UI.Core.View.Controls.Alter"
+             xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+
+        <DockPanel HorizontalAlignment="Right">
+            <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
+                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
+                           Grid.Column="5">
+                <Image Source="/Resources/File48.png"></Image>
+            </controls:Tile>
+
+            <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
+                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                <Image Source="/Resources/Cancel48.png" />
+            </controls:Tile>
+            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
+                           Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
+                <Image Source="/Resources/Accept48.png" />
+            </controls:Tile>
+        </DockPanel>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <base2:AlterBaseEntityBaseView HorizontalAlignment="Left" x:Name="UcAlterBaseEntityView" />
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+                <Label Content="Header:" HorizontalAlignment="Right" />
+                <TextBox Text="{Binding Entity.Title}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
+
+                <Label Content="Hiredate:" HorizontalAlignment="Right" />
+                <TextBox Text="{Binding Entity.HireDate}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Label Content="Work In Store:" HorizontalAlignment="Right" />
+                <ComboBox SelectedItem="{Binding Entity.WorksIn}" ItemsSource="{Binding Stores}"
+                          HorizontalAlignment="Left" MinWidth="150" MaxWidth="400" />
+            </StackPanel>
+
+            <DockPanel Grid.Row="2" Grid.Column="1">
+                <TabControl>
+                    <TabItem Header="Person Details">
+                        <alter:AlterNaturalPersonBaseView x:Name="UcAlterNaturalPersonView" />
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
+
+            <DockPanel Grid.Row="3" Grid.Column="1">
+                <TabControl>
+                    <TabItem Header=">" />
+                    <TabItem Header="PayCheck">
+                        <base:AlterPayCheckBaseView />
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
+
+
+        </Grid>
+    </StackPanel>
+</UserControl>

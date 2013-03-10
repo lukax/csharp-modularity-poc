@@ -23,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IUnityContainer container,
                                          ICommandService commandService, IFluentNavigator navigator)
-            : base(entity,repository)
+            : base(entity, repository)
         {
             _container = container;
             _commandService = commandService;

@@ -170,7 +170,7 @@ namespace MahApps.Metro.Behaviours
                 var monitorInfo = new MONITORINFO();
                 UnsafeNativeMethods.GetMonitorInfo(monitor, monitorInfo);
                 bool ignoreTaskBar = AssociatedObject as MetroWindow != null &&
-                                     ((MetroWindow) this.AssociatedObject).IgnoreTaskbarOnMaximize;
+                                     ((MetroWindow) AssociatedObject).IgnoreTaskbarOnMaximize;
                 var x = ignoreTaskBar ? monitorInfo.rcMonitor.left : monitorInfo.rcWork.left;
                 var y = ignoreTaskBar ? monitorInfo.rcMonitor.top : monitorInfo.rcWork.top;
                 var cx = ignoreTaskBar ? monitorInfo.rcWork.right : Math.Abs(monitorInfo.rcWork.right - x);

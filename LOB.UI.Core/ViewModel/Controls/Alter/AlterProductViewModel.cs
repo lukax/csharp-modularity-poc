@@ -32,7 +32,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         [ImportingConstructor]
         public AlterProductViewModel(Product entity, IRepository repository, IUnityContainer container,
                                      IFluentNavigator navigator)
-            : base(entity,repository)
+            : base(entity, repository)
         {
             _container = container;
             _navigator = navigator;
@@ -62,7 +62,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             while (true)
             {
                 await Task.Delay(2000);
-                this.Categories = Repository.GetList<Category>().ToList();
+                Categories = Repository.GetList<Category>().ToList();
             }
         }
 
@@ -74,9 +74,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private void ExecuteAlterCategory(object o)
         {
             if (Entity.Category != null)
-                _navigator.ResolveView(o.ToString(),
-                                       _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
-                                                                                                        Entity.Category)))
+                _navigator.ResolveView(o.ToString())
+                          .SetViewModel(
+                              _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
+                                                                                               Entity.Category)))
                           .Show(true);
             _navigator.ResolveView(o.ToString()).Show(true);
             //Messenger.Default.Send<object>(_container.ResolveView<AlterCategoryViewModel>());

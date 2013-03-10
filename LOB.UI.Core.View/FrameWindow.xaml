@@ -6,10 +6,10 @@
                       SaveWindowPosition="True">
 
     <Window.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml"/>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
     </Window.Resources>
 
     <controls:MetroContentControl Name="Control">
-            <Frame Name="Frame"/>
+        <Frame Name="Frame" />
     </controls:MetroContentControl>
 </controls:MetroWindow>

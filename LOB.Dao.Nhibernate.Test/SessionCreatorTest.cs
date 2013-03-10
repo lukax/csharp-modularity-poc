@@ -36,9 +36,9 @@ namespace LOB.Dao.Nhibernate.Test
                 };
             Email e1 = "thisdude@you.com";
             Email e2 = "another@you.com";
-            var contact = new ContactInfo()
+            var contact = new ContactInfo
                 {
-                    PhoneNumbers = new PhoneNumber[]
+                    PhoneNumbers = new[]
                         {
                             new PhoneNumber
                                 {
@@ -61,12 +61,12 @@ namespace LOB.Dao.Nhibernate.Test
                 };
 
 
-            var stores = new Store[]
+            var stores = new[]
                 {
                     new Store {Name = "Fresh Bar"},
                     new Store {Name = "Total Drinks"}
                 };
-            var entity = new LegalPerson()
+            var entity = new LegalPerson
                 {
                     TradingName = "Coke",
                     CorporateName = "The Coca-Cola Company",

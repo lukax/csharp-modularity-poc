@@ -20,7 +20,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public AlterAddressViewModel(Address entity, IRepository repository, IUnityContainer container,
                                      ICommandService commandService)
-            : base(entity,repository)
+            : base(entity, repository)
         {
             _commandService = commandService;
             _container = container;

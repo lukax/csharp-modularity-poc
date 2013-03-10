@@ -66,9 +66,9 @@ namespace MahApps.Metro.Controls
             animationTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             animationTimer.Tick += HandleWorldTimerTick;
 
-            this.Loaded += (sender, e) => { animationTimer.Start(); };
+            Loaded += (sender, e) => { animationTimer.Start(); };
 
-            this.Unloaded += (sender, e) => { animationTimer.Stop(); };
+            Unloaded += (sender, e) => { animationTimer.Stop(); };
         }
 
         public double Friction

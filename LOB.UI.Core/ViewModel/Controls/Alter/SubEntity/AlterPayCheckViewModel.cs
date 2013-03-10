@@ -18,7 +18,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         private IUnityContainer _container;
 
         public AlterPayCheckViewModel(PayCheck entity, IRepository repository, IUnityContainer container)
-            : base(entity,repository)
+            : base(entity, repository)
         {
             _container = container;
         }

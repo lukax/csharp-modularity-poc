@@ -132,6 +132,8 @@
     <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListNaturalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Sell\SellProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Sell\SellServiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

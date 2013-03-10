@@ -56,7 +56,7 @@
     <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
-    <Compile Include="IView.cs" />
+    <Compile Include="IBaseView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Base\IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />
@@ -88,6 +88,8 @@
     <Compile Include="ViewModel\Controls\List\SubEntity\IListEmailViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\IListPayCheckViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\IListPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Sell\ISellProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Sell\ISellServiceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LOB.UI.Interface.snk" />

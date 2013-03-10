@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.List.SubEntity.ListPhoneNumberBaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d"
+             Height="Auto"
+             Width="Auto"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel Width="Auto" Height="Auto">
+        <TextBox MinWidth="200"
+                 Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                 controls:TextboxHelper.Watermark="Search..." controls:TextboxHelper.ClearTextButton="True" />
+        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single"
+                  SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />
+    </StackPanel>
+</UserControl>
