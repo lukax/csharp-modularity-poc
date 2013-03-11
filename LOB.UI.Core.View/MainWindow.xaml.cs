@@ -46,14 +46,9 @@ namespace LOB.UI.Core.View
 
                 DataContext = value;
                 _commandService.RegisterCommand("OpenTab", new DelegateCommand(OpenTab));
-                _commandService.RegisterCommand("Cancel",
-                                                new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
+                _commandService.RegisterCommand("Cancel", new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
                 _commandService.RegisterCommand("OpenView", new DelegateCommand(o => OpenView(o.ToString())));
                 _commandService.RegisterCommand("QuickSearch", new DelegateCommand(o => OpenView(o.ToString())));
-                //Messenger.Default.Register<int?>(DataContext, "Cancel", o => TabControlMain.Items.RemoveAt(o ?? 0));
-                //Messenger.Default.Register<object>(DataContext, "OpenTab", OpenTab);
-                ////Messenger.Default.Register<object>(DataContext, "OpenView", o => OpenView(o.ToString(), _navigator.ResolveView(o.ToString()).GetView()));
-                //Messenger.Default.Register<object>(DataContext, "QuickSearch", o => OpenView("QuickSearch", o));
             }
         }
 
@@ -79,11 +74,9 @@ namespace LOB.UI.Core.View
 
         public void OpenTab(object view)
         {
-            if (view == null) throw new ArgumentNullException();
-            if (!(view is IBaseView)) throw new ArgumentException("Content isn't a IBaseView");
-
-            var t = new TabItem {Content = view, Header = ((IBaseView) view).Header};
-
+            var baseView = view as IBaseView;
+            if (baseView == null) throw new ArgumentException("Content isn't a IBaseView");
+            var t = new TabItem {Content = view, Header = baseView.Header};
             ((IBaseView) t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
             ChangeFlyouts(null, null);

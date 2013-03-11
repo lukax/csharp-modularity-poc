@@ -27,6 +27,17 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View
 {
+    public class OnOpenViewEventArgs : EventArgs
+    {
+        public OnOpenViewEventArgs(IBaseView baseView)
+        {
+            BaseView = baseView;
+        }
+
+        public IBaseView BaseView { get; private set; }
+    }
+    public delegate void OnOpenViewEventHandler(object sender, OnOpenViewEventArgs e);
+
     public class FluentNavigator : IFluentNavigator
     {
         private readonly IUnityContainer _container;
@@ -40,6 +51,8 @@ namespace LOB.UI.Core.View
             _container = container;
             _regionAdapter = regionAdapter;
         }
+
+        public event OnOpenViewEventHandler OnOpenView;
 
         public IBaseView GetView()
         {
@@ -241,15 +254,25 @@ namespace LOB.UI.Core.View
                         Width = asUc.Width + 50,
                         Title = (_resolvedView).Header
                     };
+
+                if (OnOpenView != null)
+                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
+
                 if (asDialog) window.ShowDialog();
                 else window.Show();
-                return;
             }
-            var asW = _resolvedView as Window;
-            if (asW != null)
+            else
             {
-                asW.Show();
-                return;
+                var asW = _resolvedView as Window;
+                if (asW != null)
+                {
+
+                    if (OnOpenView != null)
+                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
+
+                    if (asDialog) asW.ShowDialog();
+                    else asW.Show();
+                }
             }
         }
 

@@ -42,8 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddEmail(object arg)
         {
-            _commandService["OpenView"].Execute(_container.Resolve<IAlterEmailViewModel>());
-            _navigator.ResolveView("AlterEmail").Show();
+            _commandService["OpenView"].Execute("AlterEmail");
         }
 
         private void DeleteEmail(object arg)
@@ -52,8 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddPhoneNumber(object arg)
         {
-            _commandService["OpenView"].Execute(_container.Resolve<IAlterPhoneNumberViewModel>());
-            //Messenger.Default.Send<object>("AlterPhoneNumber", "OpenView");
+            _commandService["OpenView"].Execute("AlterPhoneNumber");
         }
 
         private void DeletePhoneNumber(object arg)
@@ -62,8 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            _commandService["QuickSearch"].Execute(_container.Resolve<ListContactInfoViewModel>());
-            //Messenger.Default.Send<object>(_container.Resolve<ListContactInfoViewModel>(), "QuickSearchCommand");
+            _commandService["QuickSearch"].Execute("ListContactInfo");
         }
 
         protected override void ClearEntity(object arg)
