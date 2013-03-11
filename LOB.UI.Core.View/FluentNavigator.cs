@@ -127,9 +127,6 @@ namespace LOB.UI.Core.View
                 case "AlterContactInfo":
                     _resolvedViewModel = _container.Resolve<IAlterContactInfoViewModel>();
                     break;
-                case "QuickSearch":
-                    _resolvedViewModel = _container.Resolve<IListBaseEntityViewModel>();
-                    break;
                 default:
                     throw new ArgumentException("Parameter not implemented yet, ", "param");
             }
@@ -207,9 +204,6 @@ namespace LOB.UI.Core.View
                     break;
                 case "AlterContactInfo":
                     _resolvedView = _container.Resolve<AlterContactInfoBaseView>();
-                    break;
-                case "QuickSearch":
-                    _resolvedView = _container.Resolve<ListBaseEntityBaseView>();
                     break;
                 default:
                     throw new ArgumentException("Parameter not implemented yet, ", "param");

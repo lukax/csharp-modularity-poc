@@ -10,7 +10,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
-    public abstract class ListPersonViewModel<T> : ListBaseEntityViewModel<T>, IListPersonViewModel where T : Person
+    public abstract class ListPersonViewModel<T> : ListBaseEntityViewModel<T>, IListPersonViewModel<T> where T : Person
     {
         public ListPersonViewModel(T entity, IRepository repository)
             : base(entity, repository)

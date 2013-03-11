@@ -20,7 +20,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.Base;
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
     [InheritedExport]
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T> where T : BaseEntity
     {
         #region Props
 

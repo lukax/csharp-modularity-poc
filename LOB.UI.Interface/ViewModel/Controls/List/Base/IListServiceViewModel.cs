@@ -6,7 +6,7 @@ using LOB.Domain.Base;
 
 namespace LOB.UI.Interface.ViewModel.Controls.List.Base
 {
-    public interface IListServiceViewModel<T> : IListBaseEntityViewModel where T : Service
+    public interface IListServiceViewModel<T> : IListBaseEntityViewModel<T> where T : Service
     {
     }
 }

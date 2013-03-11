@@ -13,11 +13,10 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public class ListNaturalPersonViewModel<T> : ListPersonViewModel<T>, IListNaturalPersonViewModel
-        where T : NaturalPerson
+    public class ListNaturalPersonViewModel : ListPersonViewModel<NaturalPerson>, IListNaturalPersonViewModel
     {
         [ImportingConstructor]
-        public ListNaturalPersonViewModel(T entity, IRepository repository)
+        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
             : base(entity, repository)
         {
         }

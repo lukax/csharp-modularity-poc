@@ -10,7 +10,8 @@ using System.Windows;
 using GalaSoft.MvvmLight.Threading;
 using LOB.Dao.Interface;
 using LOB.UI.Interface;
-using MefContrib.Integration.Unity;
+using Microsoft.Practices.Prism.UnityExtensions;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Microsoft.Win32;
 
@@ -56,10 +57,10 @@ namespace LOB.UI.Core.View
         {
             _catalog = LoadDlls();
             _unityContainer = new UnityContainer();
-
+            _unityContainer.RegisterInstance<IServiceLocator>(new UnityServiceLocatorAdapter(_unityContainer));
             //Make container resolve types known to MEF:
-            _unityContainer.RegisterCatalog(_catalog);
-
+            //_unityContainer.RegisterCatalog(_catalog);
+            
             //Register CommandService
             _unityContainer.RegisterInstance(CommandService.Default);
 

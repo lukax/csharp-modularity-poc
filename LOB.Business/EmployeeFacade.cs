@@ -6,7 +6,7 @@ using LOB.Domain;
 
 namespace LOB.Business
 {
-    public class EmployeeFacade : EntityFacade<Employee>
+    public class EmployeeFacade : EntityFacade<Employee> ,IEmployeeFacade
     {
         public EmployeeFacade(Employee entity)
             : base(entity)

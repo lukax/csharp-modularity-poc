@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
     [Export]
-    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel<Employee>, IListEmployeeViewModel
+    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel, IListEmployeeViewModel
     {
         [ImportingConstructor]
         public ListEmployeeViewModel(Employee employee, IRepository repository)

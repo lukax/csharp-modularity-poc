@@ -61,7 +61,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel<NaturalPerson>>(),
+            Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel>(),
                                            "QuickSearchCommand");
         }
 
