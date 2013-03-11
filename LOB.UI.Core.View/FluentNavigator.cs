@@ -27,17 +27,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View
 {
-    public class OnOpenViewEventArgs : EventArgs
-    {
-        public OnOpenViewEventArgs(IBaseView baseView)
-        {
-            BaseView = baseView;
-        }
-
-        public IBaseView BaseView { get; private set; }
-    }
-    public delegate void OnOpenViewEventHandler(object sender, OnOpenViewEventArgs e);
-
     public class FluentNavigator : IFluentNavigator
     {
         private readonly IUnityContainer _container;

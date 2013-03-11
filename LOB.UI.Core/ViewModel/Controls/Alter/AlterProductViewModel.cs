@@ -21,7 +21,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    [Export]
+    //[Export(typeof(IAlterProductViewModel))]
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel
     {
         private IList<Category> _categories;

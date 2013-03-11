@@ -74,6 +74,7 @@ namespace LOB.UI.Core.View
             ComposablePartCatalog daoDll = null;
             ComposablePartCatalog currentDll = null;
             ComposablePartCatalog domainDll = null;
+            ComposablePartCatalog uiInterfaceDll = null;
             try
             {
                 daoDll = new AssemblyCatalog("LOB.DAO.Nhibernate.dll");
@@ -99,9 +100,10 @@ namespace LOB.UI.Core.View
             {
                 currentDll = new AssemblyCatalog(Assembly.GetExecutingAssembly());
                 domainDll = new AssemblyCatalog(Assembly.Load("LOB.Domain"));
+                uiInterfaceDll = new AssemblyCatalog(Assembly.Load("LOB.UI.Interface"));
             }
 
-            return new AggregateCatalog(daoDll, currentDll);
+            return new AggregateCatalog(daoDll, domainDll, currentDll, uiInterfaceDll);
         }
 
 

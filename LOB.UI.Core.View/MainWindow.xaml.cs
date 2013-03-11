@@ -9,6 +9,7 @@ using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Unity;
@@ -32,6 +33,9 @@ namespace LOB.UI.Core.View
             ViewModel = viewModel;
             _navigator = navigator;
 
+            navigator.OnOpenView += (sender, args) => ChangeFlyouts(sender, args);
+
+            container.Resolve<IAlterProductViewModel>();
             InitializeComponent();
         }
 
@@ -83,11 +87,11 @@ namespace LOB.UI.Core.View
         }
 
 
-        public void ChangeFlyouts(object sender, EventArgs eventArgs, bool isOpen = false)
+        public void ChangeFlyouts(object sender, EventArgs eventArgs, bool closeFlyout = true)
         {
             foreach (var flyout in Flyouts)
             {
-                flyout.IsOpen = isOpen;
+                flyout.IsOpen = !closeFlyout;
             }
         }
 
