@@ -7,7 +7,7 @@ using LOB.UI.Interface.ViewModel.Base;
 
 namespace LOB.UI.Interface.ViewModel.Controls.List.Base
 {
-    public interface IListBaseEntityViewModel<T> : IBaseViewModel where T:BaseEntity
+    public interface IListBaseEntityViewModel<T> : IBaseViewModel where T : BaseEntity
     {
     }
 }

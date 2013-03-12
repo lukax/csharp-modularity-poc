@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
 using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -17,9 +14,9 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.UnityExtensions;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+
+#endregion
 
 namespace LOB.UI.Core
 {
@@ -36,6 +33,7 @@ namespace LOB.UI.Core
         public void Initialize()
         {
             #region Alter
+
             _container.RegisterType<IAlterBaseEntityViewModel<BaseEntity>, AlterBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IAlterPersonViewModel<Person>, AlterPersonViewModel<Person>>();
             _container.RegisterType<IAlterServiceViewModel<Service>, AlterServiceViewModel<Service>>();
@@ -52,9 +50,11 @@ namespace LOB.UI.Core
             _container.RegisterType<IAlterNaturalPersonViewModel, AlterNaturalPersonViewModel>();
             _container.RegisterType<IAlterProductViewModel, AlterProductViewModel>();
             _container.RegisterType<IAlterSaleViewModel, AlterSaleViewModel>();
+
             #endregion
 
             #region List
+
             _container.RegisterType<IListBaseEntityViewModel<BaseEntity>, ListBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IListPersonViewModel<Person>, ListPersonViewModel<Person>>();
             _container.RegisterType<IListServiceViewModel<Service>, ListServiceViewModel<Service>>();
@@ -71,6 +71,7 @@ namespace LOB.UI.Core
             _container.RegisterType<IListNaturalPersonViewModel, ListNaturalPersonViewModel>();
             _container.RegisterType<IListProductViewModel, ListProductViewModel>();
             //_container.RegisterType<IListSaleViewModel, ListSaleViewModel>();
+
             #endregion
         }
     }

@@ -123,6 +123,10 @@
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+      <Project>{5EE9ACB1-F25F-4A9D-AE79-517BE03E02D9}</Project>
+      <Name>LOB.Log.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="LOB.Dao.Nhibernate.snk" />

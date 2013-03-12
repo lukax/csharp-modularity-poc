@@ -5,7 +5,6 @@ using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;

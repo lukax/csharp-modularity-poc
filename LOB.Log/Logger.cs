@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using log4net;
 using log4net.Config;
 
+#endregion
+
 namespace LOB.Log
 {
     /// <summary>
-    /// A log4Net implementation of PRISM' ILoggerFacade.
-    /// *Note: Any logging framework could be plugged in here as long as we implement the ILoggerFacade interface.
+    ///     A log4Net implementation of PRISM' ILoggerFacade.
+    ///     *Note: Any logging framework could be plugged in here as long as we implement the ILoggerFacade interface.
     /// </summary>
-    public class Logger : ILoggerFacade
+    public class Logger : ILoggerFacade, ILogger
     {
         // Member variables
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof (Logger));
 
         public Logger()
         {
@@ -26,7 +26,7 @@ namespace LOB.Log
         #region ILoggerFacade Members
 
         /// <summary>
-        /// Prism Log routine.
+        ///     Prism Log routine.
         /// </summary>
         /// <param name="message">The message to write.</param>
         /// <param name="category">The message category.</param>

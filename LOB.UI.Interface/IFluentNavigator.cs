@@ -32,5 +32,6 @@ namespace LOB.UI.Interface
 
         public IBaseView BaseView { get; private set; }
     }
+
     public delegate void OnOpenViewEventHandler(object sender, OnOpenViewEventArgs e);
 }

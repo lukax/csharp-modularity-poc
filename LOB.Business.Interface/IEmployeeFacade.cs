@@ -1,4 +1,4 @@
-﻿namespace LOB.Business
+﻿namespace LOB.Business.Interface
 {
     public interface IEmployeeFacade
     {

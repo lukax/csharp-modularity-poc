@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using LOB.Business.Interface;
 using LOB.Domain;
 
 #endregion

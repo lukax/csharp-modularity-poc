@@ -5,11 +5,19 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:Modularity="clr-namespace:Microsoft.Practices.Prism.Modularity;assembly=Microsoft.Practices.Prism">
 
-   
+    <Modularity:ModuleInfo
+        Ref="file://LOB.Log.dll"
+        ModuleName="LogModule"
+        ModuleType="LOB.Log.Module, LOB.Log, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a5e30f61151628a">
+    </Modularity:ModuleInfo>
+    
     <Modularity:ModuleInfo
         Ref="file://LOB.Dao.Nhibernate.dll"
         ModuleName="DaoModule"
         ModuleType="LOB.Dao.Nhibernate.Module, LOB.Dao.Nhibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1a7abc5f616c87c2">
+        <Modularity:ModuleInfo.DependsOn>
+            <sys:String>LogModule</sys:String>
+        </Modularity:ModuleInfo.DependsOn>
     </Modularity:ModuleInfo>
 
     <Modularity:ModuleInfo

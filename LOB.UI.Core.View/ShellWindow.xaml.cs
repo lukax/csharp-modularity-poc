@@ -20,7 +20,26 @@ namespace LOB.UI.Core.View
         public ShellWindow()
         {
             InitializeComponent();
-            MiLightGrey();
+        }
+
+        public IBaseViewModel ViewModel
+        {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
+
+        public string Header { get; set; }
+        public int? Index { get; set; }
+
+        public void InitializeServices()
+        {
+            Messenger.Default.Register<object>(DataContext, "Cancel", o => Close());
+        }
+
+        public void Refresh()
+        {
+            base.UpdateLayout();
+            MiLightBlue(null, null);
         }
 
         #region Themes
@@ -81,25 +100,5 @@ namespace LOB.UI.Core.View
         }
 
         #endregion
-
-        public IBaseViewModel ViewModel
-        {
-            get { return DataContext as IBaseViewModel; }
-            set { DataContext = value; }
-        }
-
-        public string Header { get; set; }
-        public int? Index { get; set; }
-
-        public void InitializeServices()
-        {
-            Messenger.Default.Register<object>(DataContext, "Cancel", o => Close());
-        }
-
-        public void Refresh()
-        {
-            base.UpdateLayout();
-            MiLightBlue(null, null);
-        }
     }
 }

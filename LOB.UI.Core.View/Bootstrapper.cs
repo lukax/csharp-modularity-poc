@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using LOB.Log;
-using LOB.UI.Core.ViewModel;
-using LOB.UI.Interface;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
+
+#endregion
 
 namespace LOB.UI.Core.View
 {
     public class Bootstrapper : UnityBootstrapper
     {
-
-        public Bootstrapper()
-        {
-        }
-
-        protected override Microsoft.Practices.Prism.Logging.ILoggerFacade CreateLogger()
+        protected override ILoggerFacade CreateLogger()
         {
             return new Logger();
         }
@@ -40,11 +32,11 @@ namespace LOB.UI.Core.View
             //catalog.AddModule(new ModuleInfo() { ModuleName = "NHibernateModule", ModuleType = daoModule.AssemblyQualifiedName });
             //catalog.AddModule(new ModuleInfo() { ModuleName = "UICoreModule", ModuleType = uiCoreModule.AssemblyQualifiedName });
             //catalog.AddModule(new ModuleInfo() { ModuleName = "UICoreViewModule", ModuleType = uiCoreViewModule.AssemblyQualifiedName });
-            
+
             //DIR
             //var catalog = new DirectoryModuleCatalog() { ModulePath = @".\Modules" };
             //catalog.Load();
-            
+
             //XAML
             var catalogStream = new FileStream(@".\ModuleCatalog.xaml", FileMode.Open);
             var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(catalogStream);

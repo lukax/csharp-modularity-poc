@@ -1,14 +1,13 @@
 ﻿<controls:MetroWindow x:Class="LOB.UI.Core.View.ShellWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:prism="http://www.codeplex.com/prism"
-                      Height="Auto" Width="Auto"
-                      SaveWindowPosition="True">
+                      Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <Window.Resources>
         <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
-
     </Window.Resources>
 
     <controls:MetroContentControl Name="Control">
@@ -30,26 +29,17 @@
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>
-                                    <TextBlock Grid.Column="1"
-                                               Margin="2"
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Center"
-                                               FontSize="14.667"
-                                               Foreground="Blue"
-                                               Padding="2"
-                                               Text="{Binding Title}" />
+                                    <TextBlock Grid.Column="1"  Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.667" Foreground="Blue" Padding="2" Text="{Binding Title}" />
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
                     </Style>
                 </StackPanel.Resources>
-                <TabControl x:Name="BodyRegion" prism:RegionManager.RegionName="BodyRegion"
-                        ItemContainerStyle="{DynamicResource MainTabItem}"
-                        SelectedIndex="0"  />
+                <TabControl x:Name="BodyRegion" prism:RegionManager.RegionName="BodyRegion" ItemContainerStyle="{DynamicResource MainTabItem}" SelectedIndex="0"  />
             </StackPanel>
-
             <ContentControl x:Name="ColumnRegion" prism:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1"/>
-
+            <ContentControl x:Name="ModalRegion" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="Transparent"/>
+            
         </Grid>
     </controls:MetroContentControl>
 </controls:MetroWindow>

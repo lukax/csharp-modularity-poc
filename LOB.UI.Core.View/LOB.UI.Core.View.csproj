@@ -401,6 +401,10 @@
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+      <Project>{5ee9acb1-f25f-4a9d-ae79-517be03e02d9}</Project>
+      <Name>LOB.Log.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.Log\LOB.Log.csproj">
       <Project>{905aa680-50a8-4267-9a7e-0bd1e45aaaca}</Project>
       <Name>LOB.Log</Name>
