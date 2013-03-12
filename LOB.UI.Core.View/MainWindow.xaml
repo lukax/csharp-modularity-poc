@@ -10,6 +10,7 @@
                       ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
                       Title="LOB App"
+                      d:DataContext="{Binding null}"
                       SaveWindowPosition="True" mc:Ignorable="d">
 
     <controls:MetroWindow.Resources>

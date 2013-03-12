@@ -42,31 +42,37 @@ namespace LOB.UI.Core.View
             base.OnStartup(e);
             OnStartup();
 
-            //Startup MainWindow
-            try
-            {
-                _navigator.ResolveView<MainWindow>().Show();
-            }
-            catch (Exception ex)
-            {
-                _navigator.PromptUser("Erro: " + ex.Message);
-            }
+            ////Startup MainWindow
+            //try
+            //{
+            //    _navigator.ResolveView<MainWindow>().Show();
+            //}
+            //catch (Exception ex)
+            //{
+            //    _navigator.PromptUser("Erro: " + ex.Message);
+            //}
         }
 
         private void OnStartup()
         {
-            _catalog = LoadDlls();
+            //_catalog = LoadDlls();
             _unityContainer = new UnityContainer();
-            _unityContainer.RegisterInstance<IServiceLocator>(new UnityServiceLocatorAdapter(_unityContainer));
+            //_unityContainer.RegisterInstance<IServiceLocator>(new UnityServiceLocatorAdapter(_unityContainer));
             //Make container resolve types known to MEF:
             //_unityContainer.RegisterCatalog(_catalog);
-            
-            //Register CommandService
-            _unityContainer.RegisterInstance(CommandService.Default);
 
-            _navigator = _unityContainer.Resolve<IFluentNavigator>();
-            _regionAdapter = _unityContainer.Resolve<IRegionAdapter>();
-            _sessionCreator = _unityContainer.Resolve<ISessionCreator>();
+            _unityContainer.RegisterInstance(CommandService.Default);
+            new Bootstrapper().Run();
+
+            
+            //_navigator = _unityContainer.Resolve<IFluentNavigator>();
+            //_regionAdapter = _unityContainer.Resolve<IRegionAdapter>();
+            //_sessionCreator = _unityContainer.Resolve<ISessionCreator>();
+
+            //Console.WriteLine(Assembly.GetExecutingAssembly().FullName);
+            //Console.WriteLine(Assembly.Load("LOB.Business").FullName);
+            //Console.WriteLine(Assembly.Load("LOB.Dao.Nhibernate").FullName);
+            //Console.WriteLine(Assembly.Load("LOB.UI.Core").FullName);
         }
 
         private AggregateCatalog LoadDlls()

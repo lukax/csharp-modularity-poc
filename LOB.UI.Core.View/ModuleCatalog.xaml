@@ -4,29 +4,41 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:Modularity="clr-namespace:Microsoft.Practices.Prism.Modularity;assembly=Microsoft.Practices.Prism">
-    
+
+   
     <Modularity:ModuleInfo
-        Ref="DaoModule.xap"
+        Ref="file://LOB.Dao.Nhibernate.dll"
         ModuleName="DaoModule"
-        ModuleType="LOB.Dao.Nhibernate.Module, LOB.Dao.Nhibernate, Version=1.0.0.0">
+        ModuleType="LOB.Dao.Nhibernate.Module, LOB.Dao.Nhibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1a7abc5f616c87c2">
     </Modularity:ModuleInfo>
 
     <Modularity:ModuleInfo
-        Ref="BusinessModule.xap"
+        Ref="file://LOB.Business.dll"
         ModuleName="BusinessModule"
-        ModuleType="LOB.Business.Module, LOB.Business, Version=1.0.0.0">
+        ModuleType="LOB.Business.Module, LOB.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dbb35b8c36201cd8">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>DaoModule</sys:String>
         </Modularity:ModuleInfo.DependsOn>
     </Modularity:ModuleInfo>
     
     <Modularity:ModuleInfo
-        Ref="UICoreModule.xap"
-        ModuleName="UICoreModule"
-        ModuleType="LOB.UI.Core, LOB.UI.Core, Version=1.0.0.0">
+        Ref="file://LOB.UI.Core.dll"
+        ModuleName="c"
+        ModuleType="LOB.UI.Core.Module, LOB.UI.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1ff7c4894663fedc">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>DaoModule</sys:String>
             <sys:String>BusinessModule</sys:String>
+        </Modularity:ModuleInfo.DependsOn>
+    </Modularity:ModuleInfo>
+
+    <Modularity:ModuleInfo
+        Ref="file://LOB.UI.Core.View.exe"
+        ModuleName="UICoreViewModule"
+        ModuleType="LOB.UI.Core.View.Module, LOB.UI.Core.View, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e5246e7302e0be16">
+        <Modularity:ModuleInfo.DependsOn>
+            <sys:String>DaoModule</sys:String>
+            <sys:String>BusinessModule</sys:String>
+            <sys:String>UICoreModule</sys:String>
         </Modularity:ModuleInfo.DependsOn>
     </Modularity:ModuleInfo>
 </Modularity:ModuleCatalog>

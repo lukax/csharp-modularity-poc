@@ -33,7 +33,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             set
             {
                 DataContext = value;
-                UcAlterBaseEntityView.DataContext = value;
+                //UcAlterBaseEntityView.DataContext = value;
             }
         }
 
