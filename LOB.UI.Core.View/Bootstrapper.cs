@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using LOB.UI.Core.ViewModel;
+using LOB.UI.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Prism.Modularity;
@@ -27,10 +29,26 @@ namespace LOB.UI.Core.View
 
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            var catalogStream = new FileStream(@".\ModuleCatalog.xaml", FileMode.Open);
-            var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(catalogStream);
-            catalogStream.Dispose();
+            var catalog = new ModuleCatalog();
+            Type businessModule = typeof (LOB.Business.Module);
+            Type daoModule = typeof (LOB.Dao.Nhibernate.Module);
+            Type uiCoreModule = typeof (LOB.UI.Core.Module);
+            Type uiCoreViewModule = typeof (LOB.UI.Core.View.Module);
+
+            catalog.AddModule(new ModuleInfo() { ModuleName = businessModule.Name, ModuleType = businessModule.AssemblyQualifiedName });
+            catalog.AddModule(new ModuleInfo() { ModuleName = daoModule.Name, ModuleType = daoModule.AssemblyQualifiedName });
+            catalog.AddModule(new ModuleInfo() { ModuleName = uiCoreModule.Name, ModuleType = uiCoreModule.AssemblyQualifiedName });
+            catalog.AddModule(new ModuleInfo() { ModuleName = uiCoreViewModule.Name, ModuleType = uiCoreViewModule.AssemblyQualifiedName });
+
+            //var catalogStream = new FileStream(@".\ModuleCatalog.xaml", FileMode.Open);
+            //var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(catalogStream);
+            //catalogStream.Dispose();
             return catalog;
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
         }
 
         protected override DependencyObject CreateShell()

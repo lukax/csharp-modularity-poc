@@ -385,9 +385,17 @@
       <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
       <Name>LOB.Business.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Business\LOB.Business.csproj">
+      <Project>{8f4789d3-fe04-4b95-a20c-38f28ae900b8}</Project>
+      <Name>LOB.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
       <Project>{B275A849-EBA7-45D8-ABAD-A336F38153D9}</Project>
       <Name>LOB.Dao.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Dao.Nhibernate\LOB.Dao.Nhibernate.csproj">
+      <Project>{c2e495a5-600d-4881-a1f7-2d8ab7e5367e}</Project>
+      <Name>LOB.Dao.Nhibernate</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
@@ -473,6 +481,9 @@
     <Content Include="Resources\Shoppingcart48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
