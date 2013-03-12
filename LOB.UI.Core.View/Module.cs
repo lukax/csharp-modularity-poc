@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View
 {
-    public class Module:IModule
+    [Module(ModuleName = "UICoreViewModule")]
+    public class Module : IModule
     {
         private readonly IUnityContainer _container;
 
@@ -22,6 +24,7 @@ namespace LOB.UI.Core.View
         {
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
+            _container.RegisterInstance<ICommandService>(CommandService.Default);
         }
     }
 }

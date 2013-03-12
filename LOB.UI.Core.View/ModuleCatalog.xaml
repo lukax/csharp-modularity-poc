@@ -23,7 +23,7 @@
     
     <Modularity:ModuleInfo
         Ref="file://LOB.UI.Core.dll"
-        ModuleName="c"
+        ModuleName="UICoreModule"
         ModuleType="LOB.UI.Core.Module, LOB.UI.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1ff7c4894663fedc">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>DaoModule</sys:String>

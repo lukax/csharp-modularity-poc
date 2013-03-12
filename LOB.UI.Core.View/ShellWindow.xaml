@@ -1,7 +1,8 @@
-﻿<controls:MetroWindow x:Class="LOB.UI.Core.View.FrameWindow"
+﻿<controls:MetroWindow x:Class="LOB.UI.Core.View.ShellWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:prism="http://www.codeplex.com/prism"
                       Height="Auto" Width="Auto"
                       SaveWindowPosition="True">
 
@@ -10,6 +11,6 @@
     </Window.Resources>
 
     <controls:MetroContentControl Name="Control">
-        <Frame Name="Frame" />
+        <ItemsControl prism:RegionManager.RegionName="MainRegion"/>
     </controls:MetroContentControl>
 </controls:MetroWindow>

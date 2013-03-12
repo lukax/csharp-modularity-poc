@@ -13,11 +13,11 @@ using MahApps.Metro.Controls;
 namespace LOB.UI.Core.View
 {
     /// <summary>
-    ///     Interaction logic for FrameWindow.xaml
+    ///     Interaction logic for ShellWindow.xaml
     /// </summary>
-    public partial class FrameWindow : MetroWindow, IBaseView
+    public partial class ShellWindow : MetroWindow, IBaseView
     {
-        public FrameWindow()
+        public ShellWindow()
         {
             InitializeComponent();
             MiLightGrey();

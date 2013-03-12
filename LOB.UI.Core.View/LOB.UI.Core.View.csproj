@@ -185,8 +185,8 @@
       <DependentUpon>SellServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FluentNavigator.cs" />
-    <Compile Include="FrameWindow.xaml.cs">
-      <DependentUpon>FrameWindow.xaml</DependentUpon>
+    <Compile Include="ShellWindow.xaml.cs">
+      <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -351,7 +351,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="FrameWindow.xaml">
+    <Page Include="ShellWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -400,6 +400,10 @@
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Log\LOB.Log.csproj">
+      <Project>{905aa680-50a8-4267-9a7e-0bd1e45aaaca}</Project>
+      <Name>LOB.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.UI.Core\LOB.UI.Core.csproj">
       <Project>{8fbd60e2-7e77-41db-bac2-6883a4209ea3}</Project>

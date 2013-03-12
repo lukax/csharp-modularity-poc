@@ -229,7 +229,7 @@ namespace LOB.UI.Core.View
             var asUc = GetView() as UserControl;
             if (asUc != null)
             {
-                var window = new FrameWindow
+                var window = new ShellWindow
                     {
                         Content = asUc,
                         DataContext = _resolvedView.ViewModel,

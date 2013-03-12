@@ -12,6 +12,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.Business
 {
+    [Module(ModuleName = "BusinessModule")]
     public class Module : IModule
     {
         private readonly IUnityContainer _container;

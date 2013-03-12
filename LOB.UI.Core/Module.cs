@@ -23,6 +23,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core
 {
+    [Module(ModuleName = "UICoreModule")]
     public class Module : IModule
     {
         private IUnityContainer _container;

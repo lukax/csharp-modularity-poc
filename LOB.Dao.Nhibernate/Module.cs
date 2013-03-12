@@ -9,6 +9,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.Dao.Nhibernate
 {
+    [Module(ModuleName = "NHibernateModule")]
     public class Module : IModule 
     {
         private readonly IUnityContainer _container;
