@@ -8,9 +8,48 @@
 
     <Window.Resources>
         <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+
     </Window.Resources>
 
     <controls:MetroContentControl Name="Control">
-        <ItemsControl prism:RegionManager.RegionName="MainRegion"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ContentControl x:Name="HeaderRegion" prism:RegionManager.RegionName="HeaderRegion" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                <StackPanel.Resources>
+                    <Style x:Key="MainTabItem" TargetType="{x:Type TabItem}">
+                        <Setter Property="Header" Value="{Binding Content.DataContext, RelativeSource={RelativeSource Self}}" />
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Grid.Column="1"
+                                               Margin="2"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               FontSize="14.667"
+                                               Foreground="Blue"
+                                               Padding="2"
+                                               Text="{Binding Title}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <TabControl x:Name="BodyRegion" prism:RegionManager.RegionName="BodyRegion"
+                        ItemContainerStyle="{DynamicResource MainTabItem}"
+                        SelectedIndex="0"  />
+            </StackPanel>
+
+            <ContentControl x:Name="ColumnRegion" prism:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1"/>
+
+        </Grid>
     </controls:MetroContentControl>
 </controls:MetroWindow>
