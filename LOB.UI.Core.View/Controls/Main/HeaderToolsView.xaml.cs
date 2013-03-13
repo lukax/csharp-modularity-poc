@@ -3,6 +3,7 @@
 using System.Windows.Controls;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
 
@@ -13,9 +14,10 @@ namespace LOB.UI.Core.View.Controls.Main
     /// </summary>
     public partial class HeaderToolsView : UserControl, IBaseView
     {
-        public HeaderToolsView()
+        public HeaderToolsView(IHeaderToolsViewModel viewModel)
         {
             InitializeComponent();
+            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel

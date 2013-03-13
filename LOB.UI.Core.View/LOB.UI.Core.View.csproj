@@ -163,6 +163,9 @@
     <Compile Include="Controls\List\Base\ListServiceBaseView.xaml.cs">
       <DependentUpon>ListServiceBaseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\List\ListCommandView.xaml.cs">
+      <DependentUpon>ListCommandView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\List\ListCustomerBaseView.xaml.cs">
       <DependentUpon>ListCustomerBaseView.xaml</DependentUpon>
     </Compile>
@@ -312,6 +315,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\List\ListCommandView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\List\ListCustomerBaseView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

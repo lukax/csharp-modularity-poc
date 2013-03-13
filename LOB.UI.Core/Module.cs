@@ -1,18 +1,22 @@
 ﻿#region Usings
 
 using LOB.Domain.Base;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Core.ViewModel.Main;
+using LOB.UI.Interface.Events;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
@@ -32,6 +36,18 @@ namespace LOB.UI.Core
 
         public void Initialize()
         {
+            #region Events
+            _container.RegisterType<AbstractMessageHideEvent, MessageHideEvent>();
+            _container.RegisterType<AbstractMessageShowEvent, MessageShowEvent>();
+            #endregion
+
+            #region Main
+
+            _container.RegisterType<IColumnToolsViewModel, ColumnToolsViewModel>();
+            _container.RegisterType<IHeaderToolsViewModel, HeaderToolsViewModel>();
+
+            #endregion
+            
             #region Alter
 
             //_container.RegisterType<IAlterBaseEntityViewModel<BaseEntity>, AlterBaseEntityViewModel<BaseEntity>>();

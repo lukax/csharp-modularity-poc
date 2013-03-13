@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Service.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="SubEntity\Address.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\BaseNotifyChange.cs" />
