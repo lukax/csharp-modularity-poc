@@ -96,6 +96,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -177,6 +180,12 @@
     </Compile>
     <Compile Include="Controls\List\SubEntity\ListPhoneNumberBaseView.xaml.cs">
       <DependentUpon>ListPhoneNumberBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\ColumnToolsView.xaml.cs">
+      <DependentUpon>ColumnToolsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\HeaderToolsView.xaml.cs">
+      <DependentUpon>HeaderToolsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sell\SellProductView.xaml.cs">
       <DependentUpon>SellProductView.xaml</DependentUpon>
@@ -339,6 +348,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Main\ColumnToolsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Main\HeaderToolsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Sell\SellProductView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

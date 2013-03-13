@@ -30,10 +30,8 @@ namespace LOB.UI.Core.View.Controls.Alter
             {
                 DataContext = value;
                 UcAlterBaseEntity.DataContext = value;
-                Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",
-                                                   o => { UcAlterPersonDetails.Content = o; });
-                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
-                                                   o => Messenger.Default.Send("Cancel"));
+                Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o => { UcAlterPersonDetails.Content = o; });
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }
 

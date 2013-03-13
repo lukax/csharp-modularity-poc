@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
@@ -17,6 +18,15 @@ namespace LOB.UI.Core.View
         public ShellWindow()
         {
             InitializeComponent();
+
+            //BodyRegion.LayoutUpdated += (sender, args) => {
+            //                                                  foreach (var variable in BodyRegion.Items)
+            //                                                  {
+            //                                                      var vari = variable as IBaseView;
+            //                                                      if (vari == null) return;
+                                                                  
+            //                                                  }         
+            //};
         }
 
         public IBaseViewModel ViewModel

@@ -3,11 +3,12 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      xmlns:prism="http://www.codeplex.com/prism"
+                      xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
+                      Title="Shell"
                       Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <Window.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary x:Name="ResourcesDict" Source="/Skins/MetroVSSkin.xaml" />
     </Window.Resources>
 
     <controls:MetroContentControl Name="Control">
@@ -21,23 +22,24 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <ContentControl x:Name="HeaderRegion" prism:RegionManager.RegionName="HeaderRegion" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <ContentControl x:Name="HeaderRegion" regions:RegionManager.RegionName="HeaderRegion" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
-                <StackPanel.Resources>
+                <!--<StackPanel.Resources>
                     <Style x:Key="MainTabItem" TargetType="{x:Type TabItem}">
                         <Setter Property="Header" Value="{Binding Content.DataContext, RelativeSource={RelativeSource Self}}" />
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>
-                                    <TextBlock Grid.Column="1"  Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.667" Foreground="Blue" Padding="2" Text="{Binding Title}" />
+                                    <TextBlock Grid.Column="1" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10.667" Foreground="Blue" Padding="2" Text="{Binding Header}" />
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </StackPanel.Resources>
-                <TabControl x:Name="BodyRegion" prism:RegionManager.RegionName="BodyRegion" ItemContainerStyle="{DynamicResource MainTabItem}" SelectedIndex="0"  />
+                </StackPanel.Resources>-->
+                <TabControl x:Name="BodyRegion" regions:RegionManager.RegionName="BodyRegion" Style="{StaticResource StandardTabControl}" SelectedIndex="0" />
             </StackPanel>
-            <ContentControl x:Name="ColumnRegion" prism:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1"/>
+            
+            <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1"/>
             <ContentControl x:Name="ModalRegion" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="Transparent"/>
             
         </Grid>

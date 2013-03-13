@@ -1,7 +1,9 @@
 ﻿#region Usings
 
+using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.Alter.Base;
 using LOB.UI.Core.View.Controls.Alter.SubEntity;
+using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.View.Controls.Sell;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
@@ -32,8 +34,10 @@ namespace LOB.UI.Core.View
 
             var regionManager = _container.Resolve<IRegionManager>();
 
-            //regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterBaseEntityBaseView));
-            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterAddressBaseView));
+            regionManager.RegisterViewWithRegion(RegionNames.HeaderRegion, typeof (HeaderToolsView));
+            regionManager.RegisterViewWithRegion(RegionNames.ColumnRegion, typeof (ColumnToolsView));
+            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCustomerBaseView));
+            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCategoryBaseView));
         }
     }
 }

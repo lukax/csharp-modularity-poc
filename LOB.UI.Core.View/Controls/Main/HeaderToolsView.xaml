@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.Main.HeaderToolsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0">
+        <MenuItem Header="_ARQUIVO">
+            <MenuItem Header="Salvar" />
+            <MenuItem Header="Sair"></MenuItem>
+        </MenuItem>
+        <MenuItem Header="VENDAS">
+            <MenuItem Header="Nova Venda" Command="{Binding OpenTabCommand}" CommandParameter="NewSale" />
+            <MenuItem Header="Histórico de Vendas" Command="{Binding OpenTabCommand}"
+                              CommandParameter="ListSale" />
+            <MenuItem Header="Alterar Venda" Command="{Binding OpenTabCommand}" CommandParameter="AlterSale" />
+        </MenuItem>
+        <MenuItem Header="CADASTRAR">
+            <MenuItem Header="Cliente" Command="{Binding OpenTabCommand}" CommandParameter="AlterClient"></MenuItem>
+            <MenuItem Header="Compania" Command="{Binding OpenTabCommand}" CommandParameter="AlterCompany"></MenuItem>
+            <MenuItem Header="Fornecedor" Command="{Binding OpenTabCommand}" CommandParameter="AlterSupplier"></MenuItem>
+            <MenuItem Header="Funcionário" Command="{Binding OpenTabCommand}" CommandParameter="AlterEmployee"></MenuItem>
+            <MenuItem Header="Produto" Command="{Binding OpenTabCommand}" CommandParameter="AlterProduct"></MenuItem>
+        </MenuItem>
+        <MenuItem Header="LISTAR">
+            <MenuItem Header="Cliente" Command="{Binding OpenTabCommand}" CommandParameter="ListClient"></MenuItem>
+            <MenuItem Header="Compania" Command="{Binding OpenTabCommand}" CommandParameter="ListCompany"></MenuItem>
+            <MenuItem Header="Fornecedor" Command="{Binding OpenTabCommand}" CommandParameter="ListSupplier"></MenuItem>
+            <MenuItem Header="Funcionário" Command="{Binding OpenTabCommand}" CommandParameter="ListEmployee"></MenuItem>
+            <MenuItem Header="Produto" Command="{Binding OpenTabCommand}" CommandParameter="ListProduct"></MenuItem>
+        </MenuItem>
+        <MenuItem Header="ÚTIL">
+            <MenuItem Header="Endereços"></MenuItem>
+            <MenuItem Header="Informação de Contato"></MenuItem>
+            <MenuItem Header="Pagamentos"></MenuItem>
+            <MenuItem Header="Comissão"></MenuItem>
+        </MenuItem>
+        <MenuItem Header="RELATÓRIOS">
+
+        </MenuItem>
+    </Menu>
+</UserControl>
