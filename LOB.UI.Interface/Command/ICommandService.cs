@@ -8,7 +8,13 @@ namespace LOB.UI.Interface.Command
 {
     public interface ICommandService
     {
-        ICommand this[string name] { get; }
-        void RegisterCommand(string param, ICommand command);
+        IRegionedCommand this[string name] { get; }
+        void RegisterCommand(string opName, string regionName, ICommand command);
+    }
+
+    public interface IRegionedCommand
+    {
+         ICommand Command { get; set; }
+         string Region { get; set; }
     }
 }

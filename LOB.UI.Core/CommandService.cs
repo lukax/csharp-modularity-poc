@@ -14,10 +14,12 @@ namespace LOB.UI.Core
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
 
         private IDictionary<string, ICommand> commandMap;
+        private IDictionary<string, string> regionMap;
 
         private CommandService()
         {
             commandMap = new Dictionary<string, ICommand>();
+            regionMap = new Dictionary<string, string>();
         }
 
         public static ICommandService Default
@@ -25,14 +27,20 @@ namespace LOB.UI.Core
             get { return Lazy.Value; }
         }
 
-        public void RegisterCommand(string param, ICommand command)
+        public void RegisterCommand(string opName, string regionName, ICommand command)
         {
-            commandMap.Add(param, command);
+            commandMap.Add(opName, command);
         }
 
-        public ICommand this[string name]
+        public IRegionedCommand this[string name]
         {
-            get { return commandMap[name]; }
+            get { return new RegionedCommand { Command = commandMap[name], Region = regionMap[name] }; }
+        }
+
+        public class RegionedCommand : IRegionedCommand
+        {
+            public ICommand Command { get; set; }
+            public string Region { get; set; }
         }
     }
 }

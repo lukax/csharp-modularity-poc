@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListCommandViewModel : IListCommandViewModel
+    public class ListOpViewModel : IListOpViewModel
     {
         public string Header { get; set; }
         public void InitializeServices()

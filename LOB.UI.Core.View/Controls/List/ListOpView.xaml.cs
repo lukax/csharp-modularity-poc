@@ -21,16 +21,16 @@ namespace LOB.UI.Core.View.Controls.List
     /// <summary>
     /// Interaction logic for ListCommandView.xaml
     /// </summary>
-    public partial class ListCommandView : UserControl, IBaseView
+    public partial class ListOpView : UserControl, IBaseView
     {
-        public ListCommandView(IListCommandViewModel viewModel)
+        public ListOpView(IListOpViewModel viewModel)
         {
             InitializeComponent();
         }
 
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IListCommandViewModel; }
+            get { return DataContext as IListOpViewModel; }
             set { DataContext = value; }
         }
 
