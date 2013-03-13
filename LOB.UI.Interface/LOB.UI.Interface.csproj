@@ -71,8 +71,8 @@
     <Compile Include="Command\ICommandService.cs" />
     <Compile Include="CrudOperationType.cs" />
     <Compile Include="Dialog\IDialog.cs" />
-    <Compile Include="Events\IMessageHideEvent.cs" />
-    <Compile Include="Events\IMessageShowEvent.cs" />
+    <Compile Include="Events\AbstractMessageHideEvent.cs" />
+    <Compile Include="Events\AbstractMessageShowEvent.cs" />
     <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />

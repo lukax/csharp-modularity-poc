@@ -120,7 +120,6 @@
     <Compile Include="CommandService.cs" />
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Events\MessageHideEvent.cs" />
-    <Compile Include="Events\IMessageHideEvent.cs" />
     <Compile Include="Events\MessageShowEvent.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
@@ -180,6 +179,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="LOB.UI.Core.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
