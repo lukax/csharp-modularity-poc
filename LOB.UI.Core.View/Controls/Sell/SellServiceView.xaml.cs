@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Controls;
+using LOB.UI.Core.ViewModel.Controls.Sell;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
 
@@ -9,9 +10,6 @@ using LOB.UI.Interface.ViewModel.Base;
 
 namespace LOB.UI.Core.View.Controls.Sell
 {
-    /// <summary>
-    ///     Interaction logic for SellService.xaml
-    /// </summary>
     public partial class SellServiceView : UserControl, IBaseView
     {
         public SellServiceView()

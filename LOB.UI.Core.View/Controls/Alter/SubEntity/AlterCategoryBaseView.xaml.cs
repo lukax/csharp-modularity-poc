@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {
-    [Export]
     public partial class AlterCategoryBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -20,16 +19,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterCategoryBaseView(IAlterCategoryViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterCategoryViewModel; }
             set
             {
                 DataContext = value;

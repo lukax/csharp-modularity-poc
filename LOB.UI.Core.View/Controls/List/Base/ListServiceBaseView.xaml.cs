@@ -11,7 +11,6 @@ using LOB.UI.Interface.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.View.Controls.List.Base
 {
-    [Export]
     public partial class ListServiceBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -21,16 +20,9 @@ namespace LOB.UI.Core.View.Controls.List.Base
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public ListServiceBaseView(IListServiceViewModel<Service> viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IListServiceViewModel<Service>; }
             set { DataContext = value; }
         }
 

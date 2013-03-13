@@ -1,19 +1,7 @@
 ﻿#region Usings
 
-using System;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.IO;
-using System.Reflection;
-using System.Threading;
 using System.Windows;
 using GalaSoft.MvvmLight.Threading;
-using LOB.Dao.Interface;
-using LOB.UI.Interface;
-using Microsoft.Practices.Prism.UnityExtensions;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
-using Microsoft.Win32;
 
 #endregion
 
@@ -51,7 +39,7 @@ namespace LOB.UI.Core.View
         //    _unityContainer.RegisterCatalog(_catalog);
 
         //    _unityContainer.RegisterInstance(CommandService.Default);
-            
+
         //    _navigator = _unityContainer.Resolve<IFluentNavigator>();
         //    _regionAdapter = _unityContainer.Resolve<IRegionAdapter>();
         //    _sessionCreator = _unityContainer.Resolve<ISessionCreator>();

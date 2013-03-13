@@ -26,18 +26,18 @@ namespace LOB.UI.Core.View
         private IFluentNavigator _navigator;
         private MainWindowViewModel _viewModel;
 
-        [ImportingConstructor]
-        public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, IFluentNavigator navigator)
-        {
-            _container = container;
-            ViewModel = viewModel;
-            _navigator = navigator;
+        //[ImportingConstructor]
+        //public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, IFluentNavigator navigator)
+        //{
+        //    _container = container;
+        //    ViewModel = viewModel;
+        //    _navigator = navigator;
 
-            navigator.OnOpenView += (sender, args) => ChangeFlyouts(sender, args);
+        //    navigator.OnOpenView += (sender, args) => ChangeFlyouts(sender, args);
 
-            container.Resolve<IAlterProductViewModel>();
-            InitializeComponent();
-        }
+        //    container.Resolve<IAlterProductViewModel>();
+        //    InitializeComponent();
+        //}
 
         public IBaseViewModel ViewModel
         {
@@ -50,7 +50,8 @@ namespace LOB.UI.Core.View
 
                 DataContext = value;
                 _commandService.RegisterCommand("OpenTab", new DelegateCommand(OpenTab));
-                _commandService.RegisterCommand("Cancel", new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
+                _commandService.RegisterCommand("Cancel",
+                                                new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
                 _commandService.RegisterCommand("OpenView", new DelegateCommand(o => OpenView(o.ToString())));
                 _commandService.RegisterCommand("QuickSearch", new DelegateCommand(o => OpenView(o.ToString())));
             }
@@ -81,7 +82,7 @@ namespace LOB.UI.Core.View
             var baseView = view as IBaseView;
             if (baseView == null) throw new ArgumentException("Content isn't a IBaseView");
             var t = new TabItem {Content = view, Header = baseView.Header};
-            ((IBaseView) t.Content).Index = TabControlMain.Items.Add(t);
+            ((IBaseView)t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
             ChangeFlyouts(null, null);
         }

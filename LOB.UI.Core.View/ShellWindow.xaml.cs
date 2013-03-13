@@ -12,9 +12,6 @@ using MahApps.Metro.Controls;
 
 namespace LOB.UI.Core.View
 {
-    /// <summary>
-    ///     Interaction logic for ShellWindow.xaml
-    /// </summary>
     public partial class ShellWindow : MetroWindow, IBaseView
     {
         public ShellWindow()

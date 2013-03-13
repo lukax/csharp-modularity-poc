@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 {
-    [Export]
     public partial class AlterContactInfoBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -20,16 +19,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterContactInfoBaseView(IAlterContactInfoViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterContactInfoViewModel; }
             set
             {
                 DataContext = value;

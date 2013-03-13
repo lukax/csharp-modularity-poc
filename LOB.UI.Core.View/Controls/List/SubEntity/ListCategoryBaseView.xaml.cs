@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity
 {
-    [Export]
     public partial class ListCategoryBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -20,16 +19,9 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public ListCategoryBaseView(IListCategoryViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IListCategoryViewModel; }
             set { DataContext = value; }
         }
 

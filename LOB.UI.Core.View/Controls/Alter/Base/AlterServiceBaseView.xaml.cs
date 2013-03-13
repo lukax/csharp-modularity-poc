@@ -11,7 +11,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.View.Controls.Alter.Base
 {
-    [Export]
     public partial class AlterServiceBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -21,16 +20,9 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterServiceBaseView(IAlterServiceViewModel<Service> viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterServiceViewModel<Service>; }
             set { DataContext = value; }
         }
 

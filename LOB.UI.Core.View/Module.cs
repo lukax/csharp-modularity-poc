@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using LOB.UI.Core.View.Controls.Alter.Base;
+using LOB.UI.Core.View.Controls.Alter.SubEntity;
+using LOB.UI.Core.View.Controls.Sell;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using IRegionAdapter = LOB.UI.Interface.IRegionAdapter;
+
+#endregion
 
 namespace LOB.UI.Core.View
 {
@@ -25,6 +29,11 @@ namespace LOB.UI.Core.View
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
             _container.RegisterInstance<ICommandService>(CommandService.Default);
+
+            var regionManager = _container.Resolve<IRegionManager>();
+
+            //regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterBaseEntityBaseView));
+            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterAddressBaseView));
         }
     }
 }

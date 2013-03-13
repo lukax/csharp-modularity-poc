@@ -12,7 +12,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.View.Controls.Alter.Base
 {
-    [Export]
     public partial class AlterPersonBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -22,16 +21,9 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterPersonBaseView(IAlterPersonViewModel<Person> viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterPersonViewModel<Person>; }
             set
             {
                 DataContext = value;

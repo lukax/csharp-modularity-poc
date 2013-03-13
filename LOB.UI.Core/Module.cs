@@ -1,12 +1,14 @@
 ﻿#region Usings
 
 using LOB.Domain.Base;
+using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.ViewModel.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -34,7 +36,7 @@ namespace LOB.UI.Core
         {
             #region Alter
 
-            _container.RegisterType<IAlterBaseEntityViewModel<BaseEntity>, AlterBaseEntityViewModel<BaseEntity>>();
+            //_container.RegisterType<IAlterBaseEntityViewModel<BaseEntity>, AlterBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IAlterPersonViewModel<Person>, AlterPersonViewModel<Person>>();
             _container.RegisterType<IAlterServiceViewModel<Service>, AlterServiceViewModel<Service>>();
 

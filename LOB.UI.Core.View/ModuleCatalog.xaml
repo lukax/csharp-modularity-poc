@@ -25,6 +25,7 @@
         ModuleName="BusinessModule"
         ModuleType="LOB.Business.Module, LOB.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dbb35b8c36201cd8">
         <Modularity:ModuleInfo.DependsOn>
+            <sys:String>LogModule</sys:String>
             <sys:String>DaoModule</sys:String>
         </Modularity:ModuleInfo.DependsOn>
     </Modularity:ModuleInfo>
@@ -34,6 +35,7 @@
         ModuleName="UICoreModule"
         ModuleType="LOB.UI.Core.Module, LOB.UI.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1ff7c4894663fedc">
         <Modularity:ModuleInfo.DependsOn>
+            <sys:String>LogModule</sys:String>
             <sys:String>DaoModule</sys:String>
             <sys:String>BusinessModule</sys:String>
         </Modularity:ModuleInfo.DependsOn>
@@ -44,6 +46,7 @@
         ModuleName="UICoreViewModule"
         ModuleType="LOB.UI.Core.View.Module, LOB.UI.Core.View, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e5246e7302e0be16">
         <Modularity:ModuleInfo.DependsOn>
+            <sys:String>LogModule</sys:String>
             <sys:String>DaoModule</sys:String>
             <sys:String>BusinessModule</sys:String>
             <sys:String>UICoreModule</sys:String>

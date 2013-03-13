@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.View.Controls.List
 {
-    [Export]
     public partial class ListEmployeeBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -20,16 +19,9 @@ namespace LOB.UI.Core.View.Controls.List
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public ListEmployeeBaseView(IListEmployeeViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IListEmployeeViewModel; }
             set { DataContext = value; }
         }
 

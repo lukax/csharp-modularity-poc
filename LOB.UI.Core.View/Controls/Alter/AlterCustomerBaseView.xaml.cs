@@ -23,18 +23,9 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterCustomerBaseView(AlterCustomerViewModel viewModel, IUnityContainer container,
-                                     IFluentNavigator navigator)
-            : this()
-        {
-            ViewModel = viewModel;
-            _container = container;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as AlterCustomerViewModel; }
             set
             {
                 DataContext = value;

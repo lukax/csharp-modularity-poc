@@ -9,7 +9,7 @@ using LOB.UI.Interface.ViewModel.Base;
 namespace LOB.UI.Interface
 {
     [InheritedExport]
-    public interface IBaseView
+    public interface IBaseView 
     {
         IBaseViewModel ViewModel { get; set; }
         String Header { get; set; }

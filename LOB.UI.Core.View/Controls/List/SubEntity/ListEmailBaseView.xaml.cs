@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity
 {
-    [Export]
     public partial class ListEmailBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -20,16 +19,9 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public ListEmailBaseView(IListEmailViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IListEmailViewModel; }
             set { DataContext = value; }
         }
 

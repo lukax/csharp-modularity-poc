@@ -9,21 +9,13 @@ using LOB.UI.Interface.ViewModel.Base;
 
 namespace LOB.UI.Core.View.Controls.List.Base
 {
-    [Export]
-    public partial class ListBaseEntityBaseView : UserControl, IBaseView
+    public partial class ListBaseEntityBaseView : UserControl, IBaseViewModel
     {
         private string _header;
 
         public ListBaseEntityBaseView()
         {
             InitializeComponent();
-        }
-
-        [ImportingConstructor]
-        public ListBaseEntityBaseView(IBaseViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel

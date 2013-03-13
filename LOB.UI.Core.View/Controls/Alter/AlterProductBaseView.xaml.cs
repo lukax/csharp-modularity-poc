@@ -13,7 +13,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter
 {
-    [Export]
     public partial class AlterProductBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -24,17 +23,9 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterProductBaseView(IAlterProductViewModel viewModel, IFluentNavigator navigator)
-            : this()
-        {
-            _navigator = navigator;
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterProductViewModel; }
             set
             {
                 DataContext = value;

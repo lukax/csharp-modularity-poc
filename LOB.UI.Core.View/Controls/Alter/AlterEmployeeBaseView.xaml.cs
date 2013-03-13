@@ -13,7 +13,6 @@ using Microsoft.Expression.Interactivity.Core;
 
 namespace LOB.UI.Core.View.Controls.Alter
 {
-    [Export]
     public partial class AlterEmployeeBaseView : UserControl, IBaseView
     {
         private ICommandService _commandService;
@@ -25,19 +24,9 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterEmployeeBaseView(IAlterEmployeeViewModel viewModel, IFluentNavigator navigator,
-                                     ICommandService commandService)
-            : this()
-        {
-            _navigator = navigator;
-            _commandService = commandService;
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterEmployeeViewModel; }
             set
             {
                 DataContext = value;

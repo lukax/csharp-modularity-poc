@@ -239,7 +239,7 @@ namespace LOB.UI.Core.View
                     };
 
                 if (OnOpenView != null)
-                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
+                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asUc));
 
                 if (asDialog) window.ShowDialog();
                 else window.Show();
@@ -249,9 +249,8 @@ namespace LOB.UI.Core.View
                 var asW = _resolvedView as Window;
                 if (asW != null)
                 {
-
                     if (OnOpenView != null)
-                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
+                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asW));
 
                     if (asDialog) asW.ShowDialog();
                     else asW.Show();

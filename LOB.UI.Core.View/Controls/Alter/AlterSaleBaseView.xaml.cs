@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter
 {
-    [Export("")]
     public partial class AlterSaleBaseView : UserControl, IBaseView
     {
         private string _header;
@@ -20,16 +19,9 @@ namespace LOB.UI.Core.View.Controls.Alter
             InitializeComponent();
         }
 
-        [ImportingConstructor]
-        public AlterSaleBaseView(IAlterSaleViewModel viewModel)
-            : this()
-        {
-            ViewModel = viewModel;
-        }
-
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IBaseViewModel; }
+            get { return DataContext as IAlterSaleViewModel; }
             set { DataContext = value; }
         }
 
