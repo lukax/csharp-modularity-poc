@@ -1,26 +1,27 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter
 {
-    [Export]
     public partial class AlterCustomerBaseView : UserControl, IBaseView
     {
         private IUnityContainer _container;
         private string _header;
 
-        public AlterCustomerBaseView()
+        [InjectionConstructor]
+        public AlterCustomerBaseView(IAlterCustomerViewModel viewModel)
         {
             InitializeComponent();
+            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel
@@ -30,8 +31,10 @@ namespace LOB.UI.Core.View.Controls.Alter
             {
                 DataContext = value;
                 UcAlterBaseEntity.DataContext = value;
-                Messenger.Default.Register<object>(DataContext, "PersonTypeChanged", o => { UcAlterPersonDetails.Content = o; });
-                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
+                Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",
+                                                   o => { UcAlterPersonDetails.Content = o; });
+                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
+                                                   o => Messenger.Default.Send("Cancel"));
             }
         }
 

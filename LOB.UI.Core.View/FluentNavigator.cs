@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Domain.Base;
@@ -34,7 +33,7 @@ namespace LOB.UI.Core.View
         private IBaseView _resolvedView;
         private IBaseViewModel _resolvedViewModel;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter)
         {
             _container = container;

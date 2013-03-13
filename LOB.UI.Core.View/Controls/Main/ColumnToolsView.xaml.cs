@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿#region Usings
+
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
+
+#endregion
 
 namespace LOB.UI.Core.View.Controls.Main
 {
     /// <summary>
-    /// Interaction logic for ColumnToolsView.xaml
+    ///     Interaction logic for ColumnToolsView.xaml
     /// </summary>
     public partial class ColumnToolsView : UserControl, IBaseView
     {
@@ -27,9 +18,15 @@ namespace LOB.UI.Core.View.Controls.Main
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel { get { return this.DataContext as IBaseViewModel; } set { this.DataContext = value; } }
+        public IBaseViewModel ViewModel
+        {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
+
         public string Header { get; set; }
         public int? Index { get; set; }
+
         public void InitializeServices()
         {
         }

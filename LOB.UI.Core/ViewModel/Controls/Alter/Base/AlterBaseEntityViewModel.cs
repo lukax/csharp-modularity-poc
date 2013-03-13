@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
@@ -9,15 +8,15 @@ using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
-    [InheritedExport]
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel<T> where T : BaseEntity
     {
-        [ImportingConstructor]
+        [InjectionConstructor]
         public AlterBaseEntityViewModel(T entity, IRepository repository)
         {
             Repository = repository;

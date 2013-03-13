@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Modularity:ModuleCatalog
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,7 +11,7 @@
         ModuleName="LogModule"
         ModuleType="LOB.Log.Module, LOB.Log, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a5e30f61151628a">
     </Modularity:ModuleInfo>
-    
+
     <Modularity:ModuleInfo
         Ref="file://LOB.Dao.Nhibernate.dll"
         ModuleName="DaoModule"
@@ -29,7 +30,7 @@
             <sys:String>DaoModule</sys:String>
         </Modularity:ModuleInfo.DependsOn>
     </Modularity:ModuleInfo>
-    
+
     <Modularity:ModuleInfo
         Ref="file://LOB.UI.Core.dll"
         ModuleName="UICoreModule"

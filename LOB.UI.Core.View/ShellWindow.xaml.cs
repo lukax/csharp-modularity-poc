@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
@@ -24,7 +23,7 @@ namespace LOB.UI.Core.View
             //                                                  {
             //                                                      var vari = variable as IBaseView;
             //                                                      if (vari == null) return;
-                                                                  
+
             //                                                  }         
             //};
         }

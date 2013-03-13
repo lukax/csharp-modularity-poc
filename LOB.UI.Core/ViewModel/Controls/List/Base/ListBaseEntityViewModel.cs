@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,12 +13,12 @@ using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
+using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
-    [InheritedExport]
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T> where T : BaseEntity
     {
         #region Props
@@ -84,7 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         private int _updateInterval;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public ListBaseEntityViewModel(T entity, IRepository repository)
         {
             Repository = repository;

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
@@ -16,7 +15,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    [Export]
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel
     {
         private AlterLegalPersonViewModel _alterLegalPersonViewModel;
@@ -25,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public AlterCustomerViewModel(Customer entity, IRepository repository, IUnityContainer container,
                                       IFluentNavigator navigator,
                                       AlterLegalPersonViewModel alterLegalPersonViewModel,
@@ -39,10 +37,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             //default init customer as natural person
+            Header = "ASDPOKDSAP";
             NaturalPersonCfg();
             PersonTypeChanged();
         }
-
+        
         private void PersonTypeChanged()
         {
             Entity.PropertyChanged += (s, e) =>

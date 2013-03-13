@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +8,6 @@ using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Base;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Unity;
@@ -18,7 +16,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View
 {
-    [Export]
     public partial class MainWindow : MetroWindow, IBaseView
     {
         private ICommandService _commandService = CommandService.Default;
@@ -26,7 +23,7 @@ namespace LOB.UI.Core.View
         private IFluentNavigator _navigator;
         private MainWindowViewModel _viewModel;
 
-        //[ImportingConstructor]
+        //[InjectionConstructor]
         //public MainWindow(IUnityContainer container, MainWindowViewModel viewModel, IFluentNavigator navigator)
         //{
         //    _container = container;
@@ -82,7 +79,7 @@ namespace LOB.UI.Core.View
             var baseView = view as IBaseView;
             if (baseView == null) throw new ArgumentException("Content isn't a IBaseView");
             var t = new TabItem {Content = view, Header = baseView.Header};
-            ((IBaseView)t.Content).Index = TabControlMain.Items.Add(t);
+            ((IBaseView) t.Content).Index = TabControlMain.Items.Add(t);
             TabControlMain.SelectedItem = t;
             ChangeFlyouts(null, null);
         }

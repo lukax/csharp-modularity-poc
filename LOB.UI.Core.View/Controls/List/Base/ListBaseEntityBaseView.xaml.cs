@@ -1,8 +1,6 @@
 #region Usings
 
-using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
 
 #endregion
@@ -24,13 +22,13 @@ namespace LOB.UI.Core.View.Controls.List.Base
             set { DataContext = value; }
         }
 
+        public int? Index { get; set; }
+
         public string Header
         {
             get { return (string.IsNullOrEmpty(_header)) ? "Códigos" : _header; }
             set { _header = value; }
         }
-
-        public int? Index { get; set; }
 
         public void InitializeServices()
         {

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.Core;
 using LOB.UI.Core.ViewModel.Base;
@@ -12,12 +11,11 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel
 {
-    [Export]
     public class MainWindowViewModel : BaseViewModel
     {
         private ICommandService _commandService;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator, ICommandService commandService)
         {
             _container = container;

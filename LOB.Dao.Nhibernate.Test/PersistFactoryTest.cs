@@ -33,7 +33,7 @@ namespace LOB.Dao.Nhibernate.Test
             private readonly AggregateCatalog _catalog;
             private readonly CompositionContainer _container;
 
-            [Export] private IUnityContainer ccontainer = new UnityContainer();
+            private IUnityContainer ccontainer = new UnityContainer();
             [Import] private Inner inner;
 
             public PersistFactory(object obj)
@@ -75,12 +75,12 @@ namespace LOB.Dao.Nhibernate.Test
                 throw new ArgumentNullException();
             }
 
-            [Export]
+
             private class Inner
             {
                 public IUnityContainer container;
 
-                [ImportingConstructor]
+                [InjectionConstructor]
                 public Inner(IUnityContainer container)
                 {
                     this.container = container;

@@ -1,14 +1,12 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using LOB.Domain.Base;
 
 #endregion
 
 namespace LOB.Dao.Interface
 {
-    [InheritedExport]
     public interface IUnityOfWork : IDisposable
     {
         /// <summary>

@@ -1,7 +1,6 @@
 #region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ using LOB.Domain.Base;
 
 namespace LOB.Dao.Interface
 {
-    [InheritedExport]
     public interface IRepository
     {
         IUnityOfWork Uow { get; }

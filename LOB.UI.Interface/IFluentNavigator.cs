@@ -1,14 +1,12 @@
 #region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using LOB.UI.Interface.ViewModel.Base;
 
 #endregion
 
 namespace LOB.UI.Interface
 {
-    [InheritedExport]
     public interface IFluentNavigator
     {
         IBaseView GetView();

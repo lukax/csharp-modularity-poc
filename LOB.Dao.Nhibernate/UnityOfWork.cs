@@ -1,9 +1,9 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using Microsoft.Practices.Unity;
 using NHibernate;
 
 #endregion
@@ -16,7 +16,7 @@ namespace LOB.Dao.Nhibernate
 
         private ITransaction _transaction;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public UnityOfWork(ISessionCreator sessionCreator)
         {
             Orm = sessionCreator.Orm;

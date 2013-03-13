@@ -2,7 +2,6 @@
 
 using System;
 using System.Windows.Controls;
-using LOB.UI.Core.ViewModel.Controls.Sell;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
 

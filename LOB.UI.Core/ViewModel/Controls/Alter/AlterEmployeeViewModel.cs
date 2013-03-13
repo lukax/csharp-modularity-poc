@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
@@ -15,13 +14,12 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    [Export]
     public sealed class AlterEmployeeViewModel : AlterNaturalPersonViewModel, IAlterEmployeeViewModel
     {
         private ICommandService _commandService;
         private IUnityContainer _container;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public AlterEmployeeViewModel(Employee entity, Address address, ContactInfo contactInfo,
                                       IRepository repository, AlterAddressViewModel alterAddressViewModel,
                                       AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container,

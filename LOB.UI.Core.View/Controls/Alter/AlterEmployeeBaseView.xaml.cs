@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;

@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using LOB.Log;
+using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
@@ -59,8 +60,7 @@ namespace LOB.UI.Core.View
         protected override void InitializeShell()
         {
             base.InitializeShell();
-
-            Application.Current.MainWindow = (Window) this.Shell;
+            Application.Current.MainWindow = (Window) Shell;
             Application.Current.MainWindow.Show();
         }
     }

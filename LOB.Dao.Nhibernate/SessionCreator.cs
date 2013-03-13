@@ -1,10 +1,10 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Dao.Interface;
+using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -24,7 +24,7 @@ namespace LOB.Dao.Nhibernate
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public SessionCreator()
             : this(PersistType.MySql, null)
         {

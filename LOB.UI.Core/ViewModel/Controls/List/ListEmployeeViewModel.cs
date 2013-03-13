@@ -1,20 +1,19 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Interface.ViewModel.Controls.List;
+using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    [Export]
     public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel, IListEmployeeViewModel
     {
-        [ImportingConstructor]
+        [InjectionConstructor]
         public ListEmployeeViewModel(Employee employee, IRepository repository)
             : base(employee, repository)
         {

@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private IFluentNavigator _navigator;
         private ICommandService commandService = CommandService.Default;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public AlterProductViewModel(Product entity, IRepository repository, IUnityContainer container,
                                      IFluentNavigator navigator)
             : base(entity, repository)

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Domain;

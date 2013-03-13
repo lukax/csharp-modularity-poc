@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.UI.Interface;
 using Microsoft.Practices.Unity;
@@ -15,7 +14,7 @@ namespace LOB.UI.Core.View
         private readonly IUnityContainer _container;
         private readonly IDictionary<string, object> _regions = new Dictionary<string, object>();
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public RegionAdapter(IUnityContainer container)
         {
             _container = container;

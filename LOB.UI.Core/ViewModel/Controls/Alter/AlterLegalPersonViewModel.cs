@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
@@ -15,12 +14,11 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    [Export]
     public sealed class AlterLegalPersonViewModel : AlterPersonViewModel<LegalPerson>, IAlterLegalPersonViewModel
     {
         private IUnityContainer _container;
 
-        [ImportingConstructor]
+        [InjectionConstructor]
         public AlterLegalPersonViewModel(LegalPerson entity, Address address, ContactInfo contactInfo,
                                          IRepository repository,
                                          AlterAddressViewModel alterAddressViewModel,

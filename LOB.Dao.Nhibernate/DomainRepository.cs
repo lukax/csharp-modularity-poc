@@ -1,12 +1,12 @@
 #region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -16,7 +16,7 @@ namespace LOB.Dao.Nhibernate
 {
     public class DomainRepository : IRepository
     {
-        [ImportingConstructor]
+        [InjectionConstructor]
         public DomainRepository(IUnityOfWork unityOfWork)
         {
             Uow = unityOfWork;
