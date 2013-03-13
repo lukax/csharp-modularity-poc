@@ -35,7 +35,7 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void Ops(object arg)
         {
-            _commandService.RegisterCommand(OpNames.ListOps, );
+            _commandService.RegisterCommand(OpNames.ListOp, RegionNames.ModalRegion, "");
         }
 
         public void InitializeServices()
