@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.Main;
+using Microsoft.Expression.Interactivity.Core;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
@@ -30,12 +31,12 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void Shop(object obj)
         {
-            //_commandService.RegisterCommand();
+            _commandService.ExecuteCommand("OpenView", "ListOp");
         }
 
         private void Ops(object arg)
         {
-            _commandService.RegisterCommand(OpNames.ListOp, RegionNames.ModalRegion, "");
+            _commandService.ExecuteCommand("OpenView", "ListOp");
         }
 
         public void InitializeServices()

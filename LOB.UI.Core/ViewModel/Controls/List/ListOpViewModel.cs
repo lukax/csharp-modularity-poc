@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {

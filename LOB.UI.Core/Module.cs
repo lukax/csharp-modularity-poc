@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using LOB.Domain.Base;
+using LOB.Log.Interface;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -17,6 +18,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface.ViewModel.Controls.Main;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
@@ -86,9 +88,15 @@ namespace LOB.UI.Core
             _container.RegisterType<IListLegalPersonViewModel, ListLegalPersonViewModel>();
             _container.RegisterType<IListNaturalPersonViewModel, ListNaturalPersonViewModel>();
             _container.RegisterType<IListProductViewModel, ListProductViewModel>();
+            _container.RegisterType<IListOpViewModel, ListOpViewModel>();
             //_container.RegisterType<IListSaleViewModel, ListSaleViewModel>();
 
             #endregion
+
+#if DEBUG
+            var log = _container.Resolve<ILogger>();
+            log.Log("UICoreModule Initialized", Category.Debug, Priority.Medium);
+#endif
         }
     }
 }

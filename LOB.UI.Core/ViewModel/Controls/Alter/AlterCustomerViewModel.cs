@@ -101,7 +101,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         {
             _commandService["QuickSearch"].Execute(
                 _container.Resolve<ListCustomerViewModel>(new ParameterOverride("entity", Entity)));
-            //Messenger.Default.Send<object>(_container.ResolveView<ListCustomerViewModel>(), "QuickSearchCommand");
+            //Messenger.Default.ExecuteCommand<object>(_container.ResolveView<ListCustomerViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

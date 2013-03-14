@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Input;
+using LOB.UI.Interface.Names;
 
 #endregion
 
@@ -8,13 +9,8 @@ namespace LOB.UI.Interface.Command
 {
     public interface ICommandService
     {
-        IRegionedCommand this[string name] { get; }
-        void RegisterCommand(string opName, string regionName, ICommand command);
-    }
-
-    public interface IRegionedCommand
-    {
-         ICommand Command { get; set; }
-         string Region { get; set; }
+        void RegisterCommand<T>(T token, ICommand command);
+        void ExecuteCommand<T>(T token, object arg);
+        ICommand this[string token] { get; }
     }
 }

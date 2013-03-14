@@ -1,9 +1,15 @@
 ﻿#region Usings
 
+using LOB.Log.Interface;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Controls.Main;
+using LOB.UI.Core.View.Names;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Names;
+using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
@@ -33,8 +39,13 @@ namespace LOB.UI.Core.View
 
             regionManager.RegisterViewWithRegion(RegionNames.HeaderRegion, typeof (HeaderToolsView));
             regionManager.RegisterViewWithRegion(RegionNames.ColumnRegion, typeof (ColumnToolsView));
-            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCustomerBaseView));
-            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCategoryBaseView));
+            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCustomerView));
+            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCategoryView));
+
+#if DEBUG
+            var log = _container.Resolve<ILogger>();
+            log.Log("UICoreViewModule Initialized", Category.Debug, Priority.Medium);
+#endif
         }
     }
 }

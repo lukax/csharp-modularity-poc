@@ -2,6 +2,7 @@
 
 using LOB.Dao.Interface;
 using LOB.Log.Interface;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
@@ -21,10 +22,14 @@ namespace LOB.Dao.Nhibernate
 
         public void Initialize()
         {
-            _container.Resolve<ILogger>();
             _container.RegisterType<IRepository, DomainRepository>();
             _container.RegisterType<IUnityOfWork, UnityOfWork>();
-            _container.RegisterType<ISessionCreator, SessionCreator>();
+            _container.RegisterInstance<ISessionCreator>(SessionCreator.Default);
+
+#if DEBUG
+            var log = _container.Resolve<ILogger>();
+            log.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);
+#endif
         }
     }
 }

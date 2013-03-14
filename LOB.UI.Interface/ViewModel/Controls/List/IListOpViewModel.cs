@@ -1,8 +1,6 @@
-﻿using LOB.Domain;
-using LOB.UI.Interface.ViewModel.Base;
-using LOB.UI.Interface.ViewModel.Controls.List.Base;
+﻿using LOB.UI.Interface.ViewModel.Base;
 
-namespace LOB.UI.Core.ViewModel.Controls.List
+namespace LOB.UI.Interface.ViewModel.Controls.List
 {
     public interface IListOpViewModel : IBaseViewModel
     {

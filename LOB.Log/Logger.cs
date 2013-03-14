@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Threading.Tasks;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using log4net;
@@ -16,7 +17,7 @@ namespace LOB.Log
     public class Logger : ILoggerFacade, ILogger
     {
         // Member variables
-        private static readonly ILog _logger = LogManager.GetLogger(typeof (Logger));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));
 
         public Logger()
         {
@@ -31,26 +32,29 @@ namespace LOB.Log
         /// <param name="message">The message to write.</param>
         /// <param name="category">The message category.</param>
         /// <param name="priority">Not used by Log4Net; pass Priority.None.</param>
-        public void Log(string message, Category category, Priority priority)
+        public async void Log(string message, Category category, Priority priority)
         {
-            switch (category)
+            await Task.Run(() =>
             {
-                case Category.Debug:
-                    _logger.Debug(message);
-                    break;
+                switch (category)
+                {
+                    case Category.Debug:
+                        _logger.Debug(message);
+                        break;
 
-                case Category.Warn:
-                    _logger.Warn(message);
-                    break;
+                    case Category.Warn:
+                        _logger.Warn(message);
+                        break;
 
-                case Category.Exception:
-                    _logger.Error(message);
-                    break;
+                    case Category.Exception:
+                        _logger.Error(message);
+                        break;
 
-                case Category.Info:
-                    _logger.Info(message);
-                    break;
-            }
+                    case Category.Info:
+                        _logger.Info(message);
+                        break;
+                }
+            });
         }
 
         #endregion ILoggerFacade Members

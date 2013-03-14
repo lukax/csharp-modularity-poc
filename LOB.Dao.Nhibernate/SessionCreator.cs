@@ -24,18 +24,21 @@ namespace LOB.Dao.Nhibernate
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
 
-        [InjectionConstructor]
-        public SessionCreator()
-            : this(PersistType.MySql, null)
+        public static readonly ISessionCreator Default = new SessionCreator();
+
+        //[InjectionConstructor]
+        private SessionCreator()
+            : this(PersistType.MsSql, null)
         {
         }
 
-        public SessionCreator(PersistType persistIn, String connectionString)
+        private SessionCreator(PersistType persistIn, String connectionString)
         {
             if (connectionString != null)
                 ConnectionString = connectionString;
+            _persistType = persistIn;
 
-            Orm = SessionCreatorFactory(persistIn).OpenSession();
+            _lazyOrm = new Lazy<object>(() => SessionCreatorFactory(persistIn).OpenSession());
         }
 
         public String ConnectionString
@@ -51,7 +54,13 @@ namespace LOB.Dao.Nhibernate
             set { _connectionString = value; }
         }
 
-        public Object Orm { get; private set; }
+        private Lazy<object> _lazyOrm; 
+        private object _orm;
+        public Object Orm
+        {
+            get { return _orm ?? _lazyOrm.Value; } 
+            private set { _orm = value; }
+        }
 
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
@@ -80,38 +89,36 @@ namespace LOB.Dao.Nhibernate
         private Configuration StoreInMySqlConfiguration()
         {
             return Mapping().Database(MySQLConfiguration.Standard
-                                                        .ConnectionString(ConnectionString)
-                                                        .ShowSql)
+                                                        .ConnectionString(ConnectionString))
                             .BuildConfiguration();
         }
 
         private Configuration StoreInMsSqlConfiguration()
         {
             return Mapping().Database(MsSqlConfiguration.MsSql2008
-                                                        .ConnectionString(ConnectionString)
-                                                        .ShowSql())
+                                                        .ConnectionString(ConnectionString))
                             .BuildConfiguration();
         }
 
         private Configuration StoreInMemoryConfiguration()
         {
             return Mapping().Database(SQLiteConfiguration.Standard
-                                                         .InMemory()
-                                                         .ShowSql())
+                                                         .InMemory())
                             .BuildConfiguration();
         }
 
         private Configuration StoreInFileConfiguration()
         {
             return Mapping().Database(SQLiteConfiguration.Standard
-                                                         .UsingFile("local.db")
-                                                         .ShowSql())
+                                                         .UsingFile("local.db"))
                             .BuildConfiguration();
         }
 
         private FluentConfiguration Mapping()
         {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
+                //Disable log
+                .Diagnostics(x=> x.Enable(false))
                 //Generate Tables
                            .ExposeConfiguration(SchemaCreator);
         }
@@ -124,8 +131,7 @@ namespace LOB.Dao.Nhibernate
                 _sqlSchema.Create(false, true);
                 return;
             }
-            ;
-
+            
             _sqlSchema = new SchemaExport(cfg);
             _sqlSchema.Drop(false, true);
             _sqlSchema.Create(false, true);

@@ -15,14 +15,14 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void CreateSessionTest()
         {
-            var creator = new SessionCreator();
+            var creator = SessionCreator.Default;
             Assert.IsNotNull(creator.Orm);
         }
 
         [TestMethod]
         public void TransactionTest()
         {
-            var sCreator = new SessionCreator();
+            var sCreator = SessionCreator.Default;
 
 
             var address = new Address

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.View.Controls.List
 {

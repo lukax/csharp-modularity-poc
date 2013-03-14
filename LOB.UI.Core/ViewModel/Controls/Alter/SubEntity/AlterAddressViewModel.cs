@@ -73,7 +73,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         protected override void QuickSearch(object arg)
         {
             _commandService["QuickSearch"].Execute(_container.Resolve<ListAddressViewModel>());
-            //Messenger.Default.Send<object>(_container.Resolve<ListAddressViewModel>(), "QuickSearchCommand");
+            //Messenger.Default.ExecuteCommand<object>(_container.Resolve<ListAddressViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)

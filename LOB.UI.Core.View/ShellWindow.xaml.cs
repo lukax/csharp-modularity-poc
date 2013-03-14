@@ -1,12 +1,25 @@
 ﻿#region Usings
 
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
+using LOB.UI.Core.View.Controls.List;
+using LOB.UI.Core.View.Controls.Main;
+using LOB.UI.Core.View.Names;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Names;
 using LOB.UI.Interface.ViewModel.Base;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -14,18 +27,41 @@ namespace LOB.UI.Core.View
 {
     public partial class ShellWindow : MetroWindow, IBaseView
     {
-        public ShellWindow()
+        private readonly IUnityContainer _container;
+        private readonly IRegionManager _region;
+        private ICommandService _commandService;
+
+        BackgroundWorker bg = new BackgroundWorker();
+        private IFluentNavigator _navigator;
+
+        public ShellWindow(IUnityContainer container, IRegionManager region)
         {
+            _container = container;
+            _region = region;
             InitializeComponent();
+            Load();
+        }
 
-            //BodyRegion.LayoutUpdated += (sender, args) => {
-            //                                                  foreach (var variable in BodyRegion.Items)
-            //                                                  {
-            //                                                      var vari = variable as IBaseView;
-            //                                                      if (vari == null) return;
+        private void Busy()
+        {
+            ModalRegion = new BusyView();
+        }
 
-            //                                                  }         
-            //};
+        private void Load()
+        {
+            var module = _container.Resolve<IModuleManager>();
+            module.LoadModule("UICoreViewModule");
+            _commandService = _container.Resolve<ICommandService>();
+            _navigator = _container.Resolve<IFluentNavigator>();
+            _commandService.RegisterCommand("OpenView", new DelegateCommand(
+                o =>
+                {
+                    OperationNames parsed; Enum.TryParse(o.ToString(), out parsed);
+                    var c = OperationTypes.Views[parsed];
+                    _region.RegisterViewWithRegion(RegionNames.ModalRegion,c);
+                    //var localregion = _region.Regions[RegionNames.ModalRegion];
+                    //localregion.Activate(_container.Resolve<ListOpView>());
+                }));
         }
 
         public IBaseViewModel ViewModel

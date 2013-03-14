@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -25,14 +26,17 @@ namespace LOB.UI.Core.View
         {
             //Reference
             //var catalog = new ModuleCatalog();
-            //Type businessModule = typeof(LOB.Business.BusinessModule);
-            //Type daoModule = typeof(LOB.Dao.Nhibernate.BusinessModule);
-            //Type uiCoreModule = typeof(LOB.UI.Core.BusinessModule);
-            //Type uiCoreViewModule = typeof(LOB.UI.Core.View.BusinessModule);
-            //catalog.AddModule(new ModuleInfo() { ModuleName = "BusinessModule", ModuleType = businessModule.AssemblyQualifiedName });
+            //Type businessModule = typeof(LOB.Business.Module);
+            //Type daoModule = typeof(LOB.Dao.Nhibernate.Module);
+            //Type uiCoreModule = typeof(LOB.UI.Core.Module);
+            //Type uiCoreViewModule = typeof(LOB.UI.Core.View.Module);
+            //Type iLoggerModule = typeof (LOB.Log.Module);
+            //catalog.AddModule(new ModuleInfo() { ModuleName = "LogModule", ModuleType = iLoggerModule.AssemblyQualifiedName });
             //catalog.AddModule(new ModuleInfo() { ModuleName = "NHibernateModule", ModuleType = daoModule.AssemblyQualifiedName });
+            //catalog.AddModule(new ModuleInfo() { ModuleName = "BusinessModule", ModuleType = businessModule.AssemblyQualifiedName });
             //catalog.AddModule(new ModuleInfo() { ModuleName = "UICoreModule", ModuleType = uiCoreModule.AssemblyQualifiedName });
             //catalog.AddModule(new ModuleInfo() { ModuleName = "UICoreViewModule", ModuleType = uiCoreViewModule.AssemblyQualifiedName });
+
 
             //DIR
             //var catalog = new DirectoryModuleCatalog() { ModulePath = @".\Modules" };
@@ -52,7 +56,6 @@ namespace LOB.UI.Core.View
 
         protected override DependencyObject CreateShell()
         {
-            Thread.Sleep(500);
             var main = Container.Resolve<ShellWindow>();
             return main;
         }

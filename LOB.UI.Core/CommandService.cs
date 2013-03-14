@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Names;
 
 #endregion
 
@@ -13,13 +14,11 @@ namespace LOB.UI.Core
     {
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
 
-        private IDictionary<string, ICommand> commandMap;
-        private IDictionary<string, string> regionMap;
-
+        private IDictionary<object, ICommand> _commands;
+ 
         private CommandService()
         {
-            commandMap = new Dictionary<string, ICommand>();
-            regionMap = new Dictionary<string, string>();
+            _commands = new Dictionary<object, ICommand>();
         }
 
         public static ICommandService Default
@@ -27,20 +26,19 @@ namespace LOB.UI.Core
             get { return Lazy.Value; }
         }
 
-        public void RegisterCommand(string opName, string regionName, ICommand command)
+        public void RegisterCommand<T>(T token, ICommand command)
         {
-            commandMap.Add(opName, command);
+            _commands.Add(token, command);
         }
 
-        public IRegionedCommand this[string name]
+        public void ExecuteCommand<T>(T token, object arg)
         {
-            get { return new RegionedCommand { Command = commandMap[name], Region = regionMap[name] }; }
+            _commands[token].Execute(arg);
         }
 
-        public class RegionedCommand : IRegionedCommand
+        public ICommand this[string token]
         {
-            public ICommand Command { get; set; }
-            public string Region { get; set; }
+            get { return _commands[token]; }
         }
     }
 }

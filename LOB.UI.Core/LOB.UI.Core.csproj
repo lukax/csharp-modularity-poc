@@ -125,8 +125,6 @@
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Module.cs" />
-    <Compile Include="OpNames.cs" />
-    <Compile Include="RegionNames.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterEmployeeViewModel.cs" />
@@ -183,7 +181,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="LOB.UI.Core.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -208,6 +205,10 @@
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+      <Project>{5ee9acb1-f25f-4a9d-ae79-517be03e02d9}</Project>
+      <Name>LOB.Log.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Interface.csproj">
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>

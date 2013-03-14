@@ -149,60 +149,60 @@ namespace LOB.UI.Core.View
                     _resolvedView = _container.Resolve<SellServiceView>();
                     break;
                 case "AlterProduct":
-                    _resolvedView = _container.Resolve<AlterProductBaseView>();
+                    _resolvedView = _container.Resolve<AlterProductView>();
                     break;
                 case "AlterLegalPerson":
-                    _resolvedView = _container.Resolve<AlterLegalPersonBaseView>();
+                    _resolvedView = _container.Resolve<AlterLegalPersonView>();
                     break;
                 case "AlterNaturalPerson":
-                    _resolvedView = _container.Resolve<AlterNaturalPersonBaseView>();
+                    _resolvedView = _container.Resolve<AlterNaturalPersonView>();
                     break;
                 case "ListProduct":
-                    _resolvedView = _container.Resolve<ListProductBaseView>();
+                    _resolvedView = _container.Resolve<ListProductView>();
                     break;
                 case "AlterEmployee":
-                    _resolvedView = _container.Resolve<AlterEmployeeBaseView>();
+                    _resolvedView = _container.Resolve<AlterEmployeeView>();
                     break;
                 case "ListEmployee":
-                    _resolvedView = _container.Resolve<ListEmployeeBaseView>();
+                    _resolvedView = _container.Resolve<ListEmployeeView>();
                     break;
                 case "AlterClient":
-                    _resolvedView = _container.Resolve<AlterCustomerBaseView>();
+                    _resolvedView = _container.Resolve<AlterCustomerView>();
                     break;
                 case "ListClient":
-                    _resolvedView = _container.Resolve<ListCustomerBaseView>();
+                    _resolvedView = _container.Resolve<ListCustomerView>();
                     break;
                 case "AlterCategory":
-                    _resolvedView = _container.Resolve<AlterCategoryBaseView>();
+                    _resolvedView = _container.Resolve<AlterCategoryView>();
                     break;
                 case "AlterService":
-                    _resolvedView = _container.Resolve<AlterServiceBaseView>();
+                    _resolvedView = _container.Resolve<AlterServiceView>();
                     break;
                 case "ListCategory":
-                    _resolvedView = _container.Resolve<ListCategoryBaseView>();
+                    _resolvedView = _container.Resolve<ListCategoryView>();
                     break;
                 case "ListService":
-                    _resolvedView = _container.Resolve<ListServiceBaseView>();
+                    _resolvedView = _container.Resolve<ListServiceView>();
                     break;
                 case "AlterSale":
-                    _resolvedView = _container.Resolve<AlterSaleBaseView>();
+                    _resolvedView = _container.Resolve<AlterSaleView>();
                     break;
                 case "ListSale":
                     throw new NotImplementedException();
                 case "AlterEmail":
-                    _resolvedView = _container.Resolve<AlterEmailBaseView>();
+                    _resolvedView = _container.Resolve<AlterEmailView>();
                     break;
                 case "ListEmail":
-                    _resolvedView = _container.Resolve<ListEmailBaseView>();
+                    _resolvedView = _container.Resolve<ListEmailView>();
                     break;
                 case "AlterPhoneNumber":
-                    _resolvedView = _container.Resolve<AlterPhoneNumberBaseView>();
+                    _resolvedView = _container.Resolve<AlterPhoneNumberView>();
                     break;
                 case "ListPhoneNumber":
-                    _resolvedView = _container.Resolve<ListPhoneNumberBaseView>();
+                    _resolvedView = _container.Resolve<ListPhoneNumberView>();
                     break;
                 case "AlterContactInfo":
-                    _resolvedView = _container.Resolve<AlterContactInfoBaseView>();
+                    _resolvedView = _container.Resolve<AlterContactInfoView>();
                     break;
                 default:
                     throw new ArgumentException("Parameter not implemented yet, ", "param");
@@ -228,17 +228,17 @@ namespace LOB.UI.Core.View
             var asUc = GetView() as UserControl;
             if (asUc != null)
             {
-                var window = new ShellWindow
-                    {
-                        Content = asUc,
-                        DataContext = _resolvedView.ViewModel,
-                        Height = asUc.Height + 50,
-                        Width = asUc.Width + 50,
-                        Title = (_resolvedView).Header
-                    };
+
+                var window = _container.Resolve<ShellWindow>();
+                window.Content = asUc;
+                window.DataContext = _resolvedView.ViewModel;
+                window.Height = asUc.Height + 50;
+                window.Width = asUc.Width + 50;
+                window.Title = (_resolvedView).Header;
+
 
                 if (OnOpenView != null)
-                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asUc));
+                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
 
                 if (asDialog) window.ShowDialog();
                 else window.Show();
@@ -249,7 +249,7 @@ namespace LOB.UI.Core.View
                 if (asW != null)
                 {
                     if (OnOpenView != null)
-                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asW));
+                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
 
                     if (asDialog) asW.ShowDialog();
                     else asW.Show();

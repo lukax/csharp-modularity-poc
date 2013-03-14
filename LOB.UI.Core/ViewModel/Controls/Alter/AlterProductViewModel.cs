@@ -79,7 +79,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                                                                                                Entity.Category)))
                           .Show(true);
             _navigator.ResolveView(o.ToString()).Show(true);
-            //Messenger.Default.Send<object>(_container.ResolveView<AlterCategoryViewModel>());
+            //Messenger.Default.ExecuteCommand<object>(_container.ResolveView<AlterCategoryViewModel>());
         }
 
         protected override void SaveChanges(object arg)
@@ -109,7 +109,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         protected override void QuickSearch(object arg)
         {
             commandService["QuickSearch"].Execute(_container.Resolve<ListProductViewModel>());
-            //Messenger.Default.Send<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
+            //Messenger.Default.ExecuteCommand<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object args)
