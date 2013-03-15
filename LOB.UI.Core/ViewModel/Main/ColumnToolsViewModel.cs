@@ -31,12 +31,12 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void Shop(object obj)
         {
-            _commandService.ExecuteCommand("OpenView", "ListOp");
+            _commandService.Execute("OpenView", "ListOp");
         }
 
         private void Ops(object arg)
         {
-            _commandService.ExecuteCommand("OpenView", "ListOp");
+            _commandService.Execute("OpenView", "ListOp");
         }
 
         public void InitializeServices()

@@ -9,7 +9,7 @@ namespace LOB.UI.Interface
 {
     public interface IFluentNavigator
     {
-        IBaseView GetView();
+        IBaseView GetView(bool wrapInWndow = false);
         IBaseViewModel GetViewModel();
         IFluentNavigator ResolveView(string param);
         IFluentNavigator ResolveView<TView>() where TView : IBaseView;

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
 using System.Windows.Input;
 using LOB.UI.Interface.Names;
 
@@ -9,8 +10,8 @@ namespace LOB.UI.Interface.Command
 {
     public interface ICommandService
     {
-        void RegisterCommand<T>(T token, ICommand command);
-        void ExecuteCommand<T>(T token, object arg);
-        ICommand this[string token] { get; }
+        void Register<T>(T token, ICommand command);
+        void Execute<T>(T token, object arg);
+        IEnumerable<ICommand> this[string token] { get; }
     }
 }

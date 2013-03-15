@@ -8,6 +8,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Names;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
@@ -99,9 +100,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            _commandService["QuickSearch"].Execute(
-                _container.Resolve<ListCustomerViewModel>(new ParameterOverride("entity", Entity)));
-            //Messenger.Default.ExecuteCommand<object>(_container.ResolveView<ListCustomerViewModel>(), "QuickSearchCommand");
+            _commandService.Execute("QuickSearch", OperationName.ListCustomer);
         }
 
         protected override void ClearEntity(object arg)

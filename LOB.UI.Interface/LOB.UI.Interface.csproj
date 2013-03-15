@@ -76,7 +76,7 @@
     <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
-    <Compile Include="Names\OperationNames.cs" />
+    <Compile Include="Names\OperationName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Base\IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />

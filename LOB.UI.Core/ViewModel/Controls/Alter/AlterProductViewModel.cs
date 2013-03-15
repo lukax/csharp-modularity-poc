@@ -13,6 +13,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Names;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
@@ -79,7 +80,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                                                                                                Entity.Category)))
                           .Show(true);
             _navigator.ResolveView(o.ToString()).Show(true);
-            //Messenger.Default.ExecuteCommand<object>(_container.ResolveView<AlterCategoryViewModel>());
+            //Messenger.Default.Execute<object>(_container.ResolveView<AlterCategoryViewModel>());
         }
 
         protected override void SaveChanges(object arg)
@@ -108,8 +109,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            commandService["QuickSearch"].Execute(_container.Resolve<ListProductViewModel>());
-            //Messenger.Default.ExecuteCommand<object>(_container.Resolve<ListProductViewModel>(), "QuickSearchCommand");
+            commandService.Execute("QuickSearch", OperationName.ListProduct);
         }
 
         protected override void ClearEntity(object args)

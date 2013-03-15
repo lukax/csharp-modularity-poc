@@ -30,8 +30,6 @@
         <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1"
                             Grid.Column="1" />
 
-        <Border BorderThickness="5" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ContentControl x:Name="ModalRegion" regions:RegionManager.RegionName="ModalRegion" />
-        </Border>
+        <ContentControl x:Name="ModalRegion" BorderThickness="3" BorderBrush="Black" regions:RegionManager.RegionName="ModalRegion" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </controls:MetroWindow>

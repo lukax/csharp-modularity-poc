@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Names;
@@ -14,11 +15,11 @@ namespace LOB.UI.Core
     {
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
 
-        private IDictionary<object, ICommand> _commands;
- 
+        private readonly IDictionary<object, IList<ICommand>> _commands;
+
         private CommandService()
         {
-            _commands = new Dictionary<object, ICommand>();
+            _commands = new Dictionary<object, IList<ICommand>>();
         }
 
         public static ICommandService Default
@@ -26,17 +27,31 @@ namespace LOB.UI.Core
             get { return Lazy.Value; }
         }
 
-        public void RegisterCommand<T>(T token, ICommand command)
+        public void Register<T>(T token, ICommand command)
         {
-            _commands.Add(token, command);
+            lock (_commands)
+            {
+                if (_commands.ContainsKey(token))
+                {
+                    _commands[token].Add(command);
+                }
+                else
+                {
+                    _commands.Add(token, new List<ICommand> { command });
+                }
+
+            }
         }
 
-        public void ExecuteCommand<T>(T token, object arg)
+        public void Execute<T>(T token, object arg)
         {
-            _commands[token].Execute(arg);
+            foreach (var command in _commands[token].ToList())
+            {
+                command.Execute(arg);
+            }
         }
 
-        public ICommand this[string token]
+        public IEnumerable<ICommand> this[string token]
         {
             get { return _commands[token]; }
         }

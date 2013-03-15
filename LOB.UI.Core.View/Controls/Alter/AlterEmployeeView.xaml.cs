@@ -40,8 +40,8 @@ namespace LOB.UI.Core.View.Controls.Alter
                         localViewModel.AlterContactInfoViewModel;
                 }
 
-                _commandService.RegisterCommand("SaveChanges",
-                                                new ActionCommand(o => _commandService["Cancel"].Execute(null)));
+                _commandService.Register("SaveChanges",
+                                                new ActionCommand(o => _commandService.Execute("Cancel",null)));
             }
         }
 

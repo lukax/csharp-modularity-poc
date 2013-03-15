@@ -46,11 +46,11 @@ namespace LOB.UI.Core.View
                     _viewModel = mainWindowViewModel;
 
                 DataContext = value;
-                _commandService.RegisterCommand("OpenTab", new DelegateCommand(OpenTab));
-                _commandService.RegisterCommand("Cancel",
+                _commandService.Register("OpenTab", new DelegateCommand(OpenTab));
+                _commandService.Register("Cancel",
                                                 new DelegateCommand(o => TabControlMain.Items.RemoveAt(((int?) o) ?? 0)));
-                _commandService.RegisterCommand("OpenView", new DelegateCommand(o => OpenView(o.ToString())));
-                _commandService.RegisterCommand("QuickSearch", new DelegateCommand(o => OpenView(o.ToString())));
+                _commandService.Register("OpenView", new DelegateCommand(o => OpenView(o.ToString())));
+                _commandService.Register("QuickSearch", new DelegateCommand(o => OpenView(o.ToString())));
             }
         }
 

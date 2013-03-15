@@ -11,7 +11,9 @@ using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Core.View.Controls.List.Base;
 using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Core.View.Controls.Sell;
+using LOB.UI.Core.View.Names;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Names;
 using LOB.UI.Interface.ViewModel.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -42,13 +44,21 @@ namespace LOB.UI.Core.View
 
         public event OnOpenViewEventHandler OnOpenView;
 
-        public IBaseView GetView()
+        public IBaseView GetView(bool wrapInWindow = false)
         {
             if (_resolvedView == null)
                 throw new ArgumentException("First resolveView the view", "ResolveView");
             if (_resolvedView.ViewModel == null)
                 _resolvedView.ViewModel = _resolvedViewModel;
-
+            if (wrapInWindow)
+            {
+                var window = _container.Resolve<ShellWindow>();
+                window.Content = _resolvedView;
+                window.DataContext = _resolvedView.ViewModel;
+                window.Title = _resolvedView.Header;
+                _resolvedView.InitializeServices();
+                return window;
+            }
             _resolvedView.InitializeServices();
             return _resolvedView;
         }
@@ -62,73 +72,7 @@ namespace LOB.UI.Core.View
 
         public IFluentNavigator ResolveViewModel(string param)
         {
-            switch (param)
-            {
-                case "SellProduct":
-                    _resolvedViewModel = _container.Resolve<ISellProductViewModel>();
-                    break;
-                case "SellService":
-                    _resolvedViewModel = _container.Resolve<ISellServiceViewModel>();
-                    break;
-                case "AlterProduct":
-                    _resolvedViewModel = _container.Resolve<IAlterProductViewModel>();
-                    break;
-                case "AlterLegalPerson":
-                    _resolvedViewModel = _container.Resolve<IAlterLegalPersonViewModel>();
-                    break;
-                case "AlterNaturalPerson":
-                    _resolvedViewModel = _container.Resolve<IAlterNaturalPersonViewModel>();
-                    break;
-                case "ListProduct":
-                    _resolvedViewModel = _container.Resolve<IListProductViewModel>();
-                    break;
-                case "AlterEmployee":
-                    _resolvedViewModel = _container.Resolve<IAlterEmployeeViewModel>();
-                    break;
-                case "ListEmployee":
-                    _resolvedViewModel = _container.Resolve<IListEmployeeViewModel>();
-                    break;
-                case "AlterClient":
-                    _resolvedViewModel = _container.Resolve<IAlterCustomerViewModel>();
-                    break;
-                case "ListClient":
-                    _resolvedViewModel = _container.Resolve<IListCustomerViewModel>();
-                    break;
-                case "AlterCategory":
-                    _resolvedViewModel = _container.Resolve<IAlterCategoryViewModel>();
-                    break;
-                case "AlterService":
-                    _resolvedViewModel = _container.Resolve<IAlterServiceViewModel<Service>>();
-                    break;
-                case "ListCategory":
-                    _resolvedViewModel = _container.Resolve<IListCategoryViewModel>();
-                    break;
-                case "ListService":
-                    _resolvedViewModel = _container.Resolve<IListServiceViewModel<Service>>();
-                    break;
-                case "AlterSale":
-                    _resolvedViewModel = _container.Resolve<IAlterSaleViewModel>();
-                    break;
-                case "ListSale":
-                    throw new NotImplementedException();
-                case "AlterEmail":
-                    _resolvedViewModel = _container.Resolve<IAlterEmailViewModel>();
-                    break;
-                case "ListEmail":
-                    _resolvedViewModel = _container.Resolve<IListEmailViewModel>();
-                    break;
-                case "AlterPhoneNumber":
-                    _resolvedViewModel = _container.Resolve<IAlterPhoneNumberViewModel>();
-                    break;
-                case "ListPhoneNumber":
-                    _resolvedViewModel = _container.Resolve<IListPhoneNumberViewModel>();
-                    break;
-                case "AlterContactInfo":
-                    _resolvedViewModel = _container.Resolve<IAlterContactInfoViewModel>();
-                    break;
-                default:
-                    throw new ArgumentException("Parameter not implemented yet, ", "param");
-            }
+            _resolvedViewModel = _container.Resolve(OperationType.ViewModels[OperationNamesParser.Parse(param)]) as IBaseViewModel;
             return this;
         }
 
@@ -140,74 +84,7 @@ namespace LOB.UI.Core.View
 
         public IFluentNavigator ResolveView(string param)
         {
-            switch (param)
-            {
-                case "SellProduct":
-                    _resolvedView = _container.Resolve<SellProductView>();
-                    break;
-                case "SellService":
-                    _resolvedView = _container.Resolve<SellServiceView>();
-                    break;
-                case "AlterProduct":
-                    _resolvedView = _container.Resolve<AlterProductView>();
-                    break;
-                case "AlterLegalPerson":
-                    _resolvedView = _container.Resolve<AlterLegalPersonView>();
-                    break;
-                case "AlterNaturalPerson":
-                    _resolvedView = _container.Resolve<AlterNaturalPersonView>();
-                    break;
-                case "ListProduct":
-                    _resolvedView = _container.Resolve<ListProductView>();
-                    break;
-                case "AlterEmployee":
-                    _resolvedView = _container.Resolve<AlterEmployeeView>();
-                    break;
-                case "ListEmployee":
-                    _resolvedView = _container.Resolve<ListEmployeeView>();
-                    break;
-                case "AlterClient":
-                    _resolvedView = _container.Resolve<AlterCustomerView>();
-                    break;
-                case "ListClient":
-                    _resolvedView = _container.Resolve<ListCustomerView>();
-                    break;
-                case "AlterCategory":
-                    _resolvedView = _container.Resolve<AlterCategoryView>();
-                    break;
-                case "AlterService":
-                    _resolvedView = _container.Resolve<AlterServiceView>();
-                    break;
-                case "ListCategory":
-                    _resolvedView = _container.Resolve<ListCategoryView>();
-                    break;
-                case "ListService":
-                    _resolvedView = _container.Resolve<ListServiceView>();
-                    break;
-                case "AlterSale":
-                    _resolvedView = _container.Resolve<AlterSaleView>();
-                    break;
-                case "ListSale":
-                    throw new NotImplementedException();
-                case "AlterEmail":
-                    _resolvedView = _container.Resolve<AlterEmailView>();
-                    break;
-                case "ListEmail":
-                    _resolvedView = _container.Resolve<ListEmailView>();
-                    break;
-                case "AlterPhoneNumber":
-                    _resolvedView = _container.Resolve<AlterPhoneNumberView>();
-                    break;
-                case "ListPhoneNumber":
-                    _resolvedView = _container.Resolve<ListPhoneNumberView>();
-                    break;
-                case "AlterContactInfo":
-                    _resolvedView = _container.Resolve<AlterContactInfoView>();
-                    break;
-                default:
-                    throw new ArgumentException("Parameter not implemented yet, ", "param");
-            }
-
+            _resolvedView = _container.Resolve(OperationType.Views[OperationNamesParser.Parse(param)]) as IBaseView;
             return this;
         }
 

@@ -206,8 +206,8 @@
       <DependentUpon>SellServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FluentNavigator.cs" />
-    <Compile Include="Names\RegionNames.cs" />
-    <Compile Include="Names\OperationTypes.cs" />
+    <Compile Include="Names\RegionName.cs" />
+    <Compile Include="Names\OperationType.cs" />
     <Compile Include="ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>

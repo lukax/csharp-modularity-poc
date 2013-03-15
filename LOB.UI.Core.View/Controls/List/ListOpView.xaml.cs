@@ -27,6 +27,7 @@ namespace LOB.UI.Core.View.Controls.List
         public ListOpView(IListOpViewModel viewModel)
         {
             InitializeComponent();
+            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel
@@ -39,12 +40,10 @@ namespace LOB.UI.Core.View.Controls.List
         public int? Index { get; set; }
         public void InitializeServices()
         {
-            throw new NotImplementedException();
         }
 
         public void Refresh()
         {
-            throw new NotImplementedException();
         }
     }
 }

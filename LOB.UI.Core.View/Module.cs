@@ -37,10 +37,10 @@ namespace LOB.UI.Core.View
 
             var regionManager = _container.Resolve<IRegionManager>();
 
-            regionManager.RegisterViewWithRegion(RegionNames.HeaderRegion, typeof (HeaderToolsView));
-            regionManager.RegisterViewWithRegion(RegionNames.ColumnRegion, typeof (ColumnToolsView));
-            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCustomerView));
-            regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCategoryView));
+            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof (HeaderToolsView));
+            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof (ColumnToolsView));
+            regionManager.RegisterViewWithRegion(RegionName.BodyRegion, typeof (AlterCustomerView));
+            regionManager.RegisterViewWithRegion(RegionName.BodyRegion, typeof (AlterCategoryView));
 
 #if DEBUG
             var log = _container.Resolve<ILogger>();

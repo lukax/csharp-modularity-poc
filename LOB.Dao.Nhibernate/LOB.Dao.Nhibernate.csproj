@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="DomainRepository.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
+    <Compile Include="Mapping\OperationMap.cs" />
     <Compile Include="Mapping\SubEntity\PhoneNumberMap.cs" />
     <Compile Include="Mapping\SubEntity\EmailMap.cs" />
     <Compile Include="Mapping\EmployeeMap.cs" />

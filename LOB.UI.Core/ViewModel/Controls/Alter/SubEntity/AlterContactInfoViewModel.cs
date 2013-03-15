@@ -7,6 +7,7 @@ using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Names;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
@@ -41,7 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddEmail(object arg)
         {
-            _commandService["OpenView"].Execute("AlterEmail");
+            _commandService.Execute("OpenView", OperationName.AlterEmail);
         }
 
         private void DeleteEmail(object arg)
@@ -50,7 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddPhoneNumber(object arg)
         {
-            _commandService["OpenView"].Execute("AlterPhoneNumber");
+            _commandService.Execute("OpenView", OperationName.AlterPhoneNumber);
         }
 
         private void DeletePhoneNumber(object arg)
@@ -59,7 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            _commandService["QuickSearch"].Execute("ListContactInfo");
+            _commandService.Execute("OpenView", OperationName.ListContactInfo);
         }
 
         protected override void ClearEntity(object arg)

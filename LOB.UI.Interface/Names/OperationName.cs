@@ -1,6 +1,8 @@
-﻿namespace LOB.UI.Interface.Names
+﻿using System;
+
+namespace LOB.UI.Interface.Names
 {
-    public enum OperationNames
+    public enum OperationName
     {
         MessageHideEvent,
         MessageShowEvent,
@@ -32,6 +34,7 @@
 
         ListAddress,
         ListCategory,
+        ListContactInfo,
         ListEmail,
         ListPayCheck,
         ListPhoneNumber,
@@ -42,5 +45,22 @@
         ListNaturalPerson,
         ListProduct,
         ListOp,
+    }
+
+    public static class OperationNamesParser
+    {
+        public static OperationName Parse(string operationNames)
+        {
+            try
+            {
+                OperationName parsed;
+                Enum.TryParse<OperationName>(operationNames, out parsed);
+                return parsed;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
