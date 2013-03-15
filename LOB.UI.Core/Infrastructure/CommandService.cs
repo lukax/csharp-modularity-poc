@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Names;
 
 #endregion
 
-namespace LOB.UI.Core
+namespace LOB.UI.Core.Infrastructure
 {
+    [Obsolete("Use events now")]
     public class CommandService : ICommandService
     {
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
@@ -37,9 +37,8 @@ namespace LOB.UI.Core
                 }
                 else
                 {
-                    _commands.Add(token, new List<ICommand> { command });
+                    _commands.Add(token, new List<ICommand> {command});
                 }
-
             }
         }
 

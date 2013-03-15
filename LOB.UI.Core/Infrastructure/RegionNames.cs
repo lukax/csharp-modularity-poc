@@ -1,6 +1,6 @@
-﻿namespace LOB.UI.Core.View.Names
+﻿namespace LOB.UI.Core.Infrastructure
 {
-    public static class RegionName
+    public static class RegionNames
     {
         public const string HeaderRegion = "HeaderRegion";
         public const string BodyRegion = "BodyRegion";

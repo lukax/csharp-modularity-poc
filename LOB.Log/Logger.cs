@@ -17,7 +17,7 @@ namespace LOB.Log
     public class Logger : ILoggerFacade, ILogger
     {
         // Member variables
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof (Logger));
 
         public Logger()
         {
@@ -35,26 +35,26 @@ namespace LOB.Log
         public async void Log(string message, Category category, Priority priority)
         {
             await Task.Run(() =>
-            {
-                switch (category)
                 {
-                    case Category.Debug:
-                        _logger.Debug(message);
-                        break;
+                    switch (category)
+                    {
+                        case Category.Debug:
+                            _logger.Debug(message);
+                            break;
 
-                    case Category.Warn:
-                        _logger.Warn(message);
-                        break;
+                        case Category.Warn:
+                            _logger.Warn(message);
+                            break;
 
-                    case Category.Exception:
-                        _logger.Error(message);
-                        break;
+                        case Category.Exception:
+                            _logger.Error(message);
+                            break;
 
-                    case Category.Info:
-                        _logger.Info(message);
-                        break;
-                }
-            });
+                        case Category.Info:
+                            _logger.Info(message);
+                            break;
+                    }
+                });
         }
 
         #endregion ILoggerFacade Members

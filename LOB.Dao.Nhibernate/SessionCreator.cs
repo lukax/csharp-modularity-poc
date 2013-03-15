@@ -4,7 +4,6 @@ using System;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Dao.Interface;
-using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -20,11 +19,12 @@ namespace LOB.Dao.Nhibernate
                         Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
         private const String MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
+        public static readonly ISessionCreator Default = new SessionCreator();
         private String _connectionString;
+        private Lazy<object> _lazyOrm;
+        private object _orm;
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
-
-        public static readonly ISessionCreator Default = new SessionCreator();
 
         //[InjectionConstructor]
         private SessionCreator()
@@ -54,11 +54,9 @@ namespace LOB.Dao.Nhibernate
             set { _connectionString = value; }
         }
 
-        private Lazy<object> _lazyOrm; 
-        private object _orm;
         public Object Orm
         {
-            get { return _orm ?? _lazyOrm.Value; } 
+            get { return _orm ?? _lazyOrm.Value; }
             private set { _orm = value; }
         }
 
@@ -118,7 +116,7 @@ namespace LOB.Dao.Nhibernate
         {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
                 //Disable log
-                .Diagnostics(x=> x.Enable(false))
+                           .Diagnostics(x => x.Enable(false))
                 //Generate Tables
                            .ExposeConfiguration(SchemaCreator);
         }
@@ -131,7 +129,7 @@ namespace LOB.Dao.Nhibernate
                 _sqlSchema.Create(false, true);
                 return;
             }
-            
+
             _sqlSchema = new SchemaExport(cfg);
             _sqlSchema.Drop(false, true);
             _sqlSchema.Create(false, true);

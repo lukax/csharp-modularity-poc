@@ -117,14 +117,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandService.cs" />
+    <Compile Include="Events\CancelEvent.cs" />
+    <Compile Include="Events\QuitEvent.cs" />
+    <Compile Include="Events\OpenTabEvent.cs" />
+    <Compile Include="Events\QuickSearchEvent.cs" />
+    <Compile Include="Infrastructure\CommandService.cs" />
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Events\MessageHideEvent.cs" />
     <Compile Include="Events\MessageShowEvent.cs" />
+    <Compile Include="Events\MessageHideEvent.cs" />
+    <Compile Include="Events\OpenViewEvent.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Module.cs" />
+    <Compile Include="Infrastructure\OperationNames.cs" />
+    <Compile Include="Infrastructure\RegionNames.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterEmployeeViewModel.cs" />
@@ -162,6 +169,7 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Main\ColumnToolsViewModel.cs" />
     <Compile Include="ViewModel\Main\HeaderToolsViewModel.cs" />
+    <Compile Include="ViewModel\Main\MessageToolsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

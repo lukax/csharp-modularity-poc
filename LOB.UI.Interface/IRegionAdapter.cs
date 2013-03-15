@@ -1,10 +1,4 @@
-﻿#region Usings
-
-
-
-#endregion
-
-namespace LOB.UI.Interface
+﻿namespace LOB.UI.Interface
 {
     public interface IRegionAdapter
     {

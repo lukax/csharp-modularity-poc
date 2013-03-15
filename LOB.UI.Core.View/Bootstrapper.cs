@@ -1,8 +1,6 @@
 ﻿#region Usings
 
-using System;
 using System.IO;
-using System.Threading;
 using System.Windows;
 using LOB.Log;
 using LOB.Log.Interface;
@@ -52,6 +50,7 @@ namespace LOB.UI.Core.View
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
+            this.RegisterTypeIfMissing(typeof (ILogger), typeof (Logger), true);
         }
 
         protected override DependencyObject CreateShell()

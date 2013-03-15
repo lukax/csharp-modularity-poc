@@ -9,7 +9,6 @@ namespace LOB.UI.Core.View
 {
     public sealed partial class App : Application
     {
-
         static App()
         {
             DispatcherHelper.Initialize();

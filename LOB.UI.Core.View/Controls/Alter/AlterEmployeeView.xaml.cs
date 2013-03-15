@@ -41,7 +41,7 @@ namespace LOB.UI.Core.View.Controls.Alter
                 }
 
                 _commandService.Register("SaveChanges",
-                                                new ActionCommand(o => _commandService.Execute("Cancel",null)));
+                                         new ActionCommand(o => _commandService.Execute("Cancel", null)));
             }
         }
 

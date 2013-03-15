@@ -1,14 +1,10 @@
 ﻿#region Usings
 
 using LOB.Log.Interface;
-using LOB.UI.Core.View.Controls.Alter;
-using LOB.UI.Core.View.Controls.Alter.SubEntity;
+using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
-using LOB.UI.Core.View.Names;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Names;
-using Microsoft.Expression.Interactivity.Core;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
@@ -37,10 +33,11 @@ namespace LOB.UI.Core.View
 
             var regionManager = _container.Resolve<IRegionManager>();
 
-            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof (HeaderToolsView));
-            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof (ColumnToolsView));
-            regionManager.RegisterViewWithRegion(RegionName.BodyRegion, typeof (AlterCustomerView));
-            regionManager.RegisterViewWithRegion(RegionName.BodyRegion, typeof (AlterCategoryView));
+            regionManager.RegisterViewWithRegion(RegionNames.HeaderRegion, typeof (HeaderToolsView));
+            regionManager.RegisterViewWithRegion(RegionNames.ColumnRegion, typeof (ColumnToolsView));
+            //regionManager.RegisterViewWithRegion(RegionNames.BodyRegion, typeof (AlterCustomerView));
+            //regionManager.Regions.Add(RegionNames.BodyRegion, new Region());
+            //regionManager.AddToRegion(RegionNames.BodyRegion, typeof (AlterCategoryView));
 
 #if DEBUG
             var log = _container.Resolve<ILogger>();

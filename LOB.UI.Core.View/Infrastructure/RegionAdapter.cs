@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
 using System.Windows.Controls;
 using LOB.UI.Interface;
 using Microsoft.Practices.Prism.Regions;
@@ -9,7 +8,7 @@ using IRegionAdapter = LOB.UI.Interface.IRegionAdapter;
 
 #endregion
 
-namespace LOB.UI.Core.View
+namespace LOB.UI.Core.View.Infrastructure
 {
     public class RegionAdapter : IRegionAdapter
     {
@@ -21,7 +20,7 @@ namespace LOB.UI.Core.View
         {
             _container = container;
             _regionManager = regionManager;
-       }
+        }
 
         public IRegionAdapter RegisterRegion(string name, object region)
         {

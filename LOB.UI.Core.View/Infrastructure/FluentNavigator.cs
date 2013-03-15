@@ -3,30 +3,14 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using LOB.Domain.Base;
-using LOB.UI.Core.View.Controls.Alter;
-using LOB.UI.Core.View.Controls.Alter.Base;
-using LOB.UI.Core.View.Controls.Alter.SubEntity;
-using LOB.UI.Core.View.Controls.List;
-using LOB.UI.Core.View.Controls.List.Base;
-using LOB.UI.Core.View.Controls.List.SubEntity;
-using LOB.UI.Core.View.Controls.Sell;
-using LOB.UI.Core.View.Names;
+using LOB.UI.Core.View.Controls.Util;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Names;
 using LOB.UI.Interface.ViewModel.Base;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
-using LOB.UI.Interface.ViewModel.Controls.List;
-using LOB.UI.Interface.ViewModel.Controls.List.Base;
-using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
-using LOB.UI.Interface.ViewModel.Controls.Sell;
 using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View
+namespace LOB.UI.Core.View.Infrastructure
 {
     public class FluentNavigator : IFluentNavigator
     {
@@ -44,21 +28,12 @@ namespace LOB.UI.Core.View
 
         public event OnOpenViewEventHandler OnOpenView;
 
-        public IBaseView GetView(bool wrapInWindow = false)
+        public IBaseView GetView()
         {
             if (_resolvedView == null)
                 throw new ArgumentException("First resolveView the view", "ResolveView");
             if (_resolvedView.ViewModel == null)
                 _resolvedView.ViewModel = _resolvedViewModel;
-            if (wrapInWindow)
-            {
-                var window = _container.Resolve<ShellWindow>();
-                window.Content = _resolvedView;
-                window.DataContext = _resolvedView.ViewModel;
-                window.Title = _resolvedView.Header;
-                _resolvedView.InitializeServices();
-                return window;
-            }
             _resolvedView.InitializeServices();
             return _resolvedView;
         }
@@ -72,7 +47,7 @@ namespace LOB.UI.Core.View
 
         public IFluentNavigator ResolveViewModel(string param)
         {
-            _resolvedViewModel = _container.Resolve(OperationType.ViewModels[OperationNamesParser.Parse(param)]) as IBaseViewModel;
+            _resolvedViewModel = _container.Resolve(OperationTypes.ViewModels[param]) as IBaseViewModel;
             return this;
         }
 
@@ -84,7 +59,7 @@ namespace LOB.UI.Core.View
 
         public IFluentNavigator ResolveView(string param)
         {
-            _resolvedView = _container.Resolve(OperationType.Views[OperationNamesParser.Parse(param)]) as IBaseView;
+            _resolvedView = _container.Resolve(OperationTypes.Views[param]) as IBaseView;
             return this;
         }
 
@@ -105,8 +80,7 @@ namespace LOB.UI.Core.View
             var asUc = GetView() as UserControl;
             if (asUc != null)
             {
-
-                var window = _container.Resolve<ShellWindow>();
+                var window = _container.Resolve<FrameWindow>();
                 window.Content = asUc;
                 window.DataContext = _resolvedView.ViewModel;
                 window.Height = asUc.Height + 50;
@@ -115,7 +89,7 @@ namespace LOB.UI.Core.View
 
 
                 if (OnOpenView != null)
-                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
+                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asUc));
 
                 if (asDialog) window.ShowDialog();
                 else window.Show();
@@ -126,7 +100,7 @@ namespace LOB.UI.Core.View
                 if (asW != null)
                 {
                     if (OnOpenView != null)
-                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
+                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asW));
 
                     if (asDialog) asW.ShowDialog();
                     else asW.Show();

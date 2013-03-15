@@ -5,10 +5,9 @@ using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Names;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
@@ -42,7 +41,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             NaturalPersonCfg();
             PersonTypeChanged();
         }
-        
+
         private void PersonTypeChanged()
         {
             Entity.PropertyChanged += (s, e) =>
@@ -100,7 +99,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            _commandService.Execute("QuickSearch", OperationName.ListCustomer);
+            _commandService.Execute("QuickSearch", Operation.ListCustomer);
         }
 
         protected override void ClearEntity(object arg)

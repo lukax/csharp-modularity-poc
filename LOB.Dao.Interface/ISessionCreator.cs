@@ -1,10 +1,4 @@
-﻿#region Usings
-
-
-
-#endregion
-
-namespace LOB.Dao.Interface
+﻿namespace LOB.Dao.Interface
 {
     public interface ISessionCreator
     {

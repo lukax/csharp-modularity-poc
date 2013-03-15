@@ -71,12 +71,11 @@
     <Compile Include="Command\ICommandService.cs" />
     <Compile Include="CrudOperationType.cs" />
     <Compile Include="Dialog\IDialog.cs" />
-    <Compile Include="Events\AbstractMessageHideEvent.cs" />
-    <Compile Include="Events\AbstractMessageShowEvent.cs" />
+    <Compile Include="Events\IBaseEvent.cs" />
     <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
-    <Compile Include="Names\OperationName.cs" />
+    <Compile Include="Infrastructure\Operation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Base\IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />

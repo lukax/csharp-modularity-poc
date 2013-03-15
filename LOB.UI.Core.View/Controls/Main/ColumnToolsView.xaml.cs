@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
-using LOB.UI.Core.ViewModel.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
 using LOB.UI.Interface.ViewModel.Controls.Main;

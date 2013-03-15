@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿#region Usings
+
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Base;
 using LOB.UI.Interface.ViewModel.Controls.List;
 
+#endregion
+
 namespace LOB.UI.Core.View.Controls.List
 {
     /// <summary>
-    /// Interaction logic for ListCommandView.xaml
+    ///     Interaction logic for ListCommandView.xaml
     /// </summary>
     public partial class ListOpView : UserControl, IBaseView
     {
@@ -36,8 +26,14 @@ namespace LOB.UI.Core.View.Controls.List
             set { DataContext = value; }
         }
 
-        public string Header { get { return "Commands"; } set{} }
+        public string Header
+        {
+            get { return "Commands"; }
+            set { }
+        }
+
         public int? Index { get; set; }
+
         public void InitializeServices()
         {
         }

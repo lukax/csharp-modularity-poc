@@ -4,9 +4,8 @@ using System;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Names;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
@@ -73,7 +72,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            _commandService.Execute("QuickSearch", OperationName.ListAddress);
+            _commandService.Execute("QuickSearch", Operation.ListAddress);
         }
 
         protected override void ClearEntity(object arg)
