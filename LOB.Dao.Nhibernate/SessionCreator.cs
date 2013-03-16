@@ -22,14 +22,13 @@ namespace LOB.Dao.Nhibernate
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
         public static readonly ISessionCreator Default = new SessionCreator();
         private String _connectionString;
-        private Lazy<object> _lazyOrm;
         private object _orm;
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
 
         //[InjectionConstructor]
         private SessionCreator()
-            : this(PersistType.MsSql, null)
+            : this(PersistType.MySql, null)
         {
         }
 
@@ -38,8 +37,6 @@ namespace LOB.Dao.Nhibernate
             if (connectionString != null)
                 ConnectionString = connectionString;
             _persistType = persistIn;
-
-            _lazyOrm = new Lazy<object>(  () => SessionCreatorFactory(persistIn).OpenSession());
         }
 
         public String ConnectionString
@@ -59,7 +56,8 @@ namespace LOB.Dao.Nhibernate
         {
             get
             {
-                return _orm ?? _lazyOrm.Value;
+                BuildOrm();
+                return _orm;
             }
             private set { _orm = value; }
         }
@@ -67,30 +65,62 @@ namespace LOB.Dao.Nhibernate
         public event EventHandler OnCreatingSession;
         public event EventHandler OnSessionCreated;
 
+        private async void BuildOrm()
+        {
+            OnCreatingSession.Invoke(this, new EventArgs());
+            //await Task.Delay(5000);
+            Configuration cfg = null;
+            await Task.Run(()=>
+            {
+                switch (_persistType)
+                {
+                    case PersistType.MySql:
+                        cfg = StoreInMySqlConfiguration();
+                        break;
+                    case PersistType.MsSql:
+                        cfg = StoreInMsSqlConfiguration();
+                        break;
+                    case PersistType.File:
+                        cfg = StoreInFileConfiguration();
+                        break;
+                    case PersistType.Memory:
+                        cfg = StoreInMemoryConfiguration();
+                        break;
+                    default:
+                        throw new ArgumentEmptyException("persistIn");
+                }
+            });
+            OnSessionCreated.Invoke(this, new EventArgs());
+            Orm = cfg.BuildSessionFactory().OpenSession();
+        }
+
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
             OnCreatingSession.Invoke(this, new EventArgs());
             _persistType = persistIn;
             Configuration cfg = null;
-            switch (_persistType)
-                    {
-                        case PersistType.MySql:
-                            cfg = StoreInMySqlConfiguration();
-                            break;
-                        case PersistType.MsSql:
-                            cfg = StoreInMsSqlConfiguration();
-                            break;
-                        case PersistType.File:
-                            cfg = StoreInFileConfiguration();
-                            break;
-                        case PersistType.Memory:
-                            cfg = StoreInMemoryConfiguration();
-                            break;
-                        default:
-                            throw new ArgumentEmptyException("persistIn");
-                    }
-                
-            OnSessionCreated.Invoke(this, new EventArgs());
+
+            {
+                switch (_persistType)
+                {
+                    case PersistType.MySql:
+                        cfg = StoreInMySqlConfiguration();
+                        break;
+                    case PersistType.MsSql:
+                        cfg = StoreInMsSqlConfiguration();
+                        break;
+                    case PersistType.File:
+                        cfg = StoreInFileConfiguration();
+                        break;
+                    case PersistType.Memory:
+                        cfg = StoreInMemoryConfiguration();
+                        break;
+                    default:
+                        throw new ArgumentEmptyException("persistIn");
+                }
+                OnSessionCreated.Invoke(this, new EventArgs());
+            };
+
             return cfg.BuildSessionFactory();
         }
 

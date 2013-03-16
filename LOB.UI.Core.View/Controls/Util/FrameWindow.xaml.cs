@@ -40,7 +40,7 @@ namespace LOB.UI.Core.View.Controls.Util
             _logger = logger;
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<QuitEvent>()
-                            .Subscribe(o => { if (o == OperationNames.QuickSearch) this.Close(); });
+                            .Subscribe(o => { if (o == OperationParam.QuickSearch) this.Close(); });
             InitializeComponent();
         }
 

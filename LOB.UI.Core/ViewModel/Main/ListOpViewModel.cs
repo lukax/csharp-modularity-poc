@@ -32,7 +32,7 @@ namespace LOB.UI.Core.ViewModel.Main
             _commandService = commandService;
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
-            Entitys = new CollectionView(Operation.All.Wrap());
+            Entitys = new CollectionView(OperationName.All.Wrap());
             ListenToSelection();
         }
 
@@ -67,10 +67,10 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void SaveChanges(object arg)
         {
-            _eventAggregator.GetEvent<QuitEvent>().Publish(OperationNames.QuickSearch);
+            _eventAggregator.GetEvent<QuitEvent>().Publish(OperationParam.QuickSearch);
             _eventAggregator.GetEvent<OpenTabEvent>().Publish(Entity);
-            //_commandService.Execute(OperationNames.OpenTab, Entity);
-            //_commandService.Execute(OperationNames.Cancel, null);
+            //_commandService.Execute(OperationParam.OpenTab, Entity);
+            //_commandService.Execute(OperationParam.Cancel, null);
         }
     }
 }

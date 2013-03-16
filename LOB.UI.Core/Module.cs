@@ -90,6 +90,8 @@ namespace LOB.UI.Core
 
             #endregion
 
+            _container.RegisterInstance<MessageToolsViewModel>(_container.Resolve<MessageToolsViewModel>());
+
 #if DEBUG
             var log = _container.Resolve<ILogger>();
             log.Log("UICoreModule Initialized", Category.Debug, Priority.Medium);

@@ -48,7 +48,7 @@ namespace LOB.UI.Core.View
         private static bool _loaded = false;
         private void OnLoad()
         {
-            _eventAggregator.GetEvent<QuitEvent>().Subscribe((o) => { if (o == OperationNames.Quit)  this.Close(); });
+            _eventAggregator.GetEvent<QuitEvent>().Subscribe((o) => { if (o == OperationParam.Quit)  this.Close(); });
             if (_loaded) return;
             _module = _container.Resolve<IModuleManager>();
             _module.LoadModule("UICoreViewModule");

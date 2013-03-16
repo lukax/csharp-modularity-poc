@@ -11,11 +11,12 @@ namespace LOB.UI.Interface
     {
         IBaseView GetView();
         IBaseViewModel GetViewModel();
+        IFluentNavigator SetView(IBaseView view);
+        IFluentNavigator SetViewModel(IBaseViewModel viewModel);
         IFluentNavigator ResolveView(string param);
         IFluentNavigator ResolveView<TView>() where TView : IBaseView;
         IFluentNavigator ResolveViewModel(string param);
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
-        IFluentNavigator SetViewModel(IBaseViewModel viewModel);
         event OnOpenViewEventHandler OnOpenView;
         void Show(bool asDialog = false);
         bool PromptUser(string message);

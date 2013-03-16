@@ -24,14 +24,14 @@
         <ContentControl x:Name="HeaderRegion" regions:RegionManager.RegionName="HeaderRegion" Grid.Row="0"
                             Grid.Column="0" Grid.ColumnSpan="2" />
 
-        <TabControl x:Name="BodyRegion" regions:RegionManager.RegionName="BodyRegion"  Grid.Row="1" Grid.Column="0" Margin="5"
-                            Style="{StaticResource StandardTabControl}" SelectedIndex="0" />
+        <TabControl x:Name="TabRegion" regions:RegionManager.RegionName="TabRegion"  Grid.Row="1" Grid.Column="0" Margin="5" 
+                    Style="{StaticResource StandardTabControl}" SelectedIndex="0" />
         
-        <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Grid.Row="1" Grid.Column="0" Width="200" Height="200"/>
+        <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Grid.Row="1" Grid.Column="0" Width="200" Height="200"/>   
         
-        <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1"
-                            Grid.Column="1" />
-
-        <ContentControl x:Name="ModalRegion" BorderThickness="3" BorderBrush="Black" regions:RegionManager.RegionName="ModalRegion" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1" />
+        
+        <ContentControl x:Name="ModalRegion"  regions:RegionManager.RegionName="ModalRegion" 
+                        Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" />
     </Grid>
 </controls:MetroWindow>

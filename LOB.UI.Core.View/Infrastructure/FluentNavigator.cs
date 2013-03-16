@@ -45,25 +45,25 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator ResolveViewModel(string param)
         {
-            _resolvedViewModel = _container.Resolve(OperationTypes.ViewModels[param]) as IBaseViewModel;
+            SetViewModel(_container.Resolve(OperationTypes.ViewModels[param]) as IBaseViewModel);
             return this;
         }
 
         public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel
         {
-            _resolvedViewModel = _container.Resolve<TViewModel>();
+            SetViewModel(_container.Resolve<TViewModel>());
             return this;
         }
 
         public IFluentNavigator ResolveView(string param)
         {
-            _resolvedView = _container.Resolve(OperationTypes.Views[param]) as IBaseView;
+            SetView(_container.Resolve(OperationTypes.Views[param]) as IBaseView);
             return this;
         }
 
         public IFluentNavigator ResolveView<TView>() where TView : IBaseView
         {
-            _resolvedView = _container.Resolve<TView>();
+            SetView(_resolvedView = _container.Resolve<TView>());
             return this;
         }
 
@@ -71,6 +71,12 @@ namespace LOB.UI.Core.View.Infrastructure
         {
             _resolvedViewModel = viewModel;
             _resolvedView.ViewModel = viewModel;
+            return this;
+        }
+
+        public IFluentNavigator SetView(IBaseView view)
+        {
+            _resolvedView = view;
             return this;
         }
 
@@ -84,7 +90,8 @@ namespace LOB.UI.Core.View.Infrastructure
                 window.DataContext = _resolvedView.ViewModel;
                 window.Height = asUc.Height + 50;
                 window.Width = asUc.Width + 50;
-                window.Title = (_resolvedView).Header;
+                if(!string.IsNullOrEmpty(_resolvedView.Header))
+                    window.Title = (_resolvedView).Header;
 
 
                 if (OnOpenView != null)

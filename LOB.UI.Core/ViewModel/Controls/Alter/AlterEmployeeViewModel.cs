@@ -48,7 +48,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            _commandService.Execute("QuickSearch", Operation.ListEmployee);
+            _commandService.Execute("QuickSearch", OperationName.ListEmployee);
         }
 
         protected override void ClearEntity(object arg)

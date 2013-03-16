@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Main
 
         #region Message
 
-        private string _message = string.Empty;
+        private string _message = "Please wait...";
 
         public string Message
         {
@@ -40,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Main
 
         public ICommand CloseCommand
         {
-            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(this.Close)); }
+            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(Close, CanClose)); }
 
             set { this._closeCommand = value; }
         }
@@ -50,18 +50,26 @@ namespace LOB.UI.Core.ViewModel.Main
             this.eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
 
-        #endregion Close Command
+        public bool CanClose()
+        {
+            return _canClose;
+        }
 
-        public MessageToolsViewModel(IUnityContainer container, string message = "Please wait...")
+        private bool _canClose { get; set; }
+
+        #endregion Close Command
+        
+        [InjectionConstructor]
+        public MessageToolsViewModel(IUnityContainer container)
         {
             this.container = container;
-            Message = message;
             this.eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
-        public void Initialize(string message)
+        public void Initialize(string message, bool canClose)
         {
             this.Message = message;
+            this._canClose = canClose;
         }
 
         public override void InitializeServices()

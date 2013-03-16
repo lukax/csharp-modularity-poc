@@ -1,6 +1,6 @@
 ﻿namespace LOB.UI.Core.Infrastructure
 {
-    public static class OperationNames
+    public static class OperationParam
     {
         public const string OpenTab = "OpenTab";
         public const string OpenView = "OpenView";

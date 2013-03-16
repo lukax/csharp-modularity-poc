@@ -43,29 +43,45 @@ namespace LOB.UI.Core.View.Controller
         private void OnLoad()
         {
             _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
-            _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s =>
-                {
-                    _regionManager.RegisterViewWithRegion(RegionNames.ModalRegion, () =>
-                        {
-                            return _navigator.ResolveView(Operation.MessageTools)
-                                          .SetViewModel(_container.Resolve<MessageToolsViewModel>(new ParameterOverride("message", s)))
-                                          .GetView();
-                        });
-                });
-            _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(s =>
-                {
-                    //_regionManager.Regions[RegionNames.ModalRegion].Remove(_container.Resolve<MessageToolsView>());
-                });
-            _sessionCreator.OnCreatingSession +=
-                (sender, args) => _eventAggregator.GetEvent<MessageShowEvent>().Publish("Por favor aguarde...");
-            _sessionCreator.OnSessionCreated +=
-                (sender, args) => _eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
+            _eventAggregator.GetEvent<OpenTabEvent>().Subscribe(OpenTab, true);
+            _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(MessageShow, true);
+            _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
+            _sessionCreator.OnCreatingSession += (sender, args) => _eventAggregator.GetEvent<MessageShowEvent>().Publish("Conectando no banco de dados...");
+            _sessionCreator.OnSessionCreated += (sender, args) => _eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
 
         private void OpenView(string param)
         {
             if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param");
-            _navigator.ResolveView(param).Show(true);
+            var region = this._regionManager.Regions[RegionName.TabRegion];
+            var view = _navigator.ResolveView(param).GetView();
+            if (region.Views.Contains(view.GetType().Name))
+                return;
+            region.Add(view, view.GetType().Name);
+        }
+
+        public void MessageShow(string param)
+        {
+            MessageHide(param);
+            var region = this._regionManager.Regions[RegionName.ModalRegion];
+            var view = _container.Resolve<MessageToolsView>();
+            var viewModel = _container.Resolve<MessageToolsViewModel>(); viewModel.Initialize(param, false);
+            region.Add(_navigator.SetView(view).SetViewModel(viewModel).GetView(), OperationName.MessageTools);
+        }
+
+        public void MessageHide(string param)
+        {
+            var region = this._regionManager.Regions[RegionName.ModalRegion];
+            
+            var view = region.GetView(OperationName.MessageTools);
+            if (region.Views.Contains(view))
+                region.Remove(view);
+        }
+
+        private void OpenTab(string param)
+        {
+            if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param");
+            _regionManager.RegisterViewWithRegion(RegionName.TabRegion, _navigator.ResolveView(param).ResolveViewModel(param).GetView);
         }
     }
 }

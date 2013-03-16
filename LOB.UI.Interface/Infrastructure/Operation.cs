@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace LOB.UI.Interface.Infrastructure
 {
-    public static class Operation
+    public static class OperationName
     {
         public const string MessageTools = "MessageTools";
 
@@ -53,7 +53,7 @@ namespace LOB.UI.Interface.Infrastructure
 
         private static readonly Lazy<IList<string>> LazyList =
             new Lazy<IList<string>>(
-                () => typeof (Operation).GetFields().Select(var => var.GetValue(var).ToString()).ToList());
+                () => typeof (OperationName).GetFields().Select(var => var.GetValue(var).ToString()).ToList());
 
         public static IList<string> All
         {

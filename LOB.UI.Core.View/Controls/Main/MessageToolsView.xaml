@@ -3,29 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d">
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
+
     
-    <Grid>
-        <Border Background="{DynamicResource AccentBrush}" Opacity="0.6" />
-        <Border Width="400"
-            Height="200"
+        <Grid>
+        <Border Background="{DynamicResource AccentBrush}" Opacity="0.6"/>
+            <Border Width="Auto"
+            Height="Auto"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Background="{DynamicResource GrayBrush1}"
+            Background="{DynamicResource Background}"
             BorderBrush="{DynamicResource HighlightDarkColorBrush}"
-            BorderThickness="1"
+            BorderThickness="1" Opacity="0.8"
             Padding="5,10,5,5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Margin="5"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="{DynamicResource AccentColor3}" />
+                            <GradientStop Color="{DynamicResource AccentColor2}" Offset="2" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <TextBlock Margin="5"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="14.667"
@@ -33,14 +39,14 @@
                    FontWeight="Bold"
                    Text="{Binding Message}"
                    TextWrapping="Wrap" />
-                <Button Grid.Row="1"
+                    <Button Grid.Row="1"
                 Grid.RowSpan="5"
                 Grid.Column="5"
                 Margin="5"
                 HorizontalAlignment="Right"
                 Command="{Binding CloseCommand}"
                 Content="Close" />
-            </Grid>
-        </Border>
-    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
 </UserControl>
