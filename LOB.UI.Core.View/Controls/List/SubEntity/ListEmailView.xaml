@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <StackPanel Width="Auto" Height="Auto">

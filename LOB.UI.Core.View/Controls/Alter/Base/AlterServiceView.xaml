@@ -9,7 +9,7 @@
              d:DesignHeight="400" d:DesignWidth="500">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <StackPanel>
@@ -44,11 +44,11 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
                                Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                    <Image Source="/Resources/Cancel48.png" />
+                    <Image Source="/Resource/Cancel48.png" />
                 </controls:Tile>
                 <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
                                Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                    <Image Source="/Resources/Accept48.png" />
+                    <Image Source="/Resource/Accept48.png" />
                 </controls:Tile>
             </StackPanel>
         </StackPanel>

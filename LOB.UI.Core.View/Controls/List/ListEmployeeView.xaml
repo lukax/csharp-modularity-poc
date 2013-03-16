@@ -9,7 +9,7 @@
 
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <Grid>
@@ -25,17 +25,17 @@
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
             <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
                            Background="Transparent">
-                <Image Source="/Resources/Add48.png" />
+                <Image Source="/Resource/Add48.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
-                <Image Source="/Resources/Edit48.png" />
+                <Image Source="/Resource/Edit48.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
-                <Image Source="/Resources/delete.png" />
+                <Image Source="/Resource/delete.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
                            Background="Transparent">
-                <Image Source="/Resources/Refresh48.png" />
+                <Image Source="/Resource/Refresh48.png" />
             </controls:Tile>
         </StackPanel>
         <ScrollViewer Grid.Row="1">

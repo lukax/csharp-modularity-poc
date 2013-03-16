@@ -8,7 +8,7 @@
                       Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <Window.Resources>
-        <ResourceDictionary x:Name="ResourcesDict" Source="/Skins/MetroVSSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroVSSkin.xaml" />
     </Window.Resources>
 
     <Grid>

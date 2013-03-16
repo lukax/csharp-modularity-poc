@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Log.Interface;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
@@ -12,6 +13,7 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Base;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
@@ -25,19 +27,20 @@ namespace LOB.UI.Core.View.Controls.Util
         private readonly IUnityContainer _container;
         private readonly ILogger _logger;
         private readonly IRegionManager _region;
-        private ICommandService _commandService;
+        private readonly IEventAggregator _eventAggregator;
 
         private IFluentNavigator _navigator;
         private BackgroundWorker bg = new BackgroundWorker();
 
         public FrameWindow(IUnityContainer container, IRegionManager region, ILogger logger,
-                           ICommandService commandService)
+                           IEventAggregator eventAggregator)
         {
             _container = container;
             _region = region;
             _logger = logger;
-            _commandService = commandService;
-            _commandService.Register(OperationNames.Cancel, new DelegateCommand(Close));
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<QuitEvent>()
+                            .Subscribe(o => { if (o == OperationNames.QuickSearch) this.Close(); });
             InitializeComponent();
         }
 
@@ -120,11 +123,6 @@ namespace LOB.UI.Core.View.Controls.Util
         }
 
         #endregion
-
-        private void Close(object arg)
-        {
-            this.Close();
-        }
 
         private void Busy()
         {

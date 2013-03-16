@@ -8,11 +8,13 @@ using System.Windows.Input;
 using LOB.Core.Util;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
+using Microsoft.Practices.Prism.Events;
 
 #endregion
 
@@ -21,12 +23,14 @@ namespace LOB.UI.Core.ViewModel.Main
     public class ListOpViewModel : BaseViewModel, IListOpViewModel
     {
         private readonly ICommandService _commandService;
+        private readonly IEventAggregator _eventAggregator;
 
         private string _entity;
 
-        public ListOpViewModel(Category entity, IRepository repository, ICommandService commandService)
+        public ListOpViewModel(Category entity, IRepository repository, ICommandService commandService, IEventAggregator eventAggregator)
         {
             _commandService = commandService;
+            _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             Entitys = new CollectionView(Operation.All.Wrap());
             ListenToSelection();
@@ -49,12 +53,10 @@ namespace LOB.UI.Core.ViewModel.Main
 
         public override void InitializeServices()
         {
-            throw new NotImplementedException();
         }
 
         public override void Refresh()
         {
-            throw new NotImplementedException();
         }
 
         private async void ListenToSelection()
@@ -65,8 +67,10 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void SaveChanges(object arg)
         {
-            _commandService.Execute(OperationNames.OpenTab, Entity);
-            _commandService.Execute(OperationNames.Cancel, null);
+            _eventAggregator.GetEvent<QuitEvent>().Publish(OperationNames.QuickSearch);
+            _eventAggregator.GetEvent<OpenTabEvent>().Publish(Entity);
+            //_commandService.Execute(OperationNames.OpenTab, Entity);
+            //_commandService.Execute(OperationNames.Cancel, null);
         }
     }
 }

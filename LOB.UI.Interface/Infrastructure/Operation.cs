@@ -10,8 +10,7 @@ namespace LOB.UI.Interface.Infrastructure
 {
     public static class Operation
     {
-        public const string MessageHideEvent = "MessageHideEvent";
-        public const string MessageShowEvent = "MessageShowEvent";
+        public const string MessageTools = "MessageTools";
 
         public const string ColumnTools = "ColumnTools";
         public const string HeaderTools = "HeaderTools";

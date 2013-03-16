@@ -2,7 +2,7 @@
 
 using System;
 using System.Windows.Input;
-using LOB.UI.Core.Events;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -52,9 +52,10 @@ namespace LOB.UI.Core.ViewModel.Main
 
         #endregion Close Command
 
-        public MessageToolsViewModel(IUnityContainer container)
+        public MessageToolsViewModel(IUnityContainer container, string message = "Please wait...")
         {
             this.container = container;
+            Message = message;
             this.eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 

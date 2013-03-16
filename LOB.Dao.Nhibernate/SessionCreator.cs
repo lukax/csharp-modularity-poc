@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Threading.Tasks;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Dao.Interface;
@@ -38,7 +39,7 @@ namespace LOB.Dao.Nhibernate
                 ConnectionString = connectionString;
             _persistType = persistIn;
 
-            _lazyOrm = new Lazy<object>(() => SessionCreatorFactory(persistIn).OpenSession());
+            _lazyOrm = new Lazy<object>(  () => SessionCreatorFactory(persistIn).OpenSession());
         }
 
         public String ConnectionString
@@ -56,31 +57,40 @@ namespace LOB.Dao.Nhibernate
 
         public Object Orm
         {
-            get { return _orm ?? _lazyOrm.Value; }
+            get
+            {
+                return _orm ?? _lazyOrm.Value;
+            }
             private set { _orm = value; }
         }
 
+        public event EventHandler OnCreatingSession;
+        public event EventHandler OnSessionCreated;
+
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
+            OnCreatingSession.Invoke(this, new EventArgs());
             _persistType = persistIn;
-            Configuration cfg;
+            Configuration cfg = null;
             switch (_persistType)
-            {
-                case PersistType.MySql:
-                    cfg = StoreInMySqlConfiguration();
-                    break;
-                case PersistType.MsSql:
-                    cfg = StoreInMsSqlConfiguration();
-                    break;
-                case PersistType.File:
-                    cfg = StoreInFileConfiguration();
-                    break;
-                case PersistType.Memory:
-                    cfg = StoreInMemoryConfiguration();
-                    break;
-                default:
-                    throw new ArgumentEmptyException("persistIn");
-            }
+                    {
+                        case PersistType.MySql:
+                            cfg = StoreInMySqlConfiguration();
+                            break;
+                        case PersistType.MsSql:
+                            cfg = StoreInMsSqlConfiguration();
+                            break;
+                        case PersistType.File:
+                            cfg = StoreInFileConfiguration();
+                            break;
+                        case PersistType.Memory:
+                            cfg = StoreInMemoryConfiguration();
+                            break;
+                        default:
+                            throw new ArgumentEmptyException("persistIn");
+                    }
+                
+            OnSessionCreated.Invoke(this, new EventArgs());
             return cfg.BuildSessionFactory();
         }
 

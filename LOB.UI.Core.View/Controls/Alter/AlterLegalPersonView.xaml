@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <StackPanel>

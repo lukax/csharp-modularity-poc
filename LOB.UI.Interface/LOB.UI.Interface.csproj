@@ -71,7 +71,7 @@
     <Compile Include="Command\ICommandService.cs" />
     <Compile Include="CrudOperationType.cs" />
     <Compile Include="Dialog\IDialog.cs" />
-    <Compile Include="Events\IBaseEvent.cs" />
+    <Compile Include="Event\IBaseEvent.cs" />
     <Compile Include="IFluentNavigator.cs" />
     <Compile Include="IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />

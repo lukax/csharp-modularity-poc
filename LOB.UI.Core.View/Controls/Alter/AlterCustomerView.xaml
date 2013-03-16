@@ -12,23 +12,23 @@
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
                            HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent">
-                <Image Source="../../Resources/File48.png"></Image>
+                <Image Source="/Resource/File48.png"></Image>
             </controls:Tile>
 
             <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="../../Resources/Cancel48.png" />
+                <Image Source="/Resource/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                <Image Source="../../Resources/Accept48.png" />
+                <Image Source="/Resource/Accept48.png" />
             </controls:Tile>
         </StackPanel>
 

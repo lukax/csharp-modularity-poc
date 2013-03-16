@@ -7,6 +7,10 @@
              xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
+    </UserControl.Resources>
     
     <toolkit:BusyIndicator IsBusy="True" >
         <ContentControl regions:RegionManager.RegionName="BusyRegion"/>

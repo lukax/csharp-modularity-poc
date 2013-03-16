@@ -15,15 +15,13 @@ namespace LOB.UI.Core.View.Infrastructure
     public class FluentNavigator : IFluentNavigator
     {
         private readonly IUnityContainer _container;
-        private readonly IRegionAdapter _regionAdapter;
         private IBaseView _resolvedView;
         private IBaseViewModel _resolvedViewModel;
-
+        
         [InjectionConstructor]
-        public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter)
+        public FluentNavigator(IUnityContainer container)
         {
             _container = container;
-            _regionAdapter = regionAdapter;
         }
 
         public event OnOpenViewEventHandler OnOpenView;
@@ -31,9 +29,9 @@ namespace LOB.UI.Core.View.Infrastructure
         public IBaseView GetView()
         {
             if (_resolvedView == null)
-                throw new ArgumentException("First resolveView the view", "ResolveView");
+                throw new ArgumentException("First resolve the view", "ResolveView");
             if (_resolvedView.ViewModel == null)
-                _resolvedView.ViewModel = _resolvedViewModel;
+                throw new ArgumentException("First resolve the view model", "ResolveViewModel");
             _resolvedView.InitializeServices();
             return _resolvedView;
         }
@@ -71,6 +69,7 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator SetViewModel(IBaseViewModel viewModel)
         {
+            _resolvedViewModel = viewModel;
             _resolvedView.ViewModel = viewModel;
             return this;
         }

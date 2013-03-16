@@ -2,6 +2,7 @@
 
 using LOB.Log.Interface;
 using LOB.UI.Core.Infrastructure;
+using LOB.UI.Core.View.Controller;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
@@ -19,6 +20,8 @@ namespace LOB.UI.Core.View
     public class Module : IModule
     {
         private readonly IUnityContainer _container;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        private MainRegionController _mainRegionController;
 
         public Module(IUnityContainer container)
         {
@@ -30,7 +33,6 @@ namespace LOB.UI.Core.View
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
             _container.RegisterInstance(CommandService.Default);
-
             var regionManager = _container.Resolve<IRegionManager>();
 
             regionManager.RegisterViewWithRegion(RegionNames.HeaderRegion, typeof (HeaderToolsView));
@@ -39,6 +41,7 @@ namespace LOB.UI.Core.View
             //regionManager.Regions.Add(RegionNames.BodyRegion, new Region());
             //regionManager.AddToRegion(RegionNames.BodyRegion, typeof (AlterCategoryView));
 
+            _mainRegionController = _container.Resolve<MainRegionController>();
 #if DEBUG
             var log = _container.Resolve<ILogger>();
             log.Log("UICoreViewModule Initialized", Category.Debug, Priority.Medium);

@@ -117,15 +117,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\CancelEvent.cs" />
-    <Compile Include="Events\QuitEvent.cs" />
-    <Compile Include="Events\OpenTabEvent.cs" />
-    <Compile Include="Events\QuickSearchEvent.cs" />
+    <Compile Include="Event\CancelEvent.cs" />
+    <Compile Include="Event\QuitEvent.cs" />
+    <Compile Include="Event\OpenTabEvent.cs" />
+    <Compile Include="Event\QuickSearchEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Events\MessageShowEvent.cs" />
-    <Compile Include="Events\MessageHideEvent.cs" />
-    <Compile Include="Events\OpenViewEvent.cs" />
+    <Compile Include="Event\MessageShowEvent.cs" />
+    <Compile Include="Event\MessageHideEvent.cs" />
+    <Compile Include="Event\OpenViewEvent.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />

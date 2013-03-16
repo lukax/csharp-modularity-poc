@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using LOB.Domain.Base;
-using LOB.UI.Core.Events;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.Alter.Base;
 using LOB.UI.Core.View.Controls.Alter.SubEntity;
@@ -31,8 +31,7 @@ namespace LOB.UI.Core.View.Infrastructure
         private static readonly Lazy<IDictionary<string, Type>> LazyView =
             new Lazy<IDictionary<string, Type>>(() => new Dictionary<string, Type>
                 {
-                    {Operation.MessageHideEvent, typeof (MessageHideEvent)},
-                    {Operation.MessageShowEvent, typeof (MessageShowEvent)},
+                    {Operation.MessageTools, typeof (MessageToolsView)},
                     {Operation.ColumnTools, typeof (ColumnToolsView)},
                     {Operation.HeaderTools, typeof (HeaderToolsView)},
                     {Operation.AlterAddress, typeof (AlterAddressView)},
@@ -74,8 +73,7 @@ namespace LOB.UI.Core.View.Infrastructure
         private static readonly Lazy<IDictionary<string, Type>> LazyViewModel =
             new Lazy<IDictionary<string, Type>>(() => new Dictionary<string, Type>
                 {
-                    {Operation.MessageHideEvent, typeof (MessageHideEvent)},
-                    {Operation.MessageShowEvent, typeof (MessageShowEvent)},
+                    {Operation.MessageTools, typeof (MessageToolsViewModel)},
                     {Operation.ColumnTools, typeof (ColumnToolsViewModel)},
                     {Operation.HeaderTools, typeof (HeaderToolsViewModel)},
                     {Operation.AlterAddress, typeof (AlterAddressViewModel)},

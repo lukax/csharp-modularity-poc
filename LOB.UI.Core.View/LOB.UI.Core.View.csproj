@@ -118,6 +118,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controller\MainRegionController.cs" />
     <Compile Include="Controls\Alter\AlterCustomerView.xaml.cs">
       <DependentUpon>AlterCustomerView.xaml</DependentUpon>
     </Compile>
@@ -412,15 +413,15 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Page Include="Skins\MainSkin.xaml">
+    <Page Include="Skin\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skins\MetroSkin.xaml">
+    <Page Include="Skin\MetroSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skins\MetroVSSkin.xaml">
+    <Page Include="Skin\MetroVSSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -489,55 +490,55 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Accept48.png">
+    <Content Include="Resource\Accept48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Add48.png">
+    <Content Include="Resource\Add48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Cancel48.png">
+    <Content Include="Resource\Cancel48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\delete.png">
+    <Content Include="Resource\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\edit.png">
+    <Content Include="Resource\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Edit48.png">
+    <Content Include="Resource\Edit48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\File48.png">
+    <Content Include="Resource\File48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\File_delete48.png">
+    <Content Include="Resource\File_delete48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\File_edit48.png">
+    <Content Include="Resource\File_edit48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\glyphicons_223_thin_right_arrow.png">
+    <Content Include="Resource\glyphicons_114_list.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\logo.png">
+    <Content Include="Resource\glyphicons_223_thin_right_arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Ops.png">
+    <Content Include="Resource\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Refresh48.png">
+    <Content Include="Resource\Refresh48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Save48.png">
+    <Content Include="Resource\Save48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\save_as.png">
+    <Content Include="Resource\save_as.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Search48.png">
+    <Content Include="Resource\Search48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Shoppingcart48.png">
+    <Content Include="Resource\Shoppingcart48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

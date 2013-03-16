@@ -8,7 +8,7 @@
                       Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <Window.Resources>
-        <ResourceDictionary x:Name="ResourcesDict" Source="/Skins/MetroVSSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroVSSkin.xaml" />
     </Window.Resources>
 
     <Grid>
@@ -26,7 +26,9 @@
 
         <TabControl x:Name="BodyRegion" regions:RegionManager.RegionName="BodyRegion"  Grid.Row="1" Grid.Column="0" Margin="5"
                             Style="{StaticResource StandardTabControl}" SelectedIndex="0" />
-
+        
+        <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Grid.Row="1" Grid.Column="0" Width="200" Height="200"/>
+        
         <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1"
                             Grid.Column="1" />
 

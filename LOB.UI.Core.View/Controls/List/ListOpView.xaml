@@ -9,14 +9,14 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/Skins/MetroSkin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <DockPanel >
                 <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}">
-                    <Image Source="../../Resources/glyphicons_223_thin_right_arrow.png" DockPanel.Dock="Right"/>
+                    <Image Source="../../Resource/glyphicons_223_thin_right_arrow.png" DockPanel.Dock="Right"/>
                 </controls:Tile>
                 
                 <TextBox MinWidth="200" Width="Auto" Height="Auto"

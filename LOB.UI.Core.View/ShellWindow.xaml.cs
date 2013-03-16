@@ -2,8 +2,10 @@
 
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using LOB.Log.Interface;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.View.Infrastructure;
@@ -12,6 +14,7 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Base;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
@@ -25,20 +28,32 @@ namespace LOB.UI.Core.View
     {
         private readonly IUnityContainer _container;
         private readonly ILogger _logger;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _region;
-        private ICommandService _commandService;
         private IModuleManager _module;
 
         private IFluentNavigator _navigator;
         private BackgroundWorker bg = new BackgroundWorker();
 
-        public ShellWindow(IUnityContainer container, IRegionManager region, ILogger logger)
+        public ShellWindow(IUnityContainer container, IRegionManager region, ILogger logger, IEventAggregator eventAggregator)
         {
             _container = container;
             _region = region;
             _logger = logger;
+            _eventAggregator = eventAggregator;
             InitializeComponent();
-            Load();
+            OnLoad();
+        }
+
+        private static bool _loaded = false;
+        private void OnLoad()
+        {
+            _eventAggregator.GetEvent<QuitEvent>().Subscribe((o) => { if (o == OperationNames.Quit)  this.Close(); });
+            if (_loaded) return;
+            _module = _container.Resolve<IModuleManager>();
+            _module.LoadModule("UICoreViewModule");
+            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
+            _loaded = true;
         }
 
         public IBaseViewModel ViewModel
@@ -118,36 +133,5 @@ namespace LOB.UI.Core.View
         }
 
         #endregion
-
-        private void Busy()
-        {
-            ModalRegion = new BusyView();
-        }
-
-        private void Load()
-        {
-            _module = _container.Resolve<IModuleManager>();
-            _module.LoadModule("UICoreViewModule");
-
-            _commandService = _container.Resolve<ICommandService>();
-            _navigator = _container.Resolve<IFluentNavigator>();
-            _commandService.Register(OperationNames.OpenView,
-                                     new DelegateCommand(o => _navigator.ResolveView(o.ToString()).Show(true)));
-            _commandService.Register(OperationNames.QuickSearch,
-                                     new DelegateCommand(o => _navigator.ResolveView(o.ToString()).Show(true)));
-            _commandService.Register(OperationNames.OpenTab, new DelegateCommand(OpenTab));
-            _commandService.Register(OperationNames.Quit, new DelegateCommand(o => this.Close()));
-            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Medium);
-        }
-
-        private void OpenTab(object arg)
-        {
-            _region.RegisterViewWithRegion(RegionNames.BodyRegion, OperationTypes.Views[arg.ToString()]);
-        }
-
-        private void CloseTab(object arg)
-        {
-            //_region.Regions[RegionNames.BodyRegion].Name
-        }
     }
 }
