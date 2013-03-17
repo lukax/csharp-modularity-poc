@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -27,7 +26,8 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private string _entity;
 
-        public ListOpViewModel(Category entity, IRepository repository, ICommandService commandService, IEventAggregator eventAggregator)
+        public ListOpViewModel(Category entity, IRepository repository, ICommandService commandService,
+                               IEventAggregator eventAggregator)
         {
             _commandService = commandService;
             _eventAggregator = eventAggregator;

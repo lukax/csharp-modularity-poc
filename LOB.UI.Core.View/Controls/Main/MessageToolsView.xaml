@@ -11,8 +11,8 @@
 
     
         <Grid>
-        <Border Background="{DynamicResource AccentBrush}" Opacity="0.6"/>
-            <Border Width="Auto"
+        <Border Background="{DynamicResource AccentBrush}" Opacity="0.6" x:Name="BorderOuter"/>
+            <Border Width="Auto" x:Name="BorderInner"
             Height="Auto"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -20,7 +20,7 @@
             BorderBrush="{DynamicResource HighlightDarkColorBrush}"
             BorderThickness="1" Opacity="0.8"
             Padding="5,10,5,5">
-                <Grid>
+                <Grid x:Name="GridInner">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
@@ -31,7 +31,7 @@
                             <GradientStop Color="{DynamicResource AccentColor2}" Offset="2" />
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <TextBlock Margin="5"
+                    <TextBlock Margin="5" x:Name="TextBlockMessage"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="14.667"
@@ -43,7 +43,7 @@
                 Grid.RowSpan="5"
                 Grid.Column="5"
                 Margin="5"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Right" x:Name="ButtonClose"
                 Command="{Binding CloseCommand}"
                 Content="Close" />
                 </Grid>

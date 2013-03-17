@@ -24,7 +24,7 @@ namespace LOB.Dao.Nhibernate
         {
             _container.RegisterType<IRepository, DomainRepository>();
             _container.RegisterType<IUnityOfWork, UnityOfWork>();
-            _container.RegisterInstance<ISessionCreator>(SessionCreator.Default);
+            _container.RegisterInstance<ISessionCreator>(_container.Resolve<SessionCreator>());
 
 #if DEBUG
             var log = _container.Resolve<ILogger>();

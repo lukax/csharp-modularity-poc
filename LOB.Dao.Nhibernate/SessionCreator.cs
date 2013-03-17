@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Dao.Interface;
+using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Remotion.Linq.Utilities;
 
 #endregion
 
@@ -20,22 +22,24 @@ namespace LOB.Dao.Nhibernate
                         Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
         private const String MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
-        public static readonly ISessionCreator Default = new SessionCreator();
+        private readonly IServiceLocator _container;
+        private readonly ILoggerFacade _logger;
         private String _connectionString;
         private object _orm;
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
 
-        //[InjectionConstructor]
-        private SessionCreator()
-            : this(PersistType.MySql, null)
+        [InjectionConstructor]
+        public SessionCreator(ILoggerFacade logger)
+            : this(logger, PersistType.MsSql, null)
         {
         }
 
-        private SessionCreator(PersistType persistIn, String connectionString)
+        public SessionCreator(ILoggerFacade logger, PersistType persistIn, String connectionString)
         {
-            if (connectionString != null)
-                ConnectionString = connectionString;
+            if (logger == null) throw new ArgumentNullException("logger");
+            if (connectionString != null) ConnectionString = connectionString;
+            _logger = logger;
             _persistType = persistIn;
         }
 
@@ -62,65 +66,70 @@ namespace LOB.Dao.Nhibernate
             private set { _orm = value; }
         }
 
-        public event EventHandler OnCreatingSession;
-        public event EventHandler OnSessionCreated;
+        public event SessionCreatorEventHandler OnCreatingSession;
+        public event SessionCreatorEventHandler OnSessionCreated;
 
         private async void BuildOrm()
         {
-            OnCreatingSession.Invoke(this, new EventArgs());
-            //await Task.Delay(5000);
+            //TODO: Translation support
+            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs("Connecting to the database..."));
             Configuration cfg = null;
-            await Task.Run(()=>
-            {
-                switch (_persistType)
+            await Task.Run(() =>
                 {
-                    case PersistType.MySql:
-                        cfg = StoreInMySqlConfiguration();
-                        break;
-                    case PersistType.MsSql:
-                        cfg = StoreInMsSqlConfiguration();
-                        break;
-                    case PersistType.File:
-                        cfg = StoreInFileConfiguration();
-                        break;
-                    case PersistType.Memory:
-                        cfg = StoreInMemoryConfiguration();
-                        break;
-                    default:
-                        throw new ArgumentEmptyException("persistIn");
+                    switch (_persistType)
+                    {
+                        case PersistType.MySql:
+                            cfg = StoreInMySqlConfiguration();
+                            break;
+                        case PersistType.MsSql:
+                            cfg = StoreInMsSqlConfiguration();
+                            break;
+                        case PersistType.File:
+                            cfg = StoreInFileConfiguration();
+                            break;
+                        case PersistType.Memory:
+                            cfg = StoreInMemoryConfiguration();
+                            break;
+                        default:
+                            throw new ArgumentException("PersistType");
+                    }
+                });
+            if (cfg != null)
+                try
+                {
+                    Orm = cfg.BuildSessionFactory().OpenSession();
+                    OnSessionCreated.Invoke(this, new SessionCreatorEventArgs("Connection Successful!"));
                 }
-            });
-            OnSessionCreated.Invoke(this, new EventArgs());
-            Orm = cfg.BuildSessionFactory().OpenSession();
+                catch (Exception ex)
+                {
+                    _logger.Log(ex.Message, Category.Exception, Priority.High);
+                    OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
+                }
         }
 
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
-            OnCreatingSession.Invoke(this, new EventArgs());
+            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs("Connecting to the Database..."));
             _persistType = persistIn;
             Configuration cfg = null;
-
+            switch (_persistType)
             {
-                switch (_persistType)
-                {
-                    case PersistType.MySql:
-                        cfg = StoreInMySqlConfiguration();
-                        break;
-                    case PersistType.MsSql:
-                        cfg = StoreInMsSqlConfiguration();
-                        break;
-                    case PersistType.File:
-                        cfg = StoreInFileConfiguration();
-                        break;
-                    case PersistType.Memory:
-                        cfg = StoreInMemoryConfiguration();
-                        break;
-                    default:
-                        throw new ArgumentEmptyException("persistIn");
-                }
-                OnSessionCreated.Invoke(this, new EventArgs());
-            };
-
+                case PersistType.MySql:
+                    cfg = StoreInMySqlConfiguration();
+                    break;
+                case PersistType.MsSql:
+                    cfg = StoreInMsSqlConfiguration();
+                    break;
+                case PersistType.File:
+                    cfg = StoreInFileConfiguration();
+                    break;
+                case PersistType.Memory:
+                    cfg = StoreInMemoryConfiguration();
+                    break;
+                default:
+                    throw new ArgumentException("PersistType");
+            }
+            OnSessionCreated.Invoke(this, new SessionCreatorEventArgs("Connection Successful!"));
             return cfg.BuildSessionFactory();
         }
 
@@ -155,7 +164,7 @@ namespace LOB.Dao.Nhibernate
         private FluentConfiguration Mapping()
         {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
-                //Disable log
+                //Disable logging
                            .Diagnostics(x => x.Enable(false))
                 //Generate Tables
                            .ExposeConfiguration(SchemaCreator);
@@ -163,17 +172,25 @@ namespace LOB.Dao.Nhibernate
 
         private void SchemaCreator(Configuration cfg)
         {
-            if (_persistType == PersistType.Memory)
+            if (cfg == null) throw new ArgumentNullException("cfg");
+            try
             {
+                if (_persistType == PersistType.Memory)
+                {
+                    _sqlSchema = new SchemaExport(cfg);
+                    _sqlSchema.Create(false, true);
+                    return;
+                }
                 _sqlSchema = new SchemaExport(cfg);
+                _sqlSchema.Drop(false, true);
                 _sqlSchema.Create(false, true);
-                return;
             }
-
-            _sqlSchema = new SchemaExport(cfg);
-            _sqlSchema.Drop(false, true);
-            _sqlSchema.Create(false, true);
-            //_sqlSchema.Execute(false, true, true);
+            catch (Exception e)
+            {
+                _logger.Log(e.Message, Category.Exception, Priority.High);
+            }
         }
+
+        //private event SessionCreatorEventHandler callInMainThread;
     }
 }

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using LOB.Domain.Base;
-using LOB.UI.Core.Event;
 using LOB.UI.Core.View.Controls.Alter;
 using LOB.UI.Core.View.Controls.Alter.Base;
 using LOB.UI.Core.View.Controls.Alter.SubEntity;

@@ -17,17 +17,27 @@ namespace LOB.UI.Core.ViewModel.Main
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
 
-        #region Message
+        #region Props
 
+        private bool _isRestrictive;
         private string _message = "Please wait...";
 
         public string Message
         {
             get { return _message; }
-
             set
             {
                 _message = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsRestrictive
+        {
+            get { return _isRestrictive; }
+            set
+            {
+                _isRestrictive = value;
                 OnPropertyChanged();
             }
         }
@@ -36,13 +46,24 @@ namespace LOB.UI.Core.ViewModel.Main
 
         #region Close Command
 
+        private bool _canClose;
         private ICommand _closeCommand;
 
         public ICommand CloseCommand
         {
-            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(Close, CanClose)); }
+            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(Close, () => CanClose)); }
 
             set { this._closeCommand = value; }
+        }
+
+        public bool CanClose
+        {
+            get { return _canClose; }
+            set
+            {
+                _canClose = value;
+                OnPropertyChanged();
+            }
         }
 
         public void Close()
@@ -50,15 +71,8 @@ namespace LOB.UI.Core.ViewModel.Main
             this.eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
 
-        public bool CanClose()
-        {
-            return _canClose;
-        }
-
-        private bool _canClose { get; set; }
-
         #endregion Close Command
-        
+
         [InjectionConstructor]
         public MessageToolsViewModel(IUnityContainer container)
         {
@@ -66,10 +80,11 @@ namespace LOB.UI.Core.ViewModel.Main
             this.eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
-        public void Initialize(string message, bool canClose)
+        public void Initialize(string message, bool canClose, bool isRestrictive)
         {
-            this.Message = message;
-            this._canClose = canClose;
+            Message = message;
+            CanClose = canClose;
+            IsRestrictive = isRestrictive;
         }
 
         public override void InitializeServices()

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Diagnostics.CodeAnalysis;
 using LOB.Log.Interface;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controller;
@@ -21,8 +22,9 @@ namespace LOB.UI.Core.View
     public class Module : IModule
     {
         private readonly IUnityContainer _container;
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        private MainRegionController _mainRegionController;
+
+        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private MainRegionController
+            _mainRegionController;
 
         public Module(IUnityContainer container)
         {
@@ -34,9 +36,12 @@ namespace LOB.UI.Core.View
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
             _container.RegisterInstance(CommandService.Default);
-            _container.RegisterInstance<MessageToolsView>(new MessageToolsView(){ ViewModel = _container.Resolve<MessageToolsViewModel>() });
-            
-            
+            _container.RegisterInstance<MessageToolsView>(new MessageToolsView()
+                {
+                    ViewModel = _container.Resolve<MessageToolsViewModel>()
+                });
+
+
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof (HeaderToolsView));
             regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof (ColumnToolsView));

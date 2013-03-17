@@ -17,7 +17,7 @@ namespace LOB.UI.Core.View.Infrastructure
         private readonly IUnityContainer _container;
         private IBaseView _resolvedView;
         private IBaseViewModel _resolvedViewModel;
-        
+
         [InjectionConstructor]
         public FluentNavigator(IUnityContainer container)
         {
@@ -90,7 +90,7 @@ namespace LOB.UI.Core.View.Infrastructure
                 window.DataContext = _resolvedView.ViewModel;
                 window.Height = asUc.Height + 50;
                 window.Width = asUc.Width + 50;
-                if(!string.IsNullOrEmpty(_resolvedView.Header))
+                if (!string.IsNullOrEmpty(_resolvedView.Header))
                     window.Title = (_resolvedView).Header;
 
 

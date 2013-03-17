@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Windows.Input;
 using LOB.UI.Core.Event;
 using LOB.UI.Interface.Command;
@@ -15,10 +14,11 @@ namespace LOB.UI.Core.ViewModel.Main
     public sealed class ColumnToolsViewModel : IColumnToolsViewModel
     {
         private readonly ICommandService _commandService;
-        private readonly IEventAggregator _eventAggregator;
         private readonly IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
 
-        public ColumnToolsViewModel(IUnityContainer container, ICommandService commandService, IEventAggregator eventAggregator)
+        public ColumnToolsViewModel(IUnityContainer container, ICommandService commandService,
+                                    IEventAggregator eventAggregator)
         {
             _container = container;
             _commandService = commandService;
@@ -48,7 +48,7 @@ namespace LOB.UI.Core.ViewModel.Main
         private void ShowOperations(object arg)
         {
             _eventAggregator.GetEvent<OpenViewEvent>().Publish("ListOp");
-           // _commandService.Execute("OpenView", "ListOp");
+            // _commandService.Execute("OpenView", "ListOp");
         }
     }
 }

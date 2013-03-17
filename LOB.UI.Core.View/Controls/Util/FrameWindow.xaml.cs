@@ -9,7 +9,6 @@ using LOB.UI.Core.Event;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Base;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
@@ -25,9 +24,9 @@ namespace LOB.UI.Core.View.Controls.Util
     {
         private static bool _moduleFirstLoaded = false;
         private readonly IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
         private readonly IRegionManager _region;
-        private readonly IEventAggregator _eventAggregator;
 
         private IFluentNavigator _navigator;
         private BackgroundWorker bg = new BackgroundWorker();

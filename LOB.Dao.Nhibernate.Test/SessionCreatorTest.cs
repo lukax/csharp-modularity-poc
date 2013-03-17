@@ -2,6 +2,7 @@
 
 using LOB.Domain;
 using LOB.Domain.SubEntity;
+using LOB.Log;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
@@ -15,14 +16,14 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void CreateSessionTest()
         {
-            var creator = SessionCreator.Default;
+            var creator = new SessionCreator(new Logger());
             Assert.IsNotNull(creator.Orm);
         }
 
         [TestMethod]
         public void TransactionTest()
         {
-            var sCreator = SessionCreator.Default;
+            var sCreator = new SessionCreator(new Logger());
 
 
             var address = new Address
