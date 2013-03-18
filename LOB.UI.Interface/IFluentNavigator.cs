@@ -9,6 +9,7 @@ namespace LOB.UI.Interface
 {
     public interface IFluentNavigator
     {
+        IFluentNavigator Init { get; }
         IBaseView GetView();
         IBaseViewModel GetViewModel();
         IFluentNavigator SetView(IBaseView view);

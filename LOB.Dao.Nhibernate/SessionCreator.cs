@@ -18,13 +18,13 @@ namespace LOB.Dao.Nhibernate
 {
     public class SessionCreator : ISessionCreator
     {
-        private const String MySqlDefaultConnectionString = @"Server=192.168.0.150;
+        private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;
                         Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
-        private const String MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
+        private const string MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
         private readonly IServiceLocator _container;
         private readonly ILoggerFacade _logger;
-        private String _connectionString;
+        private string _connectionString;
         private object _orm;
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
@@ -35,7 +35,7 @@ namespace LOB.Dao.Nhibernate
         {
         }
 
-        public SessionCreator(ILoggerFacade logger, PersistType persistIn, String connectionString)
+        public SessionCreator(ILoggerFacade logger, PersistType persistIn, string connectionString)
         {
             if (logger == null) throw new ArgumentNullException("logger");
             if (connectionString != null) ConnectionString = connectionString;
@@ -43,7 +43,7 @@ namespace LOB.Dao.Nhibernate
             _persistType = persistIn;
         }
 
-        public String ConnectionString
+        public string ConnectionString
         {
             get
             {

@@ -53,7 +53,7 @@ namespace LOB.UI.Core.View.Infrastructure
                     {OperationName.ListBaseEntity, typeof (ListBaseEntityView)},
                     {OperationName.ListCategory, typeof (ListCategoryView)},
                     {OperationName.ListCustomer, typeof (ListCategoryView)},
-                    //{Command.ListEmail, typeof(ListContactInfoView)},
+                    //{OperationName.ListContactInfo, typeof(ListContactInfoView)},
                     {OperationName.ListEmployee, typeof (ListEmployeeView)},
                     //{Command.ListLegalPerson, typeof(ListLegalPersonView)},
                     //{Command.ListNaturalPerson, typeof(ListNaturalPersonView)},

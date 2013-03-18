@@ -35,6 +35,7 @@ namespace LOB.UI.Core.View.Controls.Main
                                 BorderOuter.IsHitTestVisible = true;
                                 GridInner.IsHitTestVisible = true;
                                 BorderInner.IsHitTestVisible = true;
+                                Progress.Visibility = Visibility.Visible;
                                 BorderOuter.Visibility = Visibility.Visible;
                             }
                             else
@@ -42,6 +43,7 @@ namespace LOB.UI.Core.View.Controls.Main
                                 BorderOuter.IsHitTestVisible = false;
                                 GridInner.IsHitTestVisible = false;
                                 BorderInner.IsHitTestVisible = false;
+                                Progress.Visibility = Visibility.Hidden;
                                 BorderOuter.Visibility = Visibility.Hidden;
                             }
                         };

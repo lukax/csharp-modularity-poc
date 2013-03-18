@@ -24,6 +24,11 @@ namespace LOB.UI.Core.View.Infrastructure
             _container = container;
         }
 
+        /// <summary>
+        /// Initialize with clean Fields
+        /// </summary>
+        public IFluentNavigator Init { get { return new FluentNavigator(_container); } }
+
         public event OnOpenViewEventHandler OnOpenView;
 
         public IBaseView GetView()
@@ -32,6 +37,8 @@ namespace LOB.UI.Core.View.Infrastructure
                 throw new ArgumentException("First resolve the view", "ResolveView");
             if (_resolvedView.ViewModel == null)
                 throw new ArgumentException("First resolve the view model", "ResolveViewModel");
+            if(_resolvedViewModel != null)
+                _resolvedViewModel.InitializeServices();
             _resolvedView.InitializeServices();
             return _resolvedView;
         }
@@ -45,25 +52,35 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator ResolveViewModel(string param)
         {
-            SetViewModel(_container.Resolve(OperationTypes.ViewModels[param]) as IBaseViewModel);
+            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            var resolved = _container.Resolve(OperationTypes.ViewModels[param]) as IBaseViewModel;
+            if (resolved == null) throw new ArgumentException("param");
+            SetViewModel(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel
         {
-            SetViewModel(_container.Resolve<TViewModel>());
+            if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            var resolved = _container.Resolve<TViewModel>();
+            SetViewModel(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveView(string param)
         {
-            SetView(_container.Resolve(OperationTypes.Views[param]) as IBaseView);
+            if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            var resolved = _container.Resolve(OperationTypes.Views[param]) as IBaseView;
+            if (resolved == null) throw new ArgumentException("param");
+            SetView(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveView<TView>() where TView : IBaseView
         {
-            SetView(_resolvedView = _container.Resolve<TView>());
+            if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            var resolved = _container.Resolve<TView>();
+            SetView(resolved);
             return this;
         }
 
@@ -95,7 +112,7 @@ namespace LOB.UI.Core.View.Infrastructure
 
 
                 if (OnOpenView != null)
-                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asUc));
+                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
 
                 if (asDialog) window.ShowDialog();
                 else window.Show();
@@ -106,7 +123,7 @@ namespace LOB.UI.Core.View.Infrastructure
                 if (asW != null)
                 {
                     if (OnOpenView != null)
-                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asW));
+                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
 
                     if (asDialog) asW.ShowDialog();
                     else asW.Show();

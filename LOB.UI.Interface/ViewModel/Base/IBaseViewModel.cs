@@ -8,7 +8,7 @@ namespace LOB.UI.Interface.ViewModel.Base
 {
     public interface IBaseViewModel
     {
-        String Header { get; set; }
+        string Header { get; set; }
         void InitializeServices();
         void Refresh();
     }

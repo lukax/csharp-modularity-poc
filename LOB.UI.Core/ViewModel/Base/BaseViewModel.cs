@@ -10,9 +10,9 @@ namespace LOB.UI.Core.ViewModel.Base
 {
     public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel
     {
-        private String _header;
+        private string _header;
 
-        public String Header
+        public string Header
         {
             get { return _header; }
             set

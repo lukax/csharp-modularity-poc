@@ -23,9 +23,9 @@ namespace LOB.UI.Core.View.Controller
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
-        private readonly IFluentNavigator _navigator;
         private readonly IRegionManager _regionManager;
         private readonly ISessionCreator _sessionCreator;
+        private readonly IFluentNavigator _navigator;
 
         public MainRegionController(IUnityContainer container, IRegionManager regionManager,
                                     IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
@@ -40,8 +40,8 @@ namespace LOB.UI.Core.View.Controller
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _logger = logger;
-            _navigator = navigator;
             _sessionCreator = sessionCreator;
+            _navigator = navigator;
 
             OnLoad();
         }
@@ -62,11 +62,9 @@ namespace LOB.UI.Core.View.Controller
         {
             if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param");
             var region = this._regionManager.Regions[RegionName.TabRegion];
-            var view = _navigator.ResolveView(param).GetView();
+            var view = _navigator.Init.ResolveView(param).GetView();
             if (region.Views.Contains(region.GetView(param)))
-            {
                 region.Remove(region.GetView(param));
-            }
             region.Add(view, param);
         }
 
@@ -77,13 +75,12 @@ namespace LOB.UI.Core.View.Controller
             var view = _container.Resolve<MessageToolsView>();
             var viewModel = _container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            region.Add(_navigator.SetView(view).SetViewModel(viewModel).GetView(), OperationName.MessageTools);
+            region.Add(_navigator.Init.SetView(view).SetViewModel(viewModel).GetView(), OperationName.MessageTools);
         }
 
         public async void MessageHide(string param)
         {
             var region = this._regionManager.Regions[RegionName.ModalRegion];
-
             var view = region.GetView(OperationName.MessageTools);
             if (region.Views.Contains(view))
                 region.Remove(view);
@@ -91,7 +88,7 @@ namespace LOB.UI.Core.View.Controller
             if (param != null)
             {
                 MessageShow(param, false);
-                await Task.Delay(5000);
+                await Task.Delay(4000);
                 MessageHide(null);
             }
         }
@@ -99,8 +96,9 @@ namespace LOB.UI.Core.View.Controller
         private void OpenTab(string param)
         {
             if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param");
-            _regionManager.RegisterViewWithRegion(RegionName.TabRegion,
-                                                  _navigator.ResolveView(param).ResolveViewModel(param).GetView);
+            var region = this._regionManager.Regions[RegionName.TabRegion];
+            var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
+            region.Add(view, param);
         }
     }
 }

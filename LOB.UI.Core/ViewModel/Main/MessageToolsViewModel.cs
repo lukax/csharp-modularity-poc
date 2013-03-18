@@ -89,12 +89,10 @@ namespace LOB.UI.Core.ViewModel.Main
 
         public override void InitializeServices()
         {
-            throw new NotImplementedException();
         }
 
         public override void Refresh()
         {
-            throw new NotImplementedException();
         }
     }
 }
