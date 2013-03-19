@@ -35,6 +35,8 @@ namespace LOB.UI.Core.View.Controls.Main
                                 BorderOuter.IsHitTestVisible = true;
                                 GridInner.IsHitTestVisible = true;
                                 BorderInner.IsHitTestVisible = true;
+                                BorderInner.Opacity = .8;
+                                ButtonClose.Visibility = Visibility.Visible;
                                 Progress.Visibility = Visibility.Visible;
                                 BorderOuter.Visibility = Visibility.Visible;
                             }
@@ -43,6 +45,8 @@ namespace LOB.UI.Core.View.Controls.Main
                                 BorderOuter.IsHitTestVisible = false;
                                 GridInner.IsHitTestVisible = false;
                                 BorderInner.IsHitTestVisible = false;
+                                BorderInner.Opacity = .6;
+                                ButtonClose.Visibility = Visibility.Hidden;
                                 Progress.Visibility = Visibility.Hidden;
                                 BorderOuter.Visibility = Visibility.Hidden;
                             }

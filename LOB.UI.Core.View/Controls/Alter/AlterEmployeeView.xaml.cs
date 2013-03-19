@@ -1,12 +1,14 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Practices.Prism.Events;
 
 #endregion
 
@@ -14,12 +16,12 @@ namespace LOB.UI.Core.View.Controls.Alter
 {
     public partial class AlterEmployeeView : UserControl, IBaseView
     {
-        private ICommandService _commandService;
+        private readonly IEventAggregator _eventAggregator;
         private string _header;
-        private IFluentNavigator _navigator;
 
-        public AlterEmployeeView()
+        public AlterEmployeeView(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             InitializeComponent();
         }
 
@@ -40,8 +42,8 @@ namespace LOB.UI.Core.View.Controls.Alter
                         localViewModel.AlterContactInfoViewModel;
                 }
 
-                _commandService.Register("SaveChanges",
-                                         new ActionCommand(o => _commandService.Execute("Cancel", null)));
+                _eventAggregator.GetEvent<SaveEvent>()
+                                .Subscribe((s) => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 

@@ -61,7 +61,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private async void LegalPersonCfg()
         {
             await Task.Delay(500);
-            var viewL = _navigator.ResolveView("AlterLegalPerson").SetViewModel(_alterLegalPersonViewModel).GetView();
+            var viewL = _navigator.ResolveView(OperationType.AlterLegalPerson).SetViewModel(_alterLegalPersonViewModel).GetView();
             Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
 
             Entity.Person = _alterLegalPersonViewModel.Entity;
@@ -71,7 +71,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         {
             await Task.Delay(500);
             var viewN =
-                _navigator.ResolveView("AlterNaturalPerson").SetViewModel(_alterNaturalPersonViewModel).GetView();
+                _navigator.ResolveView(OperationType.AlterNaturalPerson).SetViewModel(_alterNaturalPersonViewModel).GetView();
             Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
 
             Entity.Person = _alterNaturalPersonViewModel.Entity;

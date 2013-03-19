@@ -13,7 +13,7 @@ namespace LOB.Dao.Interface
         event SessionCreatorEventHandler OnSessionCreated;
     }
 
-    public delegate void SessionCreatorEventHandler(ISessionCreator sender, SessionCreatorEventArgs e);
+    public delegate void SessionCreatorEventHandler(object sender, SessionCreatorEventArgs e);
 
     public class SessionCreatorEventArgs : EventArgs
     {

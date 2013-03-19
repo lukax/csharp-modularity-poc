@@ -15,7 +15,6 @@ namespace LOB.UI.Core.View.Controls.Alter
     public partial class AlterProductView : UserControl, IBaseView
     {
         private string _header;
-        private IFluentNavigator _navigator;
 
         public AlterProductView()
         {

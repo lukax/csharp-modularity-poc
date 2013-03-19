@@ -10,6 +10,8 @@ namespace LOB.UI.Interface.Infrastructure
 {
     public enum OperationType
     {
+        Unknown = 0,
+
         Main,
 
         MessageTools,
@@ -54,5 +56,16 @@ namespace LOB.UI.Interface.Infrastructure
 
         SellProduct,
         SellService,
+    }
+
+    public static class OperationTypeExtension
+    {
+        public static OperationType ToOperationType(this string operationType)
+        {
+            OperationType o;
+            if (Enum.TryParse(operationType, out o))
+                return o;
+            throw new ArgumentException("Not parsable to OperationTypeEnum", "operationType");
+        }
     }
 }

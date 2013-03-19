@@ -25,7 +25,7 @@
                             Grid.Column="0" Grid.ColumnSpan="2" />
 
         <TabControl x:Name="TabRegion" regions:RegionManager.RegionName="TabRegion"  Grid.Row="1" Grid.Column="0" Margin="5" 
-                    Style="{StaticResource StandardTabControl}" SelectedIndex="0" />
+                    Style="{StaticResource StandardTabControl}" SelectedIndex="0"/>
         
         <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Grid.Row="1" Grid.Column="0" Width="200" Height="200"/>   
         

@@ -45,34 +45,27 @@ namespace LOB.UI.Core.ViewModel.Main
 
         #endregion Message
 
-        #region Close Command
+        #region CloseExecute Command
 
-        private bool _canClose;
         private ICommand _closeCommand;
 
         public ICommand CloseCommand
         {
-            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(Close, () => CanClose)); }
+            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(CloseExecute, ()=> CanClose)); }
 
             set { this._closeCommand = value; }
         }
 
         public bool CanClose
         {
-            get { return _canClose; }
-            set
-            {
-                _canClose = value;
-                OnPropertyChanged();
-            }
-        }
+            get; set; }
 
-        public void Close()
+        public void CloseExecute()
         {
             this.eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
 
-        #endregion Close Command
+        #endregion CloseExecute Command
 
         [InjectionConstructor]
         public MessageToolsViewModel(IUnityContainer container)

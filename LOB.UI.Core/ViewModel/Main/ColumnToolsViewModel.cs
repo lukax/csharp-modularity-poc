@@ -2,6 +2,7 @@
 
 using System.Windows.Input;
 using LOB.UI.Core.Event;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
@@ -42,14 +43,12 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void ShowShop(object obj)
         {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish("");
-            //_commandService.Execute("OpenView", "ListOp");
+            //_eventAggregator.GetEvent<OpenViewEvent>().Publish("");
         }
 
         private void ShowOperations(object arg)
         {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish("ListOp");
-            // _commandService.Execute("OpenView", "ListOp");
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.ListOp);
         }
 
         public OperationType OperationType { get; set; }

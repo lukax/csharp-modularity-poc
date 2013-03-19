@@ -2,6 +2,7 @@
 
 using System.Windows.Input;
 using LOB.Core;
+using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
@@ -37,8 +38,8 @@ namespace LOB.UI.Core.ViewModel
 
         private void OpenTab(object arg)
         {
-            _navigator.ResolveView(arg.ToString()).ResolveViewModel(arg.ToString()).Show();
-            //_commandService["OpenTab"].Execute(_navigator.ResolveView(arg.ToString()).GetView());
+            OperationType oP = arg.ToString().ToOperationType();
+            _navigator.ResolveView(oP).ResolveViewModel(oP).AddToRegion(RegionName.TabRegion);
         }
 
         public override void InitializeServices()

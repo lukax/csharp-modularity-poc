@@ -36,7 +36,7 @@ namespace LOB.UI.Core.View
         {
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
-            //_container.RegisterInstance(CommandService.Default);
+            _container.RegisterInstance(CommandService.Default);
             _container.RegisterInstance<MessageToolsView>(new MessageToolsView()
                 {
                     ViewModel = _container.Resolve<MessageToolsViewModel>()

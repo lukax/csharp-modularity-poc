@@ -13,12 +13,13 @@ namespace LOB.UI.Interface.Infrastructure
         IBaseViewModel GetViewModel();
         IFluentNavigator SetView(IBaseView view);
         IFluentNavigator SetViewModel(IBaseViewModel viewModel);
-        IFluentNavigator ResolveView(string param);
+        IFluentNavigator ResolveView(OperationType param);
         IFluentNavigator ResolveView<TView>() where TView : IBaseView;
-        IFluentNavigator ResolveViewModel(string param);
+        IFluentNavigator ResolveViewModel(OperationType param);
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
         event OnOpenViewEventHandler OnOpenView;
-        void Show(bool asDialog = false);
+        void AddToRegion(string regionName);
+        [Obsolete("Use method AddToRegion")] void Show(bool asDialog = false);
         bool PromptUser(string message);
     }
 

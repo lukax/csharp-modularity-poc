@@ -118,15 +118,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event\CancelEvent.cs" />
-    <Compile Include="Event\QuitEvent.cs" />
-    <Compile Include="Event\OpenTabEvent.cs" />
-    <Compile Include="Event\QuickSearchEvent.cs" />
+    <Compile Include="Event\SaveEvent.cs" />
+    <Compile Include="Event\View\CloseViewEvent.cs" />
+    <Compile Include="Event\View\OpenViewEvent.cs" />
+    <Compile Include="Event\View\QuickSearchEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
     <Compile Include="Event\MessageShowEvent.cs" />
     <Compile Include="Event\MessageHideEvent.cs" />
-    <Compile Include="Event\OpenViewEvent.cs" />
     <Compile Include="Module.cs" />
-    <Compile Include="Infrastructure\OperationParam.cs" />
     <Compile Include="Infrastructure\RegionName.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterCustomerViewModel.cs" />

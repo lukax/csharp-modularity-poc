@@ -14,7 +14,6 @@ namespace LOB.UI.Core.View.Controls.Alter
 {
     public partial class AlterCustomerView : UserControl, IBaseView
     {
-        private IUnityContainer _container;
         private string _header;
 
         [InjectionConstructor]

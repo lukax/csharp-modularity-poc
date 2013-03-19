@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using LOB.Log.Interface;
 using LOB.UI.Core.Event;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
@@ -22,24 +23,18 @@ namespace LOB.UI.Core.View.Controls.Util
 {
     public partial class FrameWindow : MetroWindow, IBaseView
     {
-        private static bool _moduleFirstLoaded = false;
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
-        private readonly IRegionManager _region;
 
-        private IFluentNavigator _navigator;
-        private BackgroundWorker bg = new BackgroundWorker();
-
-        public FrameWindow(IUnityContainer container, IRegionManager region, ILogger logger,
+        public FrameWindow(IUnityContainer container, ILogger logger,
                            IEventAggregator eventAggregator)
         {
             _container = container;
-            _region = region;
             _logger = logger;
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<QuitEvent>()
-                            .Subscribe(o => { if (o == OperationParam.QuickSearch) this.Close(); });
+            _eventAggregator.GetEvent<CloseViewEvent>()
+                            .Subscribe(o => { this.Close(); });
             InitializeComponent();
         }
 

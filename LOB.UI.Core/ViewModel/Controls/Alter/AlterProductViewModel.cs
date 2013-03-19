@@ -27,7 +27,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         private IList<Category> _categories;
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
-        private ICommandService commandService = CommandService.Default;
 
         [InjectionConstructor]
         public AlterProductViewModel(Product entity, IRepository repository, IUnityContainer container,
@@ -68,19 +67,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         private void ExecuteListCategory(object o)
         {
-            _navigator.ResolveView(o.ToString()).Show(true);
+            OperationType oP = o.ToString().ToOperationType();
+            _navigator.ResolveView(oP).Show(true);
         }
 
         private void ExecuteAlterCategory(object o)
         {
+            OperationType oP = o.ToString().ToOperationType();
             if (Entity.Category != null)
-                _navigator.ResolveView(o.ToString())
-                          .SetViewModel(
-                              _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
-                                                                                               Entity.Category)))
+                _navigator.ResolveView(oP)
+                          .SetViewModel(_container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category", Entity.Category)))
                           .Show(true);
-            _navigator.ResolveView(o.ToString()).Show(true);
-            //Messenger.Default.Execute<object>(_container.ResolveView<AlterCategoryViewModel>());
+            _navigator.ResolveView(oP).Show(true);
         }
 
         protected override void SaveChanges(object arg)

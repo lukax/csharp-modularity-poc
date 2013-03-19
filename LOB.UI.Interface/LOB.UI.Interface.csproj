@@ -75,6 +75,7 @@
     <Compile Include="Infrastructure\IFluentNavigator.cs" />
     <Compile Include="Infrastructure\IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
+    <Compile Include="Infrastructure\OperationParam.cs" />
     <Compile Include="Infrastructure\OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IBaseViewModel.cs" />

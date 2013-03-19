@@ -3,6 +3,7 @@
 using System;
 using System.Windows.Controls;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
@@ -37,20 +38,20 @@ namespace LOB.UI.Core.View.Infrastructure
             region.Add(view, typeof (TView).Name);
         }
 
-        public IBaseView GetView(string param, string regionName)
+        public IBaseView GetView(OperationType param, string regionName)
         {
-            if (param == null) throw new ArgumentNullException("param");
+            if (param == default(OperationType)) throw new ArgumentNullException("param");
             if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
-            return region.GetView(param) as IBaseView;
+            return region.GetView(param.ToString()) as IBaseView;
         }
 
-        public void RemoveView(string param, string regionName)
+        public void RemoveView(OperationType param, string regionName)
         {
-            if (param == null) throw new ArgumentNullException("param");
+            if (param == default(OperationType)) throw new ArgumentNullException("param");
             if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
-            region.Remove(region.GetView(param));
+            region.Remove(region.GetView(param.ToString()));
         }
     }
 }

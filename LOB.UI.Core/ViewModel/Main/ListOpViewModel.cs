@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -8,6 +9,7 @@ using LOB.Core.Util;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.Event;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
@@ -31,7 +33,7 @@ namespace LOB.UI.Core.ViewModel.Main
         {
             _commandService = commandService;
             _eventAggregator = eventAggregator;
-            SaveChangesCommand = new DelegateCommand(SaveChanges);
+            SaveChangesCommand = new DelegateCommand(SelectionChanged);
             ListenToSelection();
         }
 
@@ -60,14 +62,16 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private async void ListenToSelection()
         {
+            //TODO: Localization and remove of unaplicable items
+            Entitys= new CollectionView(Enum.GetValues(typeof(OperationType)));
             await Task.Delay(1000); //Avoid missclick & First item
-            Entitys.CurrentChanged += (sender, args) => SaveChanges(null);
+            Entitys.CurrentChanged += (sender, args) => SelectionChanged(null);
         }
 
-        private void SaveChanges(object arg)
+        private void SelectionChanged(object arg)
         {
-            _eventAggregator.GetEvent<QuitEvent>().Publish(OperationParam.QuickSearch.ToString());
-            _eventAggregator.GetEvent<OpenTabEvent>().Publish(Entity);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(Entity);
             //_commandService.Execute(OperationParam.OpenTab, Entity);
             //_commandService.Execute(OperationParam.Cancel, null);
         }

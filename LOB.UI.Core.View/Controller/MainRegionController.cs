@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.UI.Core.Event;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.ViewModel.Main;
@@ -50,7 +51,7 @@ namespace LOB.UI.Core.View.Controller
         private void OnLoad()
         {
             _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
-            _eventAggregator.GetEvent<OpenTabEvent>().Subscribe(OpenTab, true);
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
             _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
             _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
             _sessionCreator.OnCreatingSession +=
@@ -59,14 +60,28 @@ namespace LOB.UI.Core.View.Controller
                 (sender, args) => _eventAggregator.GetEvent<MessageHideEvent>().Publish(args.Message);
         }
 
-        private void OpenView(string param)
+        private void OpenView(OperationType param)
         {
-            if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param");
-            var region = this._regionManager.Regions[RegionName.TabRegion];
-            var view = _navigator.Init.ResolveView(param).GetView();
-            if (region.Views.Contains(region.GetView(param)))
-                region.Remove(region.GetView(param));
-            region.Add(view, param);
+            if (param == default(OperationType)) throw new ArgumentNullException("param");
+            //var region = this._regionManager.Regions[RegionName.TabRegion];
+            _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
+            //region.Add(view, param.ToString());
+        }
+
+        private void CloseView(OperationType param)
+        {
+            try
+            {
+                var region = _regionManager.Regions[RegionName.TabRegion];
+                var view = region.GetView(param.ToString());
+                if(region.Views.Contains(view))
+                    region.Remove(view);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex.Message, Category.Exception, Priority.High);
+               MessageHide(ex.Message);
+            }
         }
 
         public void MessageShow(string param, bool isRestrictive = true)
@@ -76,13 +91,13 @@ namespace LOB.UI.Core.View.Controller
             var view = _container.Resolve<MessageToolsView>();
             var viewModel = _container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            region.Add(_navigator.Init.SetView(view).SetViewModel(viewModel).GetView(), OperationType.MessageTools);
+            region.Add(_navigator.Init.SetView(view).SetViewModel(viewModel).GetView(), OperationType.MessageTools.ToString());
         }
 
         public async void MessageHide(string param)
         {
             var region = this._regionManager.Regions[RegionName.ModalRegion];
-            var view = region.GetView(OperationType.MessageTools);
+            var view = region.GetView(OperationType.MessageTools.ToString());
             if (region.Views.Contains(view))
                 region.Remove(view);
 
@@ -94,12 +109,6 @@ namespace LOB.UI.Core.View.Controller
             }
         }
 
-        private void OpenTab(string param)
-        {
-            if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param");
-            var region = this._regionManager.Regions[RegionName.TabRegion];
-            var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
-            region.Add(view, param);
-        }
+
     }
 }

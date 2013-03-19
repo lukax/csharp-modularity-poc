@@ -7,7 +7,7 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.Event
 {
-    public class OpenTabEvent : CompositePresentationEvent<OperationType>, IBaseEvent
+    public class SaveEvent : CompositePresentationEvent<string>, IBaseEvent
     {
     }
 }
