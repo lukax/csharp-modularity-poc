@@ -3,6 +3,7 @@
 using System.Windows.Input;
 using LOB.UI.Core.Event;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
@@ -50,5 +51,7 @@ namespace LOB.UI.Core.ViewModel.Main
             _eventAggregator.GetEvent<OpenViewEvent>().Publish("ListOp");
             // _commandService.Execute("OpenView", "ListOp");
         }
+
+        public OperationType OperationType { get; set; }
     }
 }

@@ -109,12 +109,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            commandService.Execute("QuickSearch", OperationName.ListProduct);
+            //commandService.Execute("QuickSearch", OperationName.ListProduct);
         }
 
         protected override void ClearEntity(object args)
         {
             Entity = new Product();
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterProduct; }
         }
     }
 }

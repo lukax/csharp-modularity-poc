@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using Microsoft.Practices.Unity;
 
@@ -40,6 +41,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                     return arg => false;
                 }
             }
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.ListNaturalPerson; }
         }
     }
 }

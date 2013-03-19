@@ -31,7 +31,7 @@ namespace LOB.Dao.Nhibernate
 
         [InjectionConstructor]
         public SessionCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MsSql, null)
+            : this(logger, PersistType.MySql, null)
         {
         }
 

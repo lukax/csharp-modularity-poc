@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Expression.Interactivity.Core;
 
@@ -64,6 +64,11 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void Refresh()
         {
+        }
+
+        public Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterEmployee; }
         }
     }
 }

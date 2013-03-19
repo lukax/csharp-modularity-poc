@@ -7,6 +7,7 @@ using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
@@ -47,6 +48,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         protected override void ClearEntity(object arg)
         {
             Entity = new LegalPerson();
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterLegalPerson; }
         }
     }
 }

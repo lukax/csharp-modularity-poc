@@ -42,7 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddEmail(object arg)
         {
-            _commandService.Execute("OpenView", OperationName.AlterEmail);
+            //_commandService.Execute("OpenView", OperationName.AlterEmail);
         }
 
         private void DeleteEmail(object arg)
@@ -51,7 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddPhoneNumber(object arg)
         {
-            _commandService.Execute("OpenView", OperationName.AlterPhoneNumber);
+            //_commandService.Execute("OpenView", OperationName.AlterPhoneNumber);
         }
 
         private void DeletePhoneNumber(object arg)
@@ -60,7 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            _commandService.Execute("OpenView", OperationName.ListContactInfo);
+            //_commandService.Execute("OpenView", OperationName.ListContactInfo);
         }
 
         protected override void ClearEntity(object arg)
@@ -78,6 +78,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         {
             //TODO: Business logic
             return true;
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterContactInfo; }
         }
     }
 }

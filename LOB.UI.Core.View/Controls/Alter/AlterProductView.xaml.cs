@@ -5,7 +5,7 @@ using GalaSoft.MvvmLight.Messaging;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
@@ -52,6 +52,11 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public void Refresh()
         {
+        }
+
+        public Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterProduct; }
         }
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
 
@@ -42,7 +43,7 @@ namespace LOB.UI.Core.View.Controller
             _logger = logger;
             _sessionCreator = sessionCreator;
             _navigator = navigator;
-
+            
             OnLoad();
         }
 
@@ -75,13 +76,13 @@ namespace LOB.UI.Core.View.Controller
             var view = _container.Resolve<MessageToolsView>();
             var viewModel = _container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            region.Add(_navigator.Init.SetView(view).SetViewModel(viewModel).GetView(), OperationName.MessageTools);
+            region.Add(_navigator.Init.SetView(view).SetViewModel(viewModel).GetView(), OperationType.MessageTools);
         }
 
         public async void MessageHide(string param)
         {
             var region = this._regionManager.Regions[RegionName.ModalRegion];
-            var view = region.GetView(OperationName.MessageTools);
+            var view = region.GetView(OperationType.MessageTools);
             if (region.Views.Contains(view))
                 region.Remove(view);
 

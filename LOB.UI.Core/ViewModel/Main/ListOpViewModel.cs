@@ -24,7 +24,7 @@ namespace LOB.UI.Core.ViewModel.Main
         private readonly ICommandService _commandService;
         private readonly IEventAggregator _eventAggregator;
 
-        private string _entity;
+        private OperationType _entity;
 
         public ListOpViewModel(Category entity, IRepository repository, ICommandService commandService,
                                IEventAggregator eventAggregator)
@@ -32,11 +32,10 @@ namespace LOB.UI.Core.ViewModel.Main
             _commandService = commandService;
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
-            Entitys = new CollectionView(OperationName.All.Wrap());
             ListenToSelection();
         }
 
-        public string Entity
+        public OperationType Entity
         {
             get { return _entity; }
             set
@@ -67,10 +66,15 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private void SaveChanges(object arg)
         {
-            _eventAggregator.GetEvent<QuitEvent>().Publish(OperationParam.QuickSearch);
+            _eventAggregator.GetEvent<QuitEvent>().Publish(OperationParam.QuickSearch.ToString());
             _eventAggregator.GetEvent<OpenTabEvent>().Publish(Entity);
             //_commandService.Execute(OperationParam.OpenTab, Entity);
             //_commandService.Execute(OperationParam.Cancel, null);
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.ListOp; }
         }
     }
 }

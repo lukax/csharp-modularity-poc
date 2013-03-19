@@ -7,7 +7,7 @@ using LOB.Log.Interface;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
@@ -129,6 +129,11 @@ namespace LOB.UI.Core.View
             _module.LoadModule("UICoreViewModule");
             _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
             _loaded = true;
+        }
+
+        public Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.Main; }
         }
     }
 }

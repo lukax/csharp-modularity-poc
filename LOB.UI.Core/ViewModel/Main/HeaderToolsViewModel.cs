@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
@@ -20,5 +21,7 @@ namespace LOB.UI.Core.ViewModel.Main
         {
             throw new NotImplementedException();
         }
+
+        public OperationType OperationType { get; set;  }
     }
 }

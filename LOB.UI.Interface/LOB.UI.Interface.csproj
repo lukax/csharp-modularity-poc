@@ -69,15 +69,15 @@
   <ItemGroup>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Command\ICommandService.cs" />
-    <Compile Include="CrudOperationType.cs" />
     <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="Event\IBaseEvent.cs" />
-    <Compile Include="IFluentNavigator.cs" />
-    <Compile Include="IRegionAdapter.cs" />
+    <Compile Include="Infrastructure\IUIComponent.cs" />
+    <Compile Include="Infrastructure\IFluentNavigator.cs" />
+    <Compile Include="Infrastructure\IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
-    <Compile Include="Infrastructure\Operation.cs" />
+    <Compile Include="Infrastructure\OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\Base\IBaseViewModel.cs" />
+    <Compile Include="IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterServiceViewModel.cs" />

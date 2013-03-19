@@ -2,7 +2,7 @@
 
 using System.Windows.Controls;
 using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
@@ -42,6 +42,11 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 
         public void Refresh()
         {
+        }
+
+        public Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterContactInfo; }
         }
     }
 }

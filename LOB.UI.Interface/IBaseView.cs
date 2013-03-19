@@ -1,13 +1,13 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Interface
 {
-    public interface IBaseView
+    public interface IBaseView : IUIComponent
     {
         IBaseViewModel ViewModel { get; set; }
         string Header { get; set; }

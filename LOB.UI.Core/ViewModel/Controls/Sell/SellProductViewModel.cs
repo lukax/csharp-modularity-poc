@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Sell;
 
 #endregion
@@ -20,5 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell
         {
             throw new NotImplementedException();
         }
+
+        public OperationType OperationType { get{return OperationType.SellProduct;} }
     }
 }

@@ -213,7 +213,7 @@
       <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\FluentNavigator.cs" />
-    <Compile Include="Infrastructure\OperationTypes.cs" />
+    <Compile Include="Infrastructure\OperationTypeMapping.cs" />
     <Compile Include="ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>

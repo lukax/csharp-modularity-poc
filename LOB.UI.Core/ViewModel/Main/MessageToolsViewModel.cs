@@ -4,6 +4,7 @@ using System;
 using System.Windows.Input;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
@@ -93,6 +94,11 @@ namespace LOB.UI.Core.ViewModel.Main
 
         public override void Refresh()
         {
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.MessageTools; }
         }
     }
 }

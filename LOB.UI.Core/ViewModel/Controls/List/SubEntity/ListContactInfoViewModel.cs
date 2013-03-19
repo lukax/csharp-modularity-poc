@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
@@ -37,6 +38,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
                     return arg => false;
                 }
             }
+        }
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.ListContactInfo; }
         }
     }
 }

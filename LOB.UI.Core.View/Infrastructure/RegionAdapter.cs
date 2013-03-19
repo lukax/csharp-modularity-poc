@@ -1,16 +1,17 @@
 ﻿#region Usings
 
+using System;
 using System.Windows.Controls;
 using LOB.UI.Interface;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
-using IRegionAdapter = LOB.UI.Interface.IRegionAdapter;
+using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
 
 namespace LOB.UI.Core.View.Infrastructure
 {
-    public class RegionAdapter : IRegionAdapter
+    public class RegionAdapter : Interface.Infrastructure.IRegionAdapter
     {
         private readonly IUnityContainer _container;
         private readonly IRegionManager _regionManager;
@@ -18,30 +19,38 @@ namespace LOB.UI.Core.View.Infrastructure
         [InjectionConstructor]
         public RegionAdapter(IUnityContainer container, IRegionManager regionManager)
         {
+            if (container == null) throw new ArgumentNullException("container");
+            if (regionManager == null) throw new ArgumentNullException("regionManager");
             _container = container;
             _regionManager = regionManager;
         }
 
-        public IRegionAdapter RegisterRegion(string name, object region)
+        public void AddView<TView>(TView view, string regionName)
+            where TView : IBaseView
         {
-            _regionManager.AddToRegion(name, region);
-            return this;
+            if (regionName == null) throw new ArgumentNullException("regionName");
+            var region = _regionManager.Regions[regionName];
+            var previousView = region.GetView(typeof (TView).Name);
+            if(previousView != null)
+                if(region.Views.Contains(previousView))
+                    region.Remove(previousView);
+            region.Add(view, typeof (TView).Name);
         }
 
-        public IRegionAdapter AddView<TView>(TView view, string regionName, string title = "IsDefault")
-            where TView : class
+        public IBaseView GetView(string param, string regionName)
         {
-            object region = _regionManager.Regions[regionName];
-            if (region is IBaseView)
-            {
-                ((IBaseView) region).Header = title;
-            }
-            if (region is ContentControl)
-            {
-                ((ContentControl) region).Content = view;
-            }
+            if (param == null) throw new ArgumentNullException("param");
+            if (regionName == null) throw new ArgumentNullException("regionName");
+            var region = _regionManager.Regions[regionName];
+            return region.GetView(param) as IBaseView;
+        }
 
-            return this;
+        public void RemoveView(string param, string regionName)
+        {
+            if (param == null) throw new ArgumentNullException("param");
+            if (regionName == null) throw new ArgumentNullException("regionName");
+            var region = _regionManager.Regions[regionName];
+            region.Remove(region.GetView(param));
         }
     }
 }

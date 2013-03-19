@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using LOB.UI.Core.View.Controls.Util;
 using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -15,19 +15,23 @@ namespace LOB.UI.Core.View.Infrastructure
     public class FluentNavigator : IFluentNavigator
     {
         private readonly IUnityContainer _container;
+        private readonly IRegionAdapter _regionAdapter;
         private IBaseView _resolvedView;
         private IBaseViewModel _resolvedViewModel;
 
         [InjectionConstructor]
-        public FluentNavigator(IUnityContainer container)
+        public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter)
         {
+            if (container == null) throw new ArgumentNullException("container");
+            if (regionAdapter == null) throw new ArgumentNullException("regionAdapter");
             _container = container;
+            _regionAdapter = regionAdapter;
         }
 
         /// <summary>
         /// Initialize with clean Fields
         /// </summary>
-        public IFluentNavigator Init { get { return new FluentNavigator(_container); } }
+        public IFluentNavigator Init { get { return new FluentNavigator(_container, _regionAdapter); } }
 
         public event OnOpenViewEventHandler OnOpenView;
 
@@ -53,7 +57,7 @@ namespace LOB.UI.Core.View.Infrastructure
         public IFluentNavigator ResolveViewModel(string param)
         {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(OperationTypes.ViewModels[param]) as IBaseViewModel;
+            var resolved = _container.Resolve(OperationTypeMapping.ViewModels[param]) as IBaseViewModel;
             if (resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);
             return this;
@@ -70,7 +74,7 @@ namespace LOB.UI.Core.View.Infrastructure
         public IFluentNavigator ResolveView(string param)
         {
             if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(OperationTypes.Views[param]) as IBaseView;
+            var resolved = _container.Resolve(OperationTypeMapping.Views[param]) as IBaseView;
             if (resolved == null) throw new ArgumentException("param");
             SetView(resolved);
             return this;
@@ -95,6 +99,12 @@ namespace LOB.UI.Core.View.Infrastructure
         {
             _resolvedView = view;
             return this;
+        }
+
+        public void AddToRegion(string regionName)
+        {
+            _regionAdapter.AddView(_resolvedView, regionName);
+            //return this;
         }
 
         public void Show(bool asDialog = false)

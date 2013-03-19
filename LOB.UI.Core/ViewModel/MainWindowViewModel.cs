@@ -5,6 +5,7 @@ using LOB.Core;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -47,5 +48,7 @@ namespace LOB.UI.Core.ViewModel
         public override void Refresh()
         {
         }
+
+        public override OperationType OperationType { get{ return OperationType.Main;} }
     }
 }

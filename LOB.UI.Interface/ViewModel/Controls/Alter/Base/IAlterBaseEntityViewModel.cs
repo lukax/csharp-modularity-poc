@@ -3,7 +3,6 @@
 using System.Windows.Input;
 using LOB.Domain.Base;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.ViewModel.Base;
 
 #endregion
 

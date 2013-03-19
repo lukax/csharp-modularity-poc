@@ -8,11 +8,12 @@ using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Core.ViewModel.Main;
 using LOB.UI.Interface;
+using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
-using IRegionAdapter = LOB.UI.Interface.IRegionAdapter;
+using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
 
@@ -35,7 +36,7 @@ namespace LOB.UI.Core.View
         {
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
-            _container.RegisterInstance(CommandService.Default);
+            //_container.RegisterInstance(CommandService.Default);
             _container.RegisterInstance<MessageToolsView>(new MessageToolsView()
                 {
                     ViewModel = _container.Resolve<MessageToolsViewModel>()

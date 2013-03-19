@@ -4,7 +4,7 @@ using System;
 using System.Windows.Controls;
 using LOB.Domain.Base;
 using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
@@ -52,6 +52,11 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
         public void Refresh()
         {
             throw new NotImplementedException();
+        }
+
+        public Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterPerson; }
         }
     }
 }

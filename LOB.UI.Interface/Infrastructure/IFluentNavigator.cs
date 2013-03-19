@@ -1,11 +1,10 @@
 #region Usings
 
 using System;
-using LOB.UI.Interface.ViewModel.Base;
 
 #endregion
 
-namespace LOB.UI.Interface
+namespace LOB.UI.Interface.Infrastructure
 {
     public interface IFluentNavigator
     {

@@ -72,12 +72,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            _commandService.Execute("QuickSearch", OperationName.ListAddress);
+            //_commandService.Execute("QuickSearch", OperationName.ListAddress);
         }
 
         protected override void ClearEntity(object arg)
         {
             throw new NotImplementedException();
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterAddress; }
         }
     }
 }

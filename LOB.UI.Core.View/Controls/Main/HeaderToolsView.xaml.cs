@@ -2,7 +2,7 @@
 
 using System.Windows.Controls;
 using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
@@ -35,6 +35,11 @@ namespace LOB.UI.Core.View.Controls.Main
 
         public void Refresh()
         {
+        }
+
+        public Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.HeaderTools; }
         }
     }
 }

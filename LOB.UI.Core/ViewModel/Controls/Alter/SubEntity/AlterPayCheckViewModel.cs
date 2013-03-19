@@ -6,6 +6,7 @@ using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
@@ -43,6 +44,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         protected override void ClearEntity(object arg)
         {
             throw new NotImplementedException();
+        }
+
+        public override Interface.Infrastructure.OperationType OperationType
+        {
+            get { return OperationType.AlterPayCheck; }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using LOB.Domain.Base;
-using LOB.UI.Interface.ViewModel.Base;
 
 #endregion
 
