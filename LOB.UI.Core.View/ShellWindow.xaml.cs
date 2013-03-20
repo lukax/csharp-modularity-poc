@@ -1,8 +1,11 @@
 ﻿#region Usings
 
 using System.ComponentModel;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using LOB.Log.Interface;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
@@ -33,6 +36,9 @@ namespace LOB.UI.Core.View
         public ShellWindow(IUnityContainer container, IRegionManager region, ILogger logger,
                            IEventAggregator eventAggregator)
         {
+            //CULTURE INFO
+            Properties.Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
+            //
             _container = container;
             _region = region;
             _logger = logger;
@@ -133,6 +139,11 @@ namespace LOB.UI.Core.View
         public Interface.Infrastructure.OperationType OperationType
         {
             get { return OperationType.Main; }
+        }
+
+        private void TabRegion_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabRegion.SelectedIndex = TabRegion.Items.Count;
         }
     }
 }

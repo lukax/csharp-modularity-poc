@@ -25,21 +25,21 @@ namespace LOB.UI.Core.View.Controller
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
-        private readonly IRegionManager _regionManager;
+        private readonly IRegionAdapter _regionAdapter;
         private readonly ISessionCreator _sessionCreator;
         private readonly IFluentNavigator _navigator;
 
-        public MainRegionController(IUnityContainer container, IRegionManager regionManager,
+        public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter,
                                     IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
                                     ISessionCreator sessionCreator)
         {
             if (container == null) throw new ArgumentNullException("container");
-            if (regionManager == null) throw new ArgumentNullException("regionManager");
+            if (regionAdapter == null) throw new ArgumentNullException("regionAdapter");
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
             if (logger == null) throw new ArgumentNullException("logger");
             if (navigator == null) throw new ArgumentNullException("navigator");
             _container = container;
-            _regionManager = regionManager;
+            _regionAdapter = regionAdapter;
             _eventAggregator = eventAggregator;
             _logger = logger;
             _sessionCreator = sessionCreator;
@@ -63,19 +63,14 @@ namespace LOB.UI.Core.View.Controller
         private void OpenView(OperationType param)
         {
             if (param == default(OperationType)) throw new ArgumentNullException("param");
-            //var region = this._regionManager.Regions[RegionName.TabRegion];
             _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
-            //region.Add(view, param.ToString());
         }
 
         private void CloseView(OperationType param)
         {
             try
             {
-                var region = _regionManager.Regions[RegionName.TabRegion];
-                var view = region.GetView(param.ToString());
-                if(region.Views.Contains(view))
-                    region.Remove(view);
+                _regionAdapter.RemoveView(param, RegionName.TabRegion);
             }
             catch (Exception ex)
             {
@@ -87,20 +82,15 @@ namespace LOB.UI.Core.View.Controller
         public void MessageShow(string param, bool isRestrictive = true)
         {
             MessageHide(null);
-            var region = this._regionManager.Regions[RegionName.ModalRegion];
-            var view = _container.Resolve<MessageToolsView>();
             var viewModel = _container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            region.Add(_navigator.Init.SetView(view).SetViewModel(viewModel).GetView(), OperationType.MessageTools.ToString());
+            _navigator.Init.ResolveView(OperationType.MessageTools).SetViewModel(viewModel).AddToRegion(RegionName.ModalRegion);
         }
 
         public async void MessageHide(string param)
         {
-            var region = this._regionManager.Regions[RegionName.ModalRegion];
-            var view = region.GetView(OperationType.MessageTools.ToString());
-            if (region.Views.Contains(view))
-                region.Remove(view);
-
+            _regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
+            
             if (param != null)
             {
                 MessageShow(param, false);

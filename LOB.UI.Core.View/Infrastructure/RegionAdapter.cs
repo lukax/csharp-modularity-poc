@@ -31,11 +31,11 @@ namespace LOB.UI.Core.View.Infrastructure
         {
             if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
-            var previousView = region.GetView(typeof (TView).Name);
+            var previousView = region.GetView(view.OperationType.ToString());
             if(previousView != null)
                 if(region.Views.Contains(previousView))
                     region.Remove(previousView);
-            region.Add(view, typeof (TView).Name);
+            region.Add(view, view.OperationType.ToString());
         }
 
         public IBaseView GetView(OperationType param, string regionName)
@@ -51,7 +51,9 @@ namespace LOB.UI.Core.View.Infrastructure
             if (param == default(OperationType)) throw new ArgumentNullException("param");
             if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
-            region.Remove(region.GetView(param.ToString()));
+            var view = region.GetView(param.ToString());
+            if(region.Views.Contains(view))
+                region.Remove(view);
         }
     }
 }
