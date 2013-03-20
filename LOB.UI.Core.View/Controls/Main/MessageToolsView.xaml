@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
                                    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d">
 
@@ -46,7 +47,7 @@
                 <!--<controls:ProgressIndicator  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10" IsEnabled="True"  UseLayoutRounding="True" />-->
                 
                     <Button  HorizontalAlignment="Right" x:Name="ButtonClose" Command="{Binding CloseCommand}"
-                    Content="Close" Grid.Row="2" Grid.RowSpan="1" Grid.Column="1" Margin="5,1,5,1" />
+                    Content="{x:Static resources:Strings.Button_Close}" Grid.Row="2" Grid.RowSpan="1" Grid.Column="1" Margin="5,1,5,1" />
                 <controls:ProgressIndicator ProgressColour="{StaticResource AccentColorBrush}" x:Name="Progress" Grid.Row="0" Height="4.667" Width="Auto" MinWidth="100" />
 
             </Grid>

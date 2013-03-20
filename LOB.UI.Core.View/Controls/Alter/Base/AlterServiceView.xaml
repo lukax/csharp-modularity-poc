@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500">
@@ -31,11 +32,11 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Content="Category Name:" HorizontalAlignment="Right" Grid.Column="1" />
+            <Label Content="{x:Static resources:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
             <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
                      MinWidth="200" MaxWidth="300" Grid.Column="2" />
 
-            <TextBox controls:TextboxHelper.Watermark="PS" MinLines="3"
+            <TextBox controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Ps}" MinLines="3"
                      Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"
                      Grid.Column="1"
                      Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
@@ -44,11 +45,11 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
                                Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                    <Image Source="/Resource/Cancel48.png" />
+                    <Image Source="/Resources/Cancel48.png" />
                 </controls:Tile>
                 <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
                                Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                    <Image Source="/Resource/Accept48.png" />
+                    <Image Source="/Resources/Accept48.png" />
                 </controls:Tile>
             </StackPanel>
         </StackPanel>

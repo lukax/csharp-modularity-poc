@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
+             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
              mc:Ignorable="d"
              Height="110" Width="300">
 
@@ -28,7 +29,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label VerticalAlignment="Center" Content="PhoneNumber:" MinWidth="40" Grid.Row="2"
+            <Label VerticalAlignment="Center" Content="{x:Static resources:Strings.Common_PhoneNumber}" MinWidth="40" Grid.Row="2"
                    HorizontalAlignment="Right" />
             <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left">
                 <StackPanel.Resources>
@@ -43,7 +44,7 @@
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>
 
-            <TextBox Text="{Binding Entity.Description}" controls:TextboxHelper.Watermark="Description" Grid.Row="3"
+            <TextBox Text="{Binding Entity.Description}" controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Description}" Grid.Row="3"
                      Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

@@ -215,7 +215,7 @@
     </Compile>
     <Compile Include="Infrastructure\FluentNavigator.cs" />
     <Compile Include="Infrastructure\OperationTypeMapping.cs" />
-    <Compile Include="Properties\Strings.Designer.cs">
+    <Compile Include="Resources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
@@ -488,62 +488,62 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resource\Accept48.png">
+    <Content Include="Resources\Accept48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Add48.png">
+    <Content Include="Resources\Add48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Cancel48.png">
+    <Content Include="Resources\Cancel48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\delete.png">
+    <Content Include="Resources\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\edit.png">
+    <Content Include="Resources\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Edit48.png">
+    <Content Include="Resources\Edit48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\File48.png">
+    <Content Include="Resources\File48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\File_delete48.png">
+    <Content Include="Resources\File_delete48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\File_edit48.png">
+    <Content Include="Resources\File_edit48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\glyphicons_114_list.png">
+    <Content Include="Resources\glyphicons_114_list.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\glyphicons_223_thin_right_arrow.png">
+    <Content Include="Resources\glyphicons_223_thin_right_arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\logo.png">
+    <Content Include="Resources\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Refresh48.png">
+    <Content Include="Resources\Refresh48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Save48.png">
+    <Content Include="Resources\Save48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\save_as.png">
+    <Content Include="Resources\save_as.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Search48.png">
+    <Content Include="Resources\Search48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resource\Shoppingcart48.png">
+    <Content Include="Resources\Shoppingcart48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Strings.en-US.resx" />
-    <EmbeddedResource Include="Properties\Strings.pt-BR.resx" />
-    <EmbeddedResource Include="Properties\Strings.resx">
+    <EmbeddedResource Include="Resources\Strings.en-US.resx" />
+    <EmbeddedResource Include="Resources\Strings.pt-BR.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>

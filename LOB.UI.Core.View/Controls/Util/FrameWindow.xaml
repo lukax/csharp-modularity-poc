@@ -4,7 +4,8 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
-                      Title="Shell"
+                      xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+                      Title="{x:Static resources:Strings.Window_Title}"
                       Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <Window.Resources>

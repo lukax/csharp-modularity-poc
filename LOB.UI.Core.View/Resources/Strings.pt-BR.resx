@@ -117,7 +117,187 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="Button_Close" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="Common_Address" xml:space="preserve">
+    <value>Endereço</value>
+  </data>
+  <data name="Common_AvailableInStore" xml:space="preserve">
+    <value>Disponível na Loja</value>
+  </data>
+  <data name="Common_BirthDate" xml:space="preserve">
+    <value>Data de Nascimento</value>
+  </data>
+  <data name="Common_Bonus" xml:space="preserve">
+    <value>Bônus</value>
+  </data>
+  <data name="Common_BoughtHistory" xml:space="preserve">
+    <value>Histórico de Compra</value>
+  </data>
+  <data name="Common_Category" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="Common_City" xml:space="preserve">
+    <value>Cidade</value>
+  </data>
+  <data name="Common_CnaeFiscal" xml:space="preserve">
+    <value>Cnae Fiscal</value>
+  </data>
+  <data name="Common_Cnpj" xml:space="preserve">
+    <value>CNPJ</value>
+  </data>
+  <data name="Common_Code" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="Common_Complement" xml:space="preserve">
+    <value>Complemento</value>
+  </data>
+  <data name="Common_Contact" xml:space="preserve">
+    <value>Contato</value>
+  </data>
+  <data name="Common_ContactInfo" xml:space="preserve">
+    <value>Informações de Contato</value>
+  </data>
+  <data name="Common_CorporateName" xml:space="preserve">
+    <value>Nome Corporativo</value>
+  </data>
+  <data name="Common_Country" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="Common_Cpf" xml:space="preserve">
+    <value>CPF</value>
+  </data>
+  <data name="Common_CurrentSalary" xml:space="preserve">
+    <value>Salário</value>
+  </data>
+  <data name="Common_Customer" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="Common_CustomerOf" xml:space="preserve">
+    <value>Cliente de</value>
+  </data>
+  <data name="Common_Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Common_Default" xml:space="preserve">
+    <value>Padrão</value>
+  </data>
+  <data name="Common_Description" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="Common_District" xml:space="preserve">
+    <value>Distrito</value>
+  </data>
+  <data name="Common_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Common_Emails" xml:space="preserve">
+    <value>Emails</value>
+  </data>
+  <data name="Common_FirstName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Common_HireDate" xml:space="preserve">
+    <value>Contratado em</value>
+  </data>
+  <data name="Common_InscEstadual" xml:space="preserve">
+    <value>Inscrição Estadual</value>
+  </data>
+  <data name="Common_InscMunicipal" xml:space="preserve">
+    <value>Inscrição Municipal</value>
+  </data>
+  <data name="Common_LastName" xml:space="preserve">
+    <value>Sobrenome</value>
+  </data>
+  <data name="Common_Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Common_NickName" xml:space="preserve">
+    <value>Apelido</value>
+  </data>
+  <data name="Common_Notes" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Common_Number" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="Common_PayCheck" xml:space="preserve">
+    <value>Folha de Pagamento</value>
+  </data>
+  <data name="Common_PersonDetails" xml:space="preserve">
+    <value>Detalhes de Pessoa</value>
+  </data>
+  <data name="Common_PersonType" xml:space="preserve">
+    <value>Tipo de Pessoa</value>
+  </data>
+  <data name="Common_PhoneNumber" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="Common_PhoneNumbers" xml:space="preserve">
+    <value>Telefones</value>
+  </data>
+  <data name="Common_Product" xml:space="preserve">
+    <value>Produto</value>
+  </data>
+  <data name="Common_Products" xml:space="preserve">
+    <value>Produtos</value>
+  </data>
+  <data name="Common_Ps" xml:space="preserve">
+    <value>Observação</value>
+  </data>
+  <data name="Common_QuantityPerUnity" xml:space="preserve">
+    <value>Quantidade por Unidade</value>
+  </data>
+  <data name="Common_Rg" xml:space="preserve">
+    <value>RG</value>
+  </data>
+  <data name="Common_Search" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="Common_State" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Common_Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Common_Stores" xml:space="preserve">
+    <value>Lojas</value>
+  </data>
+  <data name="Common_Street" xml:space="preserve">
+    <value>Rua</value>
+  </data>
+  <data name="Common_StreetNumber" xml:space="preserve">
+    <value>Numero</value>
+  </data>
+  <data name="Common_Suppliers" xml:space="preserve">
+    <value>Fornecedores</value>
+  </data>
+  <data name="Common_Title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="Common_TotalValue" xml:space="preserve">
+    <value>Valor Total</value>
+  </data>
+  <data name="Common_TradingName" xml:space="preserve">
+    <value>Nome Fantasia</value>
+  </data>
+  <data name="Common_UnitSalePrice" xml:space="preserve">
+    <value>Preço por Unidade</value>
+  </data>
+  <data name="Common_UnitsInStock" xml:space="preserve">
+    <value>Unidades em Estoque</value>
+  </data>
+  <data name="Common_Website" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="Common_WorkInStore" xml:space="preserve">
+    <value>Trabalha na Loja</value>
+  </data>
+  <data name="Common_ZipCode" xml:space="preserve">
+    <value>CEP</value>
+  </data>
+  <data name="Menu_File" xml:space="preserve">
     <value>Arquivo</value>
   </data>
   <data name="Menu_File_Quit" xml:space="preserve">
@@ -191,6 +371,30 @@
   </data>
   <data name="Menu_Util_Paycheck" xml:space="preserve">
     <value>Folha de pagamento</value>
+  </data>
+  <data name="Tab_Hide" xml:space="preserve">
+    <value>&gt;</value>
+  </data>
+  <data name="ToolTip_AlterCustomer" xml:space="preserve">
+    <value>Alterar Funcionário</value>
+  </data>
+  <data name="ToolTip_Clear" xml:space="preserve">
+    <value>Limpar Campo</value>
+  </data>
+  <data name="ToolTip_Close" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="ToolTip_Code" xml:space="preserve">
+    <value>Código de Indentificação</value>
+  </data>
+  <data name="ToolTip_Operations" xml:space="preserve">
+    <value>Operações</value>
+  </data>
+  <data name="ToolTip_QuickSearch" xml:space="preserve">
+    <value>Busca Rápida</value>
+  </data>
+  <data name="ToolTip_Sales" xml:space="preserve">
+    <value>Vendas</value>
   </data>
   <data name="Window_Title" xml:space="preserve">
     <value>LOB APP</value>

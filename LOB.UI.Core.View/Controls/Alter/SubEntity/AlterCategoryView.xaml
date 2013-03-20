@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
                     HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
                            HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
@@ -29,7 +29,7 @@
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
                 <Image Source="/Resource/Accept48.png" />
             </controls:Tile>
-        </StackPanel>
+        </StackPanel>-->
 
         <StackPanel>
             <base:AlterServiceView x:Name="UcAlterServiceView" />

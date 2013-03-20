@@ -37,7 +37,7 @@ namespace LOB.UI.Core.View
                            IEventAggregator eventAggregator)
         {
             //CULTURE INFO
-            Properties.Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
+            View.Resources.Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
             //
             _container = container;
             _region = region;

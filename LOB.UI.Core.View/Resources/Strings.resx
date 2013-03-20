@@ -117,6 +117,186 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Button_Close" xml:space="preserve">
+    <value>@Button_Close</value>
+  </data>
+  <data name="Common_Address" xml:space="preserve">
+    <value>@Common_Address</value>
+  </data>
+  <data name="Common_AvailableInStore" xml:space="preserve">
+    <value>@Common_AvailableInStore</value>
+  </data>
+  <data name="Common_BirthDate" xml:space="preserve">
+    <value>@Common_BirthDate</value>
+  </data>
+  <data name="Common_Bonus" xml:space="preserve">
+    <value>@Common_Bonus</value>
+  </data>
+  <data name="Common_BoughtHistory" xml:space="preserve">
+    <value>@Common_BoughtHistory</value>
+  </data>
+  <data name="Common_Category" xml:space="preserve">
+    <value>@Common_Category</value>
+  </data>
+  <data name="Common_City" xml:space="preserve">
+    <value>@Common_City</value>
+  </data>
+  <data name="Common_CnaeFiscal" xml:space="preserve">
+    <value>@Common_CnaeFiscal</value>
+  </data>
+  <data name="Common_Cnpj" xml:space="preserve">
+    <value>@Common_Cnpj</value>
+  </data>
+  <data name="Common_Code" xml:space="preserve">
+    <value>@Common_Code</value>
+  </data>
+  <data name="Common_Complement" xml:space="preserve">
+    <value>@Common_Complement</value>
+  </data>
+  <data name="Common_Contact" xml:space="preserve">
+    <value>@Common_Contact</value>
+  </data>
+  <data name="Common_ContactInfo" xml:space="preserve">
+    <value>@Common_ContactInfo</value>
+  </data>
+  <data name="Common_CorporateName" xml:space="preserve">
+    <value>@Common_CorporateName</value>
+  </data>
+  <data name="Common_Country" xml:space="preserve">
+    <value>@Common_Country</value>
+  </data>
+  <data name="Common_Cpf" xml:space="preserve">
+    <value>@Common_Cpf</value>
+  </data>
+  <data name="Common_CurrentSalary" xml:space="preserve">
+    <value>@Common_CurrentSalary</value>
+  </data>
+  <data name="Common_Customer" xml:space="preserve">
+    <value>@Common_Customer</value>
+  </data>
+  <data name="Common_CustomerOf" xml:space="preserve">
+    <value>@Common_CustomerOf</value>
+  </data>
+  <data name="Common_Date" xml:space="preserve">
+    <value>@Common_Date</value>
+  </data>
+  <data name="Common_Default" xml:space="preserve">
+    <value>@Common_Default</value>
+  </data>
+  <data name="Common_Description" xml:space="preserve">
+    <value>@Common_Description</value>
+  </data>
+  <data name="Common_District" xml:space="preserve">
+    <value>@Common_District</value>
+  </data>
+  <data name="Common_Email" xml:space="preserve">
+    <value>@Common_Email</value>
+  </data>
+  <data name="Common_Emails" xml:space="preserve">
+    <value>@Common_Emails</value>
+  </data>
+  <data name="Common_FirstName" xml:space="preserve">
+    <value>@Common_FirstName</value>
+  </data>
+  <data name="Common_HireDate" xml:space="preserve">
+    <value>@Common_HireDate</value>
+  </data>
+  <data name="Common_InscEstadual" xml:space="preserve">
+    <value>@Common_InscEstadual</value>
+  </data>
+  <data name="Common_InscMunicipal" xml:space="preserve">
+    <value>@Common_InscMunicipal</value>
+  </data>
+  <data name="Common_LastName" xml:space="preserve">
+    <value>@Common_LastName</value>
+  </data>
+  <data name="Common_Name" xml:space="preserve">
+    <value>@Common_Name</value>
+  </data>
+  <data name="Common_NickName" xml:space="preserve">
+    <value>@Common_NickName</value>
+  </data>
+  <data name="Common_Notes" xml:space="preserve">
+    <value>@Common_Notes</value>
+  </data>
+  <data name="Common_Number" xml:space="preserve">
+    <value>@Common_Number</value>
+  </data>
+  <data name="Common_PayCheck" xml:space="preserve">
+    <value>@Common_PayCheck</value>
+  </data>
+  <data name="Common_PersonDetails" xml:space="preserve">
+    <value>@Common_PersonDetails</value>
+  </data>
+  <data name="Common_PersonType" xml:space="preserve">
+    <value>@Common_PersonType</value>
+  </data>
+  <data name="Common_PhoneNumber" xml:space="preserve">
+    <value>@Common_PhoneNumber</value>
+  </data>
+  <data name="Common_PhoneNumbers" xml:space="preserve">
+    <value>@Common_PhoneNumbers</value>
+  </data>
+  <data name="Common_Product" xml:space="preserve">
+    <value>@Common_Product</value>
+  </data>
+  <data name="Common_Products" xml:space="preserve">
+    <value>@Common_Products</value>
+  </data>
+  <data name="Common_Ps" xml:space="preserve">
+    <value>@Common_Ps</value>
+  </data>
+  <data name="Common_QuantityPerUnity" xml:space="preserve">
+    <value>@Common_QuantityPerUnity</value>
+  </data>
+  <data name="Common_Rg" xml:space="preserve">
+    <value>@Common_Rg</value>
+  </data>
+  <data name="Common_Search" xml:space="preserve">
+    <value>@Common_Search</value>
+  </data>
+  <data name="Common_State" xml:space="preserve">
+    <value>@Common_State</value>
+  </data>
+  <data name="Common_Status" xml:space="preserve">
+    <value>@Common_Status</value>
+  </data>
+  <data name="Common_Stores" xml:space="preserve">
+    <value>@Common_Stores</value>
+  </data>
+  <data name="Common_Street" xml:space="preserve">
+    <value>@Common_Street</value>
+  </data>
+  <data name="Common_StreetNumber" xml:space="preserve">
+    <value>@Common_StreetNumber</value>
+  </data>
+  <data name="Common_Suppliers" xml:space="preserve">
+    <value>@Common_Suppliers</value>
+  </data>
+  <data name="Common_Title" xml:space="preserve">
+    <value>@Common_Title</value>
+  </data>
+  <data name="Common_TotalValue" xml:space="preserve">
+    <value>@Common_TotalValue</value>
+  </data>
+  <data name="Common_TradingName" xml:space="preserve">
+    <value>@Common_TradingName</value>
+  </data>
+  <data name="Common_UnitSalePrice" xml:space="preserve">
+    <value>@Common_UnitSalePrice</value>
+  </data>
+  <data name="Common_UnitsInStock" xml:space="preserve">
+    <value>@Common_UnitsInStock</value>
+  </data>
+  <data name="Common_Website" xml:space="preserve">
+    <value>@Common_Website</value>
+  </data>
+  <data name="Common_WorkInStore" xml:space="preserve">
+    <value>@Common_WorkInStore</value>
+  </data>
+  <data name="Common_ZipCode" xml:space="preserve">
+    <value>@Common_ZipCode</value>
+  </data>
   <data name="Menu_File" xml:space="preserve">
     <value>@Menu_File</value>
   </data>
@@ -191,6 +371,30 @@
   </data>
   <data name="Menu_Util_Paycheck" xml:space="preserve">
     <value>@Menu_Util_Paycheck</value>
+  </data>
+  <data name="Tab_Hide" xml:space="preserve">
+    <value>@Tab_Hide</value>
+  </data>
+  <data name="ToolTip_AlterCustomer" xml:space="preserve">
+    <value>@ToolTip_AlterCustomer</value>
+  </data>
+  <data name="ToolTip_Clear" xml:space="preserve">
+    <value>@ToolTip_Clear</value>
+  </data>
+  <data name="ToolTip_Close" xml:space="preserve">
+    <value>@ToolTip_Close</value>
+  </data>
+  <data name="ToolTip_Code" xml:space="preserve">
+    <value>@ToolTip_Code</value>
+  </data>
+  <data name="ToolTip_Operations" xml:space="preserve">
+    <value>@ToolTip_Operations</value>
+  </data>
+  <data name="ToolTip_QuickSearch" xml:space="preserve">
+    <value>@ToolTip_QuickSearch</value>
+  </data>
+  <data name="ToolTip_Sales" xml:space="preserve">
+    <value>@ToolTip_Sales</value>
   </data>
   <data name="Window_Title" xml:space="preserve">
     <value>@Window_Title</value>

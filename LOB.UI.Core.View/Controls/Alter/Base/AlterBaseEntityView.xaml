@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -12,12 +13,12 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <TextBlock VerticalAlignment="Center" TextAlignment="Center"
+        <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static resources:Strings.ToolTip_Code}"
                    Text="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40" />
 
-        <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="Quick Search" Width="15" Height="15"
+        <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="{x:Static resources:Strings.ToolTip_QuickSearch}" Width="15" Height="15"
                        Background="Transparent">
-            <Image Source="/Resource/Search48.png" />
+            <Image Source="/Resources/Search48.png" />
         </controls:Tile>
     </StackPanel>
 

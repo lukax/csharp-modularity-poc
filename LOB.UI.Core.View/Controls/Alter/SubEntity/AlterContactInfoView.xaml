@@ -6,6 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -32,7 +33,7 @@
 
         <base2:AlterBaseEntityView Grid.Row="0" x:Name="UcAlterBaseEntityView" />
 
-        <GroupBox Header="PhoneNumbers:" Grid.Column="1" Grid.Row="0">
+        <GroupBox Header="{x:Static resources:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="0">
             <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding PhoneNumber}" SelectionMode="Single" />
         </GroupBox>
@@ -41,15 +42,15 @@
             <controls:Tile x:Name="ButtonAddPhoneNumber" IsDefault="True" Width="18" Height="18"
                            Background="Transparent"
                            Command="{Binding AddPhoneNumberCommand}" BorderThickness="0">
-                <Image Source="/Resource/Add48.png" />
+                <Image Source="/Resources/Add48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonDeletePhoneNumber" Width="18" Height="18" Background="Transparent"
                            Command="{Binding DeletePhoneNumberCommand}" BorderThickness="0">
-                <Image Source="/Resource/delete.png" />
+                <Image Source="/Resources/delete.png" />
             </controls:Tile>
         </StackPanel>
 
-        <GroupBox Header="Emails:" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="{x:Static resources:Strings.Common_Emails}" Grid.Column="1" Grid.Row="1">
             <ListBox ItemsSource="{Binding Entity.Emails, UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding Email}" SelectionMode="Single" />
         </GroupBox>
@@ -57,23 +58,23 @@
         <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
             <controls:Tile x:Name="ButtonAddEmail" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding AddEmailCommand}" BorderThickness="0">
-                <Image Source="/Resource/Add48.png" />
+                <Image Source="/Resources/Add48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonDeleteEmail" Width="18" Height="18" Background="Transparent"
                            Command="{Binding DeleteEmailCommand}" BorderThickness="0">
-                <Image Source="/Resource/delete.png" />
+                <Image Source="/Resources/delete.png" />
             </controls:Tile>
         </StackPanel>
 
-        <Label HorizontalAlignment="Right" Content="WebSite" Grid.Row="2" />
+        <Label HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_Website}" Grid.Row="2" />
         <TextBox Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="250" MaxWidth="400" Grid.Row="2" Grid.Column="1" />
 
-        <Label Grid.Row="3" HorizontalAlignment="Right" Content="Contact:" />
+        <Label Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_Contact}" />
         <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250" Text="{Binding Entity.SpeakWith}"
                  HorizontalAlignment="Left" />
 
-        <TextBox controls:TextboxHelper.Watermark="PS" Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}"
+        <TextBox controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Ps}" Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left" MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="4" Grid.Column="1" />
 
     </Grid>

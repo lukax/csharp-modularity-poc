@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:alter="clr-namespace:LOB.UI.Core.View.Controls.Alter"
+             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -18,18 +19,18 @@
 
         <DockPanel HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
-                           HorizontalAlignment="Left" ToolTip="Limpar" Focusable="False" Background="Transparent"
+                           HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent"
                            Grid.Column="5">
-                <Image Source="/Resource/File48.png"></Image>
+                <Image Source="/Resources/File48.png"></Image>
             </controls:Tile>
 
             <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/Resource/Cancel48.png" />
+                <Image Source="/Resources/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="/Resource/Accept48.png" />
+                <Image Source="/Resources/Accept48.png" />
             </controls:Tile>
         </DockPanel>
 
@@ -50,22 +51,22 @@
             <base2:AlterBaseEntityView HorizontalAlignment="Left" x:Name="UcAlterBaseEntityView" />
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                <Label Content="Header:" HorizontalAlignment="Right" />
+                <Label Content="{x:Static resources:Strings.Common_Title}" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Title}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
 
-                <Label Content="Hiredate:" HorizontalAlignment="Right" />
+                <Label Content="{x:Static resources:Strings.Common_HireDate}" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.HireDate}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <Label Content="Work In Store:" HorizontalAlignment="Right" />
+                <Label Content="{x:Static resources:Strings.Common_WorkInStore}" HorizontalAlignment="Right" />
                 <ComboBox SelectedItem="{Binding Entity.WorksIn}" ItemsSource="{Binding Stores}"
                           HorizontalAlignment="Left" MinWidth="150" MaxWidth="400" />
             </StackPanel>
 
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <TabControl>
-                    <TabItem Header="Person Details">
+                    <TabItem Header="{x:Static resources:Strings.Common_PersonDetails}">
                         <alter:AlterNaturalPersonView x:Name="UcAlterNaturalPersonView" />
                     </TabItem>
                 </TabControl>
@@ -73,8 +74,8 @@
 
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <TabControl>
-                    <TabItem Header=">" />
-                    <TabItem Header="PayCheck">
+                    <TabItem Header="{x:Static resources:Strings.Tab_Hide}" />
+                    <TabItem Header="{x:Static resources:Strings.Common_PayCheck}">
                         <base:AlterPayCheckView />
                     </TabItem>
                 </TabControl>
