@@ -70,7 +70,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public Interface.Infrastructure.OperationType OperationType
         {
-            get { return OperationType.AlterEmployee; }
+            get { return OperationType.NewEmployee; }
         }
     }
 }

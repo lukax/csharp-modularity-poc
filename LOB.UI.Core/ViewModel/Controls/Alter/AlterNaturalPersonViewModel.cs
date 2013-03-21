@@ -71,7 +71,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override Interface.Infrastructure.OperationType OperationType
         {
-            get { return OperationType.AlterNaturalPerson; }
+            get { return OperationType.NewNaturalPerson; }
         }
     }
 }

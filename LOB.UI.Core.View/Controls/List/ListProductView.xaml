@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -25,17 +25,17 @@
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
             <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
                            Background="Transparent">
-                <Image Source="/Resources/Add48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
-                <Image Source="/Resources/Edit48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
-                <Image Source="/Resources/delete.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
             </controls:Tile>
             <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
                            Background="Transparent">
-                <Image Source="/Resources/Refresh48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
             </controls:Tile>
         </StackPanel>
 

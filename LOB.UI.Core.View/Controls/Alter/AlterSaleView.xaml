@@ -6,10 +6,10 @@
              xmlns:metrocontrols="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:lobcontrols="clr-namespace:LOB.UI.Core.View.Controls"
              xmlns:lobbasecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="900">
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skin/MetroSkin.xaml" />
@@ -61,7 +61,7 @@
                         <TextBox Text="{Binding ClientLastName}" HorizontalAlignment="Left" MinWidth="200" />
 
                         <metrocontrols:Tile Background="Transparent" Width="20" Height="20" ToolTip="{x:Static resources:Strings.ToolTip_AlterCustomer}">
-                            <Image Source="/Resources/Edit48.png" />
+                            <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
                         </metrocontrols:Tile>
                     </DockPanel>
                 </GroupBox>

@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:alter="clr-namespace:LOB.UI.Core.View.Controls.Alter"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -21,16 +21,16 @@
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
                            HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent"
                            Grid.Column="5">
-                <Image Source="/Resources/File48.png"></Image>
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </controls:Tile>
 
             <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/Resources/Cancel48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="/Resources/Accept48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
             </controls:Tile>
         </DockPanel>
 

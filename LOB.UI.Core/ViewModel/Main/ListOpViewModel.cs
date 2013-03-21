@@ -1,7 +1,10 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -33,7 +36,7 @@ namespace LOB.UI.Core.ViewModel.Main
         {
             _commandService = commandService;
             _eventAggregator = eventAggregator;
-            SaveChangesCommand = new DelegateCommand(SelectionChanged);
+            SaveChangesCommand = new DelegateCommand(SaveChangesExecute);
             ListenToSelection();
         }
 
@@ -63,17 +66,36 @@ namespace LOB.UI.Core.ViewModel.Main
         private async void ListenToSelection()
         {
             //TODO: Localization and remove of unaplicable items
-            Entitys= new CollectionView(Enum.GetValues(typeof(OperationType)));
+            Entitys= new CollectionView(PrepareList());
             await Task.Delay(1000); //Avoid missclick & First item
-            Entitys.CurrentChanged += (sender, args) => SelectionChanged(null);
+            Entitys.CurrentChanged += (sender, args) => SaveChangesExecute(null);
         }
 
-        private void SelectionChanged(object arg)
+        private IEnumerable<StringWrapper> PrepareList()
+        {
+            var enumList = Enum.GetValues(typeof (OperationType)).Cast<OperationType>().ToList();
+            //Remove Unapplicables to user selection:
+            enumList.Remove(OperationType.Unknown);
+            enumList.Remove(OperationType.MessageTools);
+            enumList.Remove(OperationType.ColumnTools);
+            enumList.Remove(OperationType.HeaderTools);
+            enumList.Remove(OperationType.NewBaseEntity);
+            enumList.Remove(OperationType.ListBaseEntity);
+            enumList.Remove(OperationType.Main);
+
+            var processedList = new List<StringWrapper>();
+            var culture = ConfigurationManager.AppSettings["Culture"];
+            foreach (var operationType in enumList)
+            {
+                processedList.Add(new StringWrapper(operationType.ToString()));
+            }
+            return processedList;
+        }
+
+        private void SaveChangesExecute(object arg)
         {
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(Entity);
-            //_commandService.Execute(OperationParam.OpenTab, Entity);
-            //_commandService.Execute(OperationParam.Cancel, null);
         }
 
         public override Interface.Infrastructure.OperationType OperationType

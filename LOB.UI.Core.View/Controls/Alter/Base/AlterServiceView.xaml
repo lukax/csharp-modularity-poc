@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500">
 
@@ -26,7 +26,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -45,11 +45,11 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
                                Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                    <Image Source="/Resources/Cancel48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
                 </controls:Tile>
                 <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
                                Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                    <Image Source="/Resources/Accept48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
                 </controls:Tile>
             </StackPanel>
         </StackPanel>

@@ -120,6 +120,105 @@
   <data name="Button_Close" xml:space="preserve">
     <value>Fechar</value>
   </data>
+  <data name="Command_ListAddress" xml:space="preserve">
+    <value>Listar Endereços</value>
+  </data>
+  <data name="Command_ListBaseEntity" xml:space="preserve">
+    <value>Listar Códigos</value>
+  </data>
+  <data name="Command_ListCategory" xml:space="preserve">
+    <value>Listar Categorias</value>
+  </data>
+  <data name="Command_ListContactInfo" xml:space="preserve">
+    <value>Listar Informações de Contato</value>
+  </data>
+  <data name="Command_ListCustomer" xml:space="preserve">
+    <value>Listar Clientes</value>
+  </data>
+  <data name="Command_ListEmail" xml:space="preserve">
+    <value>Listar Emails</value>
+  </data>
+  <data name="Command_ListEmployee" xml:space="preserve">
+    <value>Listar Funcionários</value>
+  </data>
+  <data name="Command_ListLegalPerson" xml:space="preserve">
+    <value>Listar Pessoas Legais</value>
+  </data>
+  <data name="Command_ListNaturalPerson" xml:space="preserve">
+    <value>Listar Pessoas Físicas</value>
+  </data>
+  <data name="Command_ListOp" xml:space="preserve">
+    <value>Listar Operações</value>
+  </data>
+  <data name="Command_ListPayCheck" xml:space="preserve">
+    <value>Listar Folhas de Pagamento</value>
+  </data>
+  <data name="Command_ListPerson" xml:space="preserve">
+    <value>Listar Pessoas</value>
+  </data>
+  <data name="Command_ListPhoneNumber" xml:space="preserve">
+    <value>Listar Números de Telefone</value>
+  </data>
+  <data name="Command_ListProduct" xml:space="preserve">
+    <value>Listar Produtos</value>
+  </data>
+  <data name="Command_ListSale" xml:space="preserve">
+    <value>Listar Vendas</value>
+  </data>
+  <data name="Command_ListService" xml:space="preserve">
+    <value>Listar Serviços</value>
+  </data>
+  <data name="Command_NewAddress" xml:space="preserve">
+    <value>Novo Endereço</value>
+  </data>
+  <data name="Command_NewBaseEntity" xml:space="preserve">
+    <value>Novo Código</value>
+  </data>
+  <data name="Command_NewCategory" xml:space="preserve">
+    <value>Nova Categoria</value>
+  </data>
+  <data name="Command_NewContactInfo" xml:space="preserve">
+    <value>Nova Informação de Contato</value>
+  </data>
+  <data name="Command_NewCustomer" xml:space="preserve">
+    <value>Novo Cliente</value>
+  </data>
+  <data name="Command_NewEmail" xml:space="preserve">
+    <value>Novo Email</value>
+  </data>
+  <data name="Command_NewEmployee" xml:space="preserve">
+    <value>Novo Funcionário</value>
+  </data>
+  <data name="Command_NewLegalPerson" xml:space="preserve">
+    <value>Nova Pessoa Legal</value>
+  </data>
+  <data name="Command_NewNaturalPerson" xml:space="preserve">
+    <value>Nova Pessoa Física</value>
+  </data>
+  <data name="Command_NewPayCheck" xml:space="preserve">
+    <value>Nova Folha de Pagamento</value>
+  </data>
+  <data name="Command_NewPerson" xml:space="preserve">
+    <value>Nova Pessoa</value>
+  </data>
+  <data name="Command_NewPhoneNumber" xml:space="preserve">
+    <value>Novo Número de Telefone</value>
+  </data>
+  <data name="Command_NewProduct" xml:space="preserve">
+    <value>Novo Produto</value>
+  </data>
+  <data name="Command_NewSale" xml:space="preserve">
+    <value>Nova Venda</value>
+  </data>
+  <data name="Command_NewService" xml:space="preserve">
+    <value>Novo Serviço</value>
+  </data>
+  <data name="Command_SellProduct" xml:space="preserve">
+    <value>Vender Produto</value>
+  </data>
+  <data name="Command_SellService" xml:space="preserve">
+    <value>Vender Serviço</value>
+  </data>
   <data name="Common_Address" xml:space="preserve">
     <value>Endereço</value>
   </data>

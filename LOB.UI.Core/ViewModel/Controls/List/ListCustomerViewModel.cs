@@ -61,7 +61,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List
 
         public override Interface.Infrastructure.OperationType OperationType
         {
-            get { return OperationType.AlterCustomer; }
+            get { return OperationType.NewCustomer; }
         }
     }
 }

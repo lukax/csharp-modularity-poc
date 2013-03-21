@@ -55,7 +55,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public Interface.Infrastructure.OperationType OperationType
         {
-            get { return OperationType.AlterCustomer; }
+            get { return OperationType.NewCustomer; }
         }
     }
 }

@@ -52,7 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override Interface.Infrastructure.OperationType OperationType
         {
-            get { return OperationType.AlterLegalPerson; }
+            get { return OperationType.NewLegalPerson; }
         }
     }
 }

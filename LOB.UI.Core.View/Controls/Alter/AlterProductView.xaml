@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:basecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
@@ -20,16 +20,16 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
                            HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent" Grid.Column="5">
-                <Image Source="../../Resources/File48.png"></Image>
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </controls:Tile>
 
             <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="../../Resources/Cancel48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="../../Resources/Accept48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
             </controls:Tile>
         </StackPanel>
 
@@ -45,7 +45,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -72,15 +72,15 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="350" Grid.Column="4" Grid.Row="3">
                     <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory" SelectedItem="{Binding Entity.Category}" MinWidth="150" />
                     <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" 
-                                   Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
+                                   Command="{Binding AlterCategoryCommand}" CommandParameter="NewCategory"
                                    HorizontalAlignment="Left" ToolTip="Edit" Focusable="False" Background="Transparent"
                                    Grid.Column="5">
-                        <Image Source="/Resources/edit.png" />
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
                     </controls:Tile>
                     <controls:Tile Width="18" Height="18" Background="Transparent" CommandParameter="ListCategory"
                                    Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0"
                                    ToolTip="QuickSearch">
-                        <Image Source="/Resources/Search48.png" />
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
                     </controls:Tile>
                 </StackPanel>
 
@@ -119,10 +119,10 @@
                         <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
                                        HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False"
                                        Background="Transparent" Grid.Column="5">
-                            <Image Source="/Resources/edit.png" />
+                            <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
                         </controls:Tile>
                         <controls:Tile Width="18" Height="18" Background="Transparent" Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                            <Image Source="/Resources/Search48.png" />
+                            <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
                         </controls:Tile>
                     </StackPanel>
                 </TabItem>

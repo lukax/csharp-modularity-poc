@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              mc:Ignorable="d"
              Height="110" Width="300">
 
@@ -50,11 +50,11 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
                            Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/Resource/Cancel48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
                            Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                <Image Source="/Resource/Accept48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
             </controls:Tile>
         </StackPanel>
     </StackPanel>

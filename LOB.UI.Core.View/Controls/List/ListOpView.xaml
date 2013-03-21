@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.UI.Interface.Infrastructure;assembly=LOB.UI.Interface"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -18,7 +18,7 @@
             <DockPanel >
                 <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}">
-                    <Image Source="/Resources/glyphicons_223_thin_right_arrow.png" DockPanel.Dock="Right"/>
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
                 </controls:Tile>
                 
                 <TextBox MinWidth="200" Width="Auto" Height="Auto"

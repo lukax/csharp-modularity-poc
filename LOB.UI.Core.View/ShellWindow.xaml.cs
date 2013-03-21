@@ -10,6 +10,7 @@ using LOB.Log.Interface;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
+using LOB.UI.Core.Resources.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
@@ -37,7 +38,7 @@ namespace LOB.UI.Core.View
                            IEventAggregator eventAggregator)
         {
             //CULTURE INFO
-            View.Resources.Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
+            Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
             //
             _container = container;
             _region = region;

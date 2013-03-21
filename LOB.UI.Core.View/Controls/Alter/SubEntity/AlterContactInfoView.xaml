@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
-             xmlns:resources="clr-namespace:LOB.UI.Core.View.Resources"
+             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -24,7 +24,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" MinWidth="600" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -42,11 +42,11 @@
             <controls:Tile x:Name="ButtonAddPhoneNumber" IsDefault="True" Width="18" Height="18"
                            Background="Transparent"
                            Command="{Binding AddPhoneNumberCommand}" BorderThickness="0">
-                <Image Source="/Resources/Add48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonDeletePhoneNumber" Width="18" Height="18" Background="Transparent"
                            Command="{Binding DeletePhoneNumberCommand}" BorderThickness="0">
-                <Image Source="/Resources/delete.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
             </controls:Tile>
         </StackPanel>
 
@@ -58,11 +58,11 @@
         <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
             <controls:Tile x:Name="ButtonAddEmail" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding AddEmailCommand}" BorderThickness="0">
-                <Image Source="/Resources/Add48.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
             </controls:Tile>
             <controls:Tile x:Name="ButtonDeleteEmail" Width="18" Height="18" Background="Transparent"
                            Command="{Binding DeleteEmailCommand}" BorderThickness="0">
-                <Image Source="/Resources/delete.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
             </controls:Tile>
         </StackPanel>
 

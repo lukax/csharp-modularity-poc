@@ -43,7 +43,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
 
         public Interface.Infrastructure.OperationType OperationType
         {
-            get { return OperationType.AlterService; }
+            get { return OperationType.NewService; }
         }
     }
 }
