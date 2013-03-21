@@ -53,54 +53,54 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icons\Accept48.png">
+    <Resource Include="Icons\Accept48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Add48.png">
+    </Resource>
+    <Resource Include="Icons\Add48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Arrow_Right_Thin.png">
+    </Resource>
+    <Resource Include="Icons\Arrow_Right_Thin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Cancel48.png">
+    </Resource>
+    <Resource Include="Icons\Cancel48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Delete.png">
+    </Resource>
+    <Resource Include="Icons\Delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Edit.png">
+    </Resource>
+    <Resource Include="Icons\Edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Edit48.png">
+    </Resource>
+    <Resource Include="Icons\Edit48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\File48.png">
+    </Resource>
+    <Resource Include="Icons\File48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\File_delete48.png">
+    </Resource>
+    <Resource Include="Icons\File_delete48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\File_edit48.png">
+    </Resource>
+    <Resource Include="Icons\File_edit48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\List.png">
+    </Resource>
+    <Resource Include="Icons\List.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Logo.png">
+    </Resource>
+    <Resource Include="Icons\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Refresh48.png">
+    </Resource>
+    <Resource Include="Icons\Refresh48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Save48.png">
+    </Resource>
+    <Resource Include="Icons\Save48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Search48.png">
+    </Resource>
+    <Resource Include="Icons\Search48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\Shoppingcart48.png">
+    </Resource>
+    <Resource Include="Icons\Shoppingcart48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Strings.en-US.resx" />

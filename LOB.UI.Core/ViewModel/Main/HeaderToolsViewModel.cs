@@ -22,6 +22,6 @@ namespace LOB.UI.Core.ViewModel.Main
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType { get; set;  }
+        public OperationType OperationType { get; set; }
     }
 }

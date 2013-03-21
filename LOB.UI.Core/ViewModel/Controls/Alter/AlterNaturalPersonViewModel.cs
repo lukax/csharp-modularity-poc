@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
@@ -48,6 +47,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.NewNaturalPerson; }
+        }
+
         protected override void SaveChanges(object arg)
         {
             using (Repository.Uow)
@@ -60,18 +64,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel>(),
-                                           "QuickSearchCommand");
+            //Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel>(),"QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)
         {
             Entity = new NaturalPerson();
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.NewNaturalPerson; }
         }
     }
 }

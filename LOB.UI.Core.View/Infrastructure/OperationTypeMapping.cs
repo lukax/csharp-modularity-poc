@@ -33,7 +33,6 @@ namespace LOB.UI.Core.View.Infrastructure
                     {OperationType.MessageTools, typeof (MessageToolsView)},
                     {OperationType.ColumnTools, typeof (ColumnToolsView)},
                     {OperationType.HeaderTools, typeof (HeaderToolsView)},
-
                     {OperationType.NewAddress, typeof (AlterAddressView)},
                     {OperationType.NewBaseEntity, typeof (AlterBaseEntityView)},
                     {OperationType.NewCategory, typeof (AlterCategoryView)},
@@ -76,7 +75,6 @@ namespace LOB.UI.Core.View.Infrastructure
                     {OperationType.MessageTools, typeof (MessageToolsViewModel)},
                     {OperationType.ColumnTools, typeof (ColumnToolsViewModel)},
                     {OperationType.HeaderTools, typeof (HeaderToolsViewModel)},
-
                     {OperationType.NewAddress, typeof (AlterAddressViewModel)},
                     {OperationType.NewBaseEntity, typeof (AlterBaseEntityViewModel<BaseEntity>)},
                     {OperationType.NewCategory, typeof (AlterCategoryViewModel)},

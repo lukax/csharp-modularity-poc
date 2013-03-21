@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -30,10 +29,8 @@ namespace LOB.UI.Core.View.Controls.Alter
             {
                 DataContext = value;
                 UcAlterBaseEntity.DataContext = value;
-                Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",
-                                                   o => { UcAlterPersonDetails.Content = o; });
-                Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",
-                                                   o => Messenger.Default.Send("Cancel"));
+                //Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",o => { UcAlterPersonDetails.Content = o; });
+                //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",o => Messenger.Default.Send("Cancel"));
             }
         }
 
@@ -53,7 +50,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.NewCustomer; }
         }

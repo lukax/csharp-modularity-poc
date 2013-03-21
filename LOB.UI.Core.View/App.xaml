@@ -5,9 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:LOB.UI.Core.ViewModel;assembly=LOB.UI.Core"
              mc:Ignorable="d">
-    <!--StartupUri="View\MainWindow.xaml"-->
     <Application.Resources>
-        <!--Global View Model Locator-->
-        <!--<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />-->
     </Application.Resources>
 </Application>

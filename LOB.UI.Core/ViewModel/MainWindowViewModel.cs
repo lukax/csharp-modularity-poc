@@ -4,7 +4,6 @@ using System.Windows.Input;
 using LOB.Core;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Unity;
@@ -36,6 +35,11 @@ namespace LOB.UI.Core.ViewModel
         private IUnityContainer _container { get; set; }
         private IFluentNavigator _navigator { get; set; }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.Main; }
+        }
+
         private void OpenTab(object arg)
         {
             OperationType oP = arg.ToString().ToOperationType();
@@ -49,7 +53,5 @@ namespace LOB.UI.Core.ViewModel
         public override void Refresh()
         {
         }
-
-        public override OperationType OperationType { get{ return OperationType.Main;} }
     }
 }

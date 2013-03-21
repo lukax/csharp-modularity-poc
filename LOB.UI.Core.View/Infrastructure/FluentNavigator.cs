@@ -31,7 +31,10 @@ namespace LOB.UI.Core.View.Infrastructure
         /// <summary>
         /// Initialize with clean Fields
         /// </summary>
-        public IFluentNavigator Init { get { return new FluentNavigator(_container, _regionAdapter); } }
+        public IFluentNavigator Init
+        {
+            get { return new FluentNavigator(_container, _regionAdapter); }
+        }
 
         public event OnOpenViewEventHandler OnOpenView;
 
@@ -41,7 +44,7 @@ namespace LOB.UI.Core.View.Infrastructure
                 throw new ArgumentException("First resolve the view", "ResolveView");
             if (_resolvedView.ViewModel == null)
                 throw new ArgumentException("First resolve the view model", "ResolveViewModel");
-            if(_resolvedViewModel != null)
+            if (_resolvedViewModel != null)
                 _resolvedViewModel.InitializeServices();
             _resolvedView.InitializeServices();
             return _resolvedView;
@@ -56,7 +59,8 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator ResolveViewModel(OperationType param)
         {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if (_resolvedViewModel != null)
+                throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve(OperationTypeMapping.ViewModels[param]) as IBaseViewModel;
             if (resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);
@@ -65,7 +69,8 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel
         {
-            if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if (_resolvedViewModel != null)
+                throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve<TViewModel>();
             SetViewModel(resolved);
             return this;
@@ -73,7 +78,8 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator ResolveView(OperationType param)
         {
-            if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if (_resolvedViewModel != null)
+                throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve(OperationTypeMapping.Views[param]) as IBaseView;
             if (resolved == null) throw new ArgumentException("param");
             SetView(resolved);
@@ -82,7 +88,8 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IFluentNavigator ResolveView<TView>() where TView : IBaseView
         {
-            if (_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if (_resolvedViewModel != null)
+                throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve<TView>();
             SetView(resolved);
             return this;
@@ -121,7 +128,7 @@ namespace LOB.UI.Core.View.Infrastructure
 
 
                 if (OnOpenView != null)
-                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
+                    OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asUc));
 
                 if (asDialog) window.ShowDialog();
                 else window.Show();
@@ -132,7 +139,7 @@ namespace LOB.UI.Core.View.Infrastructure
                 if (asW != null)
                 {
                     if (OnOpenView != null)
-                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
+                        OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asW));
 
                     if (asDialog) asW.ShowDialog();
                     else asW.Show();

@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
-using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -56,6 +53,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.NewProduct; }
+        }
+
         private async void UpdateCategoryList(int delay = 2000)
         {
             while (true)
@@ -76,7 +78,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             OperationType oP = o.ToString().ToOperationType();
             if (Entity.Category != null)
                 _navigator.ResolveView(oP)
-                          .SetViewModel(_container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category", Entity.Category)))
+                          .SetViewModel(
+                              _container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
+                                                                                               Entity.Category)))
                           .Show(true);
             _navigator.ResolveView(oP).Show(true);
         }
@@ -90,7 +94,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 Repository.Uow.CommitTransaction();
             }
 
-            Messenger.Default.Send("SaveChangesCommand");
+            //Messenger.Default.Send("SaveChangesCommand");
         }
 
         protected override bool CanSaveChanges(object arg)
@@ -113,11 +117,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         protected override void ClearEntity(object args)
         {
             Entity = new Product();
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.NewProduct; }
         }
     }
 }

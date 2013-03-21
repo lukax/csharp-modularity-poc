@@ -7,7 +7,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Base;
@@ -136,7 +135,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         protected virtual void Update(object arg)
         {
-            Messenger.Default.Send(Entity, "Update");
+            //Messenger.Default.Send(Entity, "Update");
             Debug.WriteLine("Updatecalled");
         }
 
@@ -147,7 +146,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
 
         protected virtual void Delete(object arg)
         {
-            Messenger.Default.Send(arg ?? _entity, "Delete");
+            //Messenger.Default.Send(arg ?? _entity, "Delete");
             Repository.Delete(_entity);
         }
 

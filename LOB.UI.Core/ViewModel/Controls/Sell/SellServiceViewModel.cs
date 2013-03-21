@@ -22,6 +22,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType { get{return OperationType.SellService;} }
+        public OperationType OperationType
+        {
+            get { return OperationType.SellService; }
+        }
     }
 }

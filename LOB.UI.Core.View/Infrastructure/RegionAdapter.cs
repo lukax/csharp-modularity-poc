@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Windows.Controls;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
@@ -12,7 +11,7 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 namespace LOB.UI.Core.View.Infrastructure
 {
-    public class RegionAdapter : Interface.Infrastructure.IRegionAdapter
+    public class RegionAdapter : IRegionAdapter
     {
         private readonly IUnityContainer _container;
         private readonly IRegionManager _regionManager;
@@ -32,8 +31,8 @@ namespace LOB.UI.Core.View.Infrastructure
             if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
             var previousView = region.GetView(view.OperationType.ToString());
-            if(previousView != null)
-                if(region.Views.Contains(previousView))
+            if (previousView != null)
+                if (region.Views.Contains(previousView))
                     region.Remove(previousView);
             region.Add(view, view.OperationType.ToString());
         }
@@ -52,7 +51,7 @@ namespace LOB.UI.Core.View.Infrastructure
             if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
             var view = region.GetView(param.ToString());
-            if(region.Views.Contains(view))
+            if (region.Views.Contains(view))
                 region.Remove(view);
         }
     }

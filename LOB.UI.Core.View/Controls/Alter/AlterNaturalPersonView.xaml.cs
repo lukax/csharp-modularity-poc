@@ -50,7 +50,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.NewNaturalPerson; }
         }

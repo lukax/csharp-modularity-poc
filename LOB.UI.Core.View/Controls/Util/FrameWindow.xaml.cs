@@ -1,20 +1,16 @@
 ﻿#region Usings
 
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Log.Interface;
-using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -57,6 +53,11 @@ namespace LOB.UI.Core.View.Controls.Util
         {
             base.UpdateLayout();
             MiLightBlue(null, null);
+        }
+
+        public OperationType OperationType
+        {
+            get { return OperationType.Main; }
         }
 
         #region Themes
@@ -121,11 +122,6 @@ namespace LOB.UI.Core.View.Controls.Util
         private void Busy()
         {
             ModalRegion = new BusyView();
-        }
-
-        public Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.Main; }
         }
     }
 }

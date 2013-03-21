@@ -39,7 +39,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.NewBaseEntity; }
         }

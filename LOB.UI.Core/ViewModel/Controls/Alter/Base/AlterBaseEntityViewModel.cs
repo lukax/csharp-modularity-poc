@@ -2,7 +2,6 @@
 
 using System.Diagnostics;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Base;
@@ -67,7 +66,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         protected virtual void Cancel(object arg)
         {
-            Messenger.Default.Send(CancelIndex, "Cancel");
+            //Messenger.Default.Send(CancelIndex, "Cancel");
         }
 
         protected abstract void QuickSearch(object arg);

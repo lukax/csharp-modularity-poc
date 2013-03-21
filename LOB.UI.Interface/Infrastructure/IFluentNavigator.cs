@@ -19,7 +19,10 @@ namespace LOB.UI.Interface.Infrastructure
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
         event OnOpenViewEventHandler OnOpenView;
         void AddToRegion(string regionName);
-        [Obsolete("Use method AddToRegion")] void Show(bool asDialog = false);
+
+        [Obsolete("Use method AddToRegion")]
+        void Show(bool asDialog = false);
+
         bool PromptUser(string message);
     }
 

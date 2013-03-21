@@ -30,7 +30,7 @@ namespace LOB.UI.Core.View.Controls.Sell
             throw new NotImplementedException();
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.SellProduct; }
         }

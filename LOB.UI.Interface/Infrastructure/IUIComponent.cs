@@ -2,6 +2,6 @@
 {
     public interface IUIComponent
     {
-        OperationType OperationType { get; } 
+        OperationType OperationType { get; }
     }
 }

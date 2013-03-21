@@ -26,6 +26,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _container = container;
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.NewCategory; }
+        }
+
         protected override void SaveChanges(object arg)
         {
             using (Repository.Uow.BeginTransaction())
@@ -38,17 +43,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-           throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         protected override void ClearEntity(object arg)
         {
             throw new NotImplementedException();
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.NewCategory; }
         }
     }
 }

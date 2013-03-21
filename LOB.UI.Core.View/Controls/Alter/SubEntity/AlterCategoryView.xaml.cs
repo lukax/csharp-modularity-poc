@@ -44,7 +44,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.NewCategory; }
         }

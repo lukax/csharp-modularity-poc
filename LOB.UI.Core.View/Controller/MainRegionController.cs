@@ -6,15 +6,11 @@ using LOB.Dao.Interface;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
-using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.ViewModel.Main;
-using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
-using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
 
@@ -25,9 +21,9 @@ namespace LOB.UI.Core.View.Controller
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
+        private readonly IFluentNavigator _navigator;
         private readonly IRegionAdapter _regionAdapter;
         private readonly ISessionCreator _sessionCreator;
-        private readonly IFluentNavigator _navigator;
 
         public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter,
                                     IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
@@ -44,7 +40,7 @@ namespace LOB.UI.Core.View.Controller
             _logger = logger;
             _sessionCreator = sessionCreator;
             _navigator = navigator;
-            
+
             OnLoad();
         }
 
@@ -75,7 +71,7 @@ namespace LOB.UI.Core.View.Controller
             catch (Exception ex)
             {
                 _logger.Log(ex.Message, Category.Exception, Priority.High);
-               MessageHide(ex.Message);
+                MessageHide(ex.Message);
             }
         }
 
@@ -84,13 +80,15 @@ namespace LOB.UI.Core.View.Controller
             MessageHide(null);
             var viewModel = _container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            _navigator.Init.ResolveView(OperationType.MessageTools).SetViewModel(viewModel).AddToRegion(RegionName.ModalRegion);
+            _navigator.Init.ResolveView(OperationType.MessageTools)
+                      .SetViewModel(viewModel)
+                      .AddToRegion(RegionName.ModalRegion);
         }
 
         public async void MessageHide(string param)
         {
             _regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
-            
+
             if (param != null)
             {
                 MessageShow(param, false);
@@ -98,7 +96,5 @@ namespace LOB.UI.Core.View.Controller
                 MessageHide(null);
             }
         }
-
-
     }
 }

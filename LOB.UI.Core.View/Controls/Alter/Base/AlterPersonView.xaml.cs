@@ -54,7 +54,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
             throw new NotImplementedException();
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.NewPerson; }
         }

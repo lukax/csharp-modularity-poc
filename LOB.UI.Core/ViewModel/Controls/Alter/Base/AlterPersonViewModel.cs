@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.SubEntity;
@@ -78,7 +77,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListPersonViewModel<Person>>(), "QuickSearchCommand");
+            //Messenger.Default.Send<object>(_container.Resolve<ListPersonViewModel<Person>>(), "QuickSearchCommand");
         }
     }
 }

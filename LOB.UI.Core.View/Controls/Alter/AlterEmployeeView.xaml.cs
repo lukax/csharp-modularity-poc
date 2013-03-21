@@ -4,10 +4,8 @@ using System.Windows.Controls;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
-using Microsoft.Expression.Interactivity.Core;
 using Microsoft.Practices.Prism.Events;
 
 #endregion
@@ -68,7 +66,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.NewEmployee; }
         }

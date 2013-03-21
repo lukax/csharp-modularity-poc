@@ -17,6 +17,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         {
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.NewEmail; }
+        }
+
         protected override void QuickSearch(object arg)
         {
             throw new NotImplementedException();
@@ -25,11 +30,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         protected override void ClearEntity(object arg)
         {
             throw new NotImplementedException();
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.NewEmail; }
         }
     }
 }

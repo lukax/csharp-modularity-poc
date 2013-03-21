@@ -1,15 +1,12 @@
 ﻿#region Usings
 
-using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Log.Interface;
-using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.Resources.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -33,7 +30,7 @@ namespace LOB.UI.Core.View
         private readonly ILogger _logger;
         private readonly IRegionManager _region;
         private IModuleManager _module;
-        
+
         public ShellWindow(IUnityContainer container, IRegionManager region, ILogger logger,
                            IEventAggregator eventAggregator)
         {
@@ -46,17 +43,6 @@ namespace LOB.UI.Core.View
             _eventAggregator = eventAggregator;
             InitializeComponent();
             OnLoad();
-        }
-
-        private void OnLoad()
-        {
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe((o) => { if (o == OperationType.Main) this.Close(); });
-            
-            if (_loaded) return;
-            _module = _container.Resolve<IModuleManager>();
-            _module.LoadModule("UICoreViewModule");
-            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
-            _loaded = true;
         }
 
         public IBaseViewModel ViewModel
@@ -76,6 +62,11 @@ namespace LOB.UI.Core.View
         {
             base.UpdateLayout();
             MiLightBlue(null, null);
+        }
+
+        public OperationType OperationType
+        {
+            get { return OperationType.Main; }
         }
 
         #region Themes
@@ -137,9 +128,15 @@ namespace LOB.UI.Core.View
 
         #endregion
 
-        public Interface.Infrastructure.OperationType OperationType
+        private void OnLoad()
         {
-            get { return OperationType.Main; }
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe((o) => { if (o == OperationType.Main) this.Close(); });
+
+            if (_loaded) return;
+            _module = _container.Resolve<IModuleManager>();
+            _module.LoadModule("UICoreViewModule");
+            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
+            _loaded = true;
         }
 
         private void TabRegion_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

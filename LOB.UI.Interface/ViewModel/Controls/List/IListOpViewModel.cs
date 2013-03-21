@@ -1,10 +1,4 @@
-﻿#region Usings
-
-
-
-#endregion
-
-namespace LOB.UI.Interface.ViewModel.Controls.List
+﻿namespace LOB.UI.Interface.ViewModel.Controls.List
 {
     public interface IListOpViewModel : IBaseViewModel
     {

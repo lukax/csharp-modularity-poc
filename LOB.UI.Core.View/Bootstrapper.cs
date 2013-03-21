@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.IO;
 using System.Windows;
 using LOB.Log;
@@ -40,10 +41,14 @@ namespace LOB.UI.Core.View
             //var catalog = new DirectoryModuleCatalog() { ModulePath = @".\Modules" };
             //catalog.Load();
 
-            //XAML
-            var catalogStream = new FileStream(@".\ModuleCatalog.xaml", FileMode.Open);
-            var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(catalogStream);
-            catalogStream.Dispose();
+            //Detached File XAML(Change Build mode to Content)
+            //var catalogStream = new FileStream(@".\ModuleCatalog.xaml", FileMode.Open);
+            //var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(catalogStream);
+            //catalogStream.Dispose();
+
+            //XAML(Change Build mode to Resource)
+            var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
+                new Uri("/LOB.UI.Core.View;component/ModuleCatalog.xaml", UriKind.Relative));
             return catalog;
         }
 

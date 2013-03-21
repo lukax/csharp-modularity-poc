@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using GalaSoft.MvvmLight.Messaging;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -24,6 +23,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _container = container;
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.NewPayCheck; }
+        }
+
         protected override bool CanSaveChanges(object arg)
         {
             //TODO: Business logic
@@ -38,17 +42,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         protected override void QuickSearch(object arg)
         {
-            Messenger.Default.Send<object>(_container.Resolve<ListPayCheckViewModel>(), "QuickSearchCommand");
+            //Messenger.Default.Send<object>(_container.Resolve<ListPayCheckViewModel>(), "QuickSearchCommand");
         }
 
         protected override void ClearEntity(object arg)
         {
             throw new NotImplementedException();
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.NewPayCheck; }
         }
     }
 }

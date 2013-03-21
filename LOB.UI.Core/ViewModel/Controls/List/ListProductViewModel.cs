@@ -42,6 +42,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List
             }
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.ListProduct; }
+        }
+
         protected override bool CanUpdate(object arg)
         {
             //TODO: Business logic
@@ -52,11 +57,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List
         {
             //TODO: Business logic
             return true;
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.ListProduct; }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Windows.Input;
-using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -41,6 +40,8 @@ namespace LOB.UI.Core.ViewModel.Main
         {
         }
 
+        public OperationType OperationType { get; set; }
+
         private void ShowShop(object obj)
         {
             //_eventAggregator.GetEvent<OpenViewEvent>().Publish("");
@@ -50,7 +51,5 @@ namespace LOB.UI.Core.ViewModel.Main
         {
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.ListOp);
         }
-
-        public OperationType OperationType { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using LOB.Domain.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;

@@ -5,7 +5,6 @@ using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -39,6 +38,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         public ICommand DeleteEmailCommand { get; set; }
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
+
+        public override OperationType OperationType
+        {
+            get { return OperationType.NewContactInfo; }
+        }
 
         private void AddEmail(object arg)
         {
@@ -78,11 +82,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         {
             //TODO: Business logic
             return true;
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.NewContactInfo; }
         }
     }
 }

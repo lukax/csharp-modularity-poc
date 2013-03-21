@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Windows.Input;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
@@ -51,14 +50,12 @@ namespace LOB.UI.Core.ViewModel.Main
 
         public ICommand CloseCommand
         {
-            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(CloseExecute, ()=> CanClose)); }
+            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
 
             set { this._closeCommand = value; }
         }
 
-        public bool CanClose
-        {
-            get; set; }
+        public bool CanClose { get; set; }
 
         public void CloseExecute()
         {
@@ -74,6 +71,11 @@ namespace LOB.UI.Core.ViewModel.Main
             this.eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.MessageTools; }
+        }
+
         public void Initialize(string message, bool canClose, bool isRestrictive)
         {
             Message = message;
@@ -87,11 +89,6 @@ namespace LOB.UI.Core.ViewModel.Main
 
         public override void Refresh()
         {
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.MessageTools; }
         }
     }
 }

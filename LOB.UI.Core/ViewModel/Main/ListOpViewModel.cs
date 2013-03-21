@@ -11,9 +11,7 @@ using System.Windows.Input;
 using LOB.Core.Util;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -63,10 +61,15 @@ namespace LOB.UI.Core.ViewModel.Main
         {
         }
 
+        public override OperationType OperationType
+        {
+            get { return OperationType.ListOp; }
+        }
+
         private async void ListenToSelection()
         {
             //TODO: Localization and remove of unaplicable items
-            Entitys= new CollectionView(PrepareList());
+            Entitys = new CollectionView(PrepareList());
             await Task.Delay(1000); //Avoid missclick & First item
             Entitys.CurrentChanged += (sender, args) => SaveChangesExecute(null);
         }
@@ -96,11 +99,6 @@ namespace LOB.UI.Core.ViewModel.Main
         {
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(Entity);
-        }
-
-        public override Interface.Infrastructure.OperationType OperationType
-        {
-            get { return OperationType.ListOp; }
         }
     }
 }

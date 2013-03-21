@@ -37,7 +37,7 @@ namespace LOB.UI.Core.View.Controls.Main
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.ColumnTools; }
         }

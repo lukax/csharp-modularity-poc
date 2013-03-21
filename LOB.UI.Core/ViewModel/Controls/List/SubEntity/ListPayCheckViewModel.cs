@@ -37,7 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
             }
         }
 
-        public override Interface.Infrastructure.OperationType OperationType
+        public override OperationType OperationType
         {
             get { return OperationType.NewPayCheck; }
         }

@@ -1,8 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 #endregion
 
@@ -30,7 +28,7 @@ namespace LOB.UI.Interface.Infrastructure
         NewPhoneNumber,
 
         NewCustomer,
-        NewEmployee ,
+        NewEmployee,
         NewLegalPerson,
         NewNaturalPerson,
         NewProduct,

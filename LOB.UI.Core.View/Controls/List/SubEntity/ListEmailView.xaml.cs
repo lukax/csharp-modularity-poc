@@ -40,7 +40,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
         {
         }
 
-        public Interface.Infrastructure.OperationType OperationType
+        public OperationType OperationType
         {
             get { return OperationType.ListEmail; }
         }
