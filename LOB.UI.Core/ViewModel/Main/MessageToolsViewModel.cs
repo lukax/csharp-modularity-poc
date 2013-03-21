@@ -18,29 +18,10 @@ namespace LOB.UI.Core.ViewModel.Main
         private IEventAggregator eventAggregator = null;
 
         #region Props
+        
+        public string Message { get; set; }
 
-        private bool _isRestrictive;
-        private string _message = "Please wait...";
-
-        public string Message
-        {
-            get { return _message; }
-            set
-            {
-                _message = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool IsRestrictive
-        {
-            get { return _isRestrictive; }
-            set
-            {
-                _isRestrictive = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool IsRestrictive { get; set; }
 
         #endregion Message
 
@@ -67,6 +48,7 @@ namespace LOB.UI.Core.ViewModel.Main
         [InjectionConstructor]
         public MessageToolsViewModel(IUnityContainer container)
         {
+            Message = "Please wait...";
             this.container = container;
             this.eventAggregator = this.container.Resolve<IEventAggregator>();
         }

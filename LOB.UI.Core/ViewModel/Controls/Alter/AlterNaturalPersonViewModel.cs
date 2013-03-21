@@ -42,7 +42,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 if (DateTime.TryParse(value, out parsed))
                 {
                     Entity.BirthDate = parsed;
-                    OnPropertyChanged();
                 }
             }
         }

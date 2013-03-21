@@ -51,6 +51,10 @@
   <ItemGroup>
     <None Include="LOB.Domain.snk" />
     <None Include="packages.config" />
+    <Reference Include="NullGuard">
+      <HintPath>..\packages\NullGuard.Fody.0.4.0.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <None Include="FodyWeavers.xml" />

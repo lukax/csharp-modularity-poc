@@ -10,18 +10,7 @@ namespace LOB.UI.Core.ViewModel.Base
 {
     public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel
     {
-        private string _header;
-
-        public string Header
-        {
-            get { return _header; }
-            set
-            {
-                _header = value;
-                OnPropertyChanged();
-            }
-        }
-
+        public string Header { get; set; }
         public abstract void InitializeServices();
         public abstract void Refresh();
         public abstract OperationType OperationType { get; }

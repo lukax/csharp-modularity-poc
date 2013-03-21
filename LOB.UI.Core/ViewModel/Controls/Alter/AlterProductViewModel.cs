@@ -48,7 +48,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 if (value == null) return;
                 if (value.Equals(_categories)) return;
                 _categories = value;
-                OnPropertyChanged();
                 if (Entity.Category == null) Entity.Category = value.FirstOrDefault();
             }
         }

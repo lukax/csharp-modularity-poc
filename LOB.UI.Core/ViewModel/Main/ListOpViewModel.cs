@@ -26,9 +26,7 @@ namespace LOB.UI.Core.ViewModel.Main
     {
         private readonly ICommandService _commandService;
         private readonly IEventAggregator _eventAggregator;
-
-        private OperationType _entity;
-
+        
         public ListOpViewModel(Category entity, IRepository repository, ICommandService commandService,
                                IEventAggregator eventAggregator)
         {
@@ -38,16 +36,7 @@ namespace LOB.UI.Core.ViewModel.Main
             ListenToSelection();
         }
 
-        public OperationType Entity
-        {
-            get { return _entity; }
-            set
-            {
-                if (_entity == value) return;
-                _entity = value;
-                OnPropertyChanged();
-            }
-        }
+        public OperationType Entity { get; set; }
 
         public ICollectionView Entitys { get; set; }
 

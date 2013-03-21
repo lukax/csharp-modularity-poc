@@ -23,23 +23,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         #region Props
 
         protected IRepository Repository;
-        private T _entity;
-        private IList<T> _list;
-
-        private string _search;
-
+      
         private Expression<Func<T, bool>> _searchCriteria;
 
-        public virtual string Search
-        {
-            get { return _search; }
-            set
-            {
-                if (_search == value) return;
-                _search = value;
-                OnPropertyChanged();
-            }
-        }
+        public virtual string Search { get; set; }
 
         public virtual Expression<Func<T, bool>> SearchCriteria
         {
@@ -58,25 +45,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
             set { _searchCriteria = value; }
         }
 
-        public IList<T> Entitys
-        {
-            get { return _list; }
-            set
-            {
-                _list = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public T Entity
-        {
-            get { return _entity; }
-            set
-            {
-                _entity = value;
-                OnPropertyChanged();
-            }
-        }
+        public IList<T> Entitys { get; set; }
+        public T Entity { get; set; }
 
         #endregion
 
@@ -86,7 +56,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         public ListBaseEntityViewModel(T entity, IRepository repository)
         {
             Repository = repository;
-            _entity = entity;
+            Entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
@@ -147,7 +117,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         protected virtual void Delete(object arg)
         {
             //Messenger.Default.Send(arg ?? _entity, "Delete");
-            Repository.Delete(_entity);
+            Repository.Delete(Entity);
         }
 
         protected virtual bool CanDelete(object arg)
