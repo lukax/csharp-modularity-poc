@@ -12,19 +12,19 @@ namespace LOB.Domain
     [Serializable]
     public class Product : Service
     {
-        public virtual Category Category { get; set; }
-        public virtual ProductStatus Status { get; set; }
-        public virtual int UnitsInStock { get; set; }
-        public virtual int MaxUnitsOfStock { get; set; }
-        public virtual int MinUnitsOfStock { get; set; }
-        public virtual double UnitCostPrice { get; set; }
-        public virtual double UnitSalePrice { get; set; }
-        public virtual double ProfitMargin { get; set; }
-        public virtual string QuantityPerUnit { get; set; }
-        public virtual IList<Store> StockedStores { get; set; }
-        public virtual IList<Sale> Sales { get; set; }
-        public virtual IList<Supplier> Suppliers { get; set; }
-        public virtual ShipmentInfo ShipmentInfo { get; set; }
+        public Category Category { get; set; }
+        public ProductStatus Status { get; set; }
+        public int UnitsInStock { get; set; }
+        public int MaxUnitsOfStock { get; set; }
+        public int MinUnitsOfStock { get; set; }
+        public double UnitCostPrice { get; set; }
+        public double UnitSalePrice { get; set; }
+        public double ProfitMargin { get; set; }
+        public string QuantityPerUnit { get; set; }
+        public IList<Store> StockedStores { get; set; }
+        public IList<Sale> Sales { get; set; }
+        public IList<Supplier> Suppliers { get; set; }
+        public ShipmentInfo ShipmentInfo { get; set; }
     }
 
     [Serializable]

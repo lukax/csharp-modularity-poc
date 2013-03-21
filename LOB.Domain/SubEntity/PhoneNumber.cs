@@ -10,9 +10,9 @@ namespace LOB.Domain.SubEntity
     [Serializable]
     public class PhoneNumber : BaseEntity
     {
-        public virtual int Number { get; set; }
-        public virtual PhoneNumberType PhoneNumberType { get; set; }
-        public virtual string Description { get; set; }
+        public int Number { get; set; }
+        public PhoneNumberType PhoneNumberType { get; set; }
+        public string Description { get; set; }
 
         public override string ToString()
         {

@@ -11,12 +11,12 @@ namespace LOB.Domain.SubEntity
     [Serializable]
     public class ContactInfo : BaseEntity
     {
-        public virtual ContactStatus Status { get; set; }
-        public virtual IList<PhoneNumber> PhoneNumbers { get; set; }
-        public virtual IList<Email> Emails { get; set; }
-        public virtual string WebSite { get; set; }
-        public virtual string SpeakWith { get; set; }
-        public virtual string Ps { get; set; }
+        public ContactStatus Status { get; set; }
+        public IList<PhoneNumber> PhoneNumbers { get; set; }
+        public IList<Email> Emails { get; set; }
+        public string WebSite { get; set; }
+        public string SpeakWith { get; set; }
+        public string Ps { get; set; }
     }
 
     [Serializable]

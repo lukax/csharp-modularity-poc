@@ -11,11 +11,11 @@ namespace LOB.Domain
     [Serializable]
     public class Customer : BaseEntity
     {
-        public virtual Person Person { get; set; }
-        public virtual PersonType PersonType { get; set; }
-        public virtual IList<Store> CustomerOf { get; set; }
-        public virtual CustomerStatus Status { get; set; }
-        public virtual IList<Sale> BoughtHistory { get; set; }
+        public Person Person { get; set; }
+        public PersonType PersonType { get; set; }
+        public IList<Store> CustomerOf { get; set; }
+        public CustomerStatus Status { get; set; }
+        public IList<Sale> BoughtHistory { get; set; }
     }
 
     [Serializable]

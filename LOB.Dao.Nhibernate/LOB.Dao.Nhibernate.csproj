@@ -76,6 +76,10 @@
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="NullGuard">
+      <HintPath>..\packages\NullGuard.Fody.0.4.0.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -83,6 +87,7 @@
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainRepository.cs" />
@@ -152,4 +157,5 @@ xcopy /y "$(ProjectDir)$(OutDir)NHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

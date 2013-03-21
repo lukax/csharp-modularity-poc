@@ -49,8 +49,13 @@
     <AssemblyOriginatorKeyFile>LOB.Core.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NullGuard">
+      <HintPath>..\packages\NullGuard.Fody.0.4.0.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProductLicense.cs" />
@@ -88,4 +93,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

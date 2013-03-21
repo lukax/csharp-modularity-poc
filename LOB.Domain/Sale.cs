@@ -11,14 +11,14 @@ namespace LOB.Domain
     [Serializable]
     public class Sale : BaseEntity
     {
-        public virtual SaleState State { get; set; }
-        public virtual DateTime SaleDate { get; set; }
-        public virtual Customer Buyer { get; set; }
-        public virtual IList<Product> Products { get; set; }
-        public virtual double TotalValue { get; set; }
-        public virtual double UnitValue { get; set; }
-        public virtual int Quantity { get; set; }
-        public virtual string Ps { get; set; }
+        public SaleState State { get; set; }
+        public DateTime SaleDate { get; set; }
+        public Customer Buyer { get; set; }
+        public IList<Product> Products { get; set; }
+        public double TotalValue { get; set; }
+        public double UnitValue { get; set; }
+        public int Quantity { get; set; }
+        public string Ps { get; set; }
     }
 
     [Serializable]

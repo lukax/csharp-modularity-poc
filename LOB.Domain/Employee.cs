@@ -10,18 +10,18 @@ namespace LOB.Domain
     [Serializable]
     public class Employee : NaturalPerson
     {
-        public virtual Store WorksIn { get; set; }
-        public virtual string Title { get; set; }
-        public virtual DateTime HireDate { get; set; }
-        public virtual PayCheck PayCheck { get; set; }
-        public virtual string Password { get; set; }
+        public Store WorksIn { get; set; }
+        public string Title { get; set; }
+        public DateTime HireDate { get; set; }
+        public PayCheck PayCheck { get; set; }
+        public string Password { get; set; }
     }
 
     [Serializable]
     public class PayCheck : BaseEntity
     {
-        public virtual double CurrentSalary { get; set; }
-        public virtual double Bonus { get; set; }
-        public virtual string Ps { get; set; }
+        public double CurrentSalary { get; set; }
+        public double Bonus { get; set; }
+        public string Ps { get; set; }
     }
 }

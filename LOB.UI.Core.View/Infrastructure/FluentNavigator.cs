@@ -22,8 +22,6 @@ namespace LOB.UI.Core.View.Infrastructure
         [InjectionConstructor]
         public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter)
         {
-            if (container == null) throw new ArgumentNullException("container");
-            if (regionAdapter == null) throw new ArgumentNullException("regionAdapter");
             _container = container;
             _regionAdapter = regionAdapter;
         }

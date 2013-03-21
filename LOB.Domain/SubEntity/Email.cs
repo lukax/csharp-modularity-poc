@@ -8,7 +8,7 @@ namespace LOB.Domain.SubEntity
 {
     public class Email : BaseEntity
     {
-        public virtual string Value { get; set; }
+        public string Value { get; set; }
 
         public static implicit operator string(Email e)
         {

@@ -11,11 +11,11 @@ namespace LOB.Domain.SubEntity
     [Serializable]
     public class ShipmentInfo : Service
     {
-        public virtual ShipmentStatus Status { get; set; }
-        public virtual Address Address { get; set; }
-        public virtual DateTime DeliverDate { get; set; }
-        public virtual int DaySchedule { get; set; }
-        public virtual IList<Product> Products { get; set; }
+        public ShipmentStatus Status { get; set; }
+        public Address Address { get; set; }
+        public DateTime DeliverDate { get; set; }
+        public int DaySchedule { get; set; }
+        public IList<Product> Products { get; set; }
     }
 
     [Serializable]

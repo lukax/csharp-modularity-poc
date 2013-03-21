@@ -11,8 +11,8 @@ namespace LOB.Domain
     [Serializable]
     public class Command : BaseEntity
     {
-        public virtual string Name { get; set; }
-        public virtual object Parameter { get; set; }
-        public virtual ICommand Task { get; set; }
+        public string Name { get; set; }
+        public object Parameter { get; set; }
+        public ICommand Task { get; set; }
     }
 }

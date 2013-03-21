@@ -29,11 +29,6 @@ namespace LOB.UI.Core.View.Controller
                                     IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
                                     ISessionCreator sessionCreator)
         {
-            if (container == null) throw new ArgumentNullException("container");
-            if (regionAdapter == null) throw new ArgumentNullException("regionAdapter");
-            if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
-            if (logger == null) throw new ArgumentNullException("logger");
-            if (navigator == null) throw new ArgumentNullException("navigator");
             _container = container;
             _regionAdapter = regionAdapter;
             _eventAggregator = eventAggregator;

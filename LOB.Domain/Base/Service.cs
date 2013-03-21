@@ -9,7 +9,7 @@ namespace LOB.Domain.Base
     [Serializable]
     public abstract class Service : BaseEntity
     {
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

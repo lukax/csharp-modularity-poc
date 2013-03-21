@@ -19,8 +19,6 @@ namespace LOB.UI.Core.View.Infrastructure
         [InjectionConstructor]
         public RegionAdapter(IUnityContainer container, IRegionManager regionManager)
         {
-            if (container == null) throw new ArgumentNullException("container");
-            if (regionManager == null) throw new ArgumentNullException("regionManager");
             _container = container;
             _regionManager = regionManager;
         }

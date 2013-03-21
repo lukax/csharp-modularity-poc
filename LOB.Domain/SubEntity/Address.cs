@@ -10,16 +10,16 @@ namespace LOB.Domain.SubEntity
     [Serializable]
     public class Address : BaseEntity
     {
-        public virtual AdressStatus Status { get; set; }
-        public virtual string Street { get; set; }
-        public virtual int StreetNumber { get; set; }
-        public virtual string StreetComplement { get; set; }
-        public virtual string District { get; set; }
-        public virtual string City { get; set; }
-        public virtual string State { get; set; }
-        public virtual string Country { get; set; }
-        public virtual int ZipCode { get; set; }
-        public virtual bool IsDefault { get; set; }
+        public AdressStatus Status { get; set; }
+        public string Street { get; set; }
+        public int StreetNumber { get; set; }
+        public string StreetComplement { get; set; }
+        public string District { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public int ZipCode { get; set; }
+        public bool IsDefault { get; set; }
     }
 
     [Serializable]

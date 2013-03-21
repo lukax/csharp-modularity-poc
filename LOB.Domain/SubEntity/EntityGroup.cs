@@ -10,7 +10,7 @@ namespace LOB.Domain.SubEntity
     [Serializable]
     public class EntityGroup<T> : BaseEntity where T : BaseEntity
     {
-        public virtual T Entity { get; set; }
-        public virtual string Description { get; set; }
+        public T Entity { get; set; }
+        public string Description { get; set; }
     }
 }
