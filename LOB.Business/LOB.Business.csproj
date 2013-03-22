@@ -118,12 +118,13 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityFacade.cs" />
+    <Compile Include="Logic\Base\ServiceFacade.cs" />
+    <Compile Include="Logic\EntityFacade.cs" />
     <Compile Include="Framework\Extension.cs" />
-    <Compile Include="Framework\ReferenceMap.cs" />
-    <Compile Include="Module.cs" />
-    <Compile Include="ProductFacade.cs" />
-    <Compile Include="EmployeeFacade.cs" />
+    <Compile Include="Modularity\Module.cs" />
+    <Compile Include="Logic\ProductFacade.cs" />
+    <Compile Include="Logic\EmployeeFacade.cs" />
+    <Compile Include="Logic\SubEntity\CategoryFacade.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

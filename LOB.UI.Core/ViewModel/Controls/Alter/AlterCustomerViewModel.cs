@@ -40,6 +40,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             PersonTypeChanged();
         }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+            Entity = new Customer();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterCustomer; }

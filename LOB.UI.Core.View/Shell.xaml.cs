@@ -22,7 +22,7 @@ using LOB.Core.Localization;
 
 namespace LOB.UI.Core.View
 {
-    public partial class ShellWindow : MetroWindow, IBaseView
+    public partial class Shell : MetroWindow, IBaseView
     {
         private static bool _loaded = false;
         private readonly IUnityContainer _container;
@@ -31,7 +31,7 @@ namespace LOB.UI.Core.View
         private readonly IRegionManager _region;
         private IModuleManager _module;
 
-        public ShellWindow(IUnityContainer container, IRegionManager region, ILogger logger,
+        public Shell(IUnityContainer container, IRegionManager region, ILogger logger,
                            IEventAggregator eventAggregator)
         {
             //CULTURE INFO

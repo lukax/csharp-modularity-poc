@@ -19,12 +19,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         protected override void QuickSearch(object arg)
         {
-            throw new NotImplementedException();
         }
 
         protected override void ClearEntity(object arg)
         {
-            throw new NotImplementedException();
         }
     }
 }

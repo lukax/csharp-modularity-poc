@@ -22,6 +22,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _container = container;
         }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+            Entity = new PayCheck();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterPayCheck; }

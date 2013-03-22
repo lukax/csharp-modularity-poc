@@ -18,7 +18,7 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
 
-namespace LOB.UI.Core.View
+namespace LOB.UI.Core.View.Modularity
 {
     [Module(ModuleName = "UICoreViewModule")]
     public class Module : IModule

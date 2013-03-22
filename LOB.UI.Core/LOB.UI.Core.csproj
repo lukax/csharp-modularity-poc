@@ -129,7 +129,7 @@
     <Compile Include="Infrastructure\CommandService.cs" />
     <Compile Include="Events\MessageShowEvent.cs" />
     <Compile Include="Events\MessageHideEvent.cs" />
-    <Compile Include="Module.cs" />
+    <Compile Include="Modularity\Module.cs" />
     <Compile Include="Infrastructure\RegionName.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\AlterCustomerViewModel.cs" />

@@ -22,7 +22,7 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core
+namespace LOB.UI.Core.Modularity
 {
     [Module(ModuleName = "UICoreModule")]
     public class Module : IModule

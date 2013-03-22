@@ -48,6 +48,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             }
         }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+            Entity = new Address();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterAddress; }

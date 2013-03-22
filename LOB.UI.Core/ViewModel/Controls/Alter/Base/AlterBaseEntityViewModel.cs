@@ -34,15 +34,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         public ICommand CancelCommand { get; set; }
         public ICommand QuickSearchCommand { get; set; }
         public int? CancelIndex { get; set; }
-        public ICommand SaveChangesCommand { get; set; }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
-        }
+        public ICommand SaveChangesCommand { get; set; }   
 
         protected virtual bool CanSaveChanges(object arg)
         {
@@ -66,11 +58,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 
         protected virtual void Cancel(object arg)
         {
-            //Messenger.Default.Send(CancelIndex, "Cancel");
         }
 
         protected abstract void QuickSearch(object arg);
-
         protected abstract void ClearEntity(object arg);
     }
 }

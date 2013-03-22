@@ -111,7 +111,7 @@
     <Compile Include="Mapping\StoreMap.cs" />
     <Compile Include="Mapping\SubEntity\UfMap.cs" />
     <Compile Include="Mapping\SupplierMap.cs" />
-    <Compile Include="Module.cs" />
+    <Compile Include="Modularity\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionCreator.cs" />
     <Compile Include="UnityOfWork.cs" />

@@ -17,6 +17,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         {
         }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+            Entity = new Sale();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterSale; }

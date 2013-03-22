@@ -110,6 +110,15 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background_grey.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background_maze.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

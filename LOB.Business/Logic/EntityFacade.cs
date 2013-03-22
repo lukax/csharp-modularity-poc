@@ -6,7 +6,7 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Business
+namespace LOB.Business.Logic
 {
     public class EntityFacade<T> : IEntityFacade<T> where T : BaseEntity
     {

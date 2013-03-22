@@ -11,7 +11,7 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View
+namespace LOB.UI.Core.View.Modularity
 {
     public class Bootstrapper : UnityBootstrapper
     {
@@ -47,7 +47,7 @@ namespace LOB.UI.Core.View
 
             //XAML(Change Build mode to Resource)
             var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
-                                    new Uri("/LOB.UI.Core.View;component/ModuleCatalog.xaml", UriKind.Relative));
+                                    new Uri("/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml", UriKind.Relative));
             return catalog;
         }
 
@@ -59,7 +59,7 @@ namespace LOB.UI.Core.View
 
         protected override DependencyObject CreateShell()
         {
-            var main = Container.Resolve<ShellWindow>();
+            var main = Container.Resolve<Shell>();
             return main;
         }
 

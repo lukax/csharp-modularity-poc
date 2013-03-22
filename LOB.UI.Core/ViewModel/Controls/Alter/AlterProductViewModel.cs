@@ -40,6 +40,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public IList<Category> Categories { get; set; }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+            Entity = new Product();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterProduct; }

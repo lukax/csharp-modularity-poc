@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.Log
+namespace LOB.Log.Modularity
 {
     [Module(ModuleName = "LogModule")]
     public class Module : IModule

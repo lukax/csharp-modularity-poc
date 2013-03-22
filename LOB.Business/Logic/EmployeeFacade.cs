@@ -6,7 +6,7 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Business
+namespace LOB.Business.Logic
 {
     public class EmployeeFacade : EntityFacade<Employee>, IEmployeeFacade
     {

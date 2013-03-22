@@ -1,7 +1,6 @@
 ﻿#region Usings
 
-using LOB.Business.Interface;
-using LOB.Domain.Base;
+using LOB.Dao.Interface;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
@@ -9,9 +8,9 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.Business
+namespace LOB.Dao.Nhibernate.Modularity
 {
-    [Module(ModuleName = "BusinessModule")]
+    [Module(ModuleName = "NHibernateModule")]
     public class Module : IModule
     {
         private readonly IUnityContainer _container;
@@ -23,13 +22,13 @@ namespace LOB.Business
 
         public void Initialize()
         {
-            _container.RegisterType<IEntityFacade<BaseEntity>, EntityFacade<BaseEntity>>();
-            _container.RegisterType<IProductFacade, ProductFacade>();
-            _container.RegisterType<IEmployeeFacade, EmployeeFacade>();
+            _container.RegisterType<ISessionCreator, SessionCreator>();
+            _container.RegisterType<IUnityOfWork, UnityOfWork>();
+            _container.RegisterType<IRepository, DomainRepository>();
 
 #if DEBUG
             var log = _container.Resolve<ILogger>();
-            log.Log("BusinessModule Initialized", Category.Debug, Priority.Medium);
+            log.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
     }

@@ -39,6 +39,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
 
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+            Entity = new ContactInfo();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterContactInfo; }
