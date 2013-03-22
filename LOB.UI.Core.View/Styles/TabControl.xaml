@@ -19,12 +19,11 @@
                         </Grid.RowDefinitions>
                         <Border Background="Transparent" BorderThickness="0,0,0,3"
                                 BorderBrush="{DynamicResource AccentBrush}">
-                            <TabPanel Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1"
+                            <TabPanel Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1" 
                                       IsItemsHost="True" KeyboardNavigation.TabIndex="1" />
                         </Border>
                         <Border Grid.Row="1" Background="{DynamicResource WhiteColorBrush}" />
-                        <ContentPresenter Grid.Row="1" Name="PART_SelectedContentHost"
-                                          ContentSource="SelectedContent" />
+                        <ContentPresenter Grid.Row="1" Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

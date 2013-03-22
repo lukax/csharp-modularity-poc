@@ -13,7 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0">
+    <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0" Background="{DynamicResource Foreground}">
         <MenuItem Header="{x:Static resource:Strings.Menu_File}">
             <MenuItem Header="{x:Static resource:Strings.Menu_File_Save}" />
             <MenuItem Header="{x:Static resource:Strings.Menu_File_Quit}"/>
