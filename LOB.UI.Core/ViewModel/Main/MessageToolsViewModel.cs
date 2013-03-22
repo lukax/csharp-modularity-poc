@@ -18,7 +18,7 @@ namespace LOB.UI.Core.ViewModel.Main
         private IEventAggregator eventAggregator = null;
 
         #region Props
-        
+
         public string Message { get; set; }
 
         public bool IsRestrictive { get; set; }

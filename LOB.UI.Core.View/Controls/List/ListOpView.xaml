@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.UI.Interface.Infrastructure;assembly=LOB.UI.Interface"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+                          xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -23,7 +23,7 @@
                 
                 <TextBox MinWidth="200" Width="Auto" Height="Auto"
                  Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                 controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True" />
+                 controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True" />
                 
             </DockPanel>
             

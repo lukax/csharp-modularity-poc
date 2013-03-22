@@ -396,6 +396,27 @@
   <data name="Common_ZipCode" xml:space="preserve">
     <value>@Common_ZipCode</value>
   </data>
+  <data name="Dao_Connecting" xml:space="preserve">
+    <value>@Dao_Connecting</value>
+  </data>
+  <data name="Dao_ConnectionFailed" xml:space="preserve">
+    <value>@Dao_ConnectionFailed</value>
+  </data>
+  <data name="Dao_ConnectionSucessful" xml:space="preserve">
+    <value>@Dao_ConnectionSucessful</value>
+  </data>
+  <data name="Dao_RequisitionFailed" xml:space="preserve">
+    <value>@Dao_RequisitionFailed</value>
+  </data>
+  <data name="Dao_RequisitionSucessful" xml:space="preserve">
+    <value>@Dao_RequisitionSucessful</value>
+  </data>
+  <data name="Error_Info" xml:space="preserve">
+    <value>@Error_Info</value>
+  </data>
+  <data name="Error_Internal" xml:space="preserve">
+    <value>@Error_Internal</value>
+  </data>
   <data name="Menu_File" xml:space="preserve">
     <value>@Menu_File</value>
   </data>

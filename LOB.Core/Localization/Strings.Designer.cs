@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LOB.UI.Core.Resources.Localization {
+namespace LOB.Core.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LOB.UI.Core.Resources.Localization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LOB.UI.Core.Resources.Localization.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LOB.Core.Localization.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -894,6 +894,69 @@ namespace LOB.UI.Core.Resources.Localization {
         public static string Common_ZipCode {
             get {
                 return ResourceManager.GetString("Common_ZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Dao_Connecting.
+        /// </summary>
+        public static string Dao_Connecting {
+            get {
+                return ResourceManager.GetString("Dao_Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Dao_ConnectionFailed.
+        /// </summary>
+        public static string Dao_ConnectionFailed {
+            get {
+                return ResourceManager.GetString("Dao_ConnectionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Dao_ConnectionSucessful.
+        /// </summary>
+        public static string Dao_ConnectionSucessful {
+            get {
+                return ResourceManager.GetString("Dao_ConnectionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Dao_RequisitionFailed.
+        /// </summary>
+        public static string Dao_RequisitionFailed {
+            get {
+                return ResourceManager.GetString("Dao_RequisitionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Dao_RequisitionSucessful.
+        /// </summary>
+        public static string Dao_RequisitionSucessful {
+            get {
+                return ResourceManager.GetString("Dao_RequisitionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Info.
+        /// </summary>
+        public static string Error_Info {
+            get {
+                return ResourceManager.GetString("Error_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Internal.
+        /// </summary>
+        public static string Error_Internal {
+            get {
+                return ResourceManager.GetString("Error_Internal", resourceCulture);
             }
         }
         

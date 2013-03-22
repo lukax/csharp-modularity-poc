@@ -396,6 +396,27 @@
   <data name="Common_ZipCode" xml:space="preserve">
     <value>CEP</value>
   </data>
+  <data name="Dao_Connecting" xml:space="preserve">
+    <value>Conectando no banco de dados...</value>
+  </data>
+  <data name="Dao_ConnectionFailed" xml:space="preserve">
+    <value>Conexão ao banco de dados falhou</value>
+  </data>
+  <data name="Dao_ConnectionSucessful" xml:space="preserve">
+    <value>Conexão ao banco de dados bem sucedida</value>
+  </data>
+  <data name="Dao_RequisitionFailed" xml:space="preserve">
+    <value>Operação não pode ser completada contra o banco de dados</value>
+  </data>
+  <data name="Dao_RequisitionSucessful" xml:space="preserve">
+    <value>Operação concluída</value>
+  </data>
+  <data name="Error_Info" xml:space="preserve">
+    <value>Aconteceu um erro ao processar seu comando. Por favor, contate o administrador.</value>
+  </data>
+  <data name="Error_Internal" xml:space="preserve">
+    <value>Aconteceu um erro interno ao processar requisição. Por favor, contate um administrador.</value>
+  </data>
   <data name="Menu_File" xml:space="preserve">
     <value>Arquivo</value>
   </data>

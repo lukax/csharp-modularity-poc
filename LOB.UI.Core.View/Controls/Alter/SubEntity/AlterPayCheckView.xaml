@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -31,16 +31,16 @@
 
         <base2:AlterBaseEntityView x:Name="UcAlterBaseEntityView" />
 
-        <Label Content="{x:Static resources:Strings.Common_CurrentSalary}" HorizontalAlignment="Right" Grid.Column="1" />
+        <Label Content="{x:Static loc:Strings.Common_CurrentSalary}" HorizontalAlignment="Right" Grid.Column="1" />
         <TextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
                  MinWidth="150" MaxWidth="250" Grid.Column="2" />
 
-        <Label Grid.Row="1" Content="{x:Static resources:Strings.Common_Bonus}" HorizontalAlignment="Right" Grid.Column="1" />
+        <Label Grid.Row="1" Content="{x:Static loc:Strings.Common_Bonus}" HorizontalAlignment="Right" Grid.Column="1" />
         <TextBox Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="150"
                  MaxWidth="250" Grid.Row="1" Grid.Column="2" />
 
-        <TextBox controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Ps}" MinLines="3"
+        <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"
                  Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"
                  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
     </Grid>

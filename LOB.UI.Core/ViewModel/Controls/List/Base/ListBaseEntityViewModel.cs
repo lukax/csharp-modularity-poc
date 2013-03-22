@@ -23,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base
         #region Props
 
         protected IRepository Repository;
-      
+
         private Expression<Func<T, bool>> _searchCriteria;
 
         public virtual string Search { get; set; }

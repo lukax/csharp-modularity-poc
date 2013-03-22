@@ -84,10 +84,6 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration">
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.4.0.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -111,7 +107,6 @@
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>..\packages\Extended.Wpf.Toolkit.1.9.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
-    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\CloseTabItemAction.cs" />
@@ -447,6 +442,10 @@
       <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
       <Name>LOB.Business.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
+      <Project>{79fb165f-3816-4a5f-b5a1-b5a64bed0218}</Project>
+      <Name>LOB.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
       <Project>{B275A849-EBA7-45D8-ABAD-A336F38153D9}</Project>
       <Name>LOB.Dao.Interface</Name>
@@ -502,5 +501,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

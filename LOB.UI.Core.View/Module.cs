@@ -25,8 +25,7 @@ namespace LOB.UI.Core.View
     {
         private readonly IUnityContainer _container;
 
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        private MainRegionController
+        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private MainRegionController
             _mainRegionController;
 
         public Module(IUnityContainer container)
@@ -46,10 +45,10 @@ namespace LOB.UI.Core.View
 
 
             var regionManager = _container.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolsView));
-            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolsView));
+            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof (HeaderToolsView));
+            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof (ColumnToolsView));
 
-            View.Actions.CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
+            CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
 
             //Init controller
             _mainRegionController = _container.Resolve<MainRegionController>();

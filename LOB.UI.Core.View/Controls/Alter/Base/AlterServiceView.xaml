@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500">
 
@@ -32,11 +32,11 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Content="{x:Static resources:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
+            <Label Content="{x:Static loc:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
             <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
                      MinWidth="200" MaxWidth="300" Grid.Column="2" />
 
-            <TextBox controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Ps}" MinLines="3"
+            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"
                      Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"
                      Grid.Column="1"
                      Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />

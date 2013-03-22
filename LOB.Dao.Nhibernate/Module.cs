@@ -25,7 +25,7 @@ namespace LOB.Dao.Nhibernate
             _container.RegisterType<ISessionCreator, SessionCreator>();
             _container.RegisterType<IUnityOfWork, UnityOfWork>();
             _container.RegisterType<IRepository, DomainRepository>();
-            
+
 #if DEBUG
             var log = _container.Resolve<ILogger>();
             log.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);

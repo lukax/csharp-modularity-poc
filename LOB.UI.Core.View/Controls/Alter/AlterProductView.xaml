@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:basecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
@@ -19,7 +19,7 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
-                           HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent" Grid.Column="5">
+                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent" Grid.Column="5">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </controls:Tile>
 
@@ -55,20 +55,20 @@
 
                 <base:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView" />
 
-                <Label Grid.Column="1" Grid.Row="1" Content="{x:Static resources:Strings.Common_Name}" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
                          HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" />
 
-                <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_UnitSalePrice}" />
+                <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_UnitSalePrice}" />
                 <TextBox Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
 
-                <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_UnitsInStock}" />
+                <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_UnitsInStock}" />
                 <TextBox Text="{Binding Entity.UnitsInStock, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" Grid.Row="2" Grid.Column="4" />
 
-                <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_QuantityPerUnity}" />
+                <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_QuantityPerUnity}" />
                 <TextBox Text="{Binding Entity.QuantityPerUnity, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" Grid.Row="3" />
 
-                <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_Category}" />
+                <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Category}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="350" Grid.Column="4" Grid.Row="3">
                     <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory" SelectedItem="{Binding Entity.Category}" MinWidth="150" />
                     <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" 
@@ -84,7 +84,7 @@
                     </controls:Tile>
                 </StackPanel>
 
-                <Label Grid.Column="3" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_Status}" Grid.Row="4" />
+                <Label Grid.Column="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Status}" Grid.Row="4" />
 
                 <StackPanel HorizontalAlignment="Left" MinWidth="150" MaxWidth="350" Grid.Column="4" Grid.Row="4">
                     <StackPanel.Resources>
@@ -99,7 +99,7 @@
                               SelectedItem="{Binding Entity.Status}" />
                 </StackPanel>
 
-                <TextBox controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Description}" VerticalScrollBarVisibility="Auto"
+                <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" VerticalScrollBarVisibility="Auto"
                          HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" MaxWidth="400"
                          Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MinWidth="360" MinLines="2" />
 
@@ -107,17 +107,17 @@
 
             <TabControl>
                 <TabItem Header=">" />
-                <TabItem Header="{x:Static resources:Strings.Common_Stores}">
+                <TabItem Header="{x:Static loc:Strings.Common_Stores}">
                     <DockPanel>
-                        <Label Content="{x:Static resources:Strings.Common_AvailableInStore}" />
+                        <Label Content="{x:Static loc:Strings.Common_AvailableInStore}" />
                         <ListView ItemsSource="{Binding Entity.StockedStores}"></ListView>
                     </DockPanel>
                 </TabItem>
-                <TabItem Header="{x:Static resources:Strings.Common_Suppliers}">
+                <TabItem Header="{x:Static loc:Strings.Common_Suppliers}">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="200" MaxWidth="350" Grid.Column="2" Grid.Row="2">
                         <ListBox ItemsSource="{Binding Entity.Suppliers}" MinWidth="150" />
                         <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
-                                       HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False"
+                                       HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False"
                                        Background="Transparent" Grid.Column="5">
                             <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
                         </controls:Tile>

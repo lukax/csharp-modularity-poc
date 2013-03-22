@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Log.Interface", "LOB.Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Core.Resources", "LOB.UI.Core.Resources\LOB.UI.Core.Resources.csproj", "{22F1D5DE-172F-4BEA-8D4E-77B0C57A2A9C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{51DB3737-D8D3-41A9-ABC1-3D1243C25FB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

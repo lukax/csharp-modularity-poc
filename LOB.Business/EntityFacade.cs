@@ -1,11 +1,8 @@
 ﻿#region Usings
 
-using System.ComponentModel.Composition;
 using LOB.Business.Interface;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
 
 #endregion
 

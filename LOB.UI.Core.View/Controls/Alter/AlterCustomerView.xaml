@@ -7,7 +7,7 @@
              xmlns:baseSub="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -19,7 +19,7 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
-                           HorizontalAlignment="Left" ToolTip="{x:Static resources:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent">
+                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </controls:Tile>
 
@@ -37,11 +37,11 @@
             <StackPanel Orientation="Horizontal">
                 <base:AlterBaseEntityView x:Name="UcAlterBaseEntity" />
 
-                <Label Content="{x:Static resources:Strings.Common_Title}" HorizontalAlignment="Right" />
+                <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
                 <TextBlock Text="{Binding Entity.Status}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
                            VerticalAlignment="Center" />
 
-                <Label Content="{x:Static resources:Strings.Common_PersonType}" HorizontalAlignment="Right" />
+                <Label Content="{x:Static loc:Strings.Common_PersonType}" HorizontalAlignment="Right" />
                 <StackPanel HorizontalAlignment="Left" MinWidth="150" MaxWidth="350">
                     <StackPanel.Resources>
                         <ObjectDataProvider x:Key="DataFromEnum"
@@ -59,7 +59,7 @@
 
             <StackPanel>
                 <TabControl>
-                    <TabItem Header="{x:Static resources:Strings.Common_PersonDetails}" x:Name="UcAlterPersonDetails">
+                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" x:Name="UcAlterPersonDetails">
                         <!--Load based on PersonType-->
                     </TabItem>
 
@@ -69,11 +69,11 @@
 
             <StackPanel>
                 <TabControl>
-                    <TabItem Header="{x:Static resources:Strings.Tab_Hide}" />
-                    <TabItem Header="{x:Static resources:Strings.Common_BoughtHistory}">
+                    <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
+                    <TabItem Header="{x:Static loc:Strings.Common_BoughtHistory}">
                         <DataGrid ItemsSource="{Binding Entity.BoughtHistory}" MinHeight="200"></DataGrid>
                     </TabItem>
-                    <TabItem Header="{x:Static resources:Strings.Common_CustomerOf}">
+                    <TabItem Header="{x:Static loc:Strings.Common_CustomerOf}">
                         <DataGrid ItemsSource="{Binding Entity.ClientOf}" MinHeight="200"></DataGrid>
                     </TabItem>
                 </TabControl>

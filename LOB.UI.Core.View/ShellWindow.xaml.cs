@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using LOB.Log.Interface;
 using LOB.UI.Core.Events.View;
-using LOB.UI.Core.Resources.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
@@ -17,6 +16,7 @@ using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using LOB.Core.Localization;
 
 #endregion
 

@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:subcontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>

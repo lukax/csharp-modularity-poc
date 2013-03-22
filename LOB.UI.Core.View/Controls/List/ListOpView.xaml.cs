@@ -1,10 +1,6 @@
 ﻿#region Usings
 
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using LOB.UI.Core.Events;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -45,10 +41,7 @@ namespace LOB.UI.Core.View.Controls.List
 
         public void InitializeServices()
         {
-            _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o =>
-                {
-                    if (o == OperationType.ListOp) Refresh();
-                });
+            _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if (o == OperationType.ListOp) Refresh(); });
         }
 
         public void Refresh()

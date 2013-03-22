@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.IO;
 using System.Windows;
 using LOB.Log;
 using LOB.Log.Interface;
@@ -48,7 +47,7 @@ namespace LOB.UI.Core.View
 
             //XAML(Change Build mode to Resource)
             var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
-                new Uri("/LOB.UI.Core.View;component/ModuleCatalog.xaml", UriKind.Relative));
+                                    new Uri("/LOB.UI.Core.View;component/ModuleCatalog.xaml", UriKind.Relative));
             return catalog;
         }
 

@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -33,7 +33,7 @@
 
         <base2:AlterBaseEntityView Grid.Row="0" x:Name="UcAlterBaseEntityView" />
 
-        <GroupBox Header="{x:Static resources:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="0">
+        <GroupBox Header="{x:Static loc:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="0">
             <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding PhoneNumber}" SelectionMode="Single" />
         </GroupBox>
@@ -50,7 +50,7 @@
             </controls:Tile>
         </StackPanel>
 
-        <GroupBox Header="{x:Static resources:Strings.Common_Emails}" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="{x:Static loc:Strings.Common_Emails}" Grid.Column="1" Grid.Row="1">
             <ListBox ItemsSource="{Binding Entity.Emails, UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding Email}" SelectionMode="Single" />
         </GroupBox>
@@ -66,15 +66,15 @@
             </controls:Tile>
         </StackPanel>
 
-        <Label HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_Website}" Grid.Row="2" />
+        <Label HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Website}" Grid.Row="2" />
         <TextBox Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
                  MinWidth="250" MaxWidth="400" Grid.Row="2" Grid.Column="1" />
 
-        <Label Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static resources:Strings.Common_Contact}" />
+        <Label Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Contact}" />
         <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250" Text="{Binding Entity.SpeakWith}"
                  HorizontalAlignment="Left" />
 
-        <TextBox controls:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Ps}" Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}"
+        <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left" MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="4" Grid.Column="1" />
 
     </Grid>

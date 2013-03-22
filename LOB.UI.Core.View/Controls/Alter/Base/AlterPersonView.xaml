@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:metrocontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:resources="clr-namespace:LOB.UI.Core.Resources.Localization;assembly=LOB.UI.Core.Resources"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -24,17 +24,17 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TabControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
-            <TabItem Header="{x:Static resources:Strings.Tab_Hide}" />
-            <TabItem Header="{x:Static resources:Strings.Common_Address}">
+            <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
+            <TabItem Header="{x:Static loc:Strings.Common_Address}">
                 <base:AlterAddressView x:Name="UcAlterAddressView" />
             </TabItem>
-            <TabItem Header="{x:Static resources:Strings.Common_ContactInfo}">
+            <TabItem Header="{x:Static loc:Strings.Common_ContactInfo}">
                 <base:AlterContactInfoView x:Name="UcAlterContactInfoView" />
             </TabItem>
         </TabControl>
 
         <TextBox Text="{Binding Entity.Notes, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                 metrocontrols:TextboxHelper.Watermark="{x:Static resources:Strings.Common_Notes}"
+                 metrocontrols:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Notes}"
                  MinWidth="300" MaxWidth="450" MinLines="2" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" />
 
 

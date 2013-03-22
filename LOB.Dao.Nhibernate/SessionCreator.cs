@@ -4,14 +4,13 @@ using System;
 using System.Threading.Tasks;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using NullGuard;
 
 #endregion
 
@@ -60,7 +59,7 @@ namespace LOB.Dao.Nhibernate
         private async void BuildOrm()
         {
             //TODO: Translation support
-            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs("Connecting to the database..."));
+            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
             Configuration cfg = null;
             await Task.Run(() =>
                 {
@@ -86,7 +85,7 @@ namespace LOB.Dao.Nhibernate
                 try
                 {
                     Orm = cfg.BuildSessionFactory().OpenSession();
-                    OnSessionCreated.Invoke(this, new SessionCreatorEventArgs("Connection Successful!"));
+                    OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
                 }
                 catch (Exception ex)
                 {
@@ -97,7 +96,7 @@ namespace LOB.Dao.Nhibernate
 
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
-            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs("Connecting to the Database..."));
+            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
             _persistType = persistIn;
             Configuration cfg = null;
             switch (_persistType)
@@ -117,7 +116,7 @@ namespace LOB.Dao.Nhibernate
                 default:
                     throw new ArgumentException("PersistType");
             }
-            OnSessionCreated.Invoke(this, new SessionCreatorEventArgs("Connection Successful!"));
+            OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
             return cfg.BuildSessionFactory();
         }
 
@@ -152,7 +151,7 @@ namespace LOB.Dao.Nhibernate
         private FluentConfiguration Mapping()
         {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
-                //Disable logging
+                //Disable to much logging
                            .Diagnostics(x => x.Enable(false))
                 //Generate Tables
                            .ExposeConfiguration(SchemaCreator);
@@ -177,7 +176,5 @@ namespace LOB.Dao.Nhibernate
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }
         }
-
-        //private event SessionCreatorEventHandler callInMainThread;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using LOB.Core.Localization;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
@@ -22,12 +23,9 @@ namespace LOB.UI.Core.ViewModel.Main
     public class ListOpViewModel : BaseViewModel, IListOpViewModel
     {
         private readonly IEventAggregator _eventAggregator;
-        private string _search;
         private ICollection<string> _entitys;
-        public OperationType Entity { get; set; }
-        public ICollectionView Entitys { get; set; }
-        public ICommand SaveChangesCommand { get; set; }
-        public string Search { get { return _search ?? string.Empty; } set { _search = value; } }
+        private Lazy<IDictionary<string, OperationType>> _operationDictLazy;
+        private string _search;
 
         public ListOpViewModel(IEventAggregator eventAggregator)
         {
@@ -37,9 +35,31 @@ namespace LOB.UI.Core.ViewModel.Main
             UpdateList();
         }
 
+        public string Entity { get; set; }
+        public ICollectionView Entitys { get; set; }
+        public ICommand SaveChangesCommand { get; set; }
+
+        public string Search
+        {
+            get { return _search ?? string.Empty; }
+            set { _search = value; }
+        }
+
+        public override void InitializeServices()
+        {
+        }
+
+        public override void Refresh()
+        {
+        }
+
+        public override OperationType OperationType
+        {
+            get { return OperationType.ListOp; }
+        }
+
         private async Task UpdateList()
         {
-
             while (true)
             {
                 await Task.Delay(500);
@@ -47,28 +67,30 @@ namespace LOB.UI.Core.ViewModel.Main
                 {
                     var list = _operationDictLazy.Value.Keys.ToList();
                     if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list))
+                    {
                         Entitys = new CollectionView(list);
+                        _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
+                        Entitys.CurrentChanged += (sender, args) => SaveChanges();
+                    }
                 }
                 else
                 {
                     var list = _operationDictLazy.Value.Keys.Where(x => x.ToLower().Contains(Search.ToLower())).ToList();
-                    if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list)) 
-                        Entitys = new CollectionView(list);
+                    if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list))
+                    {
+                        Entitys = new CollectionView(list); _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
+                        Entitys.CurrentChanged += (sender, args) => SaveChanges();
+                    }
                 }
-                _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
-                Entitys.CurrentChanged += (sender, args) => SaveChanges();
             }
-
         }
 
         private void SaveChanges()
         {
-            Entity = _operationDictLazy.Value[Entitys.CurrentItem.ToString()];
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(Entity);
+            var parsedEntity = _operationDictLazy.Value[Entitys.CurrentItem.ToString()];
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedEntity);
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
         }
-
-        private Lazy<IDictionary<string, OperationType>> _operationDictLazy;
 
         private IDictionary<string, OperationType> CreateList()
         {
@@ -84,7 +106,7 @@ namespace LOB.UI.Core.ViewModel.Main
             enumList.Remove(OperationType.ListService);
             enumList.Remove(OperationType.NewService);
             var operationTypes = new Dictionary<string, OperationType>(enumList.Count);
-            var stringsType = typeof(Resources.Localization.Strings);
+            var stringsType = typeof(Strings);
             var stringsTypeProps = stringsType.GetProperties();
             //Parse to localized string
             foreach (var operationType in enumList)
@@ -99,19 +121,6 @@ namespace LOB.UI.Core.ViewModel.Main
                 }
             }
             return operationTypes;
-        }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
-        }
-
-        public override OperationType OperationType
-        {
-            get { return OperationType.ListOp; }
         }
     }
 }

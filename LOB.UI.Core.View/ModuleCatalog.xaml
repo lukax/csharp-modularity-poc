@@ -11,6 +11,12 @@
         ModuleType="LOB.Log.Module, LOB.Log, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a5e30f61151628a">
     </Modularity:ModuleInfo>
 
+    <!--<Modularity:ModuleInfo
+        Ref="file://LOB.UI.Core.Resources.dll"
+        ModuleName="UICoreResourcesModule" InitializationMode="WhenAvailable"
+        ModuleType="LOB.UI.Core.Resources.Module, LOB.UI.Core.Resources, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a24df41632d897a">
+    </Modularity:ModuleInfo>-->
+    
     <Modularity:ModuleInfo 
         Ref="file://LOB.Dao.Nhibernate.dll"
         ModuleName="DaoModule" InitializationMode="OnDemand"

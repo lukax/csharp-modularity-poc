@@ -10,7 +10,7 @@ namespace LOB.Core
     {
         public static void Main(string[] args)
         {
-            Debug.WriteLine("Initializing Application...");
+            Debug.WriteLine("Initializing LOB.Core...");
         }
     }
 }
