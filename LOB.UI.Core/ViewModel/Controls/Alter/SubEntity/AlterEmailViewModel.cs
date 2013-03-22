@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewEmail; }
+            get { return OperationType.AlterEmail; }
         }
 
         protected override void QuickSearch(object arg)

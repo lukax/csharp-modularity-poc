@@ -19,16 +19,16 @@
             <MenuItem Header="{x:Static loc:Strings.Menu_File_Quit}"/>
         </MenuItem>
         <MenuItem Header="{x:Static loc:Strings.Menu_Sales}">
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_New}" Command="{Binding OpenTabCommand}" CommandParameter="NewSale" />
+            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_New}" Command="{Binding OpenTabCommand}" CommandParameter="AlterSale" />
             <MenuItem Header="{x:Static loc:Strings.Menu_Sales_History}" Command="{Binding OpenTabCommand}" CommandParameter="ListSale" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_Alter}" Command="{Binding OpenTabCommand}" CommandParameter="NewSale" />
+            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_Alter}" Command="{Binding OpenTabCommand}" CommandParameter="AlterSale" />
         </MenuItem>
         <MenuItem Header="{x:Static loc:Strings.Menu_Register}">
             <MenuItem Header="{x:Static loc:Strings.Menu_Register_Client}" Command="{Binding OpenTabCommand}" CommandParameter="AlterClient"/>
             <MenuItem Header="{x:Static loc:Strings.Menu_Register_Company}" Command="{Binding OpenTabCommand}" CommandParameter="AlterCompany"/>
             <MenuItem Header="{x:Static loc:Strings.Menu_Register_Supplier}" Command="{Binding OpenTabCommand}" CommandParameter="AlterSupplier"/>
-            <MenuItem Header="{x:Static loc:Strings.Menu_Register_Employee}" Command="{Binding OpenTabCommand}" CommandParameter="NewEmployee"/>
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_Alter}" Command="{Binding OpenTabCommand}" CommandParameter="NewProduct"/>
+            <MenuItem Header="{x:Static loc:Strings.Menu_Register_Employee}" Command="{Binding OpenTabCommand}" CommandParameter="AlterEmployee"/>
+            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_Alter}" Command="{Binding OpenTabCommand}" CommandParameter="AlterProduct"/>
         </MenuItem>
         <MenuItem Header="{x:Static loc:Strings.Menu_List}">
             <MenuItem Header="{x:Static loc:Strings.Menu_List_Client}" Command="{Binding OpenTabCommand}" CommandParameter="ListClient"/>

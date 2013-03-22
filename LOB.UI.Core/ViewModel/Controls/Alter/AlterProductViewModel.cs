@@ -42,7 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewProduct; }
+            get { return OperationType.AlterProduct; }
         }
 
         private async void UpdateCategoryList(int delay = 2000)

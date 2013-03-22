@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
 
         <!--<base2:AlterBaseEntityBaseView Width="Auto" Grid.Column="0" x:Name="UcAlterBaseEntityView" />-->
-        <ContentControl regions:RegionManager.RegionName="NewBaseEntity" Width="Auto" Height="Auto" />
+        <ContentControl regions:RegionManager.RegionName="AlterBaseEntity" Width="Auto" Height="Auto" />
 
         <Label Content="{x:Static loc:Strings.Common_Street}" HorizontalAlignment="Right" Grid.Column="1" />
         <TextBox Text="{Binding Entity.Street, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"

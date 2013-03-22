@@ -3,5 +3,6 @@
     public interface IUIComponent
     {
         OperationType OperationType { get; }
+        string Header { get; }
     }
 }

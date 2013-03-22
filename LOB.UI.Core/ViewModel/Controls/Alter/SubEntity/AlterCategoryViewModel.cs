@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewCategory; }
+            get { return OperationType.AlterCategory; }
         }
 
         protected override void SaveChanges(object arg)

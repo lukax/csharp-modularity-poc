@@ -120,6 +120,51 @@
   <data name="Button_Close" xml:space="preserve">
     <value>Fechar</value>
   </data>
+  <data name="Command_AlterAddress" xml:space="preserve">
+    <value>Novo Endereço</value>
+  </data>
+  <data name="Command_AlterBaseEntity" xml:space="preserve">
+    <value>Novo Código</value>
+  </data>
+  <data name="Command_AlterCategory" xml:space="preserve">
+    <value>Nova Categoria</value>
+  </data>
+  <data name="Command_AlterContactInfo" xml:space="preserve">
+    <value>Nova Informação de Contato</value>
+  </data>
+  <data name="Command_AlterCustomer" xml:space="preserve">
+    <value>Novo Cliente</value>
+  </data>
+  <data name="Command_AlterEmail" xml:space="preserve">
+    <value>Novo Email</value>
+  </data>
+  <data name="Command_AlterEmployee" xml:space="preserve">
+    <value>Novo Funcionário</value>
+  </data>
+  <data name="Command_AlterLegalPerson" xml:space="preserve">
+    <value>Nova Pessoa Legal</value>
+  </data>
+  <data name="Command_AlterNaturalPerson" xml:space="preserve">
+    <value>Nova Pessoa Física</value>
+  </data>
+  <data name="Command_AlterPayCheck" xml:space="preserve">
+    <value>Nova Folha de Pagamento</value>
+  </data>
+  <data name="Command_AlterPerson" xml:space="preserve">
+    <value>Nova Pessoa</value>
+  </data>
+  <data name="Command_AlterPhoneNumber" xml:space="preserve">
+    <value>Novo Número de Telefone</value>
+  </data>
+  <data name="Command_AlterProduct" xml:space="preserve">
+    <value>Novo Produto</value>
+  </data>
+  <data name="Command_AlterSale" xml:space="preserve">
+    <value>Nova Venda</value>
+  </data>
+  <data name="Command_AlterService" xml:space="preserve">
+    <value>Novo Serviço</value>
+  </data>
   <data name="Command_ListAddress" xml:space="preserve">
     <value>Listar Endereços</value>
   </data>
@@ -167,51 +212,6 @@
   </data>
   <data name="Command_ListService" xml:space="preserve">
     <value>Listar Serviços</value>
-  </data>
-  <data name="Command_NewAddress" xml:space="preserve">
-    <value>Novo Endereço</value>
-  </data>
-  <data name="Command_NewBaseEntity" xml:space="preserve">
-    <value>Novo Código</value>
-  </data>
-  <data name="Command_NewCategory" xml:space="preserve">
-    <value>Nova Categoria</value>
-  </data>
-  <data name="Command_NewContactInfo" xml:space="preserve">
-    <value>Nova Informação de Contato</value>
-  </data>
-  <data name="Command_NewCustomer" xml:space="preserve">
-    <value>Novo Cliente</value>
-  </data>
-  <data name="Command_NewEmail" xml:space="preserve">
-    <value>Novo Email</value>
-  </data>
-  <data name="Command_NewEmployee" xml:space="preserve">
-    <value>Novo Funcionário</value>
-  </data>
-  <data name="Command_NewLegalPerson" xml:space="preserve">
-    <value>Nova Pessoa Legal</value>
-  </data>
-  <data name="Command_NewNaturalPerson" xml:space="preserve">
-    <value>Nova Pessoa Física</value>
-  </data>
-  <data name="Command_NewPayCheck" xml:space="preserve">
-    <value>Nova Folha de Pagamento</value>
-  </data>
-  <data name="Command_NewPerson" xml:space="preserve">
-    <value>Nova Pessoa</value>
-  </data>
-  <data name="Command_NewPhoneNumber" xml:space="preserve">
-    <value>Novo Número de Telefone</value>
-  </data>
-  <data name="Command_NewProduct" xml:space="preserve">
-    <value>Novo Produto</value>
-  </data>
-  <data name="Command_NewSale" xml:space="preserve">
-    <value>Nova Venda</value>
-  </data>
-  <data name="Command_NewService" xml:space="preserve">
-    <value>Novo Serviço</value>
   </data>
   <data name="Command_SellProduct" xml:space="preserve">
     <value>Vender Produto</value>
@@ -416,6 +416,96 @@
   </data>
   <data name="Error_Internal" xml:space="preserve">
     <value>Aconteceu um erro interno ao processar requisição. Por favor, contate um administrador.</value>
+  </data>
+  <data name="Header_Alter_Address" xml:space="preserve">
+    <value>Novo Endereço</value>
+  </data>
+  <data name="Header_Alter_BaseEntity" xml:space="preserve">
+    <value>Novo Código</value>
+  </data>
+  <data name="Header_Alter_Category" xml:space="preserve">
+    <value>Nova Categoria</value>
+  </data>
+  <data name="Header_Alter_ContactInfo" xml:space="preserve">
+    <value>Nova Informação de Contato</value>
+  </data>
+  <data name="Header_Alter_Customer" xml:space="preserve">
+    <value>Novo Cliente</value>
+  </data>
+  <data name="Header_Alter_Email" xml:space="preserve">
+    <value>Novo Email</value>
+  </data>
+  <data name="Header_Alter_Employee" xml:space="preserve">
+    <value>Novo Funcionário</value>
+  </data>
+  <data name="Header_Alter_LegalPerson" xml:space="preserve">
+    <value>Nova Pessoa Legal</value>
+  </data>
+  <data name="Header_Alter_NaturalPerson" xml:space="preserve">
+    <value>Nova Pessoa Física</value>
+  </data>
+  <data name="Header_Alter_PayCheck" xml:space="preserve">
+    <value>Nova Folha de Pagamento</value>
+  </data>
+  <data name="Header_Alter_Person" xml:space="preserve">
+    <value>Nova Pessoa</value>
+  </data>
+  <data name="Header_Alter_PhoneNumber" xml:space="preserve">
+    <value>Novo Numero de Telefone</value>
+  </data>
+  <data name="Header_Alter_Product" xml:space="preserve">
+    <value>Novo Produto</value>
+  </data>
+  <data name="Header_Alter_Sale" xml:space="preserve">
+    <value>Nova Venda</value>
+  </data>
+  <data name="Header_Alter_Service" xml:space="preserve">
+    <value>Novo Serviço</value>
+  </data>
+  <data name="Header_ListService" xml:space="preserve">
+    <value>Listar Serviços</value>
+  </data>
+  <data name="Header_List_BaseEntity" xml:space="preserve">
+    <value>Listar Códigos</value>
+  </data>
+  <data name="Header_List_Category" xml:space="preserve">
+    <value>Listar Categorias</value>
+  </data>
+  <data name="Header_List_Customer" xml:space="preserve">
+    <value>Listar Clientes</value>
+  </data>
+  <data name="Header_List_Email" xml:space="preserve">
+    <value>Listar Emails</value>
+  </data>
+  <data name="Header_List_Employee" xml:space="preserve">
+    <value>Listar Funcionários</value>
+  </data>
+  <data name="Header_List_Op" xml:space="preserve">
+    <value>Listar Operações</value>
+  </data>
+  <data name="Header_List_PhoneNumber" xml:space="preserve">
+    <value>Listar Numeros de Telefone</value>
+  </data>
+  <data name="Header_List_Product" xml:space="preserve">
+    <value>Listar Produtos</value>
+  </data>
+  <data name="Header_Main_Busy" xml:space="preserve">
+    <value>Aguarde...</value>
+  </data>
+  <data name="Header_Main_Column" xml:space="preserve">
+    <value>Coluna Operações</value>
+  </data>
+  <data name="Header_Main_Header" xml:space="preserve">
+    <value>Menu Principal</value>
+  </data>
+  <data name="Header_Main_Message" xml:space="preserve">
+    <value>Popup</value>
+  </data>
+  <data name="Header_Sell_Product" xml:space="preserve">
+    <value>Vender Produto</value>
+  </data>
+  <data name="Header_Sell_Service" xml:space="preserve">
+    <value>Vender Serviço</value>
   </data>
   <data name="Menu_File" xml:space="preserve">
     <value>Arquivo</value>

@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewPhoneNumber; }
+            get { return OperationType.AlterPhoneNumber; }
         }
 
         protected override void QuickSearch(object arg)

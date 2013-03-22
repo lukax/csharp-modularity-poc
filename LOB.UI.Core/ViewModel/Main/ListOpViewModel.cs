@@ -24,21 +24,23 @@ namespace LOB.UI.Core.ViewModel.Main
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly Lazy<IDictionary<string, OperationType>> _operationDictLazy;
-        private string _search;
 
         public ListOpViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             _operationDictLazy = new Lazy<IDictionary<string, OperationType>>(CreateList);
+            Search = "";
+
             UpdateList();
         }
 
+        [AllowNull]
         public string Entity { get; set; }
+        [AllowNull]
         public ICollectionView Entitys { get; set; }
         public ICommand SaveChangesCommand { get; set; }
 
-        [AllowNull]
         public string Search { get; set; }
 
         public override void InitializeServices()
@@ -96,11 +98,11 @@ namespace LOB.UI.Core.ViewModel.Main
             enumList.Remove(OperationType.MessageTools);
             enumList.Remove(OperationType.ColumnTools);
             enumList.Remove(OperationType.HeaderTools);
-            enumList.Remove(OperationType.NewBaseEntity);
+            enumList.Remove(OperationType.AlterBaseEntity);
             enumList.Remove(OperationType.ListBaseEntity);
             enumList.Remove(OperationType.Main);
             enumList.Remove(OperationType.ListService);
-            enumList.Remove(OperationType.NewService);
+            enumList.Remove(OperationType.AlterService);
             var operationTypes = new Dictionary<string, OperationType>(enumList.Count);
             var stringsType = typeof(Strings);
             var stringsTypeProps = stringsType.GetProperties();

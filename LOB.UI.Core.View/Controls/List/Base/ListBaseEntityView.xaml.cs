@@ -1,6 +1,7 @@
 #region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 
@@ -25,11 +26,7 @@ namespace LOB.UI.Core.View.Controls.List.Base
 
         public int? Index { get; set; }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Códigos" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_List_BaseEntity; } }
 
         public void InitializeServices()
         {

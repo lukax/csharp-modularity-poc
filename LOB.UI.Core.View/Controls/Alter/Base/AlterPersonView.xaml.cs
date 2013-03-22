@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.Domain.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -36,11 +37,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
         }
 
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Pessoa" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_Person; } }
 
         public int? Index { get; set; }
 
@@ -56,7 +53,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
 
         public OperationType OperationType
         {
-            get { return OperationType.NewPerson; }
+            get { return OperationType.AlterPerson; }
         }
     }
 }

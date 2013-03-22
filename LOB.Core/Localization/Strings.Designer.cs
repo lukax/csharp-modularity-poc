@@ -70,6 +70,141 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterAddress.
+        /// </summary>
+        public static string Command_AlterAddress {
+            get {
+                return ResourceManager.GetString("Command_AlterAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterBaseEntity.
+        /// </summary>
+        public static string Command_AlterBaseEntity {
+            get {
+                return ResourceManager.GetString("Command_AlterBaseEntity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterCategory.
+        /// </summary>
+        public static string Command_AlterCategory {
+            get {
+                return ResourceManager.GetString("Command_AlterCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterContactInfo.
+        /// </summary>
+        public static string Command_AlterContactInfo {
+            get {
+                return ResourceManager.GetString("Command_AlterContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterCustomer.
+        /// </summary>
+        public static string Command_AlterCustomer {
+            get {
+                return ResourceManager.GetString("Command_AlterCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterEmail.
+        /// </summary>
+        public static string Command_AlterEmail {
+            get {
+                return ResourceManager.GetString("Command_AlterEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterEmployee.
+        /// </summary>
+        public static string Command_AlterEmployee {
+            get {
+                return ResourceManager.GetString("Command_AlterEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterLegalPerson.
+        /// </summary>
+        public static string Command_AlterLegalPerson {
+            get {
+                return ResourceManager.GetString("Command_AlterLegalPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterNaturalPerson.
+        /// </summary>
+        public static string Command_AlterNaturalPerson {
+            get {
+                return ResourceManager.GetString("Command_AlterNaturalPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterPayCheck.
+        /// </summary>
+        public static string Command_AlterPayCheck {
+            get {
+                return ResourceManager.GetString("Command_AlterPayCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterPerson.
+        /// </summary>
+        public static string Command_AlterPerson {
+            get {
+                return ResourceManager.GetString("Command_AlterPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterPhoneNumber.
+        /// </summary>
+        public static string Command_AlterPhoneNumber {
+            get {
+                return ResourceManager.GetString("Command_AlterPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterProduct.
+        /// </summary>
+        public static string Command_AlterProduct {
+            get {
+                return ResourceManager.GetString("Command_AlterProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterSale.
+        /// </summary>
+        public static string Command_AlterSale {
+            get {
+                return ResourceManager.GetString("Command_AlterSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Command_AlterService.
+        /// </summary>
+        public static string Command_AlterService {
+            get {
+                return ResourceManager.GetString("Command_AlterService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Command_ListAddress.
         /// </summary>
         public static string Command_ListAddress {
@@ -210,141 +345,6 @@ namespace LOB.Core.Localization {
         public static string Command_ListService {
             get {
                 return ResourceManager.GetString("Command_ListService", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewAddress.
-        /// </summary>
-        public static string Command_NewAddress {
-            get {
-                return ResourceManager.GetString("Command_NewAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewBaseEntity.
-        /// </summary>
-        public static string Command_NewBaseEntity {
-            get {
-                return ResourceManager.GetString("Command_NewBaseEntity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewCategory.
-        /// </summary>
-        public static string Command_NewCategory {
-            get {
-                return ResourceManager.GetString("Command_NewCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewContactInfo.
-        /// </summary>
-        public static string Command_NewContactInfo {
-            get {
-                return ResourceManager.GetString("Command_NewContactInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewCustomer.
-        /// </summary>
-        public static string Command_NewCustomer {
-            get {
-                return ResourceManager.GetString("Command_NewCustomer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewEmail.
-        /// </summary>
-        public static string Command_NewEmail {
-            get {
-                return ResourceManager.GetString("Command_NewEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewEmployee.
-        /// </summary>
-        public static string Command_NewEmployee {
-            get {
-                return ResourceManager.GetString("Command_NewEmployee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewLegalPerson.
-        /// </summary>
-        public static string Command_NewLegalPerson {
-            get {
-                return ResourceManager.GetString("Command_NewLegalPerson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewNaturalPerson.
-        /// </summary>
-        public static string Command_NewNaturalPerson {
-            get {
-                return ResourceManager.GetString("Command_NewNaturalPerson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewPayCheck.
-        /// </summary>
-        public static string Command_NewPayCheck {
-            get {
-                return ResourceManager.GetString("Command_NewPayCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewPerson.
-        /// </summary>
-        public static string Command_NewPerson {
-            get {
-                return ResourceManager.GetString("Command_NewPerson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewPhoneNumber.
-        /// </summary>
-        public static string Command_NewPhoneNumber {
-            get {
-                return ResourceManager.GetString("Command_NewPhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewProduct.
-        /// </summary>
-        public static string Command_NewProduct {
-            get {
-                return ResourceManager.GetString("Command_NewProduct", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewSale.
-        /// </summary>
-        public static string Command_NewSale {
-            get {
-                return ResourceManager.GetString("Command_NewSale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Command_NewService.
-        /// </summary>
-        public static string Command_NewService {
-            get {
-                return ResourceManager.GetString("Command_NewService", resourceCulture);
             }
         }
         
@@ -957,6 +957,276 @@ namespace LOB.Core.Localization {
         public static string Error_Internal {
             get {
                 return ResourceManager.GetString("Error_Internal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Address.
+        /// </summary>
+        public static string Header_Alter_Address {
+            get {
+                return ResourceManager.GetString("Header_Alter_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_BaseEntity.
+        /// </summary>
+        public static string Header_Alter_BaseEntity {
+            get {
+                return ResourceManager.GetString("Header_Alter_BaseEntity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Category.
+        /// </summary>
+        public static string Header_Alter_Category {
+            get {
+                return ResourceManager.GetString("Header_Alter_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_ContactInfo.
+        /// </summary>
+        public static string Header_Alter_ContactInfo {
+            get {
+                return ResourceManager.GetString("Header_Alter_ContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Customer.
+        /// </summary>
+        public static string Header_Alter_Customer {
+            get {
+                return ResourceManager.GetString("Header_Alter_Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Email.
+        /// </summary>
+        public static string Header_Alter_Email {
+            get {
+                return ResourceManager.GetString("Header_Alter_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Employee.
+        /// </summary>
+        public static string Header_Alter_Employee {
+            get {
+                return ResourceManager.GetString("Header_Alter_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_LegalPerson.
+        /// </summary>
+        public static string Header_Alter_LegalPerson {
+            get {
+                return ResourceManager.GetString("Header_Alter_LegalPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_NaturalPerson.
+        /// </summary>
+        public static string Header_Alter_NaturalPerson {
+            get {
+                return ResourceManager.GetString("Header_Alter_NaturalPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_PayCheck.
+        /// </summary>
+        public static string Header_Alter_PayCheck {
+            get {
+                return ResourceManager.GetString("Header_Alter_PayCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Person.
+        /// </summary>
+        public static string Header_Alter_Person {
+            get {
+                return ResourceManager.GetString("Header_Alter_Person", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_PhoneNumber.
+        /// </summary>
+        public static string Header_Alter_PhoneNumber {
+            get {
+                return ResourceManager.GetString("Header_Alter_PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Product.
+        /// </summary>
+        public static string Header_Alter_Product {
+            get {
+                return ResourceManager.GetString("Header_Alter_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Sale.
+        /// </summary>
+        public static string Header_Alter_Sale {
+            get {
+                return ResourceManager.GetString("Header_Alter_Sale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter_Service.
+        /// </summary>
+        public static string Header_Alter_Service {
+            get {
+                return ResourceManager.GetString("Header_Alter_Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_BaseEntity.
+        /// </summary>
+        public static string Header_List_BaseEntity {
+            get {
+                return ResourceManager.GetString("Header_List_BaseEntity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Category.
+        /// </summary>
+        public static string Header_List_Category {
+            get {
+                return ResourceManager.GetString("Header_List_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Customer.
+        /// </summary>
+        public static string Header_List_Customer {
+            get {
+                return ResourceManager.GetString("Header_List_Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Email.
+        /// </summary>
+        public static string Header_List_Email {
+            get {
+                return ResourceManager.GetString("Header_List_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Employee.
+        /// </summary>
+        public static string Header_List_Employee {
+            get {
+                return ResourceManager.GetString("Header_List_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Op.
+        /// </summary>
+        public static string Header_List_Op {
+            get {
+                return ResourceManager.GetString("Header_List_Op", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_PhoneNumber.
+        /// </summary>
+        public static string Header_List_PhoneNumber {
+            get {
+                return ResourceManager.GetString("Header_List_PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Product.
+        /// </summary>
+        public static string Header_List_Product {
+            get {
+                return ResourceManager.GetString("Header_List_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_ListService.
+        /// </summary>
+        public static string Header_ListService {
+            get {
+                return ResourceManager.GetString("Header_ListService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Main_Busy.
+        /// </summary>
+        public static string Header_Main_Busy {
+            get {
+                return ResourceManager.GetString("Header_Main_Busy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Main_Column.
+        /// </summary>
+        public static string Header_Main_Column {
+            get {
+                return ResourceManager.GetString("Header_Main_Column", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Main_Header.
+        /// </summary>
+        public static string Header_Main_Header {
+            get {
+                return ResourceManager.GetString("Header_Main_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Main_Message.
+        /// </summary>
+        public static string Header_Main_Message {
+            get {
+                return ResourceManager.GetString("Header_Main_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Sell_Product.
+        /// </summary>
+        public static string Header_Sell_Product {
+            get {
+                return ResourceManager.GetString("Header_Sell_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Sell_Service.
+        /// </summary>
+        public static string Header_Sell_Service {
+            get {
+                return ResourceManager.GetString("Header_Sell_Service", resourceCulture);
             }
         }
         

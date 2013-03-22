@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewSale; }
+            get { return OperationType.AlterSale; }
         }
 
         protected override void QuickSearch(object arg)

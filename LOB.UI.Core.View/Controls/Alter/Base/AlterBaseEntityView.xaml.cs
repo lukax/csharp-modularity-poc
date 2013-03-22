@@ -1,6 +1,7 @@
 #region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 
@@ -23,11 +24,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
             set { DataContext = value; }
         }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_BaseEntity; } }
 
         public int? Index { get; set; }
 
@@ -41,7 +38,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
 
         public OperationType OperationType
         {
-            get { return OperationType.NewBaseEntity; }
+            get { return OperationType.AlterBaseEntity; }
         }
     }
 }

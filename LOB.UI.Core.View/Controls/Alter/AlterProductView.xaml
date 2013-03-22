@@ -72,7 +72,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="350" Grid.Column="4" Grid.Row="3">
                     <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory" SelectedItem="{Binding Entity.Category}" MinWidth="150" />
                     <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" 
-                                   Command="{Binding AlterCategoryCommand}" CommandParameter="NewCategory"
+                                   Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
                                    HorizontalAlignment="Left" ToolTip="Edit" Focusable="False" Background="Transparent"
                                    Grid.Column="5">
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />

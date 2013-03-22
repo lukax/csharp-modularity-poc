@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Core.Events;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -31,11 +32,7 @@ namespace LOB.UI.Core.View.Controls.List
             set { DataContext = value; }
         }
 
-        public string Header
-        {
-            get { return "Commands"; }
-            set { }
-        }
+        public string Header { get { return Strings.Header_List_Op; } }
 
         public int? Index { get; set; }
 

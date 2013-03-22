@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -24,11 +25,7 @@ namespace LOB.UI.Core.View.Controls.Alter
             set { DataContext = value; }
         }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Venda" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_Sale; } }
 
         public int? Index { get; set; }
 
@@ -42,7 +39,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public OperationType OperationType
         {
-            get { return OperationType.NewSale; }
+            get { return OperationType.AlterSale; }
         }
     }
 }

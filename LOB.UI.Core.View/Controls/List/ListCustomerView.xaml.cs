@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
@@ -24,11 +25,7 @@ namespace LOB.UI.Core.View.Controls.List
             set { DataContext = value; }
         }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_List_Customer; } }
 
         public int? Index { get; set; }
 

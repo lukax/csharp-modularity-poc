@@ -49,7 +49,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewCustomer; }
+            get { return OperationType.AlterCustomer; }
         }
 
         protected override bool CanUpdate(object arg)

@@ -30,7 +30,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewLegalPerson; }
+            get { return OperationType.AlterLegalPerson; }
         }
 
         protected override void SaveChanges(object arg)

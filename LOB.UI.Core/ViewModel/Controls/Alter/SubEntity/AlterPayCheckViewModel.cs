@@ -24,7 +24,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewPayCheck; }
+            get { return OperationType.AlterPayCheck; }
         }
 
         protected override bool CanSaveChanges(object arg)

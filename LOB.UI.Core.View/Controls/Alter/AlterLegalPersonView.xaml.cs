@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -34,11 +35,7 @@ namespace LOB.UI.Core.View.Controls.Alter
             }
         }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Pessoa" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_LegalPerson; } }
 
         public int? Index { get; set; }
 
@@ -52,7 +49,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public OperationType OperationType
         {
-            get { return OperationType.NewLegalPerson; }
+            get { return OperationType.AlterLegalPerson; }
         }
     }
 }

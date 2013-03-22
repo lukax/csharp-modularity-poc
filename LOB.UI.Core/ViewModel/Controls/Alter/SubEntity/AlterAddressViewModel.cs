@@ -50,7 +50,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewAddress; }
+            get { return OperationType.AlterAddress; }
         }
 
         protected override void SaveChanges(object arg)

@@ -1,12 +1,14 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -14,12 +16,11 @@ namespace LOB.UI.Core.View.Controls.Alter
 {
     public partial class AlterEmployeeView : UserControl, IBaseView
     {
-        private readonly IEventAggregator _eventAggregator;
-        private string _header;
+        [Dependency]
+        private IEventAggregator _eventAggregator { get; set; }
 
-        public AlterEmployeeView(IEventAggregator eventAggregator)
+        public AlterEmployeeView()
         {
-            _eventAggregator = eventAggregator;
             InitializeComponent();
         }
 
@@ -46,11 +47,7 @@ namespace LOB.UI.Core.View.Controls.Alter
         }
 
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Funcionário" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_Employee; } }
 
         public int? Index
         {
@@ -68,7 +65,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public OperationType OperationType
         {
-            get { return OperationType.NewEmployee; }
+            get { return OperationType.AlterEmployee; }
         }
     }
 }

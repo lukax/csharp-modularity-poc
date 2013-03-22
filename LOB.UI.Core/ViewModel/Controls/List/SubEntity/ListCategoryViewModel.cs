@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewCategory; }
+            get { return OperationType.AlterCategory; }
         }
     }
 }

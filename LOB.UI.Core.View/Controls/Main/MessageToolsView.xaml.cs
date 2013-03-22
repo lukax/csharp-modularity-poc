@@ -2,6 +2,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Core.ViewModel.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -54,7 +55,7 @@ namespace LOB.UI.Core.View.Controls.Main
             }
         }
 
-        public string Header { get; set; }
+        public string Header { get { return Strings.Header_Main_Message; } }
         public int? Index { get; set; }
 
         public void InitializeServices()

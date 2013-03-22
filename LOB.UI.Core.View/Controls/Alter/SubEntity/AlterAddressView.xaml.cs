@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -28,11 +29,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             }
         }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Clientes" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_Address; } }
 
         public int? Index { get; set; }
 
@@ -46,7 +43,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
 
         public OperationType OperationType
         {
-            get { return OperationType.NewAddress; }
+            get { return OperationType.AlterAddress; }
         }
     }
 }

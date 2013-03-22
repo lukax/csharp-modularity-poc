@@ -41,12 +41,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override OperationType OperationType
         {
-            get { return OperationType.NewContactInfo; }
+            get { return OperationType.AlterContactInfo; }
         }
 
         private void AddEmail(object arg)
         {
-            //_commandService.Execute("OpenView", OperationName.NewEmail);
+            //_commandService.Execute("OpenView", OperationName.AlterEmail);
         }
 
         private void DeleteEmail(object arg)
@@ -55,7 +55,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         private void AddPhoneNumber(object arg)
         {
-            //_commandService.Execute("OpenView", OperationName.NewPhoneNumber);
+            //_commandService.Execute("OpenView", OperationName.AlterPhoneNumber);
         }
 
         private void DeletePhoneNumber(object arg)

@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -16,10 +17,9 @@ namespace LOB.UI.Core.View.Controls.Alter
         private string _header;
 
         [InjectionConstructor]
-        public AlterCustomerView(IAlterCustomerViewModel viewModel)
+        public AlterCustomerView()
         {
             InitializeComponent();
-            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel
@@ -34,11 +34,7 @@ namespace LOB.UI.Core.View.Controls.Alter
             }
         }
 
-        public string Header
-        {
-            get { return (string.IsNullOrEmpty(_header)) ? "Alterar Cliente" : _header; }
-            set { _header = value; }
-        }
+        public string Header { get { return Strings.Header_Alter_Customer; } }
 
         public int? Index { get; set; }
 
@@ -52,7 +48,7 @@ namespace LOB.UI.Core.View.Controls.Alter
 
         public OperationType OperationType
         {
-            get { return OperationType.NewCustomer; }
+            get { return OperationType.AlterCustomer; }
         }
     }
 }
