@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using LOB.Business.Interface;
+using LOB.Dao.Interface;
 using LOB.Domain;
 
 #endregion
@@ -9,9 +10,12 @@ namespace LOB.Business
 {
     public class EmployeeFacade : EntityFacade<Employee>, IEmployeeFacade
     {
-        public EmployeeFacade(Employee entity)
-            : base(entity)
+        private readonly IUnityOfWork _unityOfWork;
+
+        public EmployeeFacade(IUnityOfWork unityOfWork, Employee entity)
+            : base(unityOfWork, entity)
         {
+            _unityOfWork = unityOfWork;
         }
     }
 }

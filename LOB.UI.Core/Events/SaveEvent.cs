@@ -5,9 +5,9 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Event
+namespace LOB.UI.Core.Events
 {
-    public class MessageHideEvent : CompositePresentationEvent<string>, IBaseEvent
+    public class SaveEvent : CompositePresentationEvent<string>, IBaseEvent
     {
     }
 }

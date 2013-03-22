@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Input;
-using LOB.UI.Core.Event.View;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;

@@ -1,26 +1,19 @@
 ﻿#region Usings
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using LOB.Core.Util;
-using LOB.Dao.Interface;
-using LOB.Domain.SubEntity;
-using LOB.UI.Core.Event;
-using LOB.UI.Core.Event.View;
+using LOB.UI.Core.Events;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
-using NullGuard;
 
 #endregion
 
@@ -29,66 +22,55 @@ namespace LOB.UI.Core.ViewModel.Main
     public class ListOpViewModel : BaseViewModel, IListOpViewModel
     {
         private readonly IEventAggregator _eventAggregator;
+        private string _search;
+        private ICollection<string> _entitys;
+        public OperationType Entity { get; set; }
+        public ICollectionView Entitys { get; set; }
+        public ICommand SaveChangesCommand { get; set; }
+        public string Search { get { return _search ?? string.Empty; } set { _search = value; } }
 
-        public ListOpViewModel(Category entity, IRepository repository, IEventAggregator eventAggregator)
+        public ListOpViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            SaveChangesCommand = new DelegateCommand(SaveChangesExecute);
-            _operationDictLazy = new Lazy<IDictionary<string, OperationType>>(PrepareList);
+            SaveChangesCommand = new DelegateCommand(SaveChanges);
+            _operationDictLazy = new Lazy<IDictionary<string, OperationType>>(CreateList);
             UpdateList();
         }
 
-        public OperationType Entity { get; set; }
-
-        private ICollectionView _entitys;
-        public ICollectionView Entitys
+        private async Task UpdateList()
         {
-            get
-            {
-                var local = _entitys ?? new CollectionView(_operationDictLazy.Value.Keys);
-                Entitys = local;
-                return local;
-            }
-            set
-            {
-                _entitys = value;
-                ListenToList(_entitys);
-            }
-        }
 
-        public ICommand SaveChangesCommand { get; set; }
-
-        private string _search;
-        public string Search { get { return _search ?? string.Empty; } set { _search = value; } }
-
-        public override void InitializeServices()
-        {
-        }
-
-        public override void Refresh()
-        {
-        }
-
-        private async void UpdateList()
-        {
             while (true)
             {
                 await Task.Delay(500);
-                //Entitys.AsQueryable().
-                Entitys = string.IsNullOrEmpty(Search) ? 
-                    new CollectionView(_operationDictLazy.Value.Keys) : 
-                    new CollectionView(_operationDictLazy.Value.Keys.Where(x => x.ToLower().Contains(Search.ToLower())));
+                if (string.IsNullOrEmpty(Search))
+                {
+                    var list = _operationDictLazy.Value.Keys.ToList();
+                    if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list))
+                        Entitys = new CollectionView(list);
+                }
+                else
+                {
+                    var list = _operationDictLazy.Value.Keys.Where(x => x.ToLower().Contains(Search.ToLower())).ToList();
+                    if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list)) 
+                        Entitys = new CollectionView(list);
+                }
+                _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
+                Entitys.CurrentChanged += (sender, args) => SaveChanges();
             }
+
         }
 
-        private void ListenToList(ICollectionView collection)
+        private void SaveChanges()
         {
-            _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
-            collection.CurrentChanged += (sender, args) => SaveChangesExecute();
+            Entity = _operationDictLazy.Value[Entitys.CurrentItem.ToString()];
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(Entity);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
         }
 
         private Lazy<IDictionary<string, OperationType>> _operationDictLazy;
-        private IDictionary<string, OperationType> PrepareList()
+
+        private IDictionary<string, OperationType> CreateList()
         {
             var enumList = Enum.GetValues(typeof(OperationType)).Cast<OperationType>().ToList();
             //Remove Unapplicables to user selection:
@@ -104,6 +86,7 @@ namespace LOB.UI.Core.ViewModel.Main
             var operationTypes = new Dictionary<string, OperationType>(enumList.Count);
             var stringsType = typeof(Resources.Localization.Strings);
             var stringsTypeProps = stringsType.GetProperties();
+            //Parse to localized string
             foreach (var operationType in enumList)
             {
                 foreach (string name in
@@ -118,11 +101,12 @@ namespace LOB.UI.Core.ViewModel.Main
             return operationTypes;
         }
 
-        private void SaveChangesExecute()
+        public override void InitializeServices()
         {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
-            Entity = _operationDictLazy.Value[Entitys.CurrentItem.ToString()];
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(Entity);
+        }
+
+        public override void Refresh()
+        {
         }
 
         public override OperationType OperationType

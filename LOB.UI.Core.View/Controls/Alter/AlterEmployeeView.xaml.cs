@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Controls;
-using LOB.UI.Core.Event;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;

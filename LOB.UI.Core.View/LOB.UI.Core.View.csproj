@@ -92,8 +92,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity">
-      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MahApps.Metro.0.5.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="Microsoft.CSharp" />
@@ -108,11 +109,12 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\CloseTabItemAction.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Controller\MainRegionController.cs" />
+    <Compile Include="Controllers\MainRegionController.cs" />
     <Compile Include="Controls\Alter\AlterCustomerView.xaml.cs">
       <DependentUpon>AlterCustomerView.xaml</DependentUpon>
     </Compile>
@@ -222,6 +224,22 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Alter\AlterCustomerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\BaseLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Grey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -406,15 +424,15 @@
     <Resource Include="ModuleCatalog.xaml">
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="Skin\MainSkin.xaml">
+    <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skin\MetroSkin.xaml">
+    <Page Include="Skins\MetroSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skin\MetroVSSkin.xaml">
+    <Page Include="Skins\MetroVSSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -451,10 +469,6 @@
     <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Interface.csproj">
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>
       <Name>LOB.UI.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.UI.MahApps.Metro.Resources\LOB.UI.MahApps.Metro.Resources.csproj">
-      <Project>{e708ac99-605b-42a0-8d20-abca8fe42dd2}</Project>
-      <Name>LOB.UI.MahApps.Metro.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.UI.MahApps.Metro\LOB.UI.MahApps.Metro.csproj">
       <Project>{5b1710d2-5dc8-4754-91b2-19165de49b3d}</Project>

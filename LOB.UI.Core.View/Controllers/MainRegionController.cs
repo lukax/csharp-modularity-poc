@@ -3,8 +3,8 @@
 using System;
 using System.Threading.Tasks;
 using LOB.Dao.Interface;
-using LOB.UI.Core.Event;
-using LOB.UI.Core.Event.View;
+using LOB.UI.Core.Events;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Main;
 using LOB.UI.Interface.Infrastructure;
@@ -14,7 +14,7 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controller
+namespace LOB.UI.Core.View.Controllers
 {
     public class MainRegionController
     {

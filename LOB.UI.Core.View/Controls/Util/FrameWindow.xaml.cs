@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Log.Interface;
-using LOB.UI.Core.Event.View;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;

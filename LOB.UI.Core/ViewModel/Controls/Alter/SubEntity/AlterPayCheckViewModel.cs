@@ -4,7 +4,6 @@ using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;

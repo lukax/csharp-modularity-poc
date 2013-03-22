@@ -5,7 +5,7 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Event
+namespace LOB.UI.Core.Events
 {
     /// <summary>
     ///     Event that requests a Customer

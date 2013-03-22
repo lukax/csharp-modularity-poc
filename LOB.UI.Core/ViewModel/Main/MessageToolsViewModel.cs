@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Input;
-using LOB.UI.Core.Event;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Commands;
