@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using LOB.Log.Interface;
 using LOB.UI.Core.Infrastructure;
+using LOB.UI.Core.View.Actions;
 using LOB.UI.Core.View.Controllers;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.View.Infrastructure;
@@ -11,6 +12,7 @@ using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
@@ -23,7 +25,8 @@ namespace LOB.UI.Core.View
     {
         private readonly IUnityContainer _container;
 
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private MainRegionController
+        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        private MainRegionController
             _mainRegionController;
 
         public Module(IUnityContainer container)
@@ -43,11 +46,10 @@ namespace LOB.UI.Core.View
 
 
             var regionManager = _container.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof (HeaderToolsView));
-            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof (ColumnToolsView));
-            //regionManager.RegisterViewWithRegion(RegionName.TabRegion, typeof (AlterCustomerView));
-            //regionManager.Regions.Add(RegionName.TabRegion, new Region());
-            //regionManager.AddToRegion(RegionName.TabRegion, typeof (AlterCategoryView));
+            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolsView));
+            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolsView));
+
+            View.Actions.CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
 
             //Init controller
             _mainRegionController = _container.Resolve<MainRegionController>();

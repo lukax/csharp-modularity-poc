@@ -114,6 +114,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entypo.ttf" />
     <None Include="LOB.UI.Core.Resources.snk" />
   </ItemGroup>
   <ItemGroup>
