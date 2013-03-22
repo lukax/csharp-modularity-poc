@@ -71,10 +71,6 @@
     <AssemblyOriginatorKeyFile>LOB.Business.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
@@ -105,10 +101,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -173,10 +165,6 @@
     <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Interface.csproj">
       <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
       <Name>LOB.Business.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
-      <Project>{79fb165f-3816-4a5f-b5a1-b5a64bed0218}</Project>
-      <Name>LOB.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
       <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
