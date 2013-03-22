@@ -15,7 +15,7 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
-
+using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Main
@@ -23,8 +23,7 @@ namespace LOB.UI.Core.ViewModel.Main
     public class ListOpViewModel : BaseViewModel, IListOpViewModel
     {
         private readonly IEventAggregator _eventAggregator;
-        private ICollection<string> _entitys;
-        private Lazy<IDictionary<string, OperationType>> _operationDictLazy;
+        private readonly Lazy<IDictionary<string, OperationType>> _operationDictLazy;
         private string _search;
 
         public ListOpViewModel(IEventAggregator eventAggregator)
@@ -39,11 +38,8 @@ namespace LOB.UI.Core.ViewModel.Main
         public ICollectionView Entitys { get; set; }
         public ICommand SaveChangesCommand { get; set; }
 
-        public string Search
-        {
-            get { return _search ?? string.Empty; }
-            set { _search = value; }
-        }
+        [AllowNull]
+        public string Search { get; set; }
 
         public override void InitializeServices()
         {
