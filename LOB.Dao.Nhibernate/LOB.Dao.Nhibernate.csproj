@@ -90,7 +90,7 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainRepository.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\CommandMap.cs" />
     <Compile Include="Mapping\SubEntity\PhoneNumberMap.cs" />

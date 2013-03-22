@@ -1,4 +1,4 @@
-﻿namespace LOB.Core
+﻿namespace LOB.Core.Licensing
 {
     public class TrialMaker
     {

@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using LOB.Business.Interface;
+using LOB.Business.Interface.Logic;
 using LOB.Business.Logic;
 using LOB.Domain.Base;
 using LOB.Log.Interface;

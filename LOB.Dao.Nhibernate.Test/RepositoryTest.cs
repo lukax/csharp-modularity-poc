@@ -18,7 +18,7 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void AddDeleteTest()
         {
-            var repo = new DomainRepository(new UnityOfWork(new SessionCreator(new Logger())));
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
 
             var p1 = new Product
                 {
@@ -48,7 +48,7 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void GetTest()
         {
-            var repo = new DomainRepository(new UnityOfWork(new SessionCreator(new Logger())));
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
 
             var p1 = new Product
                 {
@@ -65,7 +65,7 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void SaveOrUpdateTest()
         {
-            var repo = new DomainRepository(new UnityOfWork(new SessionCreator(new Logger())));
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
             var entity = new Product {Description = "Test description service", Name = "Test Name"};
             using (repo.Uow)
             {
@@ -88,7 +88,7 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void SaveGetPolymorphismTest()
         {
-            var repo = new DomainRepository(new UnityOfWork(new SessionCreator(new Logger())));
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
             var person = new LegalPerson
                 {
                     Cnpj = 123456,
@@ -119,7 +119,7 @@ namespace LOB.Dao.Nhibernate.Test
         [TestMethod]
         public void GetListCriteriaTest()
         {
-            var repo = new DomainRepository(new UnityOfWork(new SessionCreator(new Logger())));
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
             var person1 = new NaturalPerson
                 {
                     FirstName = "Dude1",

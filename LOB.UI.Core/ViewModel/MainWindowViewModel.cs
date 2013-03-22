@@ -2,6 +2,7 @@
 
 using System.Windows.Input;
 using LOB.Core;
+using LOB.Core.Licensing;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;

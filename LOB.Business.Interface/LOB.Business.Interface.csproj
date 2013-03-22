@@ -49,9 +49,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEmployeeFacade.cs" />
-    <Compile Include="IEntityFacade.cs" />
-    <Compile Include="IProductFacade.cs" />
+    <Compile Include="Logic\IEmployeeFacade.cs" />
+    <Compile Include="Logic\IEntityFacade.cs" />
+    <Compile Include="Logic\IProductFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="LOB.Business.Interface.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\Base\" />
+    <Folder Include="Logic\SubEntity\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

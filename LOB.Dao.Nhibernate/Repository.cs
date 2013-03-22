@@ -14,10 +14,10 @@ using NHibernate.Linq;
 
 namespace LOB.Dao.Nhibernate
 {
-    public class DomainRepository : IRepository
+    public class Repository : IRepository
     {
         [InjectionConstructor]
-        public DomainRepository(IUnityOfWork unityOfWork)
+        public Repository(IUnityOfWork unityOfWork)
         {
             Uow = unityOfWork;
         }
