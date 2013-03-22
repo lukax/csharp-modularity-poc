@@ -1,9 +1,15 @@
 ﻿#region Usings
 
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using LOB.UI.Core.Event;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
+using Microsoft.Practices.Prism.Events;
 
 #endregion
 
@@ -14,8 +20,11 @@ namespace LOB.UI.Core.View.Controls.List
     /// </summary>
     public partial class ListOpView : UserControl, IBaseView
     {
-        public ListOpView(IListOpViewModel viewModel)
+        private readonly IEventAggregator _eventAggregator;
+
+        public ListOpView(IEventAggregator eventAggregator, IListOpViewModel viewModel)
         {
+            _eventAggregator = eventAggregator;
             InitializeComponent();
             ViewModel = viewModel;
         }
@@ -36,10 +45,15 @@ namespace LOB.UI.Core.View.Controls.List
 
         public void InitializeServices()
         {
+            _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o =>
+                {
+                    if (o == OperationType.ListOp) Refresh();
+                });
         }
 
         public void Refresh()
         {
+            ListViewEntitys.SelectedIndex = -1;
         }
 
         public OperationType OperationType

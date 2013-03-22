@@ -11,6 +11,7 @@ using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using NullGuard;
 
 #endregion
 
@@ -22,39 +23,26 @@ namespace LOB.Dao.Nhibernate
                         Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
         private const string MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;
                         Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
-        private readonly IServiceLocator _container;
         private readonly ILoggerFacade _logger;
-        private string _connectionString;
         private object _orm;
         private PersistType _persistType;
         private SchemaExport _sqlSchema;
 
         [InjectionConstructor]
         public SessionCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MySql, null)
+            //MySQL
+            : this(logger, PersistType.MySql, MySqlDefaultConnectionString)
         {
         }
 
-        public SessionCreator(ILoggerFacade logger, PersistType persistIn, string connectionString)
+        protected SessionCreator(ILoggerFacade logger, PersistType persistIn, string connectionString)
         {
-            if (logger == null) throw new ArgumentNullException("logger");
-            if (connectionString != null) ConnectionString = connectionString;
+            ConnectionString = connectionString;
             _logger = logger;
             _persistType = persistIn;
         }
 
-        public string ConnectionString
-        {
-            get
-            {
-                if (_persistType == PersistType.MySql)
-                    return _connectionString ?? MySqlDefaultConnectionString;
-                if (_persistType == PersistType.MsSql)
-                    return _connectionString ?? MsSqlDefaultConnectionString;
-                return _connectionString;
-            }
-            set { _connectionString = value; }
-        }
+        public string ConnectionString { get; set; }
 
         public Object Orm
         {
@@ -172,7 +160,6 @@ namespace LOB.Dao.Nhibernate
 
         private void SchemaCreator(Configuration cfg)
         {
-            if (cfg == null) throw new ArgumentNullException("cfg");
             try
             {
                 if (_persistType == PersistType.Memory)

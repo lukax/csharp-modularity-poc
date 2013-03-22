@@ -18,10 +18,8 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    //[Export(typeof(IAlterProductViewModel))]
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel
     {
-        private IList<Category> _categories;
         private IUnityContainer _container;
         private IFluentNavigator _navigator;
 
@@ -40,17 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
 
-        public IList<Category> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                if (value == null) return;
-                if (value.Equals(_categories)) return;
-                _categories = value;
-                if (Entity.Category == null) Entity.Category = value.FirstOrDefault();
-            }
-        }
+        public IList<Category> Categories { get; set; }
 
         public override OperationType OperationType
         {

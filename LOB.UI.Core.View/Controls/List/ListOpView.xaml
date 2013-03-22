@@ -28,7 +28,7 @@
             </DockPanel>
             
             <StackPanel>
-                <ListBox SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />
+                <ListView SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" SelectionMode="Single" x:Name="ListViewEntitys" SelectedIndex="-1" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

@@ -26,7 +26,6 @@ namespace LOB.UI.Core.View.Infrastructure
         public void AddView<TView>(TView view, string regionName)
             where TView : IBaseView
         {
-            if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
             var previousView = region.GetView(view.OperationType.ToString());
             if (previousView != null)
@@ -37,8 +36,6 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public IBaseView GetView(OperationType param, string regionName)
         {
-            if (param == default(OperationType)) throw new ArgumentNullException("param");
-            if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
             return region.GetView(param.ToString()) as IBaseView;
         }
@@ -46,7 +43,6 @@ namespace LOB.UI.Core.View.Infrastructure
         public void RemoveView(OperationType param, string regionName)
         {
             if (param == default(OperationType)) throw new ArgumentNullException("param");
-            if (regionName == null) throw new ArgumentNullException("regionName");
             var region = _regionManager.Regions[regionName];
             var view = region.GetView(param.ToString());
             if (region.Views.Contains(view))

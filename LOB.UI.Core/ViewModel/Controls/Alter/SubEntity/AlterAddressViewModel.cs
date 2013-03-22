@@ -29,7 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         //TODO: Wrap with business logic
         public string State
         {
-            get { return Entity.State; }
+            get { return Entity.State ?? (Entity.State = string.Empty); }
             set
             {
                 if (value.Length == 2)
@@ -37,8 +37,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
                     try
                     {
                         UfBr parsed;
-                        Enum.TryParse(value, out parsed);
-                        Entity.State = UfBrDictionary.Ufs[parsed];
+                        if(Enum.TryParse(value, out parsed))
+                            Entity.State = UfBrDictionary.Ufs[parsed];
                     }
                     catch (ArgumentNullException)
                     {

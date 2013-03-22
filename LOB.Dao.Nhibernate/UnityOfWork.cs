@@ -13,25 +13,22 @@ namespace LOB.Dao.Nhibernate
     public class UnityOfWork : IUnityOfWork, IDisposable
     {
         //TODO: Try and catches and some logging later..
-
         private ITransaction _transaction;
 
         [InjectionConstructor]
         public UnityOfWork(ISessionCreator sessionCreator)
         {
-            Orm = sessionCreator.Orm;
+            _lazyOrm = new Lazy<object>(() => sessionCreator.Orm);
         }
 
-        public object Orm { get; private set; }
+        private Lazy<object> _lazyOrm;
+        public object Orm { get { return _lazyOrm.Value; } private set { _lazyOrm = new Lazy<object>(() => value); } }
 
         public void Save<T>(T entity) where T : BaseEntity
         {
-            if (_transaction == null)
-                throw new InvalidOperationException("Transaction not initialized");
-
             try
             {
-                ((ISession) Orm).Save(entity);
+                ((ISession)Orm).Save(entity);
             }
             catch (Exception)
             {
@@ -41,12 +38,9 @@ namespace LOB.Dao.Nhibernate
 
         public void SaveOrUpdate<T>(T entity) where T : BaseEntity
         {
-            if (_transaction == null)
-                throw new InvalidOperationException("Transaction not initialized");
-
             try
             {
-                ((ISession) Orm).SaveOrUpdate(entity);
+                ((ISession)Orm).SaveOrUpdate(entity);
             }
             catch (Exception)
             {
@@ -56,12 +50,9 @@ namespace LOB.Dao.Nhibernate
 
         public void Update<T>(T entity) where T : BaseEntity
         {
-            if (_transaction == null)
-                throw new InvalidOperationException("Transaction not initialized");
-
             try
             {
-                ((ISession) Orm).Update(entity);
+                ((ISession)Orm).Update(entity);
             }
             catch (Exception)
             {
@@ -71,12 +62,9 @@ namespace LOB.Dao.Nhibernate
 
         public void Delete<T>(T entity) where T : BaseEntity
         {
-            if (_transaction == null)
-                throw new InvalidOperationException("Transaction not initialized");
-
             try
             {
-                ((ISession) Orm).Delete(entity);
+                ((ISession)Orm).Delete(entity);
             }
             catch (Exception)
             {
@@ -86,18 +74,14 @@ namespace LOB.Dao.Nhibernate
 
         public IUnityOfWork BeginTransaction()
         {
-            if (_transaction == null)
-                _transaction = ((ISession) Orm).BeginTransaction();
-            else if (_transaction.IsActive)
+            if (_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has already been initialized, dispose first");
             return this;
         }
 
         public void CommitTransaction()
         {
-            if (_transaction == null)
-                throw new InvalidOperationException("Transaction not initialized");
-            else if (!_transaction.IsActive)
+            if (!_transaction.IsActive)
                 throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
             _transaction.Commit();
         }

@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event\CancelEvent.cs" />
+    <Compile Include="Event\Copy of CancelEvent.cs" />
     <Compile Include="Event\SaveEvent.cs" />
     <Compile Include="Event\View\CloseViewEvent.cs" />
     <Compile Include="Event\View\OpenViewEvent.cs" />
@@ -215,6 +216,10 @@
     <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
       <Project>{5ee9acb1-f25f-4a9d-ae79-517be03e02d9}</Project>
       <Name>LOB.Log.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.UI.Core.Resources\LOB.UI.Core.Resources.csproj">
+      <Project>{22f1d5de-172f-4bea-8d4e-77b0c57a2a9c}</Project>
+      <Name>LOB.UI.Core.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Interface.csproj">
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>

@@ -108,7 +108,7 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public void AddToRegion(string regionName)
         {
-            _regionAdapter.AddView(_resolvedView, regionName);
+            _regionAdapter.AddView(GetView(), regionName);
         }
 
         public void Show(bool asDialog = false)

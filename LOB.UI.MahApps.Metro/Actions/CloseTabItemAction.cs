@@ -40,7 +40,17 @@ namespace MahApps.Metro.Actions
 
         protected override void Invoke(object parameter)
         {
-            TabControl.Items.Remove(TabControl.Items.Contains(TabItem) ? TabItem : TabItem.Content);
+            if (TabControl.Items.Contains(TabItem))
+            {
+                TabControl.Items.Remove(TabItem);
+
+            }
+            else
+            {
+                TabControl.Items.Remove(TabItem.Content);
+            }
+            
+            
         }
     }
 }
