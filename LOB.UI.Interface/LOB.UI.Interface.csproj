@@ -40,10 +40,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>LOB.UI.Interface.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -97,9 +98,6 @@
     <Compile Include="ViewModel\Controls\Main\IHeaderToolsViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\ISellProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\ISellServiceViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LOB.UI.Interface.snk" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

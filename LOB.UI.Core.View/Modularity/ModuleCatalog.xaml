@@ -8,19 +8,19 @@
     <Modularity:ModuleInfo
         Ref="file://LOB.Log.dll"
         ModuleName="LogModule" InitializationMode="OnDemand"
-        ModuleType="LOB.Log.Modularity.Module, LOB.Log, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a5e30f61151628a">
+        ModuleType="LOB.Log.Modularity.Module, LOB.Log, Version=1.0.0.0, Culture=neutral">
     </Modularity:ModuleInfo>
 
     <!--<Modularity:ModuleInfo
         Ref="file://LOB.UI.Core.Resources.dll"
         ModuleName="UICoreResourcesModule" InitializationMode="WhenAvailable"
-        ModuleType="LOB.UI.Core.Modularity.Resources.Module, LOB.UI.Core.Resources, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a24df41632d897a">
+        ModuleType="LOB.UI.Core.Modularity.Resources.Module, LOB.UI.Core.Resources, Version=1.0.0.0, Culture=neutral">
     </Modularity:ModuleInfo>-->
     
     <Modularity:ModuleInfo 
         Ref="file://LOB.Dao.Nhibernate.dll"
         ModuleName="DaoModule" InitializationMode="OnDemand"
-        ModuleType="LOB.Dao.Nhibernate.Modularity.Module, LOB.Dao.Nhibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1a7abc5f616c87c2">
+        ModuleType="LOB.Dao.Nhibernate.Modularity.Module, LOB.Dao.Nhibernate, Version=1.0.0.0, Culture=neutral">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>LogModule</sys:String>
         </Modularity:ModuleInfo.DependsOn>
@@ -29,7 +29,7 @@
     <Modularity:ModuleInfo
         Ref="file://LOB.Business.dll"
         ModuleName="BusinessModule" InitializationMode="OnDemand"
-        ModuleType="LOB.Business.Modularity.Module, LOB.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dbb35b8c36201cd8">
+        ModuleType="LOB.Business.Modularity.Module, LOB.Business, Version=1.0.0.0, Culture=neutral">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>LogModule</sys:String>
             <sys:String>DaoModule</sys:String>
@@ -39,7 +39,7 @@
     <Modularity:ModuleInfo
         Ref="file://LOB.UI.Core.dll"
         ModuleName="UICoreModule" InitializationMode="OnDemand"
-        ModuleType="LOB.UI.Core.Modularity.Module, LOB.UI.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1ff7c4894663fedc">
+        ModuleType="LOB.UI.Core.Modularity.Module, LOB.UI.Core, Version=1.0.0.0, Culture=neutral">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>LogModule</sys:String>
             <sys:String>DaoModule</sys:String>
@@ -50,7 +50,7 @@
     <Modularity:ModuleInfo
         Ref="file://LOB.UI.Core.View.exe"
         ModuleName="UICoreViewModule" InitializationMode="OnDemand"
-        ModuleType="LOB.UI.Core.View.Modularity.Module, LOB.UI.Core.View, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e5246e7302e0be16">
+        ModuleType="LOB.UI.Core.View.Modularity.Module, LOB.UI.Core.View, Version=1.0.0.0, Culture=neutral">
         <Modularity:ModuleInfo.DependsOn>
             <sys:String>LogModule</sys:String>
             <sys:String>DaoModule</sys:String>

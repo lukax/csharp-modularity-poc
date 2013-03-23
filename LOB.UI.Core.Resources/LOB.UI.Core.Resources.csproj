@@ -30,10 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>LOB.UI.Core.Resources.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -98,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Entypo.ttf" />
-    <None Include="LOB.UI.Core.Resources.snk" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Icons.xaml">
