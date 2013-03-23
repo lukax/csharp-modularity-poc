@@ -14,6 +14,8 @@ namespace LOB.Domain
     {
         public Category Category { get; set; }
         public ProductStatus Status { get; set; }
+        public int CodBarras { get; set; }
+        public byte[] Image { get; set; }
         public int UnitsInStock { get; set; }
         public int MaxUnitsOfStock { get; set; }
         public int MinUnitsOfStock { get; set; }

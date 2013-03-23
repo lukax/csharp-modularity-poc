@@ -126,7 +126,9 @@
                         </controls:Tile>
                     </StackPanel>
                 </TabItem>
-
+                <TabItem Header="{x:Static loc:Strings.Common_Image}">
+                    <Image Source="{Binding Image}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </StackPanel>

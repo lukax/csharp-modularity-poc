@@ -300,6 +300,9 @@
   <data name="Common_HireDate" xml:space="preserve">
     <value>@Common_HireDate</value>
   </data>
+  <data name="Common_Image" xml:space="preserve">
+    <value>@Common_Image</value>
+  </data>
   <data name="Common_InscEstadual" xml:space="preserve">
     <value>@Common_InscEstadual</value>
   </data>

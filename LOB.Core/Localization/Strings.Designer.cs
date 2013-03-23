@@ -610,6 +610,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Image.
+        /// </summary>
+        public static string Common_Image {
+            get {
+                return ResourceManager.GetString("Common_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_InscEstadual.
         /// </summary>
         public static string Common_InscEstadual {

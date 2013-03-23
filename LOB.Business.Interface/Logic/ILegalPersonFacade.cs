@@ -2,7 +2,8 @@
 
 namespace LOB.Business.Interface.Logic
 {
-    public interface IProductFacade: IServiceFacade
+    public interface ILegalPersonFacade : IPersonFacade
     {
+         
     }
 }

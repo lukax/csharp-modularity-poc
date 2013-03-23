@@ -111,9 +111,18 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\Base\ServiceFacade.cs" />
-    <Compile Include="Logic\EntityFacade.cs" />
+    <Compile Include="Logic\Base\BaseEntityFacade.cs" />
     <Compile Include="Framework\Extension.cs" />
+    <Compile Include="Logic\Base\PersonFacade.cs" />
+    <Compile Include="Logic\Base\ServiceFacade.cs" />
+    <Compile Include="Logic\CustomerFacade.cs" />
+    <Compile Include="Logic\LegalPersonFacade.cs" />
+    <Compile Include="Logic\NaturalPersonFacade.cs" />
+    <Compile Include="Logic\SaleFacade.cs" />
+    <Compile Include="Logic\SubEntity\AddressFacade.cs" />
+    <Compile Include="Logic\SubEntity\ContactInfoFacade.cs" />
+    <Compile Include="Logic\SubEntity\EmailFacade.cs" />
+    <Compile Include="Logic\SubEntity\ShipmentInfoInfoFacade.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Logic\ProductFacade.cs" />
     <Compile Include="Logic\EmployeeFacade.cs" />

@@ -13,6 +13,8 @@ namespace LOB.Dao.Nhibernate.Mapping
         {
             References(x => x.Category);
             Map(x => x.Status);
+            Map(x => x.CodBarras);
+            Map(x => x.Image).CustomSqlType("BinaryBlob");
             Map(x => x.UnitsInStock);
             Map(x => x.MaxUnitsOfStock);
             Map(x => x.MinUnitsOfStock);

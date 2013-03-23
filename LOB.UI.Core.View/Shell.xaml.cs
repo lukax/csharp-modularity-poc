@@ -141,7 +141,7 @@ namespace LOB.UI.Core.View
 
         private void TabRegion_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabRegion.SelectedIndex = TabRegion.Items.Count;
+            TabRegion.SelectedIndex = TabRegion.Items.Count -1;
         }
     }
 }

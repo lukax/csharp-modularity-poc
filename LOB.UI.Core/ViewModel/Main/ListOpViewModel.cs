@@ -66,7 +66,7 @@ namespace LOB.UI.Core.ViewModel.Main
                     var list = _operationDictLazy.Value.Keys.ToList();
                     if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list))
                     {
-                        Entitys = new CollectionView(list);
+                        Entitys = new ListCollectionView(list);
                         _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
                         Entitys.CurrentChanged += (sender, args) => SaveChanges();
                     }

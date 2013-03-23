@@ -49,9 +49,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\Base\IBaseEntityFacade.cs" />
+    <Compile Include="Logic\Base\IPersonFacade.cs" />
+    <Compile Include="Logic\Base\IServiceFacade.cs" />
+    <Compile Include="Logic\INaturalPersonFacade.cs" />
+    <Compile Include="Logic\ICustomerFacade.cs" />
     <Compile Include="Logic\IEmployeeFacade.cs" />
-    <Compile Include="Logic\IEntityFacade.cs" />
+    <Compile Include="Logic\ILegalPersonFacade.cs" />
     <Compile Include="Logic\IProductFacade.cs" />
+    <Compile Include="Logic\ISaleFacade.cs" />
+    <Compile Include="Logic\SubEntity\IShipmentInfoFacade.cs" />
+    <Compile Include="Logic\SubEntity\IEmailFacade.cs" />
+    <Compile Include="Logic\SubEntity\IContactInfoFacade.cs" />
+    <Compile Include="Logic\SubEntity\IAddressFacade.cs" />
+    <Compile Include="Logic\SubEntity\ICategoryFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,10 +75,7 @@
       <Name>LOB.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\Base\" />
-    <Folder Include="Logic\SubEntity\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
