@@ -29,9 +29,9 @@ namespace LOB.Business.Modularity
 
         public void Initialize()
         {
-            _container.RegisterType<IBaseEntityFacade, BaseEntityFacade>();
-            _container.RegisterType<IPersonFacade, PersonFacade>();
-            _container.RegisterType<IServiceFacade, ServiceFacade>();
+            _container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade>();
+            _container.RegisterType<IPersonFacade<Person>, PersonFacade<Person>>();
+            _container.RegisterType<IServiceFacade<Service>, ServiceFacade<Service>>();
 
             _container.RegisterType<IAddressFacade, AddressFacade>();
             _container.RegisterType<ICategoryFacade, CategoryFacade>();

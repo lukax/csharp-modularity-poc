@@ -7,7 +7,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Interface.ViewModel.Controls.Alter
 {
-    public interface IAlterEmployeeViewModel : IAlterPersonViewModel<NaturalPerson>
+    public interface IAlterEmployeeViewModel : IAlterPersonViewModel<Employee>
     {
     }
 }

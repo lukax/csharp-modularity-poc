@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvalidField.cs" />
     <Compile Include="Logic\Base\IBaseEntityFacade.cs" />
     <Compile Include="Logic\Base\IPersonFacade.cs" />
     <Compile Include="Logic\Base\IServiceFacade.cs" />

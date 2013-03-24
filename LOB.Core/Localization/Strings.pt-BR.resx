@@ -414,6 +414,30 @@
   <data name="Dao_RequisitionSucessful" xml:space="preserve">
     <value>Operação concluída</value>
   </data>
+  <data name="Error_Field_Empty" xml:space="preserve">
+    <value>Campo vazio</value>
+  </data>
+  <data name="Error_Field_IntOnly" xml:space="preserve">
+    <value>Campo suporta apenas números</value>
+  </data>
+  <data name="Error_Field_Necessary" xml:space="preserve">
+    <value>Campo nescessário</value>
+  </data>
+  <data name="Error_Field_NotEmpty" xml:space="preserve">
+    <value>Campo não está vazio</value>
+  </data>
+  <data name="Error_Field_NotNecessary" xml:space="preserve">
+    <value>Campo não nescessário</value>
+  </data>
+  <data name="Error_Field_TooLong" xml:space="preserve">
+    <value>Campo excedeu limite de caracters</value>
+  </data>
+  <data name="Error_Field_TooShort" xml:space="preserve">
+    <value>Campo nescessita o mínimo de caracters</value>
+  </data>
+  <data name="Error_Field_WrongFormat" xml:space="preserve">
+    <value>Campo com formato inválido</value>
+  </data>
   <data name="Error_Info" xml:space="preserve">
     <value>Aconteceu um erro ao processar seu comando. Por favor, contate o administrador.</value>
   </data>

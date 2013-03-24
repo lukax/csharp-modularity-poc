@@ -3,7 +3,7 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Interface.Logic.SubEntity
 {
-    public interface IEmailFacade : IBaseEntityFacade
+    public interface IEmailFacade : IBaseEntityFacade<Email>
     {
 
     }

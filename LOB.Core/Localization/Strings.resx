@@ -300,6 +300,9 @@
   <data name="Common_HireDate" xml:space="preserve">
     <value>@Common_HireDate</value>
   </data>
+  <data name="Common_Id" xml:space="preserve">
+    <value>@Common_Id</value>
+  </data>
   <data name="Common_Image" xml:space="preserve">
     <value>@Common_Image</value>
   </data>
@@ -413,6 +416,30 @@
   </data>
   <data name="Dao_RequisitionSucessful" xml:space="preserve">
     <value>@Dao_RequisitionSucessful</value>
+  </data>
+  <data name="Error_Field_Empty" xml:space="preserve">
+    <value>@Error_Field_Empty</value>
+  </data>
+  <data name="Error_Field_IntOnly" xml:space="preserve">
+    <value>@Error_Field_IntOnly</value>
+  </data>
+  <data name="Error_Field_Necessary" xml:space="preserve">
+    <value>@Error_Field_Necessary</value>
+  </data>
+  <data name="Error_Field_NotEmpty" xml:space="preserve">
+    <value>@Error_Field_NotEmpty</value>
+  </data>
+  <data name="Error_Field_NotNecessary" xml:space="preserve">
+    <value>@Error_Field_NotNecessary</value>
+  </data>
+  <data name="Error_Field_TooLong" xml:space="preserve">
+    <value>@Error_Field_TooLong</value>
+  </data>
+  <data name="Error_Field_TooShort" xml:space="preserve">
+    <value>@Error_Field_TooShort</value>
+  </data>
+  <data name="Error_Field_WrongFormat" xml:space="preserve">
+    <value>@Error_Field_WrongFormat</value>
   </data>
   <data name="Error_Info" xml:space="preserve">
     <value>@Error_Info</value>

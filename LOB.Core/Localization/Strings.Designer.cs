@@ -610,6 +610,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Id.
+        /// </summary>
+        public static string Common_Id {
+            get {
+                return ResourceManager.GetString("Common_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Image.
         /// </summary>
         public static string Common_Image {
@@ -948,6 +957,78 @@ namespace LOB.Core.Localization {
         public static string Dao_RequisitionSucessful {
             get {
                 return ResourceManager.GetString("Dao_RequisitionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Empty.
+        /// </summary>
+        public static string Error_Field_Empty {
+            get {
+                return ResourceManager.GetString("Error_Field_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_IntOnly.
+        /// </summary>
+        public static string Error_Field_IntOnly {
+            get {
+                return ResourceManager.GetString("Error_Field_IntOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Necessary.
+        /// </summary>
+        public static string Error_Field_Necessary {
+            get {
+                return ResourceManager.GetString("Error_Field_Necessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_NotEmpty.
+        /// </summary>
+        public static string Error_Field_NotEmpty {
+            get {
+                return ResourceManager.GetString("Error_Field_NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_NotNecessary.
+        /// </summary>
+        public static string Error_Field_NotNecessary {
+            get {
+                return ResourceManager.GetString("Error_Field_NotNecessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_TooLong.
+        /// </summary>
+        public static string Error_Field_TooLong {
+            get {
+                return ResourceManager.GetString("Error_Field_TooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_TooShort.
+        /// </summary>
+        public static string Error_Field_TooShort {
+            get {
+                return ResourceManager.GetString("Error_Field_TooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_WrongFormat.
+        /// </summary>
+        public static string Error_Field_WrongFormat {
+            get {
+                return ResourceManager.GetString("Error_Field_WrongFormat", resourceCulture);
             }
         }
         

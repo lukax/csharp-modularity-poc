@@ -35,7 +35,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             //default init customer as natural person
-            Header = "ASDPOKDSAP";
             NaturalPersonCfg();
             PersonTypeChanged();
         }
