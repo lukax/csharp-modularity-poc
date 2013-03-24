@@ -10,6 +10,7 @@
              xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
 
@@ -81,8 +82,8 @@
                  MinWidth="150" MaxWidth="400" Grid.Column="2" Grid.Row="3" />
 
         <Label Content="{x:Static loc:Strings.Common_ZipCode}" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="3" />
-        <TextBox Text="{Binding Entity.ZipCode, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                 MinWidth="100"
+        <xctk:MaskedTextBox Text="{Binding Entity.ZipCode, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+                 MinWidth="100" Mask="00000-000"
                  MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
 

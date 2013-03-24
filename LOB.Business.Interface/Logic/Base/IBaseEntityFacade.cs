@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using LOB.Domain.Base;
 
 namespace LOB.Business.Interface.Logic.Base
 {
-    public interface IBaseEntityFacade <in TEntity> where TEntity:BaseEntity
+    public interface IBaseEntityFacade<TEntity> where TEntity : BaseEntity
     {
-        bool CanAdd(TEntity entity, out IEnumerable<InvalidField> invalidFields);
-        bool CanUpdate(TEntity entity,out IEnumerable<InvalidField> invalidFields);
-        bool CanDelete(TEntity entity, out IEnumerable<InvalidField> invalidFields);
+        TEntity Entity { get; set; }
+        bool CanAdd(out IEnumerable<InvalidField> invalidFields);
+        bool CanUpdate(out IEnumerable<InvalidField> invalidFields);
+        bool CanDelete(out IEnumerable<InvalidField> invalidFields);
     }
 }

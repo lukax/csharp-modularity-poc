@@ -13,17 +13,19 @@ namespace LOB.Business.Logic
 {
     public class CustomerFacade : ICustomerFacade
     {
-        public bool CanAdd(Customer entity, out IEnumerable<InvalidField> invalidFields)
+
+        public Customer Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(Customer entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(Customer entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }

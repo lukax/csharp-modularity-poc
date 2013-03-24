@@ -14,17 +14,23 @@ namespace LOB.Business.Logic
 {
     public class ProductFacade :  IProductFacade
     {
-        public bool CanAdd(Product entity, out IEnumerable<InvalidField> invalidFields)
+        public Product Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(Product entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(Product entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void GenerateEntity()
         {
             throw new System.NotImplementedException();
         }

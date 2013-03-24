@@ -9,6 +9,7 @@
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -47,8 +48,8 @@
                      MinWidth="150" MaxWidth="350" Grid.Row="1" Grid.Column="2" />
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="1" Content="{x:Static loc:Strings.Common_BirthDate}" />
-            <TextBox Text="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                     MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
+            <xctk:MaskedTextBox Text="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+                     MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" Mask="00/00/0000" />
 
             <Label Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Rg}" Grid.Column="1" />
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
@@ -59,12 +60,12 @@
                         </ObjectDataProvider.MethodParameters>
                     </ObjectDataProvider>
                 </StackPanel.Resources>
-                <TextBox Text="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="120" MaxWidth="250" />
+                <xctk:MaskedTextBox Text="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="120" MaxWidth="250" Mask="000.000.000-00" />
                 <ComboBox MinWidth="50" MaxWidth="100" ItemsSource="{Binding Source={StaticResource DataFromEnum}}" SelectedItem="{Binding Entity.RgUf}" />
             </StackPanel>
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" Content="{x:Static loc:Strings.Common_Cpf}" />
-            <TextBox Text="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Column="4" Grid.Row="2" />
+            <xctk:MaskedTextBox Text="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Column="4" Grid.Row="2" Mask="00.000.000-0" />
         </Grid>
 
         <StackPanel>

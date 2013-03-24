@@ -14,17 +14,18 @@ namespace LOB.Business.Logic
 {
     public class EmployeeFacade :  IEmployeeFacade
     {
-        public bool CanAdd(Employee entity, out IEnumerable<InvalidField> invalidFields)
+        public Employee Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(Employee entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(Employee entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }

@@ -9,17 +9,18 @@ namespace LOB.Business.Logic.SubEntity
 {
     public class ContactInfoFacade :  IContactInfoFacade
     {
-        public bool CanAdd(ContactInfo entity, out IEnumerable<InvalidField> invalidFields)
+        public ContactInfo Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(ContactInfo entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(ContactInfo entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }

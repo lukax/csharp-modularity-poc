@@ -97,13 +97,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="NullGuard, Version=0.4.0.0, Culture=neutral, PublicKeyToken=7805e070f98d72d0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NullGuard.Fody.0.4.0.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+    <Reference Include="NullGuard">
+      <HintPath>..\packages\NullGuard.Fody.0.5.1.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.33.0.0\lib\NET40\PropertyChanged.dll</HintPath>
+    <Reference Include="PropertyChanged, Version=1.36.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PropertyChanged.Fody.1.36.1.0\lib\NET40\PropertyChanged.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -248,6 +249,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="..\packages\Fody.1.13.3.0\Fody.targets" Condition="Exists('..\packages\Fody.1.13.3.0\Fody.targets')" />
+  <Target Name="FodyTargetsCheck" BeforeTargets="BeforeCompile">
+    <Error Condition="!Exists('..\packages\Fody.1.13.3.0\Fody.targets')" Text="Could not find Fody.targets. You either forget to check in the package or forgot to enable package restore." />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -255,5 +260,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

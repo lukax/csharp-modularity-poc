@@ -14,10 +14,9 @@
 
     <StackPanel Orientation="Horizontal">
         <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static loc:Strings.ToolTip_Code}"
-                   Text="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged}" MinWidth="40" />
+                   Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="40" />
 
-        <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Width="15" Height="15"
-                       Background="Transparent">
+        <controls:Tile Command="{Binding QuickSearchCommand}" ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Width="15" Height="15" Background="Transparent">
             <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
         </controls:Tile>
     </StackPanel>

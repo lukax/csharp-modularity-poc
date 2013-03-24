@@ -7,6 +7,7 @@
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -32,12 +33,12 @@
         <base2:AlterBaseEntityView x:Name="UcAlterBaseEntityView" />
 
         <Label Content="{x:Static loc:Strings.Common_CurrentSalary}" HorizontalAlignment="Right" Grid.Column="1" />
-        <TextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
-                 MinWidth="150" MaxWidth="250" Grid.Column="2" />
+        <xctk:MaskedTextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
+                 MinWidth="150" MaxWidth="250" Grid.Column="2" Mask="$00,000.00" HorizontalContentAlignment="Right"/>
 
         <Label Grid.Row="1" Content="{x:Static loc:Strings.Common_Bonus}" HorizontalAlignment="Right" Grid.Column="1" />
-        <TextBox Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                 MinWidth="150"
+        <xctk:MaskedTextBox Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+                 MinWidth="150" Mask="$00,000.00" HorizontalContentAlignment="Right"
                  MaxWidth="250" Grid.Row="1" Grid.Column="2" />
 
         <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"

@@ -11,21 +11,26 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Logic.Base
 {
-    public class PersonFacade<TEntity> : IPersonFacade<TEntity> where TEntity : Person
+    public abstract class PersonFacade<TEntity> : IPersonFacade<TEntity> where TEntity : Person
     {
-        public bool CanAdd(TEntity entity, out IEnumerable<InvalidField> invalidFields)
+        public string this[string columnName]
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Error { get; private set; }
+        public TEntity Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new NotImplementedException();
         }
 
-        public bool CanUpdate(TEntity entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
-
             throw new NotImplementedException();
-
         }
 
-        public bool CanDelete(TEntity entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new NotImplementedException();
         }

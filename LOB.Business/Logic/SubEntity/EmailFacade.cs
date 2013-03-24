@@ -9,17 +9,19 @@ namespace LOB.Business.Logic.SubEntity
 {
     public class EmailFacade :  IEmailFacade
     {
-        public bool CanAdd(Email entity, out IEnumerable<InvalidField> invalidFields)
+
+        public Email Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(Email entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(Email entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }

@@ -2,8 +2,8 @@
 
 namespace LOB.Business.Interface.Logic.Base
 {
-    public interface IServiceFacade<in TEntity> : IBaseEntityFacade<TEntity> where TEntity:Service
+    public interface IServiceFacade<TEntity> : IBaseEntityFacade<TEntity> where TEntity:Service
     {
-         
+        void GenerateEntity();
     }
 }

@@ -13,12 +13,12 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
+    <StackPanel SnapsToDevicePixels="True">
         <StackPanel Orientation="Horizontal">
             <base:AlterBaseEntityView />
         </StackPanel>
 
-        <Grid>
+        <Grid SnapsToDevicePixels="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -33,22 +33,21 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="{x:Static loc:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
-            <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
-                     MinWidth="200" MaxWidth="300" Grid.Column="2" />
+            <TextBox HorizontalAlignment="Right" MinWidth="200" MaxWidth="300" Grid.Column="2" SnapsToDevicePixels="True">
+                <TextBox.Text>
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="Entity.Name" ValidatesOnDataErrors="True" NotifyOnValidationError="True"/>
+                </TextBox.Text>
+            </TextBox>
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"
-                     Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"
-                     Grid.Column="1"
-                     Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+                     Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
-                               Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent" Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
                 </controls:Tile>
-                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
-                               Command="{Binding SaveChangesCommand}" BorderThickness="0">
+                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent" Command="{Binding SaveChangesCommand}" BorderThickness="0">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
                 </controls:Tile>
             </StackPanel>

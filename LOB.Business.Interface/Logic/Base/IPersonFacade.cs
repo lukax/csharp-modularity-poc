@@ -2,7 +2,7 @@
 
 namespace LOB.Business.Interface.Logic.Base
 {
-    public interface IPersonFacade<in TEntity> : IBaseEntityFacade<TEntity> where TEntity:Person
+    public interface IPersonFacade<TEntity> : IBaseEntityFacade<TEntity> where TEntity:Person
     {
 
     }

@@ -1,26 +1,54 @@
 ﻿using System.Collections.Generic;
 using LOB.Business.Interface;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
+using LOB.Core.Localization;
 using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Logic.SubEntity
 {
-    public class CategoryFacade : ICategoryFacade
+    public class CategoryFacade : ServiceFacade<Category>, ICategoryFacade
     {
-        public bool CanAdd(Category entity, out IEnumerable<InvalidField> invalidFields)
+        private Category _entity;
+        public override Category Entity
+        {
+            get { return _entity; }
+            set
+            {
+                _entity = value;
+                base.AddValidators(_entity);
+                this.AddValidadors(_entity);
+            }
+        }
+
+        private void AddValidadors(Category c)
+        {
+
+        }
+
+        public override bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(Category entity, out IEnumerable<InvalidField> invalidFields)
+        public override bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(Category entity, out IEnumerable<InvalidField> invalidFields)
+        public override bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void GenerateEntity()
+        {
+            Entity = new Category
+                {
+                    Description = "",
+                    Name = "",
+                };
         }
     }
 }

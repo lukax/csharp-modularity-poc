@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Styles/Colours.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Styles/Accents/Grey.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Styles/Accents/BaseLight.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Styles/TextBoxValidation.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Styles/Accents/Grey.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Styles/Accents/BaseLight.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

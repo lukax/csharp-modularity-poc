@@ -7,6 +7,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              Height="110" Width="300">
 
@@ -39,7 +40,7 @@
                         </ObjectDataProvider.MethodParameters>
                     </ObjectDataProvider>
                 </StackPanel.Resources>
-                <TextBox Text="{Binding Entity.PhoneNumber}" MinWidth="100" />
+                <xctk:MaskedTextBox Text="{Binding Entity.PhoneNumber}" MinWidth="100" Mask="(00) 0000-0000"/>
                 <ComboBox SelectedItem="{Binding Entity.PhoneType}"
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>

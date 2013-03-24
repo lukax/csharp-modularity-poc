@@ -9,17 +9,18 @@ namespace LOB.Business.Logic.SubEntity
 {
     public class ShipmentInfoInfoFacade : IShipmentInfoFacade
     {
-        public bool CanAdd(ShipmentInfo entity, out IEnumerable<InvalidField> invalidFields)
+        public ShipmentInfo Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(ShipmentInfo entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(ShipmentInfo entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }

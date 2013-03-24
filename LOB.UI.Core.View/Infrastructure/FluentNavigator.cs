@@ -147,7 +147,7 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public bool PromptUser(string message)
         {
-            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+            return Xceed.Wpf.Toolkit.MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
     }
 }

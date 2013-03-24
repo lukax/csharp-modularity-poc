@@ -7,7 +7,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity
 {
-    public interface IAlterCategoryViewModel : IAlterBaseEntityViewModel<Category>
+    public interface IAlterCategoryViewModel : IAlterServiceViewModel<Category>
     {
     }
 }

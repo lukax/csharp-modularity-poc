@@ -10,17 +10,18 @@ namespace LOB.Business.Logic
 {
     public class NaturalPersonFacade : INaturalPersonFacade
     {
-        public bool CanAdd(NaturalPerson entity, out IEnumerable<InvalidField> invalidFields)
+        public NaturalPerson Entity { get; set; }
+        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanUpdate(NaturalPerson entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool CanDelete(NaturalPerson entity, out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
         {
             throw new System.NotImplementedException();
         }

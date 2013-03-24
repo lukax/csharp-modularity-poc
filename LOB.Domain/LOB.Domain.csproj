@@ -52,7 +52,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.4.0.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <HintPath>..\packages\NullGuard.Fody.0.5.1.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PropertyChanged">
+      <HintPath>..\packages\PropertyChanged.Fody.1.36.1.0\lib\NET40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -62,6 +66,8 @@
   <ItemGroup>
     <Compile Include="Base\Service.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Logic\ValidationResult.cs" />
+    <Compile Include="Logic\ValidationDelegate.cs" />
     <Compile Include="SubEntity\Address.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\BaseNotifyChange.cs" />
@@ -91,6 +97,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="..\packages\Fody.1.13.3.0\Fody.targets" Condition="Exists('..\packages\Fody.1.13.3.0\Fody.targets')" />
+  <Target Name="FodyTargetsCheck" BeforeTargets="BeforeCompile">
+    <Error Condition="!Exists('..\packages\Fody.1.13.3.0\Fody.targets')" Text="Could not find Fody.targets. You either forget to check in the package or forgot to enable package restore." />
+  </Target>
 </Project>

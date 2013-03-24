@@ -7,76 +7,63 @@ using LOB.Business.Interface;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
+using LOB.Domain.Logic;
 using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
 namespace LOB.Business.Logic.Base
 {
-    public class ServiceFacade<TEntity> : IServiceFacade<TEntity> where TEntity : Service
+    public abstract class ServiceFacade<TEntity> : IServiceFacade<TEntity> where TEntity : Service
     {
-        private readonly IBaseEntityFacade<BaseEntity> _baseEntityFacade;
-
-        public ServiceFacade(IBaseEntityFacade<BaseEntity> baseEntityFacade)
+        private TEntity _entity;
+        public virtual TEntity Entity
         {
-            _baseEntityFacade = baseEntityFacade;
+            get { return _entity; }
+            set
+            {
+                if (_entity == value) return;  
+                _entity = value;
+                AddValidators(_entity);        
+            }
         }
 
-        public bool CanAdd(TEntity entity, out IEnumerable<InvalidField> invalidFields)
+        protected void AddValidators(Service s)
         {
-            IEnumerable<InvalidField> baseEntityFields;
-            bool result = _baseEntityFacade.CanAdd(entity, out baseEntityFields);
-            IList<InvalidField> fields = new List<InvalidField>(baseEntityFields);
-            if (string.IsNullOrEmpty(entity.Description))
-            {
-                fields.Add(new InvalidField(Strings.Common_Name, Strings.Error_Field_Empty));
-                result = false;
-            }
-            if (string.IsNullOrEmpty(entity.Name))
-            {
-                fields.Add(new InvalidField(Strings.Common_Id, Strings.Error_Field_Empty));
-                result = false;
-            }
-            invalidFields = fields;
-            return result;
+            s.AddValidation((sender, name) =>
+                {
+                    if (s.Name.Length < 3)
+                    {
+                        return new ValidationResult("Name", Strings.Error_Field_Empty);
+                    }
+                    return null;
+                }); 
+            s.AddValidation((sender, name) =>
+                {
+                    if (s.Description.Length < 3)
+                    {
+                        return new ValidationResult("Description", Strings.Error_Field_Empty);
+                    }
+                    return null;
+                });
         }
 
-        public bool CanUpdate(TEntity entity, out IEnumerable<InvalidField> invalidFields)
+        public virtual bool CanAdd(out IEnumerable<InvalidField> invalidFields)
         {
-            IEnumerable<InvalidField> baseEntityFields;
-            bool result = _baseEntityFacade.CanAdd(entity, out baseEntityFields);
-            IList<InvalidField> fields = new List<InvalidField>(baseEntityFields);
-            if (string.IsNullOrEmpty(entity.Description))
-            {
-                fields.Add(new InvalidField(Strings.Common_Name, Strings.Error_Field_Empty));
-                result = false;
-            }
-            if (string.IsNullOrEmpty(entity.Name))
-            {
-                fields.Add(new InvalidField(Strings.Common_Id, Strings.Error_Field_Empty));
-                result = false;
-            }
-            invalidFields = fields;
-            return result;
+            throw new NotImplementedException();
         }
 
-        public bool CanDelete(TEntity entity, out IEnumerable<InvalidField> invalidFields)
+        public virtual bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
         {
-            IEnumerable<InvalidField> baseEntityFields;
-            bool result = _baseEntityFacade.CanAdd(entity, out baseEntityFields);
-            IList<InvalidField> fields = new List<InvalidField>(baseEntityFields);
-            if (string.IsNullOrEmpty(entity.Description))
-            {
-                fields.Add(new InvalidField(Strings.Common_Name, Strings.Error_Field_Empty));
-                result = false;
-            }
-            if (string.IsNullOrEmpty(entity.Name))
-            {
-                fields.Add(new InvalidField(Strings.Common_Id, Strings.Error_Field_Empty));
-                result = false;
-            }
-            invalidFields = fields;
-            return result;
+            throw new NotImplementedException();
         }
+
+        public virtual bool CanDelete(out IEnumerable<InvalidField> invalidFields)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public abstract void GenerateEntity();
     }
 }
