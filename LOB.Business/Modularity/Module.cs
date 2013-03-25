@@ -1,5 +1,9 @@
 ﻿#region Usings
 
+using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Logic.Base;
+using LOB.Business.Logic.SubEntity;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
@@ -21,12 +25,12 @@ namespace LOB.Business.Modularity
 
         public void Initialize()
         {
-            //_container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade>();
+            _container.RegisterType<IBaseEntityFacade, BaseEntityFacade>();
             //_container.RegisterType<IPersonFacade<Person>, PersonFacade<Person>>();
-            //_container.RegisterType<IServiceFacade<Service>, ServiceFacade<Service>>();
+            _container.RegisterType<IServiceFacade, ServiceFacade>();
 
             //_container.RegisterType<IAddressFacade, AddressFacade>();
-            //_container.RegisterType<ICategoryFacade, CategoryFacade>();
+            _container.RegisterType<ICategoryFacade, CategoryFacade>();
             //_container.RegisterType<IContactInfoFacade, ContactInfoFacade>();
             //_container.RegisterType<IEmailFacade, EmailFacade>();
             //_container.RegisterType<IShipmentInfoFacade, ShipmentInfoInfoFacade>();

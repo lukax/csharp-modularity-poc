@@ -1,9 +1,11 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
+using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -26,18 +28,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override void InitializeServices()
         {
-            //_facade.GenerateEntity();
-            //Entity = _facade.Entity;
+            Entity = new Category { Name = "", Description = "", Code = 0 };
+            _facade.SetEntity(Entity);
+            _facade.ConfigureValidations();
         }
 
         public override void Refresh()
         {
         }
 
-        public override OperationType OperationType
-        {
-            get { return OperationType.AlterCategory; }
-        }
+
 
         protected override void SaveChanges(object arg)
         {
@@ -49,6 +49,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             }
         }
 
+        protected override bool CanSaveChanges(object arg)
+        {
+            //TODO: If viewState == Add : ..., If viewState == Update : ....
+            IEnumerable<ValidationResult> results;
+            return _facade.CanAdd(out results);
+        }
+
         protected override void QuickSearch(object arg)
         {
             throw new NotImplementedException();
@@ -57,6 +64,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         protected override void ClearEntity(object arg)
         {
             throw new NotImplementedException();
+        }
+
+        public override OperationType OperationType
+        {
+            get { return OperationType.AlterCategory; }
         }
     }
 }

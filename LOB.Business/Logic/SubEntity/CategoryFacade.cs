@@ -1,46 +1,68 @@
-﻿namespace LOB.Business.Logic.SubEntity
+﻿using System.Collections.Generic;
+using System.Linq;
+using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Logic.Base;
+using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
+
+namespace LOB.Business.Logic.SubEntity
 {
-    //public class CategoryFacade : ServiceFacade<Category>, ICategoryFacade
-    //{
-    ////    private Category _entity;
-    ////    public override Category Entity
-    ////    {
-    ////        get { return _entity; }
-    ////        set
-    ////        {
-    ////            _entity = value;
-    ////            base.AddValidators(_entity);
-    ////            this.AddValidadors(_entity);
-    ////        }
-    ////    }
+    public class CategoryFacade : ICategoryFacade
+    {
+        private readonly IServiceFacade _serviceFacade;
 
-    ////    private void AddValidadors(Category c)
-    ////    {
+        public CategoryFacade(IServiceFacade serviceFacade)
+        {
+            _serviceFacade = serviceFacade;
+        }
 
-    ////    }
+        private Category _entity;
+        public void SetEntity<T>(T entity) where T : Category
+        {
+            _serviceFacade.SetEntity(entity);
+            _entity = entity;
+        }
 
-    ////    public override bool CanAdd(out IEnumerable<InvalidField> invalidFields)
-    ////    {
-    ////        throw new System.NotImplementedException();
-    ////    }
+        public void ConfigureValidations()
+        {
+            _serviceFacade.ConfigureValidations();
+            if (_entity != null)
+            {
+                //Category validations...
+            }
+        }
 
-    ////    public override bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
-    ////    {
-    ////        throw new System.NotImplementedException();
-    ////    }
+        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)
+        {
+            var fields = new List<ValidationResult>();
+            //TODO: custom validations for Category
 
-    ////    public override bool CanDelete(out IEnumerable<InvalidField> invalidFields)
-    ////    {
-    ////        throw new System.NotImplementedException();
-    ////    }
+            //
+            IEnumerable<ValidationResult> validationResults;
+            bool result = _serviceFacade.CanAdd(out validationResults);
+            invalidFields = fields;
+            return result;
+        }
 
-    ////    public override void GenerateEntity()
-    ////    {
-    ////        Entity = new Category
-    ////            {
-    ////                Description = "",
-    ////                Name = "",
-    ////            };
-    ////    }
-    //}
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IBaseEntityFacade.SetEntity<T>(T entity)
+        {
+            ((IBaseEntityFacade)_serviceFacade).SetEntity(entity);
+        }
+
+        void IServiceFacade.SetEntity<T>(T entity)
+        {
+            ((IServiceFacade)_serviceFacade).SetEntity(entity);
+        }
+    }
 }

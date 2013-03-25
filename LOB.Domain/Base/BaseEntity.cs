@@ -28,6 +28,7 @@ namespace LOB.Domain.Base
             }
         }
 
+        [AllowNull]
         public virtual string Error { get; set; }
 
         public void AddValidation(ValidationDelegate func)

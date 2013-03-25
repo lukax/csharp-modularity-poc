@@ -11,9 +11,13 @@ using LOB.Domain.Logic;
 
 namespace LOB.Business.Logic.Base
 {
-    public abstract class BaseEntityFacade : IBaseEntityFacade
+    public class BaseEntityFacade : IBaseEntityFacade
     {
         private BaseEntity _entity;
+
+        public BaseEntityFacade()
+        {
+        }
 
         public void SetEntity<T>(T entity) where T : BaseEntity
         {
@@ -22,10 +26,10 @@ namespace LOB.Business.Logic.Base
 
         public void ConfigureValidations()
         {
-            if (_entity == null) throw new InvalidOperationException("First SetEntity");
-            _entity.AddValidation(
-                (sender, name) =>
-                _entity.Code < 0 ? new ValidationResult("Code", Strings.Error_Field_WrongFormat) : null);
+            if (_entity != null)
+            {
+                _entity.AddValidation((sender, name) => _entity.Code < 0 ? new ValidationResult("Code", Strings.Error_Field_WrongFormat) : null);
+            }
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)

@@ -1,13 +1,11 @@
 ﻿#region Usings
 
-
-
-#endregion
-
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+
+#endregion
 
 namespace LOB.Business.Logic.Base
 {
