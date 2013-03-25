@@ -12,7 +12,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" >
         <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static loc:Strings.ToolTip_Code}"
                    Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="40" />
 

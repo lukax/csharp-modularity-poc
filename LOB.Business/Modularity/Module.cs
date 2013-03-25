@@ -1,13 +1,5 @@
 ﻿#region Usings
 
-using LOB.Business.Interface;
-using LOB.Business.Interface.Logic;
-using LOB.Business.Interface.Logic.Base;
-using LOB.Business.Interface.Logic.SubEntity;
-using LOB.Business.Logic;
-using LOB.Business.Logic.Base;
-using LOB.Business.Logic.SubEntity;
-using LOB.Domain.Base;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
@@ -29,22 +21,22 @@ namespace LOB.Business.Modularity
 
         public void Initialize()
         {
-            _container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade>();
-            _container.RegisterType<IPersonFacade<Person>, PersonFacade<Person>>();
-            _container.RegisterType<IServiceFacade<Service>, ServiceFacade<Service>>();
+            //_container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade>();
+            //_container.RegisterType<IPersonFacade<Person>, PersonFacade<Person>>();
+            //_container.RegisterType<IServiceFacade<Service>, ServiceFacade<Service>>();
 
-            _container.RegisterType<IAddressFacade, AddressFacade>();
-            _container.RegisterType<ICategoryFacade, CategoryFacade>();
-            _container.RegisterType<IContactInfoFacade, ContactInfoFacade>();
-            _container.RegisterType<IEmailFacade, EmailFacade>();
-            _container.RegisterType<IShipmentInfoFacade, ShipmentInfoInfoFacade>();
+            //_container.RegisterType<IAddressFacade, AddressFacade>();
+            //_container.RegisterType<ICategoryFacade, CategoryFacade>();
+            //_container.RegisterType<IContactInfoFacade, ContactInfoFacade>();
+            //_container.RegisterType<IEmailFacade, EmailFacade>();
+            //_container.RegisterType<IShipmentInfoFacade, ShipmentInfoInfoFacade>();
 
-            _container.RegisterType<ICustomerFacade, CustomerFacade>();
-            _container.RegisterType<IEmployeeFacade, EmployeeFacade>();
-            _container.RegisterType<ILegalPersonFacade, LegalPersonFacade>();
-            _container.RegisterType<INaturalPersonFacade, NaturalPersonFacade>();
-            _container.RegisterType<IProductFacade, ProductFacade>();
-            _container.RegisterType<ISaleFacade, SaleFacade>();
+            //_container.RegisterType<ICustomerFacade, CustomerFacade>();
+            //_container.RegisterType<IEmployeeFacade, EmployeeFacade>();
+            //_container.RegisterType<ILegalPersonFacade, LegalPersonFacade>();
+            //_container.RegisterType<INaturalPersonFacade, NaturalPersonFacade>();
+            //_container.RegisterType<IProductFacade, ProductFacade>();
+            //_container.RegisterType<ISaleFacade, SaleFacade>();
 
 #if DEBUG
             var log = _container.Resolve<ILogger>();

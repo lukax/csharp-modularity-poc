@@ -1,28 +1,24 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
-using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
-using Microsoft.Practices.Unity;
-using NullGuard;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
-    public sealed class AlterCategoryViewModel : AlterServiceViewModel<Category>, IAlterCategoryViewModel
+    public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel
     {
         private readonly ICategoryFacade _facade;
 
-        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade facade) : base(entity, repository)
+        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade facade)
+            : base(entity, repository)
         {
             _facade = facade;
             Refresh();
@@ -30,13 +26,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         public override void InitializeServices()
         {
-            _facade.GenerateEntity();
-            Entity = _facade.Entity;
+            //_facade.GenerateEntity();
+            //Entity = _facade.Entity;
         }
 
         public override void Refresh()
         {
-        
         }
 
         public override OperationType OperationType

@@ -16,6 +16,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using NullGuard;
+
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Main
@@ -37,8 +38,10 @@ namespace LOB.UI.Core.ViewModel.Main
 
         [AllowNull]
         public string Entity { get; set; }
+
         [AllowNull]
         public ICollectionView Entitys { get; set; }
+
         public ICommand SaveChangesCommand { get; set; }
 
         public string Search { get; set; }
@@ -76,7 +79,8 @@ namespace LOB.UI.Core.ViewModel.Main
                     var list = _operationDictLazy.Value.Keys.Where(x => x.ToLower().Contains(Search.ToLower())).ToList();
                     if (Entitys == null || !Entitys.SourceCollection.Cast<string>().SequenceEqual(list))
                     {
-                        Entitys = new CollectionView(list); _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
+                        Entitys = new CollectionView(list);
+                        _eventAggregator.GetEvent<RefreshEvent>().Publish(OperationType.ListOp);
                         Entitys.CurrentChanged += (sender, args) => SaveChanges();
                     }
                 }
@@ -92,7 +96,7 @@ namespace LOB.UI.Core.ViewModel.Main
 
         private IDictionary<string, OperationType> CreateList()
         {
-            var enumList = Enum.GetValues(typeof(OperationType)).Cast<OperationType>().ToList();
+            var enumList = Enum.GetValues(typeof (OperationType)).Cast<OperationType>().ToList();
             //Remove Unapplicables to user selection:
             enumList.Remove(OperationType.Unknown);
             enumList.Remove(OperationType.MessageTools);
@@ -104,7 +108,7 @@ namespace LOB.UI.Core.ViewModel.Main
             enumList.Remove(OperationType.ListService);
             enumList.Remove(OperationType.AlterService);
             var operationTypes = new Dictionary<string, OperationType>(enumList.Count);
-            var stringsType = typeof(Strings);
+            var stringsType = typeof (Strings);
             var stringsTypeProps = stringsType.GetProperties();
             //Parse to localized string
             foreach (var operationType in enumList)

@@ -13,7 +13,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListNaturalPersonViewModel : ListPersonViewModel<NaturalPerson>, IListNaturalPersonViewModel
+    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel
     {
         [InjectionConstructor]
         public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository)

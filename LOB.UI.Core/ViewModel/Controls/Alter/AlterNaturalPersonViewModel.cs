@@ -3,32 +3,26 @@
 using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public class AlterNaturalPersonViewModel : AlterPersonViewModel<NaturalPerson>, IAlterNaturalPersonViewModel
+    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel
     {
         private IUnityContainer _container;
 
         [InjectionConstructor]
-        public AlterNaturalPersonViewModel(NaturalPerson entity, Address address, ContactInfo contactInfo,
-                                           IRepository repository,
-                                           AlterAddressViewModel alterAddressViewModel,
-                                           AlterContactInfoViewModel alterContactInfoViewModel,
-                                           IUnityContainer container)
-            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container
-                )
+        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
+            : base(entity, repository)
         {
-            _container = container;
         }
+
 
         public string BirthDate
         {
@@ -45,10 +39,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             }
         }
 
+        public override void InitializeServices()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Refresh()
+        {
+            throw new NotImplementedException();
+        }
+
         public override OperationType OperationType
         {
             get { return OperationType.AlterNaturalPerson; }
         }
+
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         protected override void SaveChanges(object arg)
         {

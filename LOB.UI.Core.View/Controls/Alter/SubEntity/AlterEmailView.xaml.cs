@@ -30,7 +30,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             get { return Strings.Header_Alter_Email; }
         }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

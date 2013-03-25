@@ -24,9 +24,12 @@ namespace LOB.UI.Core.View.Controls.List.Base
             set { DataContext = value; }
         }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
-        public string Header { get { return Strings.Header_List_BaseEntity; } }
+        public string Header
+        {
+            get { return Strings.Header_List_BaseEntity; }
+        }
 
         public void InitializeServices()
         {

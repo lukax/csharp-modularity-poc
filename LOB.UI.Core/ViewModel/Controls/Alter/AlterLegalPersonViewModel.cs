@@ -1,37 +1,45 @@
 ﻿#region Usings
 
+using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public sealed class AlterLegalPersonViewModel : AlterPersonViewModel<LegalPerson>, IAlterLegalPersonViewModel
+    public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>, IAlterLegalPersonViewModel
     {
         private IUnityContainer _container;
 
         [InjectionConstructor]
-        public AlterLegalPersonViewModel(LegalPerson entity, Address address, ContactInfo contactInfo,
-                                         IRepository repository,
-                                         AlterAddressViewModel alterAddressViewModel,
-                                         AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container)
-            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container
-                )
+        public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository)
+            : base(entity, repository)
         {
-            _container = container;
+        }
+
+        public override void InitializeServices()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Refresh()
+        {
+            throw new NotImplementedException();
         }
 
         public override OperationType OperationType
         {
             get { return OperationType.AlterLegalPerson; }
         }
+
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         protected override void SaveChanges(object arg)
         {

@@ -25,9 +25,12 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity
             set { DataContext = value; }
         }
 
-        public string Header { get { return Strings.Header_List_Category; } }
+        public string Header
+        {
+            get { return Strings.Header_List_Category; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

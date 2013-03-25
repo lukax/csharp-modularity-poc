@@ -5,7 +5,6 @@ using LOB.Core.Localization;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -34,9 +33,12 @@ namespace LOB.UI.Core.View.Controls.Alter
             }
         }
 
-        public string Header { get { return Strings.Header_Alter_Customer; } }
+        public string Header
+        {
+            get { return Strings.Header_Alter_Customer; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

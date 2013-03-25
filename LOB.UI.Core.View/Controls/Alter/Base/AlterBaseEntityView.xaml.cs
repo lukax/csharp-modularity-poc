@@ -24,9 +24,12 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
             set { DataContext = value; }
         }
 
-        public string Header { get { return Strings.Header_Alter_BaseEntity; } }
+        public string Header
+        {
+            get { return Strings.Header_Alter_BaseEntity; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

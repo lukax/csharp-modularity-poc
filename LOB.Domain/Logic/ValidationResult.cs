@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region Usings
+
+using System;
+
+#endregion
 
 namespace LOB.Domain.Logic
 {
@@ -10,6 +14,7 @@ namespace LOB.Domain.Logic
             FieldName = fieldName;
             ErrorDescription = errorDescription;
         }
+
         public string FieldName { get; private set; }
         public string ErrorDescription { get; private set; }
     }

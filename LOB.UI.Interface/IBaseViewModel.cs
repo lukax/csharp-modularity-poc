@@ -1,13 +1,12 @@
 ﻿#region Usings
 
-using System.ComponentModel;
 using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Interface
 {
-    public interface IBaseViewModel : IUIComponent//, IDataErrorInfo
+    public interface IBaseViewModel : IUIComponent
     {
         void InitializeServices();
         void Refresh();

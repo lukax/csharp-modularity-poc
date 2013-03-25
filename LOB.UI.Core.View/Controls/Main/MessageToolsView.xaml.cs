@@ -55,8 +55,12 @@ namespace LOB.UI.Core.View.Controls.Main
             }
         }
 
-        public string Header { get { return Strings.Header_Main_Message; } }
-        public int? Index { get; set; }
+        public string Header
+        {
+            get { return Strings.Header_Main_Message; }
+        }
+
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

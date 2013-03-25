@@ -3,7 +3,6 @@
 using System;
 using System.Windows.Controls;
 using LOB.Core.Localization;
-using LOB.Domain.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -23,11 +22,11 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
 
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IAlterPersonViewModel<Person>; }
+            get { return DataContext as IAlterPersonViewModel; }
             set
             {
                 DataContext = value;
-                var localViewModel = value as IAlterPersonViewModel<Person>;
+                var localViewModel = value as IAlterPersonViewModel;
                 if (localViewModel != null)
                 {
                     UcAlterAddressView.DataContext = localViewModel.AlterAddressViewModel;
@@ -37,9 +36,12 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
         }
 
 
-        public string Header { get { return Strings.Header_Alter_Person; } }
+        public string Header
+        {
+            get { return Strings.Header_Alter_Person; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

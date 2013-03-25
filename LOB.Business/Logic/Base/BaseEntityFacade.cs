@@ -1,50 +1,46 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections.Generic;
-using System.Globalization;
-using LOB.Business.Interface;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
-using NullGuard;
+
+#endregion
 
 namespace LOB.Business.Logic.Base
 {
-    public abstract class BaseEntityFacade : IBaseEntityFacade<BaseEntity>
+    public abstract class BaseEntityFacade : IBaseEntityFacade
     {
         private BaseEntity _entity;
 
-        public BaseEntity Entity
+        public void SetEntity<T>(T entity) where T : BaseEntity
         {
-            get { return _entity; }
-            set
-            {
-                if (_entity == value) return;
-                _entity = value;
-                AddValidation();
-            }
+            _entity = entity;
         }
 
-        private void AddValidation()
+        public void ConfigureValidations()
         {
-            
+            if (_entity == null) throw new InvalidOperationException("First SetEntity");
+            _entity.AddValidation(
+                (sender, name) =>
+                _entity.Code < 0 ? new ValidationResult("Code", Strings.Error_Field_WrongFormat) : null);
         }
 
-        public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
+        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)
         {
             throw new NotImplementedException();
         }
 
-        public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
         {
             throw new NotImplementedException();
         }
 
-        public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

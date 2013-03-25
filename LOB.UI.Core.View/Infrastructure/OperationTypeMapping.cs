@@ -85,11 +85,11 @@ namespace LOB.UI.Core.View.Infrastructure
                     {OperationType.AlterLegalPerson, typeof (AlterLegalPersonViewModel)},
                     {OperationType.AlterNaturalPerson, typeof (AlterNaturalPersonViewModel)},
                     {OperationType.AlterPayCheck, typeof (AlterPayCheckViewModel)},
-                    {OperationType.AlterPerson, typeof (AlterPersonViewModel<Person>)},
+                    {OperationType.AlterPerson, typeof (AlterPersonViewModel)},
                     {OperationType.AlterPhoneNumber, typeof (AlterPhoneNumberViewModel)},
                     {OperationType.AlterProduct, typeof (AlterProductViewModel)},
                     {OperationType.AlterSale, typeof (AlterSaleViewModel)},
-                    {OperationType.AlterService, typeof (AlterServiceViewModel<Service>)},
+                    {OperationType.AlterService, typeof (AlterServiceViewModel)},
 
                     //{Command.ListAddress, typeof(ListAddressViewModel)},
                     {OperationType.ListBaseEntity, typeof (ListBaseEntityViewModel<BaseEntity>)},
@@ -104,7 +104,7 @@ namespace LOB.UI.Core.View.Infrastructure
                     //{Command.ListPerson, typeof(ListPersonViewModel)},
                     {OperationType.ListPhoneNumber, typeof (ListPhoneNumberViewModel)},
                     {OperationType.ListProduct, typeof (ListProductViewModel)},
-                    {OperationType.ListService, typeof (ListServiceViewModel<Service>)},
+                    {OperationType.ListService, typeof (ListServiceViewModel)},
                 });
 
         #endregion

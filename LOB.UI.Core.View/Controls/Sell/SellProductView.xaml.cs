@@ -18,8 +18,13 @@ namespace LOB.UI.Core.View.Controls.Sell
         }
 
         public IBaseViewModel ViewModel { get; set; }
-        public string Header { get { return Strings.Command_SellProduct; } }
-        public int? Index { get; set; }
+
+        public string Header
+        {
+            get { return Strings.Command_SellProduct; }
+        }
+
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

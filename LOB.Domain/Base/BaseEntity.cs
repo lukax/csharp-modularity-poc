@@ -14,23 +14,9 @@ namespace LOB.Domain.Base
     [Serializable]
     public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo
     {
+        private readonly IList<ValidationDelegate> _validationFuncs = new List<ValidationDelegate>();
         public Guid Id { get; private set; }
         public int Code { get; set; }
-
-        private readonly IList<ValidationDelegate> _validationFuncs = new List<ValidationDelegate>();
-        public void AddValidation(ValidationDelegate func)
-        {
-            _validationFuncs.Add(func);
-        }
-        public void RemoveValidation(ValidationDelegate func)
-        {
-            if (_validationFuncs.Contains(func))
-                _validationFuncs.Remove(func);
-        }
-        public IList<ValidationResult> GetValidations(string propertyName)
-        {
-            return _validationFuncs.Select(validationDel => validationDel(this, propertyName)).Where(result => result != null).Where(result => result.FieldName == propertyName).ToList();
-        }
 
         [AllowNull]
         public virtual string this[string columnName]
@@ -43,5 +29,25 @@ namespace LOB.Domain.Base
         }
 
         public virtual string Error { get; set; }
+
+        public void AddValidation(ValidationDelegate func)
+        {
+            _validationFuncs.Add(func);
+        }
+
+        public void RemoveValidation(ValidationDelegate func)
+        {
+            if (_validationFuncs.Contains(func))
+                _validationFuncs.Remove(func);
+        }
+
+        public IList<ValidationResult> GetValidations(string propertyName)
+        {
+            return
+                _validationFuncs.Select(validationDel => validationDel(this, propertyName))
+                                .Where(result => result != null)
+                                .Where(result => result.FieldName == propertyName)
+                                .ToList();
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using LOB.Core.Localization;
 using LOB.Log.Interface;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface;
@@ -16,7 +17,6 @@ using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
-using LOB.Core.Localization;
 
 #endregion
 
@@ -32,7 +32,7 @@ namespace LOB.UI.Core.View
         private IModuleManager _module;
 
         public Shell(IUnityContainer container, IRegionManager region, ILogger logger,
-                           IEventAggregator eventAggregator)
+                     IEventAggregator eventAggregator)
         {
             //CULTURE INFO
             Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
@@ -52,7 +52,7 @@ namespace LOB.UI.Core.View
         }
 
         public string Header { get; set; }
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {
@@ -141,7 +141,7 @@ namespace LOB.UI.Core.View
 
         private void TabRegion_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabRegion.SelectedIndex = TabRegion.Items.Count -1;
+            TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
     }
 }

@@ -29,9 +29,12 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity
             }
         }
 
-        public string Header { get { return Strings.Header_Alter_Category; } }
+        public string Header
+        {
+            get { return Strings.Header_Alter_Category; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

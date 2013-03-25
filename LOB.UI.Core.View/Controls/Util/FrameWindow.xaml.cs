@@ -43,7 +43,7 @@ namespace LOB.UI.Core.View.Controls.Util
         }
 
         public string Header { get; set; }
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.ViewModel.Controls.List
 {
-    public class ListLegalPersonViewModel : ListPersonViewModel<LegalPerson>, IListLegalPersonViewModel
+    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel
     {
         public ListLegalPersonViewModel(LegalPerson entity, IRepository repository)
             : base(entity, repository)

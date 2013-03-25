@@ -12,13 +12,12 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
-    public abstract class AlterPersonViewModel<T> : AlterBaseEntityViewModel<T>, IAlterPersonViewModel<T>
-        where T : Person
+    public abstract class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel
     {
         private IUnityContainer _container;
 
         [InjectionConstructor]
-        public AlterPersonViewModel(T entity, Address address, ContactInfo contactInfo,
+        public AlterPersonViewModel(Person entity, Address address, ContactInfo contactInfo,
                                     IRepository repository,
                                     AlterAddressViewModel alterAddressViewModel,
                                     AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container)
@@ -37,8 +36,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
                 Entity.Address.State = UfBrDictionary.Ufs[UfBr.RJ];
             }
 
-            AlterAddressViewModel.Entity = Entity.Address;
-            AlterContactInfoViewModel.Entity = Entity.ContactInfo;
+            //AlterAddressViewModel = Entity.Address;
+            //AlterContactInfoViewModel.Entity = Entity.ContactInfo;
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }

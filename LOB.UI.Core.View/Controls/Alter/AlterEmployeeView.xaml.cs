@@ -16,13 +16,13 @@ namespace LOB.UI.Core.View.Controls.Alter
 {
     public partial class AlterEmployeeView : UserControl, IBaseView
     {
-        [Dependency]
-        private IEventAggregator _eventAggregator { get; set; }
-
         public AlterEmployeeView()
         {
             InitializeComponent();
         }
+
+        [Dependency]
+        private IEventAggregator _eventAggregator { get; set; }
 
         public IBaseViewModel ViewModel
         {
@@ -47,12 +47,15 @@ namespace LOB.UI.Core.View.Controls.Alter
         }
 
 
-        public string Header { get { return Strings.Header_Alter_Employee; } }
-
-        public int? Index
+        public string Header
         {
-            get { return ((AlterEmployeeViewModel) DataContext).CancelIndex; }
-            set { ((AlterEmployeeViewModel) DataContext).CancelIndex = value; }
+            get { return Strings.Header_Alter_Employee; }
+        }
+
+        public int Index
+        {
+            get { return ((AlterEmployeeViewModel) DataContext).Index; }
+            set { ((AlterEmployeeViewModel) DataContext).Index = value; }
         }
 
         public void InitializeServices()

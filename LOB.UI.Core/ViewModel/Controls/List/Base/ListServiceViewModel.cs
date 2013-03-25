@@ -9,9 +9,9 @@ using LOB.UI.Interface.ViewModel.Controls.List.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base
 {
-    public class ListServiceViewModel<T> : ListBaseEntityViewModel<T>, IListServiceViewModel<T> where T : Service
+    public class ListServiceViewModel : ListBaseEntityViewModel<Service>, IListServiceViewModel
     {
-        public ListServiceViewModel(T entity, IRepository repository) : base(entity, repository)
+        public ListServiceViewModel(Service entity, IRepository repository) : base(entity, repository)
         {
         }
 

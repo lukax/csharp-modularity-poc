@@ -1,9 +1,13 @@
-﻿using LOB.Domain.Base;
+﻿#region Usings
+
+using LOB.Domain.Base;
+
+#endregion
 
 namespace LOB.Business.Interface.Logic.Base
 {
-    public interface IServiceFacade<TEntity> : IBaseEntityFacade<TEntity> where TEntity:Service
+    public interface IServiceFacade : IBaseEntityFacade
     {
-        void GenerateEntity();
+        new void SetEntity<T>(T entity) where T : Service;
     }
 }

@@ -27,8 +27,12 @@ namespace LOB.UI.Core.View.Controls.Main
             set { DataContext = value; }
         }
 
-        public string Header { get { return Strings.Header_Main_Header; } }
-        public int? Index { get; set; }
+        public string Header
+        {
+            get { return Strings.Header_Main_Header; }
+        }
+
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

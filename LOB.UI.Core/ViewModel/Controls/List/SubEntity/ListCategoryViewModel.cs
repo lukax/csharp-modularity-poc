@@ -10,7 +10,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
 {
-    public sealed class ListCategoryViewModel : ListServiceViewModel<Category>, IListCategoryViewModel
+    public sealed class ListCategoryViewModel : ListServiceViewModel, IListCategoryViewModel
     {
         public ListCategoryViewModel(Category entity, IRepository repository)
             : base(entity, repository)

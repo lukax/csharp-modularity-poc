@@ -2,7 +2,6 @@
 
 using System.Windows.Controls;
 using LOB.Core.Localization;
-using LOB.Domain.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -22,13 +21,16 @@ namespace LOB.UI.Core.View.Controls.Alter.Base
 
         public IBaseViewModel ViewModel
         {
-            get { return DataContext as IAlterServiceViewModel<Service>; }
+            get { return DataContext as IAlterServiceViewModel; }
             set { DataContext = value; }
         }
 
-        public string Header { get { return Strings.Header_Alter_Service; } }
+        public string Header
+        {
+            get { return Strings.Header_Alter_Service; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

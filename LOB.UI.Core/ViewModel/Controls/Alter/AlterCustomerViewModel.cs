@@ -7,6 +7,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -53,6 +54,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             get { return OperationType.AlterCustomer; }
         }
 
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+
         private void PersonTypeChanged()
         {
             Entity.PropertyChanged += (s, e) =>
@@ -73,7 +77,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
         {
             await Task.Delay(500);
             var viewL =
-                _navigator.ResolveView(OperationType.AlterLegalPerson).SetViewModel(_alterLegalPersonViewModel).GetView();
+                _navigator.ResolveView(OperationType.AlterLegalPerson)
+                          .SetViewModel(_alterLegalPersonViewModel)
+                          .GetView();
             //Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
 
             Entity.Person = _alterLegalPersonViewModel.Entity;

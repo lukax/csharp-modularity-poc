@@ -9,7 +9,7 @@ namespace LOB.UI.Interface
     public interface IBaseView : IUIComponent
     {
         IBaseViewModel ViewModel { get; set; }
-        int? Index { get; set; }
+        int Index { get; set; }
         void InitializeServices();
         void Refresh();
     }

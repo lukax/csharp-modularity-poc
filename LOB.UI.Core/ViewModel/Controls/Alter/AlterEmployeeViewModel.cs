@@ -3,35 +3,47 @@
 using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.SubEntity;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter
 {
-    public sealed class AlterEmployeeViewModel : AlterNaturalPersonViewModel, IAlterEmployeeViewModel
+    public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel
     {
         private ICommandService _commandService;
         private IUnityContainer _container;
 
+
         [InjectionConstructor]
-        public AlterEmployeeViewModel(Employee entity, Address address, ContactInfo contactInfo,
-                                      IRepository repository, AlterAddressViewModel alterAddressViewModel,
-                                      AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container,
-                                      ICommandService commandService)
-            : base(entity, address, contactInfo, repository, alterAddressViewModel, alterContactInfoViewModel, container
-                )
+        public AlterEmployeeViewModel(Employee entity, IRepository repository) : base(entity, repository)
         {
-            _container = container;
-            _commandService = commandService;
-            Entity = entity;
         }
 
         public new Employee Entity { get; set; }
+
+        public override void InitializeServices()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Refresh()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override OperationType OperationType
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         protected override bool CanSaveChanges(object arg)
         {

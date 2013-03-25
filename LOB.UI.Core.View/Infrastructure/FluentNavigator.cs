@@ -7,6 +7,7 @@ using LOB.UI.Core.View.Controls.Util;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Unity;
+using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 #endregion
 
@@ -147,7 +148,7 @@ namespace LOB.UI.Core.View.Infrastructure
 
         public bool PromptUser(string message)
         {
-            return Xceed.Wpf.Toolkit.MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
     }
 }

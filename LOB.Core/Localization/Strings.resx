@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>@Button_Cancel</value>
+  </data>
   <data name="Button_Close" xml:space="preserve">
     <value>@Button_Close</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>@Button_Confirm</value>
+  </data>
+  <data name="Button_ConfirmOp" xml:space="preserve">
+    <value>@Button_ConfirmOp</value>
   </data>
   <data name="Command_AlterAddress" xml:space="preserve">
     <value>@Command_AlterAddress</value>

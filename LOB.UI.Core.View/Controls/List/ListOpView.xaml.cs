@@ -32,9 +32,12 @@ namespace LOB.UI.Core.View.Controls.List
             set { DataContext = value; }
         }
 
-        public string Header { get { return Strings.Header_List_Op; } }
+        public string Header
+        {
+            get { return Strings.Header_List_Op; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

@@ -13,12 +13,9 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel SnapsToDevicePixels="True">
-        <StackPanel Orientation="Horizontal">
-            <base:AlterBaseEntityView />
-        </StackPanel>
-
-        <Grid SnapsToDevicePixels="True">
+    <StackPanel SnapsToDevicePixels="True" Margin="5">
+        
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -32,23 +29,30 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Content="{x:Static loc:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
-            <TextBox HorizontalAlignment="Right" MinWidth="200" MaxWidth="300" Grid.Column="2" SnapsToDevicePixels="True">
-                <TextBox.Text>
-                    <Binding UpdateSourceTrigger="PropertyChanged" Path="Entity.Name" ValidatesOnDataErrors="True" NotifyOnValidationError="True"/>
-                </TextBox.Text>
-            </TextBox>
+            <DockPanel>
+                <base:AlterBaseEntityView HorizontalAlignment="Left"/>
+                <Label Content="{x:Static loc:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
+            </DockPanel>
+            
+            <TextBox HorizontalAlignment="Right" MinWidth="300" MaxWidth="500" Grid.Column="2" SnapsToDevicePixels="True" Style="{StaticResource TextBoxValidation}" 
+                     Text="{Binding Path=Entity.Name, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" VerticalAlignment="Top"/>
 
-            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"
-                     Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  TextWrapping="Wrap"
+                     Text="{Binding Entity.Description, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent" Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
+                <controls:Tile x:Name="ButtonCancel" Height="32" Background="Transparent" Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                    <DockPanel>
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26"/>
+                        <Label Content="{x:Static loc:Strings.Button_Cancel}"/>
+                    </DockPanel>
                 </controls:Tile>
-                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent" Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
+                <controls:Tile x:Name="ButtonSave" IsDefault="True" Height="32" Background="Transparent" Command="{Binding SaveChangesCommand}" BorderThickness="0">
+                    <DockPanel>
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
+                        <Label Content="{x:Static loc:Strings.Button_ConfirmOp}"/>
+                    </DockPanel>
                 </controls:Tile>
             </StackPanel>
         </StackPanel>

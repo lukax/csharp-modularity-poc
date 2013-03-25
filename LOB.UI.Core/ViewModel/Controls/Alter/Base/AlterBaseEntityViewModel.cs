@@ -13,7 +13,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
 {
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel<T> where T : BaseEntity
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity
     {
         [InjectionConstructor]
         public AlterBaseEntityViewModel(T entity, IRepository repository)
@@ -21,7 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
             Repository = repository;
             Entity = entity;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
-            CancelCommand = new DelegateCommand(Cancel, CanCancel);
+            DiscardChangesCommand = new DelegateCommand(Cancel, CanCancel);
             QuickSearchCommand = new DelegateCommand(QuickSearch);
             ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
@@ -31,10 +31,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
         public T Entity { get; set; }
 
         public DelegateCommand ClearEntityCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
+        public ICommand DiscardChangesCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
         public ICommand QuickSearchCommand { get; set; }
-        public int? CancelIndex { get; set; }
-        public ICommand SaveChangesCommand { get; set; }   
+        public int Index { get; set; }
+        public ICommand SaveChangesCommand { get; set; }
 
         protected virtual bool CanSaveChanges(object arg)
         {

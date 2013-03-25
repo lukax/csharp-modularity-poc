@@ -18,7 +18,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -36,7 +36,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--<base2:AlterBaseEntityBaseView Width="Auto" Grid.Column="0" x:Name="UcAlterBaseEntityView" />-->
+        <base2:AlterBaseEntityView Width="Auto" Grid.Column="1" x:Name="UcAlterBaseEntityView" HorizontalAlignment="Left"/>
         <ContentControl regions:RegionManager.RegionName="AlterBaseEntity" Width="Auto" Height="Auto" />
 
         <Label Content="{x:Static loc:Strings.Common_Street}" HorizontalAlignment="Right" Grid.Column="1" />

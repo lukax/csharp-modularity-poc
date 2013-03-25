@@ -50,8 +50,8 @@ namespace LOB.UI.Core.Modularity
             #region Alter
 
             //_container.RegisterType<IAlterBaseEntityViewModel<BaseEntity>, AlterBaseEntityViewModel<BaseEntity>>();
-            _container.RegisterType<IAlterPersonViewModel<Person>, AlterPersonViewModel<Person>>();
-            _container.RegisterType<IAlterServiceViewModel<Service>, AlterServiceViewModel<Service>>();
+            _container.RegisterType<IAlterPersonViewModel, AlterPersonViewModel>();
+            _container.RegisterType<IAlterServiceViewModel, AlterServiceViewModel>();
 
             _container.RegisterType<IAlterAddressViewModel, AlterAddressViewModel>();
             _container.RegisterType<IAlterCategoryViewModel, AlterCategoryViewModel>();
@@ -70,9 +70,9 @@ namespace LOB.UI.Core.Modularity
 
             #region List
 
-            _container.RegisterType<IListBaseEntityViewModel<BaseEntity>, ListBaseEntityViewModel<BaseEntity>>();
-            _container.RegisterType<IListPersonViewModel<Person>, ListPersonViewModel<Person>>();
-            _container.RegisterType<IListServiceViewModel<Service>, ListServiceViewModel<Service>>();
+            _container.RegisterType<IListBaseEntityViewModel, ListBaseEntityViewModel<BaseEntity>>();
+            _container.RegisterType<IListPersonViewModel, ListPersonViewModel>();
+            _container.RegisterType<IListServiceViewModel, ListServiceViewModel>();
 
             _container.RegisterType<IListAddressViewModel, ListAddressViewModel>();
             _container.RegisterType<IListCategoryViewModel, ListCategoryViewModel>();

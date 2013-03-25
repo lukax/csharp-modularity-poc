@@ -35,9 +35,12 @@ namespace LOB.UI.Core.View.Controls.Alter
             }
         }
 
-        public string Header { get { return Strings.Header_Alter_LegalPerson; } }
+        public string Header
+        {
+            get { return Strings.Header_Alter_LegalPerson; }
+        }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public void InitializeServices()
         {

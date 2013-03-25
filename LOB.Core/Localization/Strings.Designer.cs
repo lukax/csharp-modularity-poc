@@ -61,11 +61,38 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Button_Cancel.
+        /// </summary>
+        public static string Button_Cancel {
+            get {
+                return ResourceManager.GetString("Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Button_Close.
         /// </summary>
         public static string Button_Close {
             get {
                 return ResourceManager.GetString("Button_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Button_Confirm.
+        /// </summary>
+        public static string Button_Confirm {
+            get {
+                return ResourceManager.GetString("Button_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Button_ConfirmOp.
+        /// </summary>
+        public static string Button_ConfirmOp {
+            get {
+                return ResourceManager.GetString("Button_ConfirmOp", resourceCulture);
             }
         }
         

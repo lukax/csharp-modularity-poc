@@ -32,12 +32,15 @@ namespace LOB.UI.Core.View.Controls.Alter
             }
         }
 
-        public string Header { get { return Strings.Header_Alter_Product; } }
-
-        public int? Index
+        public string Header
         {
-            get { return ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex; }
-            set { ((AlterBaseEntityViewModel<Product>) DataContext).CancelIndex = value; }
+            get { return Strings.Header_Alter_Product; }
+        }
+
+        public int Index
+        {
+            get { return ((AlterBaseEntityViewModel<Product>) DataContext).Index; }
+            set { ((AlterBaseEntityViewModel<Product>) DataContext).Index = value; }
         }
 
         public void InitializeServices()
