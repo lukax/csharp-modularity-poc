@@ -83,7 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
                     City = "Nova Friburgo",
                     Country = "Brasil",
                     State = "Rio de Janeiro",
-                    ZipCode = "",
+                    ZipCode = 123456789,
                     Street = "",
                     StreetComplement = "",
                     IsDefault = false,

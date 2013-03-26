@@ -33,7 +33,7 @@ namespace LOB.Dao.Nhibernate.Test
                     Status = AddressStatus.Active,
                     Street = "Street b",
                     StreetNumber = 1001,
-                    ZipCode = "123100000"
+                    ZipCode = 123456789
                 };
             Email e1 = "thisdude@you.com";
             Email e2 = "another@you.com";

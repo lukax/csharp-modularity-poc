@@ -19,7 +19,7 @@ namespace LOB.Domain.SubEntity
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public string ZipCode { get; set; }
+        public int ZipCode { get; set; }
         public bool IsDefault { get; set; }
     }
 

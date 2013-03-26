@@ -31,15 +31,17 @@ namespace LOB.Business.Logic.SubEntity
             _baseEntityFacade.ConfigureValidations();
             if (_entity != null)
             {
-                _entity.AddValidation((sender, name) => _entity.Street.Length < 0 ? 
+                _entity.AddValidation((sender, name) => _entity.Street.Length < 1 ? 
                     new ValidationResult("Street", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.ZipCode.Length < 0 ? 
+                _entity.AddValidation((sender, name) => _entity.StreetNumber.ToString().Length < 1 ?
+                    new ValidationResult("StreetNumber", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.ZipCode.ToString().Length < 9 ? 
                     new ValidationResult("ZipCode", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.City.Length < 0 ?
+                _entity.AddValidation((sender, name) => _entity.City.Length < 1 ?
                     new ValidationResult("City", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.District.Length < 0 ?
+                _entity.AddValidation((sender, name) => _entity.District.Length < 1 ?
                     new ValidationResult("District", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.State.Length < 0 ?
+                _entity.AddValidation((sender, name) => _entity.State.Length < 1 ?
                     new ValidationResult("State", Strings.Error_Field_Empty) : null);
             }
         }
@@ -48,6 +50,7 @@ namespace LOB.Business.Logic.SubEntity
         {
             var fields = new List<ValidationResult>();
             fields.AddRange(_entity.GetValidations("Street"));
+            fields.AddRange(_entity.GetValidations("StreetNumber"));
             fields.AddRange(_entity.GetValidations("ZipCode"));
             fields.AddRange(_entity.GetValidations("City"));
             fields.AddRange(_entity.GetValidations("District"));
