@@ -122,6 +122,7 @@
     <Compile Include="Logic\SubEntity\AddressFacade.cs" />
     <Compile Include="Logic\SubEntity\ContactInfoFacade.cs" />
     <Compile Include="Logic\SubEntity\EmailFacade.cs" />
+    <Compile Include="Logic\SubEntity\PhoneNumberFacade.cs" />
     <Compile Include="Logic\SubEntity\ShipmentInfoInfoFacade.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Logic\ProductFacade.cs" />

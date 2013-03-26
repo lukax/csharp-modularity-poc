@@ -8,31 +8,39 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Logic.SubEntity
 {
-    public class ShipmentInfoInfoFacade : IShipmentInfoFacade
+    public class PhoneNumberFacade : IPhoneNumberFacade
     {
         private readonly IBaseEntityFacade _baseEntityFacade;
-        private ShipmentInfo _entity;
+        private PhoneNumber _entity;
 
-        public ShipmentInfoInfoFacade(IBaseEntityFacade baseEntityFacade)
+        public PhoneNumberFacade(IBaseEntityFacade baseEntityFacade)
         {
             _baseEntityFacade = baseEntityFacade;
         }
 
+        public void SetEntity<T>(T entity) where T:PhoneNumber
+        {
+            _baseEntityFacade.SetEntity(entity);
+            _entity = entity;
+        }
 
         public void ConfigureValidations()
         {
             _baseEntityFacade.ConfigureValidations();
             if (_entity != null)
             {
-                _entity.AddValidation((sender, name) => _entity.DaySchedule < 1 ?
-                    new ValidationResult("Value", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.Number < 1 ? 
+                    new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.Description.Length < 1  ? 
+                    new ValidationResult("Description", Strings.Error_Field_Empty) : null);
             }
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields)
         {
             var fields = new List<ValidationResult>();
-            fields.AddRange(_entity.GetValidations("DaySchedule"));
+            fields.AddRange(_entity.GetValidations("Number"));
+            fields.AddRange(_entity.GetValidations("Description"));
             invalidFields = fields;
             if (fields.Where(validationResult => validationResult != null)
                 .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0)
@@ -47,11 +55,6 @@ namespace LOB.Business.Logic.SubEntity
             return result;
         }
 
-        public void SetEntity<T>(T entity)where T:ShipmentInfo
-        {
-            _entity = entity;
-        }
-
         public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
         {
             throw new System.NotImplementedException();
@@ -64,7 +67,7 @@ namespace LOB.Business.Logic.SubEntity
 
         void IBaseEntityFacade.SetEntity<T>(T entity)
         {
-            ((IBaseEntityFacade)_baseEntityFacade).SetEntity(entity);
+            _baseEntityFacade.SetEntity(entity);
         }
     }
 }

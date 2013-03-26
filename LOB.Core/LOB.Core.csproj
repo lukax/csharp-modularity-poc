@@ -88,20 +88,6 @@
     <Compile Include="Util\UtilExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Interface.csproj">
-      <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
-      <Name>LOB.Business.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
-      <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
-      <Name>LOB.Dao.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
-      <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
-      <Name>LOB.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

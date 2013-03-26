@@ -8,8 +8,8 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Interface.Logic.SubEntity
 {
-    public interface IEmailFacade : IBaseEntityFacade
+    public interface IPhoneNumberFacade : IBaseEntityFacade
     {
-        new void SetEntity<T>(T entity) where T : Email;
+        new void SetEntity<T>(T entity) where T : PhoneNumber;
     }
 }

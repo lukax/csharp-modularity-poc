@@ -403,6 +403,33 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Address_Active.
+        /// </summary>
+        public static string Common_Address_Active {
+            get {
+                return ResourceManager.GetString("Common_Address_Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Address_Deprecated.
+        /// </summary>
+        public static string Common_Address_Deprecated {
+            get {
+                return ResourceManager.GetString("Common_Address_Deprecated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Address_Inactive.
+        /// </summary>
+        public static string Common_Address_Inactive {
+            get {
+                return ResourceManager.GetString("Common_Address_Inactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_AvailableInStore.
         /// </summary>
         public static string Common_AvailableInStore {

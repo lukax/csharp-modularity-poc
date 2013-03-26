@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -33,12 +34,16 @@ namespace LOB.Business.Logic.SubEntity
             }
         }
 
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)
         {
             var fields = new List<ValidationResult>();
             //TODO: custom validations for Category
 
-            //
             IEnumerable<ValidationResult> validationResults;
             bool result = _serviceFacade.CanAdd(out validationResults);
             invalidFields = fields;

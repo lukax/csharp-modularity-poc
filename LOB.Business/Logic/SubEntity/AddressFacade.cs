@@ -1,21 +1,84 @@
-﻿namespace LOB.Business.Logic.SubEntity
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Core.Localization;
+using LOB.Domain.Base;
+using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
+
+namespace LOB.Business.Logic.SubEntity
 {
-    //public class AddressFacade :  IAddressFacade
-    //{
-    ////    public Address Entity { get; set; }
-    ////    public bool CanAdd(out IEnumerable<InvalidField> invalidFields)
-    ////    {
-    ////        throw new System.NotImplementedException();
-    ////    }
+    public class AddressFacade : IAddressFacade
+    {
+        private readonly IBaseEntityFacade _baseEntityFacade;
+        private Address _entity;
 
-    ////    public bool CanUpdate(out IEnumerable<InvalidField> invalidFields)
-    ////    {
-    ////        throw new System.NotImplementedException();
-    ////    }
+        public AddressFacade(IBaseEntityFacade baseEntityFacade)
+        {
+            _baseEntityFacade = baseEntityFacade;
+        }
 
-    ////    public bool CanDelete(out IEnumerable<InvalidField> invalidFields)
-    ////    {
-    ////        throw new System.NotImplementedException();
-    ////    }
-    //}
+        public void SetEntity<T>(T entity) where T: Address
+        {
+            _baseEntityFacade.SetEntity(entity);
+            _entity = entity;
+        }
+
+        public void ConfigureValidations()
+        {
+            _baseEntityFacade.ConfigureValidations();
+            if (_entity != null)
+            {
+                _entity.AddValidation((sender, name) => _entity.Street.Length < 0 ? 
+                    new ValidationResult("Street", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.ZipCode.Length < 0 ? 
+                    new ValidationResult("ZipCode", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.City.Length < 0 ?
+                    new ValidationResult("City", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.District.Length < 0 ?
+                    new ValidationResult("District", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.State.Length < 0 ?
+                    new ValidationResult("State", Strings.Error_Field_Empty) : null);
+            }
+        }
+
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields)
+        {
+            var fields = new List<ValidationResult>();
+            fields.AddRange(_entity.GetValidations("Street"));
+            fields.AddRange(_entity.GetValidations("ZipCode"));
+            fields.AddRange(_entity.GetValidations("City"));
+            fields.AddRange(_entity.GetValidations("District"));
+            fields.AddRange(_entity.GetValidations("State"));
+            invalidFields = fields;
+            if (fields.Where(validationResult => validationResult != null)
+                .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0)
+                return false;
+            return true;
+        }
+
+        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)
+        {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
+
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IBaseEntityFacade.SetEntity<T>(T entity)
+        {
+            _baseEntityFacade.SetEntity(entity);
+        }
+    }
 }

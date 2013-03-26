@@ -1,15 +1,13 @@
 #region Usings
 
 
-
-#endregion
-
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+#endregion
 
 namespace LOB.Business.Logic.Base
 {
@@ -34,32 +32,28 @@ namespace LOB.Business.Logic.Base
             _baseEntityFacade.ConfigureValidations();
             if (_entity != null)
             {
-                _entity.AddValidation((sender, name) => _entity.Name.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.Description.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.Name.Length < 1 ? 
+                    new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.Description.Length > 300 ? 
+                    new ValidationResult("Description", Strings.Error_Field_Empty) : null);
             }
         }
 
-        private bool BasicValidations(out IEnumerable<ValidationResult> invalidFields)
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields)
         {
             var fields = new List<ValidationResult>();
             fields.AddRange(_entity.GetValidations("Name"));
             fields.AddRange(_entity.GetValidations("Description"));
             invalidFields = fields;
-            int i = 0;
-            foreach (var validationResult in fields)
-            {
-                if (validationResult != null)
-                    if (!string.IsNullOrEmpty(validationResult.ErrorDescription))
-                        i++;
-            }
-            if (i > 0)
+            if (fields.Where(validationResult => validationResult != null)
+                .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription))> 0)
                 return false;
             return true;
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)
         {
-            bool result = BasicValidations(out invalidFields);
+            bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }

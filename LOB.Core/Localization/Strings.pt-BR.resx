@@ -231,6 +231,15 @@
   <data name="Common_Address" xml:space="preserve">
     <value>Endereço</value>
   </data>
+  <data name="Common_Address_Active" xml:space="preserve">
+    <value>Ativo</value>
+  </data>
+  <data name="Common_Address_Deprecated" xml:space="preserve">
+    <value>Em desuso</value>
+  </data>
+  <data name="Common_Address_Inactive" xml:space="preserve">
+    <value>Inativo</value>
+  </data>
   <data name="Common_AvailableInStore" xml:space="preserve">
     <value>Disponível na Loja</value>
   </data>

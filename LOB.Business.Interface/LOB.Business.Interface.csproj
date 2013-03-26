@@ -58,6 +58,8 @@
     <Compile Include="Logic\ILegalPersonFacade.cs" />
     <Compile Include="Logic\IProductFacade.cs" />
     <Compile Include="Logic\ISaleFacade.cs" />
+    <Compile Include="Logic\SubEntity\IPayCheckFacade.cs" />
+    <Compile Include="Logic\SubEntity\IPhoneNumberFacade.cs" />
     <Compile Include="Logic\SubEntity\IShipmentInfoFacade.cs" />
     <Compile Include="Logic\SubEntity\IEmailFacade.cs" />
     <Compile Include="Logic\SubEntity\IContactInfoFacade.cs" />
@@ -66,6 +68,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
+      <Project>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</Project>
+      <Name>LOB.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
       <Project>{B275A849-EBA7-45D8-ABAD-A336F38153D9}</Project>
       <Name>LOB.Dao.Interface</Name>
