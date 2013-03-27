@@ -10,7 +10,7 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Main
+namespace LOB.UI.Core.ViewModel.Controls.Main
 {
     public sealed class ColumnToolsViewModel : IColumnToolsViewModel
     {

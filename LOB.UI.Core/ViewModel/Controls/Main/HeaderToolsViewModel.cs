@@ -6,7 +6,7 @@ using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Main
+namespace LOB.UI.Core.ViewModel.Controls.Main
 {
     public class HeaderToolsViewModel : IHeaderToolsViewModel
     {

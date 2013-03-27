@@ -192,7 +192,7 @@ Global
 		{819764C7-2185-4096-8677-66BEE2A1B788} = {FFB141A2-45B1-47F9-8C81-52DF77FCAAE7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 		VisualSVNWorkingCopyRoot = .
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal

@@ -1,14 +1,24 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
+using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
+using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
+using NullGuard;
 
 #endregion
 
@@ -16,36 +26,54 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel
     {
-        private ICommandService _commandService;
-        private IUnityContainer _container;
-        private IFluentNavigator _navigator;
+        private readonly IRepository _repository;
+        private readonly IContactInfoFacade _contactInfoFacade;
+        private readonly IEventAggregator _eventAggregator;
 
-        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IUnityContainer container,
-                                         ICommandService commandService, IFluentNavigator navigator)
+        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator)
             : base(entity, repository)
         {
-            _container = container;
-            _commandService = commandService;
-            _navigator = navigator;
+            _repository = repository;
+            _contactInfoFacade = contactInfoFacade;
+            _eventAggregator = eventAggregator;
             Entity = entity;
-            AddEmailCommand = new DelegateCommand(AddEmail);
-            DeleteEmailCommand = new DelegateCommand(DeleteEmail);
-            AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber);
-            DeletePhoneNumberCommand = new DelegateCommand(DeletePhoneNumber);
+            AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
+            DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
+            AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber, CanAddPhoneNumber);
+            DeletePhoneNumberCommand = new DelegateCommand(DeletePhoneNumber, CanDeletePhoneNumber);
         }
 
         public ICommand AddEmailCommand { get; set; }
         public ICommand DeleteEmailCommand { get; set; }
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
+        [AllowNull]
+        public Email Email { get; set; }
+        [AllowNull]
+        public PhoneNumber PhoneNumber { get; set; }
+        [AllowNull]
+        public ICollectionView Emails { get; set; }
+        [AllowNull]
+        public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices()
         {
+            Refresh();
+            UpdateLists().GetAwaiter();
         }
 
         public override void Refresh()
         {
-            Entity = new ContactInfo();
+            Entity = new ContactInfo
+                {
+                    Emails = new List<Email>(),
+                    PhoneNumbers = new List<PhoneNumber>(),
+                    SpeakWith = "",
+                    Ps = "",
+                    WebSite = "",
+                };
+            _contactInfoFacade.SetEntity(Entity);
+            _contactInfoFacade.ConfigureValidations();
         }
 
         public override OperationType OperationType
@@ -53,43 +81,93 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             get { return OperationType.AlterContactInfo; }
         }
 
+
+        #region Sub
+
         private void AddEmail(object arg)
         {
-            //_commandService.Execute("OpenView", OperationName.AlterEmail);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterEmail);
         }
-
-        private void DeleteEmail(object arg)
-        {
-        }
-
-        private void AddPhoneNumber(object arg)
-        {
-            //_commandService.Execute("OpenView", OperationName.AlterPhoneNumber);
-        }
-
-        private void DeletePhoneNumber(object arg)
-        {
-        }
-
-        protected override void QuickSearch(object arg)
-        {
-            //_commandService.Execute("OpenView", OperationName.ListContactInfo);
-        }
-
-        protected override void ClearEntity(object arg)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override bool CanSaveChanges(object arg)
+        private bool CanAddEmail(object arg)
         {
             //TODO: Business logic
             return true;
         }
+        private void AddPhoneNumber(object arg)
+        {
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterPhoneNumber);
+        }
+        private bool CanAddPhoneNumber(object arg)
+        {
+            //TODO: Business logic
+            return true;
+        }
+        private void DeleteEmail(object arg)
+        {
+            //TODO: Verify if can delete
+            if (Email != null)
+                using (Repository.Uow)
+                {
+                    Repository.Uow.BeginTransaction();
+                    Repository.Delete(Email);
+                    Repository.Uow.CommitTransaction();
+                }
+        }
+        private bool CanDeleteEmail(object arg)
+        {
+            if (Email != null)
+                return true;
+            return false;
+        }
+        private void DeletePhoneNumber(object arg)
+        {
+            //TODO: Verify if can delete
+            if (PhoneNumber != null)
+                using (Repository.Uow)
+                {
+                    Repository.Uow.BeginTransaction();
+                    Repository.Delete(PhoneNumber);
+                    Repository.Uow.CommitTransaction();
+                }
+        }
+        private bool CanDeletePhoneNumber(object arg)
+        {
+            if (PhoneNumber != null)
+                return true;
+            return false;
+        }
+
+        #endregion
+
+        private async Task UpdateLists()
+        {
+            while (true)
+            {
+                await Task.Delay(2000);
+
+                Emails = new ListCollectionView((await Repository.GetListAsync<Email>()).ToList());
+                PhoneNumbers = new ListCollectionView((await Repository.GetListAsync<PhoneNumber>()).ToList());
+            }
+        }
+
+        protected override void QuickSearch(object arg)
+        {
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType.ListContactInfo);
+        }
+
+        protected override void ClearEntity(object arg)
+        {
+            Refresh();
+        }
+
+        protected override bool CanSaveChanges(object arg)
+        {
+            IEnumerable<ValidationResult> results;
+            return _contactInfoFacade.CanAdd(out results);
+        }
 
         protected override bool CanCancel(object arg)
         {
-            //TODO: Business logic
             return true;
         }
     }

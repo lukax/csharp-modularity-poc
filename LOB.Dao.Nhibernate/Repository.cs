@@ -86,7 +86,7 @@ namespace LOB.Dao.Nhibernate
 
         private ISession GetSession()
         {
-            return (ISession) Uow.Orm;
+            return Uow.Orm as ISession;
         }
 
         public bool Contains<T>(int code) where T : BaseEntity

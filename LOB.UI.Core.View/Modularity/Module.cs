@@ -7,7 +7,7 @@ using LOB.UI.Core.View.Actions;
 using LOB.UI.Core.View.Controllers;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Core.ViewModel.Main;
+using LOB.UI.Core.ViewModel.Controls.Main;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;

@@ -19,7 +19,7 @@ using NullGuard;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Main
+namespace LOB.UI.Core.ViewModel.Controls.Main
 {
     public class ListOpViewModel : BaseViewModel, IListOpViewModel
     {
@@ -63,7 +63,7 @@ namespace LOB.UI.Core.ViewModel.Main
         {
             while (true)
             {
-                await Task.Delay(500);
+                await Task.Delay(1000);
                 if (string.IsNullOrEmpty(Search))
                 {
                     var list = _operationDictLazy.Value.Keys.ToList();

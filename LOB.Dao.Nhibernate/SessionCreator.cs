@@ -11,6 +11,7 @@ using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using NullGuard;
 
 #endregion
 
@@ -34,7 +35,7 @@ namespace LOB.Dao.Nhibernate
         {
         }
 
-        protected SessionCreator(ILoggerFacade logger, PersistType persistIn, string connectionString)
+        private SessionCreator(ILoggerFacade logger, PersistType persistIn, string connectionString)
         {
             ConnectionString = connectionString;
             _logger = logger;
@@ -42,63 +43,23 @@ namespace LOB.Dao.Nhibernate
         }
 
         public string ConnectionString { get; set; }
-
+        
         public Object Orm
         {
             get
             {
-                BuildOrm();
-                return _orm;
+                return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession());
             }
-            private set { _orm = value; }
         }
 
         public event SessionCreatorEventHandler OnCreatingSession;
         public event SessionCreatorEventHandler OnSessionCreated;
 
-        private async void BuildOrm()
-        {
-            //TODO: Translation support
-            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
-            Configuration cfg = null;
-            await Task.Run(() =>
-                {
-                    switch (_persistType)
-                    {
-                        case PersistType.MySql:
-                            cfg = StoreInMySqlConfiguration();
-                            break;
-                        case PersistType.MsSql:
-                            cfg = StoreInMsSqlConfiguration();
-                            break;
-                        case PersistType.File:
-                            cfg = StoreInFileConfiguration();
-                            break;
-                        case PersistType.Memory:
-                            cfg = StoreInMemoryConfiguration();
-                            break;
-                        default:
-                            throw new ArgumentException("PersistType");
-                    }
-                });
-            if (cfg != null)
-                try
-                {
-                    Orm = cfg.BuildSessionFactory().OpenSession();
-                    OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
-                }
-                catch (Exception ex)
-                {
-                    _logger.Log(ex.Message, Category.Exception, Priority.High);
-                    OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
-                }
-        }
-
         private ISessionFactory SessionCreatorFactory(PersistType persistIn)
         {
-            OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
-            _persistType = persistIn;
+            if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
             Configuration cfg = null;
+            ISessionFactory factory = null;
             switch (_persistType)
             {
                 case PersistType.MySql:
@@ -116,8 +77,18 @@ namespace LOB.Dao.Nhibernate
                 default:
                     throw new ArgumentException("PersistType");
             }
-            OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
-            return cfg.BuildSessionFactory();
+            if (cfg != null)
+                try
+                {
+                    factory = cfg.BuildSessionFactory();
+                    if (OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
+                }
+                catch (Exception ex)
+                {
+                    _logger.Log(ex.Message, Category.Exception, Priority.High);
+                    if (OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
+                }
+            return factory;
         }
 
         private Configuration StoreInMySqlConfiguration()

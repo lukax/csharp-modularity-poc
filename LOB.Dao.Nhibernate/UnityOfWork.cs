@@ -12,6 +12,7 @@ namespace LOB.Dao.Nhibernate
 {
     public class UnityOfWork : IUnityOfWork, IDisposable
     {
+        private readonly ISessionCreator _sessionCreator;
         //TODO: Try and catches and some logging later..
         private Lazy<object> _lazyOrm;
         private ITransaction _transaction;
@@ -19,20 +20,17 @@ namespace LOB.Dao.Nhibernate
         [InjectionConstructor]
         public UnityOfWork(ISessionCreator sessionCreator)
         {
+            _sessionCreator = sessionCreator;
             _lazyOrm = new Lazy<object>(() => sessionCreator.Orm);
         }
 
-        public object Orm
-        {
-            get { return _lazyOrm.Value; }
-            private set { _lazyOrm = new Lazy<object>(() => value); }
-        }
+        public object Orm { get { return _lazyOrm.Value; } }
 
         public void Save<T>(T entity) where T : BaseEntity
         {
             try
             {
-                ((ISession) Orm).Save(entity);
+                ((ISession)Orm).Save(entity);
             }
             catch (Exception)
             {
@@ -44,7 +42,7 @@ namespace LOB.Dao.Nhibernate
         {
             try
             {
-                ((ISession) Orm).SaveOrUpdate(entity);
+                ((ISession)Orm).SaveOrUpdate(entity);
             }
             catch (Exception)
             {
@@ -56,7 +54,7 @@ namespace LOB.Dao.Nhibernate
         {
             try
             {
-                ((ISession) Orm).Update(entity);
+                ((ISession)Orm).Update(entity);
             }
             catch (Exception)
             {
@@ -68,7 +66,7 @@ namespace LOB.Dao.Nhibernate
         {
             try
             {
-                ((ISession) Orm).Delete(entity);
+                ((ISession)Orm).Delete(entity);
             }
             catch (Exception)
             {

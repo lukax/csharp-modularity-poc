@@ -39,15 +39,15 @@
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="0">
-            <controls:Tile x:Name="ButtonAddPhoneNumber" IsDefault="True" Width="18" Height="18"
-                           Background="Transparent"
+            <Button x:Name="ButtonAddPhoneNumber" IsDefault="True" Width="18" Height="18"
+                           Background="Transparent" Padding="1"
                            Command="{Binding AddPhoneNumberCommand}" BorderThickness="0">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
-            </controls:Tile>
-            <controls:Tile x:Name="ButtonDeletePhoneNumber" Width="18" Height="18" Background="Transparent"
+            </Button>
+            <Button x:Name="ButtonDeletePhoneNumber" Width="18" Height="18" Background="Transparent" Padding="1"
                            Command="{Binding DeletePhoneNumberCommand}" BorderThickness="0">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
-            </controls:Tile>
+            </Button>
         </StackPanel>
 
         <GroupBox Header="{x:Static loc:Strings.Common_Emails}" Grid.Column="1" Grid.Row="1">
@@ -56,26 +56,26 @@
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
-            <controls:Tile x:Name="ButtonAddEmail" IsDefault="True" Width="18" Height="18" Background="Transparent"
-                           Command="{Binding AddEmailCommand}" BorderThickness="0">
+            <Button x:Name="ButtonAddEmail" IsDefault="True" Width="18" Height="18" Background="Transparent" Padding="1"
+                           Command="{Binding AddEmailCommand}" BorderThickness="0"> 
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
-            </controls:Tile>
-            <controls:Tile x:Name="ButtonDeleteEmail" Width="18" Height="18" Background="Transparent"
+            </Button>
+            <Button x:Name="ButtonDeleteEmail" Width="18" Height="18" Background="Transparent" Padding="1"
                            Command="{Binding DeleteEmailCommand}" BorderThickness="0">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
-            </controls:Tile>
+            </Button>
         </StackPanel>
 
         <Label HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Website}" Grid.Row="2" />
-        <TextBox Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+        <TextBox Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
                  MinWidth="250" MaxWidth="400" Grid.Row="2" Grid.Column="1" />
 
         <Label Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Contact}" />
-        <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250" Text="{Binding Entity.SpeakWith}"
+        <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250" Text="{Binding Entity.SpeakWith, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  HorizontalAlignment="Left" />
 
-        <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}"
-                 HorizontalAlignment="Left" MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="4" Grid.Column="1" />
+        <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Left" MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="4" Grid.Column="1"
+                 Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
     </Grid>
 </UserControl>

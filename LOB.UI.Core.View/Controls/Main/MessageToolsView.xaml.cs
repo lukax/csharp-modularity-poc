@@ -3,7 +3,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Core.Localization;
-using LOB.UI.Core.ViewModel.Main;
+using LOB.UI.Core.ViewModel.Controls.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 

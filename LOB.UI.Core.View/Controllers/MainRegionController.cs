@@ -6,7 +6,7 @@ using LOB.Dao.Interface;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.Infrastructure;
-using LOB.UI.Core.ViewModel.Main;
+using LOB.UI.Core.ViewModel.Controls.Main;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;

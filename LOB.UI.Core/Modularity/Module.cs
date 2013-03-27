@@ -8,7 +8,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Core.ViewModel.Controls.List.SubEntity;
-using LOB.UI.Core.ViewModel.Main;
+using LOB.UI.Core.ViewModel.Controls.Main;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
