@@ -34,7 +34,6 @@
         
         <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1" />
         
-        <ContentControl x:Name="ModalRegion"  regions:RegionManager.RegionName="ModalRegion" 
-                        Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" />
+        <ContentControl x:Name="ModalRegion"  regions:RegionManager.RegionName="ModalRegion" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" />
     </Grid>
 </controls:MetroWindow>

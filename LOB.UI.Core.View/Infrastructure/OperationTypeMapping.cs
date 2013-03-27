@@ -21,10 +21,8 @@ using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Core.View.Infrastructure
-{
-    public static class OperationTypeMapping
-    {
+namespace LOB.UI.Core.View.Infrastructure {
+    public static class OperationTypeMapping {
         #region View
 
         private static readonly Lazy<IDictionary<OperationType, Type>> LazyView =
@@ -109,13 +107,11 @@ namespace LOB.UI.Core.View.Infrastructure
 
         #endregion
 
-        public static IDictionary<OperationType, Type> Views
-        {
+        public static IDictionary<OperationType, Type> Views {
             get { return LazyView.Value; }
         }
 
-        public static IDictionary<OperationType, Type> ViewModels
-        {
+        public static IDictionary<OperationType, Type> ViewModels {
             get { return LazyViewModel.Value; }
         }
     }

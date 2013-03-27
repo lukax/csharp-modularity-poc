@@ -5,10 +5,8 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Business.Interface.Logic
-{
-    public interface INaturalPersonFacade : IPersonFacade
-    {
+namespace LOB.Business.Interface.Logic {
+    public interface INaturalPersonFacade : IPersonFacade {
         new void SetEntity<T>(T entity) where T : NaturalPerson;
     }
 }

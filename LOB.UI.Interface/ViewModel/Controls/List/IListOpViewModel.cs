@@ -1,6 +1,4 @@
-﻿namespace LOB.UI.Interface.ViewModel.Controls.List
-{
-    public interface IListOpViewModel : IBaseViewModel
-    {
+﻿namespace LOB.UI.Interface.ViewModel.Controls.List {
+    public interface IListOpViewModel : IBaseViewModel {
     }
 }

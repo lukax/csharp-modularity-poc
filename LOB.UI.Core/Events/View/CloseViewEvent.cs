@@ -6,12 +6,9 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Events.View
-{
-    public class CloseViewEvent : CompositePresentationEvent<OperationType>, IBaseEvent
-    {
-        public CloseViewEvent()
-        {
+namespace LOB.UI.Core.Events.View {
+    public class CloseViewEvent : CompositePresentationEvent<OperationType>, IBaseEvent {
+        public CloseViewEvent() {
         }
     }
 }

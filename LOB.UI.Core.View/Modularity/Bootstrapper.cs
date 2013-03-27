@@ -11,17 +11,13 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Modularity
-{
-    public class Bootstrapper : UnityBootstrapper
-    {
-        protected override ILoggerFacade CreateLogger()
-        {
+namespace LOB.UI.Core.View.Modularity {
+    public class Bootstrapper : UnityBootstrapper {
+        protected override ILoggerFacade CreateLogger() {
             return new Logger();
         }
 
-        protected override IModuleCatalog CreateModuleCatalog()
-        {
+        protected override IModuleCatalog CreateModuleCatalog() {
             //Reference
             //var catalog = new ModuleCatalog();
             //Type businessModule = typeof(LOB.Business.Module);
@@ -51,20 +47,17 @@ namespace LOB.UI.Core.View.Modularity
             return catalog;
         }
 
-        protected override void ConfigureContainer()
-        {
+        protected override void ConfigureContainer() {
             base.ConfigureContainer();
             this.RegisterTypeIfMissing(typeof (ILogger), typeof (Logger), true);
         }
 
-        protected override DependencyObject CreateShell()
-        {
+        protected override DependencyObject CreateShell() {
             var main = Container.Resolve<Shell>();
             return main;
         }
 
-        protected override void InitializeShell()
-        {
+        protected override void InitializeShell() {
             base.InitializeShell();
             Application.Current.MainWindow = (Window) Shell;
             Application.Current.MainWindow.Show();

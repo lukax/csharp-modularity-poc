@@ -12,25 +12,20 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
-{
-    public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {
         private readonly IEmailFacade _emailFacade;
 
         public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
             _emailFacade = emailFacade;
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
             Refresh();
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
             Entity = new Email
                 {
                     Value = "",
@@ -39,24 +34,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _emailFacade.ConfigureValidations();
         }
 
-        protected override bool CanSaveChanges(object arg)
-        {
+        public override OperationType OperationType {
+            get { return OperationType.AlterEmail; }
+        }
+
+        protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
             return _emailFacade.CanAdd(out results);
         }
 
-        public override OperationType OperationType
-        {
-            get { return OperationType.AlterEmail; }
-        }
-
-        protected override void QuickSearch(object arg)
-        {
+        protected override void QuickSearch(object arg) {
             throw new NotImplementedException();
         }
 
-        protected override void ClearEntity(object arg)
-        {
+        protected override void ClearEntity(object arg) {
             throw new NotImplementedException();
         }
     }

@@ -6,19 +6,15 @@ using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Main
-{
-    public class HeaderToolsViewModel : IHeaderToolsViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.Main {
+    public class HeaderToolsViewModel : IHeaderToolsViewModel {
         public string Header { get; set; }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
             throw new NotImplementedException();
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
             throw new NotImplementedException();
         }
 

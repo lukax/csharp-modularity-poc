@@ -12,10 +12,8 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter
-{
-    public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.Alter {
+    public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
         private ICommandService _commandService;
@@ -28,8 +26,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                                       AlterLegalPersonViewModel alterLegalPersonViewModel,
                                       AlterNaturalPersonViewModel alterNaturalPersonViewModel,
                                       ICommandService commandService)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
             _navigator = navigator;
             _container = container;
             _commandService = commandService;
@@ -40,29 +37,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             PersonTypeChanged();
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
             Entity = new Customer();
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterCustomer; }
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
-        private void PersonTypeChanged()
-        {
+        private void PersonTypeChanged() {
             Entity.PropertyChanged += (s, e) =>
                 {
-                    switch (Entity.PersonType)
-                    {
+                    switch (Entity.PersonType) {
                         case PersonType.Natural:
                             NaturalPersonCfg();
                             break;
@@ -73,8 +65,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
                 };
         }
 
-        private async void LegalPersonCfg()
-        {
+        private async void LegalPersonCfg() {
             await Task.Delay(500);
             var viewL =
                 _navigator.ResolveView(OperationType.AlterLegalPerson)
@@ -85,8 +76,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             Entity.Person = _alterLegalPersonViewModel.Entity;
         }
 
-        private async void NaturalPersonCfg()
-        {
+        private async void NaturalPersonCfg() {
             await Task.Delay(500);
             var viewN =
                 _navigator.ResolveView(OperationType.AlterNaturalPerson)
@@ -97,33 +87,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter
             Entity.Person = _alterNaturalPersonViewModel.Entity;
         }
 
-        protected override bool CanSaveChanges(object arg)
-        {
+        protected override bool CanSaveChanges(object arg) {
             return true;
         }
 
-        protected override bool CanCancel(object arg)
-        {
+        protected override bool CanCancel(object arg) {
             return true;
         }
 
-        protected override void SaveChanges(object arg)
-        {
-            using (Repository.Uow)
-            {
+        protected override void SaveChanges(object arg) {
+            using (Repository.Uow) {
                 Repository.Uow.BeginTransaction();
                 Repository.Uow.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
-        protected override void QuickSearch(object arg)
-        {
+        protected override void QuickSearch(object arg) {
             //_commandService.Execute("QuickSearch", OperationName.ListCustomer);
         }
 
-        protected override void ClearEntity(object arg)
-        {
+        protected override void ClearEntity(object arg) {
             Entity = new Customer();
         }
     }

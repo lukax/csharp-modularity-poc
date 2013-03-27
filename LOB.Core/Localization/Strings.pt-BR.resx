@@ -462,6 +462,9 @@
   <data name="Error_Internal" xml:space="preserve">
     <value>Aconteceu um erro interno ao processar requisição. Por favor, contate um administrador.</value>
   </data>
+  <data name="Header_Alter" xml:space="preserve">
+    <value>Novo</value>
+  </data>
   <data name="Header_Alter_Address" xml:space="preserve">
     <value>Novo Endereço</value>
   </data>
@@ -507,6 +510,9 @@
   <data name="Header_Alter_Service" xml:space="preserve">
     <value>Novo Serviço</value>
   </data>
+  <data name="Header_List" xml:space="preserve">
+    <value>Listagem</value>
+  </data>
   <data name="Header_ListService" xml:space="preserve">
     <value>Listar Serviços</value>
   </data>
@@ -545,6 +551,9 @@
   </data>
   <data name="Header_Main_Message" xml:space="preserve">
     <value>Popup</value>
+  </data>
+  <data name="Header_Sell" xml:space="preserve">
+    <value>Vendas</value>
   </data>
   <data name="Header_Sell_Product" xml:space="preserve">
     <value>Vender Produto</value>

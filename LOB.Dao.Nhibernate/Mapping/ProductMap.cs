@@ -5,12 +5,9 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping
-{
-    public class ProductMap : SubclassMap<Product>
-    {
-        public ProductMap()
-        {
+namespace LOB.Dao.Nhibernate.Mapping {
+    public class ProductMap : SubclassMap<Product> {
+        public ProductMap() {
             References(x => x.Category);
             Map(x => x.Status);
             Map(x => x.CodBarras);

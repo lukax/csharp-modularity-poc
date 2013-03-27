@@ -5,12 +5,9 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping
-{
-    public class StoreMap : BaseEntityMap<Store>
-    {
-        public StoreMap()
-        {
+namespace LOB.Dao.Nhibernate.Mapping {
+    public class StoreMap : BaseEntityMap<Store> {
+        public StoreMap() {
             HasMany(x => x.Employees)
                 .Cascade.All();
             Map(x => x.Name);

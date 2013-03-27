@@ -10,24 +10,18 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List
-{
-    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.List {
+    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel {
         public ListCustomerViewModel(Customer entity, IRepository repository)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
             Entity = entity;
             if (Entity.Person == null)
                 throw new ArgumentException("Entity has not defined a person");
         }
 
-        public new Expression<Func<Employee, bool>> SearchCriteria
-        {
-            get
-            {
-                try
-                {
+        public new Expression<Func<Employee, bool>> SearchCriteria {
+            get {
+                try {
                     return (arg =>
                             arg.Title.ToUpper().Contains(Search.ToUpper())
                             || arg.HireDate.ToString().ToUpper().Contains(Search.ToUpper())
@@ -40,26 +34,22 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                             || arg.Rg.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException)
-                {
+                catch (FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterCustomer; }
         }
 
-        protected override bool CanUpdate(object arg)
-        {
+        protected override bool CanUpdate(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        protected override bool CanDelete(object arg)
-        {
+        protected override bool CanDelete(object arg) {
             //TODO: Business logic
             return true;
         }

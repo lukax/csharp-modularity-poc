@@ -6,19 +6,17 @@ using System.Linq;
 using LOB.Domain;
 using LOB.Domain.Base;
 using LOB.Log;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Test
-{
+namespace LOB.Dao.Nhibernate.Test {
     [TestClass]
-    public class RepositoryTest
-    {
+    public class RepositoryTest {
         [TestMethod]
-        public void AddDeleteTest()
-        {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
+        public void AddDeleteTest() {
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
             var p1 = new Product
                 {
@@ -26,8 +24,7 @@ namespace LOB.Dao.Nhibernate.Test
                     UnitsInStock = 1234
                 };
 
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 p1 = repo.Save(p1);
                 Assert.AreNotEqual(0, p1.Id);
@@ -35,8 +32,7 @@ namespace LOB.Dao.Nhibernate.Test
                 Assert.IsTrue(repo.Contains(p1));
                 Assert.IsTrue(repo.Contains<Product>(x => x.Description == p1.Description));
             }
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Delete(p1);
                 repo.Uow.CommitTransaction();
@@ -46,9 +42,8 @@ namespace LOB.Dao.Nhibernate.Test
 
 
         [TestMethod]
-        public void GetTest()
-        {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
+        public void GetTest() {
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
             var p1 = new Product
                 {
@@ -63,12 +58,10 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void SaveOrUpdateTest()
-        {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
+        public void SaveOrUpdateTest() {
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var entity = new Product {Description = "Test description service", Name = "Test Name"};
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.SaveOrUpdate(entity);
                 repo.Uow.CommitTransaction();
@@ -86,9 +79,8 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void SaveGetPolymorphismTest()
-        {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
+        public void SaveGetPolymorphismTest() {
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var person = new LegalPerson
                 {
                     Cnpj = 123456,
@@ -100,8 +92,7 @@ namespace LOB.Dao.Nhibernate.Test
                     Status = CustomerStatus.New
                 };
 
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Save(client);
                 repo.Uow.CommitTransaction();
@@ -117,9 +108,8 @@ namespace LOB.Dao.Nhibernate.Test
         }
 
         [TestMethod]
-        public void GetListCriteriaTest()
-        {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger())));
+        public void GetListCriteriaTest() {
+            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var person1 = new NaturalPerson
                 {
                     FirstName = "Dude1",
@@ -144,8 +134,7 @@ namespace LOB.Dao.Nhibernate.Test
                     Person = person2,
                     Status = CustomerStatus.New
                 };
-            using (repo.Uow)
-            {
+            using (repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Save(person1);
                 repo.Save(person2);

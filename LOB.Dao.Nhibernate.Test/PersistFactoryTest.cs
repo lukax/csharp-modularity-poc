@@ -12,32 +12,27 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Test
-{
+namespace LOB.Dao.Nhibernate.Test {
     [TestClass]
-    public class PersistFactoryTest
-    {
+    public class PersistFactoryTest {
         [Import("Sql")]
         public IRepository Repository { get; set; }
 
         [TestMethod]
-        public void GetInstanceTest()
-        {
+        public void GetInstanceTest() {
             new PersistFactory(this);
             Assert.IsNotNull(Repository);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
-        private class PersistFactory
-        {
+        private class PersistFactory {
             private readonly AggregateCatalog _catalog;
             private readonly CompositionContainer _container;
 
             private IUnityContainer ccontainer = new UnityContainer();
             [Import] private Inner inner;
 
-            public PersistFactory(object obj)
-            {
+            public PersistFactory(object obj) {
                 Debug.WriteLine("Tryng to load dll from: " + Assembly.GetExecutingAssembly().Location);
 
                 _catalog = new AggregateCatalog(
@@ -56,13 +51,11 @@ namespace LOB.Dao.Nhibernate.Test
             ///     Compose a part, making the imports work
             /// </summary>
             /// <param name="obj">Object to compose</param>
-            public void Compose(object obj)
-            {
+            public void Compose(object obj) {
                 _container.ComposeParts(obj);
             }
 
-            public IRepository GetInstance(PersistType type = PersistType.MySql)
-            {
+            public IRepository GetInstance(PersistType type = PersistType.MySql) {
                 if (type == PersistType.MySql)
                     return _container.GetExportedValue<IRepository>("Sql");
 
@@ -76,13 +69,11 @@ namespace LOB.Dao.Nhibernate.Test
             }
 
 
-            private class Inner
-            {
+            private class Inner {
                 public IUnityContainer container;
 
                 [InjectionConstructor]
-                public Inner(IUnityContainer container)
-                {
+                public Inner(IUnityContainer container) {
                     this.container = container;
                 }
             }

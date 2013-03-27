@@ -12,29 +12,23 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter
-{
-    public partial class AlterEmployeeView : UserControl, IBaseView
-    {
-        public AlterEmployeeView()
-        {
+namespace LOB.UI.Core.View.Controls.Alter {
+    public partial class AlterEmployeeView : UserControl, IBaseView {
+        public AlterEmployeeView() {
             InitializeComponent();
         }
 
         [Dependency]
         private IEventAggregator _eventAggregator { get; set; }
 
-        public IBaseViewModel ViewModel
-        {
+        public IBaseViewModel ViewModel {
             get { return DataContext as IAlterEmployeeViewModel; }
-            set
-            {
+            set {
                 DataContext = value;
                 UcAlterBaseEntityView.DataContext = value;
                 UcAlterNaturalPersonView.DataContext = value;
                 var localViewModel = value as IAlterEmployeeViewModel;
-                if (localViewModel != null)
-                {
+                if (localViewModel != null) {
                     UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
                         localViewModel.AlterAddressViewModel;
                     UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
@@ -47,27 +41,22 @@ namespace LOB.UI.Core.View.Controls.Alter
         }
 
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Alter_Employee; }
         }
 
-        public int Index
-        {
+        public int Index {
             get { return ((AlterEmployeeViewModel) DataContext).Index; }
             set { ((AlterEmployeeViewModel) DataContext).Index = value; }
         }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
         }
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.AlterEmployee; }
         }
     }

@@ -6,12 +6,9 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Events.View
-{
-    public class QuickSearchEvent : CompositePresentationEvent<OperationType>, IBaseEvent
-    {
-        public QuickSearchEvent()
-        {
+namespace LOB.UI.Core.Events.View {
+    public class QuickSearchEvent : CompositePresentationEvent<OperationType>, IBaseEvent {
+        public QuickSearchEvent() {
         }
     }
 }

@@ -116,6 +116,7 @@
     <Resource Include="Backgrounds\background_maze.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icons\settings.png" />
     <Content Include="Icons\spinner.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

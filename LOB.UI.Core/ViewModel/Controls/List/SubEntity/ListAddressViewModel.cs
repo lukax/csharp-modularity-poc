@@ -10,20 +10,14 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
-{
-    public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel
-    {
-        public ListAddressViewModel(Address entity, IRepository repository) : base(entity, repository)
-        {
+namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
+    public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel {
+        public ListAddressViewModel(Address entity, IRepository repository) : base(entity, repository) {
         }
 
-        public new Expression<Func<Address, bool>> SearchCriteria
-        {
-            get
-            {
-                try
-                {
+        public new Expression<Func<Address, bool>> SearchCriteria {
+            get {
+                try {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.City.ToUpper().Contains(Search.ToUpper())
@@ -36,15 +30,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
                             || arg.State.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException)
-                {
+                catch (FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.ListAddress; }
         }
     }

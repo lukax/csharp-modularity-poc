@@ -4,10 +4,8 @@ using System;
 
 #endregion
 
-namespace LOB.UI.Interface.Infrastructure
-{
-    public interface IFluentNavigator
-    {
+namespace LOB.UI.Interface.Infrastructure {
+    public interface IFluentNavigator {
         IFluentNavigator Init { get; }
         IBaseView GetView();
         IBaseViewModel GetViewModel();
@@ -26,10 +24,8 @@ namespace LOB.UI.Interface.Infrastructure
         bool PromptUser(string message);
     }
 
-    public sealed class OnOpenViewEventArgs : EventArgs
-    {
-        public OnOpenViewEventArgs(IBaseView baseView)
-        {
+    public sealed class OnOpenViewEventArgs : EventArgs {
+        public OnOpenViewEventArgs(IBaseView baseView) {
             BaseView = baseView;
         }
 

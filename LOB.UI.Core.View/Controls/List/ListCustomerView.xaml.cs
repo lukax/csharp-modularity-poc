@@ -8,40 +8,32 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.List
-{
-    public partial class ListCustomerView : UserControl, IBaseView
-    {
+namespace LOB.UI.Core.View.Controls.List {
+    public partial class ListCustomerView : UserControl, IBaseView {
         private string _header;
 
-        public ListCustomerView()
-        {
+        public ListCustomerView() {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
+        public IBaseViewModel ViewModel {
             get { return DataContext as IListCustomerViewModel; }
             set { DataContext = value; }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_List_Customer; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
         }
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.ListCustomer; }
         }
     }

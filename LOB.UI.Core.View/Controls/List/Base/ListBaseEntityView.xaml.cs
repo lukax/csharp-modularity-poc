@@ -7,40 +7,32 @@ using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.List.Base
-{
-    public partial class ListBaseEntityView : UserControl, IBaseViewModel
-    {
+namespace LOB.UI.Core.View.Controls.List.Base {
+    public partial class ListBaseEntityView : UserControl, IBaseViewModel {
         private string _header;
 
-        public ListBaseEntityView()
-        {
+        public ListBaseEntityView() {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
+        public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
             set { DataContext = value; }
         }
 
         public int Index { get; set; }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_List_BaseEntity; }
         }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
         }
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.ListBaseEntity; }
         }
     }

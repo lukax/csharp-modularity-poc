@@ -5,12 +5,9 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping.SubEntity
-{
-    public class AddressMap : BaseEntityMap<Address>
-    {
-        public AddressMap()
-        {
+namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
+    public class AddressMap : BaseEntityMap<Address> {
+        public AddressMap() {
             Map(x => x.Status);
             Map(x => x.Street);
             Map(x => x.StreetNumber);

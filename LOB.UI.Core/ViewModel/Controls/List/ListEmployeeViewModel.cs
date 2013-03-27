@@ -9,22 +9,16 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List
-{
-    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel, IListEmployeeViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.List {
+    public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel, IListEmployeeViewModel {
         [InjectionConstructor]
         public ListEmployeeViewModel(Employee employee, IRepository repository)
-            : base(employee, repository)
-        {
+            : base(employee, repository) {
         }
 
-        public new Expression<Func<Employee, bool>> SearchCriteria
-        {
-            get
-            {
-                try
-                {
+        public new Expression<Func<Employee, bool>> SearchCriteria {
+            get {
+                try {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Title.ToUpper().Contains(Search.ToUpper())
@@ -35,21 +29,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                             || arg.Rg.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException)
-                {
+                catch (FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        protected override bool CanUpdate(object arg)
-        {
+        protected override bool CanUpdate(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        protected override bool CanDelete(object arg)
-        {
+        protected override bool CanDelete(object arg) {
             //TODO: Business logic
             return true;
         }

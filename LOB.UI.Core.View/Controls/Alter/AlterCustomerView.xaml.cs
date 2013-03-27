@@ -9,23 +9,18 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter
-{
-    public partial class AlterCustomerView : UserControl, IBaseView
-    {
+namespace LOB.UI.Core.View.Controls.Alter {
+    public partial class AlterCustomerView : UserControl, IBaseView {
         private string _header;
 
         [InjectionConstructor]
-        public AlterCustomerView()
-        {
+        public AlterCustomerView() {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
+        public IBaseViewModel ViewModel {
             get { return DataContext as AlterCustomerViewModel; }
-            set
-            {
+            set {
                 DataContext = value;
                 UcAlterBaseEntity.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",o => { UcAlterPersonDetails.Content = o; });
@@ -33,23 +28,19 @@ namespace LOB.UI.Core.View.Controls.Alter
             }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Alter_Customer; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
         }
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.AlterCustomer; }
         }
     }

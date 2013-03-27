@@ -10,21 +10,15 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List
-{
-    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.List {
+    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
         public ListLegalPersonViewModel(LegalPerson entity, IRepository repository)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
         }
 
-        public new Expression<Func<LegalPerson, bool>> SearchCriteria
-        {
-            get
-            {
-                try
-                {
+        public new Expression<Func<LegalPerson, bool>> SearchCriteria {
+            get {
+                try {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.TradingName.ToUpper().Contains(Search.ToUpper())
@@ -35,15 +29,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List
                             || arg.Notes.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.CorporateName.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException)
-                {
+                catch (FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.ListLegalPerson; }
         }
     }

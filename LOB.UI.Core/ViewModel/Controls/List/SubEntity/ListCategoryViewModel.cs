@@ -8,17 +8,13 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
-{
-    public sealed class ListCategoryViewModel : ListServiceViewModel, IListCategoryViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
+    public sealed class ListCategoryViewModel : ListServiceViewModel, IListCategoryViewModel {
         public ListCategoryViewModel(Category entity, IRepository repository)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterCategory; }
         }
     }

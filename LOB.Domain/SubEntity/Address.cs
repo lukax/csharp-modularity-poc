@@ -1,16 +1,13 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain.SubEntity
-{
+namespace LOB.Domain.SubEntity {
     [Serializable]
-    public class Address : BaseEntity
-    {
+    public class Address : BaseEntity {
         public AddressStatus Status { get; set; }
         public string Street { get; set; }
         public int StreetNumber { get; set; }
@@ -24,8 +21,7 @@ namespace LOB.Domain.SubEntity
     }
 
     [Serializable]
-    public enum AddressStatus
-    {
+    public enum AddressStatus {
         Active,
         Inactive,
         Deprecated

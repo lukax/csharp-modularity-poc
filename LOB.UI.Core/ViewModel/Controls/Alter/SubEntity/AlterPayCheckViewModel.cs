@@ -10,51 +10,41 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
-{
-    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {
         private IUnityContainer _container;
 
         public AlterPayCheckViewModel(PayCheck entity, IRepository repository, IUnityContainer container)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
             _container = container;
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
             Entity = new PayCheck();
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterPayCheck; }
         }
 
-        protected override bool CanSaveChanges(object arg)
-        {
+        protected override bool CanSaveChanges(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        protected override bool CanCancel(object arg)
-        {
+        protected override bool CanCancel(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        protected override void QuickSearch(object arg)
-        {
+        protected override void QuickSearch(object arg) {
             //Messenger.Default.Send<object>(_container.Resolve<ListPayCheckViewModel>(), "QuickSearchCommand");
         }
 
-        protected override void ClearEntity(object arg)
-        {
+        protected override void ClearEntity(object arg) {
             throw new NotImplementedException();
         }
     }

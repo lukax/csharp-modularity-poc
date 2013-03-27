@@ -1105,6 +1105,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Header_Alter.
+        /// </summary>
+        public static string Header_Alter {
+            get {
+                return ResourceManager.GetString("Header_Alter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Header_Alter_Address.
         /// </summary>
         public static string Header_Alter_Address {
@@ -1240,6 +1249,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Header_List.
+        /// </summary>
+        public static string Header_List {
+            get {
+                return ResourceManager.GetString("Header_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Header_List_BaseEntity.
         /// </summary>
         public static string Header_List_BaseEntity {
@@ -1353,6 +1371,15 @@ namespace LOB.Core.Localization {
         public static string Header_Main_Message {
             get {
                 return ResourceManager.GetString("Header_Main_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_Sell.
+        /// </summary>
+        public static string Header_Sell {
+            get {
+                return ResourceManager.GetString("Header_Sell", resourceCulture);
             }
         }
         

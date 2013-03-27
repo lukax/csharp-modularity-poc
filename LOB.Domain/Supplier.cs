@@ -1,6 +1,4 @@
-﻿namespace LOB.Domain
-{
-    public class Supplier : LegalPerson
-    {
+﻿namespace LOB.Domain {
+    public class Supplier : LegalPerson {
     }
 }

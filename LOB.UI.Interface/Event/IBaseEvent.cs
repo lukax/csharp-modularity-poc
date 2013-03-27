@@ -1,6 +1,4 @@
-﻿namespace LOB.UI.Interface.Event
-{
-    public interface IBaseEvent
-    {
+﻿namespace LOB.UI.Interface.Event {
+    public interface IBaseEvent {
     }
 }

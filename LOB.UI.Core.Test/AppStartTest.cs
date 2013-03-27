@@ -5,14 +5,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace LOB.UI.Core.Test
-{
+namespace LOB.UI.Core.Test {
     [TestClass]
-    public class AppStartTest
-    {
+    public class AppStartTest {
         [TestMethod]
-        public void StartComposed()
-        {
+        public void StartComposed() {
             var app = new App();
         }
     }

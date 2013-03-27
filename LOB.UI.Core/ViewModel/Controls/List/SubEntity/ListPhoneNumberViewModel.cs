@@ -10,36 +10,28 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
-{
-    public class ListPhoneNumberViewModel : ListBaseEntityViewModel<PhoneNumber>, IListPhoneNumberViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
+    public class ListPhoneNumberViewModel : ListBaseEntityViewModel<PhoneNumber>, IListPhoneNumberViewModel {
         public ListPhoneNumberViewModel(PhoneNumber entity, IRepository repository)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
         }
 
-        public new Expression<Func<PhoneNumber, bool>> SearchCriteria
-        {
-            get
-            {
-                try
-                {
+        public new Expression<Func<PhoneNumber, bool>> SearchCriteria {
+            get {
+                try {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Number.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.PhoneNumberType.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Description.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException)
-                {
+                catch (FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.ListPhoneNumber; }
         }
     }

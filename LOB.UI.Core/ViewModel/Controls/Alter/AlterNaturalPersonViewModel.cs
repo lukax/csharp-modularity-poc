@@ -11,69 +11,56 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter
-{
-    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.Alter {
+    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
         private IUnityContainer _container;
 
         [InjectionConstructor]
         public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
-            : base(entity, repository)
-        {
+            : base(entity, repository) {
         }
 
 
-        public string BirthDate
-        {
+        public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }
-            set
-            {
+            set {
                 if (Entity.BirthDate.ToShortDateString() == value) return;
 
                 DateTime parsed;
-                if (DateTime.TryParse(value, out parsed))
-                {
+                if (DateTime.TryParse(value, out parsed)) {
                     Entity.BirthDate = parsed;
                 }
             }
         }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
             throw new NotImplementedException();
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterNaturalPerson; }
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
-        protected override void SaveChanges(object arg)
-        {
-            using (Repository.Uow)
-            {
+        protected override void SaveChanges(object arg) {
+            using (Repository.Uow) {
                 Repository.Uow.BeginTransaction();
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
-        protected override void QuickSearch(object arg)
-        {
+        protected override void QuickSearch(object arg) {
             //Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel>(),"QuickSearchCommand");
         }
 
-        protected override void ClearEntity(object arg)
-        {
+        protected override void ClearEntity(object arg) {
             Entity = new NaturalPerson();
         }
     }

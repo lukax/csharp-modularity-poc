@@ -4,9 +4,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Alter
-{
-    public interface IAlterNaturalPersonViewModel : IAlterPersonViewModel
-    {
+namespace LOB.UI.Interface.ViewModel.Controls.Alter {
+    public interface IAlterNaturalPersonViewModel : IAlterPersonViewModel {
     }
 }

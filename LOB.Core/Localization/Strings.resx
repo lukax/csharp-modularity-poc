@@ -465,6 +465,9 @@
   <data name="Error_Internal" xml:space="preserve">
     <value>@Error_Internal</value>
   </data>
+  <data name="Header_Alter" xml:space="preserve">
+    <value>@Header_Alter</value>
+  </data>
   <data name="Header_Alter_Address" xml:space="preserve">
     <value>@Header_Alter_Address</value>
   </data>
@@ -510,6 +513,9 @@
   <data name="Header_Alter_Service" xml:space="preserve">
     <value>@Header_Alter_Service</value>
   </data>
+  <data name="Header_List" xml:space="preserve">
+    <value>@Header_List</value>
+  </data>
   <data name="Header_ListService" xml:space="preserve">
     <value>@Header_ListService</value>
   </data>
@@ -548,6 +554,9 @@
   </data>
   <data name="Header_Main_Message" xml:space="preserve">
     <value>@Header_Main_Message</value>
+  </data>
+  <data name="Header_Sell" xml:space="preserve">
+    <value>@Header_Sell</value>
   </data>
   <data name="Header_Sell_Product" xml:space="preserve">
     <value>@Header_Sell_Product</value>

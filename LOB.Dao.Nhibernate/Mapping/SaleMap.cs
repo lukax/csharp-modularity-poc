@@ -5,12 +5,9 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping
-{
-    public class SaleMap : BaseEntityMap<Sale>
-    {
-        public SaleMap()
-        {
+namespace LOB.Dao.Nhibernate.Mapping {
+    public class SaleMap : BaseEntityMap<Sale> {
+        public SaleMap() {
             Map(x => x.State);
             Map(x => x.SaleDate);
             References(x => x.Buyer);

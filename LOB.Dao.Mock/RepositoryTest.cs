@@ -7,14 +7,11 @@ using Moq;
 
 #endregion
 
-namespace LOB.Dao.Mock
-{
+namespace LOB.Dao.Mock {
     [TestClass]
-    public class RepositoryTest
-    {
+    public class RepositoryTest {
         [TestMethod]
-        public void MockstartTest()
-        {
+        public void MockstartTest() {
             var session = new Mock<ISessionCreator>(MockBehavior.Strict);
             var uow = new Mock<IUnityOfWork>(MockBehavior.Strict);
             var repo = new Mock<IRepository>(MockBehavior.Strict);
@@ -31,7 +28,7 @@ namespace LOB.Dao.Mock
                     Remove = "3"
                 };
 
-            uow.Setup(x => x.Orm).Returns(() => operations);
+            uow.Setup(x => x.ORM).Returns(() => operations);
             repo.Setup(x => x.Save(product)).Returns(() =>
                 {
                     uow.Object.Save(product);

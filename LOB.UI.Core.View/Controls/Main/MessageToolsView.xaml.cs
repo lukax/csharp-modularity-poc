@@ -9,30 +9,24 @@ using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Main
-{
+namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for MessageToolsView.xaml
     /// </summary>
-    public partial class MessageToolsView : UserControl, IBaseView
-    {
-        public MessageToolsView()
-        {
+    public partial class MessageToolsView : UserControl, IBaseView {
+        public MessageToolsView() {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
+        public IBaseViewModel ViewModel {
             get { return this.DataContext as IBaseViewModel; }
-            set
-            {
+            set {
                 this.DataContext = value;
                 var vm = value as MessageToolsViewModel;
                 if (vm != null)
                     (vm).PropertyChanged += (sender, args) =>
                         {
-                            if (vm.IsRestrictive)
-                            {
+                            if (vm.IsRestrictive) {
                                 BorderOuter.IsHitTestVisible = true;
                                 GridInner.IsHitTestVisible = true;
                                 BorderInner.IsHitTestVisible = true;
@@ -41,8 +35,7 @@ namespace LOB.UI.Core.View.Controls.Main
                                 Progress.Visibility = Visibility.Visible;
                                 BorderOuter.Visibility = Visibility.Visible;
                             }
-                            else
-                            {
+                            else {
                                 BorderOuter.IsHitTestVisible = false;
                                 GridInner.IsHitTestVisible = false;
                                 BorderInner.IsHitTestVisible = false;
@@ -55,23 +48,19 @@ namespace LOB.UI.Core.View.Controls.Main
             }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Main_Message; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
+        public void InitializeServices() {
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
         }
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.MessageTools; }
         }
     }

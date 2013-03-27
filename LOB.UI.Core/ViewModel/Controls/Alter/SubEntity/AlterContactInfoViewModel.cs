@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,22 +16,19 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 using NullGuard;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
-{
-    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel
-    {
-        private readonly IRepository _repository;
+namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IRepository _repository;
 
-        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator)
-            : base(entity, repository)
-        {
+        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository,
+                                         IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator)
+            : base(entity, repository) {
             _repository = repository;
             _contactInfoFacade = contactInfoFacade;
             _eventAggregator = eventAggregator;
@@ -47,23 +43,25 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
         public ICommand DeleteEmailCommand { get; set; }
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
+
         [AllowNull]
         public Email Email { get; set; }
+
         [AllowNull]
         public PhoneNumber PhoneNumber { get; set; }
+
         [AllowNull]
         public ICollectionView Emails { get; set; }
+
         [AllowNull]
         public ICollectionView PhoneNumbers { get; set; }
 
-        public override void InitializeServices()
-        {
+        public override void InitializeServices() {
             Refresh();
             UpdateLists().GetAwaiter();
         }
 
-        public override void Refresh()
-        {
+        public override void Refresh() {
             Entity = new ContactInfo
                 {
                     Emails = new List<Email>(),
@@ -76,62 +74,57 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             _contactInfoFacade.ConfigureValidations();
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterContactInfo; }
         }
 
-
         #region Sub
 
-        private void AddEmail(object arg)
-        {
+        private void AddEmail(object arg) {
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterEmail);
         }
-        private bool CanAddEmail(object arg)
-        {
+
+        private bool CanAddEmail(object arg) {
             //TODO: Business logic
             return true;
         }
-        private void AddPhoneNumber(object arg)
-        {
+
+        private void AddPhoneNumber(object arg) {
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterPhoneNumber);
         }
-        private bool CanAddPhoneNumber(object arg)
-        {
+
+        private bool CanAddPhoneNumber(object arg) {
             //TODO: Business logic
             return true;
         }
-        private void DeleteEmail(object arg)
-        {
+
+        private void DeleteEmail(object arg) {
             //TODO: Verify if can delete
             if (Email != null)
-                using (Repository.Uow)
-                {
+                using (Repository.Uow) {
                     Repository.Uow.BeginTransaction();
                     Repository.Delete(Email);
                     Repository.Uow.CommitTransaction();
                 }
         }
-        private bool CanDeleteEmail(object arg)
-        {
+
+        private bool CanDeleteEmail(object arg) {
             if (Email != null)
                 return true;
             return false;
         }
-        private void DeletePhoneNumber(object arg)
-        {
+
+        private void DeletePhoneNumber(object arg) {
             //TODO: Verify if can delete
             if (PhoneNumber != null)
-                using (Repository.Uow)
-                {
+                using (Repository.Uow) {
                     Repository.Uow.BeginTransaction();
                     Repository.Delete(PhoneNumber);
                     Repository.Uow.CommitTransaction();
                 }
         }
-        private bool CanDeletePhoneNumber(object arg)
-        {
+
+        private bool CanDeletePhoneNumber(object arg) {
             if (PhoneNumber != null)
                 return true;
             return false;
@@ -139,10 +132,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
 
         #endregion
 
-        private async Task UpdateLists()
-        {
-            while (true)
-            {
+        private async Task UpdateLists() {
+            while (true) {
                 await Task.Delay(2000);
 
                 Emails = new ListCollectionView((await Repository.GetListAsync<Email>()).ToList());
@@ -150,24 +141,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
             }
         }
 
-        protected override void QuickSearch(object arg)
-        {
+        protected override void QuickSearch(object arg) {
             _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType.ListContactInfo);
         }
 
-        protected override void ClearEntity(object arg)
-        {
+        protected override void ClearEntity(object arg) {
             Refresh();
         }
 
-        protected override bool CanSaveChanges(object arg)
-        {
+        protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
             return _contactInfoFacade.CanAdd(out results);
         }
 
-        protected override bool CanCancel(object arg)
-        {
+        protected override bool CanCancel(object arg) {
             return true;
         }
     }

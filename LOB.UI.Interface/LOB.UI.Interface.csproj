@@ -99,7 +99,6 @@
     <Compile Include="ViewModel\Controls\Sell\ISellProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\ISellServiceViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
