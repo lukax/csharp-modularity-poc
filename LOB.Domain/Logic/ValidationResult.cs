@@ -4,10 +4,13 @@ using System;
 
 #endregion
 
-namespace LOB.Domain.Logic {
+namespace LOB.Domain.Logic
+{
     [Serializable]
-    public class ValidationResult {
-        public ValidationResult(string fieldName, string errorDescription) {
+    public class ValidationResult
+    {
+        public ValidationResult(string fieldName, string errorDescription)
+        {
             FieldName = fieldName;
             ErrorDescription = errorDescription;
         }

@@ -41,23 +41,23 @@
 
             <Label Content="{x:Static loc:Strings.Common_Street}" HorizontalAlignment="Right" Grid.Column="1" />
             <TextBox Text="{Binding Entity.Street, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 Grid.Column="2" MinWidth="350" MaxWidth="400" Style="{StaticResource TextBoxValidation}" />
+                 Grid.Column="2" MinWidth="350" MaxWidth="400"  />
 
             <Label Content="{x:Static loc:Strings.Common_StreetNumber}" Grid.Column="3" HorizontalAlignment="Right" />
             <TextBox Text="{Binding Entity.StreetNumber, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 Grid.Column="4" MinWidth="80" MaxWidth="250" Style="{StaticResource TextBoxValidation}" />
+                 Grid.Column="4" MinWidth="80" MaxWidth="250"  />
 
             <Label Content="{x:Static loc:Strings.Common_Complement}" Grid.Column="1" Grid.Row="1" />
             <TextBox Text="{Binding Entity.StreetComplement, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 Grid.Column="2" Grid.Row="1" MinWidth="350" MaxWidth="400" Style="{StaticResource TextBoxValidation}" />
+                 Grid.Column="2" Grid.Row="1" MinWidth="350" MaxWidth="400"  />
 
             <Label Content="{x:Static loc:Strings.Common_District}" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" />
             <TextBox Text="{Binding Entity.District, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 Grid.Column="4" Grid.Row="1" MinWidth="200" MaxWidth="250" Style="{StaticResource TextBoxValidation}" />
+                 Grid.Column="4" Grid.Row="1" MinWidth="200" MaxWidth="250"  />
 
             <Label Content="{x:Static loc:Strings.Common_City}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2" />
             <TextBox Text="{Binding Entity.City, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 MinWidth="150" Style="{StaticResource TextBoxValidation}" 
+                 MinWidth="150"  
                  MaxWidth="400" Grid.Column="2" Grid.Row="2" />
 
             <Label Content="{x:Static loc:Strings.Common_State}" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" />
@@ -72,19 +72,19 @@
                 <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}" SelectedItem="{Binding State}"
                       MinWidth="50" />
                 <TextBox Text="{Binding Entity.State, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                     Style="{StaticResource TextBoxValidation}" 
+                      
                          MinWidth="150" />
             </StackPanel>
 
 
             <Label Content="{x:Static loc:Strings.Common_Country}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3" />
             <TextBox Text="{Binding Entity.Country, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 IsReadOnly="True" Style="{StaticResource TextBoxValidation}" 
+                 IsReadOnly="True"  
                  MinWidth="150" MaxWidth="400" Grid.Column="2" Grid.Row="3" />
 
             <Label Content="{x:Static loc:Strings.Common_ZipCode}" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="3" />
             <xctk:MaskedTextBox Text="{Binding Entity.ZipCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"
-                 MinWidth="100" Mask="00000-000" Style="{StaticResource TextBoxValidation}" 
+                 MinWidth="100" Mask="00000-000"  
                  MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
 

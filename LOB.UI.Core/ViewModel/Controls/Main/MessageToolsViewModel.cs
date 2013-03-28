@@ -3,7 +3,6 @@
 using System.Windows.Input;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Event;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -11,8 +10,10 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class MessageToolsViewModel : BaseViewModel {
+namespace LOB.UI.Core.ViewModel.Controls.Main
+{
+    public class MessageToolsViewModel : BaseViewModel
+    {
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
 
@@ -28,41 +29,48 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private ICommand _closeCommand;
 
-        public ICommand CloseCommand {
-            get { return this._closeCommand ?? (this._closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
+        public ICommand CloseCommand
+        {
+            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
 
-            set { this._closeCommand = value; }
+            set { _closeCommand = value; }
         }
 
         public bool CanClose { get; set; }
 
-        public void CloseExecute() {
-            this.eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
+        public void CloseExecute()
+        {
+            eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
 
         #endregion CloseExecute Command
 
         [InjectionConstructor]
-        public MessageToolsViewModel(IUnityContainer container) {
+        public MessageToolsViewModel(IUnityContainer container)
+        {
             Message = "Please wait...";
             this.container = container;
-            this.eventAggregator = this.container.Resolve<IEventAggregator>();
+            eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
-        public override OperationType OperationType {
+        public override OperationType OperationType
+        {
             get { return OperationType.MessageTools; }
         }
 
-        public void Initialize(string message, bool canClose, bool isRestrictive) {
+        public void Initialize(string message, bool canClose, bool isRestrictive)
+        {
             Message = message;
             CanClose = canClose;
             IsRestrictive = isRestrictive;
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }

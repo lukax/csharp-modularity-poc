@@ -8,33 +8,42 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    public partial class AlterPayCheckView : UserControl, IBaseView {
-        public AlterPayCheckView() {
+namespace LOB.UI.Core.View.Controls.Alter.SubEntity
+{
+    public partial class AlterPayCheckView : UserControl, IBaseView
+    {
+        public AlterPayCheckView()
+        {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel {
+        public IBaseViewModel ViewModel
+        {
             get { return DataContext as IAlterPayCheckViewModel; }
-            set {
+            set
+            {
                 DataContext = value;
                 UcAlterBaseEntityView.DataContext = value;
             }
         }
 
-        public string Header {
+        public string Header
+        {
             get { return Strings.Header_Alter_PayCheck; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
 
-        public OperationType OperationType {
+        public OperationType OperationType
+        {
             get { return OperationType.AlterPayCheck; }
         }
     }

@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal">
             <Label  Content="{x:Static loc:Strings.Common_Email}"/>
             <TextBox MinWidth="250" Text="{Binding Entity.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Email}" Style="{StaticResource TextBoxValidation}" />
+                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Email}"  />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

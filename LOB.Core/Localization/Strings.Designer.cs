@@ -1627,6 +1627,69 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Progress_Dao_Conected.
+        /// </summary>
+        public static string Progress_Dao_Conected {
+            get {
+                return ResourceManager.GetString("Progress_Dao_Conected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Progress_Dao_Connecting.
+        /// </summary>
+        public static string Progress_Dao_Connecting {
+            get {
+                return ResourceManager.GetString("Progress_Dao_Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Progress_Dao_Connecting_Failed.
+        /// </summary>
+        public static string Progress_Dao_Connecting_Failed {
+            get {
+                return ResourceManager.GetString("Progress_Dao_Connecting_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Progress_List_Updated.
+        /// </summary>
+        public static string Progress_List_Updated {
+            get {
+                return ResourceManager.GetString("Progress_List_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Progress_List_Updating.
+        /// </summary>
+        public static string Progress_List_Updating {
+            get {
+                return ResourceManager.GetString("Progress_List_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Progress_Lists_Updates.
+        /// </summary>
+        public static string Progress_Lists_Updates {
+            get {
+                return ResourceManager.GetString("Progress_Lists_Updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Progress_Lists_Updating.
+        /// </summary>
+        public static string Progress_Lists_Updating {
+            get {
+                return ResourceManager.GetString("Progress_Lists_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Tab_Hide.
         /// </summary>
         public static string Tab_Hide {

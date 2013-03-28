@@ -5,10 +5,13 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain.SubEntity {
+namespace LOB.Domain.SubEntity
+{
     [Serializable]
-    public class Category : Service {
-        public override string ToString() {
+    public class Category : Service
+    {
+        public override string ToString()
+        {
             return Name;
         }
     }

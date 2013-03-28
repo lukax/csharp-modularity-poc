@@ -11,10 +11,13 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
+namespace LOB.UI.Core.ViewModel.Controls.Alter.Base
+{
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity
+    {
         [InjectionConstructor]
-        public AlterBaseEntityViewModel(T entity, IRepository repository) {
+        public AlterBaseEntityViewModel(T entity, IRepository repository)
+        {
             Repository = repository;
             Entity = entity;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
@@ -34,23 +37,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public int Index { get; set; }
         public ICommand SaveChangesCommand { get; set; }
 
-        protected virtual bool CanSaveChanges(object arg) {
+        protected virtual bool CanSaveChanges(object arg)
+        {
             return Entity != null;
         }
 
-        protected virtual bool CanCancel(object arg) {
+        protected virtual bool CanCancel(object arg)
+        {
             return Entity != null;
         }
 
-        protected virtual void SaveChanges(object arg) {
-            using (Repository.Uow.BeginTransaction()) {
+        protected virtual void SaveChanges(object arg)
+        {
+            using (Repository.Uow.BeginTransaction())
+            {
                 Debug.Write("Saving changes...");
                 Entity = Repository.SaveOrUpdate(Entity);
             }
             Cancel(arg);
         }
 
-        protected virtual void Cancel(object arg) {
+        protected virtual void Cancel(object arg)
+        {
         }
 
         protected abstract void QuickSearch(object arg);

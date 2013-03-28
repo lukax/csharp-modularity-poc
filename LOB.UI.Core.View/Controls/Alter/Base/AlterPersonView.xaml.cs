@@ -9,20 +9,26 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.Base {
-    public partial class AlterPersonView : UserControl, IBaseView {
+namespace LOB.UI.Core.View.Controls.Alter.Base
+{
+    public partial class AlterPersonView : UserControl, IBaseView
+    {
         private string _header;
 
-        public AlterPersonView() {
+        public AlterPersonView()
+        {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel {
+        public IBaseViewModel ViewModel
+        {
             get { return DataContext as IAlterPersonViewModel; }
-            set {
+            set
+            {
                 DataContext = value;
                 var localViewModel = value as IAlterPersonViewModel;
-                if (localViewModel != null) {
+                if (localViewModel != null)
+                {
                     UcAlterAddressView.DataContext = localViewModel.AlterAddressViewModel;
                     UcAlterContactInfoView.DataContext = localViewModel.AlterContactInfoViewModel;
                 }
@@ -30,21 +36,25 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         }
 
 
-        public string Header {
+        public string Header
+        {
             get { return Strings.Header_Alter_Person; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
             throw new NotImplementedException();
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType {
+        public OperationType OperationType
+        {
             get { return OperationType.AlterPerson; }
         }
     }

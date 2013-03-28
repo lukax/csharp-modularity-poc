@@ -5,9 +5,12 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping {
-    public class EmployeeMap : BaseEntityMap<Employee> {
-        public EmployeeMap() {
+namespace LOB.Dao.Nhibernate.Mapping
+{
+    public class EmployeeMap : BaseEntityMap<Employee>
+    {
+        public EmployeeMap()
+        {
             References(x => x.WorksIn);
             Map(x => x.Title);
             Map(x => x.HireDate);

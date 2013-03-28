@@ -5,8 +5,10 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Business.Interface.Logic.SubEntity {
-    public interface ICategoryFacade : IServiceFacade {
+namespace LOB.Business.Interface.Logic.SubEntity
+{
+    public interface ICategoryFacade : IServiceFacade
+    {
         new void SetEntity<T>(T entity) where T : Category;
     }
 }

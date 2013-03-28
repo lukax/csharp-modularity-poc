@@ -133,6 +133,7 @@
     <Compile Include="Events\MessageHideEvent.cs" />
     <Compile Include="Events\MessageShowEvent.cs" />
     <Compile Include="Events\RefreshEvent.cs" />
+    <Compile Include="Events\ReportProgressEvent.cs" />
     <Compile Include="Events\SaveEvent.cs" />
     <Compile Include="Events\View\CloseViewEvent.cs" />
     <Compile Include="Events\View\OpenViewEvent.cs" />
@@ -157,7 +158,7 @@
     <Compile Include="ViewModel\Controls\Alter\Base\AlterServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPhoneNumberViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\ListServiceViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Main\ListOpViewModel.cs" />
+    <Compile Include="ViewModel\Controls\List\ListOpViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListEmailViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListPhoneNumberViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListAddressViewModel.cs" />

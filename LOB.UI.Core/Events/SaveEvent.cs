@@ -5,7 +5,9 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Events {
-    public class SaveEvent : CompositePresentationEvent<string>, IBaseEvent {
+namespace LOB.UI.Core.Events
+{
+    public class SaveEvent : CompositePresentationEvent<string>, IBaseEvent
+    {
     }
 }

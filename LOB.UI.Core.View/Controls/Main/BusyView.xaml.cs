@@ -7,28 +7,34 @@ using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Main {
+namespace LOB.UI.Core.View.Controls.Main
+{
     /// <summary>
     ///     Interaction logic for BusyView.xaml
     /// </summary>
-    public partial class BusyView : UserControl, IBaseView {
-        public BusyView() {
+    public partial class BusyView : UserControl, IBaseView
+    {
+        public BusyView()
+        {
             InitializeComponent();
         }
 
         public OperationType OperationType { get; private set; }
         public IBaseViewModel ViewModel { get; set; }
 
-        public string Header {
+        public string Header
+        {
             get { return Strings.Header_Main_Busy; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
     }
 }

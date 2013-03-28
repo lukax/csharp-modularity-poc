@@ -12,48 +12,58 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
+namespace LOB.UI.Core.ViewModel.Controls.Alter
+{
+    public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel
+    {
         private ICommandService _commandService;
         private IUnityContainer _container;
 
 
         [InjectionConstructor]
-        public AlterEmployeeViewModel(Employee entity, IRepository repository) : base(entity, repository) {
+        public AlterEmployeeViewModel(Employee entity, IRepository repository) : base(entity, repository)
+        {
         }
 
         public new Employee Entity { get; set; }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
             throw new NotImplementedException();
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType {
+        public override OperationType OperationType
+        {
             get { throw new NotImplementedException(); }
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
-        protected override bool CanSaveChanges(object arg) {
+        protected override bool CanSaveChanges(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        protected override bool CanCancel(object arg) {
+        protected override bool CanCancel(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        protected override void QuickSearch(object arg) {
+        protected override void QuickSearch(object arg)
+        {
             //_commandService.Execute("QuickSearch", OperationName.ListEmployee);
         }
 
-        protected override void ClearEntity(object arg) {
+        protected override void ClearEntity(object arg)
+        {
             throw new NotImplementedException();
         }
     }

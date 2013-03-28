@@ -8,32 +8,40 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.Base {
-    public partial class AlterServiceView : UserControl, IBaseView {
+namespace LOB.UI.Core.View.Controls.Alter.Base
+{
+    public partial class AlterServiceView : UserControl, IBaseView
+    {
         private string _header;
 
-        public AlterServiceView() {
+        public AlterServiceView()
+        {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel {
+        public IBaseViewModel ViewModel
+        {
             get { return DataContext as IAlterServiceViewModel; }
             set { DataContext = value; }
         }
 
-        public string Header {
+        public string Header
+        {
             get { return Strings.Header_Alter_Service; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
 
-        public OperationType OperationType {
+        public OperationType OperationType
+        {
             get { return OperationType.AlterService; }
         }
     }

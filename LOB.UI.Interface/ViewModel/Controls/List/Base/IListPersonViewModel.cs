@@ -1,4 +1,6 @@
-﻿namespace LOB.UI.Interface.ViewModel.Controls.List.Base {
-    public interface IListPersonViewModel : IListBaseEntityViewModel {
+﻿namespace LOB.UI.Interface.ViewModel.Controls.List.Base
+{
+    public interface IListPersonViewModel : IListBaseEntityViewModel
+    {
     }
 }

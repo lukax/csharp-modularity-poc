@@ -10,39 +10,49 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterProductView : UserControl, IBaseView {
+namespace LOB.UI.Core.View.Controls.Alter
+{
+    public partial class AlterProductView : UserControl, IBaseView
+    {
         private string _header;
 
-        public AlterProductView() {
+        public AlterProductView()
+        {
             InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel {
+        public IBaseViewModel ViewModel
+        {
             get { return DataContext as IAlterProductViewModel; }
-            set {
+            set
+            {
                 DataContext = value;
                 UcAlterBaseEntityView.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }
 
-        public string Header {
+        public string Header
+        {
             get { return Strings.Header_Alter_Product; }
         }
 
-        public int Index {
+        public int Index
+        {
             get { return ((AlterBaseEntityViewModel<Product>) DataContext).Index; }
             set { ((AlterBaseEntityViewModel<Product>) DataContext).Index = value; }
         }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
         }
 
-        public OperationType OperationType {
+        public OperationType OperationType
+        {
             get { return OperationType.AlterProduct; }
         }
     }

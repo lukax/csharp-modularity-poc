@@ -7,10 +7,10 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.UI.Interface.Infrastructure;assembly=LOB.UI.Interface"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
-             xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
+
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-
+    <!--xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"-->
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
@@ -22,7 +22,7 @@
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
                 </controls:Tile>
                 
-                <TextBox MinWidth="200" Width="Auto" Height="Auto"
+                <TextBox MinWidth="200" Width="Auto" Height="Auto" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
                   controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True"/>
                 
             </DockPanel>
@@ -38,9 +38,9 @@
                     <DataTemplate DataType="{x:Type System:String}">
                         <controls:Tile Title="{Binding}" Width="100" Height="100" Command="{Binding ElementName=ListViewEntitys, Path=DataContext.SaveChangesCommand}" CommandParameter="{Binding}" >
                             <Image Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons/Logo.png" Opacity="0.5"  Stretch="UniformToFill">
-                                <Image.Effect>
+                                <!--<Image.Effect>
                                     <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                                </Image.Effect>
+                                </Image.Effect>-->
                             </Image>
                         </controls:Tile>
                     </DataTemplate>

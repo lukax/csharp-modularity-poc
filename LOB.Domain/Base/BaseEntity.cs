@@ -9,16 +9,20 @@ using NullGuard;
 
 #endregion
 
-namespace LOB.Domain.Base {
+namespace LOB.Domain.Base
+{
     [Serializable]
-    public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo {
+    public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo
+    {
         private readonly IList<ValidationDelegate> _validationFuncs = new List<ValidationDelegate>();
         public Guid Id { get; private set; }
         public int Code { get; set; }
 
         [AllowNull]
-        public virtual string this[string columnName] {
-            get {
+        public virtual string this[string columnName]
+        {
+            get
+            {
                 var firstOrDefault = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
                 return firstOrDefault != null ? firstOrDefault.ErrorDescription : null;
             }
@@ -27,16 +31,19 @@ namespace LOB.Domain.Base {
         [AllowNull]
         public virtual string Error { get; set; }
 
-        public void AddValidation(ValidationDelegate func) {
+        public void AddValidation(ValidationDelegate func)
+        {
             _validationFuncs.Add(func);
         }
 
-        public void RemoveValidation(ValidationDelegate func) {
+        public void RemoveValidation(ValidationDelegate func)
+        {
             if (_validationFuncs.Contains(func))
                 _validationFuncs.Remove(func);
         }
 
-        public IList<ValidationResult> GetValidations(string propertyName) {
+        public IList<ValidationResult> GetValidations(string propertyName)
+        {
             return
                 _validationFuncs.Select(validationDel => validationDel(this, propertyName))
                                 .Where(result => result != null)

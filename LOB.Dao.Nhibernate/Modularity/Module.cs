@@ -8,17 +8,22 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Modularity {
+namespace LOB.Dao.Nhibernate.Modularity
+{
     [Module(ModuleName = "NHibernateModule")]
-    public class Module : IModule {
+    public class Module : IModule
+    {
         private readonly IUnityContainer _container;
 
-        public Module(IUnityContainer container) {
+        public Module(IUnityContainer container)
+        {
             _container = container;
         }
 
-        public void Initialize() {
-            _container.RegisterType<ISessionCreator, SessionCreator>();
+        public void Initialize()
+        {
+            //_container.RegisterType<ISessionCreator, SessionCreator>();
+            _container.RegisterInstance<ISessionCreator>(_container.Resolve<SessionCreator>());
             //_container.RegisterType<IUnityOfWork, UnityOfWork>();
             _container.RegisterInstance<IUnityOfWork>(_container.Resolve<UnityOfWork>());
             _container.RegisterType<IRepository, Repository>();

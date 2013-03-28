@@ -636,6 +636,27 @@
   <data name="Menu_Util_Paycheck" xml:space="preserve">
     <value>Folha de pagamento</value>
   </data>
+  <data name="Progress_Dao_Conected" xml:space="preserve">
+    <value>Conectado ao Banco de Dados</value>
+  </data>
+  <data name="Progress_Dao_Connecting" xml:space="preserve">
+    <value>Conectando ao Banco de Dados...</value>
+  </data>
+  <data name="Progress_Dao_Connecting_Failed" xml:space="preserve">
+    <value>Conexão ao Banco de Dados falhou!</value>
+  </data>
+  <data name="Progress_Lists_Updates" xml:space="preserve">
+    <value>Listagens Atualizadas</value>
+  </data>
+  <data name="Progress_Lists_Updating" xml:space="preserve">
+    <value>Atualizando Listagens...</value>
+  </data>
+  <data name="Progress_List_Updated" xml:space="preserve">
+    <value>Listagem Atualizada</value>
+  </data>
+  <data name="Progress_List_Updating" xml:space="preserve">
+    <value>Atualizando Listagem...</value>
+  </data>
   <data name="Tab_Hide" xml:space="preserve">
     <value>&gt;</value>
   </data>

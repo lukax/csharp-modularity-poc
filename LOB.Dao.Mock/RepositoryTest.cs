@@ -7,11 +7,14 @@ using Moq;
 
 #endregion
 
-namespace LOB.Dao.Mock {
+namespace LOB.Dao.Mock
+{
     [TestClass]
-    public class RepositoryTest {
+    public class RepositoryTest
+    {
         [TestMethod]
-        public void MockstartTest() {
+        public void MockstartTest()
+        {
             var session = new Mock<ISessionCreator>(MockBehavior.Strict);
             var uow = new Mock<IUnityOfWork>(MockBehavior.Strict);
             var repo = new Mock<IRepository>(MockBehavior.Strict);

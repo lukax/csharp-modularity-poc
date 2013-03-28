@@ -16,8 +16,10 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity {
+namespace LOB.UI.Core.ViewModel.Controls.List.Base
+{
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity
+    {
         #region Props
 
         protected IRepository Repository;
@@ -26,13 +28,17 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public virtual string Search { get; set; }
 
-        public virtual Expression<Func<T, bool>> SearchCriteria {
-            get {
-                try {
+        public virtual Expression<Func<T, bool>> SearchCriteria
+        {
+            get
+            {
+                try
+                {
                     var converted = Convert.ToInt32(Search);
                     return _searchCriteria ?? (arg => arg.Code == converted);
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     return arg => false;
                 }
             }
@@ -47,7 +53,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         private int _updateInterval;
 
         [InjectionConstructor]
-        public ListBaseEntityViewModel(T entity, IRepository repository) {
+        public ListBaseEntityViewModel(T entity, IRepository repository)
+        {
             Repository = repository;
             Entity = entity;
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
@@ -62,53 +69,64 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ICommand SaveToFileCommand { get; set; }
         public ICommand FetchCommand { get; set; }
 
-        public int UpdateInterval {
+        public int UpdateInterval
+        {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
             set { _updateInterval = value; }
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
 
         /// <summary>
         ///     Constantly update the list async every 1000 miliseconds
         /// </summary>
-        private async void UpdateList() {
+        private async void UpdateList()
+        {
             //TODO: Dynamic set true/false based on selected tab
-            while (true) {
+            while (true)
+            {
                 await Task.Delay(UpdateInterval);
                 IList<T> localList = null;
                 localList = string.IsNullOrEmpty(Search)
                                 ? (await Repository.GetListAsync<T>()).ToList()
                                 : (await Repository.GetListAsync(SearchCriteria)).ToList();
-                if (Entitys == null || !localList.SequenceEqual(Entitys)) {
+                if (Entitys == null || !localList.SequenceEqual(Entitys))
+                {
                     Entitys = localList;
                 }
             }
         }
 
-        protected virtual void Update(object arg) {
+        protected virtual void Update(object arg)
+        {
             //Messenger.Default.Send(Entity, "Update");
             Debug.WriteLine("Updatecalled");
         }
 
-        protected virtual bool CanUpdate(object arg) {
+        protected virtual bool CanUpdate(object arg)
+        {
             return Entity != null;
         }
 
-        protected virtual void Delete(object arg) {
+        protected virtual void Delete(object arg)
+        {
             //Messenger.Default.Send(arg ?? _entity, "Delete");
             Repository.Delete(Entity);
         }
 
-        protected virtual bool CanDelete(object arg) {
+        protected virtual bool CanDelete(object arg)
+        {
             return Entity != null;
         }
 
-        protected virtual void Fetch(object arg = null) {
+        protected virtual void Fetch(object arg = null)
+        {
             Entitys = Repository.GetList<T>().ToList();
         }
     }

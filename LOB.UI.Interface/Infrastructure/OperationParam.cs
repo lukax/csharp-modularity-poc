@@ -1,5 +1,7 @@
-﻿namespace LOB.UI.Interface.Infrastructure {
-    public enum OperationParam {
+﻿namespace LOB.UI.Interface.Infrastructure
+{
+    public enum OperationParam
+    {
         ViewOpen,
         ViewClose,
         ChangesSave,

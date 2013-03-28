@@ -4,8 +4,10 @@ using System;
 
 #endregion
 
-namespace LOB.UI.Interface.Infrastructure {
-    public enum OperationType {
+namespace LOB.UI.Interface.Infrastructure
+{
+    public enum OperationType
+    {
         Unknown = 0,
 
         Main,
@@ -55,8 +57,10 @@ namespace LOB.UI.Interface.Infrastructure {
         SellService,
     }
 
-    public static class OperationTypeExtension {
-        public static OperationType ToOperationType(this string operationType) {
+    public static class OperationTypeExtension
+    {
+        public static OperationType ToOperationType(this string operationType)
+        {
             OperationType o;
             if (Enum.TryParse(operationType, out o))
                 return o;

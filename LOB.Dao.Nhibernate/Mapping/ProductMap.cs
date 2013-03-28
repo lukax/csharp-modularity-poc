@@ -5,13 +5,16 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping {
-    public class ProductMap : SubclassMap<Product> {
-        public ProductMap() {
+namespace LOB.Dao.Nhibernate.Mapping
+{
+    public class ProductMap : SubclassMap<Product>
+    {
+        public ProductMap()
+        {
             References(x => x.Category);
             Map(x => x.Status);
             Map(x => x.CodBarras);
-            Map(x => x.Image).CustomSqlType("BinaryBlob");
+            Map(x => x.Image);//.CustomSqlType("BinaryBlob"); Nhibernate automap binary arrays
             Map(x => x.UnitsInStock);
             Map(x => x.MaxUnitsOfStock);
             Map(x => x.MinUnitsOfStock);

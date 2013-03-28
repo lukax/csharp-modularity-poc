@@ -5,9 +5,12 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
-    public class ShipmentInfoMap : SubclassMap<ShipmentInfo> {
-        public ShipmentInfoMap() {
+namespace LOB.Dao.Nhibernate.Mapping.SubEntity
+{
+    public class ShipmentInfoMap : SubclassMap<ShipmentInfo>
+    {
+        public ShipmentInfoMap()
+        {
             Map(x => x.Status);
             References(x => x.Address);
             Map(x => x.DeliverDate);

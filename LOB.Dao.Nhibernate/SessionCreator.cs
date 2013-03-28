@@ -14,8 +14,10 @@ using NullGuard;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate {
-    public class SessionCreator : ISessionCreator {
+namespace LOB.Dao.Nhibernate
+{
+    public class SessionCreator : ISessionCreator
+    {
         private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 
         private const string MsSqlDefaultConnectionString =
@@ -29,10 +31,12 @@ namespace LOB.Dao.Nhibernate {
 
         [InjectionConstructor]
         public SessionCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MySql) {
+            : this(logger, PersistType.MySql)
+        {
         }
 
-        private SessionCreator(ILoggerFacade logger, PersistType persistIn, string connectionString = null) {
+        private SessionCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null)
+        {
             if (connectionString != null) ConnectionString = connectionString;
             _logger = logger;
             _persistType = persistIn;
@@ -40,8 +44,10 @@ namespace LOB.Dao.Nhibernate {
 
 
         [AllowNull]
-        public string ConnectionString {
-            get {
+        public string ConnectionString
+        {
+            get
+            {
                 if (_connectionString != null) return _connectionString;
                 if (_persistType == PersistType.MsSql) return MsSqlDefaultConnectionString;
                 if (_persistType == PersistType.MySql) return MySqlDefaultConnectionString;
@@ -50,19 +56,22 @@ namespace LOB.Dao.Nhibernate {
             set { _connectionString = value; }
         }
 
-        public Object ORM {
+        public Object ORM
+        {
             get { return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession()); }
         }
 
         public event SessionCreatorEventHandler OnCreatingSession;
         public event SessionCreatorEventHandler OnSessionCreated;
 
-        private ISessionFactory SessionCreatorFactory(PersistType persistIn) {
+        private ISessionFactory SessionCreatorFactory(PersistType persistIn)
+        {
             if (OnCreatingSession != null)
                 OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
             Configuration cfg = null;
             ISessionFactory factory = null;
-            switch (_persistType) {
+            switch (_persistType)
+            {
                 case PersistType.MySql:
                     cfg = StoreInMySqlConfiguration();
                     break;
@@ -79,12 +88,14 @@ namespace LOB.Dao.Nhibernate {
                     throw new ArgumentException("PersistType");
             }
             if (cfg != null)
-                try {
+                try
+                {
                     factory = cfg.BuildSessionFactory();
                     if (OnSessionCreated != null)
                         OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     _logger.Log(ex.Message, Category.Exception, Priority.High);
                     if (OnSessionCreated != null)
                         OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
@@ -92,31 +103,36 @@ namespace LOB.Dao.Nhibernate {
             return factory;
         }
 
-        private Configuration StoreInMySqlConfiguration() {
+        private Configuration StoreInMySqlConfiguration()
+        {
             return Mapping().Database(MySQLConfiguration.Standard
                                                         .ConnectionString(ConnectionString))
                             .BuildConfiguration();
         }
 
-        private Configuration StoreInMsSqlConfiguration() {
+        private Configuration StoreInMsSqlConfiguration()
+        {
             return Mapping().Database(MsSqlConfiguration.MsSql2008
                                                         .ConnectionString(ConnectionString))
                             .BuildConfiguration();
         }
 
-        private Configuration StoreInMemoryConfiguration() {
+        private Configuration StoreInMemoryConfiguration()
+        {
             return Mapping().Database(SQLiteConfiguration.Standard
                                                          .InMemory())
                             .BuildConfiguration();
         }
 
-        private Configuration StoreInFileConfiguration() {
+        private Configuration StoreInFileConfiguration()
+        {
             return Mapping().Database(SQLiteConfiguration.Standard
                                                          .UsingFile("local.db"))
                             .BuildConfiguration();
         }
 
-        private FluentConfiguration Mapping() {
+        private FluentConfiguration Mapping()
+        {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
                 //Disable to much logging
                            .Diagnostics(x => x.Enable(false))
@@ -124,18 +140,21 @@ namespace LOB.Dao.Nhibernate {
                            .ExposeConfiguration(SchemaCreator);
         }
 
-        private void SchemaCreator(Configuration cfg) {
-            try {
-                if (_persistType == PersistType.Memory) {
-                    _sqlSchema = new SchemaExport(cfg);
+        private void SchemaCreator(Configuration cfg)
+        {
+            try
+            {
+                _sqlSchema = new SchemaExport(cfg);
+                if (_persistType == PersistType.Memory)
+                {
                     _sqlSchema.Create(false, true);
                     return;
                 }
-                _sqlSchema = new SchemaExport(cfg);
                 _sqlSchema.Drop(false, true);
                 _sqlSchema.Create(false, true);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }
         }

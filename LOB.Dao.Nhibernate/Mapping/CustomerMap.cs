@@ -5,9 +5,12 @@ using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping {
-    public class CustomerMap : BaseEntityMap<Customer> {
-        public CustomerMap() {
+namespace LOB.Dao.Nhibernate.Mapping
+{
+    public class CustomerMap : BaseEntityMap<Customer>
+    {
+        public CustomerMap()
+        {
             References(x => x.Person)
                 .Cascade.All();
             HasManyToMany(x => x.CustomerOf);

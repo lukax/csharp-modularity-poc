@@ -6,8 +6,10 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Domain {
-    public class Store : BaseEntity {
+namespace LOB.Domain
+{
+    public class Store : BaseEntity
+    {
         public LegalPerson LegalPerson { get; set; }
         public string Name { get; set; }
         public IList<Employee> Employees { get; set; }

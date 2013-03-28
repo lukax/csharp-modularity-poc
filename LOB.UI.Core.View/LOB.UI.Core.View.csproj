@@ -124,6 +124,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extension\ControlExtension.cs" />
     <Compile Include="Modularity\Bootstrapper.cs" />
     <Compile Include="Controllers\MainRegionController.cs" />
     <Compile Include="Controls\Alter\AlterCustomerView.xaml.cs">

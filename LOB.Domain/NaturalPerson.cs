@@ -5,13 +5,16 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain {
+namespace LOB.Domain
+{
     [Serializable]
-    public class NaturalPerson : Person {
+    public class NaturalPerson : Person
+    {
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public string FullName {
+        public string FullName
+        {
             get { return string.Format("{0} {1}", FirstName, LastName); }
         }
 

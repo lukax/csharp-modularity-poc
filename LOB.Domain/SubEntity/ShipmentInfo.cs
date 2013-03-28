@@ -6,9 +6,11 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain.SubEntity {
+namespace LOB.Domain.SubEntity
+{
     [Serializable]
-    public class ShipmentInfo : Service {
+    public class ShipmentInfo : Service
+    {
         public ShipmentStatus Status { get; set; }
         public Address Address { get; set; }
         public DateTime DeliverDate { get; set; }
@@ -17,7 +19,8 @@ namespace LOB.Domain.SubEntity {
     }
 
     [Serializable]
-    public enum ShipmentStatus {
+    public enum ShipmentStatus
+    {
         Active,
         Paused,
         Finished,

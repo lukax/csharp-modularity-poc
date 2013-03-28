@@ -4,7 +4,9 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity {
-    public interface IAlterEmailViewModel : IAlterBaseEntityViewModel {
+namespace LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity
+{
+    public interface IAlterEmailViewModel : IAlterBaseEntityViewModel
+    {
     }
 }

@@ -8,16 +8,19 @@ using log4net.Config;
 
 #endregion
 
-namespace LOB.Log {
+namespace LOB.Log
+{
     /// <summary>
     ///     A log4Net implementation of PRISM' ILoggerFacade.
     ///     *Note: Any logging framework could be plugged in here as long as we implement the ILoggerFacade interface.
     /// </summary>
-    public class Logger : ILoggerFacade, ILogger {
+    public class Logger : ILoggerFacade, ILogger
+    {
         // Member variables
         private static readonly ILog _logger = LogManager.GetLogger(typeof (Logger));
 
-        public Logger() {
+        public Logger()
+        {
             XmlConfigurator.Configure();
         }
 
@@ -29,10 +32,12 @@ namespace LOB.Log {
         /// <param name="message">The message to write.</param>
         /// <param name="category">The message category.</param>
         /// <param name="priority">Not used by Log4Net; pass Priority.None.</param>
-        public async void Log(string message, Category category, Priority priority) {
+        public async void Log(string message, Category category, Priority priority)
+        {
             await Task.Run(() =>
                 {
-                    switch (category) {
+                    switch (category)
+                    {
                         case Category.Debug:
                             _logger.Debug(message);
                             break;

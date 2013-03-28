@@ -6,7 +6,9 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Events.View {
-    public class OpenViewEvent : CompositePresentationEvent<OperationType>, IBaseEvent {
+namespace LOB.UI.Core.Events.View
+{
+    public class OpenViewEvent : CompositePresentationEvent<OperationType>, IBaseEvent
+    {
     }
 }

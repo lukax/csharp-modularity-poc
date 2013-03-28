@@ -11,16 +11,22 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List {
-    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel {
+namespace LOB.UI.Core.ViewModel.Controls.List
+{
+    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel
+    {
         [InjectionConstructor]
         public ListProductViewModel(Product product, IRepository repository)
-            : base(product, repository) {
+            : base(product, repository)
+        {
         }
 
-        public new Expression<Func<Product, bool>> SearchCriteria {
-            get {
-                try {
+        public new Expression<Func<Product, bool>> SearchCriteria
+        {
+            get
+            {
+                try
+                {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Name.ToUpper().Contains(Search.ToUpper())
@@ -29,22 +35,26 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                             || arg.ProfitMargin.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType {
+        public override OperationType OperationType
+        {
             get { return OperationType.ListProduct; }
         }
 
-        protected override bool CanUpdate(object arg) {
+        protected override bool CanUpdate(object arg)
+        {
             //TODO: Business logic
             return true;
         }
 
-        protected override bool CanDelete(object arg) {
+        protected override bool CanDelete(object arg)
+        {
             //TODO: Business logic
             return true;
         }

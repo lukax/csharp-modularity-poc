@@ -8,17 +8,21 @@ using NHibernate;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Test {
+namespace LOB.Dao.Nhibernate.Test
+{
     [TestClass]
-    public class SessionCreatorTest {
+    public class SessionCreatorTest
+    {
         [TestMethod]
-        public void CreateSessionTest() {
+        public void CreateSessionTest()
+        {
             var creator = new SessionCreator(new Logger());
             Assert.IsNotNull(creator.ORM);
         }
 
         [TestMethod]
-        public void TransactionTest() {
+        public void TransactionTest()
+        {
             var sCreator = new SessionCreator(new Logger());
 
 
@@ -73,7 +77,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
 
             var session = ((ISession) sCreator.ORM);
-            using (session) {
+            using (session)
+            {
                 session.BeginTransaction();
                 session.Save(entity);
                 Assert.IsTrue((session).Contains(entity));

@@ -11,16 +11,22 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List {
-    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel {
+namespace LOB.UI.Core.ViewModel.Controls.List
+{
+    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel
+    {
         [InjectionConstructor]
         public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
-            : base(entity, repository) {
+            : base(entity, repository)
+        {
         }
 
-        public new Expression<Func<NaturalPerson, bool>> SearchCriteria {
-            get {
-                try {
+        public new Expression<Func<NaturalPerson, bool>> SearchCriteria
+        {
+            get
+            {
+                try
+                {
                     return (arg =>
                             arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.FirstName.ToUpper().Contains(Search.ToUpper())
@@ -30,13 +36,15 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                             || arg.Rg.ToString().ToUpper().Contains(Search.ToUpper())
                             || arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType {
+        public override OperationType OperationType
+        {
             get { return OperationType.ListNaturalPerson; }
         }
     }

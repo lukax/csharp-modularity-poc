@@ -8,8 +8,10 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Dao.Interface {
-    public interface IRepository {
+namespace LOB.Dao.Interface
+{
+    public interface IRepository
+    {
         IUnityOfWork Uow { get; }
         T Save<T>(T entity) where T : BaseEntity;
         T Update<T>(T entity) where T : BaseEntity;

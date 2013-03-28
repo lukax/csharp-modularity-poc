@@ -5,15 +5,19 @@ using Microsoft.Win32;
 
 #endregion
 
-namespace LOB.Core.Util {
-    public class RegistryUtility {
+namespace LOB.Core.Util
+{
+    public class RegistryUtility
+    {
         /// <summary>
         ///     An useful class to read/write/delete/count registry keys
         /// </summary>
-        public class ModifyRegistry {
+        public class ModifyRegistry
+        {
             private RegistryKey _baseRegistryKey = Registry.LocalMachine;
 
-            public ModifyRegistry() {
+            public ModifyRegistry()
+            {
                 SubKey = "SOFTWARE\\LOBAPP";
                 ShowError = false;
             }
@@ -34,7 +38,8 @@ namespace LOB.Core.Util {
             ///     A property to set the BaseRegistryKey value.
             ///     (default = Registry.LocalMachine)
             /// </summary>
-            public RegistryKey BaseRegistryKey {
+            public RegistryKey BaseRegistryKey
+            {
                 get { return _baseRegistryKey; }
                 set { _baseRegistryKey = value; }
             }
@@ -44,22 +49,27 @@ namespace LOB.Core.Util {
             ///     input: KeyName (string)
             ///     output: value (string)
             /// </summary>
-            public string Read(string keyName) {
+            public string Read(string keyName)
+            {
                 // Opening the registry key
                 RegistryKey rk = _baseRegistryKey;
                 // Open a subKey as read-only
                 RegistryKey sk1 = rk.OpenSubKey(SubKey);
                 // If the RegistrySubKey doesn't exist -> (null)
-                if (sk1 == null) {
+                if (sk1 == null)
+                {
                     return null;
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         // If the RegistryKey exists I get its value
                         // or null is returned.
                         return (string) sk1.GetValue(keyName.ToUpper());
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         // AAAAAAAAAAARGH, an error!
                         ShowErrorMessage(e, "Reading registry " + keyName.ToUpper());
                         return null;
@@ -72,8 +82,10 @@ namespace LOB.Core.Util {
             ///     input: KeyName (string) , Value (object)
             ///     output: true or false
             /// </summary>
-            public bool Write(string keyName, object value) {
-                try {
+            public bool Write(string keyName, object value)
+            {
+                try
+                {
                     // Setting
                     RegistryKey rk = _baseRegistryKey;
                     // I have to use CreateSubKey 
@@ -85,7 +97,8 @@ namespace LOB.Core.Util {
 
                     return true;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Writing registry " + keyName.ToUpper());
                     return false;
@@ -97,8 +110,10 @@ namespace LOB.Core.Util {
             ///     input: KeyName (string)
             ///     output: true or false
             /// </summary>
-            public bool DeleteKey(string keyName) {
-                try {
+            public bool DeleteKey(string keyName)
+            {
+                try
+                {
                     // Setting
                     RegistryKey rk = _baseRegistryKey;
                     RegistryKey sk1 = rk.CreateSubKey(SubKey);
@@ -110,7 +125,8 @@ namespace LOB.Core.Util {
 
                     return true;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Deleting SubKey " + SubKey);
                     return false;
@@ -122,8 +138,10 @@ namespace LOB.Core.Util {
             ///     input: void
             ///     output: true or false
             /// </summary>
-            public bool DeleteSubKeyTree() {
-                try {
+            public bool DeleteSubKeyTree()
+            {
+                try
+                {
                     // Setting
                     RegistryKey rk = _baseRegistryKey;
                     RegistryKey sk1 = rk.OpenSubKey(SubKey);
@@ -133,7 +151,8 @@ namespace LOB.Core.Util {
 
                     return true;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Deleting SubKey " + SubKey);
                     return false;
@@ -145,8 +164,10 @@ namespace LOB.Core.Util {
             ///     input: void
             ///     output: number of subkeys
             /// </summary>
-            public int SubKeyCount() {
-                try {
+            public int SubKeyCount()
+            {
+                try
+                {
                     // Setting
                     RegistryKey rk = _baseRegistryKey;
                     RegistryKey sk1 = rk.OpenSubKey(SubKey);
@@ -156,7 +177,8 @@ namespace LOB.Core.Util {
                     else
                         return 0;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Retriving subkeys of " + SubKey);
                     return 0;
@@ -168,8 +190,10 @@ namespace LOB.Core.Util {
             ///     input: void
             ///     output: number of keys
             /// </summary>
-            public int ValueCount() {
-                try {
+            public int ValueCount()
+            {
+                try
+                {
                     // Setting
                     RegistryKey rk = _baseRegistryKey;
                     RegistryKey sk1 = rk.OpenSubKey(SubKey);
@@ -179,13 +203,15 @@ namespace LOB.Core.Util {
                     else
                         return 0;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     ShowErrorMessage(e, "Retriving keys of " + SubKey);
                     return 0;
                 }
             }
 
-            private void ShowErrorMessage(Exception e, string title) {
+            private void ShowErrorMessage(Exception e, string title)
+            {
                 throw new NotImplementedException();
             }
         }

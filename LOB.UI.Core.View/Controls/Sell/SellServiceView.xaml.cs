@@ -8,29 +8,36 @@ using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Sell {
-    public partial class SellServiceView : UserControl, IBaseView {
-        public SellServiceView() {
+namespace LOB.UI.Core.View.Controls.Sell
+{
+    public partial class SellServiceView : UserControl, IBaseView
+    {
+        public SellServiceView()
+        {
             InitializeComponent();
         }
 
         public IBaseViewModel ViewModel { get; set; }
 
-        public string Header {
+        public string Header
+        {
             get { return Strings.Header_Sell_Service; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
+        public void InitializeServices()
+        {
             throw new NotImplementedException();
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType {
+        public OperationType OperationType
+        {
             get { return OperationType.SellService; }
         }
     }

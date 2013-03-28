@@ -5,7 +5,9 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
-    public class CategoryMap : SubclassMap<Category> {
+namespace LOB.Dao.Nhibernate.Mapping.SubEntity
+{
+    public class CategoryMap : SubclassMap<Category>
+    {
     }
 }

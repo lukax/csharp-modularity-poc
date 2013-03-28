@@ -9,27 +9,35 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {
-        public AlterSaleViewModel(Sale entity, IRepository repository) : base(entity, repository) {
+namespace LOB.UI.Core.ViewModel.Controls.Alter
+{
+    public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel
+    {
+        public AlterSaleViewModel(Sale entity, IRepository repository) : base(entity, repository)
+        {
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
             Entity = new Sale();
         }
 
-        public override OperationType OperationType {
+        public override OperationType OperationType
+        {
             get { return OperationType.AlterSale; }
         }
 
-        protected override void QuickSearch(object arg) {
+        protected override void QuickSearch(object arg)
+        {
             throw new NotImplementedException();
         }
 
-        protected override void ClearEntity(object arg) {
+        protected override void ClearEntity(object arg)
+        {
             Entity = new Sale();
         }
     }

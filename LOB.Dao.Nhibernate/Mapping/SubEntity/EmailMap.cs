@@ -5,9 +5,12 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
-    public class EmailMap : BaseEntityMap<Email> {
-        public EmailMap() {
+namespace LOB.Dao.Nhibernate.Mapping.SubEntity
+{
+    public class EmailMap : BaseEntityMap<Email>
+    {
+        public EmailMap()
+        {
             Map(x => x.Value);
         }
     }

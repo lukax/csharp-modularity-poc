@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace LOB.Domain.SubEntity {
-    public enum UfBr {
+namespace LOB.Domain.SubEntity
+{
+    public enum UfBr
+    {
         AC,
         AL,
         AP,
@@ -36,7 +38,8 @@ namespace LOB.Domain.SubEntity {
         TO
     }
 
-    public static class UfBrDictionary {
+    public static class UfBrDictionary
+    {
         private static readonly Lazy<IDictionary<UfBr, string>> Lazy =
             new Lazy<IDictionary<UfBr, string>>(
                 () => new Dictionary<UfBr, string>
@@ -70,7 +73,8 @@ namespace LOB.Domain.SubEntity {
                         {UfBr.TO, "Tocantins"}
                     });
 
-        public static IDictionary<UfBr, string> Ufs {
+        public static IDictionary<UfBr, string> Ufs
+        {
             get { return Lazy.Value; }
         }
     }

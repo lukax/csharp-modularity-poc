@@ -11,23 +11,29 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Business.Logic.SubEntity {
-    public class PhoneNumberFacade : IPhoneNumberFacade {
+namespace LOB.Business.Logic.SubEntity
+{
+    public class PhoneNumberFacade : IPhoneNumberFacade
+    {
         private readonly IBaseEntityFacade _baseEntityFacade;
         private PhoneNumber _entity;
 
-        public PhoneNumberFacade(IBaseEntityFacade baseEntityFacade) {
+        public PhoneNumberFacade(IBaseEntityFacade baseEntityFacade)
+        {
             _baseEntityFacade = baseEntityFacade;
         }
 
-        public void SetEntity<T>(T entity) where T : PhoneNumber {
+        public void SetEntity<T>(T entity) where T : PhoneNumber
+        {
             _baseEntityFacade.SetEntity(entity);
             _entity = entity;
         }
 
-        public void ConfigureValidations() {
+        public void ConfigureValidations()
+        {
             _baseEntityFacade.ConfigureValidations();
-            if (_entity != null) {
+            if (_entity != null)
+            {
                 _entity.AddValidation((sender, name) => _entity.Number < 1
                                                             ? new ValidationResult("Name", Strings.Error_Field_Empty)
                                                             : null);
@@ -38,25 +44,30 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
-        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
+        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields)
+        {
             bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
+        {
             throw new NotImplementedException();
         }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
+        {
             throw new NotImplementedException();
         }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) {
+        void IBaseEntityFacade.SetEntity<T>(T entity)
+        {
             _baseEntityFacade.SetEntity(entity);
         }
 
-        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields)
+        {
             var fields = new List<ValidationResult>();
             fields.AddRange(_entity.GetValidations("Number"));
             fields.AddRange(_entity.GetValidations("Description"));

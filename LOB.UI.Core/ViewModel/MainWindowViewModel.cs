@@ -10,12 +10,15 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel {
-    public class MainWindowViewModel : BaseViewModel {
+namespace LOB.UI.Core.ViewModel
+{
+    public class MainWindowViewModel : BaseViewModel
+    {
         private ICommandService _commandService;
 
         [InjectionConstructor]
-        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator, ICommandService commandService) {
+        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator, ICommandService commandService)
+        {
             _container = container;
             _navigator = navigator;
             _commandService = commandService;
@@ -23,7 +26,8 @@ namespace LOB.UI.Core.ViewModel {
             OpenTabCommand = new DelegateCommand(OpenTab);
         }
 
-        public string LicenseInformation {
+        public string LicenseInformation
+        {
             get { return ProductLicense.LicenseInformation(); }
         }
 
@@ -31,19 +35,23 @@ namespace LOB.UI.Core.ViewModel {
         private IUnityContainer _container { get; set; }
         private IFluentNavigator _navigator { get; set; }
 
-        public override OperationType OperationType {
+        public override OperationType OperationType
+        {
             get { return OperationType.Main; }
         }
 
-        private void OpenTab(object arg) {
+        private void OpenTab(object arg)
+        {
             OperationType oP = arg.ToString().ToOperationType();
             _navigator.ResolveView(oP).ResolveViewModel(oP).AddToRegion(RegionName.TabRegion);
         }
 
-        public override void InitializeServices() {
+        public override void InitializeServices()
+        {
         }
 
-        public override void Refresh() {
+        public override void Refresh()
+        {
         }
     }
 }
