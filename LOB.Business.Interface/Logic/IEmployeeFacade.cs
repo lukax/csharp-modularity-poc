@@ -8,6 +8,7 @@ namespace LOB.Business.Interface.Logic {
     public interface IEmployeeFacade : INaturalPersonFacade {
 
         new void SetEntity<T>(T entity) where T : Employee;
+        new Employee GenerateEntity();
 
     }
 }

@@ -12,6 +12,7 @@ namespace LOB.Business.Interface.Logic.SubEntity {
     public interface IAddressFacade : IBaseEntityFacade {
 
         new void SetEntity<T>(T entity) where T : Address;
+        Address GenerateEntity();
 
     }
 

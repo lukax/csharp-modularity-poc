@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Domain;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
 
 #endregion
@@ -13,15 +15,47 @@ namespace LOB.Business.Logic {
     public class ProductFacade : IProductFacade {
 
         private readonly IServiceFacade _serviceFacade;
+        private readonly ICategoryFacade _categoryFacade;
+        private readonly IShipmentInfoFacade _shipmentInfoFacade;
 
         private Product _entity;
 
-        public ProductFacade(IServiceFacade serviceFacade) {
+        public ProductFacade(IServiceFacade serviceFacade, ICategoryFacade categoryFacade, IShipmentInfoFacade shipmentInfoFacade) {
             _serviceFacade = serviceFacade;
+            _categoryFacade = categoryFacade;
+            _shipmentInfoFacade = shipmentInfoFacade;
         }
 
         public void SetEntity<T>(T entity) where T : Product {
             _entity = entity;
+        }
+
+        public Product GenerateEntity() {
+            return new Product {
+                Code = 0,
+                Error = null,
+                Status = default(ProductStatus),
+                Category = _categoryFacade.GenerateEntity(),
+                Description = "",
+                Name = "",
+                ShipmentInfo = _shipmentInfoFacade.GenerateEntity(),
+                CodBarras = 0,
+                Image = null,
+                MaxUnitsOfStock = 0,
+                MinUnitsOfStock = 0,
+                ProfitMargin = 0,
+                QuantityPerUnit = "",
+                Sales = new List<Sale>(),
+                StockedStores = new List<Store>(),
+                Suppliers = new List<Supplier>(),
+                UnitCostPrice = 0,
+                UnitSalePrice = 0,
+                UnitsInStock = 0,
+            };
+        }
+
+        Service IServiceFacade.GenerateEntity() {
+            return GenerateEntity();
         }
 
         public void ConfigureValidations() {

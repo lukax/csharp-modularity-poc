@@ -25,6 +25,10 @@ namespace LOB.Business.Logic.Base {
             _entity = entity;
         }
 
+        public Service GenerateEntity() {
+            throw new NotImplementedException();
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {

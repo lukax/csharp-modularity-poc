@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -16,15 +19,50 @@ namespace LOB.Business.Logic {
 
         private readonly IBaseEntityFacade _baseEntityFacade;
         private readonly INaturalPersonFacade _naturalPersonFacade;
+        private readonly IPayCheckFacade _payCheckFacade;
+        private readonly IStoreFacade _storeFacade;
         private Employee _entity;
 
-        public EmployeeFacade(IBaseEntityFacade baseEntityFacade, INaturalPersonFacade naturalPersonFacade) {
+        public EmployeeFacade(IBaseEntityFacade baseEntityFacade, INaturalPersonFacade naturalPersonFacade, 
+            IPayCheckFacade payCheckFacade, IStoreFacade storeFacade) {
             _baseEntityFacade = baseEntityFacade;
             _naturalPersonFacade = naturalPersonFacade;
+            _payCheckFacade = payCheckFacade;
+            _storeFacade = storeFacade;
         }
 
         void INaturalPersonFacade.SetEntity<T>(T entity) {
             _naturalPersonFacade.SetEntity(entity);
+        }
+
+        public Employee GenerateEntity() {
+            return new Employee {
+                Code = 0,
+                Error = null,
+                Address = _naturalPersonFacade.GenerateEntity().Address,
+                ContactInfo = _naturalPersonFacade.GenerateEntity().ContactInfo,
+                Notes = "",
+                BirthDate = DateTime.Now,
+                Cpf = 0,
+                FirstName = "",
+                LastName = "",
+                HireDate = DateTime.Now,
+                NickName = "",
+                Password = "",
+                PayCheck = _payCheckFacade.GenerateEntity(),
+                Rg = 0,
+                RgUf = "",
+                Title = "",
+                WorksIn = _storeFacade.GenerateEntity(),
+            };
+        }
+
+        NaturalPerson INaturalPersonFacade.GenerateEntity() {
+            return GenerateEntity();
+        }
+
+        Person IPersonFacade.GenerateEntity() {
+            return GenerateEntity();
         }
 
         public void SetEntity<T>(T entity) where T : Employee {

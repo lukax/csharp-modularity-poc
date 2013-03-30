@@ -41,6 +41,20 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
+        public ShipmentInfo GenerateEntity() {
+            return new ShipmentInfo {
+                Code = 0,
+                Address = null,
+                Error = null,
+                Description = "",
+                Status = default(ShipmentStatus),
+                DaySchedule = 0,
+                DeliverDate = DateTime.Now,
+                Name = "",
+                Products = null,
+            };
+        }
+
         public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
             throw new NotImplementedException();
         }

@@ -25,6 +25,14 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
+        public Email GenerateEntity() {
+            return new Email {
+                Code = 0,
+                Error = null,
+                Value = "",
+            };
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null)

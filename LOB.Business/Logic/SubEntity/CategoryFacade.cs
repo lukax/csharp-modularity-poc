@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 
@@ -23,6 +24,19 @@ namespace LOB.Business.Logic.SubEntity {
         public void SetEntity<T>(T entity) where T : Category {
             _serviceFacade.SetEntity(entity);
             _entity = entity;
+        }
+
+        public Category GenerateEntity() {
+            return new Category {
+                Code = 0,
+                Description = "",
+                Error = null,
+                Name = "",
+            };
+        }
+
+        Service IServiceFacade.GenerateEntity() {
+            return GenerateEntity();
         }
 
         public void ConfigureValidations() {

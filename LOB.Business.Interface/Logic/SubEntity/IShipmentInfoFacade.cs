@@ -9,6 +9,7 @@ namespace LOB.Business.Interface.Logic.SubEntity {
     public interface IShipmentInfoFacade : IBaseEntityFacade {
 
         new void SetEntity<T>(T entity) where T : ShipmentInfo;
+        ShipmentInfo GenerateEntity();
 
     }
 }

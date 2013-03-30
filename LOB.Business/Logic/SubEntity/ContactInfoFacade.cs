@@ -28,6 +28,19 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
+        public ContactInfo GenerateEntity() {
+            return new ContactInfo {
+                Code = 0,
+                Error = null,
+                Status = default(ContactStatus),
+                Ps = "",
+                Emails = new List<Email>(),
+                PhoneNumbers = new List<PhoneNumber>(),
+                SpeakWith = "",
+                WebSite = "",
+            };
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null)

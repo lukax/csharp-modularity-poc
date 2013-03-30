@@ -9,6 +9,7 @@ namespace LOB.Business.Interface.Logic.SubEntity {
     public interface IContactInfoFacade : IBaseEntityFacade {
 
         new void SetEntity<T>(T entity) where T : ContactInfo;
+        ContactInfo GenerateEntity();
 
     }
 }

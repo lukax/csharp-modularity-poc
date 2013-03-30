@@ -26,6 +26,23 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
+        public Address GenerateEntity() {
+            return new Address {
+                Code = 0,
+                City = "Nova Friburgo",
+                Country = "Brasil",
+                District = "",
+                Error = null,
+                IsDefault = false,
+                State = "Rio de Janeiro",
+                Status = default(AddressStatus),
+                Street = "",
+                StreetComplement = "",
+                StreetNumber = 0,
+                ZipCode = 0,
+            };
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {

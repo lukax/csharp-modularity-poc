@@ -33,6 +33,10 @@ namespace LOB.Business.Logic.Base {
             _entity = entity;
         }
 
+        public Person GenerateEntity() {
+            throw new NotImplementedException();
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             _addressFacade.ConfigureValidations();

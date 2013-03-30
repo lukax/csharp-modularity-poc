@@ -7,6 +7,7 @@ using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Domain;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
 
 #endregion
@@ -17,7 +18,12 @@ namespace LOB.Business.Logic {
         private readonly ILegalPersonFacade _legalPersonFacade;
         private readonly INaturalPersonFacade _naturalPersonFacade;
         private Customer _entity;
-        private PersonType _personType;
+        private PersonType PersonType {
+            get {
+                if(_entity != null) return _entity.PersonType;
+                return default(PersonType);
+            }
+        }
 
         public CustomerFacade(INaturalPersonFacade naturalPersonFacade, ILegalPersonFacade legalPersonFacade) {
             _naturalPersonFacade = naturalPersonFacade;
@@ -28,6 +34,24 @@ namespace LOB.Business.Logic {
             if(entity.PersonType == PersonType.Legal) _legalPersonFacade.SetEntity(entity.Person as LegalPerson);
             if(entity.PersonType == PersonType.Natural) _naturalPersonFacade.SetEntity(entity.Person as NaturalPerson);
             _entity = entity;
+        }
+
+        public Customer GenerateEntity() {
+            return new Customer {
+                Code = 0,
+                Error = null,
+                BoughtHistory = new List<Sale>(),
+                Status = default(CustomerStatus),
+                CustomerOf = new List<Store>(),
+                Person = ((IPersonFacade) this).GenerateEntity(),
+                PersonType = default(PersonType),
+            };
+        }
+
+        Person IPersonFacade.GenerateEntity() {
+            if(PersonType == PersonType.Natural) return _naturalPersonFacade.GenerateEntity();
+            if(PersonType == PersonType.Legal) return _legalPersonFacade.GenerateEntity();
+            throw new NotImplementedException("PersonType");
         }
 
         public void ConfigureValidations() {

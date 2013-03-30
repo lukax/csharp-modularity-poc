@@ -26,6 +26,16 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
+        public PhoneNumber GenerateEntity() {
+            return new PhoneNumber {
+                Code = 0,
+                Error = null,
+                Description = "",
+                Number = 0,
+                PhoneNumberType = default(PhoneNumberType),
+            };
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {

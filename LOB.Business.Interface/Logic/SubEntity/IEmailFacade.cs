@@ -9,6 +9,7 @@ namespace LOB.Business.Interface.Logic.SubEntity {
     public interface IEmailFacade : IBaseEntityFacade {
 
         new void SetEntity<T>(T entity) where T : Email;
+        Email GenerateEntity();
 
     }
 }

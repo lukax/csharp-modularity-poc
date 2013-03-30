@@ -77,8 +77,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
@@ -103,8 +102,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Address
-            {
+            Entity = new Address {
                 Code = 0,
                 District = "",
                 City = "Nova Friburgo",

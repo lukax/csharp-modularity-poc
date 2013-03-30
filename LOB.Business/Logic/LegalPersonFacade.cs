@@ -7,6 +7,7 @@ using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Domain;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
 
 #endregion
@@ -26,6 +27,14 @@ namespace LOB.Business.Logic {
         public void SetEntity<T>(T entity) where T : LegalPerson {
             _baseEntityFacade.SetEntity(entity);
             _entity = entity;
+        }
+
+        public LegalPerson GenerateEntity() {
+            throw new NotImplementedException();
+        }
+
+        Person IPersonFacade.GenerateEntity() {
+            return GenerateEntity();
         }
 
         public void ConfigureValidations() {
