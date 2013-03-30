@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,113 +14,89 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Util
-{
-    public partial class FrameWindow : MetroWindow, IBaseView
-    {
+namespace LOB.UI.Core.View.Controls.Util {
+    public partial class FrameWindow : MetroWindow, IBaseView {
+
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
 
-        public FrameWindow(IUnityContainer container, ILogger logger,
-                           IEventAggregator eventAggregator)
-        {
-            _container = container;
-            _logger = logger;
-            _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<CloseViewEvent>()
-                            .Subscribe(o => { Close(); });
-            InitializeComponent();
+        public FrameWindow(IUnityContainer container, ILogger logger, IEventAggregator eventAggregator) {
+            this._container = container;
+            this._logger = logger;
+            this._eventAggregator = eventAggregator;
+            this._eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { this.Close(); });
+            this.InitializeComponent();
         }
 
         public UserControl View { get; set; }
 
-        public IBaseViewModel ViewModel
-        {
-            get { return DataContext as IBaseViewModel; }
-            set { DataContext = value; }
+        public IBaseViewModel ViewModel {
+            get { return this.DataContext as IBaseViewModel; }
+            set { this.DataContext = value; }
         }
 
         public string Header { get; set; }
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
-        }
+        public void InitializeServices() {}
 
-        public void Refresh()
-        {
+        public void Refresh() {
             base.UpdateLayout();
-            MiLightBlue(null, null);
+            this.MiLightBlue(null, null);
         }
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.Main; }
         }
-
         #region Themes
-
-        private void MiLightGrey()
-        {
+        private void MiLightGrey() {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"), Theme.Light);
         }
 
-        private void MiLightRed(object sender, RoutedEventArgs e)
-        {
+        private void MiLightRed(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"), Theme.Light);
         }
 
-        private void MiDarkRed(object sender, RoutedEventArgs e)
-        {
+        private void MiDarkRed(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"), Theme.Dark);
         }
 
-        private void MiLightGreen(object sender, RoutedEventArgs e)
-        {
+        private void MiLightGreen(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"), Theme.Light);
         }
 
-        private void MiDarkGreen(object sender, RoutedEventArgs e)
-        {
+        private void MiDarkGreen(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"), Theme.Dark);
         }
 
-        private void MiLightBlue(object sender, RoutedEventArgs e)
-        {
+        private void MiLightBlue(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"), Theme.Light);
         }
 
-        private void MiDarkBlue(object sender, RoutedEventArgs e)
-        {
+        private void MiDarkBlue(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"), Theme.Dark);
         }
 
-        private void MiLightPurple(object sender, RoutedEventArgs e)
-        {
+        private void MiLightPurple(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Purple"), Theme.Light);
         }
 
-        private void MiDarkPurple(object sender, RoutedEventArgs e)
-        {
+        private void MiDarkPurple(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Purple"), Theme.Dark);
         }
 
-        private void MiDarkOrange(object sender, RoutedEventArgs e)
-        {
+        private void MiDarkOrange(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Dark);
         }
 
-        private void MiLightOrange(object sender, RoutedEventArgs e)
-        {
+        private void MiLightOrange(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light);
         }
-
         #endregion
-
-        private void Busy()
-        {
-            ModalRegion = new BusyView();
+        private void Busy() {
+            this.ModalRegion = new BusyView();
         }
+
     }
 }

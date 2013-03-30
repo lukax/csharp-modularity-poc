@@ -18,9 +18,11 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+                    HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
-                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent" Grid.Column="5">
+                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False"
+                           Background="Transparent" Grid.Column="5">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </controls:Tile>
 
@@ -56,23 +58,34 @@
 
                 <base:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView" />
 
-                <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}"
+                       HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
                          HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" />
 
-                <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_UnitSalePrice}" />
-                <xctk:MaskedTextBox Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" Mask="$00,000.00" HorizontalContentAlignment="Right"/>
+                <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right"
+                       Content="{x:Static loc:Strings.Common_UnitSalePrice}" />
+                <xctk:MaskedTextBox Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged}"
+                                    HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Row="1"
+                                    Grid.Column="4" Mask="$00,000.00" HorizontalContentAlignment="Right" />
 
-                <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_UnitsInStock}" />
-                <TextBox Text="{Binding Entity.UnitsInStock, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" Grid.Row="2" Grid.Column="4" />
+                <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right"
+                       Content="{x:Static loc:Strings.Common_UnitsInStock}" />
+                <TextBox Text="{Binding Entity.UnitsInStock, UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" Grid.Row="2" Grid.Column="4" />
 
-                <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_QuantityPerUnity}" />
-                <TextBox Text="{Binding Entity.QuantityPerUnity, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" Grid.Row="3" />
+                <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"
+                       Content="{x:Static loc:Strings.Common_QuantityPerUnity}" />
+                <TextBox Text="{Binding Entity.QuantityPerUnity, UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" Grid.Row="3" />
 
-                <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Category}" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="350" Grid.Column="4" Grid.Row="3">
-                    <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory" SelectedItem="{Binding Entity.Category}" MinWidth="150" />
-                    <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" 
+                <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right"
+                       Content="{x:Static loc:Strings.Common_Category}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="350" Grid.Column="4"
+                            Grid.Row="3">
+                    <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory"
+                              SelectedItem="{Binding Entity.Category}" MinWidth="150" />
+                    <controls:Tile DockPanel.Dock="Left" Height="18" Width="18"
                                    Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
                                    HorizontalAlignment="Left" ToolTip="Edit" Focusable="False" Background="Transparent"
                                    Grid.Column="5">
@@ -85,7 +98,8 @@
                     </controls:Tile>
                 </StackPanel>
 
-                <Label Grid.Column="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Status}" Grid.Row="4" />
+                <Label Grid.Column="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Status}"
+                       Grid.Row="4" />
 
                 <StackPanel HorizontalAlignment="Left" MinWidth="150" MaxWidth="350" Grid.Column="4" Grid.Row="4">
                     <StackPanel.Resources>
@@ -100,7 +114,8 @@
                               SelectedItem="{Binding Entity.Status}" />
                 </StackPanel>
 
-                <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" VerticalScrollBarVisibility="Auto"
+                <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"
+                         VerticalScrollBarVisibility="Auto"
                          HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" MaxWidth="400"
                          Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MinWidth="360" MinLines="2" />
 
@@ -115,24 +130,27 @@
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="{x:Static loc:Strings.Common_Suppliers}">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="200" MaxWidth="350" Grid.Column="2" Grid.Row="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="200" MaxWidth="350"
+                                Grid.Column="2" Grid.Row="2">
                         <ListBox ItemsSource="{Binding Entity.Suppliers}" MinWidth="150" />
-                        <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
-                                       HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False"
+                        <controls:Tile DockPanel.Dock="Left" Height="18" Width="18"
+                                       Command="{Binding ClearEntityCommand}"
+                                       HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}"
+                                       Focusable="False"
                                        Background="Transparent" Grid.Column="5">
                             <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
                         </controls:Tile>
-                        <controls:Tile Width="18" Height="18" Background="Transparent" Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
+                        <controls:Tile Width="18" Height="18" Background="Transparent"
+                                       Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
                             <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
                         </controls:Tile>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="{x:Static loc:Strings.Common_Image}">
-                    <Image Source="{Binding Image}"/>
+                    <Image Source="{Binding Image}" />
                 </TabItem>
             </TabControl>
         </StackPanel>
     </StackPanel>
-
 
 </UserControl>

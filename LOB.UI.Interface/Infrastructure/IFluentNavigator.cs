@@ -1,13 +1,11 @@
 #region Usings
-
 using System;
 
 #endregion
 
-namespace LOB.UI.Interface.Infrastructure
-{
-    public interface IFluentNavigator
-    {
+namespace LOB.UI.Interface.Infrastructure {
+    public interface IFluentNavigator {
+
         IFluentNavigator Init { get; }
         IBaseView GetView();
         IBaseViewModel GetViewModel();
@@ -20,20 +18,20 @@ namespace LOB.UI.Interface.Infrastructure
         event OnOpenViewEventHandler OnOpenView;
         void AddToRegion(string regionName);
 
-        [Obsolete("Use method AddToRegion")]
-        void Show(bool asDialog = false);
+        [Obsolete("Use method AddToRegion")] void Show(bool asDialog = false);
 
         bool PromptUser(string message);
+
     }
 
-    public sealed class OnOpenViewEventArgs : EventArgs
-    {
-        public OnOpenViewEventArgs(IBaseView baseView)
-        {
-            BaseView = baseView;
+    public sealed class OnOpenViewEventArgs : EventArgs {
+
+        public OnOpenViewEventArgs(IBaseView baseView) {
+            this.BaseView = baseView;
         }
 
         public IBaseView BaseView { get; private set; }
+
     }
 
     public delegate void OnOpenViewEventHandler(object sender, OnOpenViewEventArgs e);

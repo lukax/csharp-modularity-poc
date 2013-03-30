@@ -1,5 +1,4 @@
 #region Usings
-
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,10 +7,9 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Dao.Interface
-{
-    public interface IRepository
-    {
+namespace LOB.Dao.Interface {
+    public interface IRepository {
+
         IUnityOfWork Uow { get; }
         T Save<T>(T entity) where T : BaseEntity;
         T Update<T>(T entity) where T : BaseEntity;
@@ -24,5 +22,6 @@ namespace LOB.Dao.Interface
         IQueryable<T> GetList<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
         Task<IQueryable<T>> GetListAsync<T>() where T : BaseEntity;
         Task<IQueryable<T>> GetListAsync<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
+
     }
 }

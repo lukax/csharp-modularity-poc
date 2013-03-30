@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -10,24 +9,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Test
-{
-    [TestClass]
-    public class RepositoryTest
-    {
-        [TestMethod]
-        public void AddDeleteTest()
-        {
+namespace LOB.Dao.Nhibernate.Test {
+    [TestClass] public class RepositoryTest {
+
+        [TestMethod] public void AddDeleteTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
-            var p1 = new Product
-                {
-                    Description = "Teste description",
-                    UnitsInStock = 1234
-                };
+            var p1 = new Product {Description = "Teste description", UnitsInStock = 1234};
 
-            using (repo.Uow)
-            {
+            using(repo.Uow) {
                 repo.Uow.BeginTransaction();
                 p1 = repo.Save(p1);
                 Assert.AreNotEqual(0, p1.Id);
@@ -35,8 +25,7 @@ namespace LOB.Dao.Nhibernate.Test
                 Assert.IsTrue(repo.Contains(p1));
                 Assert.IsTrue(repo.Contains<Product>(x => x.Description == p1.Description));
             }
-            using (repo.Uow)
-            {
+            using(repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Delete(p1);
                 repo.Uow.CommitTransaction();
@@ -44,17 +33,10 @@ namespace LOB.Dao.Nhibernate.Test
             }
         }
 
-
-        [TestMethod]
-        public void GetTest()
-        {
+        [TestMethod] public void GetTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
-            var p1 = new Product
-                {
-                    Description = "Madeira",
-                    UnitsInStock = 10
-                };
+            var p1 = new Product {Description = "Madeira", UnitsInStock = 10};
 
             repo.Uow.BeginTransaction();
             p1 = repo.Save(p1);
@@ -62,13 +44,10 @@ namespace LOB.Dao.Nhibernate.Test
             Assert.AreEqual(p1, p2);
         }
 
-        [TestMethod]
-        public void SaveOrUpdateTest()
-        {
+        [TestMethod] public void SaveOrUpdateTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var entity = new Product {Description = "Test description service", Name = "Test Name"};
-            using (repo.Uow)
-            {
+            using(repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.SaveOrUpdate(entity);
                 repo.Uow.CommitTransaction();
@@ -85,23 +64,12 @@ namespace LOB.Dao.Nhibernate.Test
             }
         }
 
-        [TestMethod]
-        public void SaveGetPolymorphismTest()
-        {
+        [TestMethod] public void SaveGetPolymorphismTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
-            var person = new LegalPerson
-                {
-                    Cnpj = 123456,
-                    Iestadual = 1234,
-                };
-            var client = new Customer
-                {
-                    Person = person,
-                    Status = CustomerStatus.New
-                };
+            var person = new LegalPerson {Cnpj = 123456, Iestadual = 1234,};
+            var client = new Customer {Person = person, Status = CustomerStatus.New};
 
-            using (repo.Uow)
-            {
+            using(repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Save(client);
                 repo.Uow.CommitTransaction();
@@ -116,36 +84,23 @@ namespace LOB.Dao.Nhibernate.Test
             }
         }
 
-        [TestMethod]
-        public void GetListCriteriaTest()
-        {
+        [TestMethod] public void GetListCriteriaTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
-            var person1 = new NaturalPerson
-                {
-                    FirstName = "Dude1",
-                    LastName = "Martin",
-                    NickName = "Doesn't have1",
-                    BirthDate = DateTime.Now
-                };
-            var person2 = new NaturalPerson
-                {
-                    FirstName = "Dude2",
-                    LastName = "Martin",
-                    NickName = "Doesn't have2",
-                    BirthDate = DateTime.Now
-                };
-            var client1 = new Customer
-                {
-                    Person = person1,
-                    Status = CustomerStatus.New
-                };
-            var client2 = new Customer
-                {
-                    Person = person2,
-                    Status = CustomerStatus.New
-                };
-            using (repo.Uow)
-            {
+            var person1 = new NaturalPerson {
+                FirstName = "Dude1",
+                LastName = "Martin",
+                NickName = "Doesn't have1",
+                BirthDate = DateTime.Now
+            };
+            var person2 = new NaturalPerson {
+                FirstName = "Dude2",
+                LastName = "Martin",
+                NickName = "Doesn't have2",
+                BirthDate = DateTime.Now
+            };
+            var client1 = new Customer {Person = person1, Status = CustomerStatus.New};
+            var client2 = new Customer {Person = person2, Status = CustomerStatus.New};
+            using(repo.Uow) {
                 repo.Uow.BeginTransaction();
                 repo.Save(person1);
                 repo.Save(person2);
@@ -157,5 +112,6 @@ namespace LOB.Dao.Nhibernate.Test
                 Assert.IsTrue(list1.Count() > 1);
             }
         }
+
     }
 }

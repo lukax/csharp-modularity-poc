@@ -19,7 +19,8 @@
 
         <DockPanel HorizontalAlignment="Right">
             <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
-                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False" Background="Transparent"
+                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False"
+                           Background="Transparent"
                            Grid.Column="5">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </controls:Tile>
@@ -80,7 +81,6 @@
                     </TabItem>
                 </TabControl>
             </DockPanel>
-
 
         </Grid>
     </StackPanel>

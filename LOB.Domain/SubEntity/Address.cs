@@ -1,15 +1,12 @@
 ﻿#region Usings
-
 using System;
 using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain.SubEntity
-{
-    [Serializable]
-    public class Address : BaseEntity
-    {
+namespace LOB.Domain.SubEntity {
+    [Serializable] public class Address : BaseEntity {
+
         public AddressStatus Status { get; set; }
         public string Street { get; set; }
         public int StreetNumber { get; set; }
@@ -20,13 +17,14 @@ namespace LOB.Domain.SubEntity
         public string Country { get; set; }
         public int ZipCode { get; set; }
         public bool IsDefault { get; set; }
+
     }
 
-    [Serializable]
-    public enum AddressStatus
-    {
+    [Serializable] public enum AddressStatus {
+
         Active,
         Inactive,
         Deprecated
+
     }
 }

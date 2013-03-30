@@ -1,12 +1,10 @@
 ﻿#region Usings
-
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity
-{
-    public interface IAlterCategoryViewModel : IAlterServiceViewModel
-    {
+namespace LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity {
+    public interface IAlterCategoryViewModel : IAlterServiceViewModel {
+
     }
 }

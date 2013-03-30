@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
@@ -10,70 +9,60 @@ using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
-namespace LOB.UI.Core.View.Actions
-{
-    public class CloseTabItemAction : TriggerAction<DependencyObject>
-    {
-        public static readonly DependencyProperty TabControlProperty =
-            DependencyProperty.Register("TabControl",
-                                        typeof (TabControl),
-                                        typeof (CloseTabItemAction),
-                                        new PropertyMetadata(default(TabControl)));
+namespace LOB.UI.Core.View.Actions {
+    public class CloseTabItemAction : TriggerAction<DependencyObject> {
 
-        public static readonly DependencyProperty TabItemProperty =
-            DependencyProperty.Register("TabItem",
-                                        typeof (TabItem),
-                                        typeof (CloseTabItemAction),
-                                        new PropertyMetadata(default(TabItem)));
+        public static readonly DependencyProperty TabControlProperty = DependencyProperty.Register("TabControl",
+                                                                                                   typeof(TabControl),
+                                                                                                   typeof(
+                                                                                                       CloseTabItemAction
+                                                                                                       ),
+                                                                                                   new PropertyMetadata(
+                                                                                                       default(
+                                                                                                           TabControl)));
 
-        public TabControl TabControl
-        {
-            get { return (TabControl) GetValue(TabControlProperty); }
-            set { SetValue(TabControlProperty, value); }
+        public static readonly DependencyProperty TabItemProperty = DependencyProperty.Register("TabItem",
+                                                                                                typeof(TabItem),
+                                                                                                typeof(
+                                                                                                    CloseTabItemAction),
+                                                                                                new PropertyMetadata(
+                                                                                                    default(TabItem)));
+
+        public TabControl TabControl {
+            get { return (TabControl) this.GetValue(TabControlProperty); }
+            set { this.SetValue(TabControlProperty, value); }
         }
 
-        public TabItem TabItem
-        {
-            get { return (TabItem) GetValue(TabItemProperty); }
-            set
-            {
-                SetValue(TabItemProperty, value);
+        public TabItem TabItem {
+            get { return (TabItem) this.GetValue(TabItemProperty); }
+            set {
+                this.SetValue(TabItemProperty, value);
                 var view = value as IBaseView;
-                if (view != null)
-                    //TODO: Get proper Index and assign to view
+                if(view != null) //TODO: Get proper Index and assign to view
                     ;
                 var innerView = value.Content as IBaseView;
-                if (innerView != null)
-                    ;
+                if(innerView != null) ;
             }
         }
 
         public static IServiceLocator Container { get; set; }
 
-        protected override void Invoke(object parameter)
-        {
-            if (TabControl.Items.Contains(TabItem))
-            {
-                if (Container != null)
-                {
-                    var view = TabItem as IBaseView;
+        protected override void Invoke(object parameter) {
+            if(this.TabControl.Items.Contains(this.TabItem))
+                if(Container != null) {
+                    var view = this.TabItem as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
-                    if (view != null) region.RemoveView(view.OperationType, RegionName.TabRegion);
+                    if(view != null) region.RemoveView(view.OperationType, RegionName.TabRegion);
                 }
-                else
-                    TabControl.Items.Remove(TabItem);
-            }
-            else if (TabControl.Items.Contains(TabItem.Content))
-            {
-                if (Container != null)
-                {
-                    var view = TabItem.Content as IBaseView;
+                else this.TabControl.Items.Remove(this.TabItem);
+            else if(this.TabControl.Items.Contains(this.TabItem.Content))
+                if(Container != null) {
+                    var view = this.TabItem.Content as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
-                    if (view != null) region.RemoveView(view.OperationType, RegionName.TabRegion);
+                    if(view != null) region.RemoveView(view.OperationType, RegionName.TabRegion);
                 }
-                else
-                    TabControl.Items.Remove(TabItem.Content);
-            }
+                else this.TabControl.Items.Remove(this.TabItem.Content);
         }
+
     }
 }

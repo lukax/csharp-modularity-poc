@@ -1,21 +1,17 @@
 ﻿#region Usings
-
 using System;
 using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain
-{
-    [Serializable]
-    public class NaturalPerson : Person
-    {
+namespace LOB.Domain {
+    [Serializable] public class NaturalPerson : Person {
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public string FullName
-        {
-            get { return string.Format("{0} {1}", FirstName, LastName); }
+        public string FullName {
+            get { return string.Format("{0} {1}", this.FirstName, this.LastName); }
         }
 
         public string NickName { get; set; }
@@ -23,5 +19,6 @@ namespace LOB.Domain
         public int Cpf { get; set; }
         public int Rg { get; set; }
         public string RgUf { get; set; }
+
     }
 }

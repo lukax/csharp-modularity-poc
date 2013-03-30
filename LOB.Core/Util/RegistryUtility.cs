@@ -1,25 +1,22 @@
 ﻿#region Usings
-
 using System;
 using Microsoft.Win32;
 
 #endregion
 
-namespace LOB.Core.Util
-{
-    public class RegistryUtility
-    {
+namespace LOB.Core.Util {
+    public class RegistryUtility {
+
         /// <summary>
         ///     An useful class to read/write/delete/count registry keys
         /// </summary>
-        public class ModifyRegistry
-        {
+        public class ModifyRegistry {
+
             private RegistryKey _baseRegistryKey = Registry.LocalMachine;
 
-            public ModifyRegistry()
-            {
-                SubKey = "SOFTWARE\\LOBAPP";
-                ShowError = false;
+            public ModifyRegistry() {
+                this.SubKey = "SOFTWARE\\LOBAPP";
+                this.ShowError = false;
             }
 
             /// <summary>
@@ -38,10 +35,9 @@ namespace LOB.Core.Util
             ///     A property to set the BaseRegistryKey value.
             ///     (default = Registry.LocalMachine)
             /// </summary>
-            public RegistryKey BaseRegistryKey
-            {
-                get { return _baseRegistryKey; }
-                set { _baseRegistryKey = value; }
+            public RegistryKey BaseRegistryKey {
+                get { return this._baseRegistryKey; }
+                set { this._baseRegistryKey = value; }
             }
 
             /// <summary>
@@ -49,32 +45,24 @@ namespace LOB.Core.Util
             ///     input: KeyName (string)
             ///     output: value (string)
             /// </summary>
-            public string Read(string keyName)
-            {
+            public string Read(string keyName) {
                 // Opening the registry key
-                RegistryKey rk = _baseRegistryKey;
+                RegistryKey rk = this._baseRegistryKey;
                 // Open a subKey as read-only
-                RegistryKey sk1 = rk.OpenSubKey(SubKey);
+                RegistryKey sk1 = rk.OpenSubKey(this.SubKey);
                 // If the RegistrySubKey doesn't exist -> (null)
-                if (sk1 == null)
-                {
-                    return null;
-                }
+                if(sk1 == null) return null;
                 else
-                {
-                    try
-                    {
+                    try {
                         // If the RegistryKey exists I get its value
                         // or null is returned.
                         return (string) sk1.GetValue(keyName.ToUpper());
                     }
-                    catch (Exception e)
-                    {
+                    catch(Exception e) {
                         // AAAAAAAAAAARGH, an error!
-                        ShowErrorMessage(e, "Reading registry " + keyName.ToUpper());
+                        this.ShowErrorMessage(e, "Reading registry " + keyName.ToUpper());
                         return null;
                     }
-                }
             }
 
             /// <summary>
@@ -82,25 +70,22 @@ namespace LOB.Core.Util
             ///     input: KeyName (string) , Value (object)
             ///     output: true or false
             /// </summary>
-            public bool Write(string keyName, object value)
-            {
-                try
-                {
+            public bool Write(string keyName, object value) {
+                try {
                     // Setting
-                    RegistryKey rk = _baseRegistryKey;
+                    RegistryKey rk = this._baseRegistryKey;
                     // I have to use CreateSubKey 
                     // (create or open it if already exits), 
                     // 'cause OpenSubKey open a subKey as read-only
-                    RegistryKey sk1 = rk.CreateSubKey(SubKey);
+                    RegistryKey sk1 = rk.CreateSubKey(this.SubKey);
                     // Save the value
                     sk1.SetValue(keyName.ToUpper(), value);
 
                     return true;
                 }
-                catch (Exception e)
-                {
+                catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
-                    ShowErrorMessage(e, "Writing registry " + keyName.ToUpper());
+                    this.ShowErrorMessage(e, "Writing registry " + keyName.ToUpper());
                     return false;
                 }
             }
@@ -110,25 +95,20 @@ namespace LOB.Core.Util
             ///     input: KeyName (string)
             ///     output: true or false
             /// </summary>
-            public bool DeleteKey(string keyName)
-            {
-                try
-                {
+            public bool DeleteKey(string keyName) {
+                try {
                     // Setting
-                    RegistryKey rk = _baseRegistryKey;
-                    RegistryKey sk1 = rk.CreateSubKey(SubKey);
+                    RegistryKey rk = this._baseRegistryKey;
+                    RegistryKey sk1 = rk.CreateSubKey(this.SubKey);
                     // If the RegistrySubKey doesn't exists -> (true)
-                    if (sk1 == null)
-                        return true;
-                    else
-                        sk1.DeleteValue(keyName);
+                    if(sk1 == null) return true;
+                    else sk1.DeleteValue(keyName);
 
                     return true;
                 }
-                catch (Exception e)
-                {
+                catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
-                    ShowErrorMessage(e, "Deleting SubKey " + SubKey);
+                    this.ShowErrorMessage(e, "Deleting SubKey " + this.SubKey);
                     return false;
                 }
             }
@@ -138,23 +118,19 @@ namespace LOB.Core.Util
             ///     input: void
             ///     output: true or false
             /// </summary>
-            public bool DeleteSubKeyTree()
-            {
-                try
-                {
+            public bool DeleteSubKeyTree() {
+                try {
                     // Setting
-                    RegistryKey rk = _baseRegistryKey;
-                    RegistryKey sk1 = rk.OpenSubKey(SubKey);
+                    RegistryKey rk = this._baseRegistryKey;
+                    RegistryKey sk1 = rk.OpenSubKey(this.SubKey);
                     // If the RegistryKey exists, I delete it
-                    if (sk1 != null)
-                        rk.DeleteSubKeyTree(SubKey);
+                    if(sk1 != null) rk.DeleteSubKeyTree(this.SubKey);
 
                     return true;
                 }
-                catch (Exception e)
-                {
+                catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
-                    ShowErrorMessage(e, "Deleting SubKey " + SubKey);
+                    this.ShowErrorMessage(e, "Deleting SubKey " + this.SubKey);
                     return false;
                 }
             }
@@ -164,23 +140,18 @@ namespace LOB.Core.Util
             ///     input: void
             ///     output: number of subkeys
             /// </summary>
-            public int SubKeyCount()
-            {
-                try
-                {
+            public int SubKeyCount() {
+                try {
                     // Setting
-                    RegistryKey rk = _baseRegistryKey;
-                    RegistryKey sk1 = rk.OpenSubKey(SubKey);
+                    RegistryKey rk = this._baseRegistryKey;
+                    RegistryKey sk1 = rk.OpenSubKey(this.SubKey);
                     // If the RegistryKey exists...
-                    if (sk1 != null)
-                        return sk1.SubKeyCount;
-                    else
-                        return 0;
+                    if(sk1 != null) return sk1.SubKeyCount;
+                    else return 0;
                 }
-                catch (Exception e)
-                {
+                catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
-                    ShowErrorMessage(e, "Retriving subkeys of " + SubKey);
+                    this.ShowErrorMessage(e, "Retriving subkeys of " + this.SubKey);
                     return 0;
                 }
             }
@@ -190,30 +161,26 @@ namespace LOB.Core.Util
             ///     input: void
             ///     output: number of keys
             /// </summary>
-            public int ValueCount()
-            {
-                try
-                {
+            public int ValueCount() {
+                try {
                     // Setting
-                    RegistryKey rk = _baseRegistryKey;
-                    RegistryKey sk1 = rk.OpenSubKey(SubKey);
+                    RegistryKey rk = this._baseRegistryKey;
+                    RegistryKey sk1 = rk.OpenSubKey(this.SubKey);
                     // If the RegistryKey exists...
-                    if (sk1 != null)
-                        return sk1.ValueCount;
-                    else
-                        return 0;
+                    if(sk1 != null) return sk1.ValueCount;
+                    else return 0;
                 }
-                catch (Exception e)
-                {
-                    ShowErrorMessage(e, "Retriving keys of " + SubKey);
+                catch(Exception e) {
+                    this.ShowErrorMessage(e, "Retriving keys of " + this.SubKey);
                     return 0;
                 }
             }
 
-            private void ShowErrorMessage(Exception e, string title)
-            {
+            private void ShowErrorMessage(Exception e, string title) {
                 throw new NotImplementedException();
             }
+
         }
+
     }
 }

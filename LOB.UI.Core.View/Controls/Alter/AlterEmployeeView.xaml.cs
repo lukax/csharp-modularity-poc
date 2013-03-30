@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events;
@@ -12,63 +11,50 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter
-{
-    public partial class AlterEmployeeView : UserControl, IBaseView
-    {
-        public AlterEmployeeView()
-        {
-            InitializeComponent();
+namespace LOB.UI.Core.View.Controls.Alter {
+    public partial class AlterEmployeeView : UserControl, IBaseView {
+
+        public AlterEmployeeView() {
+            this.InitializeComponent();
         }
 
-        [Dependency]
-        private IEventAggregator _eventAggregator { get; set; }
+        [Dependency] private IEventAggregator _eventAggregator { get; set; }
 
-        public IBaseViewModel ViewModel
-        {
-            get { return DataContext as IAlterEmployeeViewModel; }
-            set
-            {
-                DataContext = value;
-                UcAlterBaseEntityView.DataContext = value;
-                UcAlterNaturalPersonView.DataContext = value;
+        public IBaseViewModel ViewModel {
+            get { return this.DataContext as IAlterEmployeeViewModel; }
+            set {
+                this.DataContext = value;
+                this.UcAlterBaseEntityView.DataContext = value;
+                this.UcAlterNaturalPersonView.DataContext = value;
                 var localViewModel = value as IAlterEmployeeViewModel;
-                if (localViewModel != null)
-                {
-                    UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
+                if(localViewModel != null) {
+                    this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
                         localViewModel.AlterAddressViewModel;
-                    UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
+                    this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
                         localViewModel.AlterContactInfoViewModel;
                 }
 
-                _eventAggregator.GetEvent<SaveEvent>()
-                                .Subscribe((s) => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
+                this._eventAggregator.GetEvent<SaveEvent>()
+                    .Subscribe((s) => this._eventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 
-
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Alter_Employee; }
         }
 
-        public int Index
-        {
-            get { return ((AlterEmployeeViewModel) DataContext).Index; }
-            set { ((AlterEmployeeViewModel) DataContext).Index = value; }
+        public int Index {
+            get { return ((AlterEmployeeViewModel) this.DataContext).Index; }
+            set { ((AlterEmployeeViewModel) this.DataContext).Index = value; }
         }
 
-        public void InitializeServices()
-        {
-        }
+        public void InitializeServices() {}
 
-        public void Refresh()
-        {
-        }
+        public void Refresh() {}
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.AlterEmployee; }
         }
+
     }
 }

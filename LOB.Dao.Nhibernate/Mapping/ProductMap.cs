@@ -1,37 +1,29 @@
 ﻿#region Usings
-
 using FluentNHibernate.Mapping;
 using LOB.Domain;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping
-{
-    public class ProductMap : SubclassMap<Product>
-    {
-        public ProductMap()
-        {
+namespace LOB.Dao.Nhibernate.Mapping {
+    public class ProductMap : SubclassMap<Product> {
+
+        public ProductMap() {
             References(x => x.Category);
-            Map(x => x.Status);
-            Map(x => x.CodBarras);
-            Map(x => x.Image);//.CustomSqlType("BinaryBlob"); Nhibernate automap binary arrays
-            Map(x => x.UnitsInStock);
-            Map(x => x.MaxUnitsOfStock);
-            Map(x => x.MinUnitsOfStock);
-            Map(x => x.UnitCostPrice);
-            Map(x => x.UnitSalePrice);
-            Map(x => x.ProfitMargin);
-            Map(x => x.QuantityPerUnit);
-            HasManyToMany(x => x.StockedStores)
-                .Cascade.All()
-                .Inverse()
-                .Table("ProductStore");
-            HasManyToMany(x => x.Sales)
-                .Inverse()
-                .Cascade.All()
-                .Table("ProductSale");
+            this.Map(x => x.Status);
+            this.Map(x => x.CodBarras);
+            this.Map(x => x.Image); //.CustomSqlType("BinaryBlob"); Nhibernate automap binary arrays
+            this.Map(x => x.UnitsInStock);
+            this.Map(x => x.MaxUnitsOfStock);
+            this.Map(x => x.MinUnitsOfStock);
+            this.Map(x => x.UnitCostPrice);
+            this.Map(x => x.UnitSalePrice);
+            this.Map(x => x.ProfitMargin);
+            this.Map(x => x.QuantityPerUnit);
+            HasManyToMany(x => x.StockedStores).Cascade.All().Inverse().Table("ProductStore");
+            HasManyToMany(x => x.Sales).Inverse().Cascade.All().Table("ProductSale");
             HasMany(x => x.Suppliers);
             References(x => x.ShipmentInfo);
         }
+
     }
 }

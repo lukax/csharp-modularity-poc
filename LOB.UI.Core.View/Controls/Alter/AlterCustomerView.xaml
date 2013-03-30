@@ -19,16 +19,16 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
             <Button DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}" Padding="1"
-                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False" >
+                    HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
             </Button>
 
-            <Button x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent" Padding="1" 
-                    Command="{Binding CancelCommand}" IsCancel="True" >
+            <Button x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent" Padding="1"
+                    Command="{Binding CancelCommand}" IsCancel="True">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
             </Button>
             <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent" Padding="1"
-                           Command="{Binding SaveChangesCommand}" >
+                    Command="{Binding SaveChangesCommand}">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
             </Button>
         </StackPanel>
@@ -66,7 +66,6 @@
                 </TabControl>
             </StackPanel>
 
-
             <StackPanel>
                 <TabControl>
                     <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
@@ -82,14 +81,16 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
                             <DockPanel>
-                                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26" />
-                                <Label Content="{x:Static loc:Strings.Button_Cancel}"/>
+                                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26"
+                                       Width="26" />
+                                <Label Content="{x:Static loc:Strings.Button_Cancel}" />
                             </DockPanel>
                         </Button>
                         <Button Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
                             <DockPanel>
-                                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
-                                <Label Content="{x:Static loc:Strings.Button_ConfirmOp}"/>
+                                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26"
+                                       Width="26" />
+                                <Label Content="{x:Static loc:Strings.Button_ConfirmOp}" />
                             </DockPanel>
                         </Button>
                     </StackPanel>
@@ -97,6 +98,6 @@
             </StackPanel>
 
         </StackPanel>
-        
+
     </StackPanel>
 </UserControl>

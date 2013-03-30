@@ -15,7 +15,6 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,13 +32,16 @@
         <base2:AlterBaseEntityView x:Name="UcAlterBaseEntityView" />
 
         <Label Content="{x:Static loc:Strings.Common_CurrentSalary}" HorizontalAlignment="Right" Grid.Column="1" />
-        <xctk:MaskedTextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"
-                 MinWidth="150" MaxWidth="250" Grid.Column="2" Mask="$00,000.00" HorizontalContentAlignment="Right"/>
+        <xctk:MaskedTextBox Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged}"
+                            HorizontalAlignment="Right"
+                            MinWidth="150" MaxWidth="250" Grid.Column="2" Mask="$00,000.00"
+                            HorizontalContentAlignment="Right" />
 
         <Label Grid.Row="1" Content="{x:Static loc:Strings.Common_Bonus}" HorizontalAlignment="Right" Grid.Column="1" />
-        <xctk:MaskedTextBox Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                 MinWidth="150" Mask="$00,000.00" HorizontalContentAlignment="Right"
-                 MaxWidth="250" Grid.Row="1" Grid.Column="2" />
+        <xctk:MaskedTextBox Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged}"
+                            HorizontalAlignment="Left"
+                            MinWidth="150" Mask="$00,000.00" HorizontalContentAlignment="Right"
+                            MaxWidth="250" Grid.Row="1" Grid.Column="2" />
 
         <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"
                  Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"

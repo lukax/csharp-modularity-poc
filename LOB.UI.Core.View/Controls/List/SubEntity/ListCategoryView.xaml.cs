@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -8,41 +7,33 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.List.SubEntity
-{
-    public partial class ListCategoryView : UserControl, IBaseView
-    {
+namespace LOB.UI.Core.View.Controls.List.SubEntity {
+    public partial class ListCategoryView : UserControl, IBaseView {
+
         private string _header;
 
-        public ListCategoryView()
-        {
-            InitializeComponent();
+        public ListCategoryView() {
+            this.InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
-            get { return DataContext as IListCategoryViewModel; }
-            set { DataContext = value; }
+        public IBaseViewModel ViewModel {
+            get { return this.DataContext as IListCategoryViewModel; }
+            set { this.DataContext = value; }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_List_Category; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
-        }
+        public void InitializeServices() {}
 
-        public void Refresh()
-        {
-        }
+        public void Refresh() {}
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.ListCategory; }
         }
+
     }
 }

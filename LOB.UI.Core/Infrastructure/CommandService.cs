@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,51 +7,35 @@ using LOB.UI.Interface.Command;
 
 #endregion
 
-namespace LOB.UI.Core.Infrastructure
-{
-    [Obsolete("Use events now")]
-    public class CommandService : ICommandService
-    {
+namespace LOB.UI.Core.Infrastructure {
+    [Obsolete("Use events now")] public class CommandService : ICommandService {
+
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
 
         private readonly IDictionary<object, IList<ICommand>> _commands;
 
-        private CommandService()
-        {
-            _commands = new Dictionary<object, IList<ICommand>>();
+        private CommandService() {
+            this._commands = new Dictionary<object, IList<ICommand>>();
         }
 
-        public static ICommandService Default
-        {
+        public static ICommandService Default {
             get { return Lazy.Value; }
         }
 
-        public void Register<T>(T token, ICommand command)
-        {
-            lock (_commands)
-            {
-                if (_commands.ContainsKey(token))
-                {
-                    _commands[token].Add(command);
-                }
-                else
-                {
-                    _commands.Add(token, new List<ICommand> {command});
-                }
+        public void Register<T>(T token, ICommand command) {
+            lock(this._commands) {
+                if(this._commands.ContainsKey(token)) this._commands[token].Add(command);
+                else this._commands.Add(token, new List<ICommand> {command});
             }
         }
 
-        public void Execute<T>(T token, object arg)
-        {
-            foreach (var command in _commands[token].ToList())
-            {
-                command.Execute(arg);
-            }
+        public void Execute<T>(T token, object arg) {
+            foreach(var command in this._commands[token].ToList()) command.Execute(arg);
         }
 
-        public IEnumerable<ICommand> this[string token]
-        {
-            get { return _commands[token]; }
+        public IEnumerable<ICommand> this[string token] {
+            get { return this._commands[token]; }
         }
+
     }
 }

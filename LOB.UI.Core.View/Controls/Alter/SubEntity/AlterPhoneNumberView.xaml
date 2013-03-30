@@ -30,7 +30,8 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label VerticalAlignment="Center" Content="{x:Static loc:Strings.Common_PhoneNumber}" MinWidth="40" Grid.Row="2"
+            <Label VerticalAlignment="Center" Content="{x:Static loc:Strings.Common_PhoneNumber}" MinWidth="40"
+                   Grid.Row="2"
                    HorizontalAlignment="Right" />
             <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left">
                 <StackPanel.Resources>
@@ -40,12 +41,13 @@
                         </ObjectDataProvider.MethodParameters>
                     </ObjectDataProvider>
                 </StackPanel.Resources>
-                <xctk:MaskedTextBox Text="{Binding Entity.PhoneNumber}" MinWidth="100" Mask="(00) 0000-0000"/>
+                <xctk:MaskedTextBox Text="{Binding Entity.PhoneNumber}" MinWidth="100" Mask="(00) 0000-0000" />
                 <ComboBox SelectedItem="{Binding Entity.PhoneType}"
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>
 
-            <TextBox Text="{Binding Entity.Description}" controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
+            <TextBox Text="{Binding Entity.Description}"
+                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
                      Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

@@ -14,6 +14,6 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <base:ListBaseEntityView x:Name="ViewListBaseEntity"/>
+        <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
     </StackPanel>
 </UserControl>

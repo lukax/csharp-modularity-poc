@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Collections.Generic;
 using LOB.Domain.Base;
@@ -7,11 +6,9 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Domain
-{
-    [Serializable]
-    public class Product : Service
-    {
+namespace LOB.Domain {
+    [Serializable] public class Product : Service {
+
         public Category Category { get; set; }
         public ProductStatus Status { get; set; }
         public int CodBarras { get; set; }
@@ -27,15 +24,16 @@ namespace LOB.Domain
         public IList<Sale> Sales { get; set; }
         public IList<Supplier> Suppliers { get; set; }
         public ShipmentInfo ShipmentInfo { get; set; }
+
     }
 
-    [Serializable]
-    public enum ProductStatus
-    {
+    [Serializable] public enum ProductStatus {
+
         Plenty,
         NotMany,
         Low,
         OutOfStorage,
         Discontinued
+
     }
 }

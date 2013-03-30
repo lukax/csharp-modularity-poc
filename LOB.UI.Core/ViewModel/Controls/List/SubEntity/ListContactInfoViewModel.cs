@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
@@ -7,42 +6,42 @@ using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
+using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity
-{
-    public class ListContactInfoViewModel : ListBaseEntityViewModel<ContactInfo>, IListContactInfoViewModel
-    {
-        public ListContactInfoViewModel(ContactInfo entity, IRepository repository) : base(entity, repository)
-        {
-        }
+namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
+    public class ListContactInfoViewModel : ListBaseEntityViewModel<ContactInfo>, IListContactInfoViewModel {
 
-        public new Expression<Func<ContactInfo, bool>> SearchCriteria
-        {
-            get
-            {
-                try
-                {
-                    return (arg =>
-                            arg.Code.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.Ps.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.SpeakWith.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.WebSite.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.Status.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.Emails.ToString().ToUpper().Contains(Search.ToUpper())
-                            || arg.PhoneNumbers.ToString().ToUpper().Contains(Search.ToUpper()));
+        public ListContactInfoViewModel(ContactInfo entity, IRepository repository, IEventAggregator eventAggregator)
+            : base(entity, repository, eventAggregator) {}
+
+        public new Expression<Func<ContactInfo, bool>> SearchCriteria {
+            get {
+                try {
+                    return
+                        (arg =>
+                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
+                         arg.Ps.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
+                         arg.SpeakWith.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
+                         arg.WebSite.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
+                         arg.Status.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
+                         arg.Emails.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
+                         arg.PhoneNumbers.ToString().ToUpper().Contains(this.Search.ToUpper()));
                 }
-                catch (FormatException)
-                {
+                catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override OperationType OperationType
-        {
+        public override void Refresh() {
+            throw new NotImplementedException();
+        }
+
+        public override OperationType OperationType {
             get { return OperationType.ListContactInfo; }
         }
+
     }
 }

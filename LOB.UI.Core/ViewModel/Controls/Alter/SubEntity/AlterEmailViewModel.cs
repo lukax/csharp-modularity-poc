@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -12,62 +11,50 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity
-{
-    public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel
-    {
+namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {
+
         private readonly IEmailFacade _emailFacade;
 
         public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade)
-            : base(entity, repository)
-        {
-            _emailFacade = emailFacade;
+            : base(entity, repository) {
+            this._emailFacade = emailFacade;
         }
 
-        public override void InitializeServices()
-        {
-            Refresh();
+        public override void InitializeServices() {
+            this.Refresh();
         }
 
-        public override void Refresh()
-        {
-            Entity = new Email
-                {
-                    Value = "",
-                };
-            _emailFacade.SetEntity(Entity);
-            _emailFacade.ConfigureValidations();
+        public override void Refresh() {
+            this.Entity = new Email {Value = "",};
+            this._emailFacade.SetEntity(this.Entity);
+            this._emailFacade.ConfigureValidations();
         }
 
-        protected override void SaveChanges(object arg)
-        {
-            using (Repository.Uow)
-            {
-                Repository.Uow.BeginTransaction();
-                Repository.Save(Entity);
-                Repository.Uow.CommitTransaction();
+        protected override void SaveChanges(object arg) {
+            using(this.Repository.Uow) {
+                this.Repository.Uow.BeginTransaction();
+                this.Repository.Save(this.Entity);
+                this.Repository.Uow.CommitTransaction();
             }
         }
 
-        protected override bool CanSaveChanges(object arg)
-        {
+        protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            return _emailFacade.CanAdd(out results);
+            return this._emailFacade.CanAdd(out results);
         }
 
-        protected override void QuickSearch(object arg)
-        {
+        protected override void QuickSearch(object arg) {
             throw new NotImplementedException();
         }
 
-        protected override void ClearEntity(object arg)
-        {
+        protected override void ClearEntity(object arg) {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType
-        {
+        public override OperationType OperationType {
             get { return OperationType.AlterEmail; }
         }
+
     }
 }

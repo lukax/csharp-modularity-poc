@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Threading.Tasks;
 using LOB.Dao.Interface;
@@ -15,10 +14,9 @@ using NullGuard;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controllers
-{
-    public class MainRegionController
-    {
+namespace LOB.UI.Core.View.Controllers {
+    public class MainRegionController {
+
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
@@ -28,67 +26,59 @@ namespace LOB.UI.Core.View.Controllers
         private readonly IUnityOfWork _unityOfWork;
 
         public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter,
-                                    IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
-                                    ISessionCreator sessionCreator, IUnityOfWork unityOfWork)
-        {
-            _container = container;
-            _regionAdapter = regionAdapter;
-            _eventAggregator = eventAggregator;
-            _logger = logger;
-            _sessionCreator = sessionCreator;
-            _unityOfWork = unityOfWork;
-            _navigator = navigator;
+            IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
+            ISessionCreator sessionCreator, IUnityOfWork unityOfWork) {
+            this._container = container;
+            this._regionAdapter = regionAdapter;
+            this._eventAggregator = eventAggregator;
+            this._logger = logger;
+            this._sessionCreator = sessionCreator;
+            this._unityOfWork = unityOfWork;
+            this._navigator = navigator;
 
-            OnLoad();
+            this.OnLoad();
         }
 
-        private void OnLoad()
-        {
-            _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
-            _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
-            _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
+        private void OnLoad() {
+            this._eventAggregator.GetEvent<OpenViewEvent>().Subscribe(this.OpenView, true);
+            this._eventAggregator.GetEvent<CloseViewEvent>().Subscribe(this.CloseView, true);
+            this._eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => this.MessageShow(s), true);
+            this._eventAggregator.GetEvent<MessageHideEvent>().Subscribe(this.MessageHide, true);
         }
 
-        private void OpenView(OperationType param)
-        {
-            if (param == default(OperationType)) throw new ArgumentNullException("param");
-            _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
+        private void OpenView(OperationType param) {
+            if(param == default(OperationType)) throw new ArgumentNullException("param");
+            this._navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
         }
 
-        private void CloseView(OperationType param)
-        {
-            try
-            {
-                _regionAdapter.RemoveView(param, RegionName.TabRegion);
+        private void CloseView(OperationType param) {
+            try {
+                this._regionAdapter.RemoveView(param, RegionName.TabRegion);
             }
-            catch (Exception ex)
-            {
-                _logger.Log(ex.Message, Category.Exception, Priority.High);
-                MessageHide(ex.Message);
+            catch(Exception ex) {
+                this._logger.Log(ex.Message, Category.Exception, Priority.High);
+                this.MessageHide(ex.Message);
             }
         }
 
-        public void MessageShow(string param, bool isRestrictive = true)
-        {
-            MessageHide(null);
-            var viewModel = _container.Resolve<MessageToolsViewModel>();
+        public void MessageShow(string param, bool isRestrictive = true) {
+            this.MessageHide(null);
+            var viewModel = this._container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            _navigator.Init.ResolveView(OperationType.MessageTools)
-                      .SetViewModel(viewModel)
-                      .AddToRegion(RegionName.ModalRegion);
+            this._navigator.Init.ResolveView(OperationType.MessageTools)
+                .SetViewModel(viewModel)
+                .AddToRegion(RegionName.ModalRegion);
         }
 
-        public async void MessageHide([AllowNull] string param)
-        {
-            _regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
+        public async void MessageHide([AllowNull] string param) {
+            this._regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
 
-            if (param != null)
-            {
-                MessageShow(param, false);
+            if(param != null) {
+                this.MessageShow(param, false);
                 await Task.Delay(4000);
-                MessageHide(null);
+                this.MessageHide(null);
             }
         }
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.Domain;
@@ -10,50 +9,40 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter
-{
-    public partial class AlterProductView : UserControl, IBaseView
-    {
+namespace LOB.UI.Core.View.Controls.Alter {
+    public partial class AlterProductView : UserControl, IBaseView {
+
         private string _header;
 
-        public AlterProductView()
-        {
-            InitializeComponent();
+        public AlterProductView() {
+            this.InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
-            get { return DataContext as IAlterProductViewModel; }
-            set
-            {
-                DataContext = value;
-                UcAlterBaseEntityView.DataContext = value;
+        public IBaseViewModel ViewModel {
+            get { return this.DataContext as IAlterProductViewModel; }
+            set {
+                this.DataContext = value;
+                this.UcAlterBaseEntityView.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Alter_Product; }
         }
 
-        public int Index
-        {
-            get { return ((AlterBaseEntityViewModel<Product>) DataContext).Index; }
-            set { ((AlterBaseEntityViewModel<Product>) DataContext).Index = value; }
+        public int Index {
+            get { return ((AlterBaseEntityViewModel<Product>) this.DataContext).Index; }
+            set { ((AlterBaseEntityViewModel<Product>) this.DataContext).Index = value; }
         }
 
-        public void InitializeServices()
-        {
-        }
+        public void InitializeServices() {}
 
-        public void Refresh()
-        {
-        }
+        public void Refresh() {}
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.AlterProduct; }
         }
+
     }
 }

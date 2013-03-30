@@ -15,13 +15,14 @@
     <DockPanel>
         <DockPanel Grid.Row="0" Dock="Top" Width="Auto" HorizontalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent" Command="{Binding SaveChangesCommand}">
+                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
+                               Command="{Binding SaveChangesCommand}">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
                 </controls:Tile>
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
                 <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
-                           Background="Transparent">
+                               Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
                 </controls:Tile>
                 <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
@@ -31,14 +32,17 @@
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
                 </controls:Tile>
                 <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
-                           Background="Transparent">
+                               Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
                 </controls:Tile>
             </StackPanel>
-            <TextBox MinWidth="200" Width="Auto" Height="Auto" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                  controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True"/>
+            <TextBox MinWidth="200" Width="Auto" Height="Auto"
+                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}"
+                     controls:TextboxHelper.ClearTextButton="True" />
         </DockPanel>
-        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" Width="Auto" HorizontalAlignment="Stretch"
+        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" Width="Auto"
+                  HorizontalAlignment="Stretch"
                   SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />
     </DockPanel>
 </UserControl>

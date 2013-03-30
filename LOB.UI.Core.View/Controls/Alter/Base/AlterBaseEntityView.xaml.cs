@@ -1,5 +1,4 @@
 #region Usings
-
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -7,41 +6,33 @@ using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.Base
-{
-    public partial class AlterBaseEntityView : UserControl, IBaseView
-    {
+namespace LOB.UI.Core.View.Controls.Alter.Base {
+    public partial class AlterBaseEntityView : UserControl, IBaseView {
+
         private string _header;
 
-        public AlterBaseEntityView()
-        {
-            InitializeComponent();
+        public AlterBaseEntityView() {
+            this.InitializeComponent();
         }
 
-        public IBaseViewModel ViewModel
-        {
-            get { return DataContext as IBaseViewModel; }
-            set { DataContext = value; }
+        public IBaseViewModel ViewModel {
+            get { return this.DataContext as IBaseViewModel; }
+            set { this.DataContext = value; }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Alter_BaseEntity; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
-        }
+        public void InitializeServices() {}
 
-        public void Refresh()
-        {
-        }
+        public void Refresh() {}
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.AlterBaseEntity; }
         }
+
     }
 }

@@ -1,16 +1,13 @@
 ﻿#region Usings
-
 using System;
 using System.Collections.Generic;
 using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain
-{
-    [Serializable]
-    public class Sale : BaseEntity
-    {
+namespace LOB.Domain {
+    [Serializable] public class Sale : BaseEntity {
+
         public SaleState State { get; set; }
         public DateTime SaleDate { get; set; }
         public Customer Buyer { get; set; }
@@ -19,14 +16,15 @@ namespace LOB.Domain
         public double UnitValue { get; set; }
         public int Quantity { get; set; }
         public string Ps { get; set; }
+
     }
 
-    [Serializable]
-    public enum SaleState
-    {
+    [Serializable] public enum SaleState {
+
         Open,
         Finalized,
         Canceled,
         Paused
+
     }
 }

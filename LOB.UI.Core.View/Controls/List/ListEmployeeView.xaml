@@ -4,17 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                          xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.List.Base"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="400">
-
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <base:ListBaseEntityView x:Name="ViewListBaseEntity"/>
+        <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
     </StackPanel>
 </UserControl>

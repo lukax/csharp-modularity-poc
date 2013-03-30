@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -8,31 +7,25 @@ using NullGuard;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Main
-{
+namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for MessageToolsView.xaml
     /// </summary>
-    public partial class MessageToolsView : UserControl, IBaseView
-    {
-        public MessageToolsView()
-        {
-            InitializeComponent();
+    public partial class MessageToolsView : UserControl, IBaseView {
+
+        public MessageToolsView() {
+            this.InitializeComponent();
         }
 
-        [AllowNull]
-        public IBaseViewModel ViewModel
-        {
-            get
-            {
+        [AllowNull] public IBaseViewModel ViewModel {
+            get {
                 IBaseViewModel result = null;
-                Dispatcher.Invoke(() => DataContext);
+                this.Dispatcher.Invoke(() => this.DataContext);
                 return result;
             }
-            set
-            {
+            set {
                 IBaseViewModel result = value;
-                Dispatcher.Invoke(() => DataContext = result);
+                this.Dispatcher.Invoke(() => this.DataContext = result);
                 //this.DataContext = value;
                 //var vm = value as MessageToolsViewModel;
                 //if (vm != null)
@@ -60,24 +53,19 @@ namespace LOB.UI.Core.View.Controls.Main
             }
         }
 
-        public string Header
-        {
+        public string Header {
             get { return Strings.Header_Main_Message; }
         }
 
         public int Index { get; set; }
 
-        public void InitializeServices()
-        {
-        }
+        public void InitializeServices() {}
 
-        public void Refresh()
-        {
-        }
+        public void Refresh() {}
 
-        public OperationType OperationType
-        {
+        public OperationType OperationType {
             get { return OperationType.MessageTools; }
         }
+
     }
 }

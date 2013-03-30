@@ -1,14 +1,12 @@
 ﻿#region Usings
-
 using System;
 using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Dao.Interface
-{
-    public interface IUnityOfWork : IDisposable
-    {
+namespace LOB.Dao.Interface {
+    public interface IUnityOfWork : IDisposable {
+
         /// <summary>
         ///     ORM's 'Session' goes in here.
         /// </summary>
@@ -26,5 +24,6 @@ namespace LOB.Dao.Interface
         IUnityOfWork BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
+
     }
 }

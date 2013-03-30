@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.Windows;
 using LOB.Log;
@@ -11,17 +10,14 @@ using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace LOB.UI.Core.View.Modularity
-{
-    public class Bootstrapper : UnityBootstrapper
-    {
-        protected override ILoggerFacade CreateLogger()
-        {
+namespace LOB.UI.Core.View.Modularity {
+    public class Bootstrapper : UnityBootstrapper {
+
+        protected override ILoggerFacade CreateLogger() {
             return new Logger();
         }
 
-        protected override IModuleCatalog CreateModuleCatalog()
-        {
+        protected override IModuleCatalog CreateModuleCatalog() {
             //Reference
             //var catalog = new ModuleCatalog();
             //Type businessModule = typeof(LOB.Business.Module);
@@ -35,7 +31,6 @@ namespace LOB.UI.Core.View.Modularity
             //catalog.AddModule(new ModuleInfo() { ModuleName = "UICoreModule", ModuleType = uiCoreModule.AssemblyQualifiedName });
             //catalog.AddModule(new ModuleInfo() { ModuleName = "UICoreViewModule", ModuleType = uiCoreViewModule.AssemblyQualifiedName });
 
-
             //DIR
             //var catalog = new DirectoryModuleCatalog() { ModulePath = @".\Modules" };
             //catalog.Load();
@@ -46,28 +41,29 @@ namespace LOB.UI.Core.View.Modularity
             //catalogStream.Dispose();
 
             //XAML(Change Build mode to Resource)
-            var catalog = Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
-                new Uri("/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml", UriKind.Relative));
+            var catalog =
+                Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
+                                                                                  new Uri(
+                                                                                      "/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml",
+                                                                                      UriKind.Relative));
             return catalog;
         }
 
-        protected override void ConfigureContainer()
-        {
+        protected override void ConfigureContainer() {
             base.ConfigureContainer();
-            RegisterTypeIfMissing(typeof (ILogger), typeof (Logger), true);
+            this.RegisterTypeIfMissing(typeof(ILogger), typeof(Logger), true);
         }
 
-        protected override DependencyObject CreateShell()
-        {
-            var main = Container.Resolve<Shell>();
+        protected override DependencyObject CreateShell() {
+            var main = this.Container.Resolve<Shell>();
             return main;
         }
 
-        protected override void InitializeShell()
-        {
+        protected override void InitializeShell() {
             base.InitializeShell();
-            Application.Current.MainWindow = (Window) Shell;
+            Application.Current.MainWindow = (Window) this.Shell;
             Application.Current.MainWindow.Show();
         }
+
     }
 }

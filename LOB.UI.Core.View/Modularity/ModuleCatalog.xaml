@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Modularity:ModuleCatalog
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,8 +17,8 @@
         ModuleName="UICoreResourcesModule" InitializationMode="WhenAvailable"
         ModuleType="LOB.UI.Core.Modularity.Resources.Module, LOB.UI.Core.Resources, Version=1.0.0.0, Culture=neutral">
     </Modularity:ModuleInfo>-->
-    
-    <Modularity:ModuleInfo 
+
+    <Modularity:ModuleInfo
         Ref="file://LOB.Dao.Nhibernate.dll"
         ModuleName="DaoModule" InitializationMode="OnDemand"
         ModuleType="LOB.Dao.Nhibernate.Modularity.Module, LOB.Dao.Nhibernate, Version=1.0.0.0, Culture=neutral">

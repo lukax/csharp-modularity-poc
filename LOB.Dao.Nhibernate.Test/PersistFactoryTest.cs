@@ -1,5 +1,4 @@
 ﻿#region Usings
-
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -12,80 +11,67 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Test
-{
-    [TestClass]
-    public class PersistFactoryTest
-    {
-        [Import("Sql")]
-        public IRepository Repository { get; set; }
+namespace LOB.Dao.Nhibernate.Test {
+    [TestClass] public class PersistFactoryTest {
 
-        [TestMethod]
-        public void GetInstanceTest()
-        {
+        [Import("Sql")] public IRepository Repository { get; set; }
+
+        [TestMethod] public void GetInstanceTest() {
             new PersistFactory(this);
-            Assert.IsNotNull(Repository);
+            Assert.IsNotNull(this.Repository);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
-        private class PersistFactory
-        {
+        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")] private class
+            PersistFactory {
+
             private readonly AggregateCatalog _catalog;
             private readonly CompositionContainer _container;
 
-            private IUnityContainer ccontainer = new UnityContainer();
+            private readonly IUnityContainer ccontainer = new UnityContainer();
             [Import] private Inner inner;
 
-            public PersistFactory(object obj)
-            {
+            public PersistFactory(object obj) {
                 Debug.WriteLine("Tryng to load dll from: " + Assembly.GetExecutingAssembly().Location);
 
-                _catalog = new AggregateCatalog(
-                    new AssemblyCatalog(Assembly.GetExecutingAssembly()),
-                    new AssemblyCatalog(Assembly.LoadFrom("LOB.Dao.Nhibernate.dll"))
-                    );
-                _container = new CompositionContainer(_catalog);
+                this._catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()),
+                                                     new AssemblyCatalog(Assembly.LoadFrom("LOB.Dao.Nhibernate.dll")));
+                this._container = new CompositionContainer(this._catalog);
                 //_container.SatisfyImportsOnce(this);
                 //_container.SatisfyImportsOnce(obj);
-                _container.ComposeParts(this, obj);
+                this._container.ComposeParts(this, obj);
 
-                Assert.AreEqual(ccontainer, inner.container);
+                Assert.AreEqual(this.ccontainer, this.inner.container);
             }
 
             /// <summary>
             ///     Compose a part, making the imports work
             /// </summary>
             /// <param name="obj">Object to compose</param>
-            public void Compose(object obj)
-            {
-                _container.ComposeParts(obj);
+            public void Compose(object obj) {
+                this._container.ComposeParts(obj);
             }
 
-            public IRepository GetInstance(PersistType type = PersistType.MySql)
-            {
-                if (type == PersistType.MySql)
-                    return _container.GetExportedValue<IRepository>("Sql");
+            public IRepository GetInstance(PersistType type = PersistType.MySql) {
+                if(type == PersistType.MySql) return this._container.GetExportedValue<IRepository>("Sql");
 
-                if (type == PersistType.Memory)
-                    return _container.GetExportedValue<IRepository>("GetList");
+                if(type == PersistType.Memory) return this._container.GetExportedValue<IRepository>("GetList");
 
-                if (type == PersistType.File)
-                    return _container.GetExportedValue<IRepository>("File");
+                if(type == PersistType.File) return this._container.GetExportedValue<IRepository>("File");
 
                 throw new ArgumentNullException();
             }
 
+            private class Inner {
 
-            private class Inner
-            {
-                public IUnityContainer container;
+                public readonly IUnityContainer container;
 
-                [InjectionConstructor]
-                public Inner(IUnityContainer container)
-                {
+                [InjectionConstructor] public Inner(IUnityContainer container) {
                     this.container = container;
                 }
+
             }
+
         }
+
     }
 }

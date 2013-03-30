@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="LOB.UI.Core.View.Controls.List.ListOpView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
@@ -10,7 +10,7 @@
              xmlns:xtck="clr-namespace:Xceed.Wpf.Toolkit.Panels;assembly=Xceed.Wpf.Toolkit"
              xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
 
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <!--xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"-->
     <UserControl.Resources>
@@ -19,39 +19,45 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent" Command="{Binding SaveChangesCommand}">
+            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
+                           Command="{Binding SaveChangesCommand}">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
             </controls:Tile>
-            <TextBox MinWidth="200" Width="Auto" Height="Auto" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                  controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True"/>
+            <TextBox MinWidth="200" Width="Auto" Height="Auto"
+                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}"
+                     controls:TextboxHelper.ClearTextButton="True" />
         </DockPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            
-            
-                <ScrollViewer.Background>
-                    <RadialGradientBrush RadiusY=".7" RadiusX=".9" Center=".6,.2" GradientOrigin=".2,.3">
-                        <GradientStop Color="{DynamicResource AccentColor}" />
-                        <GradientStop Color="{DynamicResource AccentColor3}" Offset=".9" />
-                    </RadialGradientBrush>
-                </ScrollViewer.Background>
-                <ScrollViewer.Resources>
-                    <DataTemplate DataType="{x:Type System:String}">
-                    <controls:Tile Title="{Binding}" Command="{Binding ElementName=PanoramaEntitys, Path=DataContext.SaveChangesCommand}" CommandParameter="{Binding}" Width="100" Height="100">
-                            <Image Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons/Logo.png" Opacity="0.5"  Stretch="UniformToFill">
-                                <Image.Effect>
-                                    <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                                </Image.Effect>
-                            </Image>
-                        </controls:Tile>
-                    </DataTemplate>
-                </ScrollViewer.Resources>
-            <controls:Panorama x:Name="PanoramaEntitys" ItemsSource="{Binding Entitys}" 
-                               VerticalAlignment="Stretch" Margin="0,20,0,0" ItemBox="120" UseSnapBackScrolling="False" HeaderFontColor="{DynamicResource Foreground}"  Height="550" GroupHeight="100"/>
-            
+
+            <ScrollViewer.Background>
+                <RadialGradientBrush RadiusY=".7" RadiusX=".9" Center=".6,.2" GradientOrigin=".2,.3">
+                    <GradientStop Color="{DynamicResource AccentColor}" />
+                    <GradientStop Color="{DynamicResource AccentColor3}" Offset=".9" />
+                </RadialGradientBrush>
+            </ScrollViewer.Background>
+            <ScrollViewer.Resources>
+                <DataTemplate DataType="{x:Type System:String}">
+                    <controls:Tile Title="{Binding}"
+                                   Command="{Binding ElementName=PanoramaEntitys, Path=DataContext.SaveChangesCommand}"
+                                   CommandParameter="{Binding}" Width="100" Height="100">
+                        <Image Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons/Logo.png"
+                               Opacity="0.5" Stretch="UniformToFill">
+                            <Image.Effect>
+                                <effect:GrayscaleEffect x:Name="grayscaleEffect" />
+                            </Image.Effect>
+                        </Image>
+                    </controls:Tile>
+                </DataTemplate>
+            </ScrollViewer.Resources>
+            <controls:Panorama x:Name="PanoramaEntitys" ItemsSource="{Binding Entitys}"
+                               VerticalAlignment="Stretch" Margin="0,20,0,0" ItemBox="120" UseSnapBackScrolling="False"
+                               HeaderFontColor="{DynamicResource Foreground}" Height="550" GroupHeight="100" />
+
         </ScrollViewer>
     </Grid>
 

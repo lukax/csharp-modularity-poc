@@ -4,7 +4,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
-                                   xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+                      xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
                       Title="{x:Static loc:Strings.Window_Title}"
                       Height="Auto" Width="Auto" SaveWindowPosition="True">
 
@@ -25,15 +25,19 @@
         </Grid.ColumnDefinitions>
 
         <ContentControl x:Name="HeaderRegion" regions:RegionManager.RegionName="HeaderRegion" Grid.Row="0"
-                            Grid.Column="0" Grid.ColumnSpan="2" />
+                        Grid.Column="0" Grid.ColumnSpan="2" />
 
-        <TabControl x:Name="TabRegion" regions:RegionManager.RegionName="TabRegion"  Grid.Row="1" Grid.Column="0" Margin="5"
+        <TabControl x:Name="TabRegion" regions:RegionManager.RegionName="TabRegion" Grid.Row="1" Grid.Column="0"
+                    Margin="5"
                     Style="{StaticResource StandardTabControl}" SelectedIndex="0" />
-        
-        <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Grid.Row="1" Grid.Column="0" Width="25" Height="25"/>   
-        
-        <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1" Grid.Column="1" />
-        
-        <ContentControl x:Name="ModalRegion"  regions:RegionManager.RegionName="ModalRegion" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#00000000" />
+
+        <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Grid.Row="1" Grid.Column="0" Width="25"
+                               Height="25" />
+
+        <ContentControl x:Name="ColumnRegion" regions:RegionManager.RegionName="ColumnRegion" Grid.Row="1"
+                        Grid.Column="1" />
+
+        <ContentControl x:Name="ModalRegion" regions:RegionManager.RegionName="ModalRegion" Grid.RowSpan="2"
+                        Grid.ColumnSpan="2" Background="#00000000" />
     </Grid>
 </controls:MetroWindow>
