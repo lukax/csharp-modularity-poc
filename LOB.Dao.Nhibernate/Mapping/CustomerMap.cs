@@ -10,9 +10,9 @@ namespace LOB.Dao.Nhibernate.Mapping {
         public CustomerMap() {
             References(x => x.Person).Cascade.All();
             HasManyToMany(x => x.CustomerOf);
-            this.Map(x => x.Status);
+            Map(x => x.Status);
             HasMany(x => x.BoughtHistory);
-            this.Map(x => x.PersonType);
+            Map(x => x.PersonType);
         }
 
     }

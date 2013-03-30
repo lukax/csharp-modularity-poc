@@ -22,18 +22,18 @@ namespace LOB.UI.Core.View.Controls.Util {
         private readonly ILogger _logger;
 
         public FrameWindow(IUnityContainer container, ILogger logger, IEventAggregator eventAggregator) {
-            this._container = container;
-            this._logger = logger;
-            this._eventAggregator = eventAggregator;
-            this._eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { this.Close(); });
-            this.InitializeComponent();
+            _container = container;
+            _logger = logger;
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { Close(); });
+            InitializeComponent();
         }
 
         public UserControl View { get; set; }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IBaseViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header { get; set; }
@@ -43,7 +43,7 @@ namespace LOB.UI.Core.View.Controls.Util {
 
         public void Refresh() {
             base.UpdateLayout();
-            this.MiLightBlue(null, null);
+            MiLightBlue(null, null);
         }
 
         public OperationType OperationType {
@@ -95,7 +95,7 @@ namespace LOB.UI.Core.View.Controls.Util {
         }
         #endregion
         private void Busy() {
-            this.ModalRegion = new BusyView();
+            ModalRegion = new BusyView();
         }
 
     }

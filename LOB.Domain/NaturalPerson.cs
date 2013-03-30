@@ -11,7 +11,7 @@ namespace LOB.Domain {
         public string LastName { get; set; }
 
         public string FullName {
-            get { return string.Format("{0} {1}", this.FirstName, this.LastName); }
+            get { return string.Format("{0} {1}", FirstName, LastName); }
         }
 
         public string NickName { get; set; }

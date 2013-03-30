@@ -11,7 +11,7 @@ namespace LOB.UI.Core.View.Controls.Sell {
     public partial class SellProductView : UserControl, IBaseView {
 
         public SellProductView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel { get; set; }

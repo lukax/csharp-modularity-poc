@@ -28,55 +28,55 @@ namespace LOB.UI.Core.View.Controllers {
         public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter,
             IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
             ISessionCreator sessionCreator, IUnityOfWork unityOfWork) {
-            this._container = container;
-            this._regionAdapter = regionAdapter;
-            this._eventAggregator = eventAggregator;
-            this._logger = logger;
-            this._sessionCreator = sessionCreator;
-            this._unityOfWork = unityOfWork;
-            this._navigator = navigator;
+            _container = container;
+            _regionAdapter = regionAdapter;
+            _eventAggregator = eventAggregator;
+            _logger = logger;
+            _sessionCreator = sessionCreator;
+            _unityOfWork = unityOfWork;
+            _navigator = navigator;
 
-            this.OnLoad();
+            OnLoad();
         }
 
         private void OnLoad() {
-            this._eventAggregator.GetEvent<OpenViewEvent>().Subscribe(this.OpenView, true);
-            this._eventAggregator.GetEvent<CloseViewEvent>().Subscribe(this.CloseView, true);
-            this._eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => this.MessageShow(s), true);
-            this._eventAggregator.GetEvent<MessageHideEvent>().Subscribe(this.MessageHide, true);
+            _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
+            _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
+            _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
         }
 
         private void OpenView(OperationType param) {
             if(param == default(OperationType)) throw new ArgumentNullException("param");
-            this._navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
+            _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
         }
 
         private void CloseView(OperationType param) {
             try {
-                this._regionAdapter.RemoveView(param, RegionName.TabRegion);
+                _regionAdapter.RemoveView(param, RegionName.TabRegion);
             }
             catch(Exception ex) {
-                this._logger.Log(ex.Message, Category.Exception, Priority.High);
-                this.MessageHide(ex.Message);
+                _logger.Log(ex.Message, Category.Exception, Priority.High);
+                MessageHide(ex.Message);
             }
         }
 
         public void MessageShow(string param, bool isRestrictive = true) {
-            this.MessageHide(null);
-            var viewModel = this._container.Resolve<MessageToolsViewModel>();
+            MessageHide(null);
+            var viewModel = _container.Resolve<MessageToolsViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            this._navigator.Init.ResolveView(OperationType.MessageTools)
-                .SetViewModel(viewModel)
-                .AddToRegion(RegionName.ModalRegion);
+            _navigator.Init.ResolveView(OperationType.MessageTools)
+                      .SetViewModel(viewModel)
+                      .AddToRegion(RegionName.ModalRegion);
         }
 
         public async void MessageHide([AllowNull] string param) {
-            this._regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
+            _regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
 
             if(param != null) {
-                this.MessageShow(param, false);
+                MessageShow(param, false);
                 await Task.Delay(4000);
-                this.MessageHide(null);
+                MessageHide(null);
             }
         }
 

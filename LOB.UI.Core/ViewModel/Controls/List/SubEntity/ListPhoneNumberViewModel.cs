@@ -21,10 +21,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Number.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.PhoneNumberType.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Description.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Number.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.PhoneNumberType.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Description.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

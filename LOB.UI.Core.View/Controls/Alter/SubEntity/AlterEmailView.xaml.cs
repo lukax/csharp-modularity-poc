@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         private string _header;
 
         public AlterEmailView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterEmailViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IAlterEmailViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

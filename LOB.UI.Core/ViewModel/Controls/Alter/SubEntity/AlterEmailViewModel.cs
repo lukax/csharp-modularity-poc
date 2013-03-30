@@ -8,6 +8,8 @@ using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 
 #endregion
 
@@ -16,32 +18,33 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private readonly IEmailFacade _emailFacade;
 
-        public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade)
-            : base(entity, repository) {
-            this._emailFacade = emailFacade;
+        public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _emailFacade = emailFacade;
         }
 
         public override void InitializeServices() {
-            this.Refresh();
+            Refresh();
         }
 
         public override void Refresh() {
-            this.Entity = new Email {Value = "",};
-            this._emailFacade.SetEntity(this.Entity);
-            this._emailFacade.ConfigureValidations();
+            Entity = new Email {Value = "",};
+            _emailFacade.SetEntity(Entity);
+            _emailFacade.ConfigureValidations();
         }
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow) {
-                this.Repository.Uow.BeginTransaction();
-                this.Repository.Save(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+            using(Repository.Uow) {
+                Repository.Uow.BeginTransaction();
+                Repository.Save(Entity);
+                Repository.Uow.CommitTransaction();
             }
         }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            return this._emailFacade.CanAdd(out results);
+            return _emailFacade.CanAdd(out results);
         }
 
         protected override void QuickSearch(object arg) {

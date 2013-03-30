@@ -8,12 +8,12 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class ContactInfoMap : BaseEntityMap<ContactInfo> {
 
         public ContactInfoMap() {
-            this.Map(x => x.Status);
+            Map(x => x.Status);
             HasMany(x => x.PhoneNumbers).Cascade.All();
             HasMany(x => x.Emails).Cascade.All();
-            this.Map(x => x.WebSite);
-            this.Map(x => x.SpeakWith);
-            this.Map(x => x.Ps);
+            Map(x => x.WebSite);
+            Map(x => x.SpeakWith);
+            Map(x => x.Ps);
         }
 
     }

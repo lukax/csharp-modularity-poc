@@ -35,21 +35,21 @@ namespace LOB.UI.Core.View {
             //CULTURE INFO
             Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
             //
-            this._container = container;
-            this._region = region;
-            this._logger = logger;
-            this._eventAggregator = eventAggregator;
-            this.InitializeComponent();
-            this.OnLoad();
+            _container = container;
+            _region = region;
+            _logger = logger;
+            _eventAggregator = eventAggregator;
+            InitializeComponent();
+            OnLoad();
 
             //Change to Last added Tab
-            var defaultView = CollectionViewSource.GetDefaultView(this.TabRegion.Items);
-            defaultView.CollectionChanged += this.TabRegion_OnSelectionChanged;
+            var defaultView = CollectionViewSource.GetDefaultView(TabRegion.Items);
+            defaultView.CollectionChanged += TabRegion_OnSelectionChanged;
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IBaseViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header { get; set; }
@@ -59,7 +59,7 @@ namespace LOB.UI.Core.View {
 
         public void Refresh() {
             base.UpdateLayout();
-            this.MiLightBlue(null, null);
+            MiLightBlue(null, null);
         }
 
         public OperationType OperationType {
@@ -111,23 +111,22 @@ namespace LOB.UI.Core.View {
         }
         #endregion
         private void OnLoad() {
-            this._eventAggregator.GetEvent<CloseViewEvent>()
-                .Subscribe((o) => { if(o == OperationType.Main) this.Close(); });
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe((o) => { if(o == OperationType.Main) Close(); });
 
             if(_loaded) return;
-            this._module = this._container.Resolve<IModuleManager>();
-            this._module.LoadModule("UICoreViewModule");
-            this._logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
+            _module = _container.Resolve<IModuleManager>();
+            _module.LoadModule("UICoreViewModule");
+            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
             _loaded = true;
         }
 
         private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            this.TabRegion.SelectedIndex = -1;
-            this.ProgressRing.IsActive = true;
+            TabRegion.SelectedIndex = -1;
+            ProgressRing.IsActive = true;
             await Task.Delay(500); // Fix validation color border in textboxes TODO: Check this issue
-            if(this.TabRegion.Items.Count == 0) this.TabRegion.SelectedIndex = 1;
-            this.TabRegion.SelectedIndex = this.TabRegion.Items.Count - 1;
-            this.ProgressRing.IsActive = false;
+            if(TabRegion.Items.Count == 0) TabRegion.SelectedIndex = 1;
+            TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
+            ProgressRing.IsActive = false;
         }
 
     }

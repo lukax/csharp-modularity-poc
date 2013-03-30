@@ -23,14 +23,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.TradingName.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.CorporateName.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Cnpj.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Iestadual.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Imunicipal.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Notes.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.CorporateName.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CorporateName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Cnpj.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Iestadual.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Imunicipal.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CorporateName.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

@@ -26,11 +26,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private string _search;
 
         public ListOpViewModel(IEventAggregator eventAggregator) {
-            this._eventAggregator = eventAggregator;
-            this.SaveChangesCommand = new DelegateCommand(this.SaveChanges);
-            this._operationDictLazy = new Lazy<IDictionary<string, OperationType>>(this.CreateList);
-            this.Search = "";
-            this.Entity = "";
+            _eventAggregator = eventAggregator;
+            SaveChangesCommand = new DelegateCommand(SaveChanges);
+            _operationDictLazy = new Lazy<IDictionary<string, OperationType>>(CreateList);
+            Search = "";
+            Entity = "";
         }
 
         public string Entity { get; set; }
@@ -40,16 +40,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public ICommand SaveChangesCommand { get; set; }
 
         public string Search {
-            get { return this._search.ToLower(); }
+            get { return _search.ToLower(); }
             set {
-                this._search = value;
-                this.UpdateList();
+                _search = value;
+                UpdateList();
             }
         }
 
         public override void InitializeServices() {
-            this._worker.DoWork += (sender, args) => this.UpdateList();
-            this._worker.RunWorkerAsync();
+            _worker.DoWork += (sender, args) => UpdateList();
+            _worker.RunWorkerAsync();
         }
 
         public override void Refresh() {}
@@ -60,69 +60,63 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private void UpdateList() {
             Task.Delay(1000);
-            if(string.IsNullOrEmpty(this.Search)) {
+            if(string.IsNullOrEmpty(Search)) {
                 var alterGroup = new PanoramaGroup(Strings.Header_Alter);
                 alterGroup.SetSource(
-                                     this._operationDictLazy.Value.Keys.Where(
-                                                                              x =>
-                                                                              this._operationDictLazy.Value[x].ToString()
-                                                                                                              .Contains(
-                                                                                                                        "Alter"))
-                                         .ToList());
+                                     _operationDictLazy.Value.Keys.Where(
+                                                                         x =>
+                                                                         _operationDictLazy.Value[x].ToString()
+                                                                                                    .Contains("Alter"))
+                                                       .ToList());
                 var listGroup = new PanoramaGroup(Strings.Header_List);
                 listGroup.SetSource(
-                                    this._operationDictLazy.Value.Keys.Where(
-                                                                             x =>
-                                                                             this._operationDictLazy.Value[x].ToString()
-                                                                                                             .Contains(
-                                                                                                                       "List"))
-                                        .ToList());
+                                    _operationDictLazy.Value.Keys.Where(
+                                                                        x =>
+                                                                        _operationDictLazy.Value[x].ToString()
+                                                                                                   .Contains("List"))
+                                                      .ToList());
                 var sellGroup = new PanoramaGroup(Strings.Header_Sell);
                 sellGroup.SetSource(
-                                    this._operationDictLazy.Value.Keys.Where(
-                                                                             x =>
-                                                                             this._operationDictLazy.Value[x].ToString()
-                                                                                                             .Contains(
-                                                                                                                       "Sell"))
-                                        .ToList());
-                this.Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
+                                    _operationDictLazy.Value.Keys.Where(
+                                                                        x =>
+                                                                        _operationDictLazy.Value[x].ToString()
+                                                                                                   .Contains("Sell"))
+                                                      .ToList());
+                Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
             }
             else {
                 var alterGroup = new PanoramaGroup(Strings.Header_Alter);
                 alterGroup.SetSource(
-                                     this._operationDictLazy.Value.Keys.Where(
-                                                                              x =>
-                                                                              this._operationDictLazy.Value[x].ToString()
-                                                                                                              .Contains(
-                                                                                                                        "Alter"))
-                                         .Where(x => x.ToLower().Contains(this.Search))
-                                         .ToList());
+                                     _operationDictLazy.Value.Keys.Where(
+                                                                         x =>
+                                                                         _operationDictLazy.Value[x].ToString()
+                                                                                                    .Contains("Alter"))
+                                                       .Where(x => x.ToLower().Contains(Search))
+                                                       .ToList());
                 var listGroup = new PanoramaGroup(Strings.Header_List);
                 listGroup.SetSource(
-                                    this._operationDictLazy.Value.Keys.Where(
-                                                                             x =>
-                                                                             this._operationDictLazy.Value[x].ToString()
-                                                                                                             .Contains(
-                                                                                                                       "List"))
-                                        .Where(x => x.ToLower().Contains(this.Search))
-                                        .ToList());
+                                    _operationDictLazy.Value.Keys.Where(
+                                                                        x =>
+                                                                        _operationDictLazy.Value[x].ToString()
+                                                                                                   .Contains("List"))
+                                                      .Where(x => x.ToLower().Contains(Search))
+                                                      .ToList());
                 var sellGroup = new PanoramaGroup(Strings.Header_Sell);
                 sellGroup.SetSource(
-                                    this._operationDictLazy.Value.Keys.Where(
-                                                                             x =>
-                                                                             this._operationDictLazy.Value[x].ToString()
-                                                                                                             .Contains(
-                                                                                                                       "Sell"))
-                                        .Where(x => x.ToLower().Contains(this.Search))
-                                        .ToList());
-                this.Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
+                                    _operationDictLazy.Value.Keys.Where(
+                                                                        x =>
+                                                                        _operationDictLazy.Value[x].ToString()
+                                                                                                   .Contains("Sell"))
+                                                      .Where(x => x.ToLower().Contains(Search))
+                                                      .ToList());
+                Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
             }
         }
 
         private void SaveChanges(object arg) {
-            var parsedEntity = this._operationDictLazy.Value[arg.ToString()];
-            this._eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedEntity);
-            this._eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
+            var parsedEntity = _operationDictLazy.Value[arg.ToString()];
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedEntity);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
         }
 
         private IDictionary<string, OperationType> CreateList() {

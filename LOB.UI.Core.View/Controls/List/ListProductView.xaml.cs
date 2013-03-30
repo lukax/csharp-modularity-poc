@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.List {
         private string _header;
 
         public ListProductView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IListProductViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IListProductViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

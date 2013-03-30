@@ -12,12 +12,12 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         private string _header;
 
         public AlterBaseEntityView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IBaseViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

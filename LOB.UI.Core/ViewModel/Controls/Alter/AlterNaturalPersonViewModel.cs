@@ -6,6 +6,8 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -15,16 +17,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private IUnityContainer _container;
 
-        [InjectionConstructor] public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository)
-            : base(entity, repository) {}
+        [InjectionConstructor] public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {}
 
         public string BirthDate {
-            get { return this.Entity.BirthDate.ToShortDateString(); }
+            get { return Entity.BirthDate.ToShortDateString(); }
             set {
-                if(this.Entity.BirthDate.ToShortDateString() == value) return;
+                if(Entity.BirthDate.ToShortDateString() == value) return;
 
                 DateTime parsed;
-                if(DateTime.TryParse(value, out parsed)) this.Entity.BirthDate = parsed;
+                if(DateTime.TryParse(value, out parsed)) Entity.BirthDate = parsed;
             }
         }
 
@@ -44,10 +47,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow) {
-                this.Repository.Uow.BeginTransaction();
-                this.Repository.SaveOrUpdate(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+            using(Repository.Uow) {
+                Repository.Uow.BeginTransaction();
+                Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
             }
         }
 
@@ -56,7 +59,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void ClearEntity(object arg) {
-            this.Entity = new NaturalPerson();
+            Entity = new NaturalPerson();
         }
 
     }

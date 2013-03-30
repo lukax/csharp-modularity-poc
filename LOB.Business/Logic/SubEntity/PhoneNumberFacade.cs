@@ -17,32 +17,32 @@ namespace LOB.Business.Logic.SubEntity {
         private PhoneNumber _entity;
 
         public PhoneNumberFacade(IBaseEntityFacade baseEntityFacade) {
-            this._baseEntityFacade = baseEntityFacade;
+            _baseEntityFacade = baseEntityFacade;
         }
 
         public void SetEntity<T>(T entity) where T : PhoneNumber {
-            this._baseEntityFacade.SetEntity(entity);
-            this._entity = entity;
+            _baseEntityFacade.SetEntity(entity);
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            this._baseEntityFacade.ConfigureValidations();
-            if(this._entity != null) {
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Number < 1
-                                               ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Description.Length < 1
-                                               ? new ValidationResult("Description", Strings.Error_Field_Empty)
-                                               : null);
+            _baseEntityFacade.ConfigureValidations();
+            if(_entity != null) {
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Number < 1
+                                          ? new ValidationResult("Name", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Description.Length < 1
+                                          ? new ValidationResult("Description", Strings.Error_Field_Empty)
+                                          : null);
             }
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = this.ProcessBasicValidations(out invalidFields);
+            bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
@@ -56,13 +56,13 @@ namespace LOB.Business.Logic.SubEntity {
         }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            this._baseEntityFacade.SetEntity(entity);
+            _baseEntityFacade.SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
-            fields.AddRange(this._entity.GetValidations("Number"));
-            fields.AddRange(this._entity.GetValidations("Description"));
+            fields.AddRange(_entity.GetValidations("Number"));
+            fields.AddRange(_entity.GetValidations("Description"));
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)

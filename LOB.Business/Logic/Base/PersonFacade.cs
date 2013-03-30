@@ -20,32 +20,32 @@ namespace LOB.Business.Logic.Base {
 
         public PersonFacade(IBaseEntityFacade baseEntityFacade, IAddressFacade addressFacade,
             IContactInfoFacade contactInfoFacade) {
-            this._baseEntityFacade = baseEntityFacade;
-            this._addressFacade = addressFacade;
-            this._contactInfoFacade = contactInfoFacade;
+            _baseEntityFacade = baseEntityFacade;
+            _addressFacade = addressFacade;
+            _contactInfoFacade = contactInfoFacade;
         }
 
         public void SetEntity<T>(T entity) where T : Person {
-            this._baseEntityFacade.SetEntity(entity);
-            this._addressFacade.SetEntity(entity.Address);
-            this._contactInfoFacade.SetEntity(entity.ContactInfo);
-            this._entity = entity;
+            _baseEntityFacade.SetEntity(entity);
+            _addressFacade.SetEntity(entity.Address);
+            _contactInfoFacade.SetEntity(entity.ContactInfo);
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            this._baseEntityFacade.ConfigureValidations();
-            this._addressFacade.ConfigureValidations();
-            this._contactInfoFacade.ConfigureValidations();
-            if(this._entity != null)
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Notes.Length > 300
-                                               ? new ValidationResult("Notes", Strings.Error_Field_TooLong)
-                                               : null);
+            _baseEntityFacade.ConfigureValidations();
+            _addressFacade.ConfigureValidations();
+            _contactInfoFacade.ConfigureValidations();
+            if(_entity != null)
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Notes.Length > 300
+                                          ? new ValidationResult("Notes", Strings.Error_Field_TooLong)
+                                          : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = this.ProcessBasicValidations(out invalidFields);
+            bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
@@ -59,12 +59,12 @@ namespace LOB.Business.Logic.Base {
         }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            this._baseEntityFacade.SetEntity(entity);
+            _baseEntityFacade.SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
-            fields.AddRange(this._entity.GetValidations("Notes"));
+            fields.AddRange(_entity.GetValidations("Notes"));
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)

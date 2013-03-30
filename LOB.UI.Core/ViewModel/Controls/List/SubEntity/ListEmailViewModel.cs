@@ -21,8 +21,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Value.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Value.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

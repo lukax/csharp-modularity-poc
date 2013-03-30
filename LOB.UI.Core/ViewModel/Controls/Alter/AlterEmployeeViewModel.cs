@@ -7,6 +7,8 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -17,8 +19,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private ICommandService _commandService;
         private IUnityContainer _container;
 
-        [InjectionConstructor] public AlterEmployeeViewModel(Employee entity, IRepository repository)
-            : base(entity, repository) {}
+        [InjectionConstructor] public AlterEmployeeViewModel(Employee entity, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {}
 
         public new Employee Entity { get; set; }
 

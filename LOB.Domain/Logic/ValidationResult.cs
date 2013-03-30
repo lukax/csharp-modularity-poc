@@ -7,8 +7,8 @@ namespace LOB.Domain.Logic {
     [Serializable] public class ValidationResult {
 
         public ValidationResult(string fieldName, string errorDescription) {
-            this.FieldName = fieldName;
-            this.ErrorDescription = errorDescription;
+            FieldName = fieldName;
+            ErrorDescription = errorDescription;
         }
 
         public string FieldName { get; private set; }

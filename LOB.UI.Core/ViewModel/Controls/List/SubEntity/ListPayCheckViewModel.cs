@@ -1,6 +1,7 @@
 ﻿#region Usings
 using System;
 using System.Linq.Expressions;
+using System.Threading;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
@@ -21,10 +22,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Ps.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Bonus.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.CurrentSalary.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Ps.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Bonus.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CurrentSalary.ToString(Thread.CurrentThread.CurrentCulture)
+                            .ToUpper()
+                            .Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

@@ -8,9 +8,9 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class PayCheckMap : BaseEntityMap<PayCheck> {
 
         public PayCheckMap() {
-            this.Map(x => x.CurrentSalary);
-            this.Map(x => x.Bonus);
-            this.Map(x => x.Ps);
+            Map(x => x.CurrentSalary);
+            Map(x => x.Bonus);
+            Map(x => x.Ps);
         }
 
     }

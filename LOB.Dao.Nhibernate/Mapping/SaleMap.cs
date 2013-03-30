@@ -8,14 +8,14 @@ namespace LOB.Dao.Nhibernate.Mapping {
     public class SaleMap : BaseEntityMap<Sale> {
 
         public SaleMap() {
-            this.Map(x => x.State);
-            this.Map(x => x.SaleDate);
+            Map(x => x.State);
+            Map(x => x.SaleDate);
             References(x => x.Buyer);
             HasManyToMany(x => x.Products);
-            this.Map(x => x.TotalValue);
-            this.Map(x => x.UnitValue);
-            this.Map(x => x.Quantity);
-            this.Map(x => x.Ps);
+            Map(x => x.TotalValue);
+            Map(x => x.UnitValue);
+            Map(x => x.Quantity);
+            Map(x => x.Ps);
         }
 
     }

@@ -12,12 +12,12 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         private string _header;
 
         public ListBaseEntityView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IBaseViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

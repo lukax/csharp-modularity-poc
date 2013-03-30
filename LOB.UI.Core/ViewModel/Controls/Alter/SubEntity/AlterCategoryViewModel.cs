@@ -5,10 +5,12 @@ using System.Diagnostics;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
+using Category = LOB.Domain.SubEntity.Category;
 
 #endregion
 
@@ -17,16 +19,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private readonly ICategoryFacade _facade;
 
-        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade facade)
-            : base(entity, repository) {
-            this._facade = facade;
-            this.Refresh();
+        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade facade,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _facade = facade;
+            Refresh();
         }
 
         public override void InitializeServices() {
-            this.Entity = new Category {Name = "", Description = "", Code = 0};
-            this._facade.SetEntity(this.Entity);
-            this._facade.ConfigureValidations();
+            Entity = new Category {Name = "", Description = "", Code = 0};
+            _facade.SetEntity(Entity);
+            _facade.ConfigureValidations();
         }
 
         public override void Refresh() {}
@@ -36,22 +39,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow.BeginTransaction()) {
+            using(Repository.Uow.BeginTransaction()) {
                 Debug.Write("Saving changes...");
-                this.Entity = this.Repository.SaveOrUpdate(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
             }
         }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: If viewState == Add : ..., If viewState == Update : ....
             IEnumerable<ValidationResult> results;
-            return this._facade.CanAdd(out results);
+            return _facade.CanAdd(out results);
         }
 
-        protected override void QuickSearch(object arg) {
-            throw new NotImplementedException();
-        }
+        protected override void QuickSearch(object arg) {}
 
         protected override void ClearEntity(object arg) {
             throw new NotImplementedException();

@@ -7,10 +7,10 @@ namespace LOB.Dao.Nhibernate.Mapping.Base {
     public class PersonMap : BaseEntityMap<Person> {
 
         public PersonMap() {
-            this.UseUnionSubclassForInheritanceMapping();
+            UseUnionSubclassForInheritanceMapping();
             References(x => x.Address).Cascade.All();
             References(x => x.ContactInfo).Cascade.All();
-            this.Map(x => x.Notes);
+            Map(x => x.Notes);
         }
 
     }

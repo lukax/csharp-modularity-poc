@@ -21,7 +21,7 @@ namespace LOB.Dao.Interface {
     public class SessionCreatorEventArgs : EventArgs {
 
         public SessionCreatorEventArgs(string message) {
-            this.Message = message;
+            Message = message;
         }
 
         public string Message { get; private set; }

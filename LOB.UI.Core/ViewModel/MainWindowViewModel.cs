@@ -16,11 +16,11 @@ namespace LOB.UI.Core.ViewModel {
 
         [InjectionConstructor] public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator,
             ICommandService commandService) {
-            this._container = container;
-            this._navigator = navigator;
-            this._commandService = commandService;
+            _container = container;
+            _navigator = navigator;
+            _commandService = commandService;
 
-            this.OpenTabCommand = new DelegateCommand(this.OpenTab);
+            OpenTabCommand = new DelegateCommand(OpenTab);
         }
 
         public string LicenseInformation {
@@ -37,7 +37,7 @@ namespace LOB.UI.Core.ViewModel {
 
         private void OpenTab(object arg) {
             OperationType oP = arg.ToString().ToOperationType();
-            this._navigator.ResolveView(oP).ResolveViewModel(oP).AddToRegion(RegionName.TabRegion);
+            _navigator.ResolveView(oP).ResolveViewModel(oP).AddToRegion(RegionName.TabRegion);
         }
 
         public override void InitializeServices() {}

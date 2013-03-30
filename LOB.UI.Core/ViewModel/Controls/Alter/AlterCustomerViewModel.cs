@@ -24,20 +24,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             IUnityContainer container, IFluentNavigator navigator, AlterLegalPersonViewModel alterLegalPersonViewModel,
             AlterNaturalPersonViewModel alterNaturalPersonViewModel, ICommandService commandService)
             : base(entity, repository) {
-            this._navigator = navigator;
-            this._container = container;
-            this._commandService = commandService;
-            this._alterLegalPersonViewModel = alterLegalPersonViewModel;
-            this._alterNaturalPersonViewModel = alterNaturalPersonViewModel;
+            _navigator = navigator;
+            _container = container;
+            _commandService = commandService;
+            _alterLegalPersonViewModel = alterLegalPersonViewModel;
+            _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             //default init customer as natural person
-            this.NaturalPersonCfg();
-            this.PersonTypeChanged();
+            NaturalPersonCfg();
+            PersonTypeChanged();
         }
 
         public override void InitializeServices() {}
 
         public override void Refresh() {
-            this.Entity = new Customer();
+            Entity = new Customer();
         }
 
         public override OperationType OperationType {
@@ -48,13 +48,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         private void PersonTypeChanged() {
-            this.Entity.PropertyChanged += (s, e) => {
-                switch(this.Entity.PersonType) {
+            Entity.PropertyChanged += (s, e) => {
+                switch(Entity.PersonType) {
                     case PersonType.Natural:
-                        this.NaturalPersonCfg();
+                        NaturalPersonCfg();
                         break;
                     case PersonType.Legal:
-                        this.LegalPersonCfg();
+                        LegalPersonCfg();
                         break;
                 }
             };
@@ -63,23 +63,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private async void LegalPersonCfg() {
             await Task.Delay(500);
             var viewL =
-                this._navigator.ResolveView(OperationType.AlterLegalPerson)
-                    .SetViewModel(this._alterLegalPersonViewModel)
-                    .GetView();
+                _navigator.ResolveView(OperationType.AlterLegalPerson)
+                          .SetViewModel(_alterLegalPersonViewModel)
+                          .GetView();
             //Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
 
-            this.Entity.Person = this._alterLegalPersonViewModel.Entity;
+            Entity.Person = _alterLegalPersonViewModel.Entity;
         }
 
         private async void NaturalPersonCfg() {
             await Task.Delay(500);
             var viewN =
-                this._navigator.ResolveView(OperationType.AlterNaturalPerson)
-                    .SetViewModel(this._alterNaturalPersonViewModel)
-                    .GetView();
+                _navigator.ResolveView(OperationType.AlterNaturalPerson)
+                          .SetViewModel(_alterNaturalPersonViewModel)
+                          .GetView();
             //Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
 
-            this.Entity.Person = this._alterNaturalPersonViewModel.Entity;
+            Entity.Person = _alterNaturalPersonViewModel.Entity;
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -91,10 +91,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow) {
-                this.Repository.Uow.BeginTransaction();
-                this.Repository.Uow.SaveOrUpdate(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+            using(Repository.Uow) {
+                Repository.Uow.BeginTransaction();
+                Repository.Uow.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
             }
         }
 
@@ -103,7 +103,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void ClearEntity(object arg) {
-            this.Entity = new Customer();
+            Entity = new Customer();
         }
 
     }

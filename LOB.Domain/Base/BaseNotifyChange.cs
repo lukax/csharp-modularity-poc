@@ -16,7 +16,7 @@ namespace LOB.Domain.Base {
         /// </summary>
         /// <param name="propertyName">Implementando nova ferramenta do .NET 4.5, Atributo que passa o nome do metodo caller em string</param>
         protected internal void OnPropertyChanged([CallerMemberName] string propertyName = null) {
-            if(this.PropertyChanged != null) this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if(PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

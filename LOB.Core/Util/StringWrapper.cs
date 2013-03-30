@@ -2,17 +2,17 @@
     public class StringWrapper {
 
         public StringWrapper(string s) {
-            this.Value = s;
+            Value = s;
         }
 
         public string Value { get; set; }
 
         protected bool Equals(StringWrapper other) {
-            return string.Equals(this.Value, other.Value);
+            return string.Equals(Value, other.Value);
         }
 
         public override string ToString() {
-            return this.Value;
+            return Value;
         }
 
         public static implicit operator string(StringWrapper e) {
@@ -24,11 +24,11 @@
         }
 
         public override bool Equals(object obj) {
-            return string.Equals(this.Value, obj.ToString());
+            return string.Equals(Value, obj.ToString());
         }
 
         public override int GetHashCode() {
-            return (this.Value != null ? this.Value.GetHashCode() : 0);
+            return (Value != null ? Value.GetHashCode() : 0);
         }
 
         public static bool operator ==(StringWrapper s, string s2) {

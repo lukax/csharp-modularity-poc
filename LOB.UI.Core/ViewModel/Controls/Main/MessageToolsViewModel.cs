@@ -23,24 +23,21 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private ICommand _closeCommand;
 
         public ICommand CloseCommand {
-            get {
-                return this._closeCommand ??
-                       (this._closeCommand = new DelegateCommand(this.CloseExecute, () => this.CanClose));
-            }
+            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
 
-            set { this._closeCommand = value; }
+            set { _closeCommand = value; }
         }
 
         public bool CanClose { get; set; }
 
         public void CloseExecute() {
-            this.eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
+            eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
         #endregion CloseExecute Command
         [InjectionConstructor] public MessageToolsViewModel(IUnityContainer container) {
-            this.Message = "Please wait...";
+            Message = "Please wait...";
             this.container = container;
-            this.eventAggregator = this.container.Resolve<IEventAggregator>();
+            eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
         public override OperationType OperationType {
@@ -48,9 +45,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {
-            this.Message = message;
-            this.CanClose = canClose;
-            this.IsRestrictive = isRestrictive;
+            Message = message;
+            CanClose = canClose;
+            IsRestrictive = isRestrictive;
         }
 
         public override void InitializeServices() {}

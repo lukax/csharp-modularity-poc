@@ -11,14 +11,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPayCheckView : UserControl, IBaseView {
 
         public AlterPayCheckView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterPayCheckViewModel; }
+            get { return DataContext as IAlterPayCheckViewModel; }
             set {
-                this.DataContext = value;
-                this.UcAlterBaseEntityView.DataContext = value;
+                DataContext = value;
+                UcAlterBaseEntityView.DataContext = value;
             }
         }
 

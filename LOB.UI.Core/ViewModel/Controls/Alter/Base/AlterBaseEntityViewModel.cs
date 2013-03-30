@@ -6,6 +6,8 @@ using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -13,13 +15,19 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
 
-        [InjectionConstructor] public AlterBaseEntityViewModel(T entity, IRepository repository) {
-            this.Repository = repository;
-            this.Entity = entity;
-            this.SaveChangesCommand = new DelegateCommand(this.SaveChanges, this.CanSaveChanges);
-            this.DiscardChangesCommand = new DelegateCommand(this.Cancel, this.CanCancel);
-            this.QuickSearchCommand = new DelegateCommand(this.QuickSearch);
-            this.ClearEntityCommand = new DelegateCommand(this.ClearEntity);
+        private readonly IEventAggregator _eventAggregator;
+        private readonly ILoggerFacade _loggerFacade;
+
+        [InjectionConstructor] public AlterBaseEntityViewModel(T entity, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
+            _eventAggregator = eventAggregator;
+            _loggerFacade = loggerFacade;
+            Repository = repository;
+            Entity = entity;
+            SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
+            DiscardChangesCommand = new DelegateCommand(Cancel, CanCancel);
+            QuickSearchCommand = new DelegateCommand(QuickSearch);
+            ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
 
         protected IRepository Repository { get; set; }
@@ -34,19 +42,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public ICommand SaveChangesCommand { get; set; }
 
         protected virtual bool CanSaveChanges(object arg) {
-            return this.Entity != null;
+            return Entity != null;
         }
 
         protected virtual bool CanCancel(object arg) {
-            return this.Entity != null;
+            return Entity != null;
         }
 
         protected virtual void SaveChanges(object arg) {
-            using(this.Repository.Uow.BeginTransaction()) {
+            using(Repository.Uow.BeginTransaction()) {
                 Debug.Write("Saving changes...");
-                this.Entity = this.Repository.SaveOrUpdate(this.Entity);
+                Entity = Repository.SaveOrUpdate(Entity);
             }
-            this.Cancel(arg);
+            Cancel(arg);
         }
 
         protected virtual void Cancel(object arg) {}

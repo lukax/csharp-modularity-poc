@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.Alter {
         private string _header;
 
         public AlterSaleView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterSaleViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IAlterSaleViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

@@ -21,16 +21,16 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.City.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Country.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.District.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Street.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.StreetComplement.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.StreetNumber.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.ZipCode.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.State.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Status.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.City.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Country.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.District.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Street.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.StreetComplement.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.StreetNumber.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.ZipCode.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.State.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

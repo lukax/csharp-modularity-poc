@@ -13,14 +13,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         private string _header;
 
         public AlterCategoryView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterCategoryViewModel; }
+            get { return DataContext as IAlterCategoryViewModel; }
             set {
-                this.DataContext = value;
-                this.UcAlterServiceView.DataContext = value;
+                DataContext = value;
+                UcAlterServiceView.DataContext = value;
             }
         }
 

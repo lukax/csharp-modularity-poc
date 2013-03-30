@@ -16,17 +16,17 @@ namespace LOB.Business.Logic.SubEntity {
         private Category _entity;
 
         public CategoryFacade(IServiceFacade serviceFacade) {
-            this._serviceFacade = serviceFacade;
+            _serviceFacade = serviceFacade;
         }
 
         public void SetEntity<T>(T entity) where T : Category {
-            this._serviceFacade.SetEntity(entity);
-            this._entity = entity;
+            _serviceFacade.SetEntity(entity);
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            this._serviceFacade.ConfigureValidations();
-            if(this._entity != null) {
+            _serviceFacade.ConfigureValidations();
+            if(_entity != null) {
                 //Category validations...
             }
         }
@@ -36,7 +36,7 @@ namespace LOB.Business.Logic.SubEntity {
             //TODO: custom validations for Category
 
             IEnumerable<ValidationResult> validationResults;
-            bool result = this._serviceFacade.CanAdd(out validationResults);
+            bool result = _serviceFacade.CanAdd(out validationResults);
             invalidFields = fields;
             return result;
         }
@@ -50,11 +50,11 @@ namespace LOB.Business.Logic.SubEntity {
         }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            ((IBaseEntityFacade) this._serviceFacade).SetEntity(entity);
+            ((IBaseEntityFacade) _serviceFacade).SetEntity(entity);
         }
 
         void IServiceFacade.SetEntity<T>(T entity) {
-            (this._serviceFacade).SetEntity(entity);
+            (_serviceFacade).SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {

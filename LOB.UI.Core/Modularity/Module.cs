@@ -27,57 +27,57 @@ namespace LOB.UI.Core.Modularity {
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) {
-            this._container = container;
+            _container = container;
         }
 
         public void Initialize() {
             #region Events
             #endregion
             #region Main
-            this._container.RegisterType<IColumnToolsViewModel, ColumnToolsViewModel>();
-            this._container.RegisterType<IHeaderToolsViewModel, HeaderToolsViewModel>();
+            _container.RegisterType<IColumnToolsViewModel, ColumnToolsViewModel>();
+            _container.RegisterType<IHeaderToolsViewModel, HeaderToolsViewModel>();
             #endregion
             #region Alter
-            this._container.RegisterType<IAlterBaseEntityViewModel, AlterBaseEntityViewModel<BaseEntity>>();
-            this._container.RegisterType<IAlterPersonViewModel, AlterPersonViewModel>();
-            this._container.RegisterType<IAlterServiceViewModel, AlterServiceViewModel>();
+            _container.RegisterType<IAlterBaseEntityViewModel, AlterBaseEntityViewModel<BaseEntity>>();
+            _container.RegisterType<IAlterPersonViewModel, AlterPersonViewModel>();
+            _container.RegisterType<IAlterServiceViewModel, AlterServiceViewModel>();
 
-            this._container.RegisterType<IAlterAddressViewModel, AlterAddressViewModel>();
-            this._container.RegisterType<IAlterCategoryViewModel, AlterCategoryViewModel>();
-            this._container.RegisterType<IAlterEmailViewModel, AlterEmailViewModel>();
-            this._container.RegisterType<IAlterPayCheckViewModel, AlterPayCheckViewModel>();
-            this._container.RegisterType<IAlterPhoneNumberViewModel, AlterPhoneNumberViewModel>();
+            _container.RegisterType<IAlterAddressViewModel, AlterAddressViewModel>();
+            _container.RegisterType<IAlterCategoryViewModel, AlterCategoryViewModel>();
+            _container.RegisterType<IAlterEmailViewModel, AlterEmailViewModel>();
+            _container.RegisterType<IAlterPayCheckViewModel, AlterPayCheckViewModel>();
+            _container.RegisterType<IAlterPhoneNumberViewModel, AlterPhoneNumberViewModel>();
 
-            this._container.RegisterType<IAlterCustomerViewModel, AlterCustomerViewModel>();
-            this._container.RegisterType<IAlterEmployeeViewModel, AlterEmployeeViewModel>();
-            this._container.RegisterType<IAlterLegalPersonViewModel, AlterLegalPersonViewModel>();
-            this._container.RegisterType<IAlterNaturalPersonViewModel, AlterNaturalPersonViewModel>();
-            this._container.RegisterType<IAlterProductViewModel, AlterProductViewModel>();
-            this._container.RegisterType<IAlterSaleViewModel, AlterSaleViewModel>();
+            _container.RegisterType<IAlterCustomerViewModel, AlterCustomerViewModel>();
+            _container.RegisterType<IAlterEmployeeViewModel, AlterEmployeeViewModel>();
+            _container.RegisterType<IAlterLegalPersonViewModel, AlterLegalPersonViewModel>();
+            _container.RegisterType<IAlterNaturalPersonViewModel, AlterNaturalPersonViewModel>();
+            _container.RegisterType<IAlterProductViewModel, AlterProductViewModel>();
+            _container.RegisterType<IAlterSaleViewModel, AlterSaleViewModel>();
             #endregion
             #region List
-            this._container.RegisterType<IListBaseEntityViewModel, ListBaseEntityViewModel<BaseEntity>>();
-            this._container.RegisterType<IListPersonViewModel, ListPersonViewModel>();
-            this._container.RegisterType<IListServiceViewModel, ListServiceViewModel>();
+            _container.RegisterType<IListBaseEntityViewModel, ListBaseEntityViewModel<BaseEntity>>();
+            _container.RegisterType<IListPersonViewModel, ListPersonViewModel>();
+            _container.RegisterType<IListServiceViewModel, ListServiceViewModel>();
 
-            this._container.RegisterType<IListAddressViewModel, ListAddressViewModel>();
-            this._container.RegisterType<IListCategoryViewModel, ListCategoryViewModel>();
-            this._container.RegisterType<IListEmailViewModel, ListEmailViewModel>();
-            this._container.RegisterType<IListPayCheckViewModel, ListPayCheckViewModel>();
-            this._container.RegisterType<IListPhoneNumberViewModel, ListPhoneNumberViewModel>();
+            _container.RegisterType<IListAddressViewModel, ListAddressViewModel>();
+            _container.RegisterType<IListCategoryViewModel, ListCategoryViewModel>();
+            _container.RegisterType<IListEmailViewModel, ListEmailViewModel>();
+            _container.RegisterType<IListPayCheckViewModel, ListPayCheckViewModel>();
+            _container.RegisterType<IListPhoneNumberViewModel, ListPhoneNumberViewModel>();
 
-            this._container.RegisterType<IListCustomerViewModel, ListCustomerViewModel>();
-            this._container.RegisterType<IListEmployeeViewModel, ListEmployeeViewModel>();
-            this._container.RegisterType<IListLegalPersonViewModel, ListLegalPersonViewModel>();
-            this._container.RegisterType<IListNaturalPersonViewModel, ListNaturalPersonViewModel>();
-            this._container.RegisterType<IListProductViewModel, ListProductViewModel>();
-            this._container.RegisterType<IListOpViewModel, ListOpViewModel>();
+            _container.RegisterType<IListCustomerViewModel, ListCustomerViewModel>();
+            _container.RegisterType<IListEmployeeViewModel, ListEmployeeViewModel>();
+            _container.RegisterType<IListLegalPersonViewModel, ListLegalPersonViewModel>();
+            _container.RegisterType<IListNaturalPersonViewModel, ListNaturalPersonViewModel>();
+            _container.RegisterType<IListProductViewModel, ListProductViewModel>();
+            _container.RegisterType<IListOpViewModel, ListOpViewModel>();
             //_container.RegisterType<IListSaleViewModel, ListSaleViewModel>();
             #endregion
-            this._container.RegisterInstance(this._container.Resolve<MessageToolsViewModel>());
+            _container.RegisterInstance(_container.Resolve<MessageToolsViewModel>());
 
 #if DEBUG
-            var log = this._container.Resolve<ILogger>();
+            var log = _container.Resolve<ILogger>();
             log.Log("UICoreModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }

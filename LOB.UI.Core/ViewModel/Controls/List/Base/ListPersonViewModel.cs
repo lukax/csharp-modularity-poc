@@ -20,8 +20,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

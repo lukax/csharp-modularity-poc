@@ -8,7 +8,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class EmailMap : BaseEntityMap<Email> {
 
         public EmailMap() {
-            this.Map(x => x.Value);
+            Map(x => x.Value);
         }
 
     }

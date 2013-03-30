@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
         private string _header;
 
         public ListPhoneNumberView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IListPhoneNumberViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IListPhoneNumberViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

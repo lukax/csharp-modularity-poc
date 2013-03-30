@@ -17,7 +17,7 @@ namespace LOB.Domain.Base {
 
         [AllowNull] public virtual string this[string columnName] {
             get {
-                var firstOrDefault = this.GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
+                var firstOrDefault = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
                 return firstOrDefault != null ? firstOrDefault.ErrorDescription : null;
             }
         }
@@ -25,19 +25,19 @@ namespace LOB.Domain.Base {
         [AllowNull] public virtual string Error { get; set; }
 
         public void AddValidation(ValidationDelegate func) {
-            this._validationFuncs.Add(func);
+            _validationFuncs.Add(func);
         }
 
         public void RemoveValidation(ValidationDelegate func) {
-            if(this._validationFuncs.Contains(func)) this._validationFuncs.Remove(func);
+            if(_validationFuncs.Contains(func)) _validationFuncs.Remove(func);
         }
 
         public IList<ValidationResult> GetValidations(string propertyName) {
             return
-                this._validationFuncs.Select(validationDel => validationDel(this, propertyName))
-                    .Where(result => result != null)
-                    .Where(result => result.FieldName == propertyName)
-                    .ToList();
+                _validationFuncs.Select(validationDel => validationDel(this, propertyName))
+                                .Where(result => result != null)
+                                .Where(result => result.FieldName == propertyName)
+                                .ToList();
         }
 
     }

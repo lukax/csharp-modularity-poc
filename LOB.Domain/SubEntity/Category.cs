@@ -8,7 +8,7 @@ namespace LOB.Domain.SubEntity {
     [Serializable] public class Category : Service {
 
         public override string ToString() {
-            return this.Name;
+            return Name;
         }
 
     }

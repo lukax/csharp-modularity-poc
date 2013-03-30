@@ -14,13 +14,13 @@ namespace LOB.UI.Core.View.Controls.Main {
     public partial class ColumnToolsView : UserControl, IBaseView {
 
         public ColumnToolsView(IColumnToolsViewModel viewModel) {
-            this.InitializeComponent();
-            this.ViewModel = viewModel;
+            InitializeComponent();
+            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IBaseViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

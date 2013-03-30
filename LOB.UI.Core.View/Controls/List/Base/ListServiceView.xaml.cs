@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         private string _header;
 
         public ListServiceView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IListServiceViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IListServiceViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

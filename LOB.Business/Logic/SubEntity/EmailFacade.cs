@@ -17,25 +17,25 @@ namespace LOB.Business.Logic.SubEntity {
         private Email _entity;
 
         public EmailFacade(IBaseEntityFacade baseEntityFacade) {
-            this._baseEntityFacade = baseEntityFacade;
+            _baseEntityFacade = baseEntityFacade;
         }
 
         public void SetEntity<T>(T entity) where T : Email {
-            this._entity = entity;
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            this._baseEntityFacade.ConfigureValidations();
-            if(this._entity != null)
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Value.Length < 1
-                                               ? new ValidationResult("Value", Strings.Error_Field_Empty)
-                                               : null);
+            _baseEntityFacade.ConfigureValidations();
+            if(_entity != null)
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Value.Length < 1
+                                          ? new ValidationResult("Value", Strings.Error_Field_Empty)
+                                          : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = this.ProcessBasicValidations(out invalidFields);
+            bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
@@ -49,12 +49,12 @@ namespace LOB.Business.Logic.SubEntity {
         }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            this._baseEntityFacade.SetEntity(entity);
+            _baseEntityFacade.SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
-            fields.AddRange(this._entity.GetValidations("Value"));
+            fields.AddRange(_entity.GetValidations("Value"));
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)

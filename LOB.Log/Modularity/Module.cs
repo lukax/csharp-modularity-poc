@@ -12,12 +12,12 @@ namespace LOB.Log.Modularity {
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) {
-            this._container = container;
+            _container = container;
         }
 
         public void Initialize() {
-            this._container.RegisterType<ILogger, Logger>();
-            this._container.RegisterType<ILoggerFacade, Logger>();
+            _container.RegisterType<ILogger, Logger>();
+            _container.RegisterType<ILoggerFacade, Logger>();
         }
 
     }

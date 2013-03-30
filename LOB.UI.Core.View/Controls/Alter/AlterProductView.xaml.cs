@@ -15,14 +15,14 @@ namespace LOB.UI.Core.View.Controls.Alter {
         private string _header;
 
         public AlterProductView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterProductViewModel; }
+            get { return DataContext as IAlterProductViewModel; }
             set {
-                this.DataContext = value;
-                this.UcAlterBaseEntityView.DataContext = value;
+                DataContext = value;
+                UcAlterBaseEntityView.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }
@@ -32,8 +32,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public int Index {
-            get { return ((AlterBaseEntityViewModel<Product>) this.DataContext).Index; }
-            set { ((AlterBaseEntityViewModel<Product>) this.DataContext).Index = value; }
+            get { return ((AlterBaseEntityViewModel<Product>) DataContext).Index; }
+            set { ((AlterBaseEntityViewModel<Product>) DataContext).Index = value; }
         }
 
         public void InitializeServices() {}

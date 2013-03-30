@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
         private string _header;
 
         public ListEmailView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IListEmailViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IListEmailViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

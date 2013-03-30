@@ -8,9 +8,9 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class PhoneNumberMap : BaseEntityMap<PhoneNumber> {
 
         public PhoneNumberMap() {
-            this.Map(x => x.Number);
-            this.Map(x => x.PhoneNumberType);
-            this.Map(x => x.Description);
+            Map(x => x.Number);
+            Map(x => x.PhoneNumberType);
+            Map(x => x.Description);
         }
 
     }

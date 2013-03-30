@@ -21,13 +21,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Ps.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.SpeakWith.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.WebSite.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Status.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Emails.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.PhoneNumbers.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Ps.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.SpeakWith.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.WebSite.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Status.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Emails.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.PhoneNumbers.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

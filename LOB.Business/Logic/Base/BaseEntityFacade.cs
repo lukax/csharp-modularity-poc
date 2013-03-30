@@ -14,16 +14,16 @@ namespace LOB.Business.Logic.Base {
         private BaseEntity _entity;
 
         public void SetEntity<T>(T entity) where T : BaseEntity {
-            this._entity = entity;
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            if(this._entity != null)
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Code < 0
-                                               ? new ValidationResult("Code", Strings.Error_Field_WrongFormat)
-                                               : null);
+            if(_entity != null)
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Code < 0
+                                          ? new ValidationResult("Code", Strings.Error_Field_WrongFormat)
+                                          : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {

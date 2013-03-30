@@ -18,14 +18,14 @@ namespace LOB.UI.Core.View.Controls.List {
         private readonly IEventAggregator _eventAggregator;
 
         public ListOpView(IEventAggregator eventAggregator, IListOpViewModel viewModel) {
-            this._eventAggregator = eventAggregator;
-            this.InitializeComponent();
-            this.ViewModel = viewModel;
+            _eventAggregator = eventAggregator;
+            InitializeComponent();
+            ViewModel = viewModel;
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IListOpViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IListOpViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {
@@ -35,8 +35,7 @@ namespace LOB.UI.Core.View.Controls.List {
         public int Index { get; set; }
 
         public void InitializeServices() {
-            this._eventAggregator.GetEvent<RefreshEvent>()
-                .Subscribe(o => { if(o == OperationType.ListOp) this.Refresh(); });
+            _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o == OperationType.ListOp) Refresh(); });
         }
 
         public void Refresh() {

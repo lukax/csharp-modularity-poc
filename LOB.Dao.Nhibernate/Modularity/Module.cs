@@ -13,18 +13,18 @@ namespace LOB.Dao.Nhibernate.Modularity {
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) {
-            this._container = container;
+            _container = container;
         }
 
         public void Initialize() {
             //_container.RegisterType<ISessionCreator, SessionCreator>();
-            this._container.RegisterInstance<ISessionCreator>(this._container.Resolve<SessionCreator>());
+            _container.RegisterInstance<ISessionCreator>(_container.Resolve<SessionCreator>());
             //_container.RegisterType<IUnityOfWork, UnityOfWork>();
-            this._container.RegisterInstance<IUnityOfWork>(this._container.Resolve<UnityOfWork>());
-            this._container.RegisterType<IRepository, Repository>();
+            _container.RegisterInstance<IUnityOfWork>(_container.Resolve<UnityOfWork>());
+            _container.RegisterType<IRepository, Repository>();
 
 #if DEBUG
-            var log = this._container.Resolve<ILogger>();
+            var log = _container.Resolve<ILogger>();
             log.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }

@@ -13,18 +13,18 @@ namespace LOB.UI.Core.View.Controls.Alter {
         private string _header;
 
         public AlterLegalPersonView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterLegalPersonViewModel; }
+            get { return DataContext as IAlterLegalPersonViewModel; }
             set {
-                this.DataContext = value;
+                DataContext = value;
                 var localViewModel = value as IAlterLegalPersonViewModel;
                 if(localViewModel != null) {
-                    this.UcAlterPersonView.DataContext = value;
-                    this.UcAlterPersonView.UcAlterAddressView.DataContext = localViewModel.AlterAddressViewModel;
-                    this.UcAlterPersonView.UcAlterContactInfoView.DataContext = localViewModel.AlterContactInfoViewModel;
+                    UcAlterPersonView.DataContext = value;
+                    UcAlterPersonView.UcAlterAddressView.DataContext = localViewModel.AlterAddressViewModel;
+                    UcAlterPersonView.UcAlterContactInfoView.DataContext = localViewModel.AlterContactInfoViewModel;
                 }
             }
         }

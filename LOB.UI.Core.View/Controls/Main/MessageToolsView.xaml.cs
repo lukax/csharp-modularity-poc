@@ -14,18 +14,18 @@ namespace LOB.UI.Core.View.Controls.Main {
     public partial class MessageToolsView : UserControl, IBaseView {
 
         public MessageToolsView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         [AllowNull] public IBaseViewModel ViewModel {
             get {
                 IBaseViewModel result = null;
-                this.Dispatcher.Invoke(() => this.DataContext);
+                Dispatcher.Invoke(() => DataContext);
                 return result;
             }
             set {
                 IBaseViewModel result = value;
-                this.Dispatcher.Invoke(() => this.DataContext = result);
+                Dispatcher.Invoke(() => DataContext = result);
                 //this.DataContext = value;
                 //var vm = value as MessageToolsViewModel;
                 //if (vm != null)

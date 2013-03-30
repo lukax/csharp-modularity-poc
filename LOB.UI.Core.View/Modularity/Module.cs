@@ -25,28 +25,28 @@ namespace LOB.UI.Core.View.Modularity {
             _mainRegionController;
 
         public Module(IUnityContainer container) {
-            this._container = container;
+            _container = container;
         }
 
         public void Initialize() {
-            this._container.RegisterType<IFluentNavigator, FluentNavigator>();
-            this._container.RegisterType<IRegionAdapter, RegionAdapter>();
-            this._container.RegisterInstance(CommandService.Default);
+            _container.RegisterType<IFluentNavigator, FluentNavigator>();
+            _container.RegisterType<IRegionAdapter, RegionAdapter>();
+            _container.RegisterInstance(CommandService.Default);
             //_container.RegisterInstance<MessageToolsView>(new MessageToolsView()
             //    {
             //        ViewModel = _container.Resolve<MessageToolsViewModel>()
             //    });
 
-            var regionManager = this._container.Resolve<IRegionManager>();
+            var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolsView));
             regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolsView));
 
-            CloseTabItemAction.Container = this._container.Resolve<IServiceLocator>();
+            CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
 
             //Init controller
-            this._mainRegionController = this._container.Resolve<MainRegionController>();
+            _mainRegionController = _container.Resolve<MainRegionController>();
 #if DEBUG
-            var log = this._container.Resolve<ILogger>();
+            var log = _container.Resolve<ILogger>();
             log.Log("UICoreViewModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }

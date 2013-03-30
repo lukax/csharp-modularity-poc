@@ -12,7 +12,7 @@ namespace LOB.Domain.SubEntity {
         public string Description { get; set; }
 
         public override string ToString() {
-            return this.Number.ToString();
+            return Number.ToString();
         }
 
     }

@@ -18,39 +18,39 @@ namespace LOB.Business.Logic {
         private LegalPerson _entity;
 
         public LegalPersonFacade(IBaseEntityFacade baseEntityFacade, IPersonFacade personFacade) {
-            this._baseEntityFacade = baseEntityFacade;
-            this._personFacade = personFacade;
+            _baseEntityFacade = baseEntityFacade;
+            _personFacade = personFacade;
         }
 
         public void SetEntity<T>(T entity) where T : LegalPerson {
-            this._baseEntityFacade.SetEntity(entity);
-            this._entity = entity;
+            _baseEntityFacade.SetEntity(entity);
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            this._baseEntityFacade.ConfigureValidations();
-            this._personFacade.ConfigureValidations();
-            if(this._entity != null) {
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.CorporateName.Length < 1
-                                               ? new ValidationResult("CorporateName", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.TradingName.Length < 1
-                                               ? new ValidationResult("TradingName", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Cnpj.ToString().Length < 1
-                                               ? new ValidationResult("Cnpj", Strings.Error_Field_Empty)
-                                               : null);
+            _baseEntityFacade.ConfigureValidations();
+            _personFacade.ConfigureValidations();
+            if(_entity != null) {
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.CorporateName.Length < 1
+                                          ? new ValidationResult("CorporateName", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.TradingName.Length < 1
+                                          ? new ValidationResult("TradingName", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Cnpj.ToString().Length < 1
+                                          ? new ValidationResult("Cnpj", Strings.Error_Field_Empty)
+                                          : null);
             }
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = this.ProcessBasicValidations(out invalidFields);
+            bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
@@ -64,18 +64,18 @@ namespace LOB.Business.Logic {
         }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            this._baseEntityFacade.SetEntity(entity);
+            _baseEntityFacade.SetEntity(entity);
         }
 
         void IPersonFacade.SetEntity<T>(T entity) {
-            this._personFacade.SetEntity(entity);
+            _personFacade.SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
-            fields.AddRange(this._entity.GetValidations("CorporateName"));
-            fields.AddRange(this._entity.GetValidations("TradingName"));
-            fields.AddRange(this._entity.GetValidations("Cnpj"));
+            fields.AddRange(_entity.GetValidations("CorporateName"));
+            fields.AddRange(_entity.GetValidations("TradingName"));
+            fields.AddRange(_entity.GetValidations("Cnpj"));
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)

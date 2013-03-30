@@ -14,14 +14,14 @@ namespace LOB.UI.Core.View.Controls.Alter {
         private string _header;
 
         [InjectionConstructor] public AlterCustomerView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as AlterCustomerViewModel; }
+            get { return DataContext as AlterCustomerViewModel; }
             set {
-                this.DataContext = value;
-                this.UcAlterBaseEntity.DataContext = value;
+                DataContext = value;
+                UcAlterBaseEntity.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",o => { UcAlterPersonDetails.Content = o; });
                 //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",o => Messenger.Default.Send("Cancel"));
             }

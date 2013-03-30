@@ -11,12 +11,12 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPhoneNumberView : UserControl, IBaseView {
 
         public AlterPhoneNumberView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterPhoneNumberViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IAlterPhoneNumberViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

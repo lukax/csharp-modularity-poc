@@ -15,8 +15,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public ListCustomerViewModel(Customer entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) {
-            this.Entity = entity;
-            if(this.Entity.Person == null) throw new ArgumentException("Entity has not defined a person");
+            Entity = entity;
+            if(Entity.Person == null) throw new ArgumentException("Entity has not defined a person");
         }
 
         public new Expression<Func<Employee, bool>> SearchCriteria {
@@ -24,16 +24,16 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Title.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.HireDate.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Title.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.FirstName.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.LastName.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.NickName.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Notes.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Rg.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Cpf.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Title.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.HireDate.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Title.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.NickName.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Rg.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

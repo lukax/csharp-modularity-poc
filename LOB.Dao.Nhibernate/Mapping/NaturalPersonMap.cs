@@ -8,13 +8,13 @@ namespace LOB.Dao.Nhibernate.Mapping {
     public class NaturalPersonMap : SubclassMap<NaturalPerson> {
 
         public NaturalPersonMap() {
-            this.Map(x => x.FirstName);
-            this.Map(x => x.LastName);
-            this.Map(x => x.NickName);
-            this.Map(x => x.BirthDate);
-            this.Map(x => x.Cpf);
-            this.Map(x => x.Rg);
-            this.Map(x => x.RgUf);
+            Map(x => x.FirstName);
+            Map(x => x.LastName);
+            Map(x => x.NickName);
+            Map(x => x.BirthDate);
+            Map(x => x.Cpf);
+            Map(x => x.Rg);
+            Map(x => x.RgUf);
         }
 
     }

@@ -6,6 +6,8 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -15,8 +17,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private IUnityContainer _container;
 
-        [InjectionConstructor] public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository)
-            : base(entity, repository) {}
+        [InjectionConstructor] public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {}
 
         public override void InitializeServices() {
             throw new NotImplementedException();
@@ -34,10 +37,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow) {
-                this.Repository.Uow.BeginTransaction();
-                this.Repository.SaveOrUpdate(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+            using(Repository.Uow) {
+                Repository.Uow.BeginTransaction();
+                Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
             }
         }
 
@@ -46,7 +49,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void ClearEntity(object arg) {
-            this.Entity = new LegalPerson();
+            Entity = new LegalPerson();
         }
 
     }

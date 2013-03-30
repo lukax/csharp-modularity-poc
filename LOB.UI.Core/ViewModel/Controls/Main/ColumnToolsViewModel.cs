@@ -18,11 +18,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public ColumnToolsViewModel(IUnityContainer container, ICommandService commandService,
             IEventAggregator eventAggregator) {
-            this._container = container;
-            this._commandService = commandService;
-            this._eventAggregator = eventAggregator;
-            this.OperationCommand = new DelegateCommand(this.ShowOperations);
-            this.ShopCommand = new DelegateCommand(this.ShowShop);
+            _container = container;
+            _commandService = commandService;
+            _eventAggregator = eventAggregator;
+            OperationCommand = new DelegateCommand(ShowOperations);
+            ShopCommand = new DelegateCommand(ShowShop);
         }
 
         public ICommand OperationCommand { get; set; }
@@ -40,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void ShowOperations(object arg) {
-            this._eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.ListOp);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.ListOp);
         }
 
     }

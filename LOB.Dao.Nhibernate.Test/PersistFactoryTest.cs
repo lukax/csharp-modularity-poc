@@ -18,7 +18,7 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod] public void GetInstanceTest() {
             new PersistFactory(this);
-            Assert.IsNotNull(this.Repository);
+            Assert.IsNotNull(Repository);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")] private class
@@ -33,14 +33,14 @@ namespace LOB.Dao.Nhibernate.Test {
             public PersistFactory(object obj) {
                 Debug.WriteLine("Tryng to load dll from: " + Assembly.GetExecutingAssembly().Location);
 
-                this._catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()),
-                                                     new AssemblyCatalog(Assembly.LoadFrom("LOB.Dao.Nhibernate.dll")));
-                this._container = new CompositionContainer(this._catalog);
+                _catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()),
+                                                new AssemblyCatalog(Assembly.LoadFrom("LOB.Dao.Nhibernate.dll")));
+                _container = new CompositionContainer(_catalog);
                 //_container.SatisfyImportsOnce(this);
                 //_container.SatisfyImportsOnce(obj);
-                this._container.ComposeParts(this, obj);
+                _container.ComposeParts(this, obj);
 
-                Assert.AreEqual(this.ccontainer, this.inner.container);
+                Assert.AreEqual(ccontainer, inner.container);
             }
 
             /// <summary>
@@ -48,15 +48,15 @@ namespace LOB.Dao.Nhibernate.Test {
             /// </summary>
             /// <param name="obj">Object to compose</param>
             public void Compose(object obj) {
-                this._container.ComposeParts(obj);
+                _container.ComposeParts(obj);
             }
 
             public IRepository GetInstance(PersistType type = PersistType.MySql) {
-                if(type == PersistType.MySql) return this._container.GetExportedValue<IRepository>("Sql");
+                if(type == PersistType.MySql) return _container.GetExportedValue<IRepository>("Sql");
 
-                if(type == PersistType.Memory) return this._container.GetExportedValue<IRepository>("GetList");
+                if(type == PersistType.Memory) return _container.GetExportedValue<IRepository>("GetList");
 
-                if(type == PersistType.File) return this._container.GetExportedValue<IRepository>("File");
+                if(type == PersistType.File) return _container.GetExportedValue<IRepository>("File");
 
                 throw new ArgumentNullException();
             }

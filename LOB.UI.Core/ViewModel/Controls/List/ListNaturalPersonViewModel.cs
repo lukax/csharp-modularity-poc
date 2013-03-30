@@ -23,13 +23,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.FirstName.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.LastName.ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.NickName.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Notes.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Rg.ToString().ToUpper().Contains(this.Search.ToUpper()) ||
-                         arg.Cpf.ToString().ToUpper().Contains(this.Search.ToUpper()));
+                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.NickName.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Rg.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
                 }
                 catch(FormatException) {
                     return arg => false;

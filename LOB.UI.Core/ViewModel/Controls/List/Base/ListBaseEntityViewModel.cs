@@ -28,14 +28,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
-                    var converted = Convert.ToInt32(this.Search);
-                    return this._searchCriteria ?? (arg => arg.Code == converted);
+                    var converted = Convert.ToInt32(Search);
+                    return _searchCriteria ?? (arg => arg.Code == converted);
                 }
                 catch(FormatException) {
                     return arg => false;
                 }
             }
-            set { this._searchCriteria = value; }
+            set { _searchCriteria = value; }
         }
         public ICommand SaveCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
@@ -48,25 +48,25 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         [InjectionConstructor] protected ListBaseEntityViewModel(T entity, IRepository repository,
             IEventAggregator eventAggregator) {
-            this._eventAggregator = eventAggregator;
-            this.Repository = repository;
-            this.Entity = entity;
-            this.SaveCommand = new DelegateCommand(this.Save, this.CanSave);
-            this.UpdateCommand = new DelegateCommand(this.Update, this.CanUpdate);
-            this.DeleteCommand = new DelegateCommand(this.Delete, this.CanDelete);
-            this.FetchCommand = new DelegateCommand(this.Fetch);
+            _eventAggregator = eventAggregator;
+            Repository = repository;
+            Entity = entity;
+            SaveCommand = new DelegateCommand(Save, CanSave);
+            UpdateCommand = new DelegateCommand(Update, CanUpdate);
+            DeleteCommand = new DelegateCommand(Delete, CanDelete);
+            FetchCommand = new DelegateCommand(Fetch);
         }
 
         public int UpdateInterval {
-            get { return this._updateInterval == default(int) ? 1000 : this._updateInterval; }
-            set { this._updateInterval = value; }
+            get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
+            set { _updateInterval = value; }
         }
 
         public override void InitializeServices() {
-            this._worker.DoWork += this.UpdateList;
-            this._worker.WorkerSupportsCancellation = true;
-            this._worker.WorkerReportsProgress = true;
-            this._worker.RunWorkerAsync();
+            _worker.DoWork += UpdateList;
+            _worker.WorkerSupportsCancellation = true;
+            _worker.WorkerReportsProgress = true;
+            _worker.RunWorkerAsync();
         }
 
         /// <summary>
@@ -74,46 +74,46 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         /// </summary>
         private async void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
             //TODO: Dynamic set based on selected tab
-            while(!this._worker.CancellationPending) {
-                await Task.Delay(this.UpdateInterval);
+            while(!_worker.CancellationPending) {
+                await Task.Delay(UpdateInterval);
                 IList<T> localList;
-                this._eventAggregator.GetEvent<ReportProgressEvent>()
-                    .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 0});
-                if(string.IsNullOrEmpty(this.Search)) localList = (this.Repository.GetList<T>()).ToList();
-                else localList = (this.Repository.GetList(this.SearchCriteria)).ToList();
-                if(this.Entitys == null || !localList.SequenceEqual(this.Entitys)) {
-                    this.Entitys = localList;
-                    this._eventAggregator.GetEvent<ReportProgressEvent>()
-                        .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 100});
+                _eventAggregator.GetEvent<ReportProgressEvent>()
+                                .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 0});
+                if(string.IsNullOrEmpty(Search)) localList = (Repository.GetList<T>()).ToList();
+                else localList = (Repository.GetList(SearchCriteria)).ToList();
+                if(Entitys == null || !localList.SequenceEqual(Entitys)) {
+                    Entitys = localList;
+                    _eventAggregator.GetEvent<ReportProgressEvent>()
+                                    .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 100});
                 }
                 else
-                    this._eventAggregator.GetEvent<ReportProgressEvent>()
-                        .Publish(new Progress {Message = Strings.Progress_List_Updated});
+                    _eventAggregator.GetEvent<ReportProgressEvent>()
+                                    .Publish(new Progress {Message = Strings.Progress_List_Updated});
             }
         }
 
         protected virtual void Save(object arg) {}
 
         protected virtual bool CanSave(object arg) {
-            return this.Entity != null;
+            return Entity != null;
         }
 
         protected virtual void Update(object arg) {}
 
         protected virtual bool CanUpdate(object arg) {
-            return this.Entity != null;
+            return Entity != null;
         }
 
         protected virtual void Delete(object arg) {
-            this.Repository.Delete(this.Entity);
+            Repository.Delete(Entity);
         }
 
         protected virtual bool CanDelete(object arg) {
-            return this.Entity != null;
+            return Entity != null;
         }
 
         protected virtual void Fetch(object arg = null) {
-            this.Entitys = this.Repository.GetList<T>().ToList();
+            Entitys = Repository.GetList<T>().ToList();
         }
 
     }

@@ -29,14 +29,14 @@ namespace LOB.UI.Core.View.Actions {
                                                                                                     default(TabItem)));
 
         public TabControl TabControl {
-            get { return (TabControl) this.GetValue(TabControlProperty); }
-            set { this.SetValue(TabControlProperty, value); }
+            get { return (TabControl) GetValue(TabControlProperty); }
+            set { SetValue(TabControlProperty, value); }
         }
 
         public TabItem TabItem {
-            get { return (TabItem) this.GetValue(TabItemProperty); }
+            get { return (TabItem) GetValue(TabItemProperty); }
             set {
-                this.SetValue(TabItemProperty, value);
+                SetValue(TabItemProperty, value);
                 var view = value as IBaseView;
                 if(view != null) //TODO: Get proper Index and assign to view
                     ;
@@ -48,20 +48,20 @@ namespace LOB.UI.Core.View.Actions {
         public static IServiceLocator Container { get; set; }
 
         protected override void Invoke(object parameter) {
-            if(this.TabControl.Items.Contains(this.TabItem))
+            if(TabControl.Items.Contains(TabItem))
                 if(Container != null) {
-                    var view = this.TabItem as IBaseView;
+                    var view = TabItem as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
                     if(view != null) region.RemoveView(view.OperationType, RegionName.TabRegion);
                 }
-                else this.TabControl.Items.Remove(this.TabItem);
-            else if(this.TabControl.Items.Contains(this.TabItem.Content))
+                else TabControl.Items.Remove(TabItem);
+            else if(TabControl.Items.Contains(TabItem.Content))
                 if(Container != null) {
-                    var view = this.TabItem.Content as IBaseView;
+                    var view = TabItem.Content as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
                     if(view != null) region.RemoveView(view.OperationType, RegionName.TabRegion);
                 }
-                else this.TabControl.Items.Remove(this.TabItem.Content);
+                else TabControl.Items.Remove(TabItem.Content);
         }
 
     }

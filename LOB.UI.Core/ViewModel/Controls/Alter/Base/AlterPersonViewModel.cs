@@ -5,6 +5,8 @@ using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -12,22 +14,19 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
 
-        private IUnityContainer _container;
-
         [InjectionConstructor] public AlterPersonViewModel(Person entity, Address address, ContactInfo contactInfo,
-            IRepository repository, AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel, IUnityContainer container)
-            : base(entity, repository) {
-            this._container = container;
-            this.AlterAddressViewModel = alterAddressViewModel;
-            this.AlterContactInfoViewModel = alterContactInfoViewModel;
+            AlterAddressViewModel alterAddressViewModel, AlterContactInfoViewModel alterContactInfoViewModel,
+            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            AlterAddressViewModel = alterAddressViewModel;
+            AlterContactInfoViewModel = alterContactInfoViewModel;
 
-            this.Entity.Address = address;
-            this.Entity.ContactInfo = contactInfo;
+            Entity.Address = address;
+            Entity.ContactInfo = contactInfo;
             //TODO: Use business logic to set default params
-            if(this.Entity.Address.State == null && this.Entity.Address.Country == null) {
-                this.Entity.Address.Country = "Brasil";
-                this.Entity.Address.State = UfBrDictionary.Ufs[UfBr.RJ];
+            if(Entity.Address.State == null && Entity.Address.Country == null) {
+                Entity.Address.Country = "Brasil";
+                Entity.Address.State = UfBrDictionary.Ufs[UfBr.RJ];
             }
 
             //AlterAddressViewModel = Entity.Address;
@@ -42,10 +41,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public override void Refresh() {}
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow) {
-                this.Repository.Uow.BeginTransaction();
-                this.Repository.SaveOrUpdate(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+            using(Repository.Uow) {
+                Repository.Uow.BeginTransaction();
+                Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
             }
         }
 

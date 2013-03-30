@@ -7,9 +7,9 @@ namespace LOB.Dao.Nhibernate.Mapping.Base {
     public class ServiceMap : BaseEntityMap<Service> {
 
         public ServiceMap() {
-            this.UseUnionSubclassForInheritanceMapping();
-            this.Map(x => x.Description);
-            this.Map(x => x.Name);
+            UseUnionSubclassForInheritanceMapping();
+            Map(x => x.Description);
+            Map(x => x.Name);
         }
 
     }

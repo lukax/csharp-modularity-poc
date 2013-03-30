@@ -13,13 +13,13 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         private string _header;
 
         public AlterAddressView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterAddressViewModel; }
+            get { return DataContext as IAlterAddressViewModel; }
             set {
-                this.DataContext = value;
+                DataContext = value;
                 //UcAlterBaseEntityView.DataContext = value;
             }
         }

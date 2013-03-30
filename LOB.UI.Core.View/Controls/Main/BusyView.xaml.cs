@@ -13,7 +13,7 @@ namespace LOB.UI.Core.View.Controls.Main {
     public partial class BusyView : UserControl, IBaseView {
 
         public BusyView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public OperationType OperationType { get; private set; }

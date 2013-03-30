@@ -27,7 +27,7 @@ namespace LOB.UI.Interface.Infrastructure {
     public sealed class OnOpenViewEventArgs : EventArgs {
 
         public OnOpenViewEventArgs(IBaseView baseView) {
-            this.BaseView = baseView;
+            BaseView = baseView;
         }
 
         public IBaseView BaseView { get; private set; }

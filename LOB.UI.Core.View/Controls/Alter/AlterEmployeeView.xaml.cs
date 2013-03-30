@@ -15,27 +15,27 @@ namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterEmployeeView : UserControl, IBaseView {
 
         public AlterEmployeeView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         [Dependency] private IEventAggregator _eventAggregator { get; set; }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterEmployeeViewModel; }
+            get { return DataContext as IAlterEmployeeViewModel; }
             set {
-                this.DataContext = value;
-                this.UcAlterBaseEntityView.DataContext = value;
-                this.UcAlterNaturalPersonView.DataContext = value;
+                DataContext = value;
+                UcAlterBaseEntityView.DataContext = value;
+                UcAlterNaturalPersonView.DataContext = value;
                 var localViewModel = value as IAlterEmployeeViewModel;
                 if(localViewModel != null) {
-                    this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
+                    UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
                         localViewModel.AlterAddressViewModel;
-                    this.UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
+                    UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
                         localViewModel.AlterContactInfoViewModel;
                 }
 
-                this._eventAggregator.GetEvent<SaveEvent>()
-                    .Subscribe((s) => this._eventAggregator.GetEvent<CancelEvent>().Publish(null));
+                _eventAggregator.GetEvent<SaveEvent>()
+                                .Subscribe((s) => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 
@@ -44,8 +44,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public int Index {
-            get { return ((AlterEmployeeViewModel) this.DataContext).Index; }
-            set { ((AlterEmployeeViewModel) this.DataContext).Index = value; }
+            get { return ((AlterEmployeeViewModel) DataContext).Index; }
+            set { ((AlterEmployeeViewModel) DataContext).Index = value; }
         }
 
         public void InitializeServices() {}

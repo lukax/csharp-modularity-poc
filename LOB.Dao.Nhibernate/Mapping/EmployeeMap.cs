@@ -9,10 +9,10 @@ namespace LOB.Dao.Nhibernate.Mapping {
 
         public EmployeeMap() {
             References(x => x.WorksIn);
-            this.Map(x => x.Title);
-            this.Map(x => x.HireDate);
+            Map(x => x.Title);
+            Map(x => x.HireDate);
             References(x => x.PayCheck).Cascade.All();
-            this.Map(x => x.Password);
+            Map(x => x.Password);
         }
 
     }

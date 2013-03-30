@@ -18,49 +18,49 @@ namespace LOB.Business.Logic {
         private NaturalPerson _entity;
 
         public NaturalPersonFacade(IBaseEntityFacade baseEntityFacade, IPersonFacade personFacade) {
-            this._baseEntityFacade = baseEntityFacade;
-            this._personFacade = personFacade;
+            _baseEntityFacade = baseEntityFacade;
+            _personFacade = personFacade;
         }
 
         public void SetEntity<T>(T entity) where T : NaturalPerson {
-            this._baseEntityFacade.SetEntity(entity);
-            this._entity = entity;
+            _baseEntityFacade.SetEntity(entity);
+            _entity = entity;
         }
 
         public void ConfigureValidations() {
-            this._baseEntityFacade.ConfigureValidations();
-            this._personFacade.ConfigureValidations();
-            if(this._entity != null) {
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.FirstName.Length < 1
-                                               ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.LastName.Length < 1
-                                               ? new ValidationResult("Description", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Cpf.ToString().Length < 1
-                                               ? new ValidationResult("Cpf", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.Rg.ToString().Length < 1
-                                               ? new ValidationResult("Rg", Strings.Error_Field_Empty)
-                                               : null);
-                this._entity.AddValidation(
-                                           (sender, name) =>
-                                           this._entity.BirthDate.ToShortDateString().ToString().Length < 1
-                                               ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
-                                               : null);
+            _baseEntityFacade.ConfigureValidations();
+            _personFacade.ConfigureValidations();
+            if(_entity != null) {
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.FirstName.Length < 1
+                                          ? new ValidationResult("Name", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.LastName.Length < 1
+                                          ? new ValidationResult("Description", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Cpf.ToString().Length < 1
+                                          ? new ValidationResult("Cpf", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.Rg.ToString().Length < 1
+                                          ? new ValidationResult("Rg", Strings.Error_Field_Empty)
+                                          : null);
+                _entity.AddValidation(
+                                      (sender, name) =>
+                                      _entity.BirthDate.ToShortDateString().ToString().Length < 1
+                                          ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
+                                          : null);
             }
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = this.ProcessBasicValidations(out invalidFields);
+            bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
@@ -74,20 +74,20 @@ namespace LOB.Business.Logic {
         }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            this._baseEntityFacade.SetEntity(entity);
+            _baseEntityFacade.SetEntity(entity);
         }
 
         void IPersonFacade.SetEntity<T>(T entity) {
-            this._personFacade.SetEntity(entity);
+            _personFacade.SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
-            fields.AddRange(this._entity.GetValidations("Number"));
-            fields.AddRange(this._entity.GetValidations("Description"));
-            fields.AddRange(this._entity.GetValidations("Cpf"));
-            fields.AddRange(this._entity.GetValidations("Rg"));
-            fields.AddRange(this._entity.GetValidations("BirthDate"));
+            fields.AddRange(_entity.GetValidations("Number"));
+            fields.AddRange(_entity.GetValidations("Description"));
+            fields.AddRange(_entity.GetValidations("Cpf"));
+            fields.AddRange(_entity.GetValidations("Rg"));
+            fields.AddRange(_entity.GetValidations("BirthDate"));
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)

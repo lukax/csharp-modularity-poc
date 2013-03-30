@@ -5,30 +5,33 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
+using Category = LOB.Domain.SubEntity.Category;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
 
-        private readonly IUnityContainer _container;
+        private readonly IUnityContainer _unityContainer;
         private readonly IFluentNavigator _navigator;
 
-        [InjectionConstructor] public AlterProductViewModel(Product entity, IRepository repository,
-            IUnityContainer container, IFluentNavigator navigator)
-            : base(entity, repository) {
-            this._container = container;
-            this._navigator = navigator;
-            this.AlterCategoryCommand = new DelegateCommand(this.ExecuteAlterCategory);
-            this.ListCategoryCommand = new DelegateCommand(this.ExecuteListCategory);
-            this.UpdateCategoryList();
+        [InjectionConstructor] public AlterProductViewModel(Product entity, IUnityContainer unityContainer,
+            IFluentNavigator fluentNavigator, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _unityContainer = unityContainer;
+            _navigator = fluentNavigator;
+            AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
+            ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
+            UpdateCategoryList();
         }
 
         public ICommand AlterCategoryCommand { get; set; }
@@ -39,7 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void InitializeServices() {}
 
         public override void Refresh() {
-            this.Entity = new Product();
+            Entity = new Product();
         }
 
         public override OperationType OperationType {
@@ -49,32 +52,31 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private async void UpdateCategoryList(int delay = 2000) {
             while(true) {
                 await Task.Delay(2000);
-                this.Categories = this.Repository.GetList<Category>().ToList();
+                Categories = Repository.GetList<Category>().ToList();
             }
         }
 
         private void ExecuteListCategory(object o) {
             OperationType oP = o.ToString().ToOperationType();
-            this._navigator.ResolveView(oP).Show(true);
+            _navigator.ResolveView(oP).Show(true);
         }
 
         private void ExecuteAlterCategory(object o) {
             OperationType oP = o.ToString().ToOperationType();
-            if(this.Entity.Category != null)
-                this._navigator.ResolveView(oP)
-                    .SetViewModel(
-                                  this._container.Resolve<AlterCategoryViewModel>(new ParameterOverride("category",
-                                                                                                        this.Entity
-                                                                                                            .Category)))
-                    .Show(true);
-            this._navigator.ResolveView(oP).Show(true);
+            if(Entity.Category != null)
+                _navigator.ResolveView(oP)
+                          .SetViewModel(
+                                        _unityContainer.Resolve<AlterCategoryViewModel>(new ParameterOverride(
+                                                                                            "category", Entity.Category)))
+                          .Show(true);
+            _navigator.ResolveView(oP).Show(true);
         }
 
         protected override void SaveChanges(object arg) {
-            using(this.Repository.Uow) {
-                this.Repository.Uow.BeginTransaction();
-                this.Entity = this.Repository.SaveOrUpdate(this.Entity);
-                this.Repository.Uow.CommitTransaction();
+            using(Repository.Uow) {
+                Repository.Uow.BeginTransaction();
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
             }
 
             //Messenger.Default.Send("SaveChangesCommand");
@@ -95,7 +97,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void ClearEntity(object args) {
-            this.Entity = new Product();
+            Entity = new Product();
         }
 
     }

@@ -13,12 +13,12 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         private string _header;
 
         public AlterServiceView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterServiceViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IAlterServiceViewModel; }
+            set { DataContext = value; }
         }
 
         public string Header {

@@ -11,14 +11,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterContactInfoView : UserControl, IBaseView {
 
         public AlterContactInfoView() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public IBaseViewModel ViewModel {
-            get { return this.DataContext as IAlterContactInfoViewModel; }
+            get { return DataContext as IAlterContactInfoViewModel; }
             set {
-                this.DataContext = value;
-                this.UcAlterBaseEntityView.DataContext = value;
+                DataContext = value;
+                UcAlterBaseEntityView.DataContext = value;
             }
         }
 

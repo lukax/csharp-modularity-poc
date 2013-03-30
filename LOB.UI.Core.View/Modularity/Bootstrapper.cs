@@ -51,17 +51,17 @@ namespace LOB.UI.Core.View.Modularity {
 
         protected override void ConfigureContainer() {
             base.ConfigureContainer();
-            this.RegisterTypeIfMissing(typeof(ILogger), typeof(Logger), true);
+            RegisterTypeIfMissing(typeof(ILogger), typeof(Logger), true);
         }
 
         protected override DependencyObject CreateShell() {
-            var main = this.Container.Resolve<Shell>();
+            var main = Container.Resolve<Shell>();
             return main;
         }
 
         protected override void InitializeShell() {
             base.InitializeShell();
-            Application.Current.MainWindow = (Window) this.Shell;
+            Application.Current.MainWindow = (Window) Shell;
             Application.Current.MainWindow.Show();
         }
 
