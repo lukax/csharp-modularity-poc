@@ -7,6 +7,7 @@ using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -20,6 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
 
         private readonly IAddressFacade _addressFacade;
+        private readonly IEventAggregator _eventAggregator;
         private string _status;
         private IList<string> _statuses;
 
@@ -27,6 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _addressFacade = addressFacade;
+            _eventAggregator = eventAggregator;
         }
 
         //TODO: Wrap with business logic
@@ -62,22 +65,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            Refresh();
+            ClearEntity(null);
         }
 
         public override void Refresh() {
-            Entity = new Address {
-                District = "",
-                City = "Nova Friburgo",
-                Country = "Brasil",
-                State = "Rio de Janeiro",
-                ZipCode = 123456789,
-                Street = "",
-                StreetComplement = "",
-                IsDefault = false,
-            };
-            _addressFacade.SetEntity(Entity);
-            _addressFacade.ConfigureValidations();
+            ClearEntity(null);
         }
 
         public override OperationType OperationType {
@@ -92,8 +84,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override bool CanSaveChanges(object arg) {
-            //TODO: Business logic
             IEnumerable<ValidationResult> results;
             return _addressFacade.CanAdd(out results);
         }
@@ -104,11 +99,26 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void QuickSearch(object arg) {
-            //_commandService.Execute("QuickSearch", OperationName.ListAddress);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            throw new NotImplementedException();
+            Entity = new Address
+            {
+                Code = 0,
+                District = "",
+                City = "Nova Friburgo",
+                Country = "Brasil",
+                State = "Rio de Janeiro",
+                ZipCode = 0,
+                Street = "",
+                StreetNumber = 0,
+                StreetComplement = "",
+                IsDefault = false,
+                Status = default(AddressStatus),
+            };
+            _addressFacade.SetEntity(Entity);
+            _addressFacade.ConfigureValidations();
         }
 
     }

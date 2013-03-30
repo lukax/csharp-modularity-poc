@@ -1,8 +1,9 @@
 ﻿#region Usings
 
-using System;
+using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -14,14 +15,22 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {
 
-        public AlterPayCheckViewModel(PayCheck entity, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {}
+        private readonly IPayCheckFacade _payCheckFacade;
+        private readonly IEventAggregator _eventAggregator;
 
-        public override void InitializeServices() {}
+        public AlterPayCheckViewModel(PayCheck entity, IPayCheckFacade payCheckFacade, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _payCheckFacade = payCheckFacade;
+            _eventAggregator = eventAggregator;
+        }
+
+        public override void InitializeServices() {
+            ClearEntity(null);
+        }
 
         public override void Refresh() {
-            Entity = new PayCheck();
+            ClearEntity(null);
         }
 
         public override OperationType OperationType {
@@ -38,12 +47,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return true;
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            //Messenger.Default.Send<object>(_container.Resolve<ListPayCheckViewModel>(), "QuickSearchCommand");
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            throw new NotImplementedException();
+            Entity = new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, Ps = ""};
         }
 
     }

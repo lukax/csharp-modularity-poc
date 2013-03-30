@@ -3,6 +3,7 @@
 using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -16,11 +17,19 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
 
+        private readonly IEventAggregator _eventAggregator;
         private IUnityContainer _container;
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+        public override OperationType OperationType {
+            get { return OperationType.AlterNaturalPerson; }
+        }
 
         [InjectionConstructor] public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {}
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _eventAggregator = eventAggregator;
+        }
 
         public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }
@@ -33,34 +42,30 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            throw new NotImplementedException();
+            ClearEntity(null);
         }
 
         public override void Refresh() {
-            throw new NotImplementedException();
+            ClearEntity(null);
         }
-
-        public override OperationType OperationType {
-            get { return OperationType.AlterNaturalPerson; }
-        }
-
-        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
-        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            //Messenger.Default.Send<object>(_container.Resolve<ListNaturalPersonViewModel>(),"QuickSearchCommand");
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new NaturalPerson();
+            Entity = new NaturalPerson {};
         }
 
     }

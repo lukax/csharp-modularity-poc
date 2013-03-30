@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.Command;
@@ -23,6 +24,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private readonly IUnityContainer _unityContainer;
         private readonly IFluentNavigator _navigator;
+        private readonly IEventAggregator _eventAggregator;
+        public ICommand AlterCategoryCommand { get; set; }
+        public ICommand ListCategoryCommand { get; set; }
+        public IList<Category> Categories { get; set; }
+        public override OperationType OperationType {
+            get { return OperationType.AlterProduct; }
+        }
 
         [InjectionConstructor] public AlterProductViewModel(Product entity, IUnityContainer unityContainer,
             IFluentNavigator fluentNavigator, IRepository repository, IEventAggregator eventAggregator,
@@ -30,24 +38,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             : base(entity, repository, eventAggregator, loggerFacade) {
             _unityContainer = unityContainer;
             _navigator = fluentNavigator;
+            _eventAggregator = eventAggregator;
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
             UpdateCategoryList();
         }
 
-        public ICommand AlterCategoryCommand { get; set; }
-        public ICommand ListCategoryCommand { get; set; }
-
-        public IList<Category> Categories { get; set; }
-
-        public override void InitializeServices() {}
-
-        public override void Refresh() {
-            Entity = new Product();
+        public override void InitializeServices() {
+            ClearEntity(null);
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterProduct; }
+        public override void Refresh() {
+            ClearEntity(null);
         }
 
         private async void UpdateCategoryList(int delay = 2000) {
@@ -74,13 +76,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Entity = Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
+        }
 
-            //Messenger.Default.Send("SaveChangesCommand");
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -94,11 +97,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void QuickSearch(object arg) {
-            //commandService.Execute("QuickSearch", OperationName.ListProduct);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object args) {
-            Entity = new Product();
+            Entity = new Product {};
         }
 
     }

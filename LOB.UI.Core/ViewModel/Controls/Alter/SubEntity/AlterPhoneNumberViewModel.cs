@@ -1,8 +1,10 @@
 ﻿#region Usings
 
 using System;
+using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -14,26 +16,43 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {
 
-        public AlterPhoneNumberViewModel(PhoneNumber entity, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {}
+        private readonly IPhoneNumberFacade _phoneNumberFacade;
+        private readonly IEventAggregator _eventAggregator;
 
-        public override void InitializeServices() {}
+        public AlterPhoneNumberViewModel(PhoneNumber entity, IPhoneNumberFacade phoneNumberFacade, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _phoneNumberFacade = phoneNumberFacade;
+            _eventAggregator = eventAggregator;
+        }
+
+        public override void InitializeServices() {
+            ClearEntity(null);
+        }
 
         public override void Refresh() {
-            Entity = new PhoneNumber();
+            ClearEntity(null);
         }
 
         public override OperationType OperationType {
             get { return OperationType.AlterPhoneNumber; }
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            throw new NotImplementedException();
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            throw new NotImplementedException();
+            Entity = new PhoneNumber {
+                Code = 0,
+                Description = "",
+                Number = 0,
+                PhoneNumberType = default(PhoneNumberType)
+            };
         }
 
     }

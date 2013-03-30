@@ -1,8 +1,8 @@
 ﻿#region Usings
 
-using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -16,41 +16,48 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>, IAlterLegalPersonViewModel {
 
+        private readonly AlterPersonViewModel _alterPersonViewModel;
+        private readonly IEventAggregator _eventAggregator;
         private IUnityContainer _container;
-
-        [InjectionConstructor] public AlterLegalPersonViewModel(LegalPerson entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {}
-
-        public override void InitializeServices() {
-            throw new NotImplementedException();
-        }
-
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
-
         public override OperationType OperationType {
             get { return OperationType.AlterLegalPerson; }
         }
-
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
+        [InjectionConstructor] public AlterLegalPersonViewModel(LegalPerson entity,
+            AlterPersonViewModel alterPersonViewModel, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _alterPersonViewModel = alterPersonViewModel;
+            _eventAggregator = eventAggregator;
+        }
+
+        public override void InitializeServices() {
+            ClearEntity(null);
+        }
+
+        public override void Refresh() {
+            ClearEntity(null);
+        }
+
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            //Messenger.Default.Send<object>(_container.Resolve<ListLegalPersonViewModel>(), "QuickSearchCommand");
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new LegalPerson();
+            Entity = new LegalPerson { };
         }
 
     }

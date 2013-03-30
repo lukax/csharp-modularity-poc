@@ -6,6 +6,7 @@ using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -18,29 +19,32 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {
 
         private readonly IEmailFacade _emailFacade;
+        private readonly IEventAggregator _eventAggregator;
 
         public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _emailFacade = emailFacade;
+            _eventAggregator = eventAggregator;
         }
 
         public override void InitializeServices() {
-            Refresh();
+            ClearEntity(null);
         }
 
         public override void Refresh() {
-            Entity = new Email {Value = "",};
-            _emailFacade.SetEntity(Entity);
-            _emailFacade.ConfigureValidations();
+            ClearEntity(null);
         }
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Repository.Save(Entity);
                 Repository.Uow.CommitTransaction();
             }
+        }
+
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -49,11 +53,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void QuickSearch(object arg) {
-            throw new NotImplementedException();
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            throw new NotImplementedException();
+            Entity = new Email { Value = "", Code = 0};
+            _emailFacade.SetEntity(Entity);
+            _emailFacade.ConfigureValidations();
         }
 
         public override OperationType OperationType {

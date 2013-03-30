@@ -50,28 +50,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICommand DeletePhoneNumberCommand { get; set; }
 
         [AllowNull] public Email Email { get; set; }
-
         [AllowNull] public PhoneNumber PhoneNumber { get; set; }
-
         [AllowNull] public ICollectionView Emails { get; set; }
-
         [AllowNull] public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
-            Refresh();
+            ClearEntity(null);
             InitBackgroundWorker();
         }
 
         public override void Refresh() {
-            Entity = new ContactInfo {
-                Emails = new List<Email>(),
-                PhoneNumbers = new List<PhoneNumber>(),
-                SpeakWith = "",
-                Ps = "",
-                WebSite = "",
-            };
-            _contactInfoFacade.SetEntity(Entity);
-            _contactInfoFacade.ConfigureValidations();
+            ClearEntity(null);
         }
 
         public override OperationType OperationType {
@@ -168,12 +157,26 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         #endregion
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType.ListContactInfo);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            Refresh();
+            Entity = new ContactInfo {
+                Code = 0,
+                Emails = new List<Email>(),
+                PhoneNumbers = new List<PhoneNumber>(),
+                SpeakWith = "",
+                Status = default(ContactStatus),
+                Ps = "",
+                WebSite = "",
+            };
+            _contactInfoFacade.SetEntity(Entity);
+            _contactInfoFacade.ConfigureValidations();
         }
 
         protected override bool CanSaveChanges(object arg) {

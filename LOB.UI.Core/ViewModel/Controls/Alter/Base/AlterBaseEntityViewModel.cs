@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -58,10 +59,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Cancel(arg);
         }
 
-        protected virtual void Cancel(object arg) {}
-
+        protected abstract void Cancel(object arg);
         protected abstract void QuickSearch(object arg);
         protected abstract void ClearEntity(object arg);
-
     }
 }

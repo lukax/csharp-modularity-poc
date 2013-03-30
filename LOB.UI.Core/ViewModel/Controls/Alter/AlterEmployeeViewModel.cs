@@ -3,6 +3,7 @@
 using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -17,25 +18,24 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
 
-        private ICommandService _commandService;
-        private IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
 
         [InjectionConstructor] public AlterEmployeeViewModel(Employee entity, IRepository repository,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {}
-
-        public new Employee Entity { get; set; }
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _eventAggregator = eventAggregator;
+        }
 
         public override void InitializeServices() {
-            throw new NotImplementedException();
+            ClearEntity(null);
         }
 
         public override void Refresh() {
-            throw new NotImplementedException();
+            ClearEntity(null);
         }
 
         public override OperationType OperationType {
-            get { throw new NotImplementedException(); }
+            get { return OperationType.AlterEmployee; }
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
@@ -51,12 +51,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             return true;
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            //_commandService.Execute("QuickSearch", OperationName.ListEmployee);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            throw new NotImplementedException();
+            Entity = new Employee {};
+
         }
 
     }

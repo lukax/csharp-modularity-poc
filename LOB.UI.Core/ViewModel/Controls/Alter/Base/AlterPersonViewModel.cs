@@ -1,9 +1,14 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Prism.Events;
@@ -13,33 +18,49 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    public abstract class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
+    public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
 
-        [InjectionConstructor] public AlterPersonViewModel(Person entity, Address address, ContactInfo contactInfo,
+        private readonly IPersonFacade _personFacade;
+        private AlterAddressViewModel _alterAddressViewModel;
+        private AlterContactInfoViewModel _alterContactInfoViewModel;
+        private readonly IEventAggregator _eventAggregator;
+
+        [InjectionConstructor] protected AlterPersonViewModel(Person entity, IPersonFacade personFacade,
             AlterAddressViewModel alterAddressViewModel, AlterContactInfoViewModel alterContactInfoViewModel,
             IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
-            AlterAddressViewModel = alterAddressViewModel;
-            AlterContactInfoViewModel = alterContactInfoViewModel;
+            _personFacade = personFacade;
+            _alterAddressViewModel = alterAddressViewModel;
+            _alterContactInfoViewModel = alterContactInfoViewModel;
+            _eventAggregator = eventAggregator;
 
-            Entity.Address = address;
-            Entity.ContactInfo = contactInfo;
             //TODO: Use business logic to set default params
             if(Entity.Address.State == null && Entity.Address.Country == null) {
                 Entity.Address.Country = "Brasil";
                 Entity.Address.State = UfBrDictionary.Ufs[UfBr.RJ];
             }
-
-            //AlterAddressViewModel = Entity.Address;
-            //AlterContactInfoViewModel.Entity = Entity.ContactInfo;
         }
 
-        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
-        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+        public IAlterAddressViewModel AlterAddressViewModel {
+            get { return _alterAddressViewModel; }
+            set { _alterAddressViewModel = value as AlterAddressViewModel; }
+        }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel {
+            get { return _alterContactInfoViewModel; }
+            set { _alterContactInfoViewModel = value as AlterContactInfoViewModel; }
+        }
 
-        public override void InitializeServices() {}
+        public override void InitializeServices() {
+            ClearEntity(null);
+        }
 
-        public override void Refresh() {}
+        public override void Refresh() {
+            ClearEntity(null);
+        }
+
+        public override OperationType OperationType {
+            get { return OperationType.AlterPerson; }
+        }
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow) {
@@ -49,18 +70,38 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             }
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override bool CanSaveChanges(object arg) {
-            //TODO: Business logic
-            return true;
+            IEnumerable<ValidationResult> results;
+            return _personFacade.CanAdd(out results);
         }
 
         protected override bool CanCancel(object arg) {
-            //TODO: Business logic
             return true;
         }
 
         protected override void QuickSearch(object arg) {
-            //Messenger.Default.Send<object>(_container.Resolve<ListPersonViewModel<Person>>(), "QuickSearchCommand");
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+        }
+
+        protected override void ClearEntity(object arg) {
+            _alterAddressViewModel.ClearEntityCommand.Execute(null);
+            _alterContactInfoViewModel.ClearEntityCommand.Execute(null);
+            Entity = new LocalPerson {
+                Address = _alterAddressViewModel.Entity,
+                Code = 0,
+                ContactInfo = _alterContactInfoViewModel.Entity,
+                Notes = "",
+            };
+            _personFacade.SetEntity(Entity);
+            _personFacade.ConfigureValidations();
+        }
+
+        private class LocalPerson : Person {
+
         }
 
     }

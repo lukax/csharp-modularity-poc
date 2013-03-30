@@ -3,11 +3,14 @@
 using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -18,16 +21,25 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private readonly AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
         private ICommandService _commandService;
+        private readonly IEventAggregator _eventAggregator;
         private IUnityContainer _container;
         private readonly IFluentNavigator _navigator;
+        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+        public override OperationType OperationType
+        {
+            get { return OperationType.AlterCustomer; }
+        }
 
         [InjectionConstructor] public AlterCustomerViewModel(Customer entity, IRepository repository,
             IUnityContainer container, IFluentNavigator navigator, AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel, ICommandService commandService)
-            : base(entity, repository) {
+            AlterNaturalPersonViewModel alterNaturalPersonViewModel, ICommandService commandService, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade)
+        {
             _navigator = navigator;
             _container = container;
             _commandService = commandService;
+            _eventAggregator = eventAggregator;
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             //default init customer as natural person
@@ -40,14 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void Refresh() {
             Entity = new Customer();
         }
-
-        public override OperationType OperationType {
-            get { return OperationType.AlterCustomer; }
-        }
-
-        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
-        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
-
+        
         private void PersonTypeChanged() {
             Entity.PropertyChanged += (s, e) => {
                 switch(Entity.PersonType) {
@@ -68,7 +73,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                           .SetViewModel(_alterLegalPersonViewModel)
                           .GetView();
             //Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
-
             Entity.Person = _alterLegalPersonViewModel.Entity;
         }
 
@@ -79,7 +83,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                           .SetViewModel(_alterNaturalPersonViewModel)
                           .GetView();
             //Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
-
             Entity.Person = _alterNaturalPersonViewModel.Entity;
         }
 
@@ -92,19 +95,22 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Repository.Uow.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
         }
 
+        protected override void Cancel(object arg) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+        }
+
         protected override void QuickSearch(object arg) {
-            //_commandService.Execute("QuickSearch", OperationName.ListCustomer);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Customer();
+            Entity = new Customer{};
         }
 
     }
