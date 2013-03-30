@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;

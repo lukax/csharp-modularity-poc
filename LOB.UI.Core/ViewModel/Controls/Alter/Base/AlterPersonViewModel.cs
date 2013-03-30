@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.SubEntity;

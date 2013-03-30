@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Domain;
 using LOB.Domain.SubEntity;
 using LOB.Log;

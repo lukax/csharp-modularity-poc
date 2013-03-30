@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Windows.Input;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface.Command;

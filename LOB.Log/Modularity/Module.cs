@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;

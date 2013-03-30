@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Threading.Tasks;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
@@ -21,6 +22,7 @@ namespace LOB.Log {
             XmlConfigurator.Configure();
         }
         #region ILoggerFacade Members
+
         /// <summary>
         ///     Prism Log routine.
         /// </summary>
@@ -48,6 +50,7 @@ namespace LOB.Log {
                 }
             });
         }
+
         #endregion ILoggerFacade Members
     }
 }

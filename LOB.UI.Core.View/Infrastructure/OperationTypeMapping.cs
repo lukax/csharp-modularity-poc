@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System;
 using System.Collections.Generic;
 using LOB.Domain.Base;
@@ -23,6 +24,7 @@ using LOB.UI.Interface.Infrastructure;
 namespace LOB.UI.Core.View.Infrastructure {
     public static class OperationTypeMapping {
         #region View
+
         private static readonly Lazy<IDictionary<OperationType, Type>> LazyView =
             new Lazy<IDictionary<OperationType, Type>>(
                 () =>
@@ -61,8 +63,10 @@ namespace LOB.UI.Core.View.Infrastructure {
                     {OperationType.ListProduct, typeof(ListProductView)},
                     {OperationType.ListService, typeof(ListServiceView)},
                 });
+
         #endregion
         #region ViewModel
+
         private static readonly Lazy<IDictionary<OperationType, Type>> LazyViewModel =
             new Lazy<IDictionary<OperationType, Type>>(
                 () =>
@@ -101,6 +105,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                     {OperationType.ListProduct, typeof(ListProductViewModel)},
                     {OperationType.ListService, typeof(ListServiceViewModel)},
                 });
+
         #endregion
         public static IDictionary<OperationType, Type> Views {
             get { return LazyView.Value; }

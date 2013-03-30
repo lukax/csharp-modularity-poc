@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Collections.Generic;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;

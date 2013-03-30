@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Diagnostics;
 using System.Windows.Input;
 using LOB.Dao.Interface;

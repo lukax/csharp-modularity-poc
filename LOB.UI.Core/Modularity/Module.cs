@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Domain.Base;
 using LOB.Log.Interface;
 using LOB.UI.Core.ViewModel.Controls.Alter;
@@ -32,12 +33,16 @@ namespace LOB.UI.Core.Modularity {
 
         public void Initialize() {
             #region Events
+
             #endregion
             #region Main
+
             _container.RegisterType<IColumnToolsViewModel, ColumnToolsViewModel>();
             _container.RegisterType<IHeaderToolsViewModel, HeaderToolsViewModel>();
+
             #endregion
             #region Alter
+
             _container.RegisterType<IAlterBaseEntityViewModel, AlterBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IAlterPersonViewModel, AlterPersonViewModel>();
             _container.RegisterType<IAlterServiceViewModel, AlterServiceViewModel>();
@@ -54,8 +59,10 @@ namespace LOB.UI.Core.Modularity {
             _container.RegisterType<IAlterNaturalPersonViewModel, AlterNaturalPersonViewModel>();
             _container.RegisterType<IAlterProductViewModel, AlterProductViewModel>();
             _container.RegisterType<IAlterSaleViewModel, AlterSaleViewModel>();
+
             #endregion
             #region List
+
             _container.RegisterType<IListBaseEntityViewModel, ListBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IListPersonViewModel, ListPersonViewModel>();
             _container.RegisterType<IListServiceViewModel, ListServiceViewModel>();
@@ -73,6 +80,7 @@ namespace LOB.UI.Core.Modularity {
             _container.RegisterType<IListProductViewModel, ListProductViewModel>();
             _container.RegisterType<IListOpViewModel, ListOpViewModel>();
             //_container.RegisterType<IListSaleViewModel, ListSaleViewModel>();
+
             #endregion
             _container.RegisterInstance(_container.Resolve<MessageToolsViewModel>());
 

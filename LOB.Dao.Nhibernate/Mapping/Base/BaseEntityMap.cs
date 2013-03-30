@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using FluentNHibernate.Mapping;
 using LOB.Domain.Base;
 

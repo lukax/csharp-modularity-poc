@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;

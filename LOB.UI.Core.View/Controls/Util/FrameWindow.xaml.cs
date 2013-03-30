@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,6 +51,7 @@ namespace LOB.UI.Core.View.Controls.Util {
             get { return OperationType.Main; }
         }
         #region Themes
+
         private void MiLightGrey() {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"), Theme.Light);
         }
@@ -93,6 +95,7 @@ namespace LOB.UI.Core.View.Controls.Util {
         private void MiLightOrange(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light);
         }
+
         #endregion
         private void Busy() {
             ModalRegion = new BusyView();

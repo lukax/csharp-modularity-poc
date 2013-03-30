@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using Microsoft.Practices.Prism.Logging;
 
 #endregion

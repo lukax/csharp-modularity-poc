@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.UI.Core.View;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

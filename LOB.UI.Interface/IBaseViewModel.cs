@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.UI.Interface.Infrastructure;
 
 #endregion

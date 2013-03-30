@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System;
 using LOB.Dao.Interface;
 using LOB.Domain;

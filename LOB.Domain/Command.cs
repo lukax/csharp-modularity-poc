@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System;
 using System.Windows.Input;
 using LOB.Domain.Base;

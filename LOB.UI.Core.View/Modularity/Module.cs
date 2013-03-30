@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Diagnostics.CodeAnalysis;
 using LOB.Log.Interface;
 using LOB.UI.Core.Infrastructure;

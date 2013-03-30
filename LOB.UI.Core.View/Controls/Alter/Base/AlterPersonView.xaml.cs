@@ -1,4 +1,5 @@
 #region Usings
+
 using System;
 using System.Windows.Controls;
 using LOB.Core.Localization;

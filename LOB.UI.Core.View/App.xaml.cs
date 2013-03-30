@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Windows;
 using LOB.UI.Core.View.Modularity;
 

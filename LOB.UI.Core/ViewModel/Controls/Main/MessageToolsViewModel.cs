@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Windows.Input;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
@@ -15,11 +16,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private readonly IUnityContainer container;
         private readonly IEventAggregator eventAggregator;
         #region Props
+
         public string Message { get; set; }
 
         public bool IsRestrictive { get; set; }
+
         #endregion Message
         #region CloseExecute Command
+
         private ICommand _closeCommand;
 
         public ICommand CloseCommand {
@@ -33,6 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public void CloseExecute() {
             eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
+
         #endregion CloseExecute Command
         [InjectionConstructor] public MessageToolsViewModel(IUnityContainer container) {
             Message = "Please wait...";

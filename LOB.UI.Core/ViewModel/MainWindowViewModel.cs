@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Windows.Input;
 using LOB.Core.Licensing;
 using LOB.UI.Core.Infrastructure;

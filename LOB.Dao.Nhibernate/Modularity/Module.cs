@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Dao.Interface;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;

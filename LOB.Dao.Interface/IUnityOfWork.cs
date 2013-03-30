@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System;
 using LOB.Domain.Base;
 

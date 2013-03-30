@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Globalization;
@@ -66,6 +67,7 @@ namespace LOB.UI.Core.View {
             get { return OperationType.Main; }
         }
         #region Themes
+
         private void MiLightGrey() {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"), Theme.Light);
         }
@@ -109,6 +111,7 @@ namespace LOB.UI.Core.View {
         private void MiLightOrange(object sender, RoutedEventArgs e) {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light);
         }
+
         #endregion
         private void OnLoad() {
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe((o) => { if(o == OperationType.Main) Close(); });

@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -77,6 +78,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             get { return OperationType.AlterContactInfo; }
         }
         #region UI Validations
+
         private void AddEmail(object arg) {
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterEmail);
         }
@@ -124,8 +126,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             if(PhoneNumber != null) return true;
             return false;
         }
+
         #endregion
         #region Repo Operations
+
         private void InitBackgroundWorker() {
             _worker.DoWork += WorkerListsGetFromRepo;
             _worker.RunWorkerCompleted += WorkerListsSetFromRepo;
@@ -162,6 +166,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var k = new Progress {Message = Strings.Progress_List_Updating, Percentage = args.ProgressPercentage};
             _eventAggregator.GetEvent<ReportProgressEvent>().Publish(k);
         }
+
         #endregion
         protected override void QuickSearch(object arg) {
             _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType.ListContactInfo);

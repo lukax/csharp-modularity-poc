@@ -1,4 +1,5 @@
 ﻿#region Usings
+
 using LOB.Dao.Interface;
 using LOB.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
