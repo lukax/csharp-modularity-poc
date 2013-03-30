@@ -5,20 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                           xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.List.Base"
              mc:Ignorable="d"
              Height="Auto"
              Width="Auto"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="400" d:DesignWidth="400">
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel Width="Auto" Height="Auto">
-        <TextBox MinWidth="200"
-                 Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                 controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True" />
-        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single"
-                  SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />
+    <StackPanel Orientation="Horizontal">
+        <base:ListBaseEntityView x:Name="ViewListBaseEntity"/>
     </StackPanel>
 </UserControl>

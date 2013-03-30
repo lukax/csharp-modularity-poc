@@ -5,62 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                           xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.List.Base"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="400" d:DesignWidth="400">
 
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal">
-            <TextBox MinWidth="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True" />
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
-            <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
-                           Background="Transparent">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
-            </controls:Tile>
-            <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
-            </controls:Tile>
-            <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
-            </controls:Tile>
-            <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
-                           Background="Transparent">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
-            </controls:Tile>
-        </StackPanel>
-        <ScrollViewer Grid.Row="1">
-            <Grid>
-                <StackPanel>
-                    <StackPanel>
-                        <DataGrid ItemsSource="{Binding Entitys, Mode=OneWay}" x:Name="DataGridProduct"
-                                  SelectedItem="{Binding Entity, Mode=OneWayToSource}" IsReadOnly="True"
-                                  Height="Auto" Width="Auto" BorderThickness="0" GridLinesVisibility="None"
-                                  Background="{DynamicResource WhiteColorBrush}" SelectionMode="Single"
-                                  Foreground="{DynamicResource BlackColorBrush}">
-                            <DataGrid.ColumnHeaderStyle>
-                                <Style TargetType="{x:Type DataGridColumnHeader}">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </Style>
-                            </DataGrid.ColumnHeaderStyle>
-                        </DataGrid>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+    <StackPanel Orientation="Horizontal">
+        <base:ListBaseEntityView x:Name="ViewListBaseEntity"/>
+    </StackPanel>
 </UserControl>

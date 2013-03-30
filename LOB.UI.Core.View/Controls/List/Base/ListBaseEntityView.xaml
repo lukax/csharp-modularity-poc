@@ -4,21 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                          xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d"
-             Height="Auto"
-             Width="Auto"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="400" d:DesignWidth="400">
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel Width="Auto" Height="Auto">
-        <TextBox MinWidth="200"
-                 Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                 controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True" />
-        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single"
+    <DockPanel>
+        <DockPanel Grid.Row="0" Dock="Top" Width="Auto" HorizontalAlignment="Stretch">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent" Command="{Binding SaveChangesCommand}">
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
+                </controls:Tile>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
+                <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
+                           Background="Transparent">
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
+                </controls:Tile>
+                <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
+                </controls:Tile>
+                <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
+                </controls:Tile>
+                <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
+                           Background="Transparent">
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
+                </controls:Tile>
+            </StackPanel>
+            <TextBox MinWidth="200" Width="Auto" Height="Auto" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                  controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}" controls:TextboxHelper.ClearTextButton="True"/>
+        </DockPanel>
+        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" Width="Auto" HorizontalAlignment="Stretch"
                   SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />
-    </StackPanel>
+    </DockPanel>
 </UserControl>

@@ -13,10 +13,10 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal" >
-        <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static loc:Strings.ToolTip_Code}"
+        <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static loc:Strings.ToolTip_Code}" Focusable="False"
                    Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="40" />
 
-        <Button Command="{Binding QuickSearchCommand}" ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Width="18" Height="18" Background="Transparent" Padding="1" BorderThickness="0">
+        <Button Command="{Binding QuickSearchCommand}" Focusable="False" ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Width="18" Height="18" Background="Transparent" Padding="1" BorderThickness="0">
             <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
         </Button>
     </StackPanel>

@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using LOB.Core.Localization;
@@ -144,11 +145,15 @@ namespace LOB.UI.Core.View
             _loaded = true;
         }
 
-        private void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            TabRegion.SelectedIndex = -1;
+            ProgressRing.IsActive = true;
+            await Task.Delay(500); // Fix validation color border in textboxes TODO: Check this issue
             if (TabRegion.Items.Count == 0)
                 TabRegion.SelectedIndex = 1;
-            TabRegion.SelectedIndex = TabRegion.Items.Count;
+            TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
+            ProgressRing.IsActive = false;
         }
     }
 }
