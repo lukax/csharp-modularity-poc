@@ -8,6 +8,7 @@
              xmlns:lobbasecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
 
@@ -16,6 +17,7 @@
     </UserControl.Resources>
 
     <StackPanel>
+        <util:EditToolsView x:Name="ViewEditTools" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -82,5 +84,6 @@
 
             </Grid>
         </ScrollViewer>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
     </StackPanel>
 </UserControl>

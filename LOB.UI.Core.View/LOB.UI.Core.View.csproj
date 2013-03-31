@@ -124,6 +124,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Util\ConfCancelToolsView.xaml.cs">
+      <DependentUpon>ConfCancelToolsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Util\EditToolsView.xaml.cs">
+      <DependentUpon>EditToolsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extension\ControlExtension.cs" />
     <Compile Include="Modularity\Bootstrapper.cs" />
     <Compile Include="Controllers\MainRegionController.cs" />
@@ -237,6 +243,14 @@
     <Page Include="Controls\Alter\AlterCustomerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Util\ConfCancelToolsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Util\EditToolsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Skins\DefaultMetroSkin.xaml">
       <Generator>MSBuild:Compile</Generator>

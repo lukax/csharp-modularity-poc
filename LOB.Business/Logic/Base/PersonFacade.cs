@@ -34,7 +34,15 @@ namespace LOB.Business.Logic.Base {
         }
 
         public Person GenerateEntity() {
-            throw new NotImplementedException();
+            var localAddress = _addressFacade.GenerateEntity();
+            var localContactInfo = _contactInfoFacade.GenerateEntity();
+            return new LocalPerson {
+                Code = 0,
+                Error = null,
+                Address = localAddress,
+                ContactInfo = localContactInfo,
+                Notes = "",
+            };
         }
 
         public void ConfigureValidations() {
@@ -75,6 +83,10 @@ namespace LOB.Business.Logic.Base {
                 fields.Where(validationResult => validationResult != null)
                       .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
+        }
+
+        private class LocalPerson : Person {
+
         }
 
     }

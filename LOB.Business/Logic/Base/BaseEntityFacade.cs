@@ -28,15 +28,37 @@ namespace LOB.Business.Logic.Base {
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
+            bool result = true;
+            IList<ValidationResult> results = new List<ValidationResult>();
+            if(_entity.Code != default(int)) {
+                result = false;
+                results.Add(new ValidationResult("Code", Strings.Error_Field_NotEmpty));
+            }
+            if(_entity.Id != default(Guid)) {
+                result = false;
+                results.Add(new ValidationResult("Id", Strings.Error_Field_NotEmpty));
+            }
+            invalidFields = results;
+            return result;
         }
 
         public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
+            bool result = true;
+            IList<ValidationResult> results = new List<ValidationResult>();
+            if(_entity.Code == default(int)) {
+                result = false;
+                results.Add(new ValidationResult("Code", Strings.Error_Field_Empty));
+            }
+            if(_entity.Id == default(Guid)) {
+                result = false;
+                results.Add(new ValidationResult("Id", Strings.Error_Field_Empty));
+            }
+            invalidFields = results;
+            return result;
         }
 
         public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
+            return CanUpdate(out invalidFields);
         }
 
     }

@@ -10,6 +10,7 @@
              xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -18,23 +19,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
-                    HorizontalAlignment="Right">
-            <controls:Tile DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntityCommand}"
-                           HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False"
-                           Background="Transparent" Grid.Column="5">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
-            </controls:Tile>
-
-            <controls:Tile x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
-                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
-            </controls:Tile>
-            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
-                           Command="{Binding SaveChangesCommand}" BorderThickness="0" Grid.Column="4" Grid.Row="3">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
-            </controls:Tile>
-        </StackPanel>
+        <util:EditToolsView x:Name="ViewEditTools" />
 
         <StackPanel>
             <Grid>
@@ -56,7 +41,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <base:AlterBaseEntityView Grid.Row="1" x:Name="UcAlterBaseEntityView" />
+                <base:AlterBaseEntityView Grid.Row="1" x:Name="ViewAlterBaseEntity" />
 
                 <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}"
                        HorizontalAlignment="Right" />
@@ -151,6 +136,7 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
     </StackPanel>
 
 </UserControl>

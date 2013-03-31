@@ -7,6 +7,7 @@
              xmlns:subcontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>
@@ -15,24 +16,9 @@
 
     <StackPanel>
         <StackPanel>
-            <base:AlterServiceView x:Name="UcAlterServiceView" />
+            <base:AlterServiceView x:Name="ViewAlterService" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="ButtonCancel" Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
-                    <DockPanel>
-                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26" />
-                        <Label Content="{x:Static loc:Strings.Button_Cancel}" />
-                    </DockPanel>
-                </Button>
-                <Button x:Name="ButtonSave" Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
-                    <DockPanel>
-                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
-                        <Label Content="{x:Static loc:Strings.Button_ConfirmOp}" />
-                    </DockPanel>
-                </Button>
-            </StackPanel>
-        </StackPanel>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>
 
 </UserControl>

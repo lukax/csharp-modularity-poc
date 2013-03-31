@@ -37,13 +37,14 @@ namespace LOB.Business.Logic {
         }
 
         public Customer GenerateEntity() {
+            var localPerson = ((IPersonFacade) this).GenerateEntity();
             return new Customer {
                 Code = 0,
                 Error = null,
                 BoughtHistory = new List<Sale>(),
                 Status = default(CustomerStatus),
                 CustomerOf = new List<Store>(),
-                Person = ((IPersonFacade) this).GenerateEntity(),
+                Person = localPerson,
                 PersonType = default(PersonType),
             };
         }

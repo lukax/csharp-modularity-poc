@@ -30,8 +30,20 @@ namespace LOB.Business.Logic {
         }
 
         public NaturalPerson GenerateEntity() {
+            var localPerson = _personFacade.GenerateEntity();
             return new NaturalPerson {
-                
+                FirstName = "",
+                LastName = "",
+                NickName = "",
+                BirthDate = DateTime.Now,
+                Cpf = 0,
+                Rg = 0,
+                RgUf = "",
+                Code = 0,
+                Error = null,
+                Address = localPerson.Address,
+                ContactInfo = localPerson.ContactInfo,
+                Notes = "",
             };
         }
 

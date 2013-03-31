@@ -21,7 +21,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             get { return DataContext as IAlterCategoryViewModel; }
             set {
                 DataContext = value;
-                UcAlterServiceView.DataContext = value;
+                ViewAlterService.DataContext = value;
+                ViewConfCancelTools.DataContext = value;
             }
         }
 

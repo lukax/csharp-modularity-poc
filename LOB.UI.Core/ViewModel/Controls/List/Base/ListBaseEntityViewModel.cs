@@ -11,6 +11,7 @@ using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.Events;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
@@ -39,6 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             set { _searchCriteria = value; }
         }
         public ICommand SaveCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand FetchCommand { get; set; }
@@ -56,6 +58,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
+            ExitCommand = new DelegateCommand(Exit);
+        }
+
+        private void Exit(object obj) {
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
         }
 
         public int UpdateInterval {

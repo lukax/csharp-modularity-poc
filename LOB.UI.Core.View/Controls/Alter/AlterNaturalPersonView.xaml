@@ -10,6 +10,7 @@
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -18,7 +19,6 @@
     </UserControl.Resources>
 
     <StackPanel>
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -76,8 +76,9 @@
         </Grid>
 
         <StackPanel>
-            <base2:AlterPersonView x:Name="UcAlterPersonView" />
+            <base2:AlterPersonView x:Name="ViewAlterPerson" />
         </StackPanel>
-
+        
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden"/>
     </StackPanel>
 </UserControl>

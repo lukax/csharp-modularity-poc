@@ -11,6 +11,7 @@
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
 
@@ -36,7 +37,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <base2:AlterBaseEntityView Width="Auto" Grid.Column="1" x:Name="UcAlterBaseEntityView"
+            <base2:AlterBaseEntityView Width="Auto" Grid.Column="1" x:Name="ViewAlterBaseEntity"
                                        HorizontalAlignment="Left" />
             <ContentControl regions:RegionManager.RegionName="AlterBaseEntity" Width="Auto" Height="Auto" />
 
@@ -104,7 +105,7 @@
                    Grid.Row="3" />
             <xctk:MaskedTextBox
                 Text="{Binding Entity.ZipCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Right"
                 MinWidth="100" Mask="00000-000"
                 MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
@@ -121,21 +122,6 @@
                                          HorizontalAlignment="Left" Grid.Column="4" Grid.Row="4" />
         </Grid>
 
-        <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="ButtonCancel" Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
-                    <DockPanel>
-                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26" />
-                        <Label Content="{x:Static loc:Strings.Button_Cancel}" />
-                    </DockPanel>
-                </Button>
-                <Button x:Name="ButtonSave" Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
-                    <DockPanel>
-                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
-                        <Label Content="{x:Static loc:Strings.Button_ConfirmOp}" />
-                    </DockPanel>
-                </Button>
-            </StackPanel>
-        </StackPanel>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden"/>
     </StackPanel>
 </UserControl>

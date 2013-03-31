@@ -19,7 +19,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             get { return DataContext as IAlterContactInfoViewModel; }
             set {
                 DataContext = value;
-                UcAlterBaseEntityView.DataContext = value;
+                ViewAlterBaseEntity.DataContext = value;
+                ViewConfCancelTools.DataContext = value;
             }
         }
 

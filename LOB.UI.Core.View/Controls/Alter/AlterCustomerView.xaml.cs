@@ -22,7 +22,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
             get { return DataContext as AlterCustomerViewModel; }
             set {
                 DataContext = value;
-                UcAlterBaseEntity.DataContext = value;
+                ViewEditTools.DataContext = value;
+                ViewAlterBaseEntity.DataContext = value;
+                ViewConfCancelTools.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "PersonTypeChanged",o => { UcAlterPersonDetails.Content = o; });
                 //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand",o => Messenger.Default.Send("Cancel"));
             }

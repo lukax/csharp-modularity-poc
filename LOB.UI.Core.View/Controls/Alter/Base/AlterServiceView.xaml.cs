@@ -19,7 +19,9 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterServiceViewModel; }
-            set { DataContext = value; }
+            set { DataContext = value;
+                ViewAlterBaseEntity.DataContext = value;
+            }
         }
 
         public string Header {

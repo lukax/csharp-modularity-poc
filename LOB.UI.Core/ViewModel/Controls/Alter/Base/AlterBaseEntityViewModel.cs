@@ -35,13 +35,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected IRepository Repository { get; set; }
 
         public T Entity { get; set; }
-
-        public DelegateCommand ClearEntityCommand { get; set; }
+        public ICommand SaveChangesCommand { get; set; }
         public ICommand DiscardChangesCommand { get; set; }
+        public ICommand ClearEntityCommand { get; set; }
         public ICommand ExitCommand { get; set; }
         public ICommand QuickSearchCommand { get; set; }
         public int Index { get; set; }
-        public ICommand SaveChangesCommand { get; set; }
+
 
         protected virtual bool CanSaveChanges(object arg) {
             return Entity != null;

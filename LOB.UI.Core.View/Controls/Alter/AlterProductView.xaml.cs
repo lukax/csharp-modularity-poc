@@ -23,7 +23,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
             get { return DataContext as IAlterProductViewModel; }
             set {
                 DataContext = value;
-                UcAlterBaseEntityView.DataContext = value;
+                ViewEditTools.DataContext = value;
+                ViewAlterBaseEntity.DataContext = value;
+                ViewConfCancelTools.DataContext = value;
                 //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }

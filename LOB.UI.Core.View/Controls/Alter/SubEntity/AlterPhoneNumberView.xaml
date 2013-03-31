@@ -8,6 +8,8 @@
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:subEntity="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              mc:Ignorable="d"
              Height="110" Width="300">
 
@@ -50,15 +52,6 @@
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
                      Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
         </Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <controls:Tile x:Name="ButtonCancel" Width="32" Height="32" Background="Transparent"
-                           Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
-            </controls:Tile>
-            <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="32" Height="32" Background="Transparent"
-                           Command="{Binding SaveChangesCommand}" BorderThickness="0">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
-            </controls:Tile>
-        </StackPanel>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
     </StackPanel>
 </UserControl>

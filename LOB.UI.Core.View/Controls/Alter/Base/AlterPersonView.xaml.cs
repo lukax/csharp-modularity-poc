@@ -24,8 +24,8 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
                 DataContext = value;
                 var localViewModel = value as IAlterPersonViewModel;
                 if(localViewModel != null) {
-                    UcAlterAddressView.DataContext = localViewModel.AlterAddressViewModel;
-                    UcAlterContactInfoView.DataContext = localViewModel.AlterContactInfoViewModel;
+                    ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
+                    ViewAlterContactInfo.DataContext = localViewModel.AlterContactInfoViewModel;
                 }
             }
         }

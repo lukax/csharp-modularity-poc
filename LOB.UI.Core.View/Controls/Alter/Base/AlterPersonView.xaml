@@ -26,10 +26,10 @@
         <TabControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
             <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
             <TabItem Header="{x:Static loc:Strings.Common_Address}">
-                <base:AlterAddressView x:Name="UcAlterAddressView" />
+                <base:AlterAddressView x:Name="ViewAlterAddress" />
             </TabItem>
             <TabItem Header="{x:Static loc:Strings.Common_ContactInfo}">
-                <base:AlterContactInfoView x:Name="UcAlterContactInfoView" />
+                <base:AlterContactInfoView x:Name="ViewAlterContactInfo" />
             </TabItem>
         </TabControl>
 

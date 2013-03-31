@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel>
-                <base:AlterBaseEntityView HorizontalAlignment="Left" />
+                <base:AlterBaseEntityView HorizontalAlignment="Left" x:Name="ViewAlterBaseEntity" />
                 <Label Content="{x:Static loc:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
             </DockPanel>
 

@@ -26,7 +26,12 @@ namespace LOB.Business.Logic.Base {
         }
 
         public Service GenerateEntity() {
-            throw new NotImplementedException();
+            return new LocalService {
+                Code = 0,
+                Error = null,
+                Description = "",
+                Name = "",
+            };
         }
 
         public void ConfigureValidations() {
@@ -74,5 +79,6 @@ namespace LOB.Business.Logic.Base {
             return true;
         }
 
+        private class LocalService : Service{}
     }
 }

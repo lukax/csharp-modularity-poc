@@ -31,14 +31,17 @@ namespace LOB.Business.Logic {
         }
 
         public Product GenerateEntity() {
+            var localService = _serviceFacade.GenerateEntity();
+            var localShipmentInfo = _shipmentInfoFacade.GenerateEntity();
+            var localCategory = _categoryFacade.GenerateEntity();
             return new Product {
                 Code = 0,
                 Error = null,
                 Status = default(ProductStatus),
-                Category = _categoryFacade.GenerateEntity(),
-                Description = "",
-                Name = "",
-                ShipmentInfo = _shipmentInfoFacade.GenerateEntity(),
+                Category = localCategory,
+                Description = localService.Description,
+                Name = localService.Name,
+                ShipmentInfo = localShipmentInfo,
                 CodBarras = 0,
                 Image = null,
                 MaxUnitsOfStock = 0,

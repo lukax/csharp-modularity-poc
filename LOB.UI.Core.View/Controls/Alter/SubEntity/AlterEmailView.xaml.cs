@@ -19,7 +19,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterEmailViewModel; }
-            set { DataContext = value; }
+            set { DataContext = value;
+            ViewConfCancelTools.DataContext = value;
+            }
         }
 
         public string Header {

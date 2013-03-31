@@ -30,7 +30,20 @@ namespace LOB.Business.Logic {
         }
 
         public LegalPerson GenerateEntity() {
-            throw new NotImplementedException();
+            var localPerson = _personFacade.GenerateEntity();
+            return new LegalPerson {
+                Code = 0,
+                Error = null,
+                Address = localPerson.Address,
+                ContactInfo = localPerson.ContactInfo,
+                Notes = "",
+                CnaeFiscal = 0,
+                Cnpj = 0,
+                CorporateName = "",
+                Iestadual = 0,
+                Imunicipal = 0,
+                TradingName = "",
+            };
         }
 
         Person IPersonFacade.GenerateEntity() {

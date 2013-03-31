@@ -9,6 +9,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -17,25 +18,10 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-            <Button DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}" Padding="1"
-                    HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
-            </Button>
-
-            <Button x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent" Padding="1"
-                    Command="{Binding CancelCommand}" IsCancel="True">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
-            </Button>
-            <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent" Padding="1"
-                    Command="{Binding SaveChangesCommand}">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
-            </Button>
-        </StackPanel>
-
+        <util:EditToolsView x:Name="ViewEditTools" />
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <base:AlterBaseEntityView x:Name="UcAlterBaseEntity" />
+                <base:AlterBaseEntityView x:Name="ViewAlterBaseEntity" />
 
                 <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
                 <TextBlock Text="{Binding Entity.Status}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
@@ -77,24 +63,7 @@
                     </TabItem>
                 </TabControl>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
-                            <DockPanel>
-                                <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26"
-                                       Width="26" />
-                                <Label Content="{x:Static loc:Strings.Button_Cancel}" />
-                            </DockPanel>
-                        </Button>
-                        <Button Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
-                            <DockPanel>
-                                <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26"
-                                       Width="26" />
-                                <Label Content="{x:Static loc:Strings.Button_ConfirmOp}" />
-                            </DockPanel>
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
+                <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
             </StackPanel>
 
         </StackPanel>

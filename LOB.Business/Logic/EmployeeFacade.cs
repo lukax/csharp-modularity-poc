@@ -36,24 +36,27 @@ namespace LOB.Business.Logic {
         }
 
         public Employee GenerateEntity() {
+            var localNaturalPerson = _naturalPersonFacade.GenerateEntity();
+            var localStore = _storeFacade.GenerateEntity();
+            var localPayCheck = _payCheckFacade.GenerateEntity();
             return new Employee {
                 Code = 0,
                 Error = null,
-                Address = _naturalPersonFacade.GenerateEntity().Address,
-                ContactInfo = _naturalPersonFacade.GenerateEntity().ContactInfo,
-                Notes = "",
-                BirthDate = DateTime.Now,
-                Cpf = 0,
-                FirstName = "",
-                LastName = "",
+                Address = localNaturalPerson.Address,
+                ContactInfo = localNaturalPerson.ContactInfo,
+                Notes = localNaturalPerson.Notes,
+                BirthDate = localNaturalPerson.BirthDate,
+                Cpf = localNaturalPerson.Cpf,
+                FirstName = localNaturalPerson.FirstName,
+                LastName = localNaturalPerson.LastName,
                 HireDate = DateTime.Now,
-                NickName = "",
+                NickName = localNaturalPerson.NickName,
                 Password = "",
-                PayCheck = _payCheckFacade.GenerateEntity(),
-                Rg = 0,
-                RgUf = "",
+                PayCheck = localPayCheck,
+                Rg = localNaturalPerson.Rg,
+                RgUf = localNaturalPerson.RgUf,
                 Title = "",
-                WorksIn = _storeFacade.GenerateEntity(),
+                WorksIn = localStore,
             };
         }
 

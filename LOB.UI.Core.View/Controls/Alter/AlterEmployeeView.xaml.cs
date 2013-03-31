@@ -25,18 +25,19 @@ namespace LOB.UI.Core.View.Controls.Alter {
             get { return DataContext as IAlterEmployeeViewModel; }
             set {
                 DataContext = value;
-                UcAlterBaseEntityView.DataContext = value;
-                UcAlterNaturalPersonView.DataContext = value;
+                ViewEditTools.DataContext = value;
+                ViewAlterBaseEntity.DataContext = value;
+                ViewAlterNaturalPerson.DataContext = value;
                 var localViewModel = value as IAlterEmployeeViewModel;
                 if(localViewModel != null) {
-                    UcAlterNaturalPersonView.UcAlterPersonView.UcAlterAddressView.DataContext =
+                    ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterAddress.DataContext =
                         localViewModel.AlterAddressViewModel;
-                    UcAlterNaturalPersonView.UcAlterPersonView.UcAlterContactInfoView.DataContext =
+                    ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterContactInfo.DataContext =
                         localViewModel.AlterContactInfoViewModel;
                 }
 
                 _eventAggregator.GetEvent<SaveEvent>()
-                                .Subscribe((s) => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
+                                .Subscribe(s => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 
