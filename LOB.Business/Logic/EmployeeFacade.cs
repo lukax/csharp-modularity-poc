@@ -10,7 +10,6 @@ using LOB.Core.Localization;
 using LOB.Domain;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -23,7 +22,7 @@ namespace LOB.Business.Logic {
         private readonly IStoreFacade _storeFacade;
         private Employee _entity;
 
-        public EmployeeFacade(IBaseEntityFacade baseEntityFacade, INaturalPersonFacade naturalPersonFacade, 
+        public EmployeeFacade(IBaseEntityFacade baseEntityFacade, INaturalPersonFacade naturalPersonFacade,
             IPayCheckFacade payCheckFacade, IStoreFacade storeFacade) {
             _baseEntityFacade = baseEntityFacade;
             _naturalPersonFacade = naturalPersonFacade;

@@ -13,7 +13,10 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal">
+    <StackPanel>
         <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
+        <StackPanel>
+            <Border Background="{DynamicResource AccentBrush}" Opacity="0.6" x:Name="BorderOuter" />
+        </StackPanel>
     </StackPanel>
 </UserControl>

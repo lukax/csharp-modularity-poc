@@ -45,14 +45,21 @@ namespace LOB.UI.Core.View.Controllers {
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
             _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
             _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Subscribe(QuickSearch, true);
         }
 
-        private void OpenView(OperationType param) {
-            if(param == default(OperationType)) throw new ArgumentNullException("param");
+        private void QuickSearch(UIOperation param) {
+            if(param.Type == default(UIOperationType)) throw new ArgumentException("param");
+            var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
+            _regionAdapter.AddView(view, RegionName.ModalRegion);
+        }
+
+        private void OpenView(UIOperation param) {
+            if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
         }
 
-        private void CloseView(OperationType param) {
+        private void CloseView(UIOperation param) {
             try {
                 _regionAdapter.RemoveView(param, RegionName.TabRegion);
             }
@@ -64,15 +71,15 @@ namespace LOB.UI.Core.View.Controllers {
 
         public void MessageShow(string param, bool isRestrictive = true) {
             MessageHide(null);
-            var viewModel = _container.Resolve<MessageToolsViewModel>();
+            var viewModel = _container.Resolve<MessageToolViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            _navigator.Init.ResolveView(OperationType.MessageTools)
+            _navigator.Init.ResolveView(new UIOperation {Type = UIOperationType.MessageTool})
                       .SetViewModel(viewModel)
                       .AddToRegion(RegionName.ModalRegion);
         }
 
         public async void MessageHide([AllowNull] string param) {
-            _regionAdapter.RemoveView(OperationType.MessageTools, RegionName.ModalRegion);
+            _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool}, RegionName.ModalRegion);
 
             if(param != null) {
                 MessageShow(param, false);

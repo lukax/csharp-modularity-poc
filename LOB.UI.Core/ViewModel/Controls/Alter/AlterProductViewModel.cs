@@ -8,7 +8,6 @@ using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -28,8 +27,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        public override OperationType OperationType {
-            get { return OperationType.AlterProduct; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         [InjectionConstructor] public AlterProductViewModel(Product entity, IUnityContainer unityContainer,
@@ -60,19 +60,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void ExecuteListCategory(object o) {
-            OperationType oP = o.ToString().ToOperationType();
-            _navigator.ResolveView(oP).Show(true);
+            //UIOperationType oP = o.ToString().ToUIOperationType();
+            //_navigator.ResolveView(oP).Show(true);
         }
 
         private void ExecuteAlterCategory(object o) {
-            OperationType oP = o.ToString().ToOperationType();
-            if(Entity.Category != null)
-                _navigator.ResolveView(oP)
-                          .SetViewModel(
-                                        _unityContainer.Resolve<AlterCategoryViewModel>(new ParameterOverride(
-                                                                                            "category", Entity.Category)))
-                          .Show(true);
-            _navigator.ResolveView(oP).Show(true);
+            //UIOperationType oP = o.ToString().ToUIOperationType();
+            //if(Entity.Category != null)
+            //    _navigator.ResolveView(oP)
+            //              .SetViewModel(
+            //                            _unityContainer.Resolve<AlterCategoryViewModel>(new ParameterOverride(
+            //                                                                                "category", Entity.Category)))
+            //              .Show(true);
+            //_navigator.ResolveView(oP).Show(true);
         }
 
         protected override void SaveChanges(object arg) {
@@ -83,7 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -97,7 +97,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object args) {

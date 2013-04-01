@@ -63,13 +63,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             ClearEntity(null);
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterContactInfo; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
         #region UI Validations
 
         private void AddEmail(object arg) {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterEmail);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation);
         }
 
         private bool CanAddEmail(object arg) {
@@ -78,7 +79,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void AddPhoneNumber(object arg) {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.AlterPhoneNumber);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation);
         }
 
         private bool CanAddPhoneNumber(object arg) {
@@ -158,11 +159,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         #endregion
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {

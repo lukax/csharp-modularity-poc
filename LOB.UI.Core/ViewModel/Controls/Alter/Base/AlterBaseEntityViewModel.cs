@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -42,7 +41,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public ICommand QuickSearchCommand { get; set; }
         public int Index { get; set; }
 
-
         protected virtual bool CanSaveChanges(object arg) {
             return Entity != null;
         }
@@ -62,5 +60,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected abstract void Cancel(object arg);
         protected abstract void QuickSearch(object arg);
         protected abstract void ClearEntity(object arg);
+
     }
 }

@@ -1,11 +1,9 @@
 ﻿#region Usings
 
-using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -34,8 +32,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             ClearEntity(null);
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterEmployee; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
@@ -52,16 +51,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {
             Entity = new Employee {};
-
         }
 
     }

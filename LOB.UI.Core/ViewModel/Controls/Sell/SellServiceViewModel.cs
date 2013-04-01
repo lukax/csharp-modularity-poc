@@ -9,6 +9,11 @@ using LOB.UI.Interface.ViewModel.Controls.Sell;
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
     public class SellServiceViewModel : ISellServiceViewModel {
 
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Sell};
+        public UIOperation UIOperation {
+            get { return _operation; }
+        }
+
         public string Header { get; set; }
 
         public void InitializeServices() {
@@ -17,10 +22,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
 
         public void Refresh() {
             throw new NotImplementedException();
-        }
-
-        public OperationType OperationType {
-            get { return OperationType.SellService; }
         }
 
     }

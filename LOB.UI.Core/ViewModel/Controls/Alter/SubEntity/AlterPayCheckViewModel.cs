@@ -33,8 +33,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             ClearEntity(null);
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterPayCheck; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PayCheck, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -48,11 +49,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {

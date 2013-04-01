@@ -63,7 +63,7 @@
                     </TabItem>
                 </TabControl>
 
-                <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
+                <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
             </StackPanel>
 
         </StackPanel>

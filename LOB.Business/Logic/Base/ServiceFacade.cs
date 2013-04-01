@@ -26,12 +26,7 @@ namespace LOB.Business.Logic.Base {
         }
 
         public Service GenerateEntity() {
-            return new LocalService {
-                Code = 0,
-                Error = null,
-                Description = "",
-                Name = "",
-            };
+            return new LocalService {Code = 0, Error = null, Description = "", Name = "",};
         }
 
         public void ConfigureValidations() {
@@ -79,6 +74,9 @@ namespace LOB.Business.Logic.Base {
             return true;
         }
 
-        private class LocalService : Service{}
+        private class LocalService : Service {
+
+        }
+
     }
 }

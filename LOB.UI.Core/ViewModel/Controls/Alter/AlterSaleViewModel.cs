@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.Events.View;
@@ -16,9 +15,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {
 
         private readonly IEventAggregator _eventAggregator;
-        public override OperationType OperationType
-        {
-            get { return OperationType.AlterSale; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator,
@@ -36,15 +35,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Sale{};
+            Entity = new Sale {};
         }
 
     }

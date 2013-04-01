@@ -37,8 +37,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.ListPhoneNumber; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.List};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

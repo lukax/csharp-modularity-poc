@@ -19,7 +19,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterSaleViewModel; }
-            set { DataContext = value;
+            set {
+                DataContext = value;
                 ViewEditTools.DataContext = value;
                 ViewConfCancelTools.DataContext = value;
             }
@@ -35,8 +36,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.AlterSale; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

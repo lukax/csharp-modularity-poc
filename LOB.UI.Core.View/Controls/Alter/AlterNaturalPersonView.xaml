@@ -78,7 +78,7 @@
         <StackPanel>
             <base2:AlterPersonView x:Name="ViewAlterPerson" />
         </StackPanel>
-        
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden"/>
+
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden" />
     </StackPanel>
 </UserControl>

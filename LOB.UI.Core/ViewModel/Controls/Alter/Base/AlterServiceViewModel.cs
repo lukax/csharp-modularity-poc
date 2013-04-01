@@ -1,9 +1,7 @@
 ﻿#region Usings
 
-using System;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;

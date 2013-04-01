@@ -33,14 +33,10 @@ namespace LOB.UI.Core.View.Modularity {
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
             _container.RegisterInstance(CommandService.Default);
-            //_container.RegisterInstance<MessageToolsView>(new MessageToolsView()
-            //    {
-            //        ViewModel = _container.Resolve<MessageToolsViewModel>()
-            //    });
 
             var regionManager = _container.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolsView));
-            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolsView));
+            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolView));
+            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolView));
 
             CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
 

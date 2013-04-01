@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="LOB.UI.Core.View.Controls.Util.ConfCancelToolsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
@@ -22,7 +22,7 @@
             <Button x:Name="ButtonSave" Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
                 <DockPanel>
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
-                    <Label Content="{x:Static loc:Strings.Button_ConfirmOp}" />
+                    <Label Content="{x:Static loc:Strings.Button_Confirm_Op}" />
                 </DockPanel>
             </Button>
         </StackPanel>

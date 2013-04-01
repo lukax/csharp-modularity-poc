@@ -17,7 +17,9 @@ namespace LOB.UI.Core.View.Controls.Main {
             InitializeComponent();
         }
 
-        public OperationType OperationType { get; private set; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
+        }
         public IBaseViewModel ViewModel { get; set; }
 
         public string Header {

@@ -61,11 +61,11 @@
                 <TabControl>
                     <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
                     <TabItem Header="{x:Static loc:Strings.Common_PayCheck}">
-                        <base:AlterPayCheckView x:Name="ViewAlterPayCheck"/>
+                        <base:AlterPayCheckView x:Name="ViewAlterPayCheck" />
                     </TabItem>
                 </TabControl>
             </DockPanel>
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>
 </UserControl>

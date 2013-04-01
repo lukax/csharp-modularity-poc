@@ -56,15 +56,43 @@ namespace LOB.UI.Core.View {
         public string Header { get; set; }
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() {
+            _eventAggregator.GetEvent<QuickSearchEvent>().Subscribe(type => {
+                BlurModal.Radius = 8;
+                BorderModal.Visibility = Visibility.Visible;
+            });
+        }
 
         public void Refresh() {
             base.UpdateLayout();
             MiLightBlue(null, null);
         }
 
-        public OperationType OperationType {
-            get { return OperationType.Main; }
+        public UIOperationType UIOperationType {
+            get { return UIOperationType.Main; }
+        }
+
+        private void OnLoad() {
+            _eventAggregator.GetEvent<CloseViewEvent>()
+                            .Subscribe(o => { if(o == new UIOperation {Type = UIOperationType.Main}) Close(); });
+
+            if(_loaded) return;
+            _module = _container.Resolve<IModuleManager>();
+            _module.LoadModule("UICoreViewModule");
+            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
+            _loaded = true;
+        }
+
+        private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            TabRegion.SelectedIndex = -1;
+            ProgressRing.IsActive = true;
+            await Task.Delay(300); // Fix validation color border in textboxes TODO: Check this issue
+            ProgressRing.IsActive = false;
+            TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
+        }
+
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
         #region Themes
 
@@ -113,24 +141,5 @@ namespace LOB.UI.Core.View {
         }
 
         #endregion
-        private void OnLoad() {
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe((o) => { if(o == OperationType.Main) Close(); });
-
-            if(_loaded) return;
-            _module = _container.Resolve<IModuleManager>();
-            _module.LoadModule("UICoreViewModule");
-            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
-            _loaded = true;
-        }
-
-        private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            TabRegion.SelectedIndex = -1;
-            ProgressRing.IsActive = true;
-            await Task.Delay(500); // Fix validation color border in textboxes TODO: Check this issue
-            if(TabRegion.Items.Count == 0) TabRegion.SelectedIndex = 1;
-            TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
-            ProgressRing.IsActive = false;
-        }
-
     }
 }

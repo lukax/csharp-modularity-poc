@@ -46,7 +46,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ICommand FetchCommand { get; set; }
         public T Entity { get; set; }
         public IList<T> Entitys { get; set; }
-        public virtual string Search { get; set; }
+        public string Search { get; set; }
         protected IRepository Repository { get; set; }
 
         [InjectionConstructor] protected ListBaseEntityViewModel(T entity, IRepository repository,
@@ -59,10 +59,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
             ExitCommand = new DelegateCommand(Exit);
+            Search = "";
         }
 
         private void Exit(object obj) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         public int UpdateInterval {

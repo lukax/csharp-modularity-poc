@@ -126,106 +126,106 @@
   <data name="Button_Confirm" xml:space="preserve">
     <value>@Button_Confirm</value>
   </data>
-  <data name="Button_ConfirmOp" xml:space="preserve">
+  <data name="Button_Confirm_Op" xml:space="preserve">
     <value>@Button_ConfirmOp</value>
   </data>
-  <data name="Command_AlterAddress" xml:space="preserve">
+  <data name="Command_Alter_Address" xml:space="preserve">
     <value>@Command_AlterAddress</value>
   </data>
-  <data name="Command_AlterBaseEntity" xml:space="preserve">
+  <data name="Command_Alter_BaseEntity" xml:space="preserve">
     <value>@Command_AlterBaseEntity</value>
   </data>
-  <data name="Command_AlterCategory" xml:space="preserve">
+  <data name="Command_Alter_Category" xml:space="preserve">
     <value>@Command_AlterCategory</value>
   </data>
-  <data name="Command_AlterContactInfo" xml:space="preserve">
+  <data name="Command_Alter_ContactInfo" xml:space="preserve">
     <value>@Command_AlterContactInfo</value>
   </data>
-  <data name="Command_AlterCustomer" xml:space="preserve">
+  <data name="Command_Alter_Customer" xml:space="preserve">
     <value>@Command_AlterCustomer</value>
   </data>
-  <data name="Command_AlterEmail" xml:space="preserve">
+  <data name="Command_Alter_Email" xml:space="preserve">
     <value>@Command_AlterEmail</value>
   </data>
-  <data name="Command_AlterEmployee" xml:space="preserve">
+  <data name="Command_Alter_Employee" xml:space="preserve">
     <value>@Command_AlterEmployee</value>
   </data>
-  <data name="Command_AlterLegalPerson" xml:space="preserve">
+  <data name="Command_Alter_LegalPerson" xml:space="preserve">
     <value>@Command_AlterLegalPerson</value>
   </data>
-  <data name="Command_AlterNaturalPerson" xml:space="preserve">
+  <data name="Command_Alter_NaturalPerson" xml:space="preserve">
     <value>@Command_AlterNaturalPerson</value>
   </data>
-  <data name="Command_AlterPayCheck" xml:space="preserve">
+  <data name="Command_Alter_PayCheck" xml:space="preserve">
     <value>@Command_AlterPayCheck</value>
   </data>
-  <data name="Command_AlterPerson" xml:space="preserve">
+  <data name="Command_Alter_Person" xml:space="preserve">
     <value>@Command_AlterPerson</value>
   </data>
-  <data name="Command_AlterPhoneNumber" xml:space="preserve">
+  <data name="Command_Alter_PhoneNumber" xml:space="preserve">
     <value>@Command_AlterPhoneNumber</value>
   </data>
-  <data name="Command_AlterProduct" xml:space="preserve">
+  <data name="Command_Alter_Product" xml:space="preserve">
     <value>@Command_AlterProduct</value>
   </data>
-  <data name="Command_AlterSale" xml:space="preserve">
+  <data name="Command_Alter_Sale" xml:space="preserve">
     <value>@Command_AlterSale</value>
   </data>
-  <data name="Command_AlterService" xml:space="preserve">
+  <data name="Command_Alter_Service" xml:space="preserve">
     <value>@Command_AlterService</value>
   </data>
-  <data name="Command_ListAddress" xml:space="preserve">
+  <data name="Command_List_Address" xml:space="preserve">
     <value>@Command_ListAddress</value>
   </data>
-  <data name="Command_ListBaseEntity" xml:space="preserve">
+  <data name="Command_List_BaseEntity" xml:space="preserve">
     <value>@Command_ListBaseEntity</value>
   </data>
-  <data name="Command_ListCategory" xml:space="preserve">
+  <data name="Command_List_Category" xml:space="preserve">
     <value>@Command_ListCategory</value>
   </data>
-  <data name="Command_ListContactInfo" xml:space="preserve">
+  <data name="Command_List_ContactInfo" xml:space="preserve">
     <value>@Command_ListContactInfo</value>
   </data>
-  <data name="Command_ListCustomer" xml:space="preserve">
+  <data name="Command_List_Customer" xml:space="preserve">
     <value>@Command_ListCustomer</value>
   </data>
-  <data name="Command_ListEmail" xml:space="preserve">
+  <data name="Command_List_Email" xml:space="preserve">
     <value>@Command_ListEmail</value>
   </data>
-  <data name="Command_ListEmployee" xml:space="preserve">
+  <data name="Command_List_Employee" xml:space="preserve">
     <value>@Command_ListEmployee</value>
   </data>
-  <data name="Command_ListLegalPerson" xml:space="preserve">
+  <data name="Command_List_LegalPerson" xml:space="preserve">
     <value>@Command_ListLegalPerson</value>
   </data>
-  <data name="Command_ListNaturalPerson" xml:space="preserve">
+  <data name="Command_List_NaturalPerson" xml:space="preserve">
     <value>@Command_ListNaturalPerson</value>
   </data>
-  <data name="Command_ListOp" xml:space="preserve">
+  <data name="Command_List_Op" xml:space="preserve">
     <value>@Command_ListOp</value>
   </data>
-  <data name="Command_ListPayCheck" xml:space="preserve">
+  <data name="Command_List_PayCheck" xml:space="preserve">
     <value>@Command_ListPayCheck</value>
   </data>
-  <data name="Command_ListPerson" xml:space="preserve">
+  <data name="Command_List_Person" xml:space="preserve">
     <value>@Command_ListPerson</value>
   </data>
-  <data name="Command_ListPhoneNumber" xml:space="preserve">
+  <data name="Command_List_PhoneNumber" xml:space="preserve">
     <value>@Command_ListPhoneNumber</value>
   </data>
-  <data name="Command_ListProduct" xml:space="preserve">
+  <data name="Command_List_Product" xml:space="preserve">
     <value>@Command_ListProduct</value>
   </data>
-  <data name="Command_ListSale" xml:space="preserve">
+  <data name="Command_List_Sale" xml:space="preserve">
     <value>@Command_ListSale</value>
   </data>
-  <data name="Command_ListService" xml:space="preserve">
+  <data name="Command_List_Service" xml:space="preserve">
     <value>@Command_ListService</value>
   </data>
-  <data name="Command_SellProduct" xml:space="preserve">
+  <data name="Command_Sell_Product" xml:space="preserve">
     <value>@Command_SellProduct</value>
   </data>
-  <data name="Command_SellService" xml:space="preserve">
+  <data name="Command_Sell_Service" xml:space="preserve">
     <value>@Command_SellService</value>
   </data>
   <data name="Common_Address" xml:space="preserve">
@@ -516,7 +516,7 @@
   <data name="Header_List" xml:space="preserve">
     <value>@Header_List</value>
   </data>
-  <data name="Header_ListService" xml:space="preserve">
+  <data name="Header_List_Service" xml:space="preserve">
     <value>@Header_ListService</value>
   </data>
   <data name="Header_List_BaseEntity" xml:space="preserve">

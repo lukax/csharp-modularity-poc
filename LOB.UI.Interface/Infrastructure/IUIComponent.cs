@@ -1,7 +1,7 @@
 ﻿namespace LOB.UI.Interface.Infrastructure {
     public interface IUIComponent {
 
-        OperationType OperationType { get; }
+        UIOperation UIOperation { get; }
         string Header { get; }
 
     }

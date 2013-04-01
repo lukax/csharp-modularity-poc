@@ -10,11 +10,11 @@ using LOB.UI.Interface.ViewModel.Controls.Main;
 
 namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
-    ///     Interaction logic for ColumnToolsView.xaml
+    ///     Interaction logic for ColumnToolView.xaml
     /// </summary>
-    public partial class HeaderToolsView : UserControl, IBaseView {
+    public partial class HeaderToolView : UserControl, IBaseView {
 
-        public HeaderToolsView(IHeaderToolsViewModel viewModel) {
+        public HeaderToolView(IHeaderToolsViewModel viewModel) {
             InitializeComponent();
             ViewModel = viewModel;
         }
@@ -34,8 +34,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.HeaderTools; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

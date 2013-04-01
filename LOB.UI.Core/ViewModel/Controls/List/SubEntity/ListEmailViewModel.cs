@@ -35,8 +35,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.ListEmail; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.List};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

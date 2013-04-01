@@ -19,8 +19,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType {
-            get { return OperationType.SellProduct; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        public UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

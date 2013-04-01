@@ -43,8 +43,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.ListAddress; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.List};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

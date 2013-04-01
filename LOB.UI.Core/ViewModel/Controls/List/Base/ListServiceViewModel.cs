@@ -19,8 +19,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.ListService; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.List};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

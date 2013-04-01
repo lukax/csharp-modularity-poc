@@ -12,13 +12,16 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolsView.xaml
     /// </summary>
-    public partial class ColumnToolsView : UserControl, IBaseView {
+    public partial class ColumnToolView : UserControl, IBaseView {
 
-        public ColumnToolsView(IColumnToolsViewModel viewModel) {
+        public ColumnToolView(IColumnToolsViewModel viewModel) {
             InitializeComponent();
             ViewModel = viewModel;
         }
 
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
+        }
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
             set { DataContext = value; }
@@ -34,8 +37,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.ColumnTools; }
+        public UIOperationType UIOperationType {
+            get { return UIOperationType.ColumnTool; }
         }
 
     }

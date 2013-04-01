@@ -32,8 +32,8 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.ListCustomer; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

@@ -27,12 +27,7 @@ namespace LOB.Business.Logic.SubEntity {
         }
 
         public Category GenerateEntity() {
-            return new Category {
-                Code = 0,
-                Description = "",
-                Error = null,
-                Name = "",
-            };
+            return new Category {Code = 0, Description = "", Error = null, Name = "",};
         }
 
         Service IServiceFacade.GenerateEntity() {

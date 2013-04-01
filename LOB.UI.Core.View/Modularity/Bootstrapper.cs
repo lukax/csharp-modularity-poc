@@ -57,6 +57,7 @@ namespace LOB.UI.Core.View.Modularity {
 
         protected override DependencyObject CreateShell() {
             var main = Container.Resolve<Shell>();
+            main.InitializeServices();
             return main;
         }
 

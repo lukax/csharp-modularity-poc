@@ -19,7 +19,8 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterServiceViewModel; }
-            set { DataContext = value;
+            set {
+                DataContext = value;
                 ViewAlterBaseEntity.DataContext = value;
             }
         }
@@ -34,8 +35,8 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.AlterService; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

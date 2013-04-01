@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
@@ -44,7 +43,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -53,17 +52,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Email { Value = "", Code = 0};
+            Entity = new Email {Value = "", Code = 0};
             _emailFacade.SetEntity(Entity);
             _emailFacade.ConfigureValidations();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterEmail; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

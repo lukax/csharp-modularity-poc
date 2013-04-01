@@ -136,7 +136,7 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools"/>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>
 
 </UserControl>

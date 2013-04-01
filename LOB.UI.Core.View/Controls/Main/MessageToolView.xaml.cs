@@ -10,11 +10,11 @@ using NullGuard;
 
 namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
-    ///     Interaction logic for MessageToolsView.xaml
+    ///     Interaction logic for MessageToolView.xaml
     /// </summary>
-    public partial class MessageToolsView : UserControl, IBaseView {
+    public partial class MessageToolView : UserControl, IBaseView {
 
-        public MessageToolsView() {
+        public MessageToolView() {
             InitializeComponent();
         }
 
@@ -28,7 +28,7 @@ namespace LOB.UI.Core.View.Controls.Main {
                 IBaseViewModel result = value;
                 Dispatcher.Invoke(() => DataContext = result);
                 //this.DataContext = value;
-                //var vm = value as MessageToolsViewModel;
+                //var vm = value as MessageToolViewModel;
                 //if (vm != null)
                 //    (vm).PropertyChanged += (sender, args) =>
                 //        {
@@ -64,8 +64,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.MessageTools; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

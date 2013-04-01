@@ -31,8 +31,8 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.ListBaseEntity; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

@@ -46,9 +46,9 @@ namespace LOB.UI.Core.View.Infrastructure {
             return _resolvedViewModel;
         }
 
-        public IFluentNavigator ResolveViewModel(OperationType param) {
+        public IFluentNavigator ResolveViewModel(UIOperation param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(OperationTypeMapping.ViewModels[param]) as IBaseViewModel;
+            var resolved = _container.Resolve(UIOperationMapping.ViewModels[param]) as IBaseViewModel;
             if(resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);
             return this;
@@ -61,9 +61,9 @@ namespace LOB.UI.Core.View.Infrastructure {
             return this;
         }
 
-        public IFluentNavigator ResolveView(OperationType param) {
+        public IFluentNavigator ResolveView(UIOperation param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(OperationTypeMapping.Views[param]) as IBaseView;
+            var resolved = _container.Resolve(UIOperationMapping.Views[param]) as IBaseView;
             if(resolved == null) throw new ArgumentException("param");
             SetView(resolved);
             return this;

@@ -41,8 +41,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.AlterLegalPerson; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

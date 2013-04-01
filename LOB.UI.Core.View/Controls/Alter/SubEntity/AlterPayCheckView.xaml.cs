@@ -34,8 +34,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.AlterPayCheck; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

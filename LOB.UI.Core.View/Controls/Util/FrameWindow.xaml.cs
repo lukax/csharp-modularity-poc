@@ -47,8 +47,8 @@ namespace LOB.UI.Core.View.Controls.Util {
             MiLightBlue(null, null);
         }
 
-        public OperationType OperationType {
-            get { return OperationType.Main; }
+        public UIOperationType UIOperationType {
+            get { return UIOperationType.Main; }
         }
         #region Themes
 
@@ -99,6 +99,10 @@ namespace LOB.UI.Core.View.Controls.Util {
         #endregion
         private void Busy() {
             ModalRegion = new BusyView();
+        }
+
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

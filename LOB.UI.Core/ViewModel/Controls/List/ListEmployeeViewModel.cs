@@ -4,6 +4,7 @@ using System;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
@@ -45,6 +46,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         protected override bool CanDelete(object arg) {
             //TODO: Business logic
             return true;
+        }
+
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.List};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
     }

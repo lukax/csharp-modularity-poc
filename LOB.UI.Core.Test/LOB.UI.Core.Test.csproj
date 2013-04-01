@@ -73,6 +73,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AppStartTest.cs" />
+    <Compile Include="Infrastructure\OperationTypeMappingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +88,10 @@
     <ProjectReference Include="..\LOB.UI.Core.View\LOB.UI.Core.View.csproj">
       <Project>{b0968403-1f39-4128-b3f4-8d283d541071}</Project>
       <Name>LOB.UI.Core.View</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Interface.csproj">
+      <Project>{A231C91C-A4D3-4BE7-BA4E-EE7DFB3D7EEF}</Project>
+      <Name>LOB.UI.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

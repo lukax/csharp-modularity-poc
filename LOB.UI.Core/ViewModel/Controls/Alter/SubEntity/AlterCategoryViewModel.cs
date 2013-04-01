@@ -1,8 +1,6 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
@@ -38,8 +36,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             ClearEntity(null);
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterCategory; }
+        private UIOperation _uiOperation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _uiOperation; }
         }
 
         protected override void SaveChanges(object arg) {
@@ -50,7 +49,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -60,11 +59,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _uiOperation.State = UIOperationState.QuickSearch;
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Category { Name = "", Description = "", Code = 0 };
+            Entity = new Category {Name = "", Description = "", Code = 0};
             _facade.SetEntity(Entity);
             _facade.ConfigureValidations();
         }

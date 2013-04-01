@@ -31,8 +31,8 @@ namespace LOB.UI.Core.View.Controls.Sell {
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType {
-            get { return OperationType.SellService; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

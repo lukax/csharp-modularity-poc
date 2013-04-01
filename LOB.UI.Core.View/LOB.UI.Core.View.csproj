@@ -208,14 +208,14 @@
     <Compile Include="Controls\Main\BusyView.xaml.cs">
       <DependentUpon>BusyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Main\ColumnToolsView.xaml.cs">
-      <DependentUpon>ColumnToolsView.xaml</DependentUpon>
+    <Compile Include="Controls\Main\ColumnToolView.xaml.cs">
+      <DependentUpon>ColumnToolView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Main\HeaderToolsView.xaml.cs">
-      <DependentUpon>HeaderToolsView.xaml</DependentUpon>
+    <Compile Include="Controls\Main\HeaderToolView.xaml.cs">
+      <DependentUpon>HeaderToolView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Main\MessageToolsView.xaml.cs">
-      <DependentUpon>MessageToolsView.xaml</DependentUpon>
+    <Compile Include="Controls\Main\MessageToolView.xaml.cs">
+      <DependentUpon>MessageToolView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sell\SellProductView.xaml.cs">
       <DependentUpon>SellProductView.xaml</DependentUpon>
@@ -227,7 +227,7 @@
       <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\FluentNavigator.cs" />
-    <Compile Include="Infrastructure\OperationTypeMapping.cs" />
+    <Compile Include="Infrastructure\UIOperationMapping.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -418,15 +418,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Main\ColumnToolsView.xaml">
+    <Page Include="Controls\Main\ColumnToolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Main\HeaderToolsView.xaml">
+    <Page Include="Controls\Main\HeaderToolView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Main\MessageToolsView.xaml">
+    <Page Include="Controls\Main\MessageToolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

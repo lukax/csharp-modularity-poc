@@ -37,8 +37,8 @@ namespace LOB.UI.Core.Modularity {
             #endregion
             #region Main
 
-            _container.RegisterType<IColumnToolsViewModel, ColumnToolsViewModel>();
-            _container.RegisterType<IHeaderToolsViewModel, HeaderToolsViewModel>();
+            _container.RegisterType<IColumnToolsViewModel, ColumnToolViewModel>();
+            _container.RegisterType<IHeaderToolsViewModel, HeaderToolViewModel>();
 
             #endregion
             #region Alter
@@ -82,7 +82,7 @@ namespace LOB.UI.Core.Modularity {
             //_container.RegisterType<IListSaleViewModel, ListSaleViewModel>();
 
             #endregion
-            _container.RegisterInstance(_container.Resolve<MessageToolsViewModel>());
+            _container.RegisterInstance(_container.Resolve<MessageToolViewModel>());
 
 #if DEBUG
             var log = _container.Resolve<ILogger>();

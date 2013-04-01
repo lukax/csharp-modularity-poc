@@ -11,7 +11,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class MessageToolsViewModel : BaseViewModel {
+    public class MessageToolViewModel : BaseViewModel {
 
         private readonly IUnityContainer container;
         private readonly IEventAggregator eventAggregator;
@@ -39,14 +39,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         #endregion CloseExecute Command
-        [InjectionConstructor] public MessageToolsViewModel(IUnityContainer container) {
+        [InjectionConstructor] public MessageToolViewModel(IUnityContainer container) {
             Message = "Please wait...";
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.MessageTools; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {

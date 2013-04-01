@@ -19,8 +19,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterEmailViewModel; }
-            set { DataContext = value;
-            ViewConfCancelTools.DataContext = value;
+            set {
+                DataContext = value;
+                ViewConfCancelTools.DataContext = value;
             }
         }
 
@@ -34,8 +35,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.AlterEmail; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

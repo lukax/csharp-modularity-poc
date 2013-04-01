@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events.View;
+using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -18,18 +19,18 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Main {
+namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListOpViewModel : BaseViewModel, IListOpViewModel {
 
         private readonly IEventAggregator _eventAggregator;
-        private readonly Lazy<IDictionary<string, OperationType>> _operationDictLazy;
+        private readonly Lazy<IDictionary<string, UIOperation>> _operationDictLazy;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private string _search;
 
         public ListOpViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
-            _operationDictLazy = new Lazy<IDictionary<string, OperationType>>(CreateList);
+            _operationDictLazy = new Lazy<IDictionary<string, UIOperation>>(CreateList);
             Search = "";
             Entity = "";
         }
@@ -55,8 +56,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() {}
 
-        public override OperationType OperationType {
-            get { return OperationType.ListOp; }
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Op,
+            State = UIOperationState.List
+        };
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         private void UpdateList() {
@@ -115,33 +120,33 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void SaveChanges(object arg) {
-            var parsedEntity = _operationDictLazy.Value[arg.ToString()];
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedEntity);
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType.ListOp);
+            var parsedUIOperation = _operationDictLazy.Value[arg.ToString()];
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedUIOperation);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
-        private IDictionary<string, OperationType> CreateList() {
-            var enumList = Enum.GetValues(typeof(OperationType)).Cast<OperationType>().ToList();
-            //Remove Unapplicables to user selection:
-            enumList.Remove(OperationType.Unknown);
-            enumList.Remove(OperationType.MessageTools);
-            enumList.Remove(OperationType.ColumnTools);
-            enumList.Remove(OperationType.HeaderTools);
-            enumList.Remove(OperationType.AlterBaseEntity);
-            enumList.Remove(OperationType.ListBaseEntity);
-            enumList.Remove(OperationType.Main);
-            enumList.Remove(OperationType.ListService);
-            enumList.Remove(OperationType.AlterService);
-            var operationTypes = new Dictionary<string, OperationType>(enumList.Count);
+        private IDictionary<string, UIOperation> CreateList() {
+            var catalog = UIOperationCatalog.UIOperations;
+            //Remove Internal usage Types from user selection:
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Unknown));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Tool));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Loading));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Add));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Update));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Discard));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.QuickSearch));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Exit));
+
+            var operationTypes = new Dictionary<string, UIOperation>(catalog.Count);
             var stringsType = typeof(Strings);
             var stringsTypeProps = stringsType.GetProperties();
+
             //Parse to localized string
-            foreach(var operationType in enumList)
-                foreach(string name in
-                    from propertyInfo in stringsTypeProps
-                    let item = propertyInfo.Name
-                    where propertyInfo.Name.Contains(operationType.ToString())
-                    select item) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), operationType);
+            foreach(var uiOperation in catalog)
+                foreach(string name in from propertyInfo in stringsTypeProps
+                                       let name = propertyInfo.Name
+                                       where propertyInfo.Name.Contains("Command_" + uiOperation.ToString())
+                                       select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
             return operationTypes;
         }
 

@@ -11,13 +11,13 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public sealed class ColumnToolsViewModel : IColumnToolsViewModel {
+    public sealed class ColumnToolViewModel : IColumnToolsViewModel {
 
         private readonly ICommandService _commandService;
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
 
-        public ColumnToolsViewModel(IUnityContainer container, ICommandService commandService,
+        public ColumnToolViewModel(IUnityContainer container, ICommandService commandService,
             IEventAggregator eventAggregator) {
             _container = container;
             _commandService = commandService;
@@ -34,14 +34,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public void Refresh() {}
 
-        public OperationType OperationType { get; set; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ColumnTool};
+        public UIOperation UIOperation {
+            get { return _operation; }
+        }
 
         private void ShowShop(object obj) {
             //_eventAggregator.GetEvent<OpenViewEvent>().Publish("");
         }
 
         private void ShowOperations(object arg) {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(OperationType.ListOp);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List});
         }
 
     }

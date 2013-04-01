@@ -48,7 +48,16 @@ namespace LOB.Dao.Nhibernate {
         }
 
         public Object ORM {
-            get { return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession()); }
+            get {
+                try {
+                    return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession());
+                }
+                catch(NullReferenceException e) {
+                    _logger.Log(e.Message, Category.Exception, Priority.Low);
+                    if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_RequisitionFailed));
+                }
+                return null;
+            }
         }
 
         public event SessionCreatorEventHandler OnCreatingSession;

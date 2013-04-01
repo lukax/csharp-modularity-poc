@@ -12,9 +12,9 @@ namespace LOB.UI.Interface.Infrastructure {
         IBaseViewModel GetViewModel();
         IFluentNavigator SetView(IBaseView view);
         IFluentNavigator SetViewModel(IBaseViewModel viewModel);
-        IFluentNavigator ResolveView(OperationType param);
+        IFluentNavigator ResolveView(UIOperation param);
         IFluentNavigator ResolveView<TView>() where TView : IBaseView;
-        IFluentNavigator ResolveViewModel(OperationType param);
+        IFluentNavigator ResolveViewModel(UIOperation param);
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
         event OnOpenViewEventHandler OnOpenView;
         void AddToRegion(string regionName);

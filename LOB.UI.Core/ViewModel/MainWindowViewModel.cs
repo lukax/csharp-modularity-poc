@@ -32,13 +32,15 @@ namespace LOB.UI.Core.ViewModel {
         private IUnityContainer _container { get; set; }
         private IFluentNavigator _navigator { get; set; }
 
-        public override OperationType OperationType {
-            get { return OperationType.Main; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Main};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         private void OpenTab(object arg) {
-            OperationType oP = arg.ToString().ToOperationType();
-            _navigator.ResolveView(oP).ResolveViewModel(oP).AddToRegion(RegionName.TabRegion);
+            UIOperationType operationType = arg.ToString().ToUIOperationType();
+            var op = new UIOperation {Type = operationType};
+            _navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
         public override void InitializeServices() {}

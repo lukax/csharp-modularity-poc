@@ -23,7 +23,7 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         }
 
         public string Header {
-            get { return Strings.Header_ListService; }
+            get { return Strings.Header_List_Service; }
         }
 
         public int Index { get; set; }
@@ -32,8 +32,8 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.ListService; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

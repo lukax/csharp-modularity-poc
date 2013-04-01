@@ -32,8 +32,8 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.ListEmail; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

@@ -36,15 +36,15 @@ namespace LOB.UI.Core.View.Controls.List {
         public int Index { get; set; }
 
         public void InitializeServices() {
-            _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o == OperationType.ListOp) Refresh(); });
+            _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o == UIOperation) Refresh(); });
         }
 
         public void Refresh() {
             //ListViewEntitys.SelectedIndex = -1;
         }
 
-        public OperationType OperationType {
-            get { return OperationType.ListOp; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

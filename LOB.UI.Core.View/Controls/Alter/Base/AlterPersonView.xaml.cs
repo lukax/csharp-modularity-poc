@@ -44,8 +44,8 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType {
-            get { return OperationType.AlterPerson; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

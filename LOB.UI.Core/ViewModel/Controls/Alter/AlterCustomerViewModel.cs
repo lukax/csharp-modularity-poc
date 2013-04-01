@@ -26,16 +26,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly IFluentNavigator _navigator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
-        public override OperationType OperationType
-        {
-            get { return OperationType.AlterCustomer; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         [InjectionConstructor] public AlterCustomerViewModel(Customer entity, IRepository repository,
             IUnityContainer container, IFluentNavigator navigator, AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel, ICommandService commandService, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade)
-        {
+            AlterNaturalPersonViewModel alterNaturalPersonViewModel, ICommandService commandService,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
             _navigator = navigator;
             _container = container;
             _commandService = commandService;
@@ -52,7 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void Refresh() {
             Entity = new Customer();
         }
-        
+
         private void PersonTypeChanged() {
             Entity.PropertyChanged += (s, e) => {
                 switch(Entity.PersonType) {
@@ -68,20 +68,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private async void LegalPersonCfg() {
             await Task.Delay(500);
-            var viewL =
-                _navigator.ResolveView(OperationType.AlterLegalPerson)
-                          .SetViewModel(_alterLegalPersonViewModel)
-                          .GetView();
+            var viewL = _navigator.ResolveView(UIOperation).SetViewModel(_alterLegalPersonViewModel).GetView();
             //Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
             Entity.Person = _alterLegalPersonViewModel.Entity;
         }
 
         private async void NaturalPersonCfg() {
             await Task.Delay(500);
-            var viewN =
-                _navigator.ResolveView(OperationType.AlterNaturalPerson)
-                          .SetViewModel(_alterNaturalPersonViewModel)
-                          .GetView();
+            var viewN = _navigator.ResolveView(UIOperation).SetViewModel(_alterNaturalPersonViewModel).GetView();
             //Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
             Entity.Person = _alterNaturalPersonViewModel.Entity;
         }
@@ -102,15 +96,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Customer{};
+            Entity = new Customer {};
         }
 
     }

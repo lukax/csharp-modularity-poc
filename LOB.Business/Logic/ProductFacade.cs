@@ -20,7 +20,8 @@ namespace LOB.Business.Logic {
 
         private Product _entity;
 
-        public ProductFacade(IServiceFacade serviceFacade, ICategoryFacade categoryFacade, IShipmentInfoFacade shipmentInfoFacade) {
+        public ProductFacade(IServiceFacade serviceFacade, ICategoryFacade categoryFacade,
+            IShipmentInfoFacade shipmentInfoFacade) {
             _serviceFacade = serviceFacade;
             _categoryFacade = categoryFacade;
             _shipmentInfoFacade = shipmentInfoFacade;

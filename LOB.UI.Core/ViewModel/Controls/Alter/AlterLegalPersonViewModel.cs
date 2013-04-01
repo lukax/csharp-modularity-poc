@@ -19,8 +19,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly AlterPersonViewModel _alterPersonViewModel;
         private readonly IEventAggregator _eventAggregator;
         private IUnityContainer _container;
-        public override OperationType OperationType {
-            get { return OperationType.AlterLegalPerson; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
@@ -49,15 +50,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
         }
 
         protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(OperationType);
+            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new LegalPerson { };
+            Entity = new LegalPerson {};
         }
 
     }

@@ -9,7 +9,7 @@ namespace LOB.Business.Interface.Logic {
     public interface ISaleFacade : IBaseEntityFacade {
 
         new void SetEntity<T>(T entity) where T : Sale;
-        new Sale GenerateEntity();
+         Sale GenerateEntity();
 
     }
 }

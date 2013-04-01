@@ -139,6 +139,7 @@
     <Compile Include="Events\View\OpenViewEvent.cs" />
     <Compile Include="Events\View\QuickSearchEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
+    <Compile Include="Infrastructure\UIOperationCatalog.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Infrastructure\RegionName.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
@@ -175,9 +176,9 @@
     <Compile Include="ViewModel\Controls\Sell\SellProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\SellServiceViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Main\ColumnToolsViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Main\HeaderToolsViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Main\MessageToolsViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\ColumnToolViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\HeaderToolViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\MessageToolViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

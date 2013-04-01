@@ -18,7 +18,7 @@ namespace LOB.UI.Core.View.Controls.Sell {
         public IBaseViewModel ViewModel { get; set; }
 
         public string Header {
-            get { return Strings.Command_SellProduct; }
+            get { return Strings.Command_Sell_Product; }
         }
 
         public int Index { get; set; }
@@ -31,8 +31,8 @@ namespace LOB.UI.Core.View.Controls.Sell {
             throw new NotImplementedException();
         }
 
-        public OperationType OperationType {
-            get { return OperationType.SellProduct; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

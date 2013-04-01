@@ -46,8 +46,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             throw new NotImplementedException();
         }
 
-        public override OperationType OperationType {
-            get { return OperationType.AlterCustomer; }
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.List};
+        public override UIOperation UIOperation {
+            get { return _operation; }
         }
 
         protected override bool CanUpdate(object arg) {

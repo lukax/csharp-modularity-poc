@@ -31,8 +31,8 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public void Refresh() {}
 
-        public OperationType OperationType {
-            get { return OperationType.AlterBaseEntity; }
+        public UIOperation UIOperation {
+            get { return ViewModel.UIOperation; }
         }
 
     }

@@ -22,18 +22,18 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public void AddView<TView>(TView view, string regionName) where TView : IBaseView {
             var region = _regionManager.Regions[regionName];
-            var previousView = region.GetView(view.OperationType.ToString());
+            var previousView = region.GetView(view.UIOperation.ToString());
             if(previousView != null) if(region.Views.Contains(previousView)) region.Remove(previousView);
-            region.Add(view, view.OperationType.ToString());
+            region.Add(view, view.UIOperation.ToString());
         }
 
-        public IBaseView GetView(OperationType param, string regionName) {
+        public IBaseView GetView(UIOperation param, string regionName) {
             var region = _regionManager.Regions[regionName];
             return region.GetView(param.ToString()) as IBaseView;
         }
 
-        public void RemoveView(OperationType param, string regionName) {
-            if(param == default(OperationType)) throw new ArgumentNullException("param");
+        public void RemoveView(UIOperation param, string regionName) {
+            if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             var region = _regionManager.Regions[regionName];
             var view = region.GetView(param.ToString());
             if(region.Views.Contains(view)) region.Remove(view);

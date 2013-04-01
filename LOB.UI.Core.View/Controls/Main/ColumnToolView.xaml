@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LOB.UI.Core.View.Controls.Main.ColumnToolsView"
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.Main.ColumnToolView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
