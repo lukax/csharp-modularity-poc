@@ -47,7 +47,7 @@ namespace LOB.Dao.Nhibernate {
             set { _connectionString = value; }
         }
 
-        public Object ORM {
+        [AllowNull] public Object ORM {
             get {
                 try {
                     return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession());
