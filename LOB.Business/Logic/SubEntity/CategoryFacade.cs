@@ -17,22 +17,16 @@ namespace LOB.Business.Logic.SubEntity {
 
         private Category _entity;
 
-        public CategoryFacade(IServiceFacade serviceFacade) {
-            _serviceFacade = serviceFacade;
-        }
+        public CategoryFacade(IServiceFacade serviceFacade) { _serviceFacade = serviceFacade; }
 
         public void SetEntity<T>(T entity) where T : Category {
             _serviceFacade.SetEntity(entity);
             _entity = entity;
         }
 
-        public Category GenerateEntity() {
-            return new Category {Code = 0, Description = "", Error = null, Name = "",};
-        }
+        public Category GenerateEntity() { return new Category {Code = 0, Description = "", Error = null, Name = "",}; }
 
-        Service IServiceFacade.GenerateEntity() {
-            return GenerateEntity();
-        }
+        Service IServiceFacade.GenerateEntity() { return GenerateEntity(); }
 
         public void ConfigureValidations() {
             _serviceFacade.ConfigureValidations();
@@ -51,25 +45,15 @@ namespace LOB.Business.Logic.SubEntity {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) {
-            ((IBaseEntityFacade) _serviceFacade).SetEntity(entity);
-        }
+        void IBaseEntityFacade.SetEntity<T>(T entity) { ((IBaseEntityFacade)_serviceFacade).SetEntity(entity); }
 
-        void IServiceFacade.SetEntity<T>(T entity) {
-            (_serviceFacade).SetEntity(entity);
-        }
+        void IServiceFacade.SetEntity<T>(T entity) { (_serviceFacade).SetEntity(entity); }
 
-        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
     }
 }

@@ -16,9 +16,7 @@ namespace LOB.UI.Interface.Command {
             _canExecute = canExecute;
         }
 
-        public void Execute(object parameter) {
-            _execute(parameter);
-        }
+        public void Execute(object parameter) { _execute(parameter); }
 
         public bool CanExecute(object parameter) {
             if(_canExecute != null) return _canExecute(parameter);

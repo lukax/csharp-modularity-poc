@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel {
 
         public ListPayCheckViewModel(PayCheck entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<PayCheck, bool>> SearchCriteria {
             get {
@@ -29,18 +29,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                          arg.CurrentSalary.ToString(Thread.CurrentThread.CurrentCulture)
                             .ToUpper()
                             .Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PayCheck, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.PayCheck,
+            State = UIOperationState.List
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

@@ -15,7 +15,8 @@ namespace LOB.UI.Core.View.Infrastructure {
         private readonly IUnityContainer _container;
         private readonly IRegionManager _regionManager;
 
-        [InjectionConstructor] public RegionAdapter(IUnityContainer container, IRegionManager regionManager) {
+        [InjectionConstructor]
+        public RegionAdapter(IUnityContainer container, IRegionManager regionManager) {
             _container = container;
             _regionManager = regionManager;
         }

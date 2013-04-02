@@ -13,9 +13,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         private string _header;
 
-        public ListEmailView() {
-            InitializeComponent();
-        }
+        public ListEmailView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IListEmailViewModel; }
@@ -28,9 +26,9 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

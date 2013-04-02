@@ -7,7 +7,8 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Domain {
-    [Serializable] public class Sale : BaseEntity {
+    [Serializable]
+    public class Sale : BaseEntity {
 
         public SaleState State { get; set; }
         public DateTime SaleDate { get; set; }
@@ -20,7 +21,8 @@ namespace LOB.Domain {
 
     }
 
-    [Serializable] public enum SaleState {
+    [Serializable]
+    public enum SaleState {
 
         Open,
         Finalized,

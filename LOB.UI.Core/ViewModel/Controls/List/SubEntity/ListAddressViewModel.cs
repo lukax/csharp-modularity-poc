@@ -15,7 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel {
 
         public ListAddressViewModel(Address entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Address, bool>> SearchCriteria {
             get {
@@ -32,18 +32,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                          arg.ZipCode.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.State.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Address,
+            State = UIOperationState.List
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

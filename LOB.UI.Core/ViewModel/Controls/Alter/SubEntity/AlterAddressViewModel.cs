@@ -40,14 +40,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                     try {
                         UfBr parsed;
                         if(Enum.TryParse(value, out parsed)) Entity.State = UfBrDictionary.Ufs[parsed];
-                    }
-                    catch(ArgumentNullException) {
+                    } catch(ArgumentNullException) {
                         Entity.State = value;
                     }
             }
         }
 
-        [AllowNull] public string Status {
+        [AllowNull]
+        public string Status {
             get { return _status; }
             set {
                 _status = value;
@@ -64,15 +64,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Address,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
@@ -84,9 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
@@ -98,9 +95,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return true;
         }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
         protected override void ClearEntity(object arg) {
             Entity = new Address {

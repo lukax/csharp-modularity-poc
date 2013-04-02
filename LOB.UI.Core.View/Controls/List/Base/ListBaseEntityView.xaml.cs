@@ -12,9 +12,7 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         private string _header;
 
-        public ListBaseEntityView() {
-            InitializeComponent();
-        }
+        public ListBaseEntityView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
@@ -27,9 +25,9 @@ namespace LOB.UI.Core.View.Controls.List.Base {
             get { return Strings.Header_List_BaseEntity; }
         }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

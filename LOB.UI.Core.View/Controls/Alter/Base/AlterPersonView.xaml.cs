@@ -14,9 +14,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         private string _header;
 
-        public AlterPersonView() {
-            InitializeComponent();
-        }
+        public AlterPersonView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterPersonViewModel; }
@@ -36,13 +34,9 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
-            throw new NotImplementedException();
-        }
+        public void InitializeServices() { throw new NotImplementedException(); }
 
-        public void Refresh() {
-            throw new NotImplementedException();
-        }
+        public void Refresh() { throw new NotImplementedException(); }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

@@ -19,8 +19,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _loggerFacade;
 
-        [InjectionConstructor] public AlterBaseEntityViewModel(T entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
+        [InjectionConstructor]
+        public AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade) {
             _eventAggregator = eventAggregator;
             _loggerFacade = loggerFacade;
             Repository = repository;
@@ -41,13 +42,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public ICommand QuickSearchCommand { get; set; }
         public int Index { get; set; }
 
-        protected virtual bool CanSaveChanges(object arg) {
-            return Entity != null;
-        }
+        protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
 
-        protected virtual bool CanCancel(object arg) {
-            return Entity != null;
-        }
+        protected virtual bool CanCancel(object arg) { return Entity != null; }
 
         protected virtual void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {

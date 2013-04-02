@@ -18,7 +18,8 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="25" />
                         </Grid.ColumnDefinitions>
-                        <ContentPresenter ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Header}">
+                        <ContentPresenter ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" Content="{Binding Header}">
                             <ContentPresenter.Resources>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Foreground" Value="{DynamicResource Foreground}" />

@@ -30,9 +30,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public ICommand ShopCommand { get; set; }
         public string Header { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ColumnTool};
         public UIOperation UIOperation {
@@ -44,7 +44,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void ShowOperations(object arg) {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List});
+            _eventAggregator.GetEvent<OpenViewEvent>()
+                            .Publish(new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List});
         }
 
     }

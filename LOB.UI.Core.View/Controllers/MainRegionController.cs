@@ -62,8 +62,7 @@ namespace LOB.UI.Core.View.Controllers {
         private void CloseView(UIOperation param) {
             try {
                 _regionAdapter.RemoveView(param, RegionName.TabRegion);
-            }
-            catch(Exception ex) {
+            } catch(Exception ex) {
                 _logger.Log(ex.Message, Category.Exception, Priority.High);
                 MessageHide(ex.Message);
             }

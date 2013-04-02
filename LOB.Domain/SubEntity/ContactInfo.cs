@@ -7,7 +7,8 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Domain.SubEntity {
-    [Serializable] public class ContactInfo : BaseEntity {
+    [Serializable]
+    public class ContactInfo : BaseEntity {
 
         public ContactStatus Status { get; set; }
         public IList<PhoneNumber> PhoneNumbers { get; set; }
@@ -18,7 +19,8 @@ namespace LOB.Domain.SubEntity {
 
     }
 
-    [Serializable] public enum ContactStatus {
+    [Serializable]
+    public enum ContactStatus {
 
         Active,
         Inactive,

@@ -9,15 +9,14 @@ using LOB.UI.Interface.Command;
 #endregion
 
 namespace LOB.UI.Core.Infrastructure {
-    [Obsolete("Use events now")] public class CommandService : ICommandService {
+    [Obsolete("Use events now")]
+    public class CommandService : ICommandService {
 
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
 
         private readonly IDictionary<object, IList<ICommand>> _commands;
 
-        private CommandService() {
-            _commands = new Dictionary<object, IList<ICommand>>();
-        }
+        private CommandService() { _commands = new Dictionary<object, IList<ICommand>>(); }
 
         public static ICommandService Default {
             get { return Lazy.Value; }
@@ -30,9 +29,7 @@ namespace LOB.UI.Core.Infrastructure {
             }
         }
 
-        public void Execute<T>(T token, object arg) {
-            foreach(var command in _commands[token].ToList()) command.Execute(arg);
-        }
+        public void Execute<T>(T token, object arg) { foreach(var command in _commands[token].ToList()) command.Execute(arg); }
 
         public IEnumerable<ICommand> this[string token] {
             get { return _commands[token]; }

@@ -25,7 +25,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private AlterContactInfoViewModel _alterContactInfoViewModel;
         private readonly IEventAggregator _eventAggregator;
 
-        [InjectionConstructor] protected AlterPersonViewModel(Person entity, IPersonFacade personFacade,
+        [InjectionConstructor]
+        protected AlterPersonViewModel(Person entity, IPersonFacade personFacade,
             AlterAddressViewModel alterAddressViewModel, AlterContactInfoViewModel alterContactInfoViewModel,
             IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
@@ -50,15 +51,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             set { _alterContactInfoViewModel = value as AlterContactInfoViewModel; }
         }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Person,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
@@ -71,22 +71,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             }
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
             return _personFacade.CanAdd(out results);
         }
 
-        protected override bool CanCancel(object arg) {
-            return true;
-        }
+        protected override bool CanCancel(object arg) { return true; }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
         protected override void ClearEntity(object arg) {
             _alterAddressViewModel.ClearEntityCommand.Execute(null);

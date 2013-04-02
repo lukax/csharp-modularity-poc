@@ -27,9 +27,7 @@ namespace LOB.Business.Logic {
             _shipmentInfoFacade = shipmentInfoFacade;
         }
 
-        public void SetEntity<T>(T entity) where T : Product {
-            _entity = entity;
-        }
+        public void SetEntity<T>(T entity) where T : Product { _entity = entity; }
 
         public Product GenerateEntity() {
             var localService = _serviceFacade.GenerateEntity();
@@ -58,9 +56,7 @@ namespace LOB.Business.Logic {
             };
         }
 
-        Service IServiceFacade.GenerateEntity() {
-            return GenerateEntity();
-        }
+        Service IServiceFacade.GenerateEntity() { return GenerateEntity(); }
 
         public void ConfigureValidations() {
             _serviceFacade.ConfigureValidations();
@@ -69,25 +65,15 @@ namespace LOB.Business.Logic {
             }
         }
 
-        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) {
-            ((IBaseEntityFacade) _serviceFacade).SetEntity(entity);
-        }
+        void IBaseEntityFacade.SetEntity<T>(T entity) { ((IBaseEntityFacade)_serviceFacade).SetEntity(entity); }
 
-        void IServiceFacade.SetEntity<T>(T entity) {
-            (_serviceFacade).SetEntity(entity);
-        }
+        void IServiceFacade.SetEntity<T>(T entity) { (_serviceFacade).SetEntity(entity); }
 
     }
 }

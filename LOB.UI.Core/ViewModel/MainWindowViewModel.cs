@@ -15,8 +15,8 @@ namespace LOB.UI.Core.ViewModel {
 
         private ICommandService _commandService;
 
-        [InjectionConstructor] public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator,
-            ICommandService commandService) {
+        [InjectionConstructor]
+        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator, ICommandService commandService) {
             _container = container;
             _navigator = navigator;
             _commandService = commandService;
@@ -43,9 +43,9 @@ namespace LOB.UI.Core.ViewModel {
             _navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
-        public override void InitializeServices() {}
+        public override void InitializeServices() { }
 
-        public override void Refresh() {}
+        public override void Refresh() { }
 
     }
 }

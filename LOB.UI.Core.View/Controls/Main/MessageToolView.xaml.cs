@@ -14,11 +14,10 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// </summary>
     public partial class MessageToolView : UserControl, IBaseView {
 
-        public MessageToolView() {
-            InitializeComponent();
-        }
+        public MessageToolView() { InitializeComponent(); }
 
-        [AllowNull] public IBaseViewModel ViewModel {
+        [AllowNull]
+        public IBaseViewModel ViewModel {
             get {
                 IBaseViewModel result = null;
                 Dispatcher.Invoke(() => DataContext);
@@ -60,9 +59,9 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

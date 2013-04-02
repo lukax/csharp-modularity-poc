@@ -11,9 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPhoneNumberView : UserControl, IBaseView {
 
-        public AlterPhoneNumberView() {
-            InitializeComponent();
-        }
+        public AlterPhoneNumberView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterPhoneNumberViewModel; }
@@ -29,9 +27,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

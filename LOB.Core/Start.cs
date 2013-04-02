@@ -7,9 +7,7 @@ using System.Diagnostics;
 namespace LOB.Core {
     public class Start {
 
-        public static void Main(string[] args) {
-            Debug.WriteLine("Initializing LOB.Core...");
-        }
+        public static void Main(string[] args) { Debug.WriteLine("Initializing LOB.Core..."); }
 
     }
 }

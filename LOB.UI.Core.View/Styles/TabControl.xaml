@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"                    >
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
@@ -19,7 +19,7 @@
                         </Grid.RowDefinitions>
                         <Border Background="Transparent" BorderThickness="0,0,0,3"
                                 BorderBrush="{DynamicResource AccentBrush}">
-                            <TabPanel Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1" 
+                            <TabPanel Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1"
                                       IsItemsHost="True" KeyboardNavigation.TabIndex="1" />
                         </Border>
                         <Border Grid.Row="1" Background="{DynamicResource WhiteColorBrush}" />

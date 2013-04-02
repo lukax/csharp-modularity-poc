@@ -51,10 +51,8 @@ namespace LOB.Business.Logic.Base {
             _contactInfoFacade.ConfigureValidations();
             if(_entity != null)
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.Notes.Length > 300
-                                          ? new ValidationResult("Notes", Strings.Error_Field_TooLong)
-                                          : null);
+                    (sender, name) =>
+                    _entity.Notes.Length > 300 ? new ValidationResult("Notes", Strings.Error_Field_TooLong) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -63,17 +61,11 @@ namespace LOB.Business.Logic.Base {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) {
-            _baseEntityFacade.SetEntity(entity);
-        }
+        void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();

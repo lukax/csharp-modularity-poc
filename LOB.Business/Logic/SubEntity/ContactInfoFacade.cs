@@ -19,9 +19,7 @@ namespace LOB.Business.Logic.SubEntity {
         private readonly IPhoneNumberFacade _phoneNumberFacade;
         private ContactInfo _entity;
 
-        public ContactInfoFacade(IBaseEntityFacade baseEntityFacade) {
-            _baseEntityFacade = baseEntityFacade;
-        }
+        public ContactInfoFacade(IBaseEntityFacade baseEntityFacade) { _baseEntityFacade = baseEntityFacade; }
 
         public void SetEntity<T>(T entity) where T : ContactInfo {
             _baseEntityFacade.SetEntity(entity);
@@ -45,10 +43,8 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null)
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.WebSite.Length > 300
-                                          ? new ValidationResult("WebSite", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.WebSite.Length > 300 ? new ValidationResult("WebSite", Strings.Error_Field_Empty) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -56,17 +52,11 @@ namespace LOB.Business.Logic.SubEntity {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) {
-            _baseEntityFacade.SetEntity(entity);
-        }
+        void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();

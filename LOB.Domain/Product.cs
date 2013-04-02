@@ -8,7 +8,8 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Domain {
-    [Serializable] public class Product : Service {
+    [Serializable]
+    public class Product : Service {
 
         public Category Category { get; set; }
         public ProductStatus Status { get; set; }
@@ -28,7 +29,8 @@ namespace LOB.Domain {
 
     }
 
-    [Serializable] public enum ProductStatus {
+    [Serializable]
+    public enum ProductStatus {
 
         Plenty,
         NotMany,

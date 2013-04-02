@@ -6,7 +6,8 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Domain.SubEntity {
-    [Serializable] public class Address : BaseEntity {
+    [Serializable]
+    public class Address : BaseEntity {
 
         public AddressStatus Status { get; set; }
         public string Street { get; set; }
@@ -21,7 +22,8 @@ namespace LOB.Domain.SubEntity {
 
     }
 
-    [Serializable] public enum AddressStatus {
+    [Serializable]
+    public enum AddressStatus {
 
         Active,
         Inactive,

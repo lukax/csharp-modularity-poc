@@ -10,9 +10,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public string Header { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.HeaderTool};
         public UIOperation UIOperation {

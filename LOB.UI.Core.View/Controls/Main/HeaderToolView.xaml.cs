@@ -30,9 +30,9 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

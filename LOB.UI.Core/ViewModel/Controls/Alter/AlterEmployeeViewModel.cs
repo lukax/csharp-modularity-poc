@@ -18,21 +18,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private readonly IEventAggregator _eventAggregator;
 
-        [InjectionConstructor] public AlterEmployeeViewModel(Employee entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _eventAggregator = eventAggregator;
-        }
+        [InjectionConstructor]
+        public AlterEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Employee,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
@@ -50,17 +48,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             return true;
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = new Employee {};
-        }
+        protected override void ClearEntity(object arg) { Entity = new Employee {}; }
 
     }
 }

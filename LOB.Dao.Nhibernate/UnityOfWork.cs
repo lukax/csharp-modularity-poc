@@ -18,7 +18,8 @@ namespace LOB.Dao.Nhibernate {
         private readonly Lazy<object> _lazyOrm;
         private ITransaction _transaction;
 
-        [InjectionConstructor] public UnityOfWork(ISessionCreator sessionCreator, ILoggerFacade loggerFacade) {
+        [InjectionConstructor]
+        public UnityOfWork(ISessionCreator sessionCreator, ILoggerFacade loggerFacade) {
             _sessionCreator = sessionCreator;
             _loggerFacade = loggerFacade;
             _lazyOrm = new Lazy<object>(() => sessionCreator.ORM);
@@ -32,9 +33,8 @@ namespace LOB.Dao.Nhibernate {
 
         public void Save<T>(T entity) where T : BaseEntity {
             try {
-                ((ISession) ORM).Save(entity);
-            }
-            catch(Exception e) {
+                ((ISession)ORM).Save(entity);
+            } catch(Exception e) {
                 _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
                 if(OnError != null) OnError.Invoke(this, e.Message);
             }
@@ -42,9 +42,8 @@ namespace LOB.Dao.Nhibernate {
 
         public void SaveOrUpdate<T>(T entity) where T : BaseEntity {
             try {
-                ((ISession) ORM).SaveOrUpdate(entity);
-            }
-            catch(Exception e) {
+                ((ISession)ORM).SaveOrUpdate(entity);
+            } catch(Exception e) {
                 _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
                 if(OnError != null) OnError.Invoke(this, e.Message);
             }
@@ -52,9 +51,8 @@ namespace LOB.Dao.Nhibernate {
 
         public void Update<T>(T entity) where T : BaseEntity {
             try {
-                ((ISession) ORM).Update(entity);
-            }
-            catch(Exception e) {
+                ((ISession)ORM).Update(entity);
+            } catch(Exception e) {
                 _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
                 if(OnError != null) OnError.Invoke(this, e.Message);
             }
@@ -62,16 +60,15 @@ namespace LOB.Dao.Nhibernate {
 
         public void Delete<T>(T entity) where T : BaseEntity {
             try {
-                ((ISession) ORM).Delete(entity);
-            }
-            catch(Exception e) {
+                ((ISession)ORM).Delete(entity);
+            } catch(Exception e) {
                 _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
                 if(OnError != null) OnError.Invoke(this, e.Message);
             }
         }
 
         public IUnityOfWork BeginTransaction() {
-            if(_transaction == null) _transaction = ((ISession) ORM).BeginTransaction();
+            if(_transaction == null) _transaction = ((ISession)ORM).BeginTransaction();
             if(_transaction.IsActive) throw new InvalidOperationException("Transaction has already been initialized, dispose first");
             return this;
         }

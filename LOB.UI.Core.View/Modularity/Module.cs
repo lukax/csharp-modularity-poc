@@ -18,16 +18,15 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 #endregion
 
 namespace LOB.UI.Core.View.Modularity {
-    [Module(ModuleName = "UICoreViewModule")] public class Module : IModule {
+    [Module(ModuleName = "UICoreViewModule")]
+    public class Module : IModule {
 
         private readonly IUnityContainer _container;
 
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private MainRegionController
             _mainRegionController;
 
-        public Module(IUnityContainer container) {
-            _container = container;
-        }
+        public Module(IUnityContainer container) { _container = container; }
 
         public void Initialize() {
             _container.RegisterType<IFluentNavigator, FluentNavigator>();

@@ -14,7 +14,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public abstract class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
 
         protected ListPersonViewModel(Person entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Person, bool>> SearchCriteria {
             get {
@@ -23,8 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                         (arg =>
                          arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }

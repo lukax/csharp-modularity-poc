@@ -11,9 +11,7 @@ using LOB.UI.Interface.Infrastructure;
 namespace LOB.UI.Core.View.Controls.Sell {
     public partial class SellServiceView : UserControl, IBaseView {
 
-        public SellServiceView() {
-            InitializeComponent();
-        }
+        public SellServiceView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel { get; set; }
 
@@ -23,13 +21,9 @@ namespace LOB.UI.Core.View.Controls.Sell {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
-            throw new NotImplementedException();
-        }
+        public void InitializeServices() { throw new NotImplementedException(); }
 
-        public void Refresh() {
-            throw new NotImplementedException();
-        }
+        public void Refresh() { throw new NotImplementedException(); }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

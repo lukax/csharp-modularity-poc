@@ -15,9 +15,9 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel {
 
-        [InjectionConstructor] public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
-            IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+        [InjectionConstructor]
+        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator)
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<NaturalPerson, bool>> SearchCriteria {
             get {
@@ -31,18 +31,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Rg.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.NaturalPerson, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.NaturalPerson,
+            State = UIOperationState.List
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

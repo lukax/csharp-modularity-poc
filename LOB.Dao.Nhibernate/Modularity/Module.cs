@@ -9,13 +9,12 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.Dao.Nhibernate.Modularity {
-    [Module(ModuleName = "NHibernateModule")] public class Module : IModule {
+    [Module(ModuleName = "NHibernateModule")]
+    public class Module : IModule {
 
         private readonly IUnityContainer _container;
 
-        public Module(IUnityContainer container) {
-            _container = container;
-        }
+        public Module(IUnityContainer container) { _container = container; }
 
         public void Initialize() {
             //_container.RegisterType<ISessionCreator, SessionCreator>();

@@ -13,9 +13,7 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// </summary>
     public partial class BusyView : UserControl, IBaseView {
 
-        public BusyView() {
-            InitializeComponent();
-        }
+        public BusyView() { InitializeComponent(); }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }
@@ -28,9 +26,9 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
     }
 }

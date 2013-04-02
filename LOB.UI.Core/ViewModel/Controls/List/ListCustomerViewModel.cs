@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Threading;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
@@ -26,27 +27,28 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                     return
                         (arg =>
                          arg.Title.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.HireDate.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.HireDate.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Title.ToUpper().Contains(Search.ToUpper()) ||
                          arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.NickName.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Rg.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                         arg.NickName.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Rg.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Cpf.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()));
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Customer,
+            State = UIOperationState.List
+        };
+
         public override UIOperation UIOperation {
             get { return _operation; }
         }

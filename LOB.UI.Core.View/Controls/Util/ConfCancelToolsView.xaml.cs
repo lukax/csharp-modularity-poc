@@ -10,9 +10,7 @@ namespace LOB.UI.Core.View.Controls.Util {
     /// </summary>
     public partial class ConfCancelToolsView : UserControl {
 
-        public ConfCancelToolsView() {
-            InitializeComponent();
-        }
+        public ConfCancelToolsView() { InitializeComponent(); }
 
     }
 }

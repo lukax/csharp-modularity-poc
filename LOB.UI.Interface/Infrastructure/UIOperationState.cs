@@ -5,13 +5,13 @@
 
         Loading = 1, //Internal Usage
 
-        Alter =3,
-            Add =9, //Internal Usage
-            Update = 27, //Internal Usage
-            Discard =81, //Internal Usage
+        Alter = 3,
+        Add = 9, //Internal Usage
+        Update = 27, //Internal Usage
+        Discard = 81, //Internal Usage
 
         List = 5,
-            QuickSearch = 25, //Internal Usage
+        QuickSearch = 25, //Internal Usage
 
         Sell = 7,
 

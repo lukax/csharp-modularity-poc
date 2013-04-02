@@ -37,7 +37,7 @@ namespace LOB.Business.Logic {
         }
 
         public Customer GenerateEntity() {
-            var localPerson = ((IPersonFacade) this).GenerateEntity();
+            var localPerson = ((IPersonFacade)this).GenerateEntity();
             return new Customer {
                 Code = 0,
                 Error = null,
@@ -60,10 +60,8 @@ namespace LOB.Business.Logic {
             _naturalPersonFacade.ConfigureValidations();
             if(_entity != null)
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.CustomerOf.Count < 1
-                                          ? new ValidationResult("CustomerOf", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.CustomerOf.Count < 1 ? new ValidationResult("CustomerOf", Strings.Error_Field_Empty) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -72,22 +70,18 @@ namespace LOB.Business.Logic {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) {
-            ((IBaseEntityFacade) _naturalPersonFacade).SetEntity(entity);
-            ((IBaseEntityFacade) _legalPersonFacade).SetEntity(entity);
+            ((IBaseEntityFacade)_naturalPersonFacade).SetEntity(entity);
+            ((IBaseEntityFacade)_legalPersonFacade).SetEntity(entity);
         }
 
         void IPersonFacade.SetEntity<T>(T entity) {
-            ((IPersonFacade) _naturalPersonFacade).SetEntity(entity);
-            ((IPersonFacade) _legalPersonFacade).SetEntity(entity);
+            ((IPersonFacade)_naturalPersonFacade).SetEntity(entity);
+            ((IPersonFacade)_legalPersonFacade).SetEntity(entity);
         }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {

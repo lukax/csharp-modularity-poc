@@ -6,7 +6,8 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Domain {
-    [Serializable] public class Employee : NaturalPerson {
+    [Serializable]
+    public class Employee : NaturalPerson {
 
         public Store WorksIn { get; set; }
         public string Title { get; set; }
@@ -16,7 +17,8 @@ namespace LOB.Domain {
 
     }
 
-    [Serializable] public class PayCheck : BaseEntity {
+    [Serializable]
+    public class PayCheck : BaseEntity {
 
         public double CurrentSalary { get; set; }
         public double Bonus { get; set; }

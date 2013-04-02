@@ -15,7 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListEmailViewModel : ListBaseEntityViewModel<Email>, IListEmailViewModel {
 
         public ListEmailViewModel(Email entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Email, bool>> SearchCriteria {
             get {
@@ -24,18 +24,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                         (arg =>
                          arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Value.ToString().ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Email,
+            State = UIOperationState.List
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

@@ -30,12 +30,12 @@ namespace LOB.UI.Core.View.Actions {
                                                                                                     default(TabItem)));
 
         public TabControl TabControl {
-            get { return (TabControl) GetValue(TabControlProperty); }
+            get { return (TabControl)GetValue(TabControlProperty); }
             set { SetValue(TabControlProperty, value); }
         }
 
         public TabItem TabItem {
-            get { return (TabItem) GetValue(TabItemProperty); }
+            get { return (TabItem)GetValue(TabItemProperty); }
             set {
                 SetValue(TabItemProperty, value);
                 var view = value as IBaseView;

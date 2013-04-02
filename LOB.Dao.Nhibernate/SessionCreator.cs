@@ -28,8 +28,9 @@ namespace LOB.Dao.Nhibernate {
         private readonly PersistType _persistType;
         private SchemaExport _sqlSchema;
 
-        [InjectionConstructor] public SessionCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MySql) {}
+        [InjectionConstructor]
+        public SessionCreator(ILoggerFacade logger)
+            : this(logger, PersistType.MySql) { }
 
         private SessionCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
             if(connectionString != null) ConnectionString = connectionString;
@@ -37,7 +38,8 @@ namespace LOB.Dao.Nhibernate {
             _persistType = persistIn;
         }
 
-        [AllowNull] public string ConnectionString {
+        [AllowNull]
+        public string ConnectionString {
             get {
                 if(_connectionString != null) return _connectionString;
                 if(_persistType == PersistType.MsSql) return MsSqlDefaultConnectionString;
@@ -47,12 +49,12 @@ namespace LOB.Dao.Nhibernate {
             set { _connectionString = value; }
         }
 
-        [AllowNull] public Object ORM {
+        [AllowNull]
+        public Object ORM {
             get {
                 try {
                     return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession());
-                }
-                catch(NullReferenceException e) {
+                } catch(NullReferenceException e) {
                     _logger.Log(e.Message, Category.Exception, Priority.Low);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_RequisitionFailed));
                 }
@@ -87,8 +89,7 @@ namespace LOB.Dao.Nhibernate {
                 try {
                     factory = cfg.BuildSessionFactory();
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
-                }
-                catch(Exception ex) {
+                } catch(Exception ex) {
                     _logger.Log(ex.Message, Category.Exception, Priority.High);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
                 }
@@ -105,13 +106,9 @@ namespace LOB.Dao.Nhibernate {
                 Mapping().Database(MsSqlConfiguration.MsSql2008.ConnectionString(ConnectionString)).BuildConfiguration();
         }
 
-        private Configuration StoreInMemoryConfiguration() {
-            return Mapping().Database(SQLiteConfiguration.Standard.InMemory()).BuildConfiguration();
-        }
+        private Configuration StoreInMemoryConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.InMemory()).BuildConfiguration(); }
 
-        private Configuration StoreInFileConfiguration() {
-            return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration();
-        }
+        private Configuration StoreInFileConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration(); }
 
         private FluentConfiguration Mapping() {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
@@ -130,8 +127,7 @@ namespace LOB.Dao.Nhibernate {
                 }
                 _sqlSchema.Drop(false, true);
                 _sqlSchema.Create(false, true);
-            }
-            catch(Exception e) {
+            } catch(Exception e) {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }
         }

@@ -15,9 +15,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         private string _header;
 
-        public AlterProductView() {
-            InitializeComponent();
-        }
+        public AlterProductView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterProductViewModel; }
@@ -35,13 +33,13 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public int Index {
-            get { return ((AlterBaseEntityViewModel<Product>) DataContext).Index; }
-            set { ((AlterBaseEntityViewModel<Product>) DataContext).Index = value; }
+            get { return ((AlterBaseEntityViewModel<Product>)DataContext).Index; }
+            set { ((AlterBaseEntityViewModel<Product>)DataContext).Index = value; }
         }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

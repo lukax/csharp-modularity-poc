@@ -14,17 +14,13 @@ namespace LOB.Business.Logic.Base {
 
         private BaseEntity _entity;
 
-        public void SetEntity<T>(T entity) where T : BaseEntity {
-            _entity = entity;
-        }
+        public void SetEntity<T>(T entity) where T : BaseEntity { _entity = entity; }
 
         public void ConfigureValidations() {
             if(_entity != null)
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.Code < 0
-                                          ? new ValidationResult("Code", Strings.Error_Field_WrongFormat)
-                                          : null);
+                    (sender, name) =>
+                    _entity.Code < 0 ? new ValidationResult("Code", Strings.Error_Field_WrongFormat) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -57,9 +53,7 @@ namespace LOB.Business.Logic.Base {
             return result;
         }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            return CanUpdate(out invalidFields);
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { return CanUpdate(out invalidFields); }
 
     }
 }

@@ -7,9 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
 namespace LOB.UI.Core.Test.Infrastructure {
-    [TestClass] public class OperationTypeMappingTest {
+    [TestClass]
+    public class OperationTypeMappingTest {
 
-        [TestMethod] public void Mapping() {
+        [TestMethod]
+        public void Mapping() {
             var op1 = new UIOperation {Type = UIOperationType.MessageTool};
             var op2 = UIOperationMapping.ViewModels[op1];
             Assert.AreEqual(op1, op2);

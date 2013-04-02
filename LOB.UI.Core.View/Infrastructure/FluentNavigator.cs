@@ -19,7 +19,8 @@ namespace LOB.UI.Core.View.Infrastructure {
         private IBaseView _resolvedView;
         private IBaseViewModel _resolvedViewModel;
 
-        [InjectionConstructor] public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter) {
+        [InjectionConstructor]
+        public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter) {
             _container = container;
             _regionAdapter = regionAdapter;
         }
@@ -87,9 +88,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             return this;
         }
 
-        public void AddToRegion(string regionName) {
-            _regionAdapter.AddView(GetView(), regionName);
-        }
+        public void AddToRegion(string regionName) { _regionAdapter.AddView(GetView(), regionName); }
 
         public void Show(bool asDialog = false) {
             var asUc = GetView() as UserControl;
@@ -101,7 +100,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                 window.Width = asUc.Width + 50;
                 if(!string.IsNullOrEmpty(_resolvedView.Header)) window.Title = (_resolvedView).Header;
 
-                if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asUc));
+                if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
 
                 if(asDialog) window.ShowDialog();
                 else window.Show();
@@ -109,7 +108,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             else {
                 var asW = _resolvedView as Window;
                 if(asW != null) {
-                    if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView) asW));
+                    if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
 
                     if(asDialog) asW.ShowDialog();
                     else asW.Show();
@@ -117,9 +116,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
-        public bool PromptUser(string message) {
-            return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
-        }
+        public bool PromptUser(string message) { return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes; }
 
     }
 }

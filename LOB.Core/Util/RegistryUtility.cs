@@ -57,9 +57,8 @@ namespace LOB.Core.Util {
                     try {
                         // If the RegistryKey exists I get its value
                         // or null is returned.
-                        return (string) sk1.GetValue(keyName.ToUpper());
-                    }
-                    catch(Exception e) {
+                        return (string)sk1.GetValue(keyName.ToUpper());
+                    } catch(Exception e) {
                         // AAAAAAAAAAARGH, an error!
                         ShowErrorMessage(e, "Reading registry " + keyName.ToUpper());
                         return null;
@@ -83,8 +82,7 @@ namespace LOB.Core.Util {
                     sk1.SetValue(keyName.ToUpper(), value);
 
                     return true;
-                }
-                catch(Exception e) {
+                } catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Writing registry " + keyName.ToUpper());
                     return false;
@@ -106,8 +104,7 @@ namespace LOB.Core.Util {
                     else sk1.DeleteValue(keyName);
 
                     return true;
-                }
-                catch(Exception e) {
+                } catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Deleting SubKey " + SubKey);
                     return false;
@@ -128,8 +125,7 @@ namespace LOB.Core.Util {
                     if(sk1 != null) rk.DeleteSubKeyTree(SubKey);
 
                     return true;
-                }
-                catch(Exception e) {
+                } catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Deleting SubKey " + SubKey);
                     return false;
@@ -149,8 +145,7 @@ namespace LOB.Core.Util {
                     // If the RegistryKey exists...
                     if(sk1 != null) return sk1.SubKeyCount;
                     else return 0;
-                }
-                catch(Exception e) {
+                } catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Retriving subkeys of " + SubKey);
                     return 0;
@@ -170,16 +165,13 @@ namespace LOB.Core.Util {
                     // If the RegistryKey exists...
                     if(sk1 != null) return sk1.ValueCount;
                     else return 0;
-                }
-                catch(Exception e) {
+                } catch(Exception e) {
                     ShowErrorMessage(e, "Retriving keys of " + SubKey);
                     return 0;
                 }
             }
 
-            private void ShowErrorMessage(Exception e, string title) {
-                throw new NotImplementedException();
-            }
+            private void ShowErrorMessage(Exception e, string title) { throw new NotImplementedException(); }
 
         }
 

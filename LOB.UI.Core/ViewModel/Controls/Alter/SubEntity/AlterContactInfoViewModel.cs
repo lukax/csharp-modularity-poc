@@ -49,38 +49,39 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
 
-        [AllowNull] public Email Email { get; set; }
-        [AllowNull] public PhoneNumber PhoneNumber { get; set; }
-        [AllowNull] public ICollectionView Emails { get; set; }
-        [AllowNull] public ICollectionView PhoneNumbers { get; set; }
+        [AllowNull]
+        public Email Email { get; set; }
+        [AllowNull]
+        public PhoneNumber PhoneNumber { get; set; }
+        [AllowNull]
+        public ICollectionView Emails { get; set; }
+        [AllowNull]
+        public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
             ClearEntity(null);
             InitBackgroundWorker();
         }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.ContactInfo,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
         #region UI Validations
 
-        private void AddEmail(object arg) {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation);
-        }
+        private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation); }
 
         private bool CanAddEmail(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        private void AddPhoneNumber(object arg) {
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation);
-        }
+        private void AddPhoneNumber(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation); }
 
         private bool CanAddPhoneNumber(object arg) {
             //TODO: Business logic
@@ -158,13 +159,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         #endregion
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
         protected override void ClearEntity(object arg) {
             Entity = new ContactInfo {
@@ -185,9 +182,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return _contactInfoFacade.CanAdd(out results);
         }
 
-        protected override bool CanCancel(object arg) {
-            return true;
-        }
+        protected override bool CanCancel(object arg) { return true; }
 
     }
 }

@@ -11,9 +11,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
 namespace LOB.Dao.Nhibernate.Test {
-    [TestClass] public class RepositoryTest {
+    [TestClass]
+    public class RepositoryTest {
 
-        [TestMethod] public void AddDeleteTest() {
+        [TestMethod]
+        public void AddDeleteTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
             var p1 = new Product {Description = "Teste description", UnitsInStock = 1234};
@@ -34,7 +36,8 @@ namespace LOB.Dao.Nhibernate.Test {
             }
         }
 
-        [TestMethod] public void GetTest() {
+        [TestMethod]
+        public void GetTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
             var p1 = new Product {Description = "Madeira", UnitsInStock = 10};
@@ -45,7 +48,8 @@ namespace LOB.Dao.Nhibernate.Test {
             Assert.AreEqual(p1, p2);
         }
 
-        [TestMethod] public void SaveOrUpdateTest() {
+        [TestMethod]
+        public void SaveOrUpdateTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var entity = new Product {Description = "Test description service", Name = "Test Name"};
             using(repo.Uow) {
@@ -65,7 +69,8 @@ namespace LOB.Dao.Nhibernate.Test {
             }
         }
 
-        [TestMethod] public void SaveGetPolymorphismTest() {
+        [TestMethod]
+        public void SaveGetPolymorphismTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var person = new LegalPerson {Cnpj = 123456, Iestadual = 1234,};
             var client = new Customer {Person = person, Status = CustomerStatus.New};
@@ -81,11 +86,12 @@ namespace LOB.Dao.Nhibernate.Test {
 
                 Assert.IsTrue(person2 is LegalPerson);
                 Assert.IsTrue(person.Id.Equals(person2.Id));
-                Assert.IsTrue(((LegalPerson) person2).Cnpj == person.Cnpj);
+                Assert.IsTrue(((LegalPerson)person2).Cnpj == person.Cnpj);
             }
         }
 
-        [TestMethod] public void GetListCriteriaTest() {
+        [TestMethod]
+        public void GetListCriteriaTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var person1 = new NaturalPerson {
                 FirstName = "Dude1",

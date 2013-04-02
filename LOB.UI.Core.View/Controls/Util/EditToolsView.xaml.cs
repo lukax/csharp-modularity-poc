@@ -10,9 +10,7 @@ namespace LOB.UI.Core.View.Controls.Util {
     /// </summary>
     public partial class EditToolsView : UserControl {
 
-        public EditToolsView() {
-            InitializeComponent();
-        }
+        public EditToolsView() { InitializeComponent(); }
 
     }
 }

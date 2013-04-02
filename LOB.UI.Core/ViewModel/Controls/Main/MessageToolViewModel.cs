@@ -34,12 +34,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public bool CanClose { get; set; }
 
-        public void CloseExecute() {
-            eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
-        }
+        public void CloseExecute() { eventAggregator.GetEvent<MessageHideEvent>().Publish(null); }
 
         #endregion CloseExecute Command
-        [InjectionConstructor] public MessageToolViewModel(IUnityContainer container) {
+        [InjectionConstructor]
+        public MessageToolViewModel(IUnityContainer container) {
             Message = "Please wait...";
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
@@ -56,9 +55,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             IsRestrictive = isRestrictive;
         }
 
-        public override void InitializeServices() {}
+        public override void InitializeServices() { }
 
-        public override void Refresh() {}
+        public override void Refresh() { }
 
     }
 }

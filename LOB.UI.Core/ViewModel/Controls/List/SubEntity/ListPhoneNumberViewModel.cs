@@ -15,7 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPhoneNumberViewModel : ListBaseEntityViewModel<PhoneNumber>, IListPhoneNumberViewModel {
 
         public ListPhoneNumberViewModel(PhoneNumber entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<PhoneNumber, bool>> SearchCriteria {
             get {
@@ -26,18 +26,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                          arg.Number.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.PhoneNumberType.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Description.ToString().ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.PhoneNumber,
+            State = UIOperationState.List
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

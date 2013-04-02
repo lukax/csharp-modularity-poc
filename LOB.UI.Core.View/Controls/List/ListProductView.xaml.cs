@@ -13,9 +13,7 @@ namespace LOB.UI.Core.View.Controls.List {
 
         private string _header;
 
-        public ListProductView() {
-            InitializeComponent();
-        }
+        public ListProductView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IListProductViewModel; }
@@ -28,9 +26,9 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

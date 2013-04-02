@@ -13,9 +13,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         private string _header;
 
-        public AlterServiceView() {
-            InitializeComponent();
-        }
+        public AlterServiceView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterServiceViewModel; }
@@ -31,9 +29,9 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

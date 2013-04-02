@@ -8,13 +8,12 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.Log.Modularity {
-    [Module(ModuleName = "LogModule")] public class Module : IModule {
+    [Module(ModuleName = "LogModule")]
+    public class Module : IModule {
 
         private readonly IUnityContainer _container;
 
-        public Module(IUnityContainer container) {
-            _container = container;
-        }
+        public Module(IUnityContainer container) { _container = container; }
 
         public void Initialize() {
             _container.RegisterType<ILogger, Logger>();

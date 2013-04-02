@@ -32,8 +32,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 try {
                     var converted = Convert.ToInt32(Search);
                     return _searchCriteria ?? (arg => arg.Code == converted);
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
@@ -49,8 +48,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public string Search { get; set; }
         protected IRepository Repository { get; set; }
 
-        [InjectionConstructor] protected ListBaseEntityViewModel(T entity, IRepository repository,
-            IEventAggregator eventAggregator) {
+        [InjectionConstructor]
+        protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             Repository = repository;
             Entity = entity;
@@ -62,9 +61,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Search = "";
         }
 
-        private void Exit(object obj) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        private void Exit(object obj) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
         public int UpdateInterval {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
@@ -101,29 +98,19 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             }
         }
 
-        protected virtual void Save(object arg) {}
+        protected virtual void Save(object arg) { }
 
-        protected virtual bool CanSave(object arg) {
-            return Entity != null;
-        }
+        protected virtual bool CanSave(object arg) { return Entity != null; }
 
-        protected virtual void Update(object arg) {}
+        protected virtual void Update(object arg) { }
 
-        protected virtual bool CanUpdate(object arg) {
-            return Entity != null;
-        }
+        protected virtual bool CanUpdate(object arg) { return Entity != null; }
 
-        protected virtual void Delete(object arg) {
-            Repository.Delete(Entity);
-        }
+        protected virtual void Delete(object arg) { Repository.Delete(Entity); }
 
-        protected virtual bool CanDelete(object arg) {
-            return Entity != null;
-        }
+        protected virtual bool CanDelete(object arg) { return Entity != null; }
 
-        protected virtual void Fetch(object arg = null) {
-            Entitys = Repository.GetList<T>().ToList();
-        }
+        protected virtual void Fetch(object arg = null) { Entitys = Repository.GetList<T>().ToList(); }
 
     }
 }

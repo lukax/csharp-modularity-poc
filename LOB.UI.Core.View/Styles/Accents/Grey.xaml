@@ -16,13 +16,13 @@
     <Color x:Key="AccentColor4">#99A7A7A7</Color>
 
     <!--  Custom based brushes -->
-    <SolidColorBrush x:Key="HighlightDarkColorBrush" Color="{DynamicResource HighlightDarkColor}"/>
-    <SolidColorBrush x:Key="HighlightLightColorBrush" Color="{DynamicResource HighlightLightColor}"/>
+    <SolidColorBrush x:Key="HighlightDarkColorBrush" Color="{DynamicResource HighlightDarkColor}" />
+    <SolidColorBrush x:Key="HighlightLightColorBrush" Color="{DynamicResource HighlightLightColor}" />
     <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}" />
     <SolidColorBrush x:Key="AccentBrush2" Color="{DynamicResource AccentColor2}" />
     <SolidColorBrush x:Key="AccentBrush3" Color="{DynamicResource AccentColor3}" />
     <SolidColorBrush x:Key="AccentBrush4" Color="{DynamicResource AccentColor4}" />
-    
+
     <LinearGradientBrush x:Key="BrandingBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
         <GradientStop Color="{DynamicResource HighlightDarkColor}" Offset="0" />
         <GradientStop Color="#505050" Offset="1" />

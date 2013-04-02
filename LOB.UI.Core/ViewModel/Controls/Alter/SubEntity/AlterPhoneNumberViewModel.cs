@@ -25,35 +25,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _eventAggregator = eventAggregator;
         }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.PhoneNumber,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = new PhoneNumber {
-                Code = 0,
-                Description = "",
-                Number = 0,
-                PhoneNumberType = default(PhoneNumberType)
-            };
-        }
+        protected override void ClearEntity(object arg) { Entity = new PhoneNumber {Code = 0, Description = "", Number = 0, PhoneNumberType = default(PhoneNumberType)}; }
 
     }
 }

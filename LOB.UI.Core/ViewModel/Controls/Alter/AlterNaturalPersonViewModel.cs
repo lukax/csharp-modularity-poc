@@ -21,16 +21,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private IUnityContainer _container;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Service,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
 
-        [InjectionConstructor] public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
+        [InjectionConstructor]
+        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _eventAggregator = eventAggregator;
-        }
+            : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
 
         public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }
@@ -42,13 +44,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             }
         }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -57,17 +55,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             }
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = new NaturalPerson {};
-        }
+        protected override void ClearEntity(object arg) { Entity = new NaturalPerson {}; }
 
     }
 }

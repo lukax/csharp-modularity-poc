@@ -23,13 +23,12 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.Modularity {
-    [Module(ModuleName = "UICoreModule")] public class Module : IModule {
+    [Module(ModuleName = "UICoreModule")]
+    public class Module : IModule {
 
         private readonly IUnityContainer _container;
 
-        public Module(IUnityContainer container) {
-            _container = container;
-        }
+        public Module(IUnityContainer container) { _container = container; }
 
         public void Initialize() {
             #region Events

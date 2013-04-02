@@ -6,7 +6,8 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Domain {
-    [Serializable] public class LegalPerson : Person {
+    [Serializable]
+    public class LegalPerson : Person {
 
         public string CorporateName { get; set; }
         public string TradingName { get; set; }

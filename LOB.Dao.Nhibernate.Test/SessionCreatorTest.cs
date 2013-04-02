@@ -9,14 +9,17 @@ using NHibernate;
 #endregion
 
 namespace LOB.Dao.Nhibernate.Test {
-    [TestClass] public class SessionCreatorTest {
+    [TestClass]
+    public class SessionCreatorTest {
 
-        [TestMethod] public void CreateSessionTest() {
+        [TestMethod]
+        public void CreateSessionTest() {
             var creator = new SessionCreator(new Logger());
             Assert.IsNotNull(creator.ORM);
         }
 
-        [TestMethod] public void TransactionTest() {
+        [TestMethod]
+        public void TransactionTest() {
             var sCreator = new SessionCreator(new Logger());
 
             var address = new Address {
@@ -58,7 +61,7 @@ namespace LOB.Dao.Nhibernate.Test {
                 // Stores = stores,
             };
 
-            var session = ((ISession) sCreator.ORM);
+            var session = ((ISession)sCreator.ORM);
             using(session) {
                 session.BeginTransaction();
                 session.Save(entity);

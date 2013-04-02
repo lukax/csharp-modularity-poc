@@ -13,17 +13,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
 namespace LOB.Dao.Nhibernate.Test {
-    [TestClass] public class PersistFactoryTest {
+    [TestClass]
+    public class PersistFactoryTest {
 
-        [Import("Sql")] public IRepository Repository { get; set; }
+        [Import("Sql")]
+        public IRepository Repository { get; set; }
 
-        [TestMethod] public void GetInstanceTest() {
+        [TestMethod]
+        public void GetInstanceTest() {
             new PersistFactory(this);
             Assert.IsNotNull(Repository);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")] private class
-            PersistFactory {
+        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+        private class PersistFactory {
 
             private readonly AggregateCatalog _catalog;
             private readonly CompositionContainer _container;
@@ -48,9 +51,7 @@ namespace LOB.Dao.Nhibernate.Test {
             ///     Compose a part, making the imports work
             /// </summary>
             /// <param name="obj">Object to compose</param>
-            public void Compose(object obj) {
-                _container.ComposeParts(obj);
-            }
+            public void Compose(object obj) { _container.ComposeParts(obj); }
 
             public IRepository GetInstance(PersistType type = PersistType.MySql) {
                 if(type == PersistType.MySql) return _container.GetExportedValue<IRepository>("Sql");
@@ -66,9 +67,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
                 public readonly IUnityContainer container;
 
-                [InjectionConstructor] public Inner(IUnityContainer container) {
-                    this.container = container;
-                }
+                [InjectionConstructor]
+                public Inner(IUnityContainer container) { this.container = container; }
 
             }
 

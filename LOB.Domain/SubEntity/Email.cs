@@ -9,13 +9,9 @@ namespace LOB.Domain.SubEntity {
 
         public string Value { get; set; }
 
-        public static implicit operator string(Email e) {
-            return e.Value;
-        }
+        public static implicit operator string(Email e) { return e.Value; }
 
-        public static implicit operator Email(string value) {
-            return new Email {Value = value};
-        }
+        public static implicit operator Email(string value) { return new Email {Value = value}; }
 
     }
 }

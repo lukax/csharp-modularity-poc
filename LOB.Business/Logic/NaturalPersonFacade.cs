@@ -47,39 +47,29 @@ namespace LOB.Business.Logic {
             };
         }
 
-        Person IPersonFacade.GenerateEntity() {
-            return GenerateEntity();
-        }
+        Person IPersonFacade.GenerateEntity() { return GenerateEntity(); }
 
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.FirstName.Length < 1
-                                          ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.FirstName.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.LastName.Length < 1
-                                          ? new ValidationResult("Description", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.LastName.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.Cpf.ToString().Length < 1
-                                          ? new ValidationResult("Cpf", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.Cpf.ToString().Length < 1 ? new ValidationResult("Cpf", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.Rg.ToString().Length < 1
-                                          ? new ValidationResult("Rg", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.Rg.ToString().Length < 1 ? new ValidationResult("Rg", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                                      (sender, name) =>
-                                      _entity.BirthDate.ToShortDateString().ToString().Length < 1
-                                          ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
-                                          : null);
+                    (sender, name) =>
+                    _entity.BirthDate.ToShortDateString().ToString().Length < 1
+                        ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
+                        : null);
             }
         }
 
@@ -89,21 +79,13 @@ namespace LOB.Business.Logic {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            throw new NotImplementedException();
-        }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) {
-            _baseEntityFacade.SetEntity(entity);
-        }
+        void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
 
-        void IPersonFacade.SetEntity<T>(T entity) {
-            _personFacade.SetEntity(entity);
-        }
+        void IPersonFacade.SetEntity<T>(T entity) { _personFacade.SetEntity(entity); }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();

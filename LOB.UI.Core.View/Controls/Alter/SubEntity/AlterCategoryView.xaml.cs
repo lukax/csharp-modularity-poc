@@ -13,9 +13,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         private string _header;
 
-        public AlterCategoryView() {
-            InitializeComponent();
-        }
+        public AlterCategoryView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterCategoryViewModel; }
@@ -32,9 +30,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {}
+        public void InitializeServices() { }
 
-        public void Refresh() {}
+        public void Refresh() { }
 
         public UIOperation UIOperation {
             get { return ViewModel.UIOperation; }

@@ -15,9 +15,9 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel {
 
-        [InjectionConstructor] public ListProductViewModel(Product entity, IRepository repository,
-            EventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {}
+        [InjectionConstructor]
+        public ListProductViewModel(Product entity, IRepository repository, EventAggregator eventAggregator)
+            : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Product, bool>> SearchCriteria {
             get {
@@ -30,18 +30,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.UnitSalePrice.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.ProfitMargin.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
-                }
-                catch(FormatException) {
+                } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
 
-        public override void Refresh() {
-            throw new NotImplementedException();
-        }
+        public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Product, State = UIOperationState.List};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Product,
+            State = UIOperationState.List
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

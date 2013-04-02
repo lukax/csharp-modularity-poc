@@ -19,7 +19,8 @@ namespace LOB.UI.Interface.Infrastructure {
         event OnOpenViewEventHandler OnOpenView;
         void AddToRegion(string regionName);
 
-        [Obsolete("Use method AddToRegion")] void Show(bool asDialog = false);
+        [Obsolete("Use method AddToRegion")]
+        void Show(bool asDialog = false);
 
         bool PromptUser(string message);
 
@@ -27,9 +28,7 @@ namespace LOB.UI.Interface.Infrastructure {
 
     public sealed class OnOpenViewEventArgs : EventArgs {
 
-        public OnOpenViewEventArgs(IBaseView baseView) {
-            BaseView = baseView;
-        }
+        public OnOpenViewEventArgs(IBaseView baseView) { BaseView = baseView; }
 
         public IBaseView BaseView { get; private set; }
 

@@ -27,14 +27,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Service,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }
 
-        [InjectionConstructor] public AlterProductViewModel(Product entity, IUnityContainer unityContainer,
-            IFluentNavigator fluentNavigator, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
+        [InjectionConstructor]
+        public AlterProductViewModel(Product entity, IUnityContainer unityContainer, IFluentNavigator fluentNavigator,
+            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _unityContainer = unityContainer;
             _navigator = fluentNavigator;
@@ -44,13 +47,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             UpdateCategoryList();
         }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
         private async void UpdateCategoryList(int delay = 2000) {
             while(true) {
@@ -82,9 +81,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             }
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: Business logic
@@ -96,13 +93,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             return true;
         }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
-        protected override void ClearEntity(object args) {
-            Entity = new Product {};
-        }
+        protected override void ClearEntity(object args) { Entity = new Product {}; }
 
     }
 }

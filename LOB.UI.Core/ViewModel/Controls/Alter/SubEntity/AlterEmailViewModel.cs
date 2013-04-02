@@ -27,13 +27,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _eventAggregator = eventAggregator;
         }
 
-        public override void InitializeServices() {
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
-        public override void Refresh() {
-            ClearEntity(null);
-        }
+        public override void Refresh() { ClearEntity(null); }
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -42,18 +38,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        protected override void Cancel(object arg) {
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
-        }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
             return _emailFacade.CanAdd(out results);
         }
 
-        protected override void QuickSearch(object arg) {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
-        }
+        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
         protected override void ClearEntity(object arg) {
             Entity = new Email {Value = "", Code = 0};
@@ -61,7 +53,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _emailFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Email,
+            State = UIOperationState.Add
+        };
         public override UIOperation UIOperation {
             get { return _operation; }
         }

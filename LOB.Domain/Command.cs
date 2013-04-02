@@ -7,7 +7,8 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Domain {
-    [Serializable] public class Command : BaseEntity {
+    [Serializable]
+    public class Command : BaseEntity {
 
         public string Name { get; set; }
         public object Parameter { get; set; }
