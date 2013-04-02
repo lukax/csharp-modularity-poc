@@ -72,7 +72,7 @@ namespace LOB.Dao.Nhibernate.Test {
         [TestMethod]
         public void SaveGetPolymorphismTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
-            var person = new LegalPerson {Cnpj = 123456, Iestadual = 1234,};
+            var person = new LegalPerson {CNPJ = 123456, Iestadual = 1234,};
             var client = new Customer {Person = person, Status = CustomerStatus.New};
 
             using(repo.Uow) {
@@ -86,7 +86,7 @@ namespace LOB.Dao.Nhibernate.Test {
 
                 Assert.IsTrue(person2 is LegalPerson);
                 Assert.IsTrue(person.Id.Equals(person2.Id));
-                Assert.IsTrue(((LegalPerson)person2).Cnpj == person.Cnpj);
+                Assert.IsTrue(((LegalPerson)person2).CNPJ == person.CNPJ);
             }
         }
 

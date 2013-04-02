@@ -170,7 +170,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 PhoneNumbers = new List<PhoneNumber>(),
                 SpeakWith = "",
                 Status = default(ContactStatus),
-                Ps = "",
+                PS = "",
                 WebSite = "",
             };
             _contactInfoFacade.SetEntity(Entity);

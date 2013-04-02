@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Threading;
 using LOB.Domain.Base;
 
 #endregion
@@ -13,7 +14,7 @@ namespace LOB.Domain.SubEntity {
         public PhoneNumberType PhoneNumberType { get; set; }
         public string Description { get; set; }
 
-        public override string ToString() { return Number.ToString(); }
+        public override string ToString() { return Number.ToString(Thread.CurrentThread.CurrentCulture); }
 
     }
 

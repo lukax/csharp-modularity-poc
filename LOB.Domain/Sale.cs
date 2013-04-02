@@ -17,7 +17,7 @@ namespace LOB.Domain {
         public double TotalValue { get; set; }
         public double UnitValue { get; set; }
         public int Quantity { get; set; }
-        public string Ps { get; set; }
+        public string PS { get; set; }
 
     }
 

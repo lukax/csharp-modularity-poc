@@ -34,8 +34,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.NickName.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Rg.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Cpf.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()));
+                         arg.RG.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CPF.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

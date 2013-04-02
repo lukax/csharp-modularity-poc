@@ -38,7 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             set {
                 if(value.Length == 2)
                     try {
-                        UfBr parsed;
+                        UF parsed;
                         if(Enum.TryParse(value, out parsed)) Entity.State = UfBrDictionary.Ufs[parsed];
                     } catch(ArgumentNullException) {
                         Entity.State = value;

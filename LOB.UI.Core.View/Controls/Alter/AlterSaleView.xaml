@@ -80,7 +80,7 @@
                 </TabControl>
 
                 <TextBox Text="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Stretch" MinLines="2"
-                         metrocontrols:TextboxHelper.Watermark="Ps" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" />
+                         metrocontrols:TextboxHelper.Watermark="PS" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" />
 
             </Grid>
         </ScrollViewer>

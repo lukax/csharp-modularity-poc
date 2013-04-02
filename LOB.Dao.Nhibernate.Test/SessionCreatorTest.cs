@@ -47,7 +47,7 @@ namespace LOB.Dao.Nhibernate.Test {
                         }
                     },
                 WebSite = "www.thisdude.com",
-                Ps = "Hes at home by the night",
+                PS = "Hes at home by the night",
                 Status = ContactStatus.Active,
                 //Contact = "Hes at home by the night",
                 Emails = new[] {e1, e2}

@@ -6,8 +6,9 @@ using System.Collections.Generic;
 #endregion
 
 namespace LOB.Domain.SubEntity {
-    public enum UfBr {
+    public enum UF {
 
+// ReSharper disable InconsistentNaming
         AC,
         AL,
         AP,
@@ -35,45 +36,45 @@ namespace LOB.Domain.SubEntity {
         SP,
         SE,
         TO
-
+        // ReSharper restore InconsistentNaming
     }
 
     public static class UfBrDictionary {
 
-        private static readonly Lazy<IDictionary<UfBr, string>> Lazy =
-            new Lazy<IDictionary<UfBr, string>>(
+        private static readonly Lazy<IDictionary<UF, string>> Lazy =
+            new Lazy<IDictionary<UF, string>>(
                 () =>
-                new Dictionary<UfBr, string> {
-                    {UfBr.AC, "Acre"},
-                    {UfBr.AL, "Alagoas"},
-                    {UfBr.AP, "Amapá"},
-                    {UfBr.AM, "Amazonas"},
-                    {UfBr.BA, "Bahia"},
-                    {UfBr.CE, "Ceará"},
-                    {UfBr.DF, "Brasília"},
-                    {UfBr.ES, "Espírito Santo"},
-                    {UfBr.GO, "Goiás"},
-                    {UfBr.MA, "Maranhão"},
-                    {UfBr.MT, "Mato Grosso"},
-                    {UfBr.MS, "Mato Grosso do Sul"},
-                    {UfBr.MG, "Minas Gerais"},
-                    {UfBr.PA, "Pará"},
-                    {UfBr.PB, "Paraíba"},
-                    {UfBr.PR, "Paraná"},
-                    {UfBr.PE, "Pernambuco"},
-                    {UfBr.PI, "Piauí"},
-                    {UfBr.RJ, "Rio de Janeiro"},
-                    {UfBr.RN, "Rio Grande do Norte"},
-                    {UfBr.RS, "Rio Grande do Sul"},
-                    {UfBr.RO, "Rondônia"},
-                    {UfBr.RR, "Roraima"},
-                    {UfBr.SC, "Santa Catarina"},
-                    {UfBr.SP, "São Paulo"},
-                    {UfBr.SE, "Sergipe"},
-                    {UfBr.TO, "Tocantins"}
+                new Dictionary<UF, string> {
+                    {UF.AC, "Acre"},
+                    {UF.AL, "Alagoas"},
+                    {UF.AP, "Amapá"},
+                    {UF.AM, "Amazonas"},
+                    {UF.BA, "Bahia"},
+                    {UF.CE, "Ceará"},
+                    {UF.DF, "Brasília"},
+                    {UF.ES, "Espírito Santo"},
+                    {UF.GO, "Goiás"},
+                    {UF.MA, "Maranhão"},
+                    {UF.MT, "Mato Grosso"},
+                    {UF.MS, "Mato Grosso do Sul"},
+                    {UF.MG, "Minas Gerais"},
+                    {UF.PA, "Pará"},
+                    {UF.PB, "Paraíba"},
+                    {UF.PR, "Paraná"},
+                    {UF.PE, "Pernambuco"},
+                    {UF.PI, "Piauí"},
+                    {UF.RJ, "Rio de Janeiro"},
+                    {UF.RN, "Rio Grande do Norte"},
+                    {UF.RS, "Rio Grande do Sul"},
+                    {UF.RO, "Rondônia"},
+                    {UF.RR, "Roraima"},
+                    {UF.SC, "Santa Catarina"},
+                    {UF.SP, "São Paulo"},
+                    {UF.SE, "Sergipe"},
+                    {UF.TO, "Tocantins"}
                 });
 
-        public static IDictionary<UfBr, string> Ufs {
+        public static IDictionary<UF, string> Ufs {
             get { return Lazy.Value; }
         }
 

@@ -18,9 +18,9 @@ namespace LOB.Domain {
 
         public string NickName { get; set; }
         public DateTime BirthDate { get; set; }
-        public int Cpf { get; set; }
-        public int Rg { get; set; }
-        public string RgUf { get; set; }
+        public int CPF { get; set; }
+        public int RG { get; set; }
+        public string RGUF { get; set; }
 
     }
 }

@@ -15,34 +15,49 @@
     <DockPanel>
         <DockPanel Grid.Row="0" Dock="Top" Width="Auto" HorizontalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
-                               Command="{Binding SaveChangesCommand}">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
-                </controls:Tile>
+                <Button x:Name="ButtonSave" IsDefault="True" Width="20" Height="20" Background="Transparent" Padding="0" BorderThickness="0"
+                               Command="{Binding SearchCommand}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_right}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
-                <controls:Tile Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="18" Height="18"
-                               Background="Transparent">
+                <Button Command="{Binding SaveCommand}" HorizontalAlignment="Right" Width="20" Height="20" Padding="0" BorderThickness="0"
+                               Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Search}">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
-                </controls:Tile>
-                <controls:Tile Command="{Binding UpdateCommand}" Width="18" Height="18" Background="Transparent">
+                </Button>
+                <Button Command="{Binding UpdateCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Width="20" Height="20" Background="Transparent" Padding="0" BorderThickness="0" >
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
-                </controls:Tile>
-                <controls:Tile Command="{Binding DeleteCommand}" Width="18" Height="18" Background="Transparent">
+                </Button>
+                <Button Command="{Binding DeleteCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Delete}" Width="20" Height="20" Background="Transparent" BorderThickness="0" Padding="0">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
-                </controls:Tile>
-                <controls:Tile Command="{Binding FetchCommand}" ToolTip="Atualizar" Width="18" Height="18"
+                </Button>
+                <Button Command="{Binding FetchCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Update}" Width="20" Height="20" BorderThickness="0" Padding="0"
                                Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
-                </controls:Tile>
+                </Button>
+                <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Close}" Width="20" Height="20" BorderThickness="0" Padding="0"
+                               Background="Transparent">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Effect>
+                            <DropShadowEffect ShadowDepth="5" Direction="50" Color="{DynamicResource AccentColor4}"/>
+                        </Rectangle.Effect>
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
             </StackPanel>
-            <TextBox MinWidth="200" Width="Auto" Height="Auto"
+            <TextBox MinWidth="200" Width="Auto" Height="Auto" Background="Transparent"
                      Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}"
                      controls:TextboxHelper.ClearTextButton="True" />
         </DockPanel>
-        <DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" Width="Auto"
-                  HorizontalAlignment="Stretch"
-                  SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />
+        <!--<DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" Width="Auto"
+                  HorizontalAlignment="Stretch" Background="Transparent"
+                  SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />-->
     </DockPanel>
 </UserControl>

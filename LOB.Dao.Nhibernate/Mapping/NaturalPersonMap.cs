@@ -13,9 +13,9 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.LastName);
             Map(x => x.NickName);
             Map(x => x.BirthDate);
-            Map(x => x.Cpf);
-            Map(x => x.Rg);
-            Map(x => x.RgUf);
+            Map(x => x.CPF);
+            Map(x => x.RG);
+            Map(x => x.RGUF);
         }
 
     }

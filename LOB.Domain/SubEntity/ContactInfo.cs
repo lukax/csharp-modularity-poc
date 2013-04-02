@@ -15,7 +15,7 @@ namespace LOB.Domain.SubEntity {
         public IList<Email> Emails { get; set; }
         public string WebSite { get; set; }
         public string SpeakWith { get; set; }
-        public string Ps { get; set; }
+        public string PS { get; set; }
 
     }
 

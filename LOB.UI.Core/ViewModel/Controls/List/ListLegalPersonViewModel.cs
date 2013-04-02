@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.Code.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.CorporateName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Cnpj.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CNPJ.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Iestadual.ToString(Thread.CurrentThread.CurrentCulture)
                             .ToUpper()
                             .Contains(Search.ToUpper()) ||

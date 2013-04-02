@@ -70,6 +70,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="Logic\ValidationResult.cs" />
     <Compile Include="Logic\ValidationDelegate.cs" />
+    <Compile Include="Shipper.cs" />
     <Compile Include="SubEntity\Address.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\BaseNotifyChange.cs" />
@@ -88,7 +89,7 @@
     <Compile Include="Sale.cs" />
     <Compile Include="SubEntity\ShipmentInfo.cs" />
     <Compile Include="Store.cs" />
-    <Compile Include="SubEntity\Uf.cs" />
+    <Compile Include="SubEntity\UF.cs" />
     <Compile Include="Supplier.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

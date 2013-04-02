@@ -23,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                     return
                         (arg =>
                          arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Ps.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.PS.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.SpeakWith.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.WebSite.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(Search.ToUpper()) ||

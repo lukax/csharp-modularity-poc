@@ -31,7 +31,7 @@ namespace LOB.Business.Logic.SubEntity {
                 Code = 0,
                 Error = null,
                 Status = default(ContactStatus),
-                Ps = "",
+                PS = "",
                 Emails = new List<Email>(),
                 PhoneNumbers = new List<PhoneNumber>(),
                 SpeakWith = "",

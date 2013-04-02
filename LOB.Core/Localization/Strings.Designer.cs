@@ -475,6 +475,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_CFOP.
+        /// </summary>
+        public static string Common_CFOP {
+            get {
+                return ResourceManager.GetString("Common_CFOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_City.
         /// </summary>
         public static string Common_City {
@@ -498,6 +507,15 @@ namespace LOB.Core.Localization {
         public static string Common_Cnpj {
             get {
                 return ResourceManager.GetString("Common_Cnpj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_CodBarras.
+        /// </summary>
+        public static string Common_CodBarras {
+            get {
+                return ResourceManager.GetString("Common_CodBarras", resourceCulture);
             }
         }
         
@@ -718,6 +736,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_NCM.
+        /// </summary>
+        public static string Common_NCM {
+            get {
+                return ResourceManager.GetString("Common_NCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_NickName.
         /// </summary>
         public static string Common_NickName {
@@ -840,6 +867,15 @@ namespace LOB.Core.Localization {
         public static string Common_Search {
             get {
                 return ResourceManager.GetString("Common_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Shipper.
+        /// </summary>
+        public static string Common_Shipper {
+            get {
+                return ResourceManager.GetString("Common_Shipper", resourceCulture);
             }
         }
         
@@ -1699,6 +1735,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Add.
+        /// </summary>
+        public static string ToolTip_Add {
+            get {
+                return ResourceManager.GetString("ToolTip_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @ToolTip_AlterCustomer.
         /// </summary>
         public static string ToolTip_AlterCustomer {
@@ -1735,6 +1780,33 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Confirm.
+        /// </summary>
+        public static string ToolTip_Confirm {
+            get {
+                return ResourceManager.GetString("ToolTip_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Delete.
+        /// </summary>
+        public static string ToolTip_Delete {
+            get {
+                return ResourceManager.GetString("ToolTip_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Edit.
+        /// </summary>
+        public static string ToolTip_Edit {
+            get {
+                return ResourceManager.GetString("ToolTip_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @ToolTip_Operations.
         /// </summary>
         public static string ToolTip_Operations {
@@ -1758,6 +1830,24 @@ namespace LOB.Core.Localization {
         public static string ToolTip_Sales {
             get {
                 return ResourceManager.GetString("ToolTip_Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Search.
+        /// </summary>
+        public static string ToolTip_Search {
+            get {
+                return ResourceManager.GetString("ToolTip_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Update.
+        /// </summary>
+        public static string ToolTip_Update {
+            get {
+                return ResourceManager.GetString("ToolTip_Update", resourceCulture);
             }
         }
         

@@ -87,6 +87,7 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\ShipperMap.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\CommandMap.cs" />

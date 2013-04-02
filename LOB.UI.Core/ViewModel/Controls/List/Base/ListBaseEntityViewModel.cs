@@ -38,11 +38,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             }
             set { _searchCriteria = value; }
         }
+        public ICommand SearchCommand { get; set; }
         public ICommand SaveCommand { get; set; }
-        public ICommand ExitCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand FetchCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
         public T Entity { get; set; }
         public IList<T> Entitys { get; set; }
         public string Search { get; set; }
@@ -53,13 +54,16 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             _eventAggregator = eventAggregator;
             Repository = repository;
             Entity = entity;
+            SearchCommand = new DelegateCommand(SearchExecute);
             SaveCommand = new DelegateCommand(Save, CanSave);
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
-            ExitCommand = new DelegateCommand(Exit);
+            CloseCommand = new DelegateCommand(Exit);
             Search = "";
         }
+
+        protected virtual void SearchExecute(object obj) { throw new NotImplementedException(); }
 
         private void Exit(object obj) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
 

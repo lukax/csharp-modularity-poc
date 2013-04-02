@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
@@ -37,8 +38,8 @@ namespace LOB.Business.Logic {
                 Address = localPerson.Address,
                 ContactInfo = localPerson.ContactInfo,
                 Notes = "",
-                CnaeFiscal = 0,
-                Cnpj = 0,
+                CNAEFiscal = 0,
+                CNPJ = 0,
                 CorporateName = "",
                 Iestadual = 0,
                 Imunicipal = 0,
@@ -49,22 +50,15 @@ namespace LOB.Business.Logic {
         Person IPersonFacade.GenerateEntity() { return GenerateEntity(); }
 
         public void ConfigureValidations() {
+            var culture = Thread.CurrentThread.CurrentCulture;
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CorporateName.Length < 1
-                        ? new ValidationResult("CorporateName", Strings.Error_Field_Empty)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.TradingName.Length < 1
-                        ? new ValidationResult("TradingName", Strings.Error_Field_Empty)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Cnpj.ToString().Length < 1 ? new ValidationResult("Cnpj", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) =>_entity.CorporateName.Length < 1? new ValidationResult("CorporateName", Strings.Error_Field_Empty): null);
+                _entity.AddValidation((sender, name) =>_entity.TradingName.Length < 1? new ValidationResult("TradingName", Strings.Error_Field_Empty): null);
+                _entity.AddValidation((sender, name) =>_entity.CNPJ.ToString(culture).Length < 1 ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.CNPJ.ToString(culture).Length > 14 ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong) : null);
+                _entity.AddValidation((sender, name) => _entity.CNAEFiscal.ToString(culture).Length > 7 ? new ValidationResult("CNAEFiscal", Strings.Error_Field_TooLong) : null);
             }
         }
 
@@ -86,7 +80,7 @@ namespace LOB.Business.Logic {
             var fields = new List<ValidationResult>();
             fields.AddRange(_entity.GetValidations("CorporateName"));
             fields.AddRange(_entity.GetValidations("TradingName"));
-            fields.AddRange(_entity.GetValidations("Cnpj"));
+            fields.AddRange(_entity.GetValidations("CNPJ"));
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)

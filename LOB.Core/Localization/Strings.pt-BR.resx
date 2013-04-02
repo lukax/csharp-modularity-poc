@@ -684,4 +684,34 @@
   <data name="Window_Title" xml:space="preserve">
     <value>LOB APP</value>
   </data>
+  <data name="ToolTip_Add" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="ToolTip_Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="ToolTip_Delete" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="ToolTip_Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="ToolTip_Search" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="ToolTip_Update" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="Common_CFOP" xml:space="preserve">
+    <value>CFOP</value>
+  </data>
+  <data name="Common_CodBarras" xml:space="preserve">
+    <value>Código de Barras</value>
+  </data>
+  <data name="Common_NCM" xml:space="preserve">
+    <value>Código NCM</value>
+  </data>
+  <data name="Common_Shipper" xml:space="preserve">
+    <value>Transportadora</value>
+  </data>
 </root>

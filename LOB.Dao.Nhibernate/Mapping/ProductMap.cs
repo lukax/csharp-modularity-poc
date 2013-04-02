@@ -12,6 +12,8 @@ namespace LOB.Dao.Nhibernate.Mapping {
             References(x => x.Category);
             Map(x => x.Status);
             Map(x => x.CodBarras);
+            Map(x => x.CodNCM);
+            Map(x => x.CFOP);
             Map(x => x.Image); //.CustomSqlType("BinaryBlob"); Nhibernate automap binary arrays
             Map(x => x.UnitsInStock);
             Map(x => x.MaxUnitsOfStock);

@@ -38,7 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             //TODO: Use business logic to set default params
             if(Entity.Address.State == null && Entity.Address.Country == null) {
                 Entity.Address.Country = "Brasil";
-                Entity.Address.State = UfBrDictionary.Ufs[UfBr.RJ];
+                Entity.Address.State = UfBrDictionary.Ufs[UF.RJ];
             }
         }
 

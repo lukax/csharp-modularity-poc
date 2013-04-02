@@ -10,6 +10,7 @@ namespace LOB.Domain.SubEntity {
     [Serializable]
     public class ShipmentInfo : Service {
 
+        public Shipper Shipper { get; set; }
         public ShipmentStatus Status { get; set; }
         public Address Address { get; set; }
         public DateTime DeliverDate { get; set; }

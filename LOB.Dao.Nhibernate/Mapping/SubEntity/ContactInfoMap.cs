@@ -14,7 +14,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
             HasMany(x => x.Emails).Cascade.All();
             Map(x => x.WebSite);
             Map(x => x.SpeakWith);
-            Map(x => x.Ps);
+            Map(x => x.PS);
         }
 
     }

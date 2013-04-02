@@ -16,7 +16,7 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.TotalValue);
             Map(x => x.UnitValue);
             Map(x => x.Quantity);
-            Map(x => x.Ps);
+            Map(x => x.PS);
         }
 
     }

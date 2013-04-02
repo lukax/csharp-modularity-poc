@@ -29,8 +29,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.NickName.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Rg.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Cpf.ToString().ToUpper().Contains(Search.ToUpper()));
+                         arg.RG.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CPF.ToString().ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

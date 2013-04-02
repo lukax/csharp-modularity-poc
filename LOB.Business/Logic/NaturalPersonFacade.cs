@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
@@ -36,9 +37,9 @@ namespace LOB.Business.Logic {
                 LastName = "",
                 NickName = "",
                 BirthDate = DateTime.Now,
-                Cpf = 0,
-                Rg = 0,
-                RgUf = "",
+                CPF = 0,
+                RG = 0,
+                RGUF = "",
                 Code = 0,
                 Error = null,
                 Address = localPerson.Address,
@@ -50,26 +51,17 @@ namespace LOB.Business.Logic {
         Person IPersonFacade.GenerateEntity() { return GenerateEntity(); }
 
         public void ConfigureValidations() {
+            var culture = Thread.CurrentThread.CurrentCulture;
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.FirstName.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.LastName.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Cpf.ToString().Length < 1 ? new ValidationResult("Cpf", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Rg.ToString().Length < 1 ? new ValidationResult("Rg", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.BirthDate.ToShortDateString().ToString().Length < 1
-                        ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
-                        : null);
+                _entity.AddValidation((sender, name) =>_entity.FirstName.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) =>_entity.LastName.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) =>_entity.CPF.ToString(culture).Length < 1 ? new ValidationResult("CPF", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.CPF.ToString(culture).Length > 11 ? new ValidationResult("CPF", Strings.Error_Field_TooLong) : null);
+                _entity.AddValidation((sender, name) => _entity.RG.ToString(culture).Length < 1 ? new ValidationResult("RG", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.RG.ToString(culture).Length > 9 ? new ValidationResult("RG", Strings.Error_Field_TooLong) : null);
+                _entity.AddValidation((sender, name) =>_entity.BirthDate.ToShortDateString().ToString().Length < 1? new ValidationResult("BirthDate", Strings.Error_Field_Empty): null);
             }
         }
 
@@ -91,8 +83,8 @@ namespace LOB.Business.Logic {
             var fields = new List<ValidationResult>();
             fields.AddRange(_entity.GetValidations("Number"));
             fields.AddRange(_entity.GetValidations("Description"));
-            fields.AddRange(_entity.GetValidations("Cpf"));
-            fields.AddRange(_entity.GetValidations("Rg"));
+            fields.AddRange(_entity.GetValidations("CPF"));
+            fields.AddRange(_entity.GetValidations("RG"));
             fields.AddRange(_entity.GetValidations("BirthDate"));
             invalidFields = fields;
             if(
