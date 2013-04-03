@@ -717,4 +717,19 @@
   <data name="Common_Shipper" xml:space="preserve">
     <value>@Common_Shipper</value>
   </data>
+  <data name="Common_Add" xml:space="preserve">
+    <value>@Common_Add</value>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>@Common_Delete</value>
+  </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>@Common_Edit</value>
+  </data>
+  <data name="Common_Exclude" xml:space="preserve">
+    <value>@Common_Exclude</value>
+  </data>
+  <data name="Common_Include" xml:space="preserve">
+    <value>@Common_Include</value>
+  </data>
 </root>

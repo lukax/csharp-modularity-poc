@@ -13,14 +13,12 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public sealed class ColumnToolViewModel : IColumnToolsViewModel {
 
-        private readonly ICommandService _commandService;
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
 
-        public ColumnToolViewModel(IUnityContainer container, ICommandService commandService,
+        public ColumnToolViewModel(IUnityContainer container,
             IEventAggregator eventAggregator) {
             _container = container;
-            _commandService = commandService;
             _eventAggregator = eventAggregator;
             OperationCommand = new DelegateCommand(ShowOperations);
             ShopCommand = new DelegateCommand(ShowShop);

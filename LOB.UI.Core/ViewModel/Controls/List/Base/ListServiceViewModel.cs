@@ -15,7 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ListServiceViewModel(Service entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
-        public override void InitializeServices() { Operation = _operation; }
+        public override void InitializeServices() { base.InitializeServices(); Operation = _operation; }
 
         public override void Refresh() { throw new NotImplementedException(); }
 

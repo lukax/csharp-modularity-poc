@@ -48,54 +48,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\Accept48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Add48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Arrow_Right_Thin.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Cancel48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Delete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Edit.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Edit48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\File48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\File_delete48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\File_edit48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\List.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Refresh48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Save48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Search48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Shoppingcart48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Icons\Accept48.png" />
+    <Resource Include="Icons\Add48.png" />
+    <Resource Include="Icons\Arrow_Right_Thin.png" />
+    <Resource Include="Icons\Cancel48.png" />
+    <Resource Include="Icons\Delete.png" />
+    <Resource Include="Icons\Edit.png" />
+    <Resource Include="Icons\Edit48.png" />
+    <Resource Include="Icons\File48.png" />
+    <Resource Include="Icons\File_delete48.png" />
+    <Resource Include="Icons\File_edit48.png" />
+    <Resource Include="Icons\List.png" />
+    <Resource Include="Icons\Logo.png" />
+    <Resource Include="Icons\Refresh48.png" />
+    <Resource Include="Icons\Save48.png" />
+    <Resource Include="Icons\Search48.png" />
+    <Resource Include="Icons\Shoppingcart48.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entypo.ttf" />
@@ -116,8 +84,14 @@
     <Resource Include="Backgrounds\background_maze.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icons\settings.png" />
-    <Content Include="Icons\spinner.gif" />
+    <Resource Include="Icons\chat-bubble.png" />
+    <Resource Include="Icons\upload.png" />
+    <Resource Include="Icons\user.png" />
+    <Resource Include="Icons\download.png" />
+    <Resource Include="Icons\email.png" />
+    <Resource Include="Icons\folder.png" />
+    <Resource Include="Icons\settings.png" />
+    <Resource Include="Icons\spinner.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

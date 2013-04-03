@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.List.Base"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="400">
 
@@ -16,9 +17,18 @@
     <Border BorderThickness="2" BorderBrush="{DynamicResource AccentBrush2}" Background="{DynamicResource Foreground}">
         <StackPanel Margin="2">
             <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
-            <StackPanel>
-                <Border Background="{DynamicResource AccentBrush}" x:Name="BorderOuter" />
-            </StackPanel>
+            <ListView ItemsSource="{Binding Entitys, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Entity}" 
+                      SelectionMode="Single">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Category}" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Description}" DisplayMemberBinding="{Binding Description}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <util:ListContextToolMenuView x:Name="ViewListContextTool"/>
+                </ListView.ContextMenu>
+            </ListView>
         </StackPanel>
         <Border.Effect>
             <DropShadowEffect ShadowDepth="4" Direction="50" />

@@ -10,12 +10,17 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
-    public sealed class ListCategoryViewModel : ListServiceViewModel, IListCategoryViewModel {
+    public sealed class ListCategoryViewModel : ListBaseEntityViewModel<Category>, IListCategoryViewModel {
 
         public ListCategoryViewModel(Category entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
-        public override void InitializeServices() { Operation = _operation; }
+        public override void InitializeServices() {
+            base.InitializeServices();
+            Operation = _operation;
+        }
+
+        public override void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Category,

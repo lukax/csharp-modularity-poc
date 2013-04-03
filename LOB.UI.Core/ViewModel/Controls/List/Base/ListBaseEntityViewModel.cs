@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,6 +19,7 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
+using NullGuard;
 
 #endregion
 
@@ -42,13 +44,16 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             set { _searchCriteria = value; }
         }
         public ICommand SearchCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
+        public ICommand IncludeCommand { get; set; }
+        public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand FetchCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        [AllowNull]
         public T Entity { get; set; }
-        public IList<T> Entitys { get; set; }
+        [AllowNull]
+        public ObservableCollection<T> Entitys { get; set; }
         public string Search { get; set; }
         protected IRepository Repository { get; set; }
         public override UIOperation Operation {
@@ -65,13 +70,16 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Repository = repository;
             Entity = entity;
             SearchCommand = new DelegateCommand(SearchExecute);
-            SaveCommand = new DelegateCommand(Save, CanSave);
+            IncludeCommand = new DelegateCommand(Include);
+            AddCommand = new DelegateCommand(Save, CanSave);
             UpdateCommand = new DelegateCommand(Update, CanUpdate);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
             FetchCommand = new DelegateCommand(Fetch);
             CloseCommand = new DelegateCommand(Exit);
             Search = "";
         }
+
+        private void Include(object o) { _eventAggregator.GetEvent<IncludeEvent>().Publish(Entity); }
 
         protected virtual void SearchExecute(object obj) { throw new NotImplementedException(); }
 
@@ -102,7 +110,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                          ? (Repository.GetList<T>()).ToList()
                                          : (Repository.GetList(SearchCriteria)).ToList();
                 if(Entitys == null || !localList.SequenceEqual(Entitys)) {
-                    Entitys = localList;
+                    Entitys = new ObservableCollection<T>(localList);
                     _eventAggregator.GetEvent<ReportProgressEvent>()
                                     .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 100});
                 }
@@ -124,7 +132,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
-        protected virtual void Fetch(object arg = null) { Entitys = Repository.GetList<T>().ToList(); }
+        protected virtual void Fetch(object arg = null) { Entitys = new ObservableCollection<T>(Repository.GetList<T>().ToList()); }
 
     }
 }

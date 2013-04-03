@@ -124,6 +124,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Util\ListContextToolMenuView.xaml.cs">
+      <DependentUpon>ListContextToolMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Util\ConfCancelToolsView.xaml.cs">
       <DependentUpon>ConfCancelToolsView.xaml</DependentUpon>
     </Compile>
@@ -241,6 +244,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Alter\AlterCustomerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Util\ListContextToolMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

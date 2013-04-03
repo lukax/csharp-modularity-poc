@@ -14,7 +14,10 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IListCategoryViewModel; }
-            set { DataContext = value; }
+            set { DataContext = value;
+                ViewListBaseEntity.DataContext = value;
+                ViewListContextTool.DataContext = value;
+            }
         }
 
         public string Header {

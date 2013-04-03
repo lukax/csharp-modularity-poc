@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Threading;
 using LOB.Dao.Interface;
@@ -21,21 +22,23 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             if(Entity.Person == null) throw new ArgumentException("Entity has not defined a person");
         }
 
+        CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
+
         public new Expression<Func<Employee, bool>> SearchCriteria {
             get {
                 try {
                     return
                         (arg =>
                          arg.Title.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.HireDate.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.HireDate.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Title.ToUpper().Contains(Search.ToUpper()) ||
                          arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.NickName.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.RG.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CPF.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()));
+                         arg.NickName.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.RG.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CPF.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

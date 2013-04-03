@@ -13,13 +13,10 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel {
     public class MainWindowViewModel : BaseViewModel {
 
-        private ICommandService _commandService;
-
         [InjectionConstructor]
-        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator, ICommandService commandService) {
+        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator) {
             _container = container;
             _navigator = navigator;
-            _commandService = commandService;
 
             OpenTabCommand = new DelegateCommand(OpenTab);
         }

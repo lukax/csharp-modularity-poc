@@ -3,7 +3,9 @@
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -31,6 +33,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public override void InitializeServices() {
             Operation = _operation;
             ClearEntity(null);
+            _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
+        }
+
+        private void Include(BaseEntity baseEntity) {
+            var entity = baseEntity as Category;
+            if(entity == null) return;
+            Entity = entity;
+            Operation = new UIOperation {State = UIOperationState.Update, Type = Operation.Type};
         }
 
         public override void Refresh() { ClearEntity(null); }

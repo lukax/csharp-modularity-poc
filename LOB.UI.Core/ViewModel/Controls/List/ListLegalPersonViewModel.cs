@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Threading;
 using LOB.Dao.Interface;
@@ -20,23 +21,25 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         public ListLegalPersonViewModel(LegalPerson entity, IRepository repository, EventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
+        CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
+
         public new Expression<Func<LegalPerson, bool>> SearchCriteria {
             get {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.CorporateName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CNPJ.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Iestadual.ToString(Thread.CurrentThread.CurrentCulture)
+                         arg.CNPJ.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Iestadual.ToString(Culture)
                             .ToUpper()
                             .Contains(Search.ToUpper()) ||
-                         arg.Imunicipal.ToString(Thread.CurrentThread.CurrentCulture)
+                         arg.Imunicipal.ToString(Culture)
                             .ToUpper()
                             .Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CorporateName.ToString(Thread.CurrentThread.CurrentCulture)
+                         arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CorporateName.ToString(Culture)
                             .ToUpper()
                             .Contains(Search.ToUpper()));
                 } catch(FormatException) {

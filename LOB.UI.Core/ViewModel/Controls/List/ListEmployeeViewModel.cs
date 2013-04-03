@@ -1,7 +1,9 @@
 ﻿#region Usings
 
 using System;
+using System.Globalization;
 using System.Linq.Expressions;
+using System.Threading;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Interface.Infrastructure;
@@ -18,19 +20,21 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         public ListEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
+        CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
+
         public new Expression<Func<Employee, bool>> SearchCriteria {
             get {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Title.ToUpper().Contains(Search.ToUpper()) ||
                          arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.NickName.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.RG.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CPF.ToString().ToUpper().Contains(Search.ToUpper()));
+                         arg.NickName.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.RG.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CPF.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

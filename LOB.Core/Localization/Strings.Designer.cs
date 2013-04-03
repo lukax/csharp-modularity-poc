@@ -394,6 +394,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Add.
+        /// </summary>
+        public static string Common_Add {
+            get {
+                return ResourceManager.GetString("Common_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Address.
         /// </summary>
         public static string Common_Address {
@@ -628,6 +637,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Delete.
+        /// </summary>
+        public static string Common_Delete {
+            get {
+                return ResourceManager.GetString("Common_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Description.
         /// </summary>
         public static string Common_Description {
@@ -646,6 +664,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Edit.
+        /// </summary>
+        public static string Common_Edit {
+            get {
+                return ResourceManager.GetString("Common_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Email.
         /// </summary>
         public static string Common_Email {
@@ -660,6 +687,15 @@ namespace LOB.Core.Localization {
         public static string Common_Emails {
             get {
                 return ResourceManager.GetString("Common_Emails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Exclude.
+        /// </summary>
+        public static string Common_Exclude {
+            get {
+                return ResourceManager.GetString("Common_Exclude", resourceCulture);
             }
         }
         
@@ -696,6 +732,15 @@ namespace LOB.Core.Localization {
         public static string Common_Image {
             get {
                 return ResourceManager.GetString("Common_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Include.
+        /// </summary>
+        public static string Common_Include {
+            get {
+                return ResourceManager.GetString("Common_Include", resourceCulture);
             }
         }
         
