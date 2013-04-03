@@ -24,7 +24,7 @@
                 <base:AlterBaseEntityView x:Name="ViewAlterBaseEntity" />
 
                 <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
-                <TextBlock Text="{Binding Entity.Status}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
+                <TextBlock Text="{Binding Entity.Status, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
                            VerticalAlignment="Center" />
 
                 <Label Content="{x:Static loc:Strings.Common_PersonType}" HorizontalAlignment="Right" />

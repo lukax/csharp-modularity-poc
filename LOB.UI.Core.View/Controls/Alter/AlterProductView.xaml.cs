@@ -21,7 +21,6 @@ namespace LOB.UI.Core.View.Controls.Alter {
                 ViewEditTools.DataContext = value;
                 ViewAlterBaseEntity.DataContext = value;
                 ViewConfCancelTools.DataContext = value;
-                //Messenger.Default.Register<object>(DataContext, "SaveChangesCommand", o => Messenger.Default.Send("Cancel"));
             }
         }
 
@@ -29,10 +28,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
             get { return Strings.Header_Alter_Product; }
         }
 
-        public int Index {
-            get { return ((AlterBaseEntityViewModel<Product>)DataContext).Index; }
-            set { ((AlterBaseEntityViewModel<Product>)DataContext).Index = value; }
-        }
+        public int Index { get; set; }
 
         public void InitializeServices() { }
 

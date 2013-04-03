@@ -36,16 +36,16 @@
             <base2:AlterBaseEntityView HorizontalAlignment="Left" x:Name="ViewAlterBaseEntity" />
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
+                <Label Content="{x:Static loc:Strings.Common_Title, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Entity.Title}" HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
 
                 <Label Content="{x:Static loc:Strings.Common_HireDate}" HorizontalAlignment="Right" />
-                <TextBox Text="{Binding Entity.HireDate}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
+                <TextBox Text="{Binding Entity.HireDate, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                 <Label Content="{x:Static loc:Strings.Common_WorkInStore}" HorizontalAlignment="Right" />
-                <ComboBox SelectedItem="{Binding Entity.WorksIn}" ItemsSource="{Binding Stores}"
+                <ComboBox SelectedItem="{Binding Entity.WorksIn, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" ItemsSource="{Binding Stores}"
                           HorizontalAlignment="Left" MinWidth="150" MaxWidth="400" />
             </StackPanel>
 

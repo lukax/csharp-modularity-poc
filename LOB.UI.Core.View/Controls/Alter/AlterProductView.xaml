@@ -46,23 +46,23 @@
 
                 <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}"
                        HorizontalAlignment="Right" />
-                <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
+                <TextBox Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Grid.Row="1"
                          HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" />
 
                 <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right"
                        Content="{x:Static loc:Strings.Common_UnitSalePrice}" />
-                <xctk:MaskedTextBox Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged}"
+                <xctk:MaskedTextBox Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                     HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Row="1"
                                     Grid.Column="4" Mask="$00,000.00" HorizontalContentAlignment="Right" />
 
                 <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right"
                        Content="{x:Static loc:Strings.Common_UnitsInStock}" />
-                <TextBox Text="{Binding Entity.UnitsInStock, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Entity.UnitsInStock, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
                          HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" Grid.Row="2" Grid.Column="4" />
 
                 <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"
                        Content="{x:Static loc:Strings.Common_QuantityPerUnity}" />
-                <TextBox Text="{Binding Entity.QuantityPerUnity, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Entity.QuantityPerUnity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                          HorizontalAlignment="Left" MinWidth="250" MaxWidth="350" Grid.Column="2" Grid.Row="3" />
 
                 <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right"
@@ -70,7 +70,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="350" Grid.Column="4"
                             Grid.Row="3">
                     <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory"
-                              SelectedItem="{Binding Entity.Category}" MinWidth="150" />
+                              SelectedItem="{Binding Entity.Category, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="150" />
                     <controls:Tile DockPanel.Dock="Left" Height="18" Width="18"
                                    Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
                                    HorizontalAlignment="Left" ToolTip="Edit" Focusable="False" Background="Transparent"
@@ -96,25 +96,25 @@
                             </ObjectDataProvider.MethodParameters>
                         </ObjectDataProvider>
                     </StackPanel.Resources>
-                    <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
-                              SelectedItem="{Binding Entity.Status}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}" 
+                              SelectedItem="{Binding Entity.Status, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
                 </StackPanel>
 
                 <Label Grid.Row="5" Grid.Column="1" Content="{x:Static loc:Strings.Common_CodBarras}" />
-                <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Entity.CodBarras}" />
+                <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Entity.CodBarras, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
                 <Label Grid.Row="5" Grid.Column="3" Content="{x:Static loc:Strings.Common_NCM}"
                        HorizontalAlignment="Right" />
-                <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Entity.CodNCM}" />
+                <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Entity.CodNCM, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
                 <Label Grid.Row="6" Grid.Column="3" Content="{x:Static loc:Strings.Common_CFOP}"
                        HorizontalAlignment="Right" />
-                <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Entity.CFOP}" />
+                <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Entity.CFOP, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
                 <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"
                          VerticalScrollBarVisibility="Auto"
                          HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" MaxWidth="400"
-                         Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MinWidth="360" MinLines="2" />
+                         Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="360" MinLines="2" />
 
             </Grid>
 
