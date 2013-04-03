@@ -15,16 +15,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ListServiceViewModel(Service entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
+        public override void InitializeServices() { Operation = _operation; }
+
         public override void Refresh() { throw new NotImplementedException(); }
 
-        private UIOperation _operation = new UIOperation {
+        private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Service,
             State = UIOperationState.List
         };
-        public override UIOperation Operation {
-            get { return _operation; }
-            set { _operation = value; }
-        }
 
     }
 }

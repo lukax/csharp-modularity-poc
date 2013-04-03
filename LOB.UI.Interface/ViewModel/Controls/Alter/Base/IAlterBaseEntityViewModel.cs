@@ -11,7 +11,7 @@ namespace LOB.UI.Interface.ViewModel.Controls.Alter.Base {
         ICommand QuickSearchCommand { get; set; }
         ICommand SaveChangesCommand { get; set; }
         ICommand DiscardChangesCommand { get; set; }
-        ICommand ExitCommand { get; set; }
+        ICommand CloseCommand { get; set; }
 
     }
 }

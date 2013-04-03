@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Prism.Events;
 
@@ -29,6 +30,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             }
         }
 
+        public override void InitializeServices() { Operation = _operation; }
+
         protected override bool CanUpdate(object arg) {
             //TODO: Business logic
             return true;
@@ -38,6 +41,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             //TODO: Business logic
             return true;
         }
+
+        private readonly UIOperation _operation = new UIOperation
+        {
+            Type = UIOperationType.Person,
+            State = UIOperationState.List
+        };
 
     }
 }

@@ -13,10 +13,15 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
-        <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
-        <StackPanel>
-            <Border Background="{DynamicResource AccentBrush}" Opacity="0.6" x:Name="BorderOuter" />
+    <Border BorderThickness="2" BorderBrush="{DynamicResource AccentBrush2}" Background="{DynamicResource Foreground}">
+        <StackPanel Margin="2">
+            <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
+            <StackPanel>
+                <Border Background="{DynamicResource AccentBrush}" x:Name="BorderOuter" />
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="4" Direction="50"/>
+        </Border.Effect>
+    </Border>
 </UserControl>

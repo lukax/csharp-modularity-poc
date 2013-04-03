@@ -63,6 +63,12 @@ namespace LOB.UI.Core.View {
                                                                          BorderModal.Visibility = Visibility.Visible;
                                                                      }
                                                                  });
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
+                                                                      if(type.State == UIOperationState.QuickSearch) {
+                                                                          BlurModal.Radius = 0;
+                                                                          BorderModal.Visibility = Visibility.Hidden;
+                                                                      }
+                                                                  });
         }
 
         public void Refresh() {
