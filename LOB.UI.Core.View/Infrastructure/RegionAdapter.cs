@@ -23,9 +23,9 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public void AddView<TView>(TView view, string regionName) where TView : IBaseView {
             var region = _regionManager.Regions[regionName];
-            var previousView = region.GetView(view.UIOperation.ToString());
+            var previousView = region.GetView(view.Operation.ToString());
             if(previousView != null) if(region.Views.Contains(previousView)) region.Remove(previousView);
-            region.Add(view, view.UIOperation.ToString());
+            region.Add(view, view.Operation.ToString());
         }
 
         public IBaseView GetView(UIOperation param, string regionName) {

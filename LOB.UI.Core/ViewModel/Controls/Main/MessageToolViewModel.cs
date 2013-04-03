@@ -44,9 +44,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             eventAggregator = this.container.Resolve<IEventAggregator>();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool};
-        public override UIOperation UIOperation {
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool};
+        public override UIOperation Operation {
             get { return _operation; }
+            set { _operation = value; }
         }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {

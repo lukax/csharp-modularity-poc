@@ -40,11 +40,11 @@ namespace LOB.UI.Core.Infrastructure {
                 new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Alter},
 
                 //List
-                //new UIOperation{ Type = UIOperationType.Address},
+                //new Operation{ Type = UIOperationType.Address},
                 new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.List},
                 new UIOperation {Type = UIOperationType.Category, State = UIOperationState.List},
                 new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.List},
-                //UIOperation.ListContactInfo, typeof(ListContactInfoView),
+                //Operation.ListContactInfo, typeof(ListContactInfoView),
                 new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.List},
                 //Command.ListLegalPerson, typeof(ListLegalPersonView),
                 //Command.ListNaturalPerson, typeof(ListNaturalPersonView),

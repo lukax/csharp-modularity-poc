@@ -64,7 +64,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        public override void InitializeServices() { ClearEntity(null); }
+        public override void InitializeServices() {
+            ClearEntity(null);
+            Operation = _operation;
+        }
 
         public override void Refresh() { ClearEntity(null); }
 
@@ -72,9 +75,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Type = UIOperationType.Address,
             State = UIOperationState.Add
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -83,7 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
@@ -94,8 +94,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             //TODO: Business logic
             return true;
         }
-
-        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
 
         protected override void ClearEntity(object arg) {
             Entity = new Address {

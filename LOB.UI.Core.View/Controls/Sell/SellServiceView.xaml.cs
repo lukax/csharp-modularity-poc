@@ -25,8 +25,8 @@ namespace LOB.UI.Core.View.Controls.Sell {
 
         public void Refresh() { throw new NotImplementedException(); }
 
-        public UIOperation UIOperation {
-            get { return ViewModel.UIOperation; }
+        public UIOperation Operation {
+            get { return ViewModel.Operation; }
         }
 
     }

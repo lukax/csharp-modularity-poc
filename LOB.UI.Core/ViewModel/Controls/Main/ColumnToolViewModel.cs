@@ -35,7 +35,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ColumnTool};
-        public UIOperation UIOperation {
+        public UIOperation Operation {
             get { return _operation; }
         }
 

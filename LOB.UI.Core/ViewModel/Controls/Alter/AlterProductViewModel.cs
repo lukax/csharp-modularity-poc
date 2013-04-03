@@ -31,9 +31,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             Type = UIOperationType.Service,
             State = UIOperationState.Add
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
         [InjectionConstructor]
         public AlterProductViewModel(Product entity, IUnityContainer unityContainer, IFluentNavigator fluentNavigator,
@@ -47,13 +44,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             UpdateCategoryList();
         }
 
-        public override void InitializeServices() { ClearEntity(null); }
+        public override void InitializeServices() { Operation = _operation; ClearEntity(null); }
 
         public override void Refresh() { ClearEntity(null); }
 
         private async void UpdateCategoryList(int delay = 2000) {
             while(true) {
-                await Task.Delay(2000);
+                await Task.Delay(delay);
                 Categories = Repository.GetList<Category>().ToList();
             }
         }
@@ -81,7 +78,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             }
         }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: Business logic
@@ -92,9 +89,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             //TODO: Business logic
             return true;
         }
-
-        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
-
+        
         protected override void ClearEntity(object args) { Entity = new Product {}; }
 
     }

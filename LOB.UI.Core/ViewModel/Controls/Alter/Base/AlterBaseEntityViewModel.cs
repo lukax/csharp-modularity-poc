@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
@@ -18,9 +20,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _loggerFacade;
+        private UIOperation _previousOperation;
+        private SubscriptionToken _currentSubscription;
+        private UIOperation _operation;
 
         [InjectionConstructor]
-        public AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator,
+        protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade) {
             _eventAggregator = eventAggregator;
             _loggerFacade = loggerFacade;
@@ -33,6 +38,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         protected IRepository Repository { get; set; }
+        public override UIOperation Operation {
+            get { return _operation; }
+            set {
+                _previousOperation = value;
+                _operation = value;
+            }
+        }
 
         public T Entity { get; set; }
         public ICommand SaveChangesCommand { get; set; }
@@ -55,7 +67,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         protected abstract void Cancel(object arg);
-        protected abstract void QuickSearch(object arg);
+
+        protected virtual void QuickSearch(object arg) {
+            Operation = new UIOperation {Type = Operation.Type, State = UIOperationState.QuickSearch};
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
+            _currentSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
+        }
+
+        private void ChangeUIState(UIOperation obj) {
+            if(Operation.State == UIOperationState.QuickSearch) {
+                Operation = _previousOperation;
+                _currentSubscription.Dispose();
+            }
+        }
+
         protected abstract void ClearEntity(object arg);
 
     }

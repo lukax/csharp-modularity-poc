@@ -14,6 +14,7 @@ using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
@@ -27,6 +28,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
+        private UIOperation _operation;
+        private UIOperation _previousOperation;
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
@@ -48,6 +51,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public IList<T> Entitys { get; set; }
         public string Search { get; set; }
         protected IRepository Repository { get; set; }
+        public override UIOperation Operation
+        {
+            get { return _operation; }
+            set {
+                _previousOperation = value;
+                _operation = value;
+            }
+        }
 
         [InjectionConstructor]
         protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
@@ -65,7 +76,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         protected virtual void SearchExecute(object obj) { throw new NotImplementedException(); }
 
-        private void Exit(object obj) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
+        private void Exit(object obj) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         public int UpdateInterval {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }

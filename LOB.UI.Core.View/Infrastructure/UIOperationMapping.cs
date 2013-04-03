@@ -80,7 +80,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                 },
 
                 //List
-                //{new UIOperation{ Type = UIOperationType.Address}, typeof(ListAddressView)},
+                //{new Operation{ Type = UIOperationType.Address}, typeof(ListAddressView)},
                 {
                     new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.List},
                     typeof(ListBaseEntityView)
@@ -91,7 +91,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                     new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.List},
                     typeof(ListCustomerView)
                 },
-                //{UIOperation.ListContactInfo, typeof(ListContactInfoView)},
+                //{Operation.ListContactInfo, typeof(ListContactInfoView)},
                 {
                     new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.List},
                     typeof(ListEmployeeView)
@@ -113,7 +113,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                 },
 
                 //QuickSearch
-                //{new UIOperation{ Type = UIOperationType.Address, State = UIOperationState.QuickSearch}, typeof(ListAddressView)},
+                //{new Operation{ Type = UIOperationType.Address, State = UIOperationState.QuickSearch}, typeof(ListAddressView)},
                 {
                     new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.QuickSearch},
                     typeof(ListBaseEntityView)
@@ -124,7 +124,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                     new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.QuickSearch},
                     typeof(ListCustomerView)
                 },
-                //{UIOperation.ListContactInfo, typeof(ListContactInfoView)},
+                //{Operation.ListContactInfo, typeof(ListContactInfoView)},
                 {
                     new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.QuickSearch},
                     typeof(ListEmployeeView)

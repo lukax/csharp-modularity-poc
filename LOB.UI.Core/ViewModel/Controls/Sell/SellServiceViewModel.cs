@@ -13,7 +13,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
             Type = UIOperationType.Service,
             State = UIOperationState.Sell
         };
-        public UIOperation UIOperation {
+        public UIOperation Operation {
             get { return _operation; }
         }
 

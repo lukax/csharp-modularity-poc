@@ -17,12 +17,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public override void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {
+        private UIOperation _operation = new UIOperation {
             Type = UIOperationType.Service,
             State = UIOperationState.List
         };
-        public override UIOperation UIOperation {
+        public override UIOperation Operation {
             get { return _operation; }
+            set { _operation = value; }
         }
 
     }

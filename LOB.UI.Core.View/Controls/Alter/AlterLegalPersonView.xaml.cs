@@ -39,8 +39,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Refresh() { }
 
-        public UIOperation UIOperation {
-            get { return ViewModel.UIOperation; }
+        public UIOperation Operation {
+            get { return ViewModel.Operation; }
         }
 
     }

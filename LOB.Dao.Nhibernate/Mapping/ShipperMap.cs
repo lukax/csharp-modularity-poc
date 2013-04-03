@@ -1,16 +1,16 @@
 ﻿#region Usings
 
-using LOB.Dao.Nhibernate.Mapping.Base;
+using FluentNHibernate.Mapping;
 using LOB.Domain;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping {
-    public class ShipperMap : BaseEntityMap<Shipper> {
+    public class ShipperMap : SubclassMap<Shipper> {
 
         public ShipperMap() {
-            Map(x => x.Address);
-            Map(x => x.ContactInfo);
+            References(x => x.Address);
+            References(x => x.ContactInfo);
         }
 
     }

@@ -11,11 +11,9 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterServiceViewModel : AlterBaseEntityViewModel<Service>, IAlterServiceViewModel {
 
-        private readonly IEventAggregator _eventAggregator;
-
         protected AlterServiceViewModel(Service entity, IRepository repository, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
+            : base(entity, repository, eventAggregator, loggerFacade) { }
 
     }
 }

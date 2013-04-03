@@ -137,7 +137,6 @@
     <Compile Include="Events\SaveEvent.cs" />
     <Compile Include="Events\View\CloseViewEvent.cs" />
     <Compile Include="Events\View\OpenViewEvent.cs" />
-    <Compile Include="Events\View\QuickSearchEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
     <Compile Include="Infrastructure\UIOperationCatalog.cs" />
     <Compile Include="Modularity\Module.cs" />

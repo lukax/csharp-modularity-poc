@@ -15,13 +15,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
         public ListCategoryViewModel(Category entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
+        public override void InitializeServices() { Operation = _operation; }
+
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Category,
             State = UIOperationState.List
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
     }
 }

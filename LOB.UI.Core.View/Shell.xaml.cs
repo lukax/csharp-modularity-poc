@@ -57,10 +57,12 @@ namespace LOB.UI.Core.View {
         public int Index { get; set; }
 
         public void InitializeServices() {
-            _eventAggregator.GetEvent<QuickSearchEvent>().Subscribe(type => {
-                                                                        BlurModal.Radius = 8;
-                                                                        BorderModal.Visibility = Visibility.Visible;
-                                                                    });
+            _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
+                                                                     if(type.State == UIOperationState.QuickSearch) {
+                                                                         BlurModal.Radius = 10;
+                                                                         BorderModal.Visibility = Visibility.Visible;
+                                                                     }
+                                                                 });
         }
 
         public void Refresh() {
@@ -91,8 +93,8 @@ namespace LOB.UI.Core.View {
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 
-        public UIOperation UIOperation {
-            get { return ViewModel.UIOperation; }
+        public UIOperation Operation {
+            get { return ViewModel.Operation; }
         }
         #region Themes
 

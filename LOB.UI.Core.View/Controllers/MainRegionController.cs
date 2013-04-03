@@ -45,7 +45,7 @@ namespace LOB.UI.Core.View.Controllers {
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
             _eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
             _eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
-            _eventAggregator.GetEvent<QuickSearchEvent>().Subscribe(QuickSearch, true);
+            //_eventAggregator.GetEvent<QuickSearchEvent>().Subscribe(QuickSearch, true);
         }
 
         private void QuickSearch(UIOperation param) {
@@ -56,6 +56,7 @@ namespace LOB.UI.Core.View.Controllers {
 
         private void OpenView(UIOperation param) {
             if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+            if(param.State == UIOperationState.QuickSearch) QuickSearch(param);
             _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
         }
 

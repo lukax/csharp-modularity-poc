@@ -9,7 +9,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class ShipmentInfoMap : SubclassMap<ShipmentInfo> {
 
         public ShipmentInfoMap() {
-            Map(x => x.Shipper);
+            References(x => x.Shipper);
             Map(x => x.Status);
             References(x => x.Address);
             Map(x => x.DeliverDate);

@@ -59,6 +59,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
+            Operation = _operation;
             ClearEntity(null);
             InitBackgroundWorker();
         }
@@ -69,19 +70,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Type = UIOperationType.ContactInfo,
             State = UIOperationState.Add
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
+
         #region UI Validations
 
-        private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation); }
+        private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation); }
 
         private bool CanAddEmail(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        private void AddPhoneNumber(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(UIOperation); }
+        private void AddPhoneNumber(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation); }
 
         private bool CanAddPhoneNumber(object arg) {
             //TODO: Business logic
@@ -159,9 +158,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         #endregion
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
-
-        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) {
             Entity = new ContactInfo {

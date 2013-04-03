@@ -37,15 +37,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void InitializeServices() { Operation = _operation; }
+
+        public override void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.NaturalPerson,
             State = UIOperationState.List
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
     }
 }

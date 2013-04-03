@@ -63,8 +63,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() { }
 
-        public UIOperation UIOperation {
-            get { return ViewModel.UIOperation; }
+        public UIOperation Operation {
+            get { return ViewModel.Operation; }
         }
 
     }

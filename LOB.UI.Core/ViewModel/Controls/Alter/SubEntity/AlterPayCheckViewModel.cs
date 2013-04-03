@@ -25,7 +25,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _eventAggregator = eventAggregator;
         }
 
-        public override void InitializeServices() { ClearEntity(null); }
+        public override void InitializeServices() {
+            Operation = _operation;
+            ClearEntity(null);
+        }
 
         public override void Refresh() { ClearEntity(null); }
 
@@ -33,9 +36,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Type = UIOperationType.PayCheck,
             State = UIOperationState.Add
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: Business logic
@@ -47,9 +47,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return true;
         }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
-
-        protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation); }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) { Entity = new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, Ps = ""}; }
 

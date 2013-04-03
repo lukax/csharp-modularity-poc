@@ -34,8 +34,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public UIOperation UIOperation {
-            get { return ViewModel.UIOperation; }
+        public UIOperation Operation {
+            get { return ViewModel.Operation; }
         }
 
     }

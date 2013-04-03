@@ -32,9 +32,10 @@ namespace LOB.UI.Core.ViewModel {
         private IUnityContainer _container { get; set; }
         private IFluentNavigator _navigator { get; set; }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Main};
-        public override UIOperation UIOperation {
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.Main};
+        public override UIOperation Operation {
             get { return _operation; }
+            set { _operation = value; }
         }
 
         private void OpenTab(object arg) {

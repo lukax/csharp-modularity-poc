@@ -30,15 +30,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
+        public override void InitializeServices() { Operation = _operation; }
+
         public override void Refresh() { throw new NotImplementedException(); }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Email,
             State = UIOperationState.List
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
     }
 }

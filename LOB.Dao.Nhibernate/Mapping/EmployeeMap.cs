@@ -1,12 +1,12 @@
 ﻿#region Usings
 
-using LOB.Dao.Nhibernate.Mapping.Base;
+using FluentNHibernate.Mapping;
 using LOB.Domain;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping {
-    public class EmployeeMap : BaseEntityMap<Employee> {
+    public class EmployeeMap : SubclassMap<Employee> {
 
         public EmployeeMap() {
             References(x => x.WorksIn);

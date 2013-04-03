@@ -28,17 +28,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Refresh();
         }
 
-        public override void InitializeServices() { ClearEntity(null); }
+        public override void InitializeServices() {
+            Operation = _operation;
+            ClearEntity(null);
+        }
 
         public override void Refresh() { ClearEntity(null); }
 
-        private UIOperation _uiOperation = new UIOperation {
-            Type = UIOperationType.Category,
-            State = UIOperationState.Add
-        };
-        public override UIOperation UIOperation {
-            get { return _uiOperation; }
-        }
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add};
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -47,17 +44,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation); }
+        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: If viewState == Add : ..., If viewState == Update : ....
             IEnumerable<ValidationResult> results;
             return _facade.CanAdd(out results);
-        }
-
-        protected override void QuickSearch(object arg) {
-            _uiOperation.State = UIOperationState.QuickSearch;
-            _eventAggregator.GetEvent<QuickSearchEvent>().Publish(UIOperation);
         }
 
         protected override void ClearEntity(object arg) {

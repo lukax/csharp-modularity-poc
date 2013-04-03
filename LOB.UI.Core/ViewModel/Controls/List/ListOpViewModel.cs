@@ -26,6 +26,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         private readonly Lazy<IDictionary<string, UIOperation>> _operationDictLazy;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private string _search;
+        public override UIOperation Operation { get; set; }
+        public string Entity { get; set; }
+        public ObservableCollection<PanoramaGroup> Entitys { get; set; }
+        public ICommand SaveChangesCommand { get; set; }
 
         public ListOpViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
@@ -34,12 +38,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             Search = "";
             Entity = "";
         }
-
-        public string Entity { get; set; }
-
-        public ObservableCollection<PanoramaGroup> Entitys { get; set; }
-
-        public ICommand SaveChangesCommand { get; set; }
 
         public string Search {
             get { return _search.ToLower(); }
@@ -50,6 +48,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         }
 
         public override void InitializeServices() {
+            Operation = _operation;
             _worker.DoWork += (sender, args) => UpdateList();
             _worker.RunWorkerAsync();
         }
@@ -60,9 +59,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             Type = UIOperationType.Op,
             State = UIOperationState.List
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
         private void UpdateList() {
             Task.Delay(1000);
@@ -104,7 +100,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         private void SaveChanges(object arg) {
             var parsedUIOperation = _operationDictLazy.Value[arg.ToString()];
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedUIOperation);
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(UIOperation);
+            _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation);
         }
 
         private IDictionary<string, UIOperation> CreateList() {

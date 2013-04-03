@@ -37,6 +37,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
+        public override void InitializeServices() { Operation = _operation; }
+
         protected override bool CanUpdate(object arg) {
             //TODO: Business logic
             return true;
@@ -51,9 +53,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             Type = UIOperationType.Employee,
             State = UIOperationState.List
         };
-        public override UIOperation UIOperation {
-            get { return _operation; }
-        }
 
     }
 }

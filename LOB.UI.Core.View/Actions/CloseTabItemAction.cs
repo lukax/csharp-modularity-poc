@@ -53,14 +53,14 @@ namespace LOB.UI.Core.View.Actions {
                 if(Container != null) {
                     var view = TabItem as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
-                    if(view != null) region.RemoveView(view.UIOperation, RegionName.TabRegion);
+                    if(view != null) region.RemoveView(view.Operation, RegionName.TabRegion);
                 }
                 else TabControl.Items.Remove(TabItem);
             else if(TabControl.Items.Contains(TabItem.Content))
                 if(Container != null) {
                     var view = TabItem.Content as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
-                    if(view != null) region.RemoveView(view.UIOperation, RegionName.TabRegion);
+                    if(view != null) region.RemoveView(view.Operation, RegionName.TabRegion);
                 }
                 else TabControl.Items.Remove(TabItem.Content);
         }

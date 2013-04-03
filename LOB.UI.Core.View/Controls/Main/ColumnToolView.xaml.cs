@@ -19,8 +19,8 @@ namespace LOB.UI.Core.View.Controls.Main {
             ViewModel = viewModel;
         }
 
-        public UIOperation UIOperation {
-            get { return ViewModel.UIOperation; }
+        public UIOperation Operation {
+            get { return ViewModel.Operation; }
         }
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
