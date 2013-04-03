@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using LOB.Business.Interface.Logic;
@@ -19,6 +20,9 @@ namespace LOB.Business.Logic {
         private readonly IBaseEntityFacade _baseEntityFacade;
         private readonly IPersonFacade _personFacade;
         private NaturalPerson _entity;
+        private CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
 
         public NaturalPersonFacade(IBaseEntityFacade baseEntityFacade, IPersonFacade personFacade) {
             _baseEntityFacade = baseEntityFacade;
@@ -55,13 +59,37 @@ namespace LOB.Business.Logic {
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation((sender, name) =>_entity.FirstName.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) =>_entity.LastName.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) =>_entity.CPF.ToString(culture).Length < 1 ? new ValidationResult("CPF", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.CPF.ToString(culture).Length > 11 ? new ValidationResult("CPF", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation((sender, name) => _entity.RG.ToString(culture).Length < 1 ? new ValidationResult("RG", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.RG.ToString(culture).Length > 9 ? new ValidationResult("RG", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation((sender, name) =>_entity.BirthDate.ToShortDateString().ToString().Length < 1? new ValidationResult("BirthDate", Strings.Error_Field_Empty): null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.FirstName.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.LastName.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.CPF.ToString(culture).Length < 1
+                        ? new ValidationResult("CPF", Strings.Error_Field_Empty)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.CPF.ToString(culture).Length > 11
+                        ? new ValidationResult("CPF", Strings.Error_Field_TooLong)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.RG.ToString(culture).Length < 1
+                        ? new ValidationResult("RG", Strings.Error_Field_Empty)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.RG.ToString(culture).Length > 9
+                        ? new ValidationResult("RG", Strings.Error_Field_TooLong)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.BirthDate.ToShortDateString().ToString(Culture).Length < 1
+                        ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
+                        : null);
             }
         }
 

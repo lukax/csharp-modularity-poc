@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -11,9 +10,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterProductView : UserControl, IBaseView {
-
-        private string _header;
+    public partial class AlterProductView : IBaseView {
 
         public AlterProductView() { InitializeComponent(); }
 

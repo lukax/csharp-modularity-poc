@@ -38,11 +38,10 @@ namespace LOB.UI.Core.View.Actions {
             get { return (TabItem)GetValue(TabItemProperty); }
             set {
                 SetValue(TabItemProperty, value);
-                var view = value as IBaseView;
-                if(view != null) //TODO: Get proper Index and assign to view
-                    ;
-                var innerView = value.Content as IBaseView;
-                if(innerView != null) ;
+                //var view = value as IBaseView;
+                //if(view != null) //TODO: Get proper Index and assign to view
+                //var innerView = value.Content as IBaseView;
+                //if(innerView != null)
             }
         }
 
@@ -51,7 +50,9 @@ namespace LOB.UI.Core.View.Actions {
         protected override void Invoke(object parameter) {
             if(TabControl.Items.Contains(TabItem))
                 if(Container != null) {
+// ReSharper disable SuspiciousTypeConversion.Global
                     var view = TabItem as IBaseView;
+// ReSharper restore SuspiciousTypeConversion.Global
                     var region = Container.GetInstance<IRegionAdapter>();
                     if(view != null) region.RemoveView(view.Operation, RegionName.TabRegion);
                 }

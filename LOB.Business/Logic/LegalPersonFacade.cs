@@ -54,11 +54,31 @@ namespace LOB.Business.Logic {
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation((sender, name) =>_entity.CorporateName.Length < 1? new ValidationResult("CorporateName", Strings.Error_Field_Empty): null);
-                _entity.AddValidation((sender, name) =>_entity.TradingName.Length < 1? new ValidationResult("TradingName", Strings.Error_Field_Empty): null);
-                _entity.AddValidation((sender, name) =>_entity.CNPJ.ToString(culture).Length < 1 ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.CNPJ.ToString(culture).Length > 14 ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation((sender, name) => _entity.CNAEFiscal.ToString(culture).Length > 7 ? new ValidationResult("CNAEFiscal", Strings.Error_Field_TooLong) : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.CorporateName.Length < 1
+                        ? new ValidationResult("CorporateName", Strings.Error_Field_Empty)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.TradingName.Length < 1
+                        ? new ValidationResult("TradingName", Strings.Error_Field_Empty)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.CNPJ.ToString(culture).Length < 1
+                        ? new ValidationResult("CNPJ", Strings.Error_Field_Empty)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.CNPJ.ToString(culture).Length > 14
+                        ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.CNAEFiscal.ToString(culture).Length > 7
+                        ? new ValidationResult("CNAEFiscal", Strings.Error_Field_TooLong)
+                        : null);
             }
         }
 

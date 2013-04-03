@@ -70,7 +70,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Type = UIOperationType.ContactInfo,
             State = UIOperationState.Add
         };
-
         #region UI Validations
 
         private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation); }

@@ -31,7 +31,6 @@ namespace LOB.UI.Core.View.Modularity {
         public void Initialize() {
             _container.RegisterType<IFluentNavigator, FluentNavigator>();
             _container.RegisterType<IRegionAdapter, RegionAdapter>();
-            _container.RegisterInstance(CommandService.Default);
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolView));

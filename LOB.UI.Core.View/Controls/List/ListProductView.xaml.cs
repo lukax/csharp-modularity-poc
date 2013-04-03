@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -9,9 +8,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    public partial class ListProductView : UserControl, IBaseView {
-
-        private string _header;
+    public partial class ListProductView : IBaseView {
 
         public ListProductView() { InitializeComponent(); }
 

@@ -21,7 +21,7 @@
             </StackPanel>
         </StackPanel>
         <Border.Effect>
-            <DropShadowEffect ShadowDepth="4" Direction="50"/>
+            <DropShadowEffect ShadowDepth="4" Direction="50" />
         </Border.Effect>
     </Border>
 </UserControl>

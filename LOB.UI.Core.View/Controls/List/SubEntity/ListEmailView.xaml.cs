@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -9,9 +8,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    public partial class ListEmailView : UserControl, IBaseView {
-
-        private string _header;
+    public partial class ListEmailView : IBaseView {
 
         public ListEmailView() { InitializeComponent(); }
 

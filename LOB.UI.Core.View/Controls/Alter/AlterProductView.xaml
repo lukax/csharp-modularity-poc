@@ -99,16 +99,18 @@
                     <ComboBox ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
                               SelectedItem="{Binding Entity.Status}" />
                 </StackPanel>
-                
-                <Label Grid.Row="5" Grid.Column="1" Content="{x:Static loc:Strings.Common_CodBarras}"/>
-                <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Entity.CodBarras}"/>
 
-                <Label Grid.Row="5" Grid.Column="3" Content="{x:Static loc:Strings.Common_NCM}" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Entity.CodNCM}"/>
+                <Label Grid.Row="5" Grid.Column="1" Content="{x:Static loc:Strings.Common_CodBarras}" />
+                <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Entity.CodBarras}" />
 
-                <Label Grid.Row="6" Grid.Column="3" Content="{x:Static loc:Strings.Common_CFOP}" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Entity.CFOP}"/>
-                
+                <Label Grid.Row="5" Grid.Column="3" Content="{x:Static loc:Strings.Common_NCM}"
+                       HorizontalAlignment="Right" />
+                <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Entity.CodNCM}" />
+
+                <Label Grid.Row="6" Grid.Column="3" Content="{x:Static loc:Strings.Common_CFOP}"
+                       HorizontalAlignment="Right" />
+                <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Entity.CFOP}" />
+
                 <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"
                          VerticalScrollBarVisibility="Auto"
                          HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" MaxWidth="400"

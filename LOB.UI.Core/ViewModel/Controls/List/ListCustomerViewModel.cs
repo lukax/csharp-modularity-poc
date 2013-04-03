@@ -46,7 +46,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void Refresh() { throw new NotImplementedException(); }
 
-        private UIOperation _operation = new UIOperation {
+        private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Customer,
             State = UIOperationState.List
         };

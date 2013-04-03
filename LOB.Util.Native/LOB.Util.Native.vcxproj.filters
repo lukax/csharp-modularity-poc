@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Power.c">
+    <ClCompile Include="Math.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

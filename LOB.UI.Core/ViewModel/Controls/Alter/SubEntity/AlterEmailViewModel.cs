@@ -54,6 +54,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _emailFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Email,
+            State = UIOperationState.Add
+        };
+
     }
 }

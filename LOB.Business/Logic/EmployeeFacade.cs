@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -67,6 +69,10 @@ namespace LOB.Business.Logic {
             _entity = entity;
         }
 
+        private CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
+
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             _naturalPersonFacade.ConfigureValidations();
@@ -76,7 +82,7 @@ namespace LOB.Business.Logic {
                     _entity.Title.Length < 1 ? new ValidationResult("Title", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.HireDate.ToShortDateString().ToString().Length < 1
+                    _entity.HireDate.ToShortDateString().ToString(Culture).Length < 1
                         ? new ValidationResult("HireDate", Strings.Error_Field_Empty)
                         : null);
             }

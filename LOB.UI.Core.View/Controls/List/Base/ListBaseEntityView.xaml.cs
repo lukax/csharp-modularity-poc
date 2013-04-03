@@ -1,6 +1,5 @@
 #region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -8,9 +7,7 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
-    public partial class ListBaseEntityView : UserControl, IBaseViewModel {
-
-        private string _header;
+    public partial class ListBaseEntityView : IBaseViewModel {
 
         public ListBaseEntityView() { InitializeComponent(); }
 

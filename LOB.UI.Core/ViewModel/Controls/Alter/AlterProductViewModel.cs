@@ -44,7 +44,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             UpdateCategoryList();
         }
 
-        public override void InitializeServices() { Operation = _operation; ClearEntity(null); }
+        public override void InitializeServices() {
+            Operation = _operation;
+            ClearEntity(null);
+        }
 
         public override void Refresh() { ClearEntity(null); }
 
@@ -89,7 +92,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             //TODO: Business logic
             return true;
         }
-        
+
         protected override void ClearEntity(object args) { Entity = new Product {}; }
 
     }

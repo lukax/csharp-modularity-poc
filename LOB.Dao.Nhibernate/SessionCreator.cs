@@ -53,7 +53,7 @@ namespace LOB.Dao.Nhibernate {
         public Object ORM {
             get {
                 try {
-                    return _orm ?? (_orm = SessionCreatorFactory(_persistType).OpenSession());
+                    return _orm ?? (_orm = SessionCreatorFactory().OpenSession());
                 } catch(NullReferenceException e) {
                     _logger.Log(e.Message, Category.Exception, Priority.Low);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_RequisitionFailed));
@@ -65,7 +65,7 @@ namespace LOB.Dao.Nhibernate {
         public event SessionCreatorEventHandler OnCreatingSession;
         public event SessionCreatorEventHandler OnSessionCreated;
 
-        private ISessionFactory SessionCreatorFactory(PersistType persistIn) {
+        private ISessionFactory SessionCreatorFactory() {
             if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
             Configuration cfg = null;
             ISessionFactory factory = null;

@@ -51,8 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public IList<T> Entitys { get; set; }
         public string Search { get; set; }
         protected IRepository Repository { get; set; }
-        public override UIOperation Operation
-        {
+        public override UIOperation Operation {
             get { return _operation; }
             set {
                 _previousOperation = value;
@@ -95,13 +94,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         /// </summary>
         private async void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
             //TODO: Dynamic set based on selected tab
-            while(!_worker.CancellationPending) {
+            do {
                 await Task.Delay(UpdateInterval);
-                IList<T> localList;
                 _eventAggregator.GetEvent<ReportProgressEvent>()
                                 .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 0});
-                if(string.IsNullOrEmpty(Search)) localList = (Repository.GetList<T>()).ToList();
-                else localList = (Repository.GetList(SearchCriteria)).ToList();
+                IList<T> localList = string.IsNullOrEmpty(Search)
+                                         ? (Repository.GetList<T>()).ToList()
+                                         : (Repository.GetList(SearchCriteria)).ToList();
                 if(Entitys == null || !localList.SequenceEqual(Entitys)) {
                     Entitys = localList;
                     _eventAggregator.GetEvent<ReportProgressEvent>()
@@ -110,7 +109,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 else
                     _eventAggregator.GetEvent<ReportProgressEvent>()
                                     .Publish(new Progress {Message = Strings.Progress_List_Updated});
-            }
+            } while(!_worker.CancellationPending);
         }
 
         protected virtual void Save(object arg) { }

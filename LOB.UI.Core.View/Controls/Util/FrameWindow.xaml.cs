@@ -26,7 +26,7 @@ namespace LOB.UI.Core.View.Controls.Util {
             _container = container;
             _logger = logger;
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { Close(); });
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => Close());
             InitializeComponent();
         }
 

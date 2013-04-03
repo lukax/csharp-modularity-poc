@@ -29,9 +29,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         };
 
         [InjectionConstructor]
-        public AlterCustomerViewModel(Customer entity, IRepository repository,
-            IFluentNavigator navigator, AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel,
+        public AlterCustomerViewModel(Customer entity, IRepository repository, IFluentNavigator navigator,
+            AlterLegalPersonViewModel alterLegalPersonViewModel, AlterNaturalPersonViewModel alterNaturalPersonViewModel,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _navigator = navigator;
@@ -86,7 +85,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
-        
+
         protected override void ClearEntity(object arg) { Entity = new Customer {}; }
 
     }

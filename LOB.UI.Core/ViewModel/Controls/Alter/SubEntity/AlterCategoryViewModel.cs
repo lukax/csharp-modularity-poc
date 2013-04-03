@@ -35,7 +35,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void Refresh() { ClearEntity(null); }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Category,
+            State = UIOperationState.Add
+        };
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {

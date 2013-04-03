@@ -20,7 +20,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly IEventAggregator _eventAggregator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Service,
+            State = UIOperationState.Add
+        };
 
         [InjectionConstructor]
         public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,

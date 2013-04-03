@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
@@ -10,9 +9,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterCustomerView : UserControl, IBaseView {
-
-        private string _header;
+    public partial class AlterCustomerView : IBaseView {
 
         [InjectionConstructor]
         public AlterCustomerView() { InitializeComponent(); }

@@ -42,8 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             return true;
         }
 
-        private readonly UIOperation _operation = new UIOperation
-        {
+        private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Person,
             State = UIOperationState.List
         };

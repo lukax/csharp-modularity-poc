@@ -44,8 +44,9 @@
 
             <Label Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Cnpj}"
                    Grid.Column="1" />
-            <xctk:MaskedTextBox Text="{Binding Entity.Cnpj, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-                     MinWidth="120" MaxWidth="250" Grid.Column="2" Grid.Row="2" Mask="00.000.000/0000-00" />
+            <xctk:MaskedTextBox Text="{Binding Entity.Cnpj, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Left"
+                                MinWidth="120" MaxWidth="250" Grid.Column="2" Grid.Row="2" Mask="00.000.000/0000-00" />
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2"
                    Content="{x:Static loc:Strings.Common_InscEstadual}" />

@@ -21,7 +21,7 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void GetInstanceTest() {
-            new PersistFactory(this);
+            //new PersistFactory(this);
             Assert.IsNotNull(Repository);
         }
 

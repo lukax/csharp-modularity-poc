@@ -10,7 +10,7 @@ using NHibernate;
 #endregion
 
 namespace LOB.Dao.Nhibernate {
-    public class UnityOfWork : IUnityOfWork, IDisposable {
+    public class UnityOfWork : IUnityOfWork {
 
         private readonly ILoggerFacade _loggerFacade;
         private readonly ISessionCreator _sessionCreator;

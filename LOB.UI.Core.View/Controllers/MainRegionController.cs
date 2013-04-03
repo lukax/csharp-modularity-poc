@@ -59,7 +59,10 @@ namespace LOB.UI.Core.View.Controllers {
             var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
             var baseViewModel = view.ViewModel as BaseViewModel;
             if(baseViewModel != null)
-                baseViewModel.Operation = new UIOperation {State = UIOperationState.QuickSearch, Type = view.Operation.Type}; // Let the viewModel know that it's in QuickSearch State
+                baseViewModel.Operation = new UIOperation {
+                    State = UIOperationState.QuickSearch,
+                    Type = view.Operation.Type
+                }; // Let the viewModel know that it's in QuickSearch State
             _regionAdapter.AddView(view, RegionName.ModalRegion);
         }
 

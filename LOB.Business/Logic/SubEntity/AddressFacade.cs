@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
@@ -16,7 +18,9 @@ namespace LOB.Business.Logic.SubEntity {
 
         private readonly IBaseEntityFacade _baseEntityFacade;
         private Address _entity;
-
+        private CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
         public AddressFacade(IBaseEntityFacade baseEntityFacade) { _baseEntityFacade = baseEntityFacade; }
 
         public void SetEntity<T>(T entity) where T : Address {
@@ -49,12 +53,12 @@ namespace LOB.Business.Logic.SubEntity {
                     _entity.Street.Length < 1 ? new ValidationResult("Street", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.StreetNumber.ToString().Length < 1
+                    _entity.StreetNumber.ToString(Culture).Length < 1
                         ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.ZipCode.ToString().Length < 9
+                    _entity.ZipCode.ToString(Culture).Length < 9
                         ? new ValidationResult("ZipCode", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
