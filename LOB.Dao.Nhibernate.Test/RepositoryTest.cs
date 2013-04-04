@@ -16,7 +16,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void AddDeleteTest() {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
+            var repo =
+                new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
             var p1 = new Product {Description = "Teste description", UnitsInStock = 1234};
 
@@ -38,7 +39,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void GetTest() {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
+            var repo =
+                new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
 
             var p1 = new Product {Description = "Madeira", UnitsInStock = 10};
 
@@ -50,7 +52,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void SaveOrUpdateTest() {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
+            var repo =
+                new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var entity = new Product {Description = "Test description service", Name = "Test Name"};
             using(repo.Uow) {
                 repo.Uow.BeginTransaction();
@@ -71,7 +74,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void SaveGetPolymorphismTest() {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
+            var repo =
+                new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var person = new LegalPerson {CNPJ = 123456, Iestadual = 1234,};
             var client = new Customer {Person = person, Status = CustomerStatus.New};
 
@@ -92,7 +96,8 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void GetListCriteriaTest() {
-            var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
+            var repo =
+                new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
             var person1 = new NaturalPerson {
                 FirstName = "Dude1",
                 LastName = "Martin",

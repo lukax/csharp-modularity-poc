@@ -9,7 +9,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterLegalPersonView : IBaseView {
-
         public AlterLegalPersonView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -20,8 +19,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
                 if(localViewModel != null) {
                     ViewAlterPerson.DataContext = value;
                     ViewEditTools.DataContext = value;
-                    ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
-                    ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterContactInfoViewModel;
+                    ViewAlterPerson.ViewAlterAddress.DataContext =
+                        localViewModel.AlterAddressViewModel;
+                    ViewAlterPerson.ViewAlterAddress.DataContext =
+                        localViewModel.AlterContactInfoViewModel;
                 }
             }
         }
@@ -39,6 +40,5 @@ namespace LOB.UI.Core.View.Controls.Alter {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

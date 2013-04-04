@@ -9,7 +9,6 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     public partial class ListPhoneNumberView : IBaseView {
-
         public ListPhoneNumberView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -30,6 +29,5 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

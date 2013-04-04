@@ -68,7 +68,9 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Name.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                    _entity.Name.Length < 1
+                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.Description.Length > 300
@@ -81,10 +83,14 @@ namespace LOB.Business.Logic {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.UnitsInStock < 0 ? new ValidationResult("UnitsInStock", Strings.Error_Field_Negative) : null);
+                    _entity.UnitsInStock < 0
+                        ? new ValidationResult("UnitsInStock", Strings.Error_Field_Negative)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Category == default(Category) ? new ValidationResult("Category", Strings.Error_Field_Empty) : null);
+                    _entity.Category == default(Category)
+                        ? new ValidationResult("Category", Strings.Error_Field_Empty)
+                        : null);
             }
         }
 

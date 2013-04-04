@@ -39,7 +39,9 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Number < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                    _entity.Number < 1
+                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.Description.Length < 1
@@ -67,7 +69,9 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(
+                          validationResult =>
+                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

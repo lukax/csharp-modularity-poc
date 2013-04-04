@@ -41,4 +41,11 @@ namespace LOB.Domain {
         Discontinued
 
     }
+
+    public static class ProductStatusExtensions {
+
+        public static ProductStatus ToProductStatus(this string s) { return default(ProductStatus); }
+        public static string ToLocalizedString(this ProductStatus s) { return ""; }
+
+    }
 }

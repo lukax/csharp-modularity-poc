@@ -13,7 +13,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View.Modularity {
     public class Bootstrapper : UnityBootstrapper {
-
         protected override ILoggerFacade CreateLogger() { return new Logger(); }
 
         protected override IModuleCatalog CreateModuleCatalog() {
@@ -42,7 +41,8 @@ namespace LOB.UI.Core.View.Modularity {
             //XAML(Change Build mode to Resource)
             var catalog =
                 Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
-                    new Uri("/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml", UriKind.Relative));
+                    new Uri("/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml",
+                            UriKind.Relative));
             return catalog;
         }
 
@@ -62,6 +62,5 @@ namespace LOB.UI.Core.View.Modularity {
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
-
     }
 }

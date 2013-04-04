@@ -12,7 +12,6 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for BusyView.xaml
     /// </summary>
     public partial class BusyView : UserControl, IBaseView {
-
         public BusyView() { InitializeComponent(); }
 
         public UIOperation Operation {
@@ -29,6 +28,5 @@ namespace LOB.UI.Core.View.Controls.Main {
         public void InitializeServices() { }
 
         public void Refresh() { }
-
     }
 }

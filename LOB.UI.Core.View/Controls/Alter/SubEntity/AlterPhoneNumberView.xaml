@@ -43,7 +43,9 @@
                         </ObjectDataProvider.MethodParameters>
                     </ObjectDataProvider>
                 </StackPanel.Resources>
-                <xctk:MaskedTextBox Text="{Binding Entity.PhoneNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="100" Mask="(00) 0000-0000" />
+                <xctk:MaskedTextBox
+                    Text="{Binding Entity.PhoneNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    MinWidth="100" Mask="(00) 0000-0000" />
                 <ComboBox SelectedItem="{Binding Entity.PhoneType}"
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>

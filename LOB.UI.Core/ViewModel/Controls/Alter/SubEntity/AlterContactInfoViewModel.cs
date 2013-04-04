@@ -24,15 +24,16 @@ using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
-
+    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>,
+                                                    IAlterContactInfoViewModel {
         private readonly IRepository _repository;
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
 
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository,
-            IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _repository = repository;
             _contactInfoFacade = contactInfoFacade;
@@ -152,7 +153,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            var k = new Progress {Message = Strings.Progress_List_Updating, Percentage = args.ProgressPercentage};
+            var k = new Progress {
+                Message = Strings.Progress_List_Updating,
+                Percentage = args.ProgressPercentage
+            };
             _eventAggregator.GetEvent<ReportProgressEvent>().Publish(k);
         }
 
@@ -179,6 +183,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override bool CanCancel(object arg) { return true; }
-
     }
 }

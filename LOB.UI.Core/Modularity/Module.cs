@@ -42,7 +42,8 @@ namespace LOB.UI.Core.Modularity {
             #endregion
             #region Alter
 
-            _container.RegisterType<IAlterBaseEntityViewModel, AlterBaseEntityViewModel<BaseEntity>>();
+            _container.RegisterType<IAlterBaseEntityViewModel, AlterBaseEntityViewModel<BaseEntity>>
+                ();
             _container.RegisterType<IAlterPersonViewModel, AlterPersonViewModel>();
             _container.RegisterType<IAlterServiceViewModel, AlterServiceViewModel>();
 

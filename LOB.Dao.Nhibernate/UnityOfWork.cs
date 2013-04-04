@@ -69,19 +69,25 @@ namespace LOB.Dao.Nhibernate {
 
         public IUnityOfWork BeginTransaction() {
             if(_transaction == null) _transaction = ((ISession)ORM).BeginTransaction();
-            else if(_transaction.IsActive) throw new InvalidOperationException("Transaction has already been initialized, dispose first");
+            else if(_transaction.IsActive)
+                throw new InvalidOperationException(
+                    "Transaction has already been initialized, dispose first");
             return this;
         }
 
         public void CommitTransaction() {
             if(_transaction == null) throw new InvalidOperationException("Transaction not initialized");
-            if(!_transaction.IsActive) throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
+            if(!_transaction.IsActive)
+                throw new InvalidOperationException(
+                    "Transaction has not been activated, first Begin the Transaction");
             _transaction.Commit();
         }
 
         public void RollbackTransaction() {
             if(_transaction == null) throw new InvalidOperationException("Transaction not initialized");
-            if(!_transaction.IsActive) throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
+            if(!_transaction.IsActive)
+                throw new InvalidOperationException(
+                    "Transaction has not been activated, first Begin the Transaction");
             _transaction.Rollback();
         }
 

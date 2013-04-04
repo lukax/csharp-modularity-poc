@@ -15,7 +15,8 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel {
 
-        public ListPayCheckViewModel(PayCheck entity, IRepository repository, IEventAggregator eventAggregator)
+        public ListPayCheckViewModel(PayCheck entity, IRepository repository,
+            IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<PayCheck, bool>> SearchCriteria {
@@ -23,9 +24,15 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Ps.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Bonus.ToString(Thread.CurrentThread.CurrentCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture)
+                            .ToUpper()
+                            .Contains(Search.ToUpper()) ||
+                         arg.Ps.ToString(Thread.CurrentThread.CurrentCulture)
+                            .ToUpper()
+                            .Contains(Search.ToUpper()) ||
+                         arg.Bonus.ToString(Thread.CurrentThread.CurrentCulture)
+                            .ToUpper()
+                            .Contains(Search.ToUpper()) ||
                          arg.CurrentSalary.ToString(Thread.CurrentThread.CurrentCulture)
                             .ToUpper()
                             .Contains(Search.ToUpper()));

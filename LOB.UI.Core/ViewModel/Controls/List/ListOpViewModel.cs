@@ -65,32 +65,35 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             if(string.IsNullOrEmpty(Search)) {
                 var alterGroup = new PanoramaGroup(Strings.Header_Alter);
                 alterGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Alter"))
-                                      .ToList());
+                    _operationDictLazy.Value.Keys.Where(
+                        x => _operationDictLazy.Value[x].ToString().Contains("Alter")).ToList());
                 var listGroup = new PanoramaGroup(Strings.Header_List);
                 listGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("List"))
-                                      .ToList());
+                    _operationDictLazy.Value.Keys.Where(
+                        x => _operationDictLazy.Value[x].ToString().Contains("List")).ToList());
                 var sellGroup = new PanoramaGroup(Strings.Header_Sell);
                 sellGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Sell"))
-                                      .ToList());
+                    _operationDictLazy.Value.Keys.Where(
+                        x => _operationDictLazy.Value[x].ToString().Contains("Sell")).ToList());
                 Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
             }
             else {
                 var alterGroup = new PanoramaGroup(Strings.Header_Alter);
                 alterGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Alter"))
+                    _operationDictLazy.Value.Keys.Where(
+                        x => _operationDictLazy.Value[x].ToString().Contains("Alter"))
                                       .Where(x => x.ToLower().Contains(Search))
                                       .ToList());
                 var listGroup = new PanoramaGroup(Strings.Header_List);
                 listGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("List"))
+                    _operationDictLazy.Value.Keys.Where(
+                        x => _operationDictLazy.Value[x].ToString().Contains("List"))
                                       .Where(x => x.ToLower().Contains(Search))
                                       .ToList());
                 var sellGroup = new PanoramaGroup(Strings.Header_Sell);
                 sellGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Sell"))
+                    _operationDictLazy.Value.Keys.Where(
+                        x => _operationDictLazy.Value[x].ToString().Contains("Sell"))
                                       .Where(x => x.ToLower().Contains(Search))
                                       .ToList());
                 Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
@@ -123,8 +126,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             foreach(var uiOperation in catalog)
                 foreach(string name in from propertyInfo in stringsTypeProps
                                        let name = propertyInfo.Name
-                                       where propertyInfo.Name.Contains("Command_" + uiOperation.ToString())
-                                       select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
+                                       where propertyInfo.Name.Contains("Command_" + uiOperation)
+                                       select name)
+                    operationTypes.Add(
+                        stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
             return operationTypes;
         }
 

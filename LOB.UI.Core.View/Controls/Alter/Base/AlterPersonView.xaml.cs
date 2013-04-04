@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
     public partial class AlterPersonView : IBaseView {
-
         public AlterPersonView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -38,6 +37,5 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

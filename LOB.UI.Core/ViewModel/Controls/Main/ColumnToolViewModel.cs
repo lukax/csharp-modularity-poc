@@ -16,8 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
 
-        public ColumnToolViewModel(IUnityContainer container,
-            IEventAggregator eventAggregator) {
+        public ColumnToolViewModel(IUnityContainer container, IEventAggregator eventAggregator) {
             _container = container;
             _eventAggregator = eventAggregator;
             OperationCommand = new DelegateCommand(ShowOperations);
@@ -32,7 +31,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public void Refresh() { }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ColumnTool};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.ColumnTool
+        };
         public UIOperation Operation {
             get { return _operation; }
         }
@@ -43,7 +44,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private void ShowOperations(object arg) {
             _eventAggregator.GetEvent<OpenViewEvent>()
-                            .Publish(new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List});
+                            .Publish(new UIOperation {
+                                Type = UIOperationType.Op,
+                                State = UIOperationState.List
+                            });
         }
 
     }

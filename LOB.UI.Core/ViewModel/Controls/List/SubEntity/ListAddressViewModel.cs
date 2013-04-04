@@ -14,33 +14,34 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel {
 
-        public ListAddressViewModel(Address entity, IRepository repository, IEventAggregator eventAggregator)
+        public ListAddressViewModel(Address entity, IRepository repository,
+            IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
+
+        public override void InitializeServices() { Operation = _operation; }
+
+        public override void Refresh() { Search = ""; }
 
         public new Expression<Func<Address, bool>> SearchCriteria {
             get {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.City.ToUpper().Contains(Search.ToUpper()) ||
                          arg.Country.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.District.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Street.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.StreetComplement.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.StreetNumber.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.ZipCode.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.State.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.District.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Street.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.StreetComplement.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.StreetNumber.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.ZipCode.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.State.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
-
-        public override void InitializeServices() { Operation = _operation; }
-
-        public override void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Address,

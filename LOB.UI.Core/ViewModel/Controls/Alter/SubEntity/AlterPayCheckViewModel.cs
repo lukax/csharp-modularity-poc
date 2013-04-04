@@ -13,13 +13,14 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {
+    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>,
+                                                 IAlterPayCheckViewModel {
 
         private readonly IPayCheckFacade _payCheckFacade;
         private readonly IEventAggregator _eventAggregator;
 
-        public AlterPayCheckViewModel(PayCheck entity, IPayCheckFacade payCheckFacade, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterPayCheckViewModel(PayCheck entity, IPayCheckFacade payCheckFacade,
+            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _payCheckFacade = payCheckFacade;
             _eventAggregator = eventAggregator;

@@ -12,9 +12,11 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    public abstract class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
+    public abstract class ListPersonViewModel : ListBaseEntityViewModel<Person>,
+                                                IListPersonViewModel {
 
-        protected ListPersonViewModel(Person entity, IRepository repository, IEventAggregator eventAggregator)
+        protected ListPersonViewModel(Person entity, IRepository repository,
+            IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Person, bool>> SearchCriteria {
@@ -22,8 +24,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()));
+                         arg.Code.ToString(CultureInfo.InvariantCulture)
+                            .ToUpper()
+                            .Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString(CultureInfo.InvariantCulture)
+                            .ToUpper()
+                            .Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

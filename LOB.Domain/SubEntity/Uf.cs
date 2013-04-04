@@ -2,13 +2,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 #endregion
 
 namespace LOB.Domain.SubEntity {
+    [DefaultValue(Outro)]
     public enum UF {
-
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         AC,
         AL,
         AP,
@@ -35,12 +37,12 @@ namespace LOB.Domain.SubEntity {
         SC,
         SP,
         SE,
-        TO
+        TO,
         // ReSharper restore InconsistentNaming
+        Outro
     }
 
-    public static class UfBrDictionary {
-
+    public static class UFDictionary {
         private static readonly Lazy<IDictionary<UF, string>> Lazy =
             new Lazy<IDictionary<UF, string>>(
                 () =>
@@ -71,12 +73,22 @@ namespace LOB.Domain.SubEntity {
                     {UF.SC, "Santa Catarina"},
                     {UF.SP, "São Paulo"},
                     {UF.SE, "Sergipe"},
-                    {UF.TO, "Tocantins"}
+                    {UF.TO, "Tocantins"},
+                    {UF.Outro, ""},
                 });
 
         public static IDictionary<UF, string> Ufs {
             get { return Lazy.Value; }
         }
+    }
 
+    public static class UFExtensions {
+        public static UF ToUF(this string s) {
+            UF parsed;
+            if(s.Length == 2) return Enum.TryParse(s, out parsed) ? parsed : default(UF);
+            return UFDictionary.Ufs.FirstOrDefault(x => x.Value.ToLower() == s.ToLower()).Key;
+        }
+
+        public static string ToLocalizedString(this UF uf) { return UFDictionary.Ufs[uf]; }
     }
 }

@@ -15,13 +15,17 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
+    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>,
+                                            IListLegalPersonViewModel {
 
         [InjectionConstructor]
-        public ListLegalPersonViewModel(LegalPerson entity, IRepository repository, EventAggregator eventAggregator)
+        public ListLegalPersonViewModel(LegalPerson entity, IRepository repository,
+            EventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
-        CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
+        private CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
 
         public new Expression<Func<LegalPerson, bool>> SearchCriteria {
             get {
@@ -32,16 +36,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.CorporateName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.CNPJ.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Iestadual.ToString(Culture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()) ||
-                         arg.Imunicipal.ToString(Culture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()) ||
+                         arg.Iestadual.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Imunicipal.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CorporateName.ToString(Culture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()));
+                         arg.CorporateName.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

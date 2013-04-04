@@ -25,7 +25,8 @@ namespace LOB.Dao.Nhibernate.Test {
             Assert.IsNotNull(Repository);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+        [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable"
+            )]
         private class PersistFactory {
 
             private readonly AggregateCatalog _catalog;
@@ -35,10 +36,12 @@ namespace LOB.Dao.Nhibernate.Test {
             [Import] private Inner inner;
 
             public PersistFactory(object obj) {
-                Debug.WriteLine("Tryng to load dll from: " + Assembly.GetExecutingAssembly().Location);
+                Debug.WriteLine("Tryng to load dll from: " +
+                                Assembly.GetExecutingAssembly().Location);
 
-                _catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()),
-                                                new AssemblyCatalog(Assembly.LoadFrom("LOB.Dao.Nhibernate.dll")));
+                _catalog = new AggregateCatalog(
+                    new AssemblyCatalog(Assembly.GetExecutingAssembly()),
+                    new AssemblyCatalog(Assembly.LoadFrom("LOB.Dao.Nhibernate.dll")));
                 _container = new CompositionContainer(_catalog);
                 //_container.SatisfyImportsOnce(this);
                 //_container.SatisfyImportsOnce(obj);

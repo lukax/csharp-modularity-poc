@@ -22,7 +22,8 @@ using Category = LOB.Domain.SubEntity.Category;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
+    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>,
+                                                IAlterProductViewModel {
 
         private readonly IProductFacade _facade;
         private readonly IEventAggregator _eventAggregator;

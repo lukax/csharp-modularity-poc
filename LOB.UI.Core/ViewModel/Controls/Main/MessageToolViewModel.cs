@@ -27,7 +27,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private ICommand _closeCommand;
 
         public ICommand CloseCommand {
-            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
+            get {
+                return _closeCommand ??
+                       (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose));
+            }
 
             set { _closeCommand = value; }
         }

@@ -11,7 +11,6 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 namespace LOB.UI.Core.View.Infrastructure {
     public class RegionAdapter : IRegionAdapter {
-
         private readonly IUnityContainer _container;
         private readonly IRegionManager _regionManager;
 
@@ -39,6 +38,5 @@ namespace LOB.UI.Core.View.Infrastructure {
             var view = region.GetView(param.ToString());
             if(region.Views.Contains(view)) region.Remove(view);
         }
-
     }
 }

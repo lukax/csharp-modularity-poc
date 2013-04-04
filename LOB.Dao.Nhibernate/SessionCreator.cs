@@ -16,8 +16,8 @@ using NullGuard;
 
 namespace LOB.Dao.Nhibernate {
     public class SessionCreator : ISessionCreator {
-
-        private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
+        private const string MySqlDefaultConnectionString =
+            @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 
         private const string MsSqlDefaultConnectionString =
             @"Data Source=192.168.0.151;Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
@@ -32,7 +32,8 @@ namespace LOB.Dao.Nhibernate {
         public SessionCreator(ILoggerFacade logger)
             : this(logger, PersistType.MySql) { }
 
-        private SessionCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
+        private SessionCreator(ILoggerFacade logger, PersistType persistIn,
+            [AllowNull] string connectionString = null) {
             if(connectionString != null) ConnectionString = connectionString;
             _logger = logger;
             _persistType = persistIn;
@@ -56,7 +57,10 @@ namespace LOB.Dao.Nhibernate {
                     return _orm ?? (_orm = SessionCreatorFactory().OpenSession());
                 } catch(NullReferenceException e) {
                     _logger.Log(e.Message, Category.Exception, Priority.Low);
-                    if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_RequisitionFailed));
+                    if(OnSessionCreated != null)
+                        OnSessionCreated.Invoke(this,
+                                                new SessionCreatorEventArgs(
+                                                    Strings.Dao_RequisitionFailed));
                 }
                 return null;
             }
@@ -88,7 +92,10 @@ namespace LOB.Dao.Nhibernate {
             if(cfg != null)
                 try {
                     factory = cfg.BuildSessionFactory();
-                    if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_ConnectionSucessful));
+                    if(OnSessionCreated != null)
+                        OnSessionCreated.Invoke(this,
+                                                new SessionCreatorEventArgs(
+                                                    Strings.Dao_ConnectionSucessful));
                 } catch(Exception ex) {
                     _logger.Log(ex.Message, Category.Exception, Priority.High);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
@@ -98,20 +105,30 @@ namespace LOB.Dao.Nhibernate {
 
         private Configuration StoreInMySqlConfiguration() {
             return
-                Mapping().Database(MySQLConfiguration.Standard.ConnectionString(ConnectionString)).BuildConfiguration();
+                Mapping()
+                    .Database(MySQLConfiguration.Standard.ConnectionString(ConnectionString))
+                    .BuildConfiguration();
         }
 
         private Configuration StoreInMsSqlConfiguration() {
             return
-                Mapping().Database(MsSqlConfiguration.MsSql2008.ConnectionString(ConnectionString)).BuildConfiguration();
+                Mapping()
+                    .Database(MsSqlConfiguration.MsSql2008.ConnectionString(ConnectionString))
+                    .BuildConfiguration();
         }
 
         private Configuration StoreInMemoryConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.InMemory()).BuildConfiguration(); }
 
-        private Configuration StoreInFileConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration(); }
+        private Configuration StoreInFileConfiguration() {
+            return
+                Mapping()
+                    .Database(SQLiteConfiguration.Standard.UsingFile("local.db"))
+                    .BuildConfiguration();
+        }
 
         private FluentConfiguration Mapping() {
-            return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
+            return Fluently.Configure()
+                           .Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
                 //Disable to much logging
                            .Diagnostics(x => x.Enable(false))
                 //Generate Tables
@@ -131,6 +148,5 @@ namespace LOB.Dao.Nhibernate {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }
         }
-
     }
 }

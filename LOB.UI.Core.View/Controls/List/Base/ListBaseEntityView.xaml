@@ -44,7 +44,8 @@
                         Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
                 </Button>
-                <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Close}" Width="20" BorderBrush="Red"
+                <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Close}" Width="20"
+                        BorderBrush="Red"
                         Height="20" BorderThickness="1" Padding="1"
                         Background="Transparent">
                     <Rectangle Width="20" Height="20">

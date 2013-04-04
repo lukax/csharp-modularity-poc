@@ -17,15 +17,17 @@ using Category = LOB.Domain.SubEntity.Category;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {
+    public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>,
+                                                 IAlterCategoryViewModel {
 
-        private readonly ICategoryFacade _facade;
+        private readonly ICategoryFacade _categoryFacade;
         private readonly IEventAggregator _eventAggregator;
 
-        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade facade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterCategoryViewModel(Category entity, IRepository repository,
+            ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
-            _facade = facade;
+            _categoryFacade = categoryFacade;
             _eventAggregator = eventAggregator;
             Refresh();
         }
@@ -40,7 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var entity = baseEntity as Category;
             if(entity == null) return;
             Entity = entity;
-            Operation = new UIOperation {State = UIOperationState.Update, Type = Operation.Type};
+            Operation.State = UIOperationState.Update;
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -60,15 +62,22 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            //TODO: If viewState == Add : ..., If viewState == Update : ....
             IEnumerable<ValidationResult> results;
-            return _facade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Add) return _categoryFacade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Update) return _categoryFacade.CanUpdate(out results);
+            return false;
+        }
+
+        protected override bool CanCancel(object arg) {
+            if(Operation.State == UIOperationState.Add) return true;
+            if(Operation.State == UIOperationState.Update) return true;
+            return false;
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = _facade.GenerateEntity();
-            _facade.SetEntity(Entity);
-            _facade.ConfigureValidations();
+            Entity = _categoryFacade.GenerateEntity();
+            _categoryFacade.SetEntity(Entity);
+            _categoryFacade.ConfigureValidations();
         }
 
     }

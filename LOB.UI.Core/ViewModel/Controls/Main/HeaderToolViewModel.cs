@@ -14,7 +14,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public void Refresh() { }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.HeaderTool};
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.HeaderTool
+        };
         public UIOperation Operation {
             get { return _operation; }
         }

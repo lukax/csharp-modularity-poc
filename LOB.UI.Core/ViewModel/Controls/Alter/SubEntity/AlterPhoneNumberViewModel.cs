@@ -13,7 +13,8 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {
+    public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>,
+                                                    IAlterPhoneNumberViewModel {
 
         private readonly IPhoneNumberFacade _phoneNumberFacade;
         private readonly IEventAggregator _eventAggregator;
@@ -45,7 +46,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         //protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(Operation); }
 
-        protected override void ClearEntity(object arg) { Entity = new PhoneNumber {Code = 0, Description = "", Number = 0, PhoneNumberType = default(PhoneNumberType)}; }
+        protected override void ClearEntity(object arg) {
+            Entity = new PhoneNumber {
+                Code = 0,
+                Description = "",
+                Number = 0,
+                PhoneNumberType = default(PhoneNumberType)
+            };
+        }
 
     }
 }

@@ -18,7 +18,6 @@ using NullGuard;
 
 namespace LOB.UI.Core.View.Controllers {
     public class MainRegionController {
-
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
@@ -51,7 +50,10 @@ namespace LOB.UI.Core.View.Controllers {
         private void OpenView(UIOperation param) {
             if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             if(param.State == UIOperationState.QuickSearch) QuickSearch(param);
-            else _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
+            else
+                _navigator.Init.ResolveView(param)
+                          .ResolveViewModel(param)
+                          .AddToRegion(RegionName.TabRegion);
         }
 
         private void QuickSearch(UIOperation param) {
@@ -62,7 +64,8 @@ namespace LOB.UI.Core.View.Controllers {
                 baseViewModel.Operation = new UIOperation {
                     State = UIOperationState.QuickSearch,
                     Type = view.Operation.Type
-                }; // Let the viewModel know that it's in QuickSearch State
+                };
+                    // Let the viewModel know that it's in QuickSearch State
             _regionAdapter.AddView(view, RegionName.ModalRegion);
         }
 
@@ -86,7 +89,8 @@ namespace LOB.UI.Core.View.Controllers {
         }
 
         public async void MessageHide([AllowNull] string param) {
-            _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool}, RegionName.ModalRegion);
+            _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool},
+                                      RegionName.ModalRegion);
 
             if(param != null) {
                 MessageShow(param, false);
@@ -94,6 +98,5 @@ namespace LOB.UI.Core.View.Controllers {
                 MessageHide(null);
             }
         }
-
     }
 }

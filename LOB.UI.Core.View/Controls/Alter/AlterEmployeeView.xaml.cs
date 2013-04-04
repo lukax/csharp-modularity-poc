@@ -14,7 +14,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterEmployeeView : UserControl, IBaseView {
-
         public AlterEmployeeView() { InitializeComponent(); }
 
         [Dependency]
@@ -36,7 +35,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
                 }
 
                 _eventAggregator.GetEvent<SaveEvent>()
-                                .Subscribe(s => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
+                                .Subscribe(
+                                    s => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 
@@ -56,6 +56,5 @@ namespace LOB.UI.Core.View.Controls.Alter {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

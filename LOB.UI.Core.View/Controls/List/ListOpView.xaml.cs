@@ -15,7 +15,6 @@ namespace LOB.UI.Core.View.Controls.List {
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
     public partial class ListOpView : UserControl, IBaseView {
-
         private readonly IEventAggregator _eventAggregator;
 
         public ListOpView(IEventAggregator eventAggregator, IListOpViewModel viewModel) {
@@ -35,7 +34,10 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public int Index { get; set; }
 
-        public void InitializeServices() { _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o == Operation) Refresh(); }); }
+        public void InitializeServices() {
+            _eventAggregator.GetEvent<RefreshEvent>()
+                            .Subscribe(o => { if(o == Operation) Refresh(); });
+        }
 
         public void Refresh() {
             //ListViewEntitys.SelectedIndex = -1;
@@ -44,6 +46,5 @@ namespace LOB.UI.Core.View.Controls.List {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

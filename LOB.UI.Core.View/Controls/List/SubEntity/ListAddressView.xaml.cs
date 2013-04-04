@@ -8,11 +8,11 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    public partial class ListCategoryView : IBaseView {
-        public ListCategoryView() { InitializeComponent(); }
+    public partial class ListAddressView : IBaseView {
+        public ListAddressView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
-            get { return DataContext as IListCategoryViewModel; }
+            get { return DataContext as IListAddressViewModel; }
             set {
                 DataContext = value;
                 ViewListBaseEntity.DataContext = value;

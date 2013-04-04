@@ -24,8 +24,9 @@ namespace LOB.Business.Logic {
         private readonly IStoreFacade _storeFacade;
         private Employee _entity;
 
-        public EmployeeFacade(IBaseEntityFacade baseEntityFacade, INaturalPersonFacade naturalPersonFacade,
-            IPayCheckFacade payCheckFacade, IStoreFacade storeFacade) {
+        public EmployeeFacade(IBaseEntityFacade baseEntityFacade,
+            INaturalPersonFacade naturalPersonFacade, IPayCheckFacade payCheckFacade,
+            IStoreFacade storeFacade) {
             _baseEntityFacade = baseEntityFacade;
             _naturalPersonFacade = naturalPersonFacade;
             _payCheckFacade = payCheckFacade;
@@ -79,7 +80,9 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Title.Length < 1 ? new ValidationResult("Title", Strings.Error_Field_Empty) : null);
+                    _entity.Title.Length < 1
+                        ? new ValidationResult("Title", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.HireDate.ToShortDateString().ToString(Culture).Length < 1
@@ -109,7 +112,9 @@ namespace LOB.Business.Logic {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(
+                          validationResult =>
+                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

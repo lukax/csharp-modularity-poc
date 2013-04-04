@@ -16,17 +16,25 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
-
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel
+        where T : BaseEntity {
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _loggerFacade;
         private UIOperation _previousOperation;
         private SubscriptionToken _currentSubscription;
         private UIOperation _operation;
+        public T Entity { get; set; }
+        public ICommand SaveChangesCommand { get; set; }
+        public ICommand DiscardChangesCommand { get; set; }
+        public ICommand ClearEntityCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
+        public ICommand QuickSearchCommand { get; set; }
+        public int Index { get; set; }
+        protected IRepository Repository { get; set; }
 
         [InjectionConstructor]
-        protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade) {
+        protected AlterBaseEntityViewModel(T entity, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
             _eventAggregator = eventAggregator;
             _loggerFacade = loggerFacade;
             Repository = repository;
@@ -37,26 +45,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntityCommand = new DelegateCommand(ClearEntity);
         }
 
-        protected IRepository Repository { get; set; }
-        public override UIOperation Operation {
-            get { return _operation; }
-            set {
-                _previousOperation = value;
-                _operation = value;
-            }
-        }
-
-        public T Entity { get; set; }
-        public ICommand SaveChangesCommand { get; set; }
-        public ICommand DiscardChangesCommand { get; set; }
-        public ICommand ClearEntityCommand { get; set; }
-        public ICommand CloseCommand { get; set; }
-        public ICommand QuickSearchCommand { get; set; }
-        public int Index { get; set; }
-
         protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
 
-        protected virtual bool CanCancel(object arg) { return Entity != null; }
+        protected virtual bool CanCancel(object arg) {
+            if(Operation.State == UIOperationState.Add) return true;
+            if(Operation.State == UIOperationState.Update) return true;
+            return false;
+        }
 
         protected virtual void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -69,9 +64,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected abstract void Cancel(object arg);
 
         protected virtual void QuickSearch(object arg) {
-            Operation = new UIOperation {Type = Operation.Type, State = UIOperationState.QuickSearch};
+            Operation = new UIOperation {
+                Type = Operation.Type,
+                State = UIOperationState.QuickSearch
+            };
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
-            _currentSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
+            _currentSubscription =
+                _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
         }
 
         private void ChangeUIState(UIOperation obj) {
@@ -83,5 +82,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         protected abstract void ClearEntity(object arg);
 
+        public override UIOperation Operation {
+            get { return _operation; }
+            set {
+                _previousOperation = value;
+                _operation = value;
+            }
+        }
     }
 }

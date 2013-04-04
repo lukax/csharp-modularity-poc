@@ -12,7 +12,8 @@ namespace LOB.UI.Core.Infrastructure {
     [Obsolete("Use events now")]
     public class CommandService : ICommandService {
 
-        private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
+        private static readonly Lazy<ICommandService> Lazy =
+            new Lazy<ICommandService>(() => new CommandService());
 
         private readonly IDictionary<object, IList<ICommand>> _commands;
 

@@ -14,7 +14,8 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>, IAlterLegalPersonViewModel {
+    public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>,
+                                                    IAlterLegalPersonViewModel {
 
         private readonly AlterPersonViewModel _alterPersonViewModel;
         private readonly IEventAggregator _eventAggregator;
@@ -27,8 +28,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         [InjectionConstructor]
-        public AlterLegalPersonViewModel(LegalPerson entity, AlterPersonViewModel alterPersonViewModel,
-            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterLegalPersonViewModel(LegalPerson entity,
+            AlterPersonViewModel alterPersonViewModel, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _alterPersonViewModel = alterPersonViewModel;
             _eventAggregator = eventAggregator;

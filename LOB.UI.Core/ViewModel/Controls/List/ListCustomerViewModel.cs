@@ -14,15 +14,19 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel {
+    public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>,
+                                                IListCustomerViewModel {
 
-        public ListCustomerViewModel(Customer entity, IRepository repository, IEventAggregator eventAggregator)
+        public ListCustomerViewModel(Customer entity, IRepository repository,
+            IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) {
             Entity = entity;
             if(Entity.Person == null) throw new ArgumentException("Entity has not defined a person");
         }
 
-        CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
+        private CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
 
         public new Expression<Func<Employee, bool>> SearchCriteria {
             get {

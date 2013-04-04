@@ -20,7 +20,8 @@ namespace LOB.Domain.Base {
         [AllowNull]
         public virtual string this[string columnName] {
             get {
-                var firstOrDefault = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
+                var firstOrDefault =
+                    GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
                 return firstOrDefault != null ? firstOrDefault.ErrorDescription : null;
             }
         }

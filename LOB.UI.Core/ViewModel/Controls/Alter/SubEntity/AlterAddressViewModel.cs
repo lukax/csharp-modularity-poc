@@ -2,50 +2,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
+using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Unity;
 using NullGuard;
+using Category = LOB.Domain.SubEntity.Category;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
-
+    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>,
+                                                IAlterAddressViewModel {
+        private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IAddressFacade _addressFacade;
         private readonly IEventAggregator _eventAggregator;
         private string _status;
         private IList<string> _statuses;
-
-        public AlterAddressViewModel(Address entity, IRepository repository, IAddressFacade addressFacade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _addressFacade = addressFacade;
-            _eventAggregator = eventAggregator;
-        }
-
-        //TODO: Wrap with business logic
-        public string State {
-            get { return Entity.State; }
+        public ObservableCollection<UF> UFs { get; set; }
+        private UF _uf;
+        public UF UF {
+            get { return _uf; }
             set {
-                if(value.Length == 2)
-                    try {
-                        UF parsed;
-                        if(Enum.TryParse(value, out parsed)) Entity.State = UfBrDictionary.Ufs[parsed];
-                    } catch(ArgumentNullException) {
-                        Entity.State = value;
-                    }
+                _uf = value;
+                Entity.State = value.ToLocalizedString();
             }
         }
-
         [AllowNull]
         public string Status {
             get { return _status; }
@@ -53,6 +47,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 _status = value;
                 Entity.Status = AddressStatusDictionary.Statuses[value];
             }
+        }
+
+        [InjectionConstructor]
+        public AlterAddressViewModel(Address entity, IRepository repository,
+            IAddressFacade addressFacade, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _addressFacade = addressFacade;
+            _eventAggregator = eventAggregator;
         }
 
         public IList<string> Statuses {
@@ -67,14 +70,21 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public override void InitializeServices() {
             ClearEntity(null);
             Operation = _operation;
+            _worker.DoWork += UpdateUFList;
+            _worker.RunWorkerAsync();
+            _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
         }
 
-        public override void Refresh() { ClearEntity(null); }
+        private void Include(BaseEntity obj) {
+            var entity = obj as Address;
+            if (entity == null) return;
+            Entity = entity;
+            Operation.State = UIOperationState.Update;
+        }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Address,
-            State = UIOperationState.Add
-        };
+        private void UpdateUFList(object sender, DoWorkEventArgs doWorkEventArgs) { UFs = new ObservableCollection<UF>(Enum.GetValues(typeof(UF)).Cast<UF>()); }
+
+        public override void Refresh() { ClearEntity(null); }
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -87,31 +97,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            return _addressFacade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Add) return _addressFacade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Update) return _addressFacade.CanUpdate(out results);
+            return false;
         }
 
         protected override bool CanCancel(object arg) {
-            //TODO: Business logic
-            return true;
+            if(Operation.State == UIOperationState.Add) return true;
+            if(Operation.State == UIOperationState.Update) return true;
+            return false;
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Address {
-                Code = 0,
-                District = "",
-                City = "Nova Friburgo",
-                Country = "Brasil",
-                State = "Rio de Janeiro",
-                ZipCode = 0,
-                Street = "",
-                StreetNumber = 0,
-                StreetComplement = "",
-                IsDefault = false,
-                Status = default(AddressStatus),
-            };
+            Entity = _addressFacade.GenerateEntity();
+            UF = Entity.State.ToUF();
             _addressFacade.SetEntity(Entity);
             _addressFacade.ConfigureValidations();
         }
 
+        private readonly UIOperation _operation = new UIOperation {
+            Type = UIOperationType.Address,
+            State = UIOperationState.Add
+        };
     }
 }

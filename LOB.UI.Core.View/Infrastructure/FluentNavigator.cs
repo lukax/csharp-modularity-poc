@@ -48,22 +48,29 @@ namespace LOB.UI.Core.View.Infrastructure {
         }
 
         public IFluentNavigator ResolveViewModel(UIOperation param) {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(UIOperationMapping.ViewModels[param]) as IBaseViewModel;
+            if(_resolvedViewModel != null)
+                throw new InvalidOperationException(
+                    "First Init the FluentNavigator to clean fields.");
+            var resolved =
+                _container.Resolve(UIOperationMapping.ViewModels[param]) as IBaseViewModel;
             if(resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if(_resolvedViewModel != null)
+                throw new InvalidOperationException(
+                    "First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve<TViewModel>();
             SetViewModel(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveView(UIOperation param) {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if(_resolvedViewModel != null)
+                throw new InvalidOperationException(
+                    "First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve(UIOperationMapping.Views[param]) as IBaseView;
             if(resolved == null) throw new ArgumentException("param");
             SetView(resolved);
@@ -71,7 +78,9 @@ namespace LOB.UI.Core.View.Infrastructure {
         }
 
         public IFluentNavigator ResolveView<TView>() where TView : IBaseView {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            if(_resolvedViewModel != null)
+                throw new InvalidOperationException(
+                    "First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve<TView>();
             SetView(resolved);
             return this;

@@ -13,7 +13,6 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for ColumnToolView.xaml
     /// </summary>
     public partial class HeaderToolView : UserControl, IBaseView {
-
         public HeaderToolView(IHeaderToolsViewModel viewModel) {
             InitializeComponent();
             ViewModel = viewModel;
@@ -37,6 +36,5 @@ namespace LOB.UI.Core.View.Controls.Main {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

@@ -61,10 +61,14 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.FirstName.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                    _entity.FirstName.Length < 1
+                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.LastName.Length < 1 ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
+                    _entity.LastName.Length < 1
+                        ? new ValidationResult("Description", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.CPF.ToString(culture).Length < 1
@@ -117,7 +121,9 @@ namespace LOB.Business.Logic {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(
+                          validationResult =>
+                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

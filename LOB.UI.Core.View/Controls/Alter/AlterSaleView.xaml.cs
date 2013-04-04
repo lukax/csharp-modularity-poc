@@ -9,7 +9,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterSaleView : IBaseView {
-
         public AlterSaleView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -34,6 +33,5 @@ namespace LOB.UI.Core.View.Controls.Alter {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

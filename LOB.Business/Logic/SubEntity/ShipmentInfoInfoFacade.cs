@@ -24,7 +24,9 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null)
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.DaySchedule < 1 ? new ValidationResult("Value", Strings.Error_Field_Empty) : null);
+                    _entity.DaySchedule < 1
+                        ? new ValidationResult("Value", Strings.Error_Field_Empty)
+                        : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -61,7 +63,9 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(
+                          validationResult =>
+                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

@@ -1,5 +1,7 @@
 ﻿#region Usings
 
+using System.Globalization;
+using System.Threading;
 using LOB.Domain.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -13,6 +15,10 @@ namespace LOB.UI.Core.ViewModel.Base {
         public string Header { get; set; }
         public abstract void InitializeServices();
         public abstract void Refresh();
+
+        public static CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
 
     }
 }

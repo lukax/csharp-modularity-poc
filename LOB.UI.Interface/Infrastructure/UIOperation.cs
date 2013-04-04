@@ -5,7 +5,7 @@ using System;
 #endregion
 
 namespace LOB.UI.Interface.Infrastructure {
-    public struct UIOperation {
+    public class UIOperation : IEquatable<UIOperation> {
 
         public UIOperationType Type { get; set; }
         public UIOperationState State { get; set; }
@@ -13,7 +13,7 @@ namespace LOB.UI.Interface.Infrastructure {
         public override string ToString() { return string.Format("{0}_{1}", State.ToString(), Type.ToString()); }
         #region Equality members
 
-        public bool Equals(UIOperation other) { return this == other; }
+        public bool Equals(UIOperation other) { return (Type == other.Type && State == other.State); }
 
         public override int GetHashCode() {
             unchecked {
@@ -21,11 +21,17 @@ namespace LOB.UI.Interface.Infrastructure {
             }
         }
 
-        public override bool Equals(object obj) { return obj is UIOperation && (UIOperation)obj == this; }
+        public override bool Equals(object obj) {
+            var local = obj as UIOperation;
+            return local != null && Equals(local);
+        }
 
-        public static bool operator ==(UIOperation s, UIOperation s2) { return (s.Type == s2.Type && s.State == s2.State); }
+        //Before convertion to class
+        //public static bool operator ==(UIOperation s, UIOperation s2) {
+        //    return (s.Type == s2.Type && s.State == s2.State);
+        //}
 
-        public static bool operator !=(UIOperation s, UIOperation s2) { return !(s == s2); }
+        //public static bool operator !=(UIOperation s, UIOperation s2) { return !(s == s2); }
 
         #endregion
     }

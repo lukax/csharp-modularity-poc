@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -50,7 +49,9 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Street.Length < 1 ? new ValidationResult("Street", Strings.Error_Field_Empty) : null);
+                    _entity.Street.Length < 1
+                        ? new ValidationResult("Street", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.StreetNumber.ToString(Culture).Length < 1
@@ -63,13 +64,19 @@ namespace LOB.Business.Logic.SubEntity {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.City.Length < 1 ? new ValidationResult("City", Strings.Error_Field_Empty) : null);
+                    _entity.City.Length < 1
+                        ? new ValidationResult("City", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.District.Length < 1 ? new ValidationResult("District", Strings.Error_Field_Empty) : null);
+                    _entity.District.Length < 1
+                        ? new ValidationResult("District", Strings.Error_Field_Empty)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.State.Length < 1 ? new ValidationResult("State", Strings.Error_Field_Empty) : null);
+                    _entity.State.Length < 1
+                        ? new ValidationResult("State", Strings.Error_Field_Empty)
+                        : null);
             }
         }
 
@@ -79,9 +86,17 @@ namespace LOB.Business.Logic.SubEntity {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
 
@@ -96,7 +111,9 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(
+                          validationResult =>
+                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

@@ -17,10 +17,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
     public sealed class ListEmployeeViewModel : ListNaturalPersonViewModel, IListEmployeeViewModel {
 
         [InjectionConstructor]
-        public ListEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator)
+        public ListEmployeeViewModel(Employee entity, IRepository repository,
+            IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
-        CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
+        private CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
 
         public new Expression<Func<Employee, bool>> SearchCriteria {
             get {

@@ -13,7 +13,6 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for MessageToolView.xaml
     /// </summary>
     public partial class MessageToolView : UserControl, IBaseView {
-
         public MessageToolView() { InitializeComponent(); }
 
         [AllowNull]
@@ -66,6 +65,5 @@ namespace LOB.UI.Core.View.Controls.Main {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

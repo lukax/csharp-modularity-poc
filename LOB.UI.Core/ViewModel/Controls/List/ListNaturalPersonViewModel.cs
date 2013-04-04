@@ -13,10 +13,12 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel {
+    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>,
+                                              IListNaturalPersonViewModel {
 
         [InjectionConstructor]
-        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator)
+        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
+            IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<NaturalPerson, bool>> SearchCriteria {

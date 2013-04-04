@@ -16,7 +16,6 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {
-
         private readonly IEmailFacade _emailFacade;
         private readonly IEventAggregator _eventAggregator;
 
@@ -58,6 +57,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Type = UIOperationType.Email,
             State = UIOperationState.Add
         };
-
     }
 }

@@ -24,8 +24,8 @@ using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity {
-
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel
+        where T : BaseEntity {
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private int _updateInterval;
@@ -65,7 +65,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         }
 
         [InjectionConstructor]
-        protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
+        protected ListBaseEntityViewModel(T entity, IRepository repository,
+            IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             Repository = repository;
             Entity = entity;
@@ -105,14 +106,20 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             do {
                 await Task.Delay(UpdateInterval);
                 _eventAggregator.GetEvent<ReportProgressEvent>()
-                                .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 0});
+                                .Publish(new Progress {
+                                    Message = Strings.Progress_List_Updating,
+                                    Percentage = 0
+                                });
                 IList<T> localList = string.IsNullOrEmpty(Search)
                                          ? (Repository.GetList<T>()).ToList()
                                          : (Repository.GetList(SearchCriteria)).ToList();
                 if(Entitys == null || !localList.SequenceEqual(Entitys)) {
                     Entitys = new ObservableCollection<T>(localList);
                     _eventAggregator.GetEvent<ReportProgressEvent>()
-                                    .Publish(new Progress {Message = Strings.Progress_List_Updating, Percentage = 100});
+                                    .Publish(new Progress {
+                                        Message = Strings.Progress_List_Updating,
+                                        Percentage = 100
+                                    });
                 }
                 else
                     _eventAggregator.GetEvent<ReportProgressEvent>()
@@ -133,6 +140,5 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
         protected virtual void Fetch(object arg = null) { Entitys = new ObservableCollection<T>(Repository.GetList<T>().ToList()); }
-
     }
 }

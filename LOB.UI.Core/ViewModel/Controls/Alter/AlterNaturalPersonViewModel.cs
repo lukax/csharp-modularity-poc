@@ -15,7 +15,8 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
+    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>,
+                                               IAlterNaturalPersonViewModel {
 
         private readonly IEventAggregator _eventAggregator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }

@@ -1,8 +1,6 @@
 ﻿#region Usings
 
 using LOB.Core.Localization;
-using LOB.Domain;
-using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -11,7 +9,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterProductView : IBaseView {
-
         public AlterProductView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -37,6 +34,5 @@ namespace LOB.UI.Core.View.Controls.Alter {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

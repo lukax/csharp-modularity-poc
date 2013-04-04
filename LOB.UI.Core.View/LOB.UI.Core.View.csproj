@@ -124,6 +124,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\List\SubEntity\ListAddressView.xaml.cs">
+      <DependentUpon>ListAddressView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Util\ListContextToolMenuView.xaml.cs">
       <DependentUpon>ListContextToolMenuView.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Alter\AlterCustomerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\List\SubEntity\ListAddressView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

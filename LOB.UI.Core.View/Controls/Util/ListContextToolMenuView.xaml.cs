@@ -8,7 +8,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Util {
     public partial class ListContextToolMenuView : IBaseView {
-
         public ListContextToolMenuView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -29,6 +28,5 @@ namespace LOB.UI.Core.View.Controls.Util {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

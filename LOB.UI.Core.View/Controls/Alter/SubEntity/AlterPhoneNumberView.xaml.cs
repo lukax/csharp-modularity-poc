@@ -10,7 +10,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPhoneNumberView : UserControl, IBaseView {
-
         public AlterPhoneNumberView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -34,6 +33,5 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
-
     }
 }

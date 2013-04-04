@@ -27,8 +27,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         [InjectionConstructor]
         public AlterPersonViewModel(Person entity, IPersonFacade personFacade,
-            AlterAddressViewModel alterAddressViewModel, AlterContactInfoViewModel alterContactInfoViewModel,
-            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            AlterAddressViewModel alterAddressViewModel,
+            AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _personFacade = personFacade;
             _alterAddressViewModel = alterAddressViewModel;
@@ -38,7 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             //TODO: Use business logic to set default params
             if(Entity.Address.State == null && Entity.Address.Country == null) {
                 Entity.Address.Country = "Brasil";
-                Entity.Address.State = UfBrDictionary.Ufs[UF.RJ];
+                Entity.Address.State = UFDictionary.Ufs[UF.RJ];
             }
         }
 
