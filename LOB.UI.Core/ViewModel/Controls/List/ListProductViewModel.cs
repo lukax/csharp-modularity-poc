@@ -26,11 +26,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Name.ToUpper().Contains(Search.ToUpper()) ||
                          arg.Description.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.UnitSalePrice.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.ProfitMargin.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.UnitSalePrice.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.ProfitMargin.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
@@ -40,22 +40,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void InitializeServices() { Operation = _operation; }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Product,
             State = UIOperationState.List
         };
-
-        protected override bool CanUpdate(object arg) {
-            //TODO: Business logic
-            return true;
-        }
-
-        protected override bool CanDelete(object arg) {
-            //TODO: Business logic
-            return true;
-        }
 
     }
 }

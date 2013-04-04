@@ -110,6 +110,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             var catalog = UIOperationCatalog.UIOperations;
             //Remove Internal usage Types from user selection:
             catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Unknown));
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.BaseEntity));
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Service));
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Person));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Tool));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Loading));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Add));
@@ -117,19 +120,20 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Discard));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.QuickSearch));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Exit));
-
             var operationTypes = new Dictionary<string, UIOperation>(catalog.Count);
             var stringsType = typeof(Strings);
             var stringsTypeProps = stringsType.GetProperties();
 
             //Parse to localized string
-            foreach(var uiOperation in catalog)
+            foreach(var uiOperation in catalog) {
+                UIOperation operation = uiOperation;
                 foreach(string name in from propertyInfo in stringsTypeProps
                                        let name = propertyInfo.Name
-                                       where propertyInfo.Name.Contains("Command_" + uiOperation)
+                                       where propertyInfo.Name.Contains("Command_" + operation)
                                        select name)
                     operationTypes.Add(
                         stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
+            }
             return operationTypes;
         }
 

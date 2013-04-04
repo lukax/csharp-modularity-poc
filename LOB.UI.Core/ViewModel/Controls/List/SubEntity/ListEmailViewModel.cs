@@ -23,8 +23,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Value.ToString().ToUpper().Contains(Search.ToUpper()));
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Value.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }
@@ -33,7 +33,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void InitializeServices() { Operation = _operation; }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Email,

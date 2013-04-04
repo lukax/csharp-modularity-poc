@@ -2,9 +2,7 @@
 
 using System;
 using System.Linq.Expressions;
-using System.Threading;
 using LOB.Dao.Interface;
-using LOB.Domain;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -25,18 +23,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Thread.CurrentThread.CurrentCulture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()) ||
-                         arg.PS.ToString(Thread.CurrentThread.CurrentCulture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()) ||
-                         arg.Bonus.ToString(Thread.CurrentThread.CurrentCulture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()) ||
-                         arg.CurrentSalary.ToString(Thread.CurrentThread.CurrentCulture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()));
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.PS.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Bonus.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CurrentSalary.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }
@@ -45,7 +35,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void InitializeServices() { Operation = _operation; }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.PayCheck,

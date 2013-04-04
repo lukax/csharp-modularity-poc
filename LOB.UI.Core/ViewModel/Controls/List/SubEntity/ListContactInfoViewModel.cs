@@ -24,10 +24,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.PS.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.SpeakWith.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.WebSite.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.PS.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.SpeakWith.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.WebSite.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Emails.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.PhoneNumbers.ToString().ToUpper().Contains(Search.ToUpper()));
@@ -39,7 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void InitializeServices() { Operation = _operation; }
 
-        public override void Refresh() { }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.ContactInfo,

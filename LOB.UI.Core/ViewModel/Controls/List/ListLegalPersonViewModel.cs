@@ -23,10 +23,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             EventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
-        private CultureInfo Culture {
-            get { return Thread.CurrentThread.CurrentCulture; }
-        }
-
         public new Expression<Func<LegalPerson, bool>> SearchCriteria {
             get {
                 try {
@@ -48,7 +44,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void InitializeServices() { Operation = _operation; }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.LegalPerson,

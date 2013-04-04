@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -19,6 +20,19 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public override void InitializeServices() {
             base.InitializeServices();
             Operation = _operation;
+        }
+
+        public new Expression<Func<Service, bool>> SearchCriteria {
+            get {
+                try {
+                    return
+                        (arg =>
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Description.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
+                } catch(FormatException) {
+                    return arg => false;
+                }
+            }
         }
 
         public override void Refresh() { Search = ""; }

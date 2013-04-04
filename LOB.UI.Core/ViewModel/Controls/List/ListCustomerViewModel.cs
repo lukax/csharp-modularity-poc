@@ -1,9 +1,7 @@
 ﻿#region Usings
 
 using System;
-using System.Globalization;
 using System.Linq.Expressions;
-using System.Threading;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
@@ -22,10 +20,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             : base(entity, repository, eventAggregator) {
             Entity = entity;
             if(Entity.Person == null) throw new ArgumentException("Entity has not defined a person");
-        }
-
-        private CultureInfo Culture {
-            get { return Thread.CurrentThread.CurrentCulture; }
         }
 
         public new Expression<Func<Employee, bool>> SearchCriteria {
@@ -51,22 +45,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void InitializeServices() { Operation = _operation; }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Customer,
             State = UIOperationState.List
         };
-
-        protected override bool CanUpdate(object arg) {
-            //TODO: Business logic
-            return true;
-        }
-
-        protected override bool CanDelete(object arg) {
-            //TODO: Business logic
-            return true;
-        }
 
     }
 }

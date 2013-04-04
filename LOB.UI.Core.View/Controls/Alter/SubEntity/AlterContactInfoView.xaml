@@ -18,8 +18,8 @@
     <StackPanel>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="75" />
-                <RowDefinition Height="Auto" MinHeight="75" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -34,12 +34,15 @@
 
             <base2:AlterBaseEntityView Grid.Row="0" x:Name="ViewAlterBaseEntity" />
 
-            <GroupBox Header="{x:Static loc:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="0">
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" MinWidth="200"/>
+            </StackPanel>
+            <GroupBox Header="{x:Static loc:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="1">
                 <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding PhoneNumber}" SelectionMode="Single" />
             </GroupBox>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
                 <Button x:Name="ButtonAddPhoneNumber" IsDefault="True" Width="18" Height="18"
                         Background="Transparent" Padding="1"
                         Command="{Binding AddPhoneNumberCommand}" BorderThickness="0">
@@ -51,12 +54,12 @@
                 </Button>
             </StackPanel>
 
-            <GroupBox Header="{x:Static loc:Strings.Common_Emails}" Grid.Column="1" Grid.Row="1">
+            <GroupBox Header="{x:Static loc:Strings.Common_Emails}" Grid.Column="1" Grid.Row="2">
                 <ListBox ItemsSource="{Binding Entity.Emails, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding Email}" SelectionMode="Single" />
             </GroupBox>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="2">
                 <Button x:Name="ButtonAddEmail" IsDefault="True" Width="18" Height="18" Background="Transparent"
                         Padding="1"
                         Command="{Binding AddEmailCommand}" BorderThickness="0">
@@ -68,20 +71,20 @@
                 </Button>
             </StackPanel>
 
-            <Label HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Website}" Grid.Row="2" />
+            <Label HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Website}" Grid.Row="3" />
             <TextBox
                 Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 HorizontalAlignment="Left"
-                MinWidth="250" MaxWidth="400" Grid.Row="2" Grid.Column="1" />
+                MinWidth="250" MaxWidth="400" Grid.Row="3" Grid.Column="1" />
 
-            <Label Grid.Row="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Contact}" />
-            <TextBox Grid.Row="3" Grid.Column="1" MinWidth="250"
+            <Label Grid.Row="4" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_SpeakWith}" />
+            <TextBox Grid.Row="4" Grid.Column="1" MinWidth="250"
                      Text="{Binding Entity.SpeakWith, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                      HorizontalAlignment="Left" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Left"
-                     MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="4" Grid.Column="1"
-                     Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                     MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="5" Grid.Column="1"
+                     Text="{Binding Entity.PS, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
         </Grid>
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden" />

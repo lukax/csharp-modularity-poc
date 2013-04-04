@@ -36,7 +36,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <FodyPath>..\packages\Fody.1.13.6.0</FodyPath>
+    <FodyPath>..\packages\Fody.1.13.6.1</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,7 +67,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.5.1.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

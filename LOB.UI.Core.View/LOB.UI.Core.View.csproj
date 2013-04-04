@@ -28,7 +28,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <FodyPath>..\packages\Fody.1.13.6.0</FodyPath>
+    <FodyPath>..\packages\Fody.1.13.6.1</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -90,7 +90,7 @@
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.5.1.0\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
