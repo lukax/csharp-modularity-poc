@@ -12,8 +12,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    public abstract class ListPersonViewModel : ListBaseEntityViewModel<Person>,
-                                                IListPersonViewModel {
+    public class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
 
         protected ListPersonViewModel(Person entity, IRepository repository,
             IEventAggregator eventAggregator)
@@ -36,17 +35,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             }
         }
 
-        public override void InitializeServices() { Operation = _operation; }
-
-        protected override bool CanUpdate(object arg) {
-            //TODO: Business logic
-            return true;
+        public override void InitializeServices() {
+            base.InitializeServices();
+            Operation = _operation;
         }
 
-        protected override bool CanDelete(object arg) {
-            //TODO: Business logic
-            return true;
-        }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Person,

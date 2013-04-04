@@ -124,6 +124,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\List\Base\ListPersonView.xaml.cs">
+      <DependentUpon>ListPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\List\ListLegalPersonView.xaml.cs">
+      <DependentUpon>ListLegalPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\List\ListNaturalPersonView.xaml.cs">
+      <DependentUpon>ListNaturalPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\List\SubEntity\ListPayCheckView.xaml.cs">
+      <DependentUpon>ListPayCheckView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\List\SubEntity\ListContactInfoView.xaml.cs">
+      <DependentUpon>ListContactInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\List\SubEntity\ListAddressView.xaml.cs">
       <DependentUpon>ListAddressView.xaml</DependentUpon>
     </Compile>
@@ -247,6 +262,26 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Alter\AlterCustomerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\List\Base\ListPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\List\ListLegalPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\List\ListNaturalPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\List\SubEntity\ListPayCheckView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\List\SubEntity\ListContactInfoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

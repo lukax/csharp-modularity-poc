@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LOB.UI.Core.View.Controls.List.SubEntity.ListAddressView"
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.List.Base.ListPersonView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,24 +22,12 @@
                       SelectionMode="Single">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Status}"
-                                        DisplayMemberBinding="{Binding Status}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Street}"
-                                        DisplayMemberBinding="{Binding Street}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Complement}"
-                                        DisplayMemberBinding="{Binding StreetComplement}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_District}"
-                                        DisplayMemberBinding="{Binding District}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_City}"
-                                        DisplayMemberBinding="{Binding City}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_State}"
-                                        DisplayMemberBinding="{Binding State}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Country}"
-                                        DisplayMemberBinding="{Binding Country}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_ZipCode}"
-                                        DisplayMemberBinding="{Binding ZipCode}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Default}"
-                                        DisplayMemberBinding="{Binding IsDefault}" />
+                        <GridViewColumn Header="{x:Static loc:Strings.Command_Alter_Address}"
+                                        DisplayMemberBinding="{Binding Address}" />
+                        <GridViewColumn Header="{x:Static loc:Strings.Command_Alter_ContactInfo}"
+                                        DisplayMemberBinding="{Binding ContactInfo}" />
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Notes}"
+                                        DisplayMemberBinding="{Binding Notes}" />
                     </GridView>
                 </ListView.View>
                 <ListView.ContextMenu>

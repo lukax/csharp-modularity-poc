@@ -21,7 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Operation = _operation;
         }
 
-        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Refresh() { Search = ""; }
 
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Service,

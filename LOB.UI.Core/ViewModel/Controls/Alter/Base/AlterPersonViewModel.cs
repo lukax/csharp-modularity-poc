@@ -65,8 +65,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         };
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow) {
-                Repository.Uow.BeginTransaction();
+            using(Repository.Uow.BeginTransaction()) {
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
@@ -84,12 +83,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected override void ClearEntity(object arg) {
             _alterAddressViewModel.ClearEntityCommand.Execute(null);
             _alterContactInfoViewModel.ClearEntityCommand.Execute(null);
-            Entity = new LocalPerson {
-                Address = _alterAddressViewModel.Entity,
-                Code = 0,
-                ContactInfo = _alterContactInfoViewModel.Entity,
-                Notes = "",
-            };
+            Entity = _personFacade.GenerateEntity();
             _personFacade.SetEntity(Entity);
             _personFacade.ConfigureValidations();
         }

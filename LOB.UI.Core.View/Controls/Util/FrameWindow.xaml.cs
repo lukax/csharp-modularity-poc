@@ -17,6 +17,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View.Controls.Util {
     public partial class FrameWindow : MetroWindow, IBaseView {
+
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
@@ -117,5 +118,6 @@ namespace LOB.UI.Core.View.Controls.Util {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

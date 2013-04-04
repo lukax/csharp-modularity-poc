@@ -741,4 +741,13 @@
   <data name="Error_Field_Positive" xml:space="preserve">
     <value>Campo Positivo</value>
   </data>
+  <data name="Common_SpeakWith" xml:space="preserve">
+    <value>Falar com</value>
+  </data>
+  <data name="Common_Rg_Uf" xml:space="preserve">
+    <value>RG UF</value>
+  </data>
+  <data name="Common_Uf" xml:space="preserve">
+    <value>UF</value>
+  </data>
 </root>

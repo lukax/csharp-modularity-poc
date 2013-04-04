@@ -36,8 +36,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                          arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.CorporateName.ToUpper().Contains(Search.ToUpper()) ||
                          arg.CNPJ.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Iestadual.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Imunicipal.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.InscEstadual.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.InscMunicipal.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.CorporateName.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {

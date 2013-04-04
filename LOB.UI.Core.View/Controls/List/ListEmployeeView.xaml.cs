@@ -9,6 +9,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.View.Controls.List {
     public partial class ListEmployeeView : IBaseView {
+
         public ListEmployeeView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -29,5 +30,6 @@ namespace LOB.UI.Core.View.Controls.List {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

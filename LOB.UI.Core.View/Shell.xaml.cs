@@ -24,6 +24,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View {
     public partial class Shell : MetroWindow, IBaseView {
+
         private static bool _loaded;
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
@@ -102,7 +103,7 @@ namespace LOB.UI.Core.View {
             TabRegion.SelectedIndex = -1;
             ProgressRing.IsActive = true;
             await Task.Delay(300);
-                // Fix validation color border in textboxes TODO: Check this issue
+            // Fix validation color border in textboxes TODO: Check this issue
             ProgressRing.IsActive = false;
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }

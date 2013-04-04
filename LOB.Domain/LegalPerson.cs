@@ -12,8 +12,8 @@ namespace LOB.Domain {
         public string CorporateName { get; set; }
         public string TradingName { get; set; }
         public int CNPJ { get; set; }
-        public int Iestadual { get; set; }
-        public int Imunicipal { get; set; }
+        public int InscEstadual { get; set; }
+        public int InscMunicipal { get; set; }
         public int CNAEFiscal { get; set; }
 
     }

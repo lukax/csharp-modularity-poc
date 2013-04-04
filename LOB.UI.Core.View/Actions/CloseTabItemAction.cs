@@ -12,6 +12,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace LOB.UI.Core.View.Actions {
     public class CloseTabItemAction : TriggerAction<DependencyObject> {
+
         public static readonly DependencyProperty TabControlProperty =
             DependencyProperty.Register("TabControl", typeof(TabControl), typeof(CloseTabItemAction),
                                         new PropertyMetadata(default(TabControl)));
@@ -56,5 +57,6 @@ namespace LOB.UI.Core.View.Actions {
                 }
                 else TabControl.Items.Remove(TabItem.Content);
         }
+
     }
 }

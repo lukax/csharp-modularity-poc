@@ -16,6 +16,7 @@ using NullGuard;
 
 namespace LOB.Dao.Nhibernate {
     public class SessionCreator : ISessionCreator {
+
         private const string MySqlDefaultConnectionString =
             @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 
@@ -148,5 +149,6 @@ namespace LOB.Dao.Nhibernate {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }
         }
+
     }
 }

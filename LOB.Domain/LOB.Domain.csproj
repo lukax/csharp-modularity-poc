@@ -70,6 +70,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="Logic\ValidationResult.cs" />
     <Compile Include="Logic\ValidationDelegate.cs" />
+    <Compile Include="SubEntity\PayCheck.cs" />
     <Compile Include="Shipper.cs" />
     <Compile Include="SubEntity\Address.cs" />
     <Compile Include="Base\BaseEntity.cs" />

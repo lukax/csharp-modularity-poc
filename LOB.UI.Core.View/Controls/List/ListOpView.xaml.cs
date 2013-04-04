@@ -15,6 +15,7 @@ namespace LOB.UI.Core.View.Controls.List {
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
     public partial class ListOpView : UserControl, IBaseView {
+
         private readonly IEventAggregator _eventAggregator;
 
         public ListOpView(IEventAggregator eventAggregator, IListOpViewModel viewModel) {
@@ -46,5 +47,6 @@ namespace LOB.UI.Core.View.Controls.List {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

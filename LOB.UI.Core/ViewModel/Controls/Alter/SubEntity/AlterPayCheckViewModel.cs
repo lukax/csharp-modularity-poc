@@ -3,6 +3,7 @@
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.SubEntity;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -50,7 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
-        protected override void ClearEntity(object arg) { Entity = new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, Ps = ""}; }
+        protected override void ClearEntity(object arg) { Entity = new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, PS = ""}; }
 
     }
 }

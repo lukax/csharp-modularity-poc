@@ -41,8 +41,8 @@ namespace LOB.Business.Logic {
                 CNAEFiscal = 0,
                 CNPJ = 0,
                 CorporateName = "",
-                Iestadual = 0,
-                Imunicipal = 0,
+                InscEstadual = 0,
+                InscMunicipal = 0,
                 TradingName = "",
             };
         }

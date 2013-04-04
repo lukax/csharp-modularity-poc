@@ -26,6 +26,7 @@ using NullGuard;
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel
         where T : BaseEntity {
+
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private int _updateInterval;
@@ -140,5 +141,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
         protected virtual void Fetch(object arg = null) { Entitys = new ObservableCollection<T>(Repository.GetList<T>().ToList()); }
+
     }
 }

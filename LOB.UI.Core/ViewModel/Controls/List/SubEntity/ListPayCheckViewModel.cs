@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
@@ -27,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                          arg.Code.ToString(Thread.CurrentThread.CurrentCulture)
                             .ToUpper()
                             .Contains(Search.ToUpper()) ||
-                         arg.Ps.ToString(Thread.CurrentThread.CurrentCulture)
+                         arg.PS.ToString(Thread.CurrentThread.CurrentCulture)
                             .ToUpper()
                             .Contains(Search.ToUpper()) ||
                          arg.Bonus.ToString(Thread.CurrentThread.CurrentCulture)

@@ -907,6 +907,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Rg_Uf.
+        /// </summary>
+        public static string Common_Rg_Uf {
+            get {
+                return ResourceManager.GetString("Common_Rg_Uf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Search.
         /// </summary>
         public static string Common_Search {
@@ -921,6 +930,15 @@ namespace LOB.Core.Localization {
         public static string Common_Shipper {
             get {
                 return ResourceManager.GetString("Common_Shipper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_SpeakWith.
+        /// </summary>
+        public static string Common_SpeakWith {
+            get {
+                return ResourceManager.GetString("Common_SpeakWith", resourceCulture);
             }
         }
         
@@ -1002,6 +1020,15 @@ namespace LOB.Core.Localization {
         public static string Common_TradingName {
             get {
                 return ResourceManager.GetString("Common_TradingName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Uf.
+        /// </summary>
+        public static string Common_Uf {
+            get {
+                return ResourceManager.GetString("Common_Uf", resourceCulture);
             }
         }
         

@@ -20,6 +20,7 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 namespace LOB.UI.Core.View.Modularity {
     [Module(ModuleName = "UICoreViewModule")]
     public class Module : IModule {
+
         private readonly IUnityContainer _container;
 
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private
@@ -44,5 +45,6 @@ namespace LOB.UI.Core.View.Modularity {
             log.Log("UICoreViewModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
+
     }
 }

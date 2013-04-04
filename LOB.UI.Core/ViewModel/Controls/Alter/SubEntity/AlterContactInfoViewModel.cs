@@ -26,6 +26,7 @@ using NullGuard;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>,
                                                     IAlterContactInfoViewModel {
+
         private readonly IRepository _repository;
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IEventAggregator _eventAggregator;
@@ -183,5 +184,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override bool CanCancel(object arg) { return true; }
+
     }
 }

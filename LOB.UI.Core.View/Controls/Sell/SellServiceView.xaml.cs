@@ -10,6 +10,7 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Sell {
     public partial class SellServiceView : UserControl, IBaseView {
+
         public SellServiceView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel { get; set; }
@@ -27,5 +28,6 @@ namespace LOB.UI.Core.View.Controls.Sell {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

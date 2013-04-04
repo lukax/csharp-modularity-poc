@@ -11,6 +11,7 @@ namespace LOB.Domain.SubEntity {
     public class ContactInfo : BaseEntity {
 
         public ContactStatus Status { get; set; }
+        public string Description { get; set; }
         public IList<PhoneNumber> PhoneNumbers { get; set; }
         public IList<Email> Emails { get; set; }
         public string WebSite { get; set; }

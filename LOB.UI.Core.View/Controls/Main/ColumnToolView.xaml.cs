@@ -13,6 +13,7 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for ColumnToolsView.xaml
     /// </summary>
     public partial class ColumnToolView : UserControl, IBaseView {
+
         public ColumnToolView(IColumnToolsViewModel viewModel) {
             InitializeComponent();
             ViewModel = viewModel;
@@ -39,5 +40,6 @@ namespace LOB.UI.Core.View.Controls.Main {
         public UIOperationType UIOperationType {
             get { return UIOperationType.ColumnTool; }
         }
+
     }
 }

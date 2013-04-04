@@ -12,8 +12,8 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.CorporateName);
             Map(x => x.TradingName);
             Map(x => x.CNPJ);
-            Map(x => x.Iestadual);
-            Map(x => x.Imunicipal);
+            Map(x => x.InscEstadual);
+            Map(x => x.InscMunicipal);
             Map(x => x.CNAEFiscal);
         }
 

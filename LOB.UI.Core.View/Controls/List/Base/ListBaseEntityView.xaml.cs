@@ -8,6 +8,7 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.List.Base {
     public partial class ListBaseEntityView : IBaseViewModel {
+
         public ListBaseEntityView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -28,5 +29,6 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

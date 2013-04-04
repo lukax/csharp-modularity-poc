@@ -8,6 +8,7 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
     public partial class AlterBaseEntityView : IBaseView {
+
         public AlterBaseEntityView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -28,5 +29,6 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

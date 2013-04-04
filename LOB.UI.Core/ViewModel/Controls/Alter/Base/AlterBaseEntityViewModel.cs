@@ -18,6 +18,7 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel
         where T : BaseEntity {
+
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _loggerFacade;
         private UIOperation _previousOperation;
@@ -89,5 +90,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                 _operation = value;
             }
         }
+
     }
 }

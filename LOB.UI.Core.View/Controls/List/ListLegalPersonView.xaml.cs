@@ -3,26 +3,27 @@
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    public partial class AlterAddressView : IBaseView {
+namespace LOB.UI.Core.View.Controls.List {
+    public partial class ListLegalPersonView : IBaseView
+    {
 
-        public AlterAddressView() { InitializeComponent(); }
+        public ListLegalPersonView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterAddressViewModel; }
+            get { return DataContext as IListLegalPersonViewModel; }
             set {
                 DataContext = value;
-                ViewConfCancelTools.DataContext = value;
-                ViewAlterBaseEntity.DataContext = value;
+                ViewListBaseEntity.DataContext = value;
+                ViewListContextTool.DataContext = value;
             }
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Address; }
+            get { return Strings.Header_List_Category; }
         }
 
         public int Index { get; set; }

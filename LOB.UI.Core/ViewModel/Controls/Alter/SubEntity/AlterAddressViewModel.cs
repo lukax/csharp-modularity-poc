@@ -19,13 +19,13 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 using NullGuard;
-using Category = LOB.Domain.SubEntity.Category;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>,
                                                 IAlterAddressViewModel {
+
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IAddressFacade _addressFacade;
         private readonly IEventAggregator _eventAggregator;
@@ -77,7 +77,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void Include(BaseEntity obj) {
             var entity = obj as Address;
-            if (entity == null) return;
+            if(entity == null) return;
             Entity = entity;
             Operation.State = UIOperationState.Update;
         }
@@ -119,5 +119,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Type = UIOperationType.Address,
             State = UIOperationState.Add
         };
+
     }
 }

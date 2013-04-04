@@ -10,6 +10,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
 
         public ContactInfoMap() {
             Map(x => x.Status);
+            Map(x => x.Description);
             HasMany(x => x.PhoneNumbers).Cascade.All();
             HasMany(x => x.Emails).Cascade.All();
             Map(x => x.WebSite);

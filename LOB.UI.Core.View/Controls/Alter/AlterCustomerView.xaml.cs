@@ -10,6 +10,7 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterCustomerView : IBaseView {
+
         [InjectionConstructor]
         public AlterCustomerView() { InitializeComponent(); }
 
@@ -38,5 +39,6 @@ namespace LOB.UI.Core.View.Controls.Alter {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+
     }
 }

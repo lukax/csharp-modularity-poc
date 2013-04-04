@@ -18,6 +18,7 @@ using NullGuard;
 
 namespace LOB.UI.Core.View.Controllers {
     public class MainRegionController {
+
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
@@ -65,7 +66,7 @@ namespace LOB.UI.Core.View.Controllers {
                     State = UIOperationState.QuickSearch,
                     Type = view.Operation.Type
                 };
-                    // Let the viewModel know that it's in QuickSearch State
+            // Let the viewModel know that it's in QuickSearch State
             _regionAdapter.AddView(view, RegionName.ModalRegion);
         }
 
@@ -98,5 +99,6 @@ namespace LOB.UI.Core.View.Controllers {
                 MessageHide(null);
             }
         }
+
     }
 }

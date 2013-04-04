@@ -10,6 +10,7 @@ using System.Linq;
 namespace LOB.Domain.SubEntity {
     [DefaultValue(Outro)]
     public enum UF {
+
         // ReSharper disable InconsistentNaming
         AC,
         AL,
@@ -40,9 +41,11 @@ namespace LOB.Domain.SubEntity {
         TO,
         // ReSharper restore InconsistentNaming
         Outro
+
     }
 
     public static class UFDictionary {
+
         private static readonly Lazy<IDictionary<UF, string>> Lazy =
             new Lazy<IDictionary<UF, string>>(
                 () =>
@@ -80,9 +83,11 @@ namespace LOB.Domain.SubEntity {
         public static IDictionary<UF, string> Ufs {
             get { return Lazy.Value; }
         }
+
     }
 
     public static class UFExtensions {
+
         public static UF ToUF(this string s) {
             UF parsed;
             if(s.Length == 2) return Enum.TryParse(s, out parsed) ? parsed : default(UF);
@@ -90,5 +95,6 @@ namespace LOB.Domain.SubEntity {
         }
 
         public static string ToLocalizedString(this UF uf) { return UFDictionary.Ufs[uf]; }
+
     }
 }
