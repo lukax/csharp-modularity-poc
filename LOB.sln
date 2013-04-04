@@ -67,6 +67,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{5BF0E9
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LOB.Util.Native", "LOB.Util.Native\LOB.Util.Native.vcxproj", "{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Util.Native.Test", "LOB.Util.Native.Test\LOB.Util.Native.Test.csproj", "{C30DC940-7B17-4360-9037-C7B69C86BB9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -321,6 +325,20 @@ Global
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Release|x64.ActiveCfg = Release|Win32
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Release|x86.ActiveCfg = Release|Win32
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Release|x86.Build.0 = Release|Win32
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|Win32.ActiveCfg = Release|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|x64.ActiveCfg = Release|Any CPU
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -352,9 +370,11 @@ Global
 		{819764C7-2185-4096-8677-66BEE2A1B788} = {FFB141A2-45B1-47F9-8C81-52DF77FCAAE7}
 		{5BF0E95C-E62C-436C-91BC-043E53BC3734} = {4EA01FF6-83D2-48BD-9C34-95C7031E0D1B}
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66} = {5BF0E95C-E62C-436C-91BC-043E53BC3734}
+		{B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A} = {5BF0E95C-E62C-436C-91BC-043E53BC3734}
+		{C30DC940-7B17-4360-9037-C7B69C86BB9D} = {B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

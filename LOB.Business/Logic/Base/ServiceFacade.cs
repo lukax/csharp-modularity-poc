@@ -34,7 +34,7 @@ namespace LOB.Business.Logic.Base {
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.Description.Length > 300
-                        ? new ValidationResult("Description", Strings.Error_Field_Empty)
+                        ? new ValidationResult("Description", Strings.Error_Field_TooLong)
                         : null);
             }
         }

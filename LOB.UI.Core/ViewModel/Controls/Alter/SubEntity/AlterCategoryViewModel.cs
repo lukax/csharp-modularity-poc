@@ -66,7 +66,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Category {Name = "", Description = "", Code = 0};
+            Entity = _facade.GenerateEntity();
             _facade.SetEntity(Entity);
             _facade.ConfigureValidations();
         }

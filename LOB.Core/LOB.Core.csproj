@@ -74,6 +74,7 @@
     <Reference Include="System.Core" />
     <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Localization\Strings.Designer.cs">
@@ -85,6 +86,7 @@
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\TrialMaker.cs" />
+    <Compile Include="Util\ImageUtility.cs" />
     <Compile Include="Util\RegistryUtility.cs" />
     <Compile Include="Util\StringWrapper.cs" />
     <Compile Include="Util\UtilExtensions.cs" />

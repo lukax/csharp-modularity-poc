@@ -30,9 +30,7 @@ namespace LOB.Business.Logic.SubEntity {
 
         public void ConfigureValidations() {
             _serviceFacade.ConfigureValidations();
-            if(_entity != null) {
-                //Category validations...
-            }
+            if(_entity != null) { }
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {

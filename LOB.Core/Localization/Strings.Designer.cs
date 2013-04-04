@@ -1096,6 +1096,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Deprecated.
+        /// </summary>
+        public static string Error_Field_Deprecated {
+            get {
+                return ResourceManager.GetString("Error_Field_Deprecated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Error_Field_Empty.
         /// </summary>
         public static string Error_Field_Empty {
@@ -1123,6 +1132,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Negative.
+        /// </summary>
+        public static string Error_Field_Negative {
+            get {
+                return ResourceManager.GetString("Error_Field_Negative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Nescessary.
+        /// </summary>
+        public static string Error_Field_Nescessary {
+            get {
+                return ResourceManager.GetString("Error_Field_Nescessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Error_Field_NotEmpty.
         /// </summary>
         public static string Error_Field_NotEmpty {
@@ -1137,6 +1164,15 @@ namespace LOB.Core.Localization {
         public static string Error_Field_NotNecessary {
             get {
                 return ResourceManager.GetString("Error_Field_NotNecessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Positive.
+        /// </summary>
+        public static string Error_Field_Positive {
+            get {
+                return ResourceManager.GetString("Error_Field_Positive", resourceCulture);
             }
         }
         

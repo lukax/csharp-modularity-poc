@@ -1,11 +1,14 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using LOB.Business.Interface.Logic;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.Logic;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
@@ -21,8 +24,7 @@ using Category = LOB.Domain.SubEntity.Category;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
 
-        private readonly IUnityContainer _unityContainer;
-        private readonly IFluentNavigator _navigator;
+        private readonly IProductFacade _facade;
         private readonly IEventAggregator _eventAggregator;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
@@ -31,31 +33,35 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             Type = UIOperationType.Service,
             State = UIOperationState.Add
         };
+        private readonly BackgroundWorker _worker = new BackgroundWorker();
 
         [InjectionConstructor]
-        public AlterProductViewModel(Product entity, IUnityContainer unityContainer, IFluentNavigator fluentNavigator,
-            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterProductViewModel(Product entity, IRepository repository, IProductFacade facade,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
-            _unityContainer = unityContainer;
-            _navigator = fluentNavigator;
+            _facade = facade;
             _eventAggregator = eventAggregator;
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
-            UpdateCategoryList();
         }
 
         public override void InitializeServices() {
             Operation = _operation;
             ClearEntity(null);
+
+            _worker.DoWork += UpdateCategoryList;
+            _worker.WorkerSupportsCancellation = true;
+            _worker.WorkerReportsProgress = true;
+            _worker.RunWorkerAsync();
         }
 
         public override void Refresh() { ClearEntity(null); }
 
-        private async void UpdateCategoryList(int delay = 2000) {
-            while(true) {
-                await Task.Delay(delay);
+        private async void UpdateCategoryList(object sender, DoWorkEventArgs doWorkEventArgs) {
+            do {
+                await Task.Delay(2000); // TODO: Configuration based update time
                 Categories = Repository.GetList<Category>().ToList();
-            }
+            } while(!_worker.CancellationPending);
         }
 
         private void ExecuteListCategory(object o) {
@@ -84,8 +90,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            //TODO: Business logic
-            return true;
+            //TODO: If viewState == Add : ..., If viewState == Update : ....
+            IEnumerable<ValidationResult> results;
+            return _facade.CanAdd(out results);
         }
 
         protected override bool CanCancel(object arg) {
@@ -93,7 +100,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             return true;
         }
 
-        protected override void ClearEntity(object args) { Entity = new Product {}; }
+        protected override void ClearEntity(object args) {
+            Entity = _facade.GenerateEntity();
+            _facade.SetEntity(Entity);
+            _facade.ConfigureValidations();
+        }
 
     }
 }

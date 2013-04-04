@@ -729,4 +729,16 @@
   <data name="Common_Include" xml:space="preserve">
     <value>Incluir</value>
   </data>
+  <data name="Error_Field_Deprecated" xml:space="preserve">
+    <value>Campo Descontinuado</value>
+  </data>
+  <data name="Error_Field_Negative" xml:space="preserve">
+    <value>Campo Negativo</value>
+  </data>
+  <data name="Error_Field_Nescessary" xml:space="preserve">
+    <value>Campo Nescessário</value>
+  </data>
+  <data name="Error_Field_Positive" xml:space="preserve">
+    <value>Campo Positivo</value>
+  </data>
 </root>
