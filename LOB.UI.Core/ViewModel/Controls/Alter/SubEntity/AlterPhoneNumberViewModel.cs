@@ -1,7 +1,9 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
+using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -33,13 +35,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void Refresh() { ClearEntity(null); }
 
-        private UIOperation _operation = new UIOperation {
+        private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.PhoneNumber,
             State = UIOperationState.Add
         };
-        public override UIOperation Operation {
-            get { return _operation; }
-            set { _operation = value; }
+
+        protected override bool CanSaveChanges(object arg)
+        {
+            IEnumerable<ValidationResult> results;
+            if (Operation.State == UIOperationState.Add) return _phoneNumberFacade.CanAdd(out results);
+            if (Operation.State == UIOperationState.Update) return _phoneNumberFacade.CanUpdate(out results);
+            return false;
+        }
+
+        protected override bool CanCancel(object arg)
+        {
+            //TODO: Business logic
+            return true;
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
@@ -47,12 +59,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         //protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) {
-            Entity = new PhoneNumber {
-                Code = 0,
-                Description = "",
-                Number = 0,
-                PhoneNumberType = default(PhoneNumberType)
-            };
+            Entity = _phoneNumberFacade.GenerateEntity();
+            _phoneNumberFacade.SetEntity(Entity);
+            _phoneNumberFacade.ConfigureValidations();
         }
 
     }

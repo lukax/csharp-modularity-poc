@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:metrocontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
@@ -64,7 +64,7 @@
             <Label Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Rg}" Grid.Column="1" />
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
                 <StackPanel.Resources>
-                    <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
                         <ObjectDataProvider.MethodParameters>
                             <x:Type TypeName="domainSub:UF" />
                         </ObjectDataProvider.MethodParameters>

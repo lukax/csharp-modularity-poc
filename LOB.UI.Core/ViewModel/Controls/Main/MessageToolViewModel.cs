@@ -13,8 +13,8 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class MessageToolViewModel : BaseViewModel {
 
-        private readonly IUnityContainer container;
-        private readonly IEventAggregator eventAggregator;
+        private readonly IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
         #region Props
 
         public string Message { get; set; }
@@ -37,14 +37,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public bool CanClose { get; set; }
 
-        public void CloseExecute() { eventAggregator.GetEvent<MessageHideEvent>().Publish(null); }
+        public void CloseExecute() { _eventAggregator.GetEvent<MessageHideEvent>().Publish(null); }
 
         #endregion CloseExecute Command
         [InjectionConstructor]
         public MessageToolViewModel(IUnityContainer container) {
             Message = "Please wait...";
-            this.container = container;
-            eventAggregator = this.container.Resolve<IEventAggregator>();
+            _container = container;
+            _eventAggregator = _container.Resolve<IEventAggregator>();
         }
 
         private UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool};

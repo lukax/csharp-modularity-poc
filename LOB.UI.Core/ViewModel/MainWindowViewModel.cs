@@ -14,9 +14,8 @@ namespace LOB.UI.Core.ViewModel {
     public class MainWindowViewModel : BaseViewModel {
 
         [InjectionConstructor]
-        public MainWindowViewModel(IUnityContainer container, IFluentNavigator navigator) {
-            _container = container;
-            _navigator = navigator;
+        public MainWindowViewModel(IFluentNavigator navigator) {
+            Navigator = navigator;
 
             OpenTabCommand = new DelegateCommand(OpenTab);
         }
@@ -26,8 +25,7 @@ namespace LOB.UI.Core.ViewModel {
         }
 
         public ICommand OpenTabCommand { get; set; }
-        private IUnityContainer _container { get; set; }
-        private IFluentNavigator _navigator { get; set; }
+        private IFluentNavigator Navigator { get; set; }
 
         private UIOperation _operation = new UIOperation {Type = UIOperationType.Main};
         public override UIOperation Operation {
@@ -38,7 +36,7 @@ namespace LOB.UI.Core.ViewModel {
         private void OpenTab(object arg) {
             UIOperationType operationType = arg.ToString().ToUIOperationType();
             var op = new UIOperation {Type = operationType};
-            _navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
+            Navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
         public override void InitializeServices() { }

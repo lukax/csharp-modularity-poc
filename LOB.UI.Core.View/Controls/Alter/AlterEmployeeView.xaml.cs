@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Controls.Alter;
@@ -13,12 +12,12 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterEmployeeView : UserControl, IBaseView {
+    public partial class AlterEmployeeView : IBaseView {
 
         public AlterEmployeeView() { InitializeComponent(); }
 
         [Dependency]
-        private IEventAggregator _eventAggregator { get; set; }
+        public IEventAggregator EventAggregator { get; set; }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IAlterEmployeeViewModel; }
@@ -35,9 +34,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
                         localViewModel.AlterContactInfoViewModel;
                 }
 
-                _eventAggregator.GetEvent<SaveEvent>()
-                                .Subscribe(
-                                    s => _eventAggregator.GetEvent<CancelEvent>().Publish(null));
+                EventAggregator.GetEvent<SaveEvent>()
+                               .Subscribe(s => EventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 

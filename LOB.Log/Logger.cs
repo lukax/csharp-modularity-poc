@@ -16,7 +16,9 @@ namespace LOB.Log {
     public class Logger : ILoggerFacade, ILogger {
 
         // Member variables
+// ReSharper disable InconsistentNaming
         private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));
+// ReSharper restore InconsistentNaming
 
         public Logger() { XmlConfigurator.Configure(); }
         #region ILoggerFacade Members

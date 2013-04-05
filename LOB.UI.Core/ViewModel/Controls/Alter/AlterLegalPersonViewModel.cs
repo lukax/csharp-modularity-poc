@@ -17,7 +17,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>,
                                                     IAlterLegalPersonViewModel {
 
+// ReSharper disable NotAccessedField.Local
         private readonly AlterPersonViewModel _alterPersonViewModel;
+// ReSharper restore NotAccessedField.Local
         private readonly IEventAggregator _eventAggregator;
         private readonly UIOperation _operation = new UIOperation {
             Type = UIOperationType.Service,

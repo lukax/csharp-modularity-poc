@@ -29,16 +29,13 @@ namespace LOB.UI.Core.View {
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
-        private readonly IRegionManager _region;
         private IModuleManager _module;
 
-        public Shell(IUnityContainer container, IRegionManager region, ILogger logger,
-            IEventAggregator eventAggregator) {
+        public Shell(IUnityContainer container, ILogger logger,IEventAggregator eventAggregator) {
             //CULTURE INFO
             Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
             //
             _container = container;
-            _region = region;
             _logger = logger;
             _eventAggregator = eventAggregator;
             InitializeComponent();
@@ -78,7 +75,7 @@ namespace LOB.UI.Core.View {
         }
 
         public void Refresh() {
-            base.UpdateLayout();
+            UpdateLayout();
             MiLightBlue(null, null);
         }
 
@@ -89,7 +86,7 @@ namespace LOB.UI.Core.View {
         private void OnLoad() {
             _eventAggregator.GetEvent<CloseViewEvent>()
                             .Subscribe(
-                                o => { if(o == new UIOperation {Type = UIOperationType.Main}) Close(); });
+                                o => { if(o.Equals(new UIOperation {Type = UIOperationType.Main})) Close(); });
 
             if(_loaded) return;
             _module = _container.Resolve<IModuleManager>();
@@ -112,13 +109,16 @@ namespace LOB.UI.Core.View {
             get { return ViewModel.Operation; }
         }
         #region Themes
-
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedParameter.Local
         private void MiLightGrey() {
+
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"),
                                      Theme.Light);
         }
 
         private void MiLightRed(object sender, RoutedEventArgs e) {
+
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"),
                                      Theme.Light);
         }
@@ -171,7 +171,8 @@ namespace LOB.UI.Core.View {
                                      ThemeManager.DefaultAccents.First(a => a.Name == "Orange"),
                                      Theme.Light);
         }
-
+        // ReSharper restore UnusedMember.Local
+        // ReSharper restore UnusedParameter.Local
         #endregion
     }
 }

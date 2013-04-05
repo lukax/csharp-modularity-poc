@@ -12,12 +12,10 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 namespace LOB.UI.Core.View.Infrastructure {
     public class RegionAdapter : IRegionAdapter {
 
-        private readonly IUnityContainer _container;
         private readonly IRegionManager _regionManager;
 
         [InjectionConstructor]
-        public RegionAdapter(IUnityContainer container, IRegionManager regionManager) {
-            _container = container;
+        public RegionAdapter( IRegionManager regionManager) {
             _regionManager = regionManager;
         }
 

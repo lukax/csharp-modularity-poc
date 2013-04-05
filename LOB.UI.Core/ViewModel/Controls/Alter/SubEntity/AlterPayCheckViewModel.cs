@@ -1,8 +1,9 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
-using LOB.Domain;
+using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -40,8 +41,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         };
 
         protected override bool CanSaveChanges(object arg) {
-            //TODO: Business logic
-            return true;
+            IEnumerable<ValidationResult> results;
+            if(Operation.State == UIOperationState.Add)return _payCheckFacade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Update) return _payCheckFacade.CanUpdate(out results);
+            return false;
         }
 
         protected override bool CanCancel(object arg) {
@@ -51,7 +54,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
-        protected override void ClearEntity(object arg) { Entity = new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, PS = ""}; }
+        protected override void ClearEntity(object arg) {
+            Entity = _payCheckFacade.GenerateEntity();
+            _payCheckFacade.SetEntity(Entity);
+            _payCheckFacade.ConfigureValidations();
+        }
 
     }
 }

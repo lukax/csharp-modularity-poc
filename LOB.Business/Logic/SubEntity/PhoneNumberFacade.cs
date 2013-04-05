@@ -56,9 +56,19 @@ namespace LOB.Business.Logic.SubEntity {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
+        {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
+        {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
 

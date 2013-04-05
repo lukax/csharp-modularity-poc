@@ -20,8 +20,9 @@ namespace LOB.Business.Logic.SubEntity {
         private CultureInfo Culture {
             get { return Thread.CurrentThread.CurrentCulture; }
         }
-        public AddressFacade(IBaseEntityFacade baseEntityFacade) { _baseEntityFacade = baseEntityFacade; }
 
+        public AddressFacade(IBaseEntityFacade baseEntityFacade) { _baseEntityFacade = baseEntityFacade; }
+       
         public void SetEntity<T>(T entity) where T : Address {
             _baseEntityFacade.SetEntity(entity);
             _entity = entity;

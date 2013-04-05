@@ -3,29 +3,20 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using LOB.Log.Interface;
 using LOB.UI.Core.Events.View;
-using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
-using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Util {
-    public partial class FrameWindow : MetroWindow, IBaseView {
+    public partial class FrameWindow : IBaseView {
 
-        private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
-        private readonly ILogger _logger;
 
-        public FrameWindow(IUnityContainer container, ILogger logger,
-            IEventAggregator eventAggregator) {
-            _container = container;
-            _logger = logger;
+        public FrameWindow(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => Close());
             InitializeComponent();
@@ -44,7 +35,7 @@ namespace LOB.UI.Core.View.Controls.Util {
         public void InitializeServices() { }
 
         public void Refresh() {
-            base.UpdateLayout();
+            UpdateLayout();
             MiLightBlue(null, null);
         }
 
@@ -53,6 +44,8 @@ namespace LOB.UI.Core.View.Controls.Util {
         }
         #region Themes
 
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedParameter.Local
         private void MiLightGrey() {
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"),
                                      Theme.Light);
@@ -113,7 +106,7 @@ namespace LOB.UI.Core.View.Controls.Util {
         }
 
         #endregion
-        private void Busy() { ModalRegion = new BusyView(); }
+        //private void Busy() { ModalRegion = new BusyView(); }
 
         public UIOperation Operation {
             get { return ViewModel.Operation; }

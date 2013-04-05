@@ -79,7 +79,7 @@ namespace LOB.Core.Util {
                     // 'cause OpenSubKey open a subKey as read-only
                     RegistryKey sk1 = rk.CreateSubKey(SubKey);
                     // Save the value
-                    sk1.SetValue(keyName.ToUpper(), value);
+                    if(sk1 != null) sk1.SetValue(keyName.ToUpper(), value);
 
                     return true;
                 } catch(Exception e) {

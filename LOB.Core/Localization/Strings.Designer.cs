@@ -1249,6 +1249,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First resolve the view.
+        /// </summary>
+        public static string Error_Navigator_View_ResolveFirst {
+            get {
+                return ResourceManager.GetString("Error_Navigator_View_ResolveFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First resolve the view model.
+        /// </summary>
+        public static string Error_Navigator_ViewModel_ResolveFirst {
+            get {
+                return ResourceManager.GetString("Error_Navigator_ViewModel_ResolveFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Header_Alter.
         /// </summary>
         public static string Header_Alter {

@@ -14,7 +14,7 @@ namespace LOB.UI.Core.View.Controls.List {
     /// <summary>
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
-    public partial class ListOpView : UserControl, IBaseView {
+    public partial class ListOpView : IBaseView {
 
         private readonly IEventAggregator _eventAggregator;
 
@@ -37,7 +37,7 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public void InitializeServices() {
             _eventAggregator.GetEvent<RefreshEvent>()
-                            .Subscribe(o => { if(o == Operation) Refresh(); });
+                            .Subscribe(o => { if(o.Equals(Operation)) Refresh(); });
         }
 
         public void Refresh() {

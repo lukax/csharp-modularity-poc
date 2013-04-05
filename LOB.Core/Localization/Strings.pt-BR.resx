@@ -750,4 +750,7 @@
   <data name="Common_Uf" xml:space="preserve">
     <value>UF</value>
   </data>
+  <data name="Common_Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
 </root>

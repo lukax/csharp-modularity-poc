@@ -14,7 +14,9 @@ namespace LOB.Domain.Base {
     public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo {
 
         private readonly IList<ValidationDelegate> _validationFuncs = new List<ValidationDelegate>();
+// ReSharper disable UnusedAutoPropertyAccessor.Local, NHibernate Set ID
         public Guid Id { get; private set; }
+// ReSharper restore UnusedAutoPropertyAccessor.Local
         public int Code { get; set; }
 
         [AllowNull]

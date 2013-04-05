@@ -32,8 +32,8 @@ namespace LOB.Dao.Nhibernate.Test {
             private readonly AggregateCatalog _catalog;
             private readonly CompositionContainer _container;
 
-            private readonly IUnityContainer ccontainer = new UnityContainer();
-            [Import] private Inner inner;
+            private readonly IUnityContainer _ccontainer = new UnityContainer();
+            [Import] private Inner _inner;
 
             public PersistFactory(object obj) {
                 Debug.WriteLine("Tryng to load dll from: " +
@@ -47,31 +47,30 @@ namespace LOB.Dao.Nhibernate.Test {
                 //_container.SatisfyImportsOnce(obj);
                 _container.ComposeParts(this, obj);
 
-                Assert.AreEqual(ccontainer, inner.container);
+                Assert.AreEqual(_ccontainer, _inner.Container);
             }
 
             /// <summary>
             ///     Compose a part, making the imports work
             /// </summary>
-            /// <param name="obj">Object to compose</param>
-            public void Compose(object obj) { _container.ComposeParts(obj); }
+            //public void Compose(object obj) { _container.ComposeParts(obj); }
 
-            public IRepository GetInstance(PersistType type = PersistType.MySql) {
-                if(type == PersistType.MySql) return _container.GetExportedValue<IRepository>("Sql");
+            //public IRepository GetInstance(PersistType type = PersistType.MySql) {
+            //    if(type == PersistType.MySql) return _container.GetExportedValue<IRepository>("Sql");
 
-                if(type == PersistType.Memory) return _container.GetExportedValue<IRepository>("GetList");
+            //    if(type == PersistType.Memory) return _container.GetExportedValue<IRepository>("GetList");
 
-                if(type == PersistType.File) return _container.GetExportedValue<IRepository>("File");
+            //    if(type == PersistType.File) return _container.GetExportedValue<IRepository>("File");
 
-                throw new ArgumentNullException();
-            }
+            //    throw new ArgumentNullException();
+            //}
 
             private class Inner {
 
-                public readonly IUnityContainer container;
+                public readonly IUnityContainer Container;
 
                 [InjectionConstructor]
-                public Inner(IUnityContainer container) { this.container = container; }
+                public Inner(IUnityContainer container) { this.Container = container; }
 
             }
 

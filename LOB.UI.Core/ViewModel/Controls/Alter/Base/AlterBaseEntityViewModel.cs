@@ -20,7 +20,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         where T : BaseEntity {
 
         private readonly IEventAggregator _eventAggregator;
+// ReSharper disable NotAccessedField.Local
         private readonly ILoggerFacade _loggerFacade;
+// ReSharper restore NotAccessedField.Local
         private UIOperation _previousOperation;
         private SubscriptionToken _currentSubscription;
         private UIOperation _operation;

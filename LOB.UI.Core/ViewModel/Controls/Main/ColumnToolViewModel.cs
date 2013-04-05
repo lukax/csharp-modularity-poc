@@ -6,18 +6,15 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public sealed class ColumnToolViewModel : IColumnToolsViewModel {
 
-        private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
 
-        public ColumnToolViewModel(IUnityContainer container, IEventAggregator eventAggregator) {
-            _container = container;
+        public ColumnToolViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             OperationCommand = new DelegateCommand(ShowOperations);
             ShopCommand = new DelegateCommand(ShowShop);

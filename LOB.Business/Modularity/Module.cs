@@ -28,6 +28,7 @@ namespace LOB.Business.Modularity {
 
             _container.RegisterType<IAddressFacade, AddressFacade>();
             _container.RegisterType<ICategoryFacade, CategoryFacade>();
+            _container.RegisterType<IPayCheckFacade, PayCheckFacade>();
             _container.RegisterType<IContactInfoFacade, ContactInfoFacade>();
             _container.RegisterType<IEmailFacade, EmailFacade>();
             _container.RegisterType<IContactInfoFacade, ContactInfoFacade>();

@@ -2,7 +2,6 @@
 
 using System;
 using System.Threading.Tasks;
-using LOB.Dao.Interface;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.Infrastructure;
@@ -24,18 +23,13 @@ namespace LOB.UI.Core.View.Controllers {
         private readonly ILoggerFacade _logger;
         private readonly IFluentNavigator _navigator;
         private readonly IRegionAdapter _regionAdapter;
-        private readonly ISessionCreator _sessionCreator;
-        private readonly IUnityOfWork _unityOfWork;
 
         public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter,
-            IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator,
-            ISessionCreator sessionCreator, IUnityOfWork unityOfWork) {
+            IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator) {
             _container = container;
             _regionAdapter = regionAdapter;
             _eventAggregator = eventAggregator;
             _logger = logger;
-            _sessionCreator = sessionCreator;
-            _unityOfWork = unityOfWork;
             _navigator = navigator;
 
             OnLoad();

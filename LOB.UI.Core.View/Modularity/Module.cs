@@ -24,7 +24,9 @@ namespace LOB.UI.Core.View.Modularity {
         private readonly IUnityContainer _container;
 
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private
+// ReSharper disable NotAccessedField.Local
             MainRegionController _mainRegionController;
+// ReSharper restore NotAccessedField.Local
 
         public Module(IUnityContainer container) { _container = container; }
 

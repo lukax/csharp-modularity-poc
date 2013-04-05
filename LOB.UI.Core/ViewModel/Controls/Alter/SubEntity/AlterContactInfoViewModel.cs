@@ -27,7 +27,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>,
                                                     IAlterContactInfoViewModel {
 
-        private readonly IRepository _repository;
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
@@ -36,7 +35,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
-            _repository = repository;
             _contactInfoFacade = contactInfoFacade;
             _eventAggregator = eventAggregator;
             Entity = entity;

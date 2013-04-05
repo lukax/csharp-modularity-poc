@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:domainSub="clr-namespace:LOB.UI.Interface.Infrastructure;assembly=LOB.UI.Interface"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xtck="clr-namespace:Xceed.Wpf.Toolkit.Panels;assembly=Xceed.Wpf.Toolkit"
@@ -41,10 +41,12 @@
                 </RadialGradientBrush>
             </ScrollViewer.Background>
             <ScrollViewer.Resources>
-                <DataTemplate DataType="{x:Type System:String}">
+                <DataTemplate DataType="{x:Type system:String}">
+<!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
                     <controls:Tile Title="{Binding}"
                                    Command="{Binding ElementName=PanoramaEntitys, Path=DataContext.SaveChangesCommand}"
                                    CommandParameter="{Binding}" Width="100" Height="100">
+<!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
                         <Image Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons/Logo.png"
                                Opacity="0.5" Stretch="UniformToFill">
                             <Image.Effect>

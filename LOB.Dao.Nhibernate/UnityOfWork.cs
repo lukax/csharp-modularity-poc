@@ -28,6 +28,9 @@ namespace LOB.Dao.Nhibernate {
         public object ORM {
             get { return _lazyOrm.Value; }
         }
+        public ISessionCreator SessionCreator {
+            get { return _sessionCreator; }
+        }
 
         public event EventHandler<string> OnError;
 

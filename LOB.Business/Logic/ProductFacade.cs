@@ -1,7 +1,7 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -95,26 +95,46 @@ namespace LOB.Business.Logic {
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            //TODO: custom validations for Category
-
             IEnumerable<ValidationResult> validationResults;
             bool result = _serviceFacade.CanAdd(out validationResults);
-            //if(result)
-            //     result = _categoryFacade.CanAdd(out validationResults);
-            //if(result) 
-            //     result = _shipmentInfoFacade.CanAdd(out validationResults);
-            invalidFields = fields;
+            if(result) result = ProcessBasicValidations(out validationResults);
+            //if(result) result = _categoryFacade.CanAdd(out validationResults);
+            //if(result) result = _shipmentInfoFacade.CanAdd(out validationResults);
+            invalidFields = validationResults;
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) { ((IBaseEntityFacade)_serviceFacade).SetEntity(entity); }
 
         void IServiceFacade.SetEntity<T>(T entity) { (_serviceFacade).SetEntity(entity); }
+
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
+            var fields = new List<ValidationResult>();
+            fields.AddRange(_entity.GetValidations("Name"));
+            fields.AddRange(_entity.GetValidations("Description"));
+            fields.AddRange(_entity.GetValidations("UnitSalePrice"));
+            fields.AddRange(_entity.GetValidations("UnitsInStock"));
+            fields.AddRange(_entity.GetValidations("Category"));
+            invalidFields = fields;
+            if(
+                fields.Where(validationResult => validationResult != null)
+                      .Count(
+                          validationResult =>
+                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+            return true;
+        }
 
     }
 }
