@@ -28,13 +28,18 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.DaySchedule < 1
+                    _entity.DaySchedule.Length < 1
                         ? new ValidationResult("DaySchedule", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.DeliverDate.ToString(Culture).Length < 1
-                        ? new ValidationResult("DeliverDate", Strings.Error_Field_Empty)
+                    _entity.DeliverDate.CompareTo(new DateTime(2013,1,1)) < 0
+                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.DeliverDate.CompareTo(new DateTime(2015, 1, 1)) > 0
+                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooLate)
                         : null);
             }
         }
@@ -46,7 +51,7 @@ namespace LOB.Business.Logic.SubEntity {
                 Error = null,
                 Description = "",
                 Status = default(ShipmentStatus),
-                DaySchedule = 0,
+                DaySchedule = "",
                 DeliverDate = DateTime.Now,
                 Name = "",
                 Products = null,

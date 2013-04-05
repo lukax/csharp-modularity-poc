@@ -15,9 +15,7 @@ namespace LOB.UI.Core.View.Infrastructure {
         private readonly IRegionManager _regionManager;
 
         [InjectionConstructor]
-        public RegionAdapter( IRegionManager regionManager) {
-            _regionManager = regionManager;
-        }
+        public RegionAdapter(IRegionManager regionManager) { _regionManager = regionManager; }
 
         public void AddView<TView>(TView view, string regionName) where TView : IBaseView {
             var region = _regionManager.Regions[regionName];
@@ -35,7 +33,14 @@ namespace LOB.UI.Core.View.Infrastructure {
             if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             var region = _regionManager.Regions[regionName];
             var view = region.GetView(param.ToString());
-            if(region.Views.Contains(view)) region.Remove(view);
+            if(ContainsView(param, regionName)) region.Remove(view);
+        }
+
+        public bool ContainsView(UIOperation param, string regionName) {
+            if (param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+            var region = _regionManager.Regions[regionName];
+            var view = region.GetView(param.ToString());
+            return region.Views.Contains(view);
         }
 
     }

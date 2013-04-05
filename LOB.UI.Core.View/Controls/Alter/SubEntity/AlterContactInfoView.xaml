@@ -73,20 +73,22 @@
 
             <Label HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Website}" Grid.Row="3" />
             <TextBox
-                Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.WebSite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left"
                 MinWidth="250" MaxWidth="400" Grid.Row="3" Grid.Column="1" />
 
             <Label Grid.Row="4" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_SpeakWith}" />
             <TextBox Grid.Row="4" Grid.Column="1" MinWidth="250"
-                     Text="{Binding Entity.SpeakWith, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                     Text="{Binding Entity.SpeakWith, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                      HorizontalAlignment="Left" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Left"
                      MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="5" Grid.Column="1"
-                     Text="{Binding Entity.PS, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                     Text="{Binding Entity.PS, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
 
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden" />
+        <Expander IsExpanded="False" ExpandDirection="Left">
+            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+        </Expander>
     </StackPanel>
 </UserControl>

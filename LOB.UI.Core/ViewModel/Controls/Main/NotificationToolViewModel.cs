@@ -6,7 +6,7 @@ using LOB.UI.Interface.ViewModel.Controls.Main;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class HeaderToolViewModel : IHeaderToolsViewModel {
+    public class NotificationToolViewModel : INotificationToolViewModel {
 
         public string Header { get; set; }
 
@@ -15,7 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public void Refresh() { }
 
         private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.HeaderTool,
+            Type = UIOperationType.NotificationTool,
             State = UIOperationState.Tool
         };
         public UIOperation Operation {

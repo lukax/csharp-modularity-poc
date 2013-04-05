@@ -143,8 +143,8 @@ namespace LOB.Dao.Nhibernate {
                     _sqlSchema.Create(false, true);
                     return;
                 }
-                //_sqlSchema.Drop(false, true);
-                //_sqlSchema.Create(false, true);
+                _sqlSchema.Drop(false, true);
+                _sqlSchema.Create(false, true);
             } catch(Exception e) {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }

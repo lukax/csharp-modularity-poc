@@ -31,8 +31,8 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Bonus < 1
-                        ? new ValidationResult("Bonus", Strings.Error_Field_Empty)
+                    _entity.Bonus > 30000
+                        ? new ValidationResult("Bonus", Strings.Error_Field_TooLong)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
@@ -41,7 +41,7 @@ namespace LOB.Business.Logic.SubEntity {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.PS.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.PS)
                         ? new ValidationResult("PS", Strings.Error_Field_Empty)
                         : null);
             }

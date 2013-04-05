@@ -68,7 +68,7 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Name.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.Name)
                         ? new ValidationResult("Name", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
@@ -88,7 +88,7 @@ namespace LOB.Business.Logic {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Category == default(Category)
+                    string.IsNullOrWhiteSpace(_entity.Category.ToString())
                         ? new ValidationResult("Category", Strings.Error_Field_Empty)
                         : null);
             }

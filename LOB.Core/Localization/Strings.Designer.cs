@@ -655,6 +655,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Detail.
+        /// </summary>
+        public static string Common_Detail {
+            get {
+                return ResourceManager.GetString("Common_Detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Details.
+        /// </summary>
+        public static string Common_Details {
+            get {
+                return ResourceManager.GetString("Common_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_District.
         /// </summary>
         public static string Common_District {
@@ -691,6 +709,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Error.
+        /// </summary>
+        public static string Common_Error {
+            get {
+                return ResourceManager.GetString("Common_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Exclude.
         /// </summary>
         public static string Common_Exclude {
@@ -705,6 +732,15 @@ namespace LOB.Core.Localization {
         public static string Common_FirstName {
             get {
                 return ResourceManager.GetString("Common_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Fix.
+        /// </summary>
+        public static string Common_Fix {
+            get {
+                return ResourceManager.GetString("Common_Fix", resourceCulture);
             }
         }
         
@@ -772,6 +808,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Message.
+        /// </summary>
+        public static string Common_Message {
+            get {
+                return ResourceManager.GetString("Common_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Name.
         /// </summary>
         public static string Common_Name {
@@ -813,6 +858,15 @@ namespace LOB.Core.Localization {
         public static string Common_Number {
             get {
                 return ResourceManager.GetString("Common_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_OK.
+        /// </summary>
+        public static string Common_OK {
+            get {
+                return ResourceManager.GetString("Common_OK", resourceCulture);
             }
         }
         
@@ -894,6 +948,15 @@ namespace LOB.Core.Localization {
         public static string Common_QuantityPerUnity {
             get {
                 return ResourceManager.GetString("Common_QuantityPerUnity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Report.
+        /// </summary>
+        public static string Common_Report {
+            get {
+                return ResourceManager.GetString("Common_Report", resourceCulture);
             }
         }
         
@@ -1119,6 +1182,33 @@ namespace LOB.Core.Localization {
         public static string Dao_RequisitionSucessful {
             get {
                 return ResourceManager.GetString("Dao_RequisitionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_DateWrong.
+        /// </summary>
+        public static string Error_Field_DateInvalid {
+            get {
+                return ResourceManager.GetString("Error_Field_DateInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_DateEarly.
+        /// </summary>
+        public static string Error_Field_DateTooEarly {
+            get {
+                return ResourceManager.GetString("Error_Field_DateTooEarly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_DateLate.
+        /// </summary>
+        public static string Error_Field_DateTooLate {
+            get {
+                return ResourceManager.GetString("Error_Field_DateTooLate", resourceCulture);
             }
         }
         
@@ -1420,6 +1510,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Address.
+        /// </summary>
+        public static string Header_List_Address {
+            get {
+                return ResourceManager.GetString("Header_List_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Header_List_BaseEntity.
         /// </summary>
         public static string Header_List_BaseEntity {
@@ -1434,6 +1533,24 @@ namespace LOB.Core.Localization {
         public static string Header_List_Category {
             get {
                 return ResourceManager.GetString("Header_List_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Client.
+        /// </summary>
+        public static string Header_List_Client {
+            get {
+                return ResourceManager.GetString("Header_List_Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_ContactInfo.
+        /// </summary>
+        public static string Header_List_ContactInfo {
+            get {
+                return ResourceManager.GetString("Header_List_ContactInfo", resourceCulture);
             }
         }
         
@@ -1488,6 +1605,15 @@ namespace LOB.Core.Localization {
         public static string Header_List_Product {
             get {
                 return ResourceManager.GetString("Header_List_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Header_List_Sale.
+        /// </summary>
+        public static string Header_List_Sale {
+            get {
+                return ResourceManager.GetString("Header_List_Sale", resourceCulture);
             }
         }
         
@@ -1929,6 +2055,42 @@ namespace LOB.Core.Localization {
         public static string ToolTip_Edit {
             get {
                 return ResourceManager.GetString("ToolTip_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Login.
+        /// </summary>
+        public static string ToolTip_Login {
+            get {
+                return ResourceManager.GetString("ToolTip_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Logout.
+        /// </summary>
+        public static string ToolTip_Logout {
+            get {
+                return ResourceManager.GetString("ToolTip_Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Messages.
+        /// </summary>
+        public static string ToolTip_Messages {
+            get {
+                return ResourceManager.GetString("ToolTip_Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @ToolTip_Notifications.
+        /// </summary>
+        public static string ToolTip_Notifications {
+            get {
+                return ResourceManager.GetString("ToolTip_Notifications", resourceCulture);
             }
         }
         

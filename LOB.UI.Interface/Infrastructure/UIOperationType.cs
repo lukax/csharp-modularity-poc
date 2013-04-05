@@ -12,6 +12,7 @@ namespace LOB.UI.Interface.Infrastructure {
         Main,
 
         MessageTool,
+        NotificationTool,
         ColumnTool,
         HeaderTool,
 
@@ -32,6 +33,7 @@ namespace LOB.UI.Interface.Infrastructure {
         NaturalPerson,
         Product,
         Sale,
+        Store,
 
         Op,
 

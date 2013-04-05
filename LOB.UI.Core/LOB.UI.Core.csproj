@@ -142,6 +142,7 @@
     <Compile Include="ViewModel\Controls\Alter\AlterSaleViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\AlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\AlterPersonViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\AlterStoreViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterAddressViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterCategoryViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="ViewModel\Controls\List\ListEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListNaturalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListProductViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\NotificationToolViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\SellProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\SellServiceViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

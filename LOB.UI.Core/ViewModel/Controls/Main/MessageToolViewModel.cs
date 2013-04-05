@@ -4,6 +4,7 @@ using System.Windows.Input;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
@@ -11,7 +12,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class MessageToolViewModel : BaseViewModel {
+    public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
 
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
@@ -47,7 +48,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             _eventAggregator = _container.Resolve<IEventAggregator>();
         }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool};
+        private UIOperation _operation = new UIOperation {
+            Type = UIOperationType.MessageTool,
+            State = UIOperationState.Tool
+        };
+
         public override UIOperation Operation {
             get { return _operation; }
             set { _operation = value; }

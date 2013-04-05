@@ -35,7 +35,7 @@
 
             <Label Content="{x:Static loc:Strings.Common_CurrentSalary}" HorizontalAlignment="Right" Grid.Column="1" />
             <xctk:MaskedTextBox
-                Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.CurrentSalary, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Right"
                 MinWidth="150" MaxWidth="250" Grid.Column="2" Mask="$00,000.00"
                 HorizontalContentAlignment="Right" />
@@ -43,16 +43,18 @@
             <Label Grid.Row="1" Content="{x:Static loc:Strings.Common_Bonus}" HorizontalAlignment="Right"
                    Grid.Column="1" />
             <xctk:MaskedTextBox
-                Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.Bonus, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left"
                 MinWidth="150" Mask="$00,000.00" HorizontalContentAlignment="Right"
                 MaxWidth="250" Grid.Row="1" Grid.Column="2" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3"
-                     Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                     Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                      Grid.Row="2" Grid.Column="1"
                      Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden" />
+        <Expander IsExpanded="False" ExpandDirection="Left">
+            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+        </Expander>
     </StackPanel>
 </UserControl>

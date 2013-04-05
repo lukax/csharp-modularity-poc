@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -8,19 +7,19 @@ using NullGuard;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controls.Main {
+namespace LOB.UI.Core.View.Controls.Util {
     /// <summary>
-    ///     Interaction logic for MessageToolView.xaml
+    ///     Interaction logic for MessageShowToolView.xaml
     /// </summary>
-    public partial class MessageToolView : UserControl, IBaseView {
+    public partial class MessageShowToolView : IBaseView {
 
-        public MessageToolView() { InitializeComponent(); }
+        public MessageShowToolView() { InitializeComponent(); }
 
         [AllowNull]
         public IBaseViewModel ViewModel {
             get {
                 IBaseViewModel result = null;
-                Dispatcher.Invoke(() => DataContext);
+                Dispatcher.Invoke(() => result = DataContext as IBaseViewModel);
                 return result;
             }
             set {

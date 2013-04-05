@@ -759,4 +759,58 @@
   <data name="Error_Navigator_ViewModel_ResolveFirst" xml:space="preserve">
     <value>First resolve the view model</value>
   </data>
+  <data name="Header_List_Client" xml:space="preserve">
+    <value>@Header_List_Client</value>
+  </data>
+  <data name="Header_List_Address" xml:space="preserve">
+    <value>@Header_List_Address</value>
+  </data>
+  <data name="Header_List_ContactInfo" xml:space="preserve">
+    <value>@Header_List_ContactInfo</value>
+  </data>
+  <data name="Header_List_Sale" xml:space="preserve">
+    <value>@Header_List_Sale</value>
+  </data>
+  <data name="ToolTip_Messages" xml:space="preserve">
+    <value>@ToolTip_Messages</value>
+  </data>
+  <data name="ToolTip_Notifications" xml:space="preserve">
+    <value>@ToolTip_Notifications</value>
+  </data>
+  <data name="ToolTip_Login" xml:space="preserve">
+    <value>@ToolTip_Login</value>
+  </data>
+  <data name="ToolTip_Logout" xml:space="preserve">
+    <value>@ToolTip_Logout</value>
+  </data>
+  <data name="Common_Detail" xml:space="preserve">
+    <value>@Common_Detail</value>
+  </data>
+  <data name="Common_Error" xml:space="preserve">
+    <value>@Common_Error</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>@Common_OK</value>
+  </data>
+  <data name="Common_Details" xml:space="preserve">
+    <value>@Common_Details</value>
+  </data>
+  <data name="Common_Fix" xml:space="preserve">
+    <value>@Common_Fix</value>
+  </data>
+  <data name="Common_Message" xml:space="preserve">
+    <value>@Common_Message</value>
+  </data>
+  <data name="Common_Report" xml:space="preserve">
+    <value>@Common_Report</value>
+  </data>
+  <data name="Error_Field_DateTooEarly" xml:space="preserve">
+    <value>@Error_Field_DateEarly</value>
+  </data>
+  <data name="Error_Field_DateTooLate" xml:space="preserve">
+    <value>@Error_Field_DateLate</value>
+  </data>
+  <data name="Error_Field_DateInvalid" xml:space="preserve">
+    <value>@Error_Field_DateWrong</value>
+  </data>
 </root>

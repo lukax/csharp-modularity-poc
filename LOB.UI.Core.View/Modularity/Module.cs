@@ -37,6 +37,7 @@ namespace LOB.UI.Core.View.Modularity {
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolView));
             regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolView));
+            //regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(NotificationToolView));
 
             CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
 

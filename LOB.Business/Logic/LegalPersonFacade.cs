@@ -55,17 +55,17 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.CorporateName.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.CorporateName)
                         ? new ValidationResult("CorporateName", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.TradingName.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.TradingName)
                         ? new ValidationResult("TradingName", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.CNPJ.ToString(culture).Length < 1
+                    _entity.CNPJ < 0
                         ? new ValidationResult("CNPJ", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(

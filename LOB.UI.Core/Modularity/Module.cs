@@ -38,6 +38,8 @@ namespace LOB.UI.Core.Modularity {
 
             _container.RegisterType<IColumnToolsViewModel, ColumnToolViewModel>();
             _container.RegisterType<IHeaderToolsViewModel, HeaderToolViewModel>();
+            _container.RegisterType<INotificationToolViewModel, NotificationToolViewModel>();
+            _container.RegisterType<IMessageToolViewModel, MessageToolViewModel>();
 
             #endregion
             #region Alter

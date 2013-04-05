@@ -14,7 +14,7 @@ namespace LOB.Domain.SubEntity {
         public ShipmentStatus Status { get; set; }
         public Address Address { get; set; }
         public DateTime DeliverDate { get; set; }
-        public int DaySchedule { get; set; }
+        public string DaySchedule { get; set; }
         public IList<Product> Products { get; set; }
 
     }

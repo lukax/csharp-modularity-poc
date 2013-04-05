@@ -37,29 +37,29 @@
 
             <Label Grid.Column="1" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_FirstName}" />
             <TextBox
-                Text="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left"
                 MinWidth="150" MaxWidth="300" Grid.Column="2" />
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_LastName}" />
             <TextBox
-                Text="{Binding Entity.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left"
                 MinWidth="200" MaxWidth="350" Grid.Column="4" />
 
             <Label Grid.Column="1" HorizontalAlignment="Right" Grid.Row="1"
                    Content="{x:Static loc:Strings.Common_NickName}" />
             <TextBox
-                Text="{Binding Entity.NickName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.NickName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left"
                 MinWidth="150" MaxWidth="350" Grid.Row="1" Grid.Column="2" />
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="1"
                    Content="{x:Static loc:Strings.Common_BirthDate}" />
-            <xctk:MaskedTextBox
-                Text="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            <xctk:DateTimePicker
+                Text="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left"
-                MinWidth="100" MaxWidth="350" Grid.Row="1" Grid.Column="4" Mask="00/00/0000" />
+                MinWidth="200" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
 
             <Label Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Rg}" Grid.Column="1" />
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
@@ -71,15 +71,15 @@
                     </ObjectDataProvider>
                 </StackPanel.Resources>
                 <xctk:MaskedTextBox
-                    Text="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    Text="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                     HorizontalAlignment="Left" MinWidth="120" MaxWidth="250" Mask="000.000.000-00" />
                 <ComboBox MinWidth="50" MaxWidth="100" ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
-                          SelectedItem="{Binding Entity.RgUf, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                          SelectedItem="{Binding Entity.RgUf, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
             </StackPanel>
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" Content="{x:Static loc:Strings.Common_Cpf}" />
             <xctk:MaskedTextBox
-                Text="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Column="4" Grid.Row="2"
                 Mask="00.000.000-0" />
         </Grid>
@@ -88,6 +88,8 @@
             <base2:AlterPersonView x:Name="ViewAlterPerson" />
         </StackPanel>
 
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Hidden" />
+        <Expander IsExpanded="False" ExpandDirection="Left">
+            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+        </Expander>
     </StackPanel>
 </UserControl>

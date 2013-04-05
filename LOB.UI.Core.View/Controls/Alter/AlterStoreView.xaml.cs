@@ -8,22 +8,22 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterLegalPersonView : IBaseView {
+    public partial class AlterStoreView : IBaseView {
 
-        public AlterLegalPersonView() { InitializeComponent(); }
+        public AlterStoreView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterLegalPersonViewModel; }
+            get { return DataContext as IAlterStoreViewModel; }
             set {
                 DataContext = value;
-                var localViewModel = value as IAlterLegalPersonViewModel;
+                var localViewModel = value as IAlterStoreViewModel;
                 if(localViewModel != null) {
-                    ViewAlterPerson.DataContext = value;
-                    ViewConfCancelTools.DataContext = value;
-                    ViewAlterPerson.ViewAlterAddress.DataContext =
-                        localViewModel.AlterAddressViewModel;
-                    ViewAlterPerson.ViewAlterAddress.DataContext =
-                        localViewModel.AlterContactInfoViewModel;
+                    //ViewAlterPerson.DataContext = value;
+                    //ViewEditTools.DataContext = value;
+                    //ViewAlterPerson.ViewAlterAddress.DataContext =
+                    //    localViewModel.AlterAddressViewModel;
+                    //ViewAlterPerson.ViewAlterAddress.DataContext =
+                    //    localViewModel.AlterContactInfoViewModel;
                 }
             }
         }

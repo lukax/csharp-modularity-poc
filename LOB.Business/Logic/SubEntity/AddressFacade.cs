@@ -40,8 +40,8 @@ namespace LOB.Business.Logic.SubEntity {
                 Status = default(AddressStatus),
                 Street = "",
                 StreetComplement = "",
-                StreetNumber = 0,
-                ZipCode = 0,
+                StreetNumber = "",
+                ZipCode = "",
             };
         }
 
@@ -50,32 +50,32 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Street.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.Street)
                         ? new ValidationResult("Street", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.StreetNumber.ToString(Culture).Length < 1
+                    string.IsNullOrWhiteSpace(_entity.StreetNumber)
                         ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.ZipCode.ToString(Culture).Length < 9
+                    string.IsNullOrWhiteSpace(_entity.ZipCode)
                         ? new ValidationResult("ZipCode", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.City.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.City)
                         ? new ValidationResult("City", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.District.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.District)
                         ? new ValidationResult("District", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.State.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.State)
                         ? new ValidationResult("State", Strings.Error_Field_Empty)
                         : null);
             }

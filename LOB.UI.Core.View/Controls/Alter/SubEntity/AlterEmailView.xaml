@@ -17,9 +17,11 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="{x:Static loc:Strings.Common_Email}" />
             <TextBox MinWidth="250"
-                     Text="{Binding Entity.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                     Text="{Binding Entity.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Email}" />
         </StackPanel>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
+        <Expander IsExpanded="True" ExpandDirection="Left">
+            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+        </Expander>
     </StackPanel>
 </UserControl>

@@ -15,7 +15,7 @@
     <StackPanel Orientation="Horizontal">
         <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static loc:Strings.ToolTip_Code}"
                    Focusable="False"
-                   Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                   Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                    MinWidth="40" />
 
         <Button Command="{Binding QuickSearchCommand}" Focusable="False"

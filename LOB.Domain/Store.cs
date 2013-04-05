@@ -15,8 +15,6 @@ namespace LOB.Domain {
         public IList<Product> Products { get; set; }
         public IList<Customer> Clients { get; set; }
         public IList<Sale> Sales { get; set; }
-        public Address Address { get; set; }
-        public ContactInfo ContactInfo { get; set; }
-
+        
     }
 }

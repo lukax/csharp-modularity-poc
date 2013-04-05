@@ -80,13 +80,18 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Title.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.Title)
                         ? new ValidationResult("Title", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.HireDate.ToShortDateString().ToString(Culture).Length < 1
-                        ? new ValidationResult("HireDate", Strings.Error_Field_Empty)
+                    _entity.HireDate.CompareTo(new DateTime(1990, 1, 1)) < 0
+                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.HireDate.CompareTo(new DateTime(2015, 1, 1)) > 0
+                        ? new ValidationResult("HireDate", Strings.Error_Field_DateTooLate)
                         : null);
             }
         }

@@ -84,6 +84,8 @@
 
             </Grid>
         </ScrollViewer>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
+        <Expander IsExpanded="True" ExpandDirection="Left">
+            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+        </Expander>
     </StackPanel>
 </UserControl>

@@ -10,6 +10,7 @@ using LOB.UI.Core.View.Controls.List;
 using LOB.UI.Core.View.Controls.List.Base;
 using LOB.UI.Core.View.Controls.List.SubEntity;
 using LOB.UI.Core.View.Controls.Main;
+using LOB.UI.Core.View.Controls.Util;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
@@ -29,9 +30,11 @@ namespace LOB.UI.Core.View.Infrastructure {
             new Lazy<IDictionary<UIOperation, Type>>(
                 () => new Dictionary<UIOperation, Type> { 
                     //Alter
-                    {new UIOperation {Type = UIOperationType.MessageTool,State = UIOperationState.Alter},typeof(MessageToolView)}, 
-                    {new UIOperation {Type = UIOperationType.ColumnTool,State = UIOperationState.Alter},typeof(ColumnToolView)}, 
-                    {new UIOperation {Type = UIOperationType.HeaderTool,State = UIOperationState.Alter},typeof(HeaderToolView)}, 
+                    {new UIOperation {Type = UIOperationType.MessageTool,State = UIOperationState.Tool},typeof(MessageShowToolView)}, 
+                    {new UIOperation {Type = UIOperationType.ColumnTool,State = UIOperationState.Tool},typeof(ColumnToolView)}, 
+                    {new UIOperation {Type = UIOperationType.HeaderTool,State = UIOperationState.Tool},typeof(HeaderToolView)}, 
+                    {new UIOperation {Type = UIOperationType.NotificationTool,State = UIOperationState.Tool},typeof(NotificationToolView)}, 
+                   
                     {new UIOperation {Type = UIOperationType.Address,State = UIOperationState.Alter},typeof(AlterAddressView)}, 
                     {new UIOperation {Type = UIOperationType.BaseEntity,State = UIOperationState.Alter},typeof(AlterBaseEntityView)}, 
                     {new UIOperation {Type = UIOperationType.Category,State = UIOperationState.Alter},typeof(AlterCategoryView)}, 
@@ -88,9 +91,10 @@ namespace LOB.UI.Core.View.Infrastructure {
             new Lazy<IDictionary<UIOperation, Type>>(
                 () => new Dictionary<UIOperation, Type> { 
                     //Alter
-                    {new UIOperation {Type = UIOperationType.MessageTool,State = UIOperationState.Alter},typeof(MessageToolViewModel)}, 
-                    {new UIOperation {Type = UIOperationType.ColumnTool,State = UIOperationState.Alter},typeof(ColumnToolViewModel)}, 
-                    {new UIOperation {Type = UIOperationType.HeaderTool,State = UIOperationState.Alter},typeof(HeaderToolViewModel)}, 
+                    {new UIOperation {Type = UIOperationType.MessageTool,State = UIOperationState.Tool},typeof(MessageToolViewModel)}, 
+                    {new UIOperation {Type = UIOperationType.ColumnTool,State = UIOperationState.Tool},typeof(ColumnToolViewModel)}, 
+                    {new UIOperation {Type = UIOperationType.HeaderTool,State = UIOperationState.Tool},typeof(HeaderToolViewModel)}, 
+                    {new UIOperation {Type = UIOperationType.NotificationTool,State = UIOperationState.Tool},typeof(NotificationToolViewModel)}, 
 
                     {new UIOperation {Type = UIOperationType.Address,State = UIOperationState.Alter},typeof(AlterAddressViewModel)},
                     {new UIOperation {Type = UIOperationType.BaseEntity,State = UIOperationState.Alter},typeof(AlterBaseEntityViewModel<BaseEntity>)}, 

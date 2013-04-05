@@ -5,6 +5,7 @@
         public const string TabRegion = "TabRegion";
         public const string ColumnRegion = "ColumnRegion";
         public const string ModalRegion = "ModalRegion";
+        public const string BottomRegion = "BottomRegion";
 
     }
 }

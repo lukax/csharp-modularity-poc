@@ -68,6 +68,7 @@
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterServiceViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterStoreViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterLegalPersonViewModel.cs" />
@@ -95,6 +96,8 @@
     <Compile Include="ViewModel\Controls\List\SubEntity\IListEmailViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\IListPayCheckViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\IListPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\IMessageToolViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\INotificationToolViewModel.cs" />
     <Compile Include="ViewModel\Controls\Main\IColumnToolsViewModel.cs" />
     <Compile Include="ViewModel\Controls\Main\IHeaderToolsViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\ISellProductViewModel.cs" />

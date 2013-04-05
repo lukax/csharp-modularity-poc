@@ -37,18 +37,18 @@
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                 <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
-                <TextBox Text="{Binding Entity.Title, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                <TextBox Text="{Binding Entity.Title, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                          HorizontalAlignment="Left" MinWidth="200" MaxWidth="400" />
 
                 <Label Content="{x:Static loc:Strings.Common_HireDate}" HorizontalAlignment="Right" />
-                <TextBox Text="{Binding Entity.HireDate, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                <TextBox Text="{Binding Entity.HireDate, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                          HorizontalAlignment="Left" MinWidth="100" MaxWidth="150" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                 <Label Content="{x:Static loc:Strings.Common_WorkInStore}" HorizontalAlignment="Right" />
                 <ComboBox
-                    SelectedItem="{Binding Entity.WorksIn, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    SelectedItem="{Binding Entity.WorksIn, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                     ItemsSource="{Binding Stores}"
                     HorizontalAlignment="Left" MinWidth="150" MaxWidth="400" />
             </StackPanel>
@@ -70,6 +70,8 @@
                 </TabControl>
             </DockPanel>
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
+        <Expander IsExpanded="True" ExpandDirection="Left">
+            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+        </Expander>
     </StackPanel>
 </UserControl>

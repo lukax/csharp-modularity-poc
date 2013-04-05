@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500">
 
@@ -35,12 +36,12 @@
             </DockPanel>
 
             <TextBox HorizontalAlignment="Left" MinWidth="300" MaxWidth="500" Grid.Column="1"
-                     Text="{Binding Path=Entity.Name, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+                     Text="{Binding Path=Entity.Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3" MaxLines="10"
                      MaxWidth="800" Grid.Row="2" Grid.Column="1"
                      TextWrapping="Wrap" Height="Auto" AcceptsReturn="True" HorizontalContentAlignment="Left"
-                     Text="{Binding Entity.Description, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+                     Text="{Binding Entity.Description, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
         </Grid>
     </StackPanel>
 </UserControl>

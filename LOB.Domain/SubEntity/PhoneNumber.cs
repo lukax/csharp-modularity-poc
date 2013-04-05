@@ -10,7 +10,7 @@ namespace LOB.Domain.SubEntity {
     [Serializable]
     public class PhoneNumber : BaseEntity {
 
-        public int Number { get; set; }
+        public string Number { get; set; }
         public PhoneNumberType PhoneNumberType { get; set; }
         public string Description { get; set; }
 

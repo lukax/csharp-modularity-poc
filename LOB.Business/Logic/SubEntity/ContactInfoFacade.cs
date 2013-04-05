@@ -46,7 +46,7 @@ namespace LOB.Business.Logic.SubEntity {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Description.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.Description)
                         ? new ValidationResult("Description", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(

@@ -97,11 +97,11 @@ namespace LOB.UI.Core.View {
 
         private async void TabRegion_OnSelectionChanged(object sender,
             NotifyCollectionChangedEventArgs e) {
-            TabRegion.SelectedIndex = -1;
-            ProgressRing.IsActive = true;
-            await Task.Delay(300);
-            // Fix validation color border in textboxes TODO: Check this issue
-            ProgressRing.IsActive = false;
+                TabRegion.SelectedIndex = -1;
+                ProgressRing.IsActive = true;
+                await Task.Delay(200);
+                // Fix validation color border in textboxes TODO: Check this issue
+                ProgressRing.IsActive = false;
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 

@@ -7,6 +7,8 @@
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.List.Base"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:xcdg="clr-namespace:Xceed.Wpf.DataGrid;assembly=Xceed.Wpf.DataGrid"
+             xmlns:views="clr-namespace:Xceed.Wpf.DataGrid.Views;assembly=Xceed.Wpf.DataGrid"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="400">
 
@@ -46,6 +48,7 @@
                     <util:ListContextToolMenuView x:Name="ViewListContextTool" />
                 </ListView.ContextMenu>
             </ListView>
+            
         </StackPanel>
         <Border.Effect>
             <DropShadowEffect ShadowDepth="4" Direction="50" />

@@ -61,12 +61,12 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.FirstName.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.FirstName)
                         ? new ValidationResult("Name", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.LastName.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.LastName)
                         ? new ValidationResult("Description", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
@@ -91,8 +91,13 @@ namespace LOB.Business.Logic {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.BirthDate.ToShortDateString().ToString(Culture).Length < 1
-                        ? new ValidationResult("BirthDate", Strings.Error_Field_Empty)
+                    _entity.BirthDate.CompareTo(new DateTime(1910, 1, 1)) < 0
+                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
+                        : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.BirthDate.CompareTo(new DateTime(2014, 1, 1)) > 0
+                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
                         : null);
             }
         }

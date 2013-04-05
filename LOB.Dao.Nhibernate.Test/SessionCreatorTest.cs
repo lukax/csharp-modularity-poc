@@ -27,8 +27,8 @@ namespace LOB.Dao.Nhibernate.Test {
                 State = "RJ",
                 Status = AddressStatus.Active,
                 Street = "Street b",
-                StreetNumber = 1001,
-                ZipCode = 123456789
+                StreetNumber = "1001",
+                ZipCode = "123456789"
             };
             Email e1 = "thisdude@you.com";
             Email e2 = "another@you.com";
@@ -36,12 +36,12 @@ namespace LOB.Dao.Nhibernate.Test {
                 PhoneNumbers =
                     new[] {
                         new PhoneNumber {
-                            Number = 123456,
+                            Number = "123456",
                             Description = "Casa",
                             PhoneNumberType = PhoneNumberType.Telephone
                         },
                         new PhoneNumber {
-                            Number = 1234567,
+                            Number = "1234567",
                             Description = "Trabalho",
                             PhoneNumberType = PhoneNumberType.Cellphone
                         }

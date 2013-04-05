@@ -24,7 +24,7 @@
                 <base:AlterBaseEntityView x:Name="ViewAlterBaseEntity" />
 
                 <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
-                <TextBlock Text="{Binding Entity.Status, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                <TextBlock Text="{Binding Entity.Status, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                            HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
                            VerticalAlignment="Center" />
 
@@ -64,7 +64,9 @@
                     </TabItem>
                 </TabControl>
 
-                <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
+                <Expander IsExpanded="True" ExpandDirection="Left">
+                    <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
+                </Expander>
             </StackPanel>
 
         </StackPanel>

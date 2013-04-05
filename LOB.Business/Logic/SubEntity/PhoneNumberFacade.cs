@@ -29,7 +29,7 @@ namespace LOB.Business.Logic.SubEntity {
                 Code = 0,
                 Error = null,
                 Description = "",
-                Number = 0,
+                Number = "",
                 PhoneNumberType = default(PhoneNumberType),
             };
         }
@@ -39,12 +39,12 @@ namespace LOB.Business.Logic.SubEntity {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Number < 1
+                    string.IsNullOrWhiteSpace(_entity.Number)
                         ? new ValidationResult("Name", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Description.Length < 1
+                    string.IsNullOrWhiteSpace(_entity.Description)
                         ? new ValidationResult("Description", Strings.Error_Field_Empty)
                         : null);
             }

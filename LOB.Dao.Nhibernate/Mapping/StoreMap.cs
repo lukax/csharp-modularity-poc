@@ -14,8 +14,8 @@ namespace LOB.Dao.Nhibernate.Mapping {
             HasManyToMany(x => x.Products).Table("ProductStore").Cascade.All();
             HasManyToMany(x => x.Clients).Cascade.All();
             HasMany(x => x.Sales);
-            References(x => x.Address).Cascade.All();
-            References(x => x.ContactInfo).Cascade.All();
+            //References(x => x.Address).Cascade.All();
+            //References(x => x.ContactInfo).Cascade.All();
         }
 
     }
