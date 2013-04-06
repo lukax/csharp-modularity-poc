@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                     return
                         (arg =>
                          arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.City.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.County.ToUpper().Contains(Search.ToUpper()) ||
                          arg.Country.ToUpper().Contains(Search.ToUpper()) ||
                          arg.District.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Street.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||

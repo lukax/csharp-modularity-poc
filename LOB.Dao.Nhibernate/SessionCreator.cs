@@ -61,7 +61,7 @@ namespace LOB.Dao.Nhibernate {
                     if(OnSessionCreated != null)
                         OnSessionCreated.Invoke(this,
                                                 new SessionCreatorEventArgs(
-                                                    Strings.Dao_RequisitionFailed));
+                                                    Strings.Notification_Dao_RequisitionFailed));
                 }
                 return null;
             }
@@ -71,7 +71,7 @@ namespace LOB.Dao.Nhibernate {
         public event SessionCreatorEventHandler OnSessionCreated;
 
         private ISessionFactory SessionCreatorFactory() {
-            if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Dao_Connecting));
+            if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_Connecting));
             Configuration cfg = null;
             ISessionFactory factory = null;
             switch(_persistType) {
@@ -96,7 +96,7 @@ namespace LOB.Dao.Nhibernate {
                     if(OnSessionCreated != null)
                         OnSessionCreated.Invoke(this,
                                                 new SessionCreatorEventArgs(
-                                                    Strings.Dao_ConnectionSucessful));
+                                                    Strings.Notification_Dao_ConnectionSucessful));
                 } catch(Exception ex) {
                     _logger.Log(ex.Message, Category.Exception, Priority.High);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));

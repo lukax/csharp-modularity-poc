@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Windows.Input;
+using LOB.UI.Core.Events.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -24,12 +25,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             OperationCommand = new DelegateCommand(ShowOperations);
             ShopCommand = new DelegateCommand(ShowShop);
             NotificationCommand = new DelegateCommand(ShowNotification);
+            LogoutCommand = new DelegateCommand(Logout);
         }
 
         public ICommand OperationCommand { get; set; }
         public ICommand ShopCommand { get; set; }
         public ICommand NotificationCommand { get; set; }
-        //public ICommand LogoutCommand { get; set; }
+        public ICommand LogoutCommand { get; set; }
 
         public string Header { get; set; }
 
@@ -47,7 +49,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private void ShowOperations(object arg) {
             var op = new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List};
-            if (_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
+            if(_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
             else
                 _navigator.Init.ResolveView(op)
                           .ResolveViewModel(op)
@@ -59,12 +61,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void ShowNotification(object o) {
-            var op = new UIOperation { Type = UIOperationType.NotificationTool, State = UIOperationState.Tool};
+            var op = new UIOperation {
+                Type = UIOperationType.NotificationTool,
+                State = UIOperationState.Tool
+            };
             if(_regionAdapter.ContainsView(op, RegionName.BottomRegion)) _regionAdapter.RemoveView(op, RegionName.BottomRegion);
             else
                 _navigator.Init.ResolveView(op)
                           .ResolveViewModel(op)
                           .AddToRegion(RegionName.BottomRegion);
+        }
+
+        private void Logout(object o) {
+            _eventAggregator.GetEvent<CloseViewEvent>()
+                            .Publish(new UIOperation {Type = UIOperationType.Main});
         }
 
     }

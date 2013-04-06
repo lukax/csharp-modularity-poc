@@ -61,38 +61,11 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Button_Cancel.
+        ///   Looks up a localized string similar to App_Title.
         /// </summary>
-        public static string Button_Cancel {
+        public static string App_Title {
             get {
-                return ResourceManager.GetString("Button_Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Button_Close.
-        /// </summary>
-        public static string Button_Close {
-            get {
-                return ResourceManager.GetString("Button_Close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Button_Confirm.
-        /// </summary>
-        public static string Button_Confirm {
-            get {
-                return ResourceManager.GetString("Button_Confirm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Button_ConfirmOp.
-        /// </summary>
-        public static string Button_Confirm_Op {
-            get {
-                return ResourceManager.GetString("Button_Confirm_Op", resourceCulture);
+                return ResourceManager.GetString("App_Title", resourceCulture);
             }
         }
         
@@ -439,6 +412,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Attention.
+        /// </summary>
+        public static string Common_Attention {
+            get {
+                return ResourceManager.GetString("Common_Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_AvailableInStore.
         /// </summary>
         public static string Common_AvailableInStore {
@@ -475,6 +457,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Cancel.
+        /// </summary>
+        public static string Common_Cancel {
+            get {
+                return ResourceManager.GetString("Common_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Category.
         /// </summary>
         public static string Common_Category {
@@ -498,6 +489,15 @@ namespace LOB.Core.Localization {
         public static string Common_City {
             get {
                 return ResourceManager.GetString("Common_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Close.
+        /// </summary>
+        public static string Common_Close {
+            get {
+                return ResourceManager.GetString("Common_Close", resourceCulture);
             }
         }
         
@@ -547,6 +547,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm.
+        /// </summary>
+        public static string Common_Confirm {
+            get {
+                return ResourceManager.GetString("Common_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_Op.
+        /// </summary>
+        public static string Common_Confirm_Op {
+            get {
+                return ResourceManager.GetString("Common_Confirm_Op", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Contact.
         /// </summary>
         public static string Common_Contact {
@@ -579,6 +597,15 @@ namespace LOB.Core.Localization {
         public static string Common_Country {
             get {
                 return ResourceManager.GetString("Common_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_County.
+        /// </summary>
+        public static string Common_County {
+            get {
+                return ResourceManager.GetString("Common_County", resourceCulture);
             }
         }
         
@@ -727,6 +754,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Field.
+        /// </summary>
+        public static string Common_Field {
+            get {
+                return ResourceManager.GetString("Common_Field", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_FirstName.
         /// </summary>
         public static string Common_FirstName {
@@ -777,6 +813,15 @@ namespace LOB.Core.Localization {
         public static string Common_Include {
             get {
                 return ResourceManager.GetString("Common_Include", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Information.
+        /// </summary>
+        public static string Common_Information {
+            get {
+                return ResourceManager.GetString("Common_Information", resourceCulture);
             }
         }
         
@@ -988,6 +1033,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Severity.
+        /// </summary>
+        public static string Common_Severity {
+            get {
+                return ResourceManager.GetString("Common_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Shipper.
         /// </summary>
         public static string Common_Shipper {
@@ -1060,6 +1114,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Tab_Hide.
+        /// </summary>
+        public static string Common_Tab_Hide {
+            get {
+                return ResourceManager.GetString("Common_Tab_Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Title.
         /// </summary>
         public static string Common_Title {
@@ -1074,6 +1137,15 @@ namespace LOB.Core.Localization {
         public static string Common_TotalValue {
             get {
                 return ResourceManager.GetString("Common_TotalValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Town.
+        /// </summary>
+        public static string Common_Town {
+            get {
+                return ResourceManager.GetString("Common_Town", resourceCulture);
             }
         }
         
@@ -1114,6 +1186,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Warning.
+        /// </summary>
+        public static string Common_Warning {
+            get {
+                return ResourceManager.GetString("Common_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Website.
         /// </summary>
         public static string Common_Website {
@@ -1137,51 +1218,6 @@ namespace LOB.Core.Localization {
         public static string Common_ZipCode {
             get {
                 return ResourceManager.GetString("Common_ZipCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Dao_Connecting.
-        /// </summary>
-        public static string Dao_Connecting {
-            get {
-                return ResourceManager.GetString("Dao_Connecting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Dao_ConnectionFailed.
-        /// </summary>
-        public static string Dao_ConnectionFailed {
-            get {
-                return ResourceManager.GetString("Dao_ConnectionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Dao_ConnectionSucessful.
-        /// </summary>
-        public static string Dao_ConnectionSucessful {
-            get {
-                return ResourceManager.GetString("Dao_ConnectionSucessful", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Dao_RequisitionFailed.
-        /// </summary>
-        public static string Dao_RequisitionFailed {
-            get {
-                return ResourceManager.GetString("Dao_RequisitionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Dao_RequisitionSucessful.
-        /// </summary>
-        public static string Dao_RequisitionSucessful {
-            get {
-                return ResourceManager.GetString("Dao_RequisitionSucessful", resourceCulture);
             }
         }
         
@@ -1339,7 +1375,7 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First resolve the view.
+        ///   Looks up a localized string similar to @Error_Navigator_View_ResolveFirst.
         /// </summary>
         public static string Error_Navigator_View_ResolveFirst {
             get {
@@ -1348,7 +1384,7 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First resolve the view model.
+        ///   Looks up a localized string similar to @Error_Navigator_ViewModel_ResolveFirst.
         /// </summary>
         public static string Error_Navigator_ViewModel_ResolveFirst {
             get {
@@ -1915,74 +1951,173 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_Dao_Conected.
+        ///   Looks up a localized string similar to @Notification_Connecting.
         /// </summary>
-        public static string Progress_Dao_Conected {
+        public static string Notification_Connecting {
             get {
-                return ResourceManager.GetString("Progress_Dao_Conected", resourceCulture);
+                return ResourceManager.GetString("Notification_Connecting", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_Dao_Connecting.
+        ///   Looks up a localized string similar to @Notification_ConnectionFailed.
         /// </summary>
-        public static string Progress_Dao_Connecting {
+        public static string Notification_ConnectionFailed {
             get {
-                return ResourceManager.GetString("Progress_Dao_Connecting", resourceCulture);
+                return ResourceManager.GetString("Notification_ConnectionFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_Dao_Connecting_Failed.
+        ///   Looks up a localized string similar to @Notification_ConnectionSucessful.
         /// </summary>
-        public static string Progress_Dao_Connecting_Failed {
+        public static string Notification_ConnectionSucessful {
             get {
-                return ResourceManager.GetString("Progress_Dao_Connecting_Failed", resourceCulture);
+                return ResourceManager.GetString("Notification_ConnectionSucessful", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_List_Updated.
+        ///   Looks up a localized string similar to @Notification_Dao_Conected.
         /// </summary>
-        public static string Progress_List_Updated {
+        public static string Notification_Dao_Conected {
             get {
-                return ResourceManager.GetString("Progress_List_Updated", resourceCulture);
+                return ResourceManager.GetString("Notification_Dao_Conected", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_List_Updating.
+        ///   Looks up a localized string similar to @Notification_Dao_Connecting.
         /// </summary>
-        public static string Progress_List_Updating {
+        public static string Notification_Dao_Connecting {
             get {
-                return ResourceManager.GetString("Progress_List_Updating", resourceCulture);
+                return ResourceManager.GetString("Notification_Dao_Connecting", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_Lists_Updates.
+        ///   Looks up a localized string similar to @Notification_Dao_Connecting_Failed.
         /// </summary>
-        public static string Progress_Lists_Updates {
+        public static string Notification_Dao_Connecting_Failed {
             get {
-                return ResourceManager.GetString("Progress_Lists_Updates", resourceCulture);
+                return ResourceManager.GetString("Notification_Dao_Connecting_Failed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Progress_Lists_Updating.
+        ///   Looks up a localized string similar to @Notification_Dao_ConnectionFailed.
         /// </summary>
-        public static string Progress_Lists_Updating {
+        public static string Notification_Dao_ConnectionFailed {
             get {
-                return ResourceManager.GetString("Progress_Lists_Updating", resourceCulture);
+                return ResourceManager.GetString("Notification_Dao_ConnectionFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Tab_Hide.
+        ///   Looks up a localized string similar to @Notification_Dao_ConnectionSucessful.
         /// </summary>
-        public static string Tab_Hide {
+        public static string Notification_Dao_ConnectionSucessful {
             get {
-                return ResourceManager.GetString("Tab_Hide", resourceCulture);
+                return ResourceManager.GetString("Notification_Dao_ConnectionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_RequisitionFailed.
+        /// </summary>
+        public static string Notification_Dao_RequisitionFailed {
+            get {
+                return ResourceManager.GetString("Notification_Dao_RequisitionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_RequisitionSucessful.
+        /// </summary>
+        public static string Notification_Dao_RequisitionSucessful {
+            get {
+                return ResourceManager.GetString("Notification_Dao_RequisitionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Attention.
+        /// </summary>
+        public static string Notification_Field_Attention {
+            get {
+                return ResourceManager.GetString("Notification_Field_Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_ErrorInField.
+        /// </summary>
+        public static string Notification_Field_Error {
+            get {
+                return ResourceManager.GetString("Notification_Field_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Information.
+        /// </summary>
+        public static string Notification_Field_Information {
+            get {
+                return ResourceManager.GetString("Notification_Field_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_List_Updated.
+        /// </summary>
+        public static string Notification_List_Updated {
+            get {
+                return ResourceManager.GetString("Notification_List_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_List_Updating.
+        /// </summary>
+        public static string Notification_List_Updating {
+            get {
+                return ResourceManager.GetString("Notification_List_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Lists_Updates.
+        /// </summary>
+        public static string Notification_Lists_Updates {
+            get {
+                return ResourceManager.GetString("Notification_Lists_Updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Lists_Updating.
+        /// </summary>
+        public static string Notification_Lists_Updating {
+            get {
+                return ResourceManager.GetString("Notification_Lists_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_RequisitionFailed.
+        /// </summary>
+        public static string Notification_RequisitionFailed {
+            get {
+                return ResourceManager.GetString("Notification_RequisitionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_RequisitionSucessful.
+        /// </summary>
+        public static string Notification_RequisitionSucessful {
+            get {
+                return ResourceManager.GetString("Notification_RequisitionSucessful", resourceCulture);
             }
         }
         
@@ -2136,15 +2271,6 @@ namespace LOB.Core.Localization {
         public static string ToolTip_Update {
             get {
                 return ResourceManager.GetString("ToolTip_Update", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Window_Title.
-        /// </summary>
-        public static string Window_Title {
-            get {
-                return ResourceManager.GetString("Window_Title", resourceCulture);
             }
         }
     }

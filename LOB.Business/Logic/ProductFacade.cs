@@ -18,15 +18,14 @@ namespace LOB.Business.Logic {
 
         private readonly IServiceFacade _serviceFacade;
         private readonly ICategoryFacade _categoryFacade;
-        private readonly IShipmentInfoFacade _shipmentInfoFacade;
+        //private readonly IShipmentInfoFacade _shipmentInfoFacade;
 
         private Product _entity;
 
-        public ProductFacade(IServiceFacade serviceFacade, ICategoryFacade categoryFacade,
-            IShipmentInfoFacade shipmentInfoFacade) {
+        public ProductFacade(IServiceFacade serviceFacade, ICategoryFacade categoryFacade) {
             _serviceFacade = serviceFacade;
             _categoryFacade = categoryFacade;
-            _shipmentInfoFacade = shipmentInfoFacade;
+            //_shipmentInfoFacade = shipmentInfoFacade;
         }
 
         public void SetEntity<T>(T entity) where T : Product {
@@ -36,7 +35,7 @@ namespace LOB.Business.Logic {
 
         public Product GenerateEntity() {
             var localService = _serviceFacade.GenerateEntity();
-            var localShipmentInfo = _shipmentInfoFacade.GenerateEntity();
+            //var localShipmentInfo = _shipmentInfoFacade.GenerateEntity();
             var localCategory = _categoryFacade.GenerateEntity();
             return new Product {
                 Code = 0,
@@ -45,7 +44,7 @@ namespace LOB.Business.Logic {
                 Category = localCategory,
                 Description = localService.Description,
                 Name = localService.Name,
-                ShipmentInfo = localShipmentInfo,
+                ShipmentInfo = new ShipmentInfo(),
                 CodBarras = 0,
                 Image = new byte[8],
                 MaxUnitsOfStock = 0,

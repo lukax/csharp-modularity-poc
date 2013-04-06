@@ -53,16 +53,15 @@ namespace LOB.Core.Util {
                 RegistryKey sk1 = rk.OpenSubKey(SubKey);
                 // If the RegistrySubKey doesn't exist -> (null)
                 if(sk1 == null) return null;
-                else
-                    try {
-                        // If the RegistryKey exists I get its value
-                        // or null is returned.
-                        return (string)sk1.GetValue(keyName.ToUpper());
-                    } catch(Exception e) {
-                        // AAAAAAAAAAARGH, an error!
-                        ShowErrorMessage(e, "Reading registry " + keyName.ToUpper());
-                        return null;
-                    }
+                try {
+                    // If the RegistryKey exists I get its value
+                    // or null is returned.
+                    return (string)sk1.GetValue(keyName.ToUpper());
+                } catch(Exception e) {
+                    // AAAAAAAAAAARGH, an error!
+                    ShowErrorMessage(e, "Reading registry " + keyName.ToUpper());
+                    return null;
+                }
             }
 
             /// <summary>
@@ -101,7 +100,7 @@ namespace LOB.Core.Util {
                     RegistryKey sk1 = rk.CreateSubKey(SubKey);
                     // If the RegistrySubKey doesn't exists -> (true)
                     if(sk1 == null) return true;
-                    else sk1.DeleteValue(keyName);
+                    sk1.DeleteValue(keyName);
 
                     return true;
                 } catch(Exception e) {
@@ -144,7 +143,7 @@ namespace LOB.Core.Util {
                     RegistryKey sk1 = rk.OpenSubKey(SubKey);
                     // If the RegistryKey exists...
                     if(sk1 != null) return sk1.SubKeyCount;
-                    else return 0;
+                    return 0;
                 } catch(Exception e) {
                     // AAAAAAAAAAARGH, an error!
                     ShowErrorMessage(e, "Retriving subkeys of " + SubKey);
@@ -164,7 +163,7 @@ namespace LOB.Core.Util {
                     RegistryKey sk1 = rk.OpenSubKey(SubKey);
                     // If the RegistryKey exists...
                     if(sk1 != null) return sk1.ValueCount;
-                    else return 0;
+                    return 0;
                 } catch(Exception e) {
                     ShowErrorMessage(e, "Retriving keys of " + SubKey);
                     return 0;

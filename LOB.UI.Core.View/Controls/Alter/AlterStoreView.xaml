@@ -41,7 +41,7 @@
             <alter:AlterLegalPersonView Grid.Row="2" Grid.ColumnSpan="4"/>
             
             <TabControl Grid.Row="3" Grid.ColumnSpan="4">
-                <TabItem Header="{x:Static loc:Strings.Tab_Hide}"/>
+                <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}"/>
                 <TabItem Header="{x:Static loc:Strings.Header_List_Employee}"/>
                 <TabItem Header="{x:Static loc:Strings.Header_List_Product}"/>
                 <TabItem Header="{x:Static loc:Strings.Header_List_Client}"/>

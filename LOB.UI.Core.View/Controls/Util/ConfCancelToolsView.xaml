@@ -16,13 +16,13 @@
             <Button x:Name="ButtonCancel" Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
                 <DockPanel>
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26" />
-                    <Label Content="{x:Static loc:Strings.Button_Cancel}" />
+                    <Label Content="{x:Static loc:Strings.Common_Cancel}" />
                 </DockPanel>
             </Button>
             <Button x:Name="ButtonSave" Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
                 <DockPanel>
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
-                    <Label Content="{x:Static loc:Strings.Button_Confirm_Op}" />
+                    <Label Content="{x:Static loc:Strings.Common_Confirm_Op}" />
                 </DockPanel>
             </Button>
         </StackPanel>

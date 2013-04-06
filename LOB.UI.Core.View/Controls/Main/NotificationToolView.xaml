@@ -17,9 +17,10 @@
                 <ListView ItemsSource="{Binding Entitys}" SelectedItem="{Binding Entity}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding ErrorNumber}" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Priority}"  />
+                            <GridViewColumn DisplayMemberBinding="{Binding NotificationNumber}" />
                             <GridViewColumn Header="{x:Static loc:Strings.Common_Message}"
-                                            DisplayMemberBinding="{Binding Error}" />
+                                            DisplayMemberBinding="{Binding Notification}" />
                             <GridViewColumn Header="{x:Static loc:Strings.Common_Detail}"
                                             DisplayMemberBinding="{Binding Detail}" />
                             <GridViewColumn>

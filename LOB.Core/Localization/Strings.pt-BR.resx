@@ -117,17 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button_Cancel" xml:space="preserve">
+  <data name="Common_Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="Button_Close" xml:space="preserve">
+  <data name="Common_Close" xml:space="preserve">
     <value>Fechar</value>
   </data>
-  <data name="Button_Confirm" xml:space="preserve">
+  <data name="Common_Confirm" xml:space="preserve">
     <value>Confirmar</value>
   </data>
-  <data name="Button_Confirm_Op" xml:space="preserve">
-    <value>Confirmar Operação</value>
+  <data name="Common_Confirm_Op" xml:space="preserve">
+    <value>Confirmar</value>
   </data>
   <data name="Command_Alter_Address" xml:space="preserve">
     <value>Novo Endereço</value>
@@ -417,19 +417,19 @@
   <data name="Common_ZipCode" xml:space="preserve">
     <value>CEP</value>
   </data>
-  <data name="Dao_Connecting" xml:space="preserve">
+  <data name="Notification_Dao_Connecting" xml:space="preserve">
     <value>Conectando no banco de dados...</value>
   </data>
-  <data name="Dao_ConnectionFailed" xml:space="preserve">
+  <data name="Notification_Dao_ConnectionFailed" xml:space="preserve">
     <value>Conexão ao banco de dados falhou</value>
   </data>
-  <data name="Dao_ConnectionSucessful" xml:space="preserve">
+  <data name="Notification_Dao_ConnectionSucessful" xml:space="preserve">
     <value>Conexão ao banco de dados bem sucedida</value>
   </data>
-  <data name="Dao_RequisitionFailed" xml:space="preserve">
+  <data name="Notification_Dao_RequisitionFailed" xml:space="preserve">
     <value>Operação não pode ser completada contra o banco de dados</value>
   </data>
-  <data name="Dao_RequisitionSucessful" xml:space="preserve">
+  <data name="Notification_Dao_RequisitionSucessful" xml:space="preserve">
     <value>Operação concluída</value>
   </data>
   <data name="Error_Field_Empty" xml:space="preserve">
@@ -636,28 +636,25 @@
   <data name="Menu_Util_Paycheck" xml:space="preserve">
     <value>Folha de pagamento</value>
   </data>
-  <data name="Progress_Dao_Conected" xml:space="preserve">
+  <data name="Notification_Dao_Conected" xml:space="preserve">
     <value>Conectado ao Banco de Dados</value>
   </data>
-  <data name="Progress_Dao_Connecting" xml:space="preserve">
-    <value>Conectando ao Banco de Dados...</value>
-  </data>
-  <data name="Progress_Dao_Connecting_Failed" xml:space="preserve">
+  <data name="Notification_Dao_Connecting_Failed" xml:space="preserve">
     <value>Conexão ao Banco de Dados falhou!</value>
   </data>
-  <data name="Progress_Lists_Updates" xml:space="preserve">
+  <data name="Notification_Lists_Updates" xml:space="preserve">
     <value>Listagens Atualizadas</value>
   </data>
-  <data name="Progress_Lists_Updating" xml:space="preserve">
+  <data name="Notification_Lists_Updating" xml:space="preserve">
     <value>Atualizando Listagens...</value>
   </data>
-  <data name="Progress_List_Updated" xml:space="preserve">
+  <data name="Notification_List_Updated" xml:space="preserve">
     <value>Listagem Atualizada</value>
   </data>
-  <data name="Progress_List_Updating" xml:space="preserve">
+  <data name="Notification_List_Updating" xml:space="preserve">
     <value>Atualizando Listagem...</value>
   </data>
-  <data name="Tab_Hide" xml:space="preserve">
+  <data name="Common_Tab_Hide" xml:space="preserve">
     <value>&gt;</value>
   </data>
   <data name="ToolTip_AlterCustomer" xml:space="preserve">
@@ -681,7 +678,7 @@
   <data name="ToolTip_Sales" xml:space="preserve">
     <value>Vendas</value>
   </data>
-  <data name="Window_Title" xml:space="preserve">
+  <data name="App_Title" xml:space="preserve">
     <value>LOB APP</value>
   </data>
   <data name="ToolTip_Add" xml:space="preserve">
@@ -806,5 +803,56 @@
   </data>
   <data name="Error_Field_DateTooLate" xml:space="preserve">
     <value>Data muito posterior</value>
+  </data>
+  <data name="Common_County" xml:space="preserve">
+    <value>Município</value>
+  </data>
+  <data name="Common_Town" xml:space="preserve">
+    <value>Cidade</value>
+  </data>
+  <data name="Common_Attention" xml:space="preserve">
+    <value>Atenção</value>
+  </data>
+  <data name="Common_Field" xml:space="preserve">
+    <value>Campo</value>
+  </data>
+  <data name="Common_Information" xml:space="preserve">
+    <value>Informação</value>
+  </data>
+  <data name="Common_Severity" xml:space="preserve">
+    <value>Severidade</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>Perigo</value>
+  </data>
+  <data name="Notification_Field_Attention" xml:space="preserve">
+    <value>Atenção ao campo: </value>
+  </data>
+  <data name="Notification_Field_Error" xml:space="preserve">
+    <value>Erro no campo: </value>
+  </data>
+  <data name="Notification_Field_Information" xml:space="preserve">
+    <value>Info: </value>
+  </data>
+  <data name="Notification_ConnectionFailed" xml:space="preserve">
+    <value>Conexão falhou</value>
+  </data>
+  <data name="Notification_ConnectionSucessful" xml:space="preserve">
+    <value>Conexão completou com sucesso</value>
+  </data>
+  <data name="Notification_RequisitionFailed" xml:space="preserve">
+    <value>Requisição não pode ser completada</value>
+  </data>
+  <data name="Notification_RequisitionSucessful" xml:space="preserve">
+    <value>Requisição completada com sucesso</value>
+  </data>
+  <data name="Error_Navigator_View_ResolveFirst" xml:space="preserve">
+    <value>Resolva primeiro a View</value>
+  </data>
+  <data name="Error_Navigator_ViewModel_ResolveFirst" xml:space="preserve">
+    <value>Resolva primeiro a ViewModel</value>
+  </data>
+  <data name="Notification_Connecting" xml:space="preserve">
+    <value>Conectando-se</value>
   </data>
 </root>

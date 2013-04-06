@@ -31,7 +31,7 @@ namespace LOB.Business.Logic.SubEntity {
         public Address GenerateEntity() {
             return new Address {
                 Code = 0,
-                City = "Nova Friburgo",
+                County = "",
                 Country = "Brasil",
                 District = "",
                 Error = null,
@@ -65,8 +65,8 @@ namespace LOB.Business.Logic.SubEntity {
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.City)
-                        ? new ValidationResult("City", Strings.Error_Field_Empty)
+                    string.IsNullOrWhiteSpace(_entity.County)
+                        ? new ValidationResult("County", Strings.Error_Field_Empty)
                         : null);
                 _entity.AddValidation(
                     (sender, name) =>
@@ -106,7 +106,7 @@ namespace LOB.Business.Logic.SubEntity {
             fields.AddRange(_entity.GetValidations("Street"));
             fields.AddRange(_entity.GetValidations("StreetNumber"));
             fields.AddRange(_entity.GetValidations("ZipCode"));
-            fields.AddRange(_entity.GetValidations("City"));
+            fields.AddRange(_entity.GetValidations("County"));
             fields.AddRange(_entity.GetValidations("District"));
             fields.AddRange(_entity.GetValidations("State"));
             invalidFields = fields;

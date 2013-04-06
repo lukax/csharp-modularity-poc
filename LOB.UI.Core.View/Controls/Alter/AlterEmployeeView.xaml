@@ -63,7 +63,7 @@
 
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <TabControl>
-                    <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
+                    <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
                     <TabItem Header="{x:Static loc:Strings.Common_PayCheck}">
                         <base:AlterPayCheckView x:Name="ViewAlterPayCheck" />
                     </TabItem>

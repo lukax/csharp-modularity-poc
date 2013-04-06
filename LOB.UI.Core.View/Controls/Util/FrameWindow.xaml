@@ -5,7 +5,7 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
                       xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
-                      Title="{x:Static loc:Strings.Window_Title}"
+                      Title="{x:Static loc:Strings.App_Title}"
                       Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <Window.Resources>

@@ -108,7 +108,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 await Task.Delay(UpdateInterval);
                 _eventAggregator.GetEvent<ReportProgressEvent>()
                                 .Publish(new Progress {
-                                    Message = Strings.Progress_List_Updating,
+                                    Message = Strings.Notification_List_Updating,
                                     Percentage = 0
                                 });
                 IList<T> localList = string.IsNullOrEmpty(Search)
@@ -118,13 +118,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                     Entitys = new ObservableCollection<T>(localList);
                     _eventAggregator.GetEvent<ReportProgressEvent>()
                                     .Publish(new Progress {
-                                        Message = Strings.Progress_List_Updating,
+                                        Message = Strings.Notification_List_Updating,
                                         Percentage = 100
                                     });
                 }
                 else
                     _eventAggregator.GetEvent<ReportProgressEvent>()
-                                    .Publish(new Progress {Message = Strings.Progress_List_Updated});
+                                    .Publish(new Progress {Message = Strings.Notification_List_Updated});
             } while(!_worker.CancellationPending);
         }
 

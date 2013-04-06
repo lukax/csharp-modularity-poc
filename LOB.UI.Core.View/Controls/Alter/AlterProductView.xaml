@@ -56,7 +56,7 @@
                 <xctk:MaskedTextBox
                     Text="{Binding Entity.UnitSalePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                     HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Row="1"
-                    Grid.Column="4" Mask="$" HorizontalContentAlignment="Right" />
+                    Grid.Column="4" Mask="$0000,00" HorizontalContentAlignment="Right" />
 
                 <Label Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right"
                        Content="{x:Static loc:Strings.Common_UnitsInStock}" />

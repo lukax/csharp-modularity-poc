@@ -32,12 +32,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private string _status;
         private IList<string> _statuses;
         public ObservableCollection<UF> UFs { get; set; }
+        public ObservableCollection<string> Districts { get; set; } 
         private UF _uf;
         public UF UF {
             get { return _uf; }
             set {
                 _uf = value;
                 Entity.State = value.ToLocalizedString();
+                Districts = new ObservableCollection<string>(value.GetDistricts());
             }
         }
         [AllowNull]

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Base\Service.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Logic\NotificationMessage.cs" />
     <Compile Include="Logic\ValidationResult.cs" />
     <Compile Include="Logic\ValidationDelegate.cs" />
     <Compile Include="SubEntity\PayCheck.cs" />
@@ -92,6 +93,12 @@
     <Compile Include="Store.cs" />
     <Compile Include="SubEntity\UF.cs" />
     <Compile Include="Supplier.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
+      <Project>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</Project>
+      <Name>LOB.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

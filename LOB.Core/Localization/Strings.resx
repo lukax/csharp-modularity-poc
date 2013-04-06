@@ -117,17 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button_Cancel" xml:space="preserve">
-    <value>@Button_Cancel</value>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>@Common_Cancel</value>
   </data>
-  <data name="Button_Close" xml:space="preserve">
-    <value>@Button_Close</value>
+  <data name="Common_Close" xml:space="preserve">
+    <value>@Common_Close</value>
   </data>
-  <data name="Button_Confirm" xml:space="preserve">
-    <value>@Button_Confirm</value>
+  <data name="Common_Confirm" xml:space="preserve">
+    <value>@Common_Confirm</value>
   </data>
-  <data name="Button_Confirm_Op" xml:space="preserve">
-    <value>@Button_ConfirmOp</value>
+  <data name="Common_Confirm_Op" xml:space="preserve">
+    <value>@Common_Confirm_Op</value>
   </data>
   <data name="Command_Alter_Address" xml:space="preserve">
     <value>@Command_AlterAddress</value>
@@ -420,20 +420,20 @@
   <data name="Common_ZipCode" xml:space="preserve">
     <value>@Common_ZipCode</value>
   </data>
-  <data name="Dao_Connecting" xml:space="preserve">
-    <value>@Dao_Connecting</value>
+  <data name="Notification_Connecting" xml:space="preserve">
+    <value>@Notification_Connecting</value>
   </data>
-  <data name="Dao_ConnectionFailed" xml:space="preserve">
-    <value>@Dao_ConnectionFailed</value>
+  <data name="Notification_ConnectionFailed" xml:space="preserve">
+    <value>@Notification_ConnectionFailed</value>
   </data>
-  <data name="Dao_ConnectionSucessful" xml:space="preserve">
-    <value>@Dao_ConnectionSucessful</value>
+  <data name="Notification_ConnectionSucessful" xml:space="preserve">
+    <value>@Notification_ConnectionSucessful</value>
   </data>
-  <data name="Dao_RequisitionFailed" xml:space="preserve">
-    <value>@Dao_RequisitionFailed</value>
+  <data name="Notification_RequisitionFailed" xml:space="preserve">
+    <value>@Notification_RequisitionFailed</value>
   </data>
-  <data name="Dao_RequisitionSucessful" xml:space="preserve">
-    <value>@Dao_RequisitionSucessful</value>
+  <data name="Notification_RequisitionSucessful" xml:space="preserve">
+    <value>@Notification_RequisitionSucessful</value>
   </data>
   <data name="Error_Field_Empty" xml:space="preserve">
     <value>@Error_Field_Empty</value>
@@ -639,29 +639,29 @@
   <data name="Menu_Util_Paycheck" xml:space="preserve">
     <value>@Menu_Util_Paycheck</value>
   </data>
-  <data name="Progress_Dao_Conected" xml:space="preserve">
-    <value>@Progress_Dao_Conected</value>
+  <data name="Notification_Dao_Conected" xml:space="preserve">
+    <value>@Notification_Dao_Conected</value>
   </data>
-  <data name="Progress_Dao_Connecting" xml:space="preserve">
-    <value>@Progress_Dao_Connecting</value>
+  <data name="Notification_Dao_Connecting" xml:space="preserve">
+    <value>@Notification_Dao_Connecting</value>
   </data>
-  <data name="Progress_Dao_Connecting_Failed" xml:space="preserve">
-    <value>@Progress_Dao_Connecting_Failed</value>
+  <data name="Notification_Dao_Connecting_Failed" xml:space="preserve">
+    <value>@Notification_Dao_Connecting_Failed</value>
   </data>
-  <data name="Progress_Lists_Updates" xml:space="preserve">
-    <value>@Progress_Lists_Updates</value>
+  <data name="Notification_Lists_Updates" xml:space="preserve">
+    <value>@Notification_Lists_Updates</value>
   </data>
-  <data name="Progress_Lists_Updating" xml:space="preserve">
-    <value>@Progress_Lists_Updating</value>
+  <data name="Notification_Lists_Updating" xml:space="preserve">
+    <value>@Notification_Lists_Updating</value>
   </data>
-  <data name="Progress_List_Updated" xml:space="preserve">
-    <value>@Progress_List_Updated</value>
+  <data name="Notification_List_Updated" xml:space="preserve">
+    <value>@Notification_List_Updated</value>
   </data>
-  <data name="Progress_List_Updating" xml:space="preserve">
-    <value>@Progress_List_Updating</value>
+  <data name="Notification_List_Updating" xml:space="preserve">
+    <value>@Notification_List_Updating</value>
   </data>
-  <data name="Tab_Hide" xml:space="preserve">
-    <value>@Tab_Hide</value>
+  <data name="Common_Tab_Hide" xml:space="preserve">
+    <value>@Common_Tab_Hide</value>
   </data>
   <data name="ToolTip_AlterCustomer" xml:space="preserve">
     <value>@ToolTip_AlterCustomer</value>
@@ -684,8 +684,8 @@
   <data name="ToolTip_Sales" xml:space="preserve">
     <value>@ToolTip_Sales</value>
   </data>
-  <data name="Window_Title" xml:space="preserve">
-    <value>@Window_Title</value>
+  <data name="App_Title" xml:space="preserve">
+    <value>App_Title</value>
   </data>
   <data name="ToolTip_Add" xml:space="preserve">
     <value>@ToolTip_Add</value>
@@ -754,10 +754,10 @@
     <value>@Common_Uf</value>
   </data>
   <data name="Error_Navigator_View_ResolveFirst" xml:space="preserve">
-    <value>First resolve the view</value>
+    <value>@Error_Navigator_View_ResolveFirst</value>
   </data>
   <data name="Error_Navigator_ViewModel_ResolveFirst" xml:space="preserve">
-    <value>First resolve the view model</value>
+    <value>@Error_Navigator_ViewModel_ResolveFirst</value>
   </data>
   <data name="Header_List_Client" xml:space="preserve">
     <value>@Header_List_Client</value>
@@ -812,5 +812,47 @@
   </data>
   <data name="Error_Field_DateInvalid" xml:space="preserve">
     <value>@Error_Field_DateWrong</value>
+  </data>
+  <data name="Common_County" xml:space="preserve">
+    <value>@Common_County</value>
+  </data>
+  <data name="Common_Town" xml:space="preserve">
+    <value>@Common_Town</value>
+  </data>
+  <data name="Common_Attention" xml:space="preserve">
+    <value>@Common_Attention</value>
+  </data>
+  <data name="Common_Field" xml:space="preserve">
+    <value>@Common_Field</value>
+  </data>
+  <data name="Common_Information" xml:space="preserve">
+    <value>@Common_Information</value>
+  </data>
+  <data name="Common_Severity" xml:space="preserve">
+    <value>@Common_Severity</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>@Common_Warning</value>
+  </data>
+  <data name="Notification_Field_Attention" xml:space="preserve">
+    <value>@Notification_Field_Attention</value>
+  </data>
+  <data name="Notification_Field_Error" xml:space="preserve">
+    <value>@Notification_ErrorInField</value>
+  </data>
+  <data name="Notification_Field_Information" xml:space="preserve">
+    <value>@Notification_Field_Information</value>
+  </data>
+  <data name="Notification_Dao_RequisitionSucessful" xml:space="preserve">
+    <value>@Notification_Dao_RequisitionSucessful</value>
+  </data>
+  <data name="Notification_Dao_RequisitionFailed" xml:space="preserve">
+    <value>@Notification_Dao_RequisitionFailed</value>
+  </data>
+  <data name="Notification_Dao_ConnectionSucessful" xml:space="preserve">
+    <value>@Notification_Dao_ConnectionSucessful</value>
+  </data>
+  <data name="Notification_Dao_ConnectionFailed" xml:space="preserve">
+    <value>@Notification_Dao_ConnectionFailed</value>
   </data>
 </root>

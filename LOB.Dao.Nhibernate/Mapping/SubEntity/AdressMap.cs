@@ -14,7 +14,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
             Map(x => x.StreetNumber);
             Map(x => x.StreetComplement);
             Map(x => x.District);
-            Map(x => x.City);
+            Map(x => x.County);
             Map(x => x.State);
             Map(x => x.Country);
             Map(x => x.ZipCode);

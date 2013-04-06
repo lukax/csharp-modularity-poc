@@ -17,7 +17,6 @@ using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -31,7 +30,7 @@ namespace LOB.UI.Core.View {
         private readonly ILogger _logger;
         private IModuleManager _module;
 
-        public Shell(IUnityContainer container, ILogger logger,IEventAggregator eventAggregator) {
+        public Shell(IUnityContainer container, ILogger logger, IEventAggregator eventAggregator) {
             //CULTURE INFO
             Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
             //
@@ -71,6 +70,8 @@ namespace LOB.UI.Core.View {
                                                                           BorderModal.Visibility =
                                                                               Visibility.Hidden;
                                                                       }
+                                                                      if(type.Type ==
+                                                                         UIOperationType.Main) Close();
                                                                   });
         }
 
@@ -86,7 +87,8 @@ namespace LOB.UI.Core.View {
         private void OnLoad() {
             _eventAggregator.GetEvent<CloseViewEvent>()
                             .Subscribe(
-                                o => { if(o.Equals(new UIOperation {Type = UIOperationType.Main})) Close(); });
+                                o => {
+                                    if(o.Equals(new UIOperation {Type = UIOperationType.Main})) Close(); });
 
             if(_loaded) return;
             _module = _container.Resolve<IModuleManager>();
@@ -97,11 +99,11 @@ namespace LOB.UI.Core.View {
 
         private async void TabRegion_OnSelectionChanged(object sender,
             NotifyCollectionChangedEventArgs e) {
-                TabRegion.SelectedIndex = -1;
-                ProgressRing.IsActive = true;
-                await Task.Delay(200);
-                // Fix validation color border in textboxes TODO: Check this issue
-                ProgressRing.IsActive = false;
+            TabRegion.SelectedIndex = -1;
+            ProgressRing.IsActive = true;
+            await Task.Delay(200);
+            // Fix validation color border in textboxes TODO: Check this issue
+            ProgressRing.IsActive = false;
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 
@@ -109,16 +111,15 @@ namespace LOB.UI.Core.View {
             get { return ViewModel.Operation; }
         }
         #region Themes
+
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedParameter.Local
         private void MiLightGrey() {
-
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"),
                                      Theme.Light);
         }
 
         private void MiLightRed(object sender, RoutedEventArgs e) {
-
             ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"),
                                      Theme.Light);
         }
@@ -173,6 +174,7 @@ namespace LOB.UI.Core.View {
         }
         // ReSharper restore UnusedMember.Local
         // ReSharper restore UnusedParameter.Local
+
         #endregion
     }
 }

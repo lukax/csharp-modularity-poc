@@ -55,7 +55,7 @@
 
             <StackPanel>
                 <TabControl>
-                    <TabItem Header="{x:Static loc:Strings.Tab_Hide}" />
+                    <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
                     <TabItem Header="{x:Static loc:Strings.Common_BoughtHistory}">
                         <DataGrid ItemsSource="{Binding Entity.BoughtHistory}" MinHeight="200"></DataGrid>
                     </TabItem>

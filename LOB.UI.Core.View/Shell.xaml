@@ -5,7 +5,7 @@
     xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
     xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
     x:Class="LOB.UI.Core.View.Shell"
-    Title="{x:Static loc:Strings.Window_Title}"
+    Title="{x:Static loc:Strings.App_Title}"
     Height="Auto" Width="Auto" SaveWindowPosition="True">
 
     <controls:MetroWindow.Resources>
@@ -41,10 +41,10 @@
             <controls:ProgressRing x:Name="ProgressRing" Grid.Row="1" Grid.Column="0" Width="25"
                                    Height="25" IsActive="False" />
 
-            <ContentControl x:Name="ColumnRegion" Grid.Row="1"
+            <ContentControl x:Name="ColumnRegion" Grid.Row="1" Grid.RowSpan="2"
                             Grid.Column="1" regions:RegionManager.RegionName="ColumnRegion" />
 
-            <ContentControl x:Name="BottomRegion" Grid.Row="2" Grid.ColumnSpan="2"
+            <ContentControl x:Name="BottomRegion" Grid.Row="2" 
                             regions:RegionManager.RegionName="BottomRegion" />
 
             <Border Background="{DynamicResource AccentBrush3}" Opacity="0.2" x:Name="BorderModal" Grid.RowSpan="2"
