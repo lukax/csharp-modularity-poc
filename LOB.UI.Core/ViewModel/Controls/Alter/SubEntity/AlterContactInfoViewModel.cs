@@ -152,11 +152,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            var k = new Progress {
+            var k = new Notification {
                 Message = Strings.Notification_List_Updating,
-                Percentage = args.ProgressPercentage
+                Progress = args.ProgressPercentage
             };
-            _eventAggregator.GetEvent<ReportProgressEvent>().Publish(k);
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(k);
         }
 
         #endregion

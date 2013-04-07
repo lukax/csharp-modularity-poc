@@ -61,6 +61,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @App_License_Information.
+        /// </summary>
+        public static string App_License_Information {
+            get {
+                return ResourceManager.GetString("App_License_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to App_Title.
         /// </summary>
         public static string App_Title {
@@ -556,11 +565,65 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_Add.
+        /// </summary>
+        public static string Common_Confirm_Add {
+            get {
+                return ResourceManager.GetString("Common_Confirm_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_Command.
+        /// </summary>
+        public static string Common_Confirm_Command {
+            get {
+                return ResourceManager.GetString("Common_Confirm_Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_Delete.
+        /// </summary>
+        public static string Common_Confirm_Delete {
+            get {
+                return ResourceManager.GetString("Common_Confirm_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_List.
+        /// </summary>
+        public static string Common_Confirm_List {
+            get {
+                return ResourceManager.GetString("Common_Confirm_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Confirm_Op.
         /// </summary>
         public static string Common_Confirm_Op {
             get {
                 return ResourceManager.GetString("Common_Confirm_Op", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_QuickSearch.
+        /// </summary>
+        public static string Common_Confirm_QuickSearch {
+            get {
+                return ResourceManager.GetString("Common_Confirm_QuickSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Confirm_Update.
+        /// </summary>
+        public static string Common_Confirm_Update {
+            get {
+                return ResourceManager.GetString("Common_Confirm_Update", resourceCulture);
             }
         }
         
@@ -826,6 +889,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Initialized.
+        /// </summary>
+        public static string Common_Initialized {
+            get {
+                return ResourceManager.GetString("Common_Initialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Initializing.
+        /// </summary>
+        public static string Common_Initializing {
+            get {
+                return ResourceManager.GetString("Common_Initializing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_InscEstadual.
         /// </summary>
         public static string Common_InscEstadual {
@@ -849,6 +930,15 @@ namespace LOB.Core.Localization {
         public static string Common_LastName {
             get {
                 return ResourceManager.GetString("Common_LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_License.
+        /// </summary>
+        public static string Common_License {
+            get {
+                return ResourceManager.GetString("Common_License", resourceCulture);
             }
         }
         

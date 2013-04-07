@@ -1,25 +1,26 @@
 ﻿#region Usings
 
+using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class HeaderToolViewModel : IHeaderToolsViewModel {
+    public class HeaderToolViewModel : BaseViewModel, IHeaderToolsViewModel
+    {
+        
+        public override void InitializeServices() { }
 
-        public string Header { get; set; }
+        public override void Refresh() { }
 
-        public void InitializeServices() { }
-
-        public void Refresh() { }
-
-        private readonly UIOperation _operation = new UIOperation {
+        private UIOperation _operation = new UIOperation {
             Type = UIOperationType.HeaderTool,
             State = UIOperationState.Tool
         };
-        public UIOperation Operation {
+        public override UIOperation Operation {
             get { return _operation; }
+            set { _operation = value; }
         }
 
     }

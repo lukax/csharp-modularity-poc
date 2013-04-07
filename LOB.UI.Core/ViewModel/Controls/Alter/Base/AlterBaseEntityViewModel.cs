@@ -1,7 +1,9 @@
 ﻿#region Usings
 
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.Events.View;
@@ -34,6 +36,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public ICommand QuickSearchCommand { get; set; }
         public int Index { get; set; }
         protected IRepository Repository { get; set; }
+        public Visibility ConfCancelToolVisibility { get; set; }
+        public string ConfirmText { get; set; }
 
         [InjectionConstructor]
         protected AlterBaseEntityViewModel(T entity, IRepository repository,
@@ -90,6 +94,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             set {
                 _previousOperation = value;
                 _operation = value;
+                ConfCancelToolVisibility = Operation.IsChild
+                                               ? Visibility.Visible
+                                               : Visibility.Collapsed;
+                switch(value.State) {
+                    case UIOperationState.Add:
+                        ConfirmText = Strings.Common_Confirm_Add;
+                        break;
+                    case UIOperationState.Update:
+                        ConfirmText = Strings.Common_Confirm_Update;
+                        break;
+                    default:
+                        ConfirmText = Strings.Common_Confirm;
+                        break;
+                }
             }
         }
 

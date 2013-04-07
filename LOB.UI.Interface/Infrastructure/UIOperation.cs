@@ -7,9 +7,10 @@ using System;
 namespace LOB.UI.Interface.Infrastructure {
     public class UIOperation : IEquatable<UIOperation> {
 
+        public UIOperation() { IsChild = true; }
         public UIOperationType Type { get; set; }
         public UIOperationState State { get; set; }
-
+        public bool IsChild { get; set; }
         public override string ToString() { return string.Format("{0}_{1}", State.ToString(), Type.ToString()); }
         #region Equality members
 

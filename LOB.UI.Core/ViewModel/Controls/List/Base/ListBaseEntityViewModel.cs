@@ -6,11 +6,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.Domain.Logic;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
@@ -93,7 +95,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         }
 
         public override void InitializeServices() {
-            _worker.DoWork += UpdateList;
+            _worker.DoWork += WorkerUpdateList;
             _worker.WorkerSupportsCancellation = true;
             _worker.WorkerReportsProgress = true;
             _worker.RunWorkerAsync();
@@ -102,30 +104,34 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         /// <summary>
         ///     Constantly update the list async every 1000 miliseconds
         /// </summary>
-        private async void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
+        private void WorkerUpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
+            var worker = sender as BackgroundWorker;
+            if(worker == null) return;
             //TODO: Dynamic set based on selected tab
+            
+            var notification = new Notification();
             do {
-                await Task.Delay(UpdateInterval);
-                _eventAggregator.GetEvent<ReportProgressEvent>()
-                                .Publish(new Progress {
-                                    Message = Strings.Notification_List_Updating,
-                                    Percentage = 0
-                                });
+                Thread.Sleep(2000);
+                notification.Message = Strings.Notification_List_Updating;
+                notification.Progress = 0;
+                _eventAggregator.GetEvent<NotificationEvent>()
+                                .Publish(notification);
                 IList<T> localList = string.IsNullOrEmpty(Search)
                                          ? (Repository.GetList<T>()).ToList()
                                          : (Repository.GetList(SearchCriteria)).ToList();
                 if(Entitys == null || !localList.SequenceEqual(Entitys)) {
                     Entitys = new ObservableCollection<T>(localList);
-                    _eventAggregator.GetEvent<ReportProgressEvent>()
-                                    .Publish(new Progress {
-                                        Message = Strings.Notification_List_Updating,
-                                        Percentage = 100
-                                    });
+                    notification.Message = Strings.Notification_List_Updating;
+                    notification.Progress = 100;
+                    _eventAggregator.GetEvent<NotificationEvent>().Publish(notification);
                 }
-                else
-                    _eventAggregator.GetEvent<ReportProgressEvent>()
-                                    .Publish(new Progress {Message = Strings.Notification_List_Updated});
-            } while(!_worker.CancellationPending);
+                else {
+                    notification.Message = Strings.Notification_List_Updated;
+                    _eventAggregator.GetEvent<NotificationEvent>()
+                                    .Publish(notification);
+                }
+            } while (!worker.CancellationPending);
+        
         }
 
         protected virtual void Save(object arg) { }

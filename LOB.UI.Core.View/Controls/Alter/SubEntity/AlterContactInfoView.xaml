@@ -87,8 +87,6 @@
                      Text="{Binding Entity.PS, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
 
         </Grid>
-        <Expander IsExpanded="False" ExpandDirection="Left">
-            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
-        </Expander>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
     </StackPanel>
 </UserControl>

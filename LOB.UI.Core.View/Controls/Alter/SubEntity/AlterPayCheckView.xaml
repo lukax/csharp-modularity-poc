@@ -53,8 +53,6 @@
                      Grid.Row="2" Grid.Column="1"
                      Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
         </Grid>
-        <Expander IsExpanded="False" ExpandDirection="Left">
-            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
-        </Expander>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
     </StackPanel>
 </UserControl>

@@ -23,9 +23,9 @@ namespace LOB.UI.Core.View.Modularity {
 
         private readonly IUnityContainer _container;
 
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] private
+        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] 
 // ReSharper disable NotAccessedField.Local
-            MainRegionController _mainRegionController;
+        private MainRegionController _mainRegionController;
 // ReSharper restore NotAccessedField.Local
 
         public Module(IUnityContainer container) { _container = container; }
@@ -37,7 +37,7 @@ namespace LOB.UI.Core.View.Modularity {
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolView));
             regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolView));
-            //regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(NotificationToolView));
+            regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(NotificationToolView));
 
             CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
 

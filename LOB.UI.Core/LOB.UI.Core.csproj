@@ -125,7 +125,7 @@
     <Compile Include="Events\MessageHideEvent.cs" />
     <Compile Include="Events\MessageShowEvent.cs" />
     <Compile Include="Events\RefreshEvent.cs" />
-    <Compile Include="Events\ReportProgressEvent.cs" />
+    <Compile Include="Events\NotificationEvent.cs" />
     <Compile Include="Events\SaveEvent.cs" />
     <Compile Include="Events\View\CloseViewEvent.cs" />
     <Compile Include="Events\View\OpenViewEvent.cs" />

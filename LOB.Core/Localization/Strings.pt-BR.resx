@@ -855,4 +855,34 @@
   <data name="Notification_Connecting" xml:space="preserve">
     <value>Conectando-se</value>
   </data>
+  <data name="Common_Confirm_Add" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="Common_Confirm_Command" xml:space="preserve">
+    <value>Executar</value>
+  </data>
+  <data name="Common_Confirm_Delete" xml:space="preserve">
+    <value>Deletar</value>
+  </data>
+  <data name="Common_Confirm_List" xml:space="preserve">
+    <value>Listar</value>
+  </data>
+  <data name="Common_Confirm_QuickSearch" xml:space="preserve">
+    <value>Busca Rápida</value>
+  </data>
+  <data name="Common_Confirm_Update" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="Common_Initialized" xml:space="preserve">
+    <value>Inicializado</value>
+  </data>
+  <data name="Common_Initializing" xml:space="preserve">
+    <value>Inicializando</value>
+  </data>
+  <data name="App_License_Information" xml:space="preserve">
+    <value>Versão de testes, uso restrito</value>
+  </data>
+  <data name="Common_License" xml:space="preserve">
+    <value>Licença</value>
+  </data>
 </root>

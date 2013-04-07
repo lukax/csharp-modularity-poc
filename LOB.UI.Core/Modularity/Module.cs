@@ -38,8 +38,13 @@ namespace LOB.UI.Core.Modularity {
 
             _container.RegisterType<IColumnToolsViewModel, ColumnToolViewModel>();
             _container.RegisterType<IHeaderToolsViewModel, HeaderToolViewModel>();
-            _container.RegisterType<INotificationToolViewModel, NotificationToolViewModel>();
+            //_container.RegisterType<INotificationToolViewModel, NotificationToolViewModel>();
             _container.RegisterType<IMessageToolViewModel, MessageToolViewModel>();
+
+            //_container.RegisterInstance<IMessageToolViewModel>(_container.Resolve<MessageToolViewModel>());
+            _container.RegisterInstance<INotificationToolViewModel>(_container.Resolve<NotificationToolViewModel>());
+            //_container.RegisterInstance<IColumnToolsViewModel>(_container.Resolve<ColumnToolViewModel>());
+            //_container.RegisterInstance<IHeaderToolsViewModel>(_container.Resolve<HeaderToolViewModel>());
 
             #endregion
             #region Alter
@@ -84,8 +89,6 @@ namespace LOB.UI.Core.Modularity {
             //_container.RegisterType<IListSaleViewModel, ListSaleViewModel>();
 
             #endregion
-            _container.RegisterInstance(_container.Resolve<MessageToolViewModel>());
-
 #if DEBUG
             var log = _container.Resolve<ILogger>();
             log.Log("UICoreModule Initialized", Category.Debug, Priority.Medium);

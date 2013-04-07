@@ -88,8 +88,6 @@
             <base2:AlterPersonView x:Name="ViewAlterPerson" />
         </StackPanel>
 
-        <Expander IsExpanded="False" ExpandDirection="Left">
-            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
-        </Expander>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
     </StackPanel>
 </UserControl>

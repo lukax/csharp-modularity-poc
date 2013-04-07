@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
@@ -75,6 +76,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _worker.DoWork += UpdateUFList;
             _worker.RunWorkerAsync();
             _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(new Notification{ Message = string.Format("{0} {1}", Strings.Common_Initialized, Strings.Command_Alter_Address), Progress = 0, Severity = Severity.Information});
         }
 
         private void Include(BaseEntity obj) {

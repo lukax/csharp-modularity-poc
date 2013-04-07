@@ -54,8 +54,6 @@
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
                      Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
         </Grid>
-        <Expander IsExpanded="True" ExpandDirection="Left">
-            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
-        </Expander>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
     </StackPanel>
 </UserControl>

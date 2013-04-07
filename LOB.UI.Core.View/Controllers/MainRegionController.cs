@@ -44,6 +44,7 @@ namespace LOB.UI.Core.View.Controllers {
 
         private void OpenView(UIOperation param) {
             if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+            param.IsChild = false;
             if(param.State == UIOperationState.QuickSearch) QuickSearch(param);
             else
                 _navigator.Init.ResolveView(param)

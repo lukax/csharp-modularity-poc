@@ -158,9 +158,7 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
-        <Expander IsExpanded="True" ExpandDirection="Left">
-            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
-        </Expander>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
     </StackPanel>
 
 </UserControl>

@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using LOB.Core.Localization;
+using LOB.Domain.Logic;
 using LOB.Log.Interface;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -73,6 +75,8 @@ namespace LOB.UI.Core.View {
                                                                       if(type.Type ==
                                                                          UIOperationType.Main) Close();
                                                                   });
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(new Notification { Message = Strings.App_License_Information, Progress = 0, Severity = Severity.Information });
+
         }
 
         public void Refresh() {
@@ -101,7 +105,7 @@ namespace LOB.UI.Core.View {
             NotifyCollectionChangedEventArgs e) {
             TabRegion.SelectedIndex = -1;
             ProgressRing.IsActive = true;
-            await Task.Delay(200);
+            await Task.Delay(400);
             // Fix validation color border in textboxes TODO: Check this issue
             ProgressRing.IsActive = false;
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;

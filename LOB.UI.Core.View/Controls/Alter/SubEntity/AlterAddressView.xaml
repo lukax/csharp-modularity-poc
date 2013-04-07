@@ -122,9 +122,7 @@
                                          HorizontalAlignment="Left" Grid.Column="4" Grid.Row="4" />
         </Grid>
 
-        <Expander IsExpanded="False" ExpandDirection="Left">
-            <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="Visible" />
-        </Expander>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
 
     </StackPanel>
 </UserControl>

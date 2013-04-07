@@ -855,4 +855,34 @@
   <data name="Notification_Dao_ConnectionFailed" xml:space="preserve">
     <value>@Notification_Dao_ConnectionFailed</value>
   </data>
+  <data name="Common_Confirm_Add" xml:space="preserve">
+    <value>@Common_Confirm_Add</value>
+  </data>
+  <data name="Common_Confirm_Command" xml:space="preserve">
+    <value>@Common_Confirm_Command</value>
+  </data>
+  <data name="Common_Confirm_Delete" xml:space="preserve">
+    <value>@Common_Confirm_Delete</value>
+  </data>
+  <data name="Common_Confirm_List" xml:space="preserve">
+    <value>@Common_Confirm_List</value>
+  </data>
+  <data name="Common_Confirm_QuickSearch" xml:space="preserve">
+    <value>@Common_Confirm_QuickSearch</value>
+  </data>
+  <data name="Common_Confirm_Update" xml:space="preserve">
+    <value>@Common_Confirm_Update</value>
+  </data>
+  <data name="Common_Initialized" xml:space="preserve">
+    <value>@Common_Initialized</value>
+  </data>
+  <data name="Common_Initializing" xml:space="preserve">
+    <value>@Common_Initializing</value>
+  </data>
+  <data name="App_License_Information" xml:space="preserve">
+    <value>@App_License_Information</value>
+  </data>
+  <data name="Common_License" xml:space="preserve">
+    <value>@Common_License</value>
+  </data>
 </root>
