@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Globalization;
 using System.Threading;
 using LOB.Domain.Base;
@@ -20,7 +19,8 @@ namespace LOB.UI.Core.ViewModel.Base {
         public static CultureInfo Culture {
             get { return Thread.CurrentThread.CurrentCulture; }
         }
-        
+
         public abstract void Dispose();
+
     }
 }

@@ -9,12 +9,10 @@ namespace LOB.Util.Native.Test {
     [TestClass]
     public class MathTest {
 
-        [DllImport("..\\..\\..\\LOB.Util.Native\\Debug\\LOB.Util.Native.dll",
-            CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("..\\..\\..\\LOB.Util.Native\\Debug\\LOB.Util.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double Power(double x, int y);
 
-        [DllImport("..\\..\\..\\LOB.Util.Native\\Debug\\LOB.Util.Native.dll",
-            CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("..\\..\\..\\LOB.Util.Native\\Debug\\LOB.Util.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double Random();
 
         [TestMethod]

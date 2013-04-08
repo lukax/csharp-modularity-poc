@@ -29,10 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private ICommand _closeCommand;
 
         public ICommand CloseCommand {
-            get {
-                return _closeCommand ??
-                       (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose));
-            }
+            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
 
             set { _closeCommand = value; }
         }
@@ -49,10 +46,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             _eventAggregator = _container.Resolve<IEventAggregator>();
         }
 
-        private UIOperation _operation = new UIOperation {
-            Type = UIOperationType.MessageTool,
-            State = UIOperationState.Tool
-        };
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool, State = UIOperationState.Internal};
 
         public override UIOperation Operation {
             get { return _operation; }

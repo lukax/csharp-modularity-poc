@@ -66,30 +66,16 @@ namespace LOB.Business.Logic {
             _serviceFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Name)
-                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Name) ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => _entity.Description.Length > 300 ? new ValidationResult("Description", Strings.Error_Field_TooLong) : null);
+                _entity.AddValidation(
+                    (sender, name) => _entity.UnitSalePrice < 0 ? new ValidationResult("UnitSalePrice", Strings.Error_Field_Negative) : null);
+                _entity.AddValidation(
+                    (sender, name) => _entity.UnitsInStock < 0 ? new ValidationResult("UnitsInStock", Strings.Error_Field_Negative) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.Description.Length > 300
-                        ? new ValidationResult("Description", Strings.Error_Field_TooLong)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.UnitSalePrice < 0
-                        ? new ValidationResult("UnitSalePrice", Strings.Error_Field_Negative)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.UnitsInStock < 0
-                        ? new ValidationResult("UnitsInStock", Strings.Error_Field_Negative)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Category.ToString())
-                        ? new ValidationResult("Category", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.Category.ToString()) ? new ValidationResult("Category", Strings.Error_Field_Empty) : null);
             }
         }
 
@@ -129,9 +115,7 @@ namespace LOB.Business.Logic {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

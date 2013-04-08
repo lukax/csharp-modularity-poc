@@ -129,51 +129,99 @@
   <data name="Common_Confirm_Op" xml:space="preserve">
     <value>Confirmar</value>
   </data>
-  <data name="Command_Alter_Address" xml:space="preserve">
+  <data name="Command_Add_Address" xml:space="preserve">
     <value>Novo Endereço</value>
   </data>
-  <data name="Command_Alter_BaseEntity" xml:space="preserve">
+  <data name="Command_Add_BaseEntity" xml:space="preserve">
     <value>Novo Código</value>
   </data>
-  <data name="Command_Alter_Category" xml:space="preserve">
+  <data name="Command_Add_Category" xml:space="preserve">
     <value>Nova Categoria</value>
   </data>
-  <data name="Command_Alter_ContactInfo" xml:space="preserve">
+  <data name="Command_Add_ContactInfo" xml:space="preserve">
     <value>Nova Informação de Contato</value>
   </data>
-  <data name="Command_Alter_Customer" xml:space="preserve">
+  <data name="Command_Add_Customer" xml:space="preserve">
     <value>Novo Cliente</value>
   </data>
-  <data name="Command_Alter_Email" xml:space="preserve">
+  <data name="Command_Add_Email" xml:space="preserve">
     <value>Novo Email</value>
   </data>
-  <data name="Command_Alter_Employee" xml:space="preserve">
+  <data name="Command_Add_Employee" xml:space="preserve">
     <value>Novo Funcionário</value>
   </data>
-  <data name="Command_Alter_LegalPerson" xml:space="preserve">
+  <data name="Command_Add_LegalPerson" xml:space="preserve">
     <value>Nova Pessoa Jurídica</value>
   </data>
-  <data name="Command_Alter_NaturalPerson" xml:space="preserve">
+  <data name="Command_Add_NaturalPerson" xml:space="preserve">
     <value>Nova Pessoa Física</value>
   </data>
-  <data name="Command_Alter_PayCheck" xml:space="preserve">
+  <data name="Command_Add_PayCheck" xml:space="preserve">
     <value>Nova Folha de Pagamento</value>
   </data>
-  <data name="Command_Alter_Person" xml:space="preserve">
+  <data name="Command_Add_Person" xml:space="preserve">
     <value>Nova Pessoa</value>
   </data>
-  <data name="Command_Alter_PhoneNumber" xml:space="preserve">
+  <data name="Command_Add_PhoneNumber" xml:space="preserve">
     <value>Novo Número de Telefone</value>
   </data>
-  <data name="Command_Alter_Product" xml:space="preserve">
+  <data name="Command_Add_Product" xml:space="preserve">
     <value>Novo Produto</value>
   </data>
-  <data name="Command_Alter_Sale" xml:space="preserve">
+  <data name="Command_Add_Sale" xml:space="preserve">
     <value>Nova Venda</value>
   </data>
-  <data name="Command_Alter_Service" xml:space="preserve">
+  <data name="Command_Add_Service" xml:space="preserve">
     <value>Novo Serviço</value>
   </data>
+
+
+  <data name="Command_Update_Address" xml:space="preserve">
+    <value>Novo Endereço</value>
+  </data>
+  <data name="Command_Update_BaseEntity" xml:space="preserve">
+    <value>Novo Código</value>
+  </data>
+  <data name="Command_Update_Category" xml:space="preserve">
+    <value>Nova Categoria</value>
+  </data>
+  <data name="Command_Update_ContactInfo" xml:space="preserve">
+    <value>Nova Informação de Contato</value>
+  </data>
+  <data name="Command_Update_Customer" xml:space="preserve">
+    <value>Novo Cliente</value>
+  </data>
+  <data name="Command_Update_Email" xml:space="preserve">
+    <value>Novo Email</value>
+  </data>
+  <data name="Command_Update_Employee" xml:space="preserve">
+    <value>Novo Funcionário</value>
+  </data>
+  <data name="Command_Update_LegalPerson" xml:space="preserve">
+    <value>Nova Pessoa Jurídica</value>
+  </data>
+  <data name="Command_Update_NaturalPerson" xml:space="preserve">
+    <value>Nova Pessoa Física</value>
+  </data>
+  <data name="Command_Update_PayCheck" xml:space="preserve">
+    <value>Nova Folha de Pagamento</value>
+  </data>
+  <data name="Command_Update_Person" xml:space="preserve">
+    <value>Nova Pessoa</value>
+  </data>
+  <data name="Command_Update_PhoneNumber" xml:space="preserve">
+    <value>Novo Número de Telefone</value>
+  </data>
+  <data name="Command_Update_Product" xml:space="preserve">
+    <value>Novo Produto</value>
+  </data>
+  <data name="Command_Update_Sale" xml:space="preserve">
+    <value>Nova Venda</value>
+  </data>
+  <data name="Command_Update_Service" xml:space="preserve">
+    <value>Novo Serviço</value>
+  </data>
+  
   <data name="Command_List_Address" xml:space="preserve">
     <value>Listar Endereços</value>
   </data>
@@ -884,5 +932,17 @@
   </data>
   <data name="Common_License" xml:space="preserve">
     <value>Licença</value>
+  </data>
+  <data name="Common_Filter" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
+  <data name="ToolTip_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="ToolTip_Filter" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
+  <data name="ToolTip_List" xml:space="preserve">
+    <value>Listar</value>
   </data>
 </root>

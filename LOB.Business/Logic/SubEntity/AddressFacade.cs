@@ -22,7 +22,7 @@ namespace LOB.Business.Logic.SubEntity {
         }
 
         public AddressFacade(IBaseEntityFacade baseEntityFacade) { _baseEntityFacade = baseEntityFacade; }
-       
+
         public void SetEntity<T>(T entity) where T : Address {
             _baseEntityFacade.SetEntity(entity);
             _entity = entity;
@@ -49,35 +49,18 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Street)
-                        ? new ValidationResult("Street", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Street) ? new ValidationResult("Street", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.StreetNumber)
-                        ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.StreetNumber) ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.ZipCode)
-                        ? new ValidationResult("ZipCode", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.ZipCode) ? new ValidationResult("ZipCode", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.County)
-                        ? new ValidationResult("County", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.County) ? new ValidationResult("County", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.District)
-                        ? new ValidationResult("District", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.District) ? new ValidationResult("District", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.State)
-                        ? new ValidationResult("State", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.State) ? new ValidationResult("State", Strings.Error_Field_Empty) : null);
             }
         }
 
@@ -112,9 +95,7 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

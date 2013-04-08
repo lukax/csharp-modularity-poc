@@ -85,6 +85,10 @@
       <Project>{c2e495a5-600d-4881-a1f7-2d8ab7e5367e}</Project>
       <Name>LOB.Dao.Nhibernate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
+      <Project>{FF16079B-FE5D-41CA-A195-5F956CCEC1C8}</Project>
+      <Name>LOB.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.UI.Core.View\LOB.UI.Core.View.csproj">
       <Project>{b0968403-1f39-4128-b3f4-8d283d541071}</Project>
       <Name>LOB.UI.Core.View</Name>

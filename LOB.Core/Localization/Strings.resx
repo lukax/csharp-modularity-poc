@@ -129,50 +129,95 @@
   <data name="Common_Confirm_Op" xml:space="preserve">
     <value>@Common_Confirm_Op</value>
   </data>
-  <data name="Command_Alter_Address" xml:space="preserve">
-    <value>@Command_AlterAddress</value>
+  <data name="Command_Add_Address" xml:space="preserve">
+    <value>@Command_AddAddress</value>
   </data>
-  <data name="Command_Alter_BaseEntity" xml:space="preserve">
-    <value>@Command_AlterBaseEntity</value>
+  <data name="Command_Add_BaseEntity" xml:space="preserve">
+    <value>@Command_AddBaseEntity</value>
   </data>
-  <data name="Command_Alter_Category" xml:space="preserve">
-    <value>@Command_AlterCategory</value>
+  <data name="Command_Add_Category" xml:space="preserve">
+    <value>@Command_AddCategory</value>
   </data>
-  <data name="Command_Alter_ContactInfo" xml:space="preserve">
-    <value>@Command_AlterContactInfo</value>
+  <data name="Command_Add_ContactInfo" xml:space="preserve">
+    <value>@Command_AddContactInfo</value>
   </data>
-  <data name="Command_Alter_Customer" xml:space="preserve">
-    <value>@Command_AlterCustomer</value>
+  <data name="Command_Add_Customer" xml:space="preserve">
+    <value>@Command_AddCustomer</value>
   </data>
-  <data name="Command_Alter_Email" xml:space="preserve">
-    <value>@Command_AlterEmail</value>
+  <data name="Command_Add_Email" xml:space="preserve">
+    <value>@Command_AddEmail</value>
   </data>
-  <data name="Command_Alter_Employee" xml:space="preserve">
-    <value>@Command_AlterEmployee</value>
+  <data name="Command_Add_Employee" xml:space="preserve">
+    <value>@Command_AddEmployee</value>
   </data>
-  <data name="Command_Alter_LegalPerson" xml:space="preserve">
-    <value>@Command_AlterLegalPerson</value>
+  <data name="Command_Add_LegalPerson" xml:space="preserve">
+    <value>@Command_AddLegalPerson</value>
   </data>
-  <data name="Command_Alter_NaturalPerson" xml:space="preserve">
-    <value>@Command_AlterNaturalPerson</value>
+  <data name="Command_Add_NaturalPerson" xml:space="preserve">
+    <value>@Command_AddNaturalPerson</value>
   </data>
-  <data name="Command_Alter_PayCheck" xml:space="preserve">
-    <value>@Command_AlterPayCheck</value>
+  <data name="Command_Add_PayCheck" xml:space="preserve">
+    <value>@Command_AddPayCheck</value>
   </data>
-  <data name="Command_Alter_Person" xml:space="preserve">
-    <value>@Command_AlterPerson</value>
+  <data name="Command_Add_Person" xml:space="preserve">
+    <value>@Command_AddPerson</value>
   </data>
-  <data name="Command_Alter_PhoneNumber" xml:space="preserve">
-    <value>@Command_AlterPhoneNumber</value>
+  <data name="Command_Add_PhoneNumber" xml:space="preserve">
+    <value>@Command_AddPhoneNumber</value>
   </data>
-  <data name="Command_Alter_Product" xml:space="preserve">
-    <value>@Command_AlterProduct</value>
+  <data name="Command_Add_Product" xml:space="preserve">
+    <value>@Command_AddProduct</value>
   </data>
-  <data name="Command_Alter_Sale" xml:space="preserve">
-    <value>@Command_AlterSale</value>
+  <data name="Command_Add_Sale" xml:space="preserve">
+    <value>@Command_AddSale</value>
   </data>
-  <data name="Command_Alter_Service" xml:space="preserve">
-    <value>@Command_AlterService</value>
+  <data name="Command_Add_Service" xml:space="preserve">
+    <value>@Command_AddService</value>
+  </data>
+  <data name="Command_Update_Address" xml:space="preserve">
+    <value>@Command_UpdateAddress</value>
+  </data>
+  <data name="Command_Update_BaseEntity" xml:space="preserve">
+    <value>@Command_UpdateBaseEntity</value>
+  </data>
+  <data name="Command_Update_Category" xml:space="preserve">
+    <value>@Command_UpdateCategory</value>
+  </data>
+  <data name="Command_Update_ContactInfo" xml:space="preserve">
+    <value>@Command_UpdateContactInfo</value>
+  </data>
+  <data name="Command_Update_Customer" xml:space="preserve">
+    <value>@Command_UpdateCustomer</value>
+  </data>
+  <data name="Command_Update_Email" xml:space="preserve">
+    <value>@Command_UpdateEmail</value>
+  </data>
+  <data name="Command_Update_Employee" xml:space="preserve">
+    <value>@Command_UpdateEmployee</value>
+  </data>
+  <data name="Command_Update_LegalPerson" xml:space="preserve">
+    <value>@Command_UpdateLegalPerson</value>
+  </data>
+  <data name="Command_Update_NaturalPerson" xml:space="preserve">
+    <value>@Command_UpdateNaturalPerson</value>
+  </data>
+  <data name="Command_Update_PayCheck" xml:space="preserve">
+    <value>@Command_UpdatePayCheck</value>
+  </data>
+  <data name="Command_Update_Person" xml:space="preserve">
+    <value>@Command_UpdatePerson</value>
+  </data>
+  <data name="Command_Update_PhoneNumber" xml:space="preserve">
+    <value>@Command_UpdatePhoneNumber</value>
+  </data>
+  <data name="Command_Update_Product" xml:space="preserve">
+    <value>@Command_UpdateProduct</value>
+  </data>
+  <data name="Command_Update_Sale" xml:space="preserve">
+    <value>@Command_UpdateSale</value>
+  </data>
+  <data name="Command_Update_Service" xml:space="preserve">
+    <value>@Command_UpdateService</value>
   </data>
   <data name="Command_List_Address" xml:space="preserve">
     <value>@Command_ListAddress</value>
@@ -884,5 +929,17 @@
   </data>
   <data name="Common_License" xml:space="preserve">
     <value>@Common_License</value>
+  </data>
+  <data name="Common_Filter" xml:space="preserve">
+    <value>@Common_Filter</value>
+  </data>
+  <data name="ToolTip_Cancel" xml:space="preserve">
+    <value>@ToolTip_Cancel</value>
+  </data>
+  <data name="ToolTip_Filter" xml:space="preserve">
+    <value>@ToolTip_Filter</value>
+  </data>
+  <data name="ToolTip_List" xml:space="preserve">
+    <value>@ToolTip_List</value>
   </data>
 </root>

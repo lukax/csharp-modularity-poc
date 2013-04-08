@@ -35,16 +35,8 @@ namespace LOB.Dao.Nhibernate.Test {
             var contact = new ContactInfo {
                 PhoneNumbers =
                     new[] {
-                        new PhoneNumber {
-                            Number = "123456",
-                            Description = "Casa",
-                            PhoneNumberType = PhoneNumberType.Telephone
-                        },
-                        new PhoneNumber {
-                            Number = "1234567",
-                            Description = "Trabalho",
-                            PhoneNumberType = PhoneNumberType.Cellphone
-                        }
+                        new PhoneNumber {Number = "123456", Description = "Casa", PhoneNumberType = PhoneNumberType.Telephone},
+                        new PhoneNumber {Number = "1234567", Description = "Trabalho", PhoneNumberType = PhoneNumberType.Cellphone}
                     },
                 WebSite = "www.thisdude.com",
                 PS = "Hes at home by the night",

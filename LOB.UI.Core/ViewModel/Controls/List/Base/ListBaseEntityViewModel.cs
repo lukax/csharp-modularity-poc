@@ -25,8 +25,7 @@ using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel
-        where T : BaseEntity {
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity {
 
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
@@ -67,8 +66,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         }
 
         [InjectionConstructor]
-        protected ListBaseEntityViewModel(T entity, IRepository repository,
-            IEventAggregator eventAggregator) {
+        protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             Repository = repository;
             Entity = entity;
@@ -112,16 +110,12 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             do {
                 Thread.Sleep(2000);
                 _eventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(0));
-                IList<T> localList = string.IsNullOrEmpty(Search)
-                                         ? (Repository.GetList<T>()).ToList()
-                                         : (Repository.GetList(SearchCriteria)).ToList();
+                IList<T> localList = string.IsNullOrEmpty(Search) ? (Repository.GetList<T>()).ToList() : (Repository.GetList(SearchCriteria)).ToList();
                 if(Entitys == null || !localList.SequenceEqual(Entitys)) {
                     Entitys = new ObservableCollection<T>(localList);
                     _eventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(100));
                 }
-                else {
-                    _eventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updated).Progress(-1));
-                }
+                else _eventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updated).Progress(-1));
             } while(!worker.CancellationPending);
         }
 

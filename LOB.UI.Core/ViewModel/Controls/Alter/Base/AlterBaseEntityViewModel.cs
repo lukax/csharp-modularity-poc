@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -18,8 +19,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel
-        where T : BaseEntity {
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
 
         private readonly IEventAggregator _eventAggregator;
 // ReSharper disable NotAccessedField.Local
@@ -37,11 +37,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public int Index { get; set; }
         protected IRepository Repository { get; set; }
         public Visibility ConfCancelToolVisibility { get; set; }
-        public string ConfirmText { get; set; }
+        public virtual string ConfirmText { get; set; }
 
         [InjectionConstructor]
-        protected AlterBaseEntityViewModel(T entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
+        protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
             _eventAggregator = eventAggregator;
             _loggerFacade = loggerFacade;
             Repository = repository;
@@ -71,18 +70,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected abstract void Cancel(object arg);
 
         protected virtual void QuickSearch(object arg) {
-            Operation = new UIOperation {
-                Type = Operation.Type,
-                State = UIOperationState.QuickSearch
-            };
+            Operation.State = UIOperationState.QuickSearch;
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
-            _currentSubscription =
-                _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
+            _currentSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
         }
 
         private void ChangeUIState(UIOperation obj) {
             if(Operation.State == UIOperationState.QuickSearch) {
-                Operation = _previousOperation;
+                Operation.State = _previousOperation.State;
                 _currentSubscription.Dispose();
             }
         }
@@ -94,27 +89,34 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             set {
                 _previousOperation = value;
                 _operation = value;
-                ConfCancelToolVisibility = Operation.IsChild
-                                               ? Visibility.Visible
-                                               : Visibility.Collapsed;
-                switch(value.State) {
+                ListenOpState(value, new PropertyChangedEventArgs("State"));
+                value.PropertyChanged += ListenOpState;
+                ConfCancelToolVisibility = Operation.IsChild ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        private void ListenOpState(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
+            if (propertyChangedEventArgs.PropertyName != "State") return; 
+            var op = sender as UIOperation;
+
+            if(op != null)
+                switch(op.State) {
                     case UIOperationState.Add:
                         ConfirmText = Strings.Common_Confirm_Add;
                         break;
                     case UIOperationState.Update:
                         ConfirmText = Strings.Common_Confirm_Update;
                         break;
+                    case UIOperationState.Discard:
+                        ConfirmText = Strings.Common_Confirm_Delete;
+                        break;
                     default:
                         ConfirmText = Strings.Common_Confirm;
                         break;
                 }
-            }
         }
 
-        public override void Dispose() 
-        {
-            
-        }
+        public override void Dispose() { }
 
     }
 }

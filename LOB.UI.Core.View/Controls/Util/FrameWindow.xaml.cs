@@ -47,64 +47,27 @@ namespace LOB.UI.Core.View.Controls.Util {
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedParameter.Local
-        private void MiLightGrey() {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"),
-                                     Theme.Light);
-        }
+        private void MiLightGrey() { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"), Theme.Light); }
 
-        private void MiLightRed(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"),
-                                     Theme.Light);
-        }
+        private void MiLightRed(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"), Theme.Light); }
 
-        private void MiDarkRed(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"),
-                                     Theme.Dark);
-        }
+        private void MiDarkRed(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"), Theme.Dark); }
 
-        private void MiLightGreen(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"),
-                                     Theme.Light);
-        }
+        private void MiLightGreen(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"), Theme.Light); }
 
-        private void MiDarkGreen(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"),
-                                     Theme.Dark);
-        }
+        private void MiDarkGreen(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"), Theme.Dark); }
 
-        private void MiLightBlue(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"),
-                                     Theme.Light);
-        }
+        private void MiLightBlue(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"), Theme.Light); }
 
-        private void MiDarkBlue(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"),
-                                     Theme.Dark);
-        }
+        private void MiDarkBlue(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"), Theme.Dark); }
 
-        private void MiLightPurple(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Purple"),
-                                     Theme.Light);
-        }
+        private void MiLightPurple(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Purple"), Theme.Light); }
 
-        private void MiDarkPurple(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Purple"),
-                                     Theme.Dark);
-        }
+        private void MiDarkPurple(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Purple"), Theme.Dark); }
 
-        private void MiDarkOrange(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Orange"),
-                                     Theme.Dark);
-        }
+        private void MiDarkOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Dark); }
 
-        private void MiLightOrange(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Orange"),
-                                     Theme.Light);
-        }
+        private void MiLightOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light); }
 
         #endregion
         //private void Busy() { ModalRegion = new BusyView(); }

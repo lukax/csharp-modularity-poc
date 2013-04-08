@@ -22,23 +22,19 @@ using Category = LOB.Domain.SubEntity.Category;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>,
-                                                IAlterProductViewModel {
+    public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
 
         private readonly IProductFacade _facade;
         private readonly IEventAggregator _eventAggregator;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
         private readonly BackgroundWorker _worker = new BackgroundWorker();
 
         [InjectionConstructor]
-        public AlterProductViewModel(Product entity, IRepository repository, IProductFacade facade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterProductViewModel(Product entity, IRepository repository, IProductFacade facade, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _facade = facade;
             _eventAggregator = eventAggregator;
@@ -66,19 +62,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void ExecuteListCategory(object o) {
-            //UIOperationType oP = o.ToString().ToUIOperationType();
-            //_navigator.ResolveView(oP).Show(true);
+            var op = new UIOperation().State(UIOperationState.QuickSearch).Type(UIOperationType.Category);
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
         private void ExecuteAlterCategory(object o) {
-            //UIOperationType oP = o.ToString().ToUIOperationType();
-            //if(Entity.Category != null)
-            //    _navigator.ResolveView(oP)
-            //              .SetViewModel(
-            //                            _unityContainer.Resolve<AlterCategoryViewModel>(new ParameterOverride(
-            //                                                                                "category", Entity.Category)))
-            //              .Show(true);
-            //_navigator.ResolveView(oP).Show(true);
+            var op = new UIOperation().Type(UIOperationType.Address);
+            op.State(Entity.Category == null ? UIOperationState.Add : UIOperationState.Update);
+            op.Entity = Entity.Category;
+            _eventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
         protected override void SaveChanges(object arg) {

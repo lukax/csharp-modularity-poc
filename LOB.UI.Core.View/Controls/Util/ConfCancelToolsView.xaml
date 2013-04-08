@@ -14,13 +14,13 @@
     <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5"
                 Visibility="{Binding ConfCancelToolVisibility}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ButtonCancel" Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
+            <Button x:Name="ButtonCancel" Command="{Binding CancelCommand}" IsCancel="True" >
                 <DockPanel>
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26" />
                     <Label Content="{x:Static loc:Strings.Common_Cancel}" />
                 </DockPanel>
             </Button>
-            <Button x:Name="ButtonSave" Height="32" Command="{Binding SaveChangesCommand}" Padding="1">
+            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}" >
                 <DockPanel>
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
                     <Label Content="{Binding ConfirmText}" />

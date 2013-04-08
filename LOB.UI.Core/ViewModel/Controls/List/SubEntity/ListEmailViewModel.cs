@@ -14,8 +14,7 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListEmailViewModel : ListBaseEntityViewModel<Email>, IListEmailViewModel {
 
-        public ListEmailViewModel(Email entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        public ListEmailViewModel(Email entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Email, bool>> SearchCriteria {
@@ -35,10 +34,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Email,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.List};
 
     }
 }

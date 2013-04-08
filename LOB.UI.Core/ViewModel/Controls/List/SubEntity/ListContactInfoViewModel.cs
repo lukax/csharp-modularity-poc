@@ -12,11 +12,9 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
-    public class ListContactInfoViewModel : ListBaseEntityViewModel<ContactInfo>,
-                                            IListContactInfoViewModel {
+    public class ListContactInfoViewModel : ListBaseEntityViewModel<ContactInfo>, IListContactInfoViewModel {
 
-        public ListContactInfoViewModel(ContactInfo entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        public ListContactInfoViewModel(ContactInfo entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<ContactInfo, bool>> SearchCriteria {
@@ -28,8 +26,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                          arg.PS.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.SpeakWith.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.WebSite.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Status.ToString().ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Emails.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Status.ToString().ToUpper().Contains(Search.ToUpper()) || arg.Emails.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.PhoneNumbers.ToString().ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
@@ -41,10 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.ContactInfo,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.List};
 
     }
 }

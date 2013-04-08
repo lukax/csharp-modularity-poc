@@ -15,10 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
 
         public void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
         public UIOperation Operation {
             get { return _operation; }
         }

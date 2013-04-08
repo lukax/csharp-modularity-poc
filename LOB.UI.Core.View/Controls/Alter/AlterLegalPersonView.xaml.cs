@@ -21,10 +21,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
                 if(localViewModel != null) {
                     ViewAlterPerson.DataContext = value;
                     ViewConfCancelTools.DataContext = value;
-                    ViewAlterPerson.ViewAlterAddress.DataContext =
-                        localViewModel.AlterAddressViewModel;
-                    ViewAlterPerson.ViewAlterAddress.DataContext =
-                        localViewModel.AlterContactInfoViewModel;
+                    ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
+                    ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterContactInfoViewModel;
                 }
             }
         }

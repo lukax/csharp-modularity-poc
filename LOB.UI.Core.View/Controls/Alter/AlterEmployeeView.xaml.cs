@@ -29,14 +29,11 @@ namespace LOB.UI.Core.View.Controls.Alter {
                 ViewAlterNaturalPerson.DataContext = value;
                 var localViewModel = value as IAlterEmployeeViewModel;
                 if(localViewModel != null) {
-                    ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterAddress.DataContext =
-                        localViewModel.AlterAddressViewModel;
-                    ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterContactInfo.DataContext =
-                        localViewModel.AlterContactInfoViewModel;
+                    ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
+                    ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterContactInfo.DataContext = localViewModel.AlterContactInfoViewModel;
                 }
 
-                EventAggregator.GetEvent<SaveEvent>()
-                               .Subscribe(s => EventAggregator.GetEvent<CancelEvent>().Publish(null));
+                EventAggregator.GetEvent<SaveEvent>().Subscribe(s => EventAggregator.GetEvent<CancelEvent>().Publish(null));
             }
         }
 

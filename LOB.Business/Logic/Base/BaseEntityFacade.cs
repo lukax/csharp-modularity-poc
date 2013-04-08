@@ -16,14 +16,7 @@ namespace LOB.Business.Logic.Base {
 
         public void SetEntity<T>(T entity) where T : BaseEntity { _entity = entity; }
 
-        public void ConfigureValidations() {
-            if(_entity != null)
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Code < 0
-                        ? new ValidationResult("Code", Strings.Error_Field_WrongFormat)
-                        : null);
-        }
+        public void ConfigureValidations() { if(_entity != null) _entity.AddValidation((sender, name) => _entity.Code < 0 ? new ValidationResult("Code", Strings.Error_Field_WrongFormat) : null); }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = true;

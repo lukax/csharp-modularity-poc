@@ -60,35 +60,18 @@ namespace LOB.Business.Logic {
             _personFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.FirstName)
-                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.FirstName) ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.LastName)
-                        ? new ValidationResult("Description", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.LastName) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CPF.ToString(culture).Length < 1
-                        ? new ValidationResult("CPF", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => _entity.CPF.ToString(culture).Length < 1 ? new ValidationResult("CPF", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CPF.ToString(culture).Length > 11
-                        ? new ValidationResult("CPF", Strings.Error_Field_TooLong)
-                        : null);
+                    (sender, name) => _entity.CPF.ToString(culture).Length > 11 ? new ValidationResult("CPF", Strings.Error_Field_TooLong) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.RG.ToString(culture).Length < 1
-                        ? new ValidationResult("RG", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => _entity.RG.ToString(culture).Length < 1 ? new ValidationResult("RG", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.RG.ToString(culture).Length > 9
-                        ? new ValidationResult("RG", Strings.Error_Field_TooLong)
-                        : null);
+                    (sender, name) => _entity.RG.ToString(culture).Length > 9 ? new ValidationResult("RG", Strings.Error_Field_TooLong) : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     _entity.BirthDate.CompareTo(new DateTime(1910, 1, 1)) < 0
@@ -134,9 +117,7 @@ namespace LOB.Business.Logic {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

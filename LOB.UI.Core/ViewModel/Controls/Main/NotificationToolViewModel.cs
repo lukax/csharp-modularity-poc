@@ -92,10 +92,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             set { _operation = value; }
         }
 
-        private UIOperation _operation = new UIOperation {
-            Type = UIOperationType.NotificationTool,
-            State = UIOperationState.Tool
-        };
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.NotificationTool, State = UIOperationState.Internal};
         private bool _isVisible;
 
     }

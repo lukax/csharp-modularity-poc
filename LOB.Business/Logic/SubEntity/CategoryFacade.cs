@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -39,19 +38,39 @@ namespace LOB.Business.Logic.SubEntity {
 
             IEnumerable<ValidationResult> validationResults;
             bool result = _serviceFacade.CanAdd(out validationResults);
+            if(result) result = ProcessBasicValidations(out validationResults);
             invalidFields = fields;
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
+            var fields = new List<ValidationResult>();
+            //TODO: custom validations for Category
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+            IEnumerable<ValidationResult> validationResults;
+            bool result = _serviceFacade.CanUpdate(out validationResults);
+            invalidFields = fields;
+            return result;
+        }
+
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
+            var fields = new List<ValidationResult>();
+            //TODO: custom validations for Category
+
+            IEnumerable<ValidationResult> validationResults;
+            bool result = _serviceFacade.CanDelete(out validationResults);
+            invalidFields = fields;
+            return result;
+        }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) { ((IBaseEntityFacade)_serviceFacade).SetEntity(entity); }
 
         void IServiceFacade.SetEntity<T>(T entity) { (_serviceFacade).SetEntity(entity); }
 
-        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
+            invalidFields = null;
+            return true;
+        }
 
     }
 }

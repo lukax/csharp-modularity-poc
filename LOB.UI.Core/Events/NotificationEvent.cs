@@ -10,5 +10,4 @@ namespace LOB.UI.Core.Events {
     public class NotificationEvent : CompositePresentationEvent<Notification>, IBaseEvent {
 
     }
-
 }

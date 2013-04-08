@@ -20,8 +20,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private readonly IEmailFacade _emailFacade;
         private readonly IEventAggregator _eventAggregator;
 
-        public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _emailFacade = emailFacade;
             _eventAggregator = eventAggregator;
@@ -54,10 +54,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _emailFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Email,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.Add};
 
     }
 }

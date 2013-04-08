@@ -9,10 +9,7 @@ using LOB.UI.Interface.ViewModel.Controls.Sell;
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
     public class SellServiceViewModel : ISellServiceViewModel {
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Sell
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Sell};
         public UIOperation Operation {
             get { return _operation; }
         }

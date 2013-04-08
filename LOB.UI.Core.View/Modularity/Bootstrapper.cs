@@ -41,9 +41,9 @@ namespace LOB.UI.Core.View.Modularity {
 
             //XAML(Change Build mode to Resource)
             var catalog =
-                Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
-                    new Uri("/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml",
-                            UriKind.Relative));
+                Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(new Uri(
+                                                                                      "/LOB.UI.Core.View;component/Modularity/ModuleCatalog.xaml",
+                                                                                      UriKind.Relative));
             return catalog;
         }
 

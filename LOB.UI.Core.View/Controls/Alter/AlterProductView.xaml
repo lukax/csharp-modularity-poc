@@ -77,17 +77,18 @@
                     <ComboBox ItemsSource="{Binding Categories}" x:Name="ComboBoxCategory"
                               SelectedItem="{Binding Entity.Category, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                               MinWidth="150" />
-                    <controls:Tile DockPanel.Dock="Left" Height="18" Width="18"
-                                   Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
-                                   HorizontalAlignment="Left" ToolTip="Edit" Focusable="False" Background="Transparent"
-                                   Grid.Column="5">
+                    <Button DockPanel.Dock="Left" Height="18" Width="18"
+                            Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
+                            HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Focusable="False"
+                            Background="Transparent"
+                            Grid.Column="5" Padding="0" BorderThickness="0">
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
-                    </controls:Tile>
-                    <controls:Tile Width="18" Height="18" Background="Transparent" CommandParameter="ListCategory"
-                                   Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0"
-                                   ToolTip="QuickSearch">
+                    </Button>
+                    <Button Width="18" Height="18" Background="Transparent" CommandParameter="ListCategory"
+                            Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0"
+                            ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Padding="0">
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
-                    </controls:Tile>
+                    </Button>
                 </StackPanel>
 
                 <Label Grid.Column="3" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Status}"
@@ -133,7 +134,7 @@
                 <TabItem Header="{x:Static loc:Strings.Common_Stores}">
                     <DockPanel>
                         <Label Content="{x:Static loc:Strings.Common_AvailableInStore}" />
-                        <ListView ItemsSource="{Binding Entity.StockedStores}"></ListView>
+                        <ComboBox ItemsSource="{Binding Entity.StockedStores}" IsEditable="True"></ComboBox>
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="{x:Static loc:Strings.Common_Suppliers}">
@@ -154,7 +155,10 @@
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="{x:Static loc:Strings.Common_Image}">
-                    <Image Source="{Binding Image}" />
+                    <StackPanel>
+                        <Image Source="{Binding Image}" />
+                        <Button Content="{x:Static loc:Strings.Common_Include}" Command="{Binding IncludeImage}" />
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>

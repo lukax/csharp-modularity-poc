@@ -1,22 +1,21 @@
-﻿namespace LOB.UI.Interface.Infrastructure {
+﻿using LOB.Domain.Base;
+
+namespace LOB.UI.Interface.Infrastructure {
     public enum UIOperationState {
 
-        Unknown = 0,
+        Internal = 0, //Internal Usage
 
-        Loading = 1, //Internal Usage
+        //Altering
+        Add = 9,
+        Update = 27,
+        Discard = 81,
 
-        Alter = 3,
-        Add = 9, //Internal Usage
-        Update = 27, //Internal Usage
-        Discard = 81, //Internal Usage
-
+        //Listing
         List = 5,
         QuickSearch = 25, //Internal Usage
 
+        //Business
         Sell = 7,
 
-        Tool = 11,
-
-        Exit = 13, //Internal Usage
     }
 }

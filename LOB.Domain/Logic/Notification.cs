@@ -32,12 +32,7 @@ namespace LOB.Domain.Logic {
 
     public static class NotificationExtensions {
 
-        public static Notification ToNotificationMessage(this ValidationResult validationResult) {
-            return new Notification {
-                Detail = validationResult.ErrorDescription,
-                Message = Strings.Common_Error + " "
-            };
-        }
+        public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
 
         public static Notification Sevirity(this Notification notification, Severity severity) {
             notification.Severity = severity;

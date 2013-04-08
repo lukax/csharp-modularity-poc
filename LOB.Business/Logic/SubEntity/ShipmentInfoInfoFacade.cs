@@ -27,13 +27,10 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.DaySchedule.Length < 1
-                        ? new ValidationResult("DaySchedule", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => _entity.DaySchedule.Length < 1 ? new ValidationResult("DaySchedule", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.DeliverDate.CompareTo(new DateTime(2013,1,1)) < 0
+                    _entity.DeliverDate.CompareTo(new DateTime(2013, 1, 1)) < 0
                         ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
                         : null);
                 _entity.AddValidation(
@@ -87,9 +84,7 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

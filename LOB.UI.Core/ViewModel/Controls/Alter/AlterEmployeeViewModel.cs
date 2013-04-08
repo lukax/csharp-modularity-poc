@@ -14,14 +14,12 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>,
-                                                 IAlterEmployeeViewModel {
+    public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
 
         private readonly IEventAggregator _eventAggregator;
 
         [InjectionConstructor]
-        public AlterEmployeeViewModel(Employee entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
 
         public override void InitializeServices() {
@@ -31,10 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Employee,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add};
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }

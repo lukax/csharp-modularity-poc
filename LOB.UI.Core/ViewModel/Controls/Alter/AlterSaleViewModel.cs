@@ -15,17 +15,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {
 
         private readonly IEventAggregator _eventAggregator;
-        private UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Add
-        };
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
         public override UIOperation Operation {
             get { return _operation; }
             set { _operation = value; }
         }
 
-        public AlterSaleViewModel(Sale entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
 
         public override void InitializeServices() {

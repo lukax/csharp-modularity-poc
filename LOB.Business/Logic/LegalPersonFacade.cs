@@ -55,29 +55,16 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.CorporateName)
-                        ? new ValidationResult("CorporateName", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.CorporateName) ? new ValidationResult("CorporateName", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.TradingName)
-                        ? new ValidationResult("TradingName", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.TradingName) ? new ValidationResult("TradingName", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.CNPJ < 0 ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => _entity.CNPJ.ToString(culture).Length > 14 ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    _entity.CNPJ < 0
-                        ? new ValidationResult("CNPJ", Strings.Error_Field_Empty)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CNPJ.ToString(culture).Length > 14
-                        ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CNAEFiscal.ToString(culture).Length > 7
-                        ? new ValidationResult("CNAEFiscal", Strings.Error_Field_TooLong)
-                        : null);
+                    _entity.CNAEFiscal.ToString(culture).Length > 7 ? new ValidationResult("CNAEFiscal", Strings.Error_Field_TooLong) : null);
             }
         }
 
@@ -111,9 +98,7 @@ namespace LOB.Business.Logic {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

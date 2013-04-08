@@ -35,10 +35,7 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public int Index { get; set; }
 
-        public void InitializeServices() {
-            _eventAggregator.GetEvent<RefreshEvent>()
-                            .Subscribe(o => { if(o.Equals(Operation)) Refresh(); });
-        }
+        public void InitializeServices() { _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o.Equals(Operation)) Refresh(); }); }
 
         public void Refresh() {
             //ListViewEntitys.SelectedIndex = -1;

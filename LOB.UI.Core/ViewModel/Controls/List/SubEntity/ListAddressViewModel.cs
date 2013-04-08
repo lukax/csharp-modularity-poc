@@ -14,8 +14,7 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel {
 
-        public ListAddressViewModel(Address entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        public ListAddressViewModel(Address entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public override void InitializeServices() { Operation = _operation; }
@@ -27,10 +26,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.County.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Country.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.District.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.County.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Country.ToUpper().Contains(Search.ToUpper()) || arg.District.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Street.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.StreetComplement.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.StreetNumber.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
@@ -43,10 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Address,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.List};
 
     }
 }

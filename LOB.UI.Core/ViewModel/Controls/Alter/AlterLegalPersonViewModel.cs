@@ -14,24 +14,19 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>,
-                                                    IAlterLegalPersonViewModel {
+    public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>, IAlterLegalPersonViewModel {
 
 // ReSharper disable NotAccessedField.Local
         private readonly AlterPersonViewModel _alterPersonViewModel;
 // ReSharper restore NotAccessedField.Local
         private readonly IEventAggregator _eventAggregator;
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
 
         [InjectionConstructor]
-        public AlterLegalPersonViewModel(LegalPerson entity,
-            AlterPersonViewModel alterPersonViewModel, IRepository repository,
+        public AlterLegalPersonViewModel(LegalPerson entity, AlterPersonViewModel alterPersonViewModel, IRepository repository,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _alterPersonViewModel = alterPersonViewModel;

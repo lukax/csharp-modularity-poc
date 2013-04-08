@@ -22,9 +22,9 @@
                       SelectionMode="Single">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="{x:Static loc:Strings.Command_Alter_Address}"
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Address}"
                                         DisplayMemberBinding="{Binding Address}" />
-                        <GridViewColumn Header="{x:Static loc:Strings.Command_Alter_ContactInfo}"
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_ContactInfo}"
                                         DisplayMemberBinding="{Binding ContactInfo}" />
                         <GridViewColumn Header="{x:Static loc:Strings.Common_Notes}"
                                         DisplayMemberBinding="{Binding Notes}" />

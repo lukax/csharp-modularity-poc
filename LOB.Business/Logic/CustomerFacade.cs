@@ -25,8 +25,7 @@ namespace LOB.Business.Logic {
             }
         }
 
-        public CustomerFacade(INaturalPersonFacade naturalPersonFacade,
-            ILegalPersonFacade legalPersonFacade) {
+        public CustomerFacade(INaturalPersonFacade naturalPersonFacade, ILegalPersonFacade legalPersonFacade) {
             _naturalPersonFacade = naturalPersonFacade;
             _legalPersonFacade = legalPersonFacade;
         }
@@ -61,10 +60,7 @@ namespace LOB.Business.Logic {
             _naturalPersonFacade.ConfigureValidations();
             if(_entity != null)
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CustomerOf.Count < 1
-                        ? new ValidationResult("CustomerOf", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => _entity.CustomerOf.Count < 1 ? new ValidationResult("CustomerOf", Strings.Error_Field_Empty) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -79,8 +75,7 @@ namespace LOB.Business.Logic {
             return result;
         }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
-        {
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
@@ -102,9 +97,7 @@ namespace LOB.Business.Logic {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

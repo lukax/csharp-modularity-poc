@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic.Base;
@@ -24,29 +23,16 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
-        public PhoneNumber GenerateEntity() {
-            return new PhoneNumber {
-                Code = 0,
-                Error = null,
-                Description = "",
-                Number = "",
-                PhoneNumberType = default(PhoneNumberType),
-            };
-        }
+        public PhoneNumber GenerateEntity() { return new PhoneNumber {Code = 0, Error = null, Description = "", Number = "", PhoneNumberType = default(PhoneNumberType),}; }
 
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Number)
-                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Number) ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Description)
-                        ? new ValidationResult("Description", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
             }
         }
 
@@ -56,15 +42,13 @@ namespace LOB.Business.Logic.SubEntity {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields)
-        {
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
         }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields)
-        {
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             //TODO: Repository validations here
             return result;
@@ -79,9 +63,7 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

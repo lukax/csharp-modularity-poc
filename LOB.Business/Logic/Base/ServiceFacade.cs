@@ -1,6 +1,5 @@
 #region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic.Base;
@@ -28,16 +27,9 @@ namespace LOB.Business.Logic.Base {
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
+                _entity.AddValidation((sender, name) => _entity.Name.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Name.Length < 1
-                        ? new ValidationResult("Name", Strings.Error_Field_Empty)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Description.Length > 300
-                        ? new ValidationResult("Description", Strings.Error_Field_TooLong)
-                        : null);
+                    (sender, name) => _entity.Description.Length > 300 ? new ValidationResult("Description", Strings.Error_Field_TooLong) : null);
             }
         }
 
@@ -47,9 +39,17 @@ namespace LOB.Business.Logic.Base {
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            //TODO: Repository validations here
+            return result;
+        }
 
         void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
 
@@ -60,9 +60,7 @@ namespace LOB.Business.Logic.Base {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

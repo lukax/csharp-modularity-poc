@@ -15,8 +15,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>,
-                                                 IAlterCustomerViewModel {
+    public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
 
         private readonly AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private readonly AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
@@ -24,15 +23,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly IFluentNavigator _navigator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Customer,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.Add};
 
         [InjectionConstructor]
-        public AlterCustomerViewModel(Customer entity, IRepository repository,
-            IFluentNavigator navigator, AlterLegalPersonViewModel alterLegalPersonViewModel,
-            AlterNaturalPersonViewModel alterNaturalPersonViewModel,
+        public AlterCustomerViewModel(Customer entity, IRepository repository, IFluentNavigator navigator,
+            AlterLegalPersonViewModel alterLegalPersonViewModel, AlterNaturalPersonViewModel alterNaturalPersonViewModel,
             IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _navigator = navigator;
@@ -63,18 +58,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private async void LegalPersonCfg() {
             await Task.Delay(500);
-            var viewL =
-                _navigator.ResolveView(Operation).SetViewModel(_alterLegalPersonViewModel).GetView();
+            var viewL = _navigator.ResolveView(Operation).SetViewModel(_alterLegalPersonViewModel).GetView();
             //Messenger.Default.Send<object>(viewL, "PersonTypeChanged");
             Entity.Person = _alterLegalPersonViewModel.Entity;
         }
 
         private async void NaturalPersonCfg() {
             await Task.Delay(500);
-            var viewN =
-                _navigator.ResolveView(Operation)
-                          .SetViewModel(_alterNaturalPersonViewModel)
-                          .GetView();
+            var viewN = _navigator.ResolveView(Operation).SetViewModel(_alterNaturalPersonViewModel).GetView();
             //Messenger.Default.Send<object>(viewN, "PersonTypeChanged");
             Entity.Person = _alterNaturalPersonViewModel.Entity;
         }

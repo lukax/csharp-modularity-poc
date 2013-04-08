@@ -12,11 +12,9 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
-    public sealed class ListCategoryViewModel : ListBaseEntityViewModel<Category>,
-                                                IListCategoryViewModel {
+    public sealed class ListCategoryViewModel : ListBaseEntityViewModel<Category>, IListCategoryViewModel {
 
-        public ListCategoryViewModel(Category entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        public ListCategoryViewModel(Category entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public override void InitializeServices() {
@@ -31,8 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Description.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.Description.ToUpper().Contains(Search.ToUpper()) ||
                          arg.Name.ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
@@ -40,10 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Category,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.List};
 
     }
 }

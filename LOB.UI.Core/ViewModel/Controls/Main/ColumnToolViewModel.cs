@@ -30,8 +30,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public ICommand NotificationCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
 
-        public ColumnToolViewModel(IEventAggregator eventAggregator, IFluentNavigator navigator,
-            IRegionAdapter regionAdapter, IUnityContainer unityContainer) {
+        public ColumnToolViewModel(IEventAggregator eventAggregator, IFluentNavigator navigator, IRegionAdapter regionAdapter,
+            IUnityContainer unityContainer) {
             _eventAggregator = eventAggregator;
             _navigator = navigator;
             _regionAdapter = regionAdapter;
@@ -47,10 +47,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private UIOperation _operation = new UIOperation {
-            Type = UIOperationType.ColumnTool,
-            State = UIOperationState.Tool
-        };
+        private UIOperation _operation = new UIOperation {Type = UIOperationType.ColumnTool, State = UIOperationState.Internal};
         public override UIOperation Operation {
             get { return _operation; }
             set { _operation = value; }
@@ -59,10 +56,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private void ShowOperations(object arg) {
             var op = new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List};
             if(_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
-            else
-                _navigator.Init.ResolveView(op)
-                          .ResolveViewModel(op)
-                          .AddToRegion(RegionName.TabRegion);
+            else _navigator.Init.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
         private void ShowShop(object obj) {
@@ -83,10 +77,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             //              .AddToRegion(RegionName.BottomRegion);
         }
 
-        private void Logout(object o) {
-            _eventAggregator.GetEvent<CloseViewEvent>()
-                            .Publish(new UIOperation {Type = UIOperationType.Main});
-        }
+        private void Logout(object o) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(new UIOperation {Type = UIOperationType.Main}); }
 
         private void InitWorker() {
             _worker.DoWork += UpdateStatus;

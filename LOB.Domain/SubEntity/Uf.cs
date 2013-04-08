@@ -104,12 +104,8 @@ namespace LOB.Domain.SubEntity {
             IEnumerable<string> contents = null;
             foreach(var file in Directory.EnumerateFiles("..//..//..//lib//MunIBGE", "*.txt")) if(file.Contains(ibgeCod.ToString(Thread.CurrentThread.CurrentCulture))) contents = File.ReadLines(file, Encoding.Default);
             //Faster than Regex.Replace(input, @"[\d-]", "");
-            return contents != null
-                       ? contents.Select(
-                           content =>
-                           content.Remove(0,8))
-                       : null;
+            return contents != null ? contents.Select(content => content.Remove(0, 8)) : null;
         }
-        
+
     }
 }

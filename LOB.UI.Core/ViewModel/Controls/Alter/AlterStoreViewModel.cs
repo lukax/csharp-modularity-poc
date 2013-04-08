@@ -22,23 +22,19 @@ using Category = LOB.Domain.SubEntity.Category;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public sealed class AlterStoreViewModel : AlterBaseEntityViewModel<Store>,
-                                                IAlterProductViewModel {
+    public sealed class AlterStoreViewModel : AlterBaseEntityViewModel<Store>, IAlterProductViewModel {
 
         private readonly IStoreFacade _storeFacade;
         private readonly IEventAggregator _eventAggregator;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Store,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Store, State = UIOperationState.Add};
         private readonly BackgroundWorker _worker = new BackgroundWorker();
 
         [InjectionConstructor]
-        public AlterStoreViewModel(Store entity, IRepository repository, IStoreFacade storeFacade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterStoreViewModel(Store entity, IRepository repository, IStoreFacade storeFacade, IEventAggregator eventAggregator,
+            ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _storeFacade = storeFacade;
             _eventAggregator = eventAggregator;

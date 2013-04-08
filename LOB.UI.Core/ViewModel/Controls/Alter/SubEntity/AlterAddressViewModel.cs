@@ -24,8 +24,7 @@ using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>,
-                                                IAlterAddressViewModel {
+    public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
 
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IAddressFacade _addressFacade;
@@ -33,7 +32,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private string _status;
         private IList<string> _statuses;
         public ObservableCollection<UF> UFs { get; set; }
-        public ObservableCollection<string> Districts { get; set; } 
+        public ObservableCollection<string> Districts { get; set; }
         private UF _uf;
         public UF UF {
             get { return _uf; }
@@ -53,8 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         [InjectionConstructor]
-        public AlterAddressViewModel(Address entity, IRepository repository,
-            IAddressFacade addressFacade, IEventAggregator eventAggregator,
+        public AlterAddressViewModel(Address entity, IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _addressFacade = addressFacade;
@@ -76,7 +74,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _worker.DoWork += UpdateUFList;
             _worker.RunWorkerAsync();
             _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(new Notification{ Message = string.Format("{0} {1}", Strings.Common_Initialized, Strings.Command_Alter_Address), Progress = 0, Severity = Severity.Info});
+            _eventAggregator.GetEvent<NotificationEvent>()
+                            .Publish(new Notification {
+                                Message = string.Format("{0} {1}", Strings.Common_Initialized, Strings.Command_Add_Address),
+                                Progress = 0,
+                                Severity = Severity.Info
+                            });
         }
 
         private void Include(BaseEntity obj) {
@@ -119,10 +122,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _addressFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Address,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.Add};
 
     }
 }

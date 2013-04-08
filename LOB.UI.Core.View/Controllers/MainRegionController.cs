@@ -24,8 +24,8 @@ namespace LOB.UI.Core.View.Controllers {
         private readonly IFluentNavigator _navigator;
         private readonly IRegionAdapter _regionAdapter;
 
-        public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter,
-            IEventAggregator eventAggregator, ILoggerFacade logger, IFluentNavigator navigator) {
+        public MainRegionController(IUnityContainer container, IRegionAdapter regionAdapter, IEventAggregator eventAggregator, ILoggerFacade logger,
+            IFluentNavigator navigator) {
             _container = container;
             _regionAdapter = regionAdapter;
             _eventAggregator = eventAggregator;
@@ -46,21 +46,14 @@ namespace LOB.UI.Core.View.Controllers {
             if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             param.IsChild = false;
             if(param.State == UIOperationState.QuickSearch) QuickSearch(param);
-            else
-                _navigator.Init.ResolveView(param)
-                          .ResolveViewModel(param)
-                          .AddToRegion(RegionName.TabRegion);
+            else _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
         }
 
         private void QuickSearch(UIOperation param) {
             if(param.Type == default(UIOperationType)) throw new ArgumentException("param");
             var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
             var baseViewModel = view.ViewModel as BaseViewModel;
-            if(baseViewModel != null)
-                baseViewModel.Operation = new UIOperation {
-                    State = UIOperationState.QuickSearch,
-                    Type = view.Operation.Type
-                };
+            if(baseViewModel != null) baseViewModel.Operation = new UIOperation {State = UIOperationState.QuickSearch, Type = view.Operation.Type};
             // Let the viewModel know that it's in QuickSearch State
             _regionAdapter.AddView(view, RegionName.ModalRegion);
         }
@@ -85,8 +78,7 @@ namespace LOB.UI.Core.View.Controllers {
         }
 
         public async void MessageHide([AllowNull] string param) {
-            _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool},
-                                      RegionName.ModalRegion);
+            _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool}, RegionName.ModalRegion);
 
             if(param != null) {
                 MessageShow(param, false);

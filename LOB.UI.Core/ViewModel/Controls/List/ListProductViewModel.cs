@@ -13,12 +13,10 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>,
-                                               IListProductViewModel {
+    public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel {
 
         [InjectionConstructor]
-        public ListProductViewModel(Product entity, IRepository repository,
-            EventAggregator eventAggregator)
+        public ListProductViewModel(Product entity, IRepository repository, EventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Product, bool>> SearchCriteria {
@@ -26,8 +24,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Name.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.Name.ToUpper().Contains(Search.ToUpper()) ||
                          arg.Description.ToUpper().Contains(Search.ToUpper()) ||
                          arg.UnitSalePrice.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.ProfitMargin.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
@@ -42,10 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Product,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Product, State = UIOperationState.List};
 
     }
 }

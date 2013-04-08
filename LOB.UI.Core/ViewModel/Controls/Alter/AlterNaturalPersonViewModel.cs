@@ -15,20 +15,15 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>,
-                                               IAlterNaturalPersonViewModel {
+    public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
 
         private readonly IEventAggregator _eventAggregator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         [InjectionConstructor]
-        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
 
         public string BirthDate {

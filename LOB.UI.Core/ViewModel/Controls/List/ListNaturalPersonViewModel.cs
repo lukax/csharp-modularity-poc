@@ -13,12 +13,10 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>,
-                                              IListNaturalPersonViewModel {
+    public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel {
 
         [InjectionConstructor]
-        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        public ListNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<NaturalPerson, bool>> SearchCriteria {
@@ -26,10 +24,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.NickName.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.LastName.ToUpper().Contains(Search.ToUpper()) || arg.NickName.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.RG.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.CPF.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
@@ -43,10 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.NaturalPerson,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.NaturalPerson, State = UIOperationState.List};
 
     }
 }

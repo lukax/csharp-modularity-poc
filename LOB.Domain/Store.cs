@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using LOB.Domain.Base;
-using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -15,6 +14,6 @@ namespace LOB.Domain {
         public IList<Product> Products { get; set; }
         public IList<Customer> Clients { get; set; }
         public IList<Sale> Sales { get; set; }
-        
+
     }
 }

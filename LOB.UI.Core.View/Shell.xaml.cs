@@ -58,29 +58,20 @@ namespace LOB.UI.Core.View {
 
         public void InitializeServices() {
             _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
-                                                                     if(type.State ==
-                                                                        UIOperationState.QuickSearch) {
+                                                                     if(type.State == UIOperationState.QuickSearch) {
                                                                          BlurModal.Radius = 10;
-                                                                         BorderModal.Visibility =
-                                                                             Visibility.Visible;
+                                                                         BorderModal.Visibility = Visibility.Visible;
                                                                      }
                                                                  });
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
-                                                                      if(type.State ==
-                                                                         UIOperationState
-                                                                             .QuickSearch) {
+                                                                      if(type.State == UIOperationState.QuickSearch) {
                                                                           BlurModal.Radius = 0;
-                                                                          BorderModal.Visibility =
-                                                                              Visibility.Hidden;
+                                                                          BorderModal.Visibility = Visibility.Hidden;
                                                                       }
-                                                                      if(type.Type ==
-                                                                         UIOperationType.Main) Close();
+                                                                      if(type.Type == UIOperationType.Main) Close();
                                                                   });
             _eventAggregator.GetEvent<NotificationEvent>()
-                            .Publish(new Notification {
-                                Message = Strings.App_License_Information,
-                                Severity = Severity.Warning
-                            });
+                            .Publish(new Notification {Message = Strings.App_License_Information, Severity = Severity.Warning});
         }
 
         public void Refresh() {
@@ -93,10 +84,7 @@ namespace LOB.UI.Core.View {
         }
 
         private void OnLoad() {
-            _eventAggregator.GetEvent<CloseViewEvent>()
-                            .Subscribe(
-                                o => {
-                                    if(o.Equals(new UIOperation {Type = UIOperationType.Main})) Close(); });
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new UIOperation {Type = UIOperationType.Main})) Close(); });
 
             if(_loaded) return;
             _module = _container.Resolve<IModuleManager>();
@@ -105,8 +93,7 @@ namespace LOB.UI.Core.View {
             _loaded = true;
         }
 
-        private async void TabRegion_OnSelectionChanged(object sender,
-            NotifyCollectionChangedEventArgs e) {
+        private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             TabRegion.SelectedIndex = -1;
             ProgressRing.IsActive = true;
             await Task.Delay(400);
@@ -130,64 +117,27 @@ namespace LOB.UI.Core.View {
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedParameter.Local
-        private void MiLightGrey() {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"),
-                                     Theme.Light);
-        }
+        private void MiLightGrey() { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Grey"), Theme.Light); }
 
-        private void MiLightRed(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"),
-                                     Theme.Light);
-        }
+        private void MiLightRed(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"), Theme.Light); }
 
-        private void MiDarkRed(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"),
-                                     Theme.Dark);
-        }
+        private void MiDarkRed(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Red"), Theme.Dark); }
 
-        private void MiLightGreen(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"),
-                                     Theme.Light);
-        }
+        private void MiLightGreen(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"), Theme.Light); }
 
-        private void MiDarkGreen(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"),
-                                     Theme.Dark);
-        }
+        private void MiDarkGreen(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Green"), Theme.Dark); }
 
-        private void MiLightBlue(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"),
-                                     Theme.Light);
-        }
+        private void MiLightBlue(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"), Theme.Light); }
 
-        private void MiDarkBlue(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"),
-                                     Theme.Dark);
-        }
+        private void MiDarkBlue(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Blue"), Theme.Dark); }
 
-        private void MiLightPurple(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Purple"),
-                                     Theme.Light);
-        }
+        private void MiLightPurple(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Purple"), Theme.Light); }
 
-        private void MiDarkPurple(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Purple"),
-                                     Theme.Dark);
-        }
+        private void MiDarkPurple(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Purple"), Theme.Dark); }
 
-        private void MiDarkOrange(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Orange"),
-                                     Theme.Dark);
-        }
+        private void MiDarkOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Dark); }
 
-        private void MiLightOrange(object sender, RoutedEventArgs e) {
-            ThemeManager.ChangeTheme(this,
-                                     ThemeManager.DefaultAccents.First(a => a.Name == "Orange"),
-                                     Theme.Light);
-        }
+        private void MiLightOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light); }
         // ReSharper restore UnusedMember.Local
         // ReSharper restore UnusedParameter.Local
 

@@ -24,16 +24,14 @@ using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>,
-                                                    IAlterContactInfoViewModel {
+    public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
 
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
 
-        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository,
-            IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
+        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade,
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _contactInfoFacade = contactInfoFacade;
             _eventAggregator = eventAggregator;
@@ -66,10 +64,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.ContactInfo,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
         #region UI Validations
 
         private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation); }
@@ -152,10 +147,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            var k = new Notification {
-                Message = Strings.Notification_List_Updating,
-                Progress = args.ProgressPercentage
-            };
+            var k = new Notification {Message = Strings.Notification_List_Updating, Progress = args.ProgressPercentage};
             _eventAggregator.GetEvent<NotificationEvent>().Publish(k);
         }
 

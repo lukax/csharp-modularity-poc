@@ -17,8 +17,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private readonly IServiceFacade _serviceFacade;
         private readonly IEventAggregator _eventAggregator;
 
-        protected AlterServiceViewModel(Service entity, IRepository repository,
-            IServiceFacade serviceFacade, IEventAggregator eventAggregator,
+        protected AlterServiceViewModel(Service entity, IRepository repository, IServiceFacade serviceFacade, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _serviceFacade = serviceFacade;
@@ -31,10 +30,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntity(null);
         }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         public override void Refresh() { ClearEntity(null); }
 

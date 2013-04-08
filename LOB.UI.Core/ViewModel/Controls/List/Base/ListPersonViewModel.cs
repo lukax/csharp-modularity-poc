@@ -14,8 +14,7 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
 
-        protected ListPersonViewModel(Person entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        protected ListPersonViewModel(Person entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<Person, bool>> SearchCriteria {
@@ -23,12 +22,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(CultureInfo.InvariantCulture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString(CultureInfo.InvariantCulture)
-                            .ToUpper()
-                            .Contains(Search.ToUpper()));
+                         arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }
@@ -42,10 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Person,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.List};
 
     }
 }

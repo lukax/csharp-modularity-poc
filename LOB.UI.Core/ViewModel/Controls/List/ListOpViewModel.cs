@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events.View;
@@ -16,6 +15,7 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
+using NullGuard;
 
 #endregion
 
@@ -35,65 +35,59 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             _operationDictLazy = new Lazy<IDictionary<string, UIOperation>>(CreateList);
-            Search = "";
+            //Search = "";
             Entity = "";
         }
 
+        [AllowNull]
         public string Search {
-            get { return _search.ToLower(); }
+            get { return _search ?? ""; }
             set {
-                _search = value;
-                UpdateList();
+                _search = value.ToLower();
+                if(!_worker.IsBusy) _worker.RunWorkerAsync();
             }
         }
 
         public override void InitializeServices() {
             Operation = _operation;
-            _worker.DoWork += (sender, args) => UpdateList();
+            _worker.DoWork += UpdateList;
+            _worker.WorkerSupportsCancellation = true;
             _worker.RunWorkerAsync();
         }
 
         public override void Refresh() { }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Op,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List};
 
-        private void UpdateList() {
-            Task.Delay(1000);
+        private void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
+            //var worker = sender as BackgroundWorker;
+            //if(worker == null) return;
+            //worker.WorkerSupportsCancellation = true;
+
+            //Thread.Sleep(1000);
             if(string.IsNullOrEmpty(Search)) {
                 var alterGroup = new PanoramaGroup(Strings.Header_Alter);
-                alterGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(
-                        x => _operationDictLazy.Value[x].ToString().Contains("Alter")).ToList());
+                alterGroup.SetSource(_operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Add")).ToList());
                 var listGroup = new PanoramaGroup(Strings.Header_List);
-                listGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(
-                        x => _operationDictLazy.Value[x].ToString().Contains("List")).ToList());
+                listGroup.SetSource(_operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("List")).ToList());
                 var sellGroup = new PanoramaGroup(Strings.Header_Sell);
-                sellGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(
-                        x => _operationDictLazy.Value[x].ToString().Contains("Sell")).ToList());
+                sellGroup.SetSource(_operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Sell")).ToList());
                 Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
             }
             else {
                 var alterGroup = new PanoramaGroup(Strings.Header_Alter);
                 alterGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(
-                        x => _operationDictLazy.Value[x].ToString().Contains("Alter"))
+                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Add"))
                                       .Where(x => x.ToLower().Contains(Search))
                                       .ToList());
                 var listGroup = new PanoramaGroup(Strings.Header_List);
                 listGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(
-                        x => _operationDictLazy.Value[x].ToString().Contains("List"))
+                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("List"))
                                       .Where(x => x.ToLower().Contains(Search))
                                       .ToList());
                 var sellGroup = new PanoramaGroup(Strings.Header_Sell);
                 sellGroup.SetSource(
-                    _operationDictLazy.Value.Keys.Where(
-                        x => _operationDictLazy.Value[x].ToString().Contains("Sell"))
+                    _operationDictLazy.Value.Keys.Where(x => _operationDictLazy.Value[x].ToString().Contains("Sell"))
                                       .Where(x => x.ToLower().Contains(Search))
                                       .ToList());
                 Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
@@ -113,13 +107,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.BaseEntity));
             catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Service));
             catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Person));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Tool));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Loading));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Add));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Internal));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Update));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Discard));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.QuickSearch));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Exit));
             var operationTypes = new Dictionary<string, UIOperation>(catalog.Count);
             var stringsType = typeof(Strings);
             var stringsTypeProps = stringsType.GetProperties();
@@ -127,18 +118,26 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             //Parse to localized string
             foreach(var uiOperation in catalog) {
                 UIOperation operation = uiOperation;
-                foreach(string name in from propertyInfo in stringsTypeProps
-                                       let name = propertyInfo.Name
-                                       where propertyInfo.Name.Contains("Command_" + operation)
-                                       select name)
-                    operationTypes.Add(
-                        stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
+                foreach(
+                    string name in
+                        from propertyInfo in stringsTypeProps
+                        let name = propertyInfo.Name
+                        where propertyInfo.Name.Contains("Command_" + operation)
+                        select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
             }
             return operationTypes;
         }
         #region Implementation of IDisposable
 
-        public override void Dispose() { GC.SuppressFinalize(this); }
+        ~ListOpViewModel() { Dispose(false); }
+        public override void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected void Dispose(bool disposing) {
+            if(_worker.WorkerSupportsCancellation) _worker.CancelAsync();
+            if(disposing) _worker.Dispose();
+        }
 
         #endregion
     }

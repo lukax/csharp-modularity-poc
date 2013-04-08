@@ -40,20 +40,12 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.WebSite.Length > 300
-                        ? new ValidationResult("WebSite", Strings.Error_Field_TooLong)
-                        : null);
+                    (sender, name) => _entity.WebSite.Length > 300 ? new ValidationResult("WebSite", Strings.Error_Field_TooLong) : null);
                 _entity.AddValidation(
                     (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Description)
-                        ? new ValidationResult("Description", Strings.Error_Field_Empty)
-                        : null);
+                    string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.SpeakWith.Length > 300
-                        ? new ValidationResult("SpeakWith", Strings.Error_Field_TooLong)
-                        : null);
+                    (sender, name) => _entity.SpeakWith.Length > 300 ? new ValidationResult("SpeakWith", Strings.Error_Field_TooLong) : null);
             }
         }
 
@@ -82,9 +74,7 @@ namespace LOB.Business.Logic.SubEntity {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

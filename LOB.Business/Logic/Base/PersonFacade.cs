@@ -19,8 +19,7 @@ namespace LOB.Business.Logic.Base {
         private readonly IContactInfoFacade _contactInfoFacade;
         private Person _entity;
 
-        public PersonFacade(IBaseEntityFacade baseEntityFacade, IAddressFacade addressFacade,
-            IContactInfoFacade contactInfoFacade) {
+        public PersonFacade(IBaseEntityFacade baseEntityFacade, IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade) {
             _baseEntityFacade = baseEntityFacade;
             _addressFacade = addressFacade;
             _contactInfoFacade = contactInfoFacade;
@@ -36,25 +35,14 @@ namespace LOB.Business.Logic.Base {
         public Person GenerateEntity() {
             var localAddress = _addressFacade.GenerateEntity();
             var localContactInfo = _contactInfoFacade.GenerateEntity();
-            return new LocalPerson {
-                Code = 0,
-                Error = null,
-                Address = localAddress,
-                ContactInfo = localContactInfo,
-                Notes = "",
-            };
+            return new LocalPerson {Code = 0, Error = null, Address = localAddress, ContactInfo = localContactInfo, Notes = "",};
         }
 
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             _addressFacade.ConfigureValidations();
             _contactInfoFacade.ConfigureValidations();
-            if(_entity != null)
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Notes.Length > 300
-                        ? new ValidationResult("Notes", Strings.Error_Field_TooLong)
-                        : null);
+            if(_entity != null) _entity.AddValidation((sender, name) => _entity.Notes.Length > 300 ? new ValidationResult("Notes", Strings.Error_Field_TooLong) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
@@ -75,9 +63,7 @@ namespace LOB.Business.Logic.Base {
             invalidFields = fields;
             if(
                 fields.Where(validationResult => validationResult != null)
-                      .Count(
-                          validationResult =>
-                          !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
 

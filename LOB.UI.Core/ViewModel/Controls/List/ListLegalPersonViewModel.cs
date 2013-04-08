@@ -1,9 +1,7 @@
 ﻿#region Usings
 
 using System;
-using System.Globalization;
 using System.Linq.Expressions;
-using System.Threading;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
@@ -15,12 +13,10 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>,
-                                            IListLegalPersonViewModel {
+    public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
 
         [InjectionConstructor]
-        public ListLegalPersonViewModel(LegalPerson entity, IRepository repository,
-            EventAggregator eventAggregator)
+        public ListLegalPersonViewModel(LegalPerson entity, IRepository repository, EventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public new Expression<Func<LegalPerson, bool>> SearchCriteria {
@@ -28,10 +24,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CorporateName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CNPJ.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.TradingName.ToUpper().Contains(Search.ToUpper()) ||
+                         arg.CorporateName.ToUpper().Contains(Search.ToUpper()) || arg.CNPJ.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.InscEstadual.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.InscMunicipal.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                          arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
@@ -46,10 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.LegalPerson,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.LegalPerson, State = UIOperationState.List};
 
     }
 }

@@ -26,10 +26,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private readonly IEventAggregator _eventAggregator;
 
         [InjectionConstructor]
-        public AlterPersonViewModel(Person entity, IPersonFacade personFacade,
-            AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+        public AlterPersonViewModel(Person entity, IPersonFacade personFacade, AlterAddressViewModel alterAddressViewModel,
+            AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _personFacade = personFacade;
             _alterAddressViewModel = alterAddressViewModel;
@@ -59,10 +57,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Person,
-            State = UIOperationState.Add
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add};
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {

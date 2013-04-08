@@ -13,8 +13,7 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public class ListServiceViewModel : ListBaseEntityViewModel<Service>, IListServiceViewModel {
 
-        public ListServiceViewModel(Service entity, IRepository repository,
-            IEventAggregator eventAggregator)
+        public ListServiceViewModel(Service entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
         public override void InitializeServices() {
@@ -37,10 +36,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Service,
-            State = UIOperationState.List
-        };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.List};
 
     }
 }

@@ -17,14 +17,12 @@ using Category = LOB.Domain.SubEntity.Category;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>,
-                                                 IAlterCategoryViewModel {
+    public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {
 
         private readonly ICategoryFacade _categoryFacade;
         private readonly IEventAggregator _eventAggregator;
 
-        public AlterCategoryViewModel(Category entity, IRepository repository,
-            ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
+        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _categoryFacade = categoryFacade;
@@ -42,15 +40,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var entity = baseEntity as Category;
             if(entity == null) return;
             Entity = entity;
-            Operation.State = UIOperationState.Update;
+            Operation.State(UIOperationState.Update);
         }
 
         public override void Refresh() { ClearEntity(null); }
-
-        private readonly UIOperation _operation = new UIOperation {
-            Type = UIOperationType.Category,
-            State = UIOperationState.Add
-        };
 
         protected override void SaveChanges(object arg) {
             using(Repository.Uow.BeginTransaction()) {
@@ -80,5 +73,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _categoryFacade.ConfigureValidations();
         }
 
+        private readonly UIOperation _operation = new UIOperation { Type = UIOperationType.Category, State = UIOperationState.Add };
     }
 }
