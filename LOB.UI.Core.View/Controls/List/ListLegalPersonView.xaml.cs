@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -8,8 +9,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    public partial class ListLegalPersonView : IBaseView
-    {
+    public partial class ListLegalPersonView : IBaseView {
 
         public ListLegalPersonView() { InitializeComponent(); }
 
@@ -35,6 +35,13 @@ namespace LOB.UI.Core.View.Controls.List {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+        #region Implementation of IDisposable
 
+        public void Dispose() {
+            if(ViewModel != null) ViewModel.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

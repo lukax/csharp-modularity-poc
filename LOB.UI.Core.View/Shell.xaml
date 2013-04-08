@@ -44,7 +44,7 @@
             <ContentControl x:Name="ColumnRegion" Grid.Row="1" Grid.RowSpan="2"
                             Grid.Column="1" regions:RegionManager.RegionName="ColumnRegion" />
 
-            <ContentControl x:Name="BottomRegion" Grid.Row="2" 
+            <ContentControl x:Name="BottomRegion" Grid.Row="2"
                             regions:RegionManager.RegionName="BottomRegion" />
 
             <Border Background="{DynamicResource AccentBrush3}" Opacity="0.2" x:Name="BorderModal" Grid.RowSpan="2"

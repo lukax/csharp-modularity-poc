@@ -11,7 +11,8 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5" Visibility="{Binding ConfCancelToolVisibility}">
+    <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5"
+                Visibility="{Binding ConfCancelToolVisibility}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="ButtonCancel" Height="32" Command="{Binding CancelCommand}" IsCancel="True" Padding="1">
                 <DockPanel>

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Windows.Input;
 using LOB.Core.Licensing;
 using LOB.UI.Core.Infrastructure;
@@ -42,6 +43,10 @@ namespace LOB.UI.Core.ViewModel {
         public override void InitializeServices() { }
 
         public override void Refresh() { }
+        #region Implementation of IDisposable
 
+        public override void Dispose() { GC.SuppressFinalize(this); }
+
+        #endregion
     }
 }

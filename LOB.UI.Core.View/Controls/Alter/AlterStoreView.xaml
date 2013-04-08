@@ -19,35 +19,35 @@
     <StackPanel>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            
-            <base2:AlterBaseEntityView/>
-            
-            <Label Content="{x:Static loc:Strings.Common_Name}" Grid.Column="1" HorizontalAlignment="Right"/>
-            <TextBox Text="{Binding Name}" Grid.Column="2" HorizontalAlignment="Left" MinWidth="200"/>
 
-            <alter:AlterLegalPersonView Grid.Row="2" Grid.ColumnSpan="4"/>
-            
+            <base2:AlterBaseEntityView />
+
+            <Label Content="{x:Static loc:Strings.Common_Name}" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBox Text="{Binding Name}" Grid.Column="2" HorizontalAlignment="Left" MinWidth="200" />
+
+            <alter:AlterLegalPersonView Grid.Row="2" Grid.ColumnSpan="4" />
+
             <TabControl Grid.Row="3" Grid.ColumnSpan="4">
-                <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}"/>
-                <TabItem Header="{x:Static loc:Strings.Header_List_Employee}"/>
-                <TabItem Header="{x:Static loc:Strings.Header_List_Product}"/>
-                <TabItem Header="{x:Static loc:Strings.Header_List_Client}"/>
-                <TabItem Header="{x:Static loc:Strings.Header_List_Sale}"/>
+                <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
+                <TabItem Header="{x:Static loc:Strings.Header_List_Employee}" />
+                <TabItem Header="{x:Static loc:Strings.Header_List_Product}" />
+                <TabItem Header="{x:Static loc:Strings.Header_List_Client}" />
+                <TabItem Header="{x:Static loc:Strings.Header_List_Sale}" />
             </TabControl>
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}" />
     </StackPanel>
 </UserControl>

@@ -1,6 +1,6 @@
 ﻿#region Usings
 
-using System.Windows.Controls;
+using System;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events;
 using LOB.UI.Interface;
@@ -47,6 +47,13 @@ namespace LOB.UI.Core.View.Controls.List {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+        #region Implementation of IDisposable
 
+        public void Dispose() {
+            if(ViewModel != null) ViewModel.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

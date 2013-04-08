@@ -64,7 +64,7 @@
                     </TabItem>
                 </TabControl>
 
-                <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
+                <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}" />
             </StackPanel>
 
         </StackPanel>

@@ -136,6 +136,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
             return operationTypes;
         }
+        #region Implementation of IDisposable
 
+        public override void Dispose() { GC.SuppressFinalize(this); }
+
+        #endregion
     }
 }

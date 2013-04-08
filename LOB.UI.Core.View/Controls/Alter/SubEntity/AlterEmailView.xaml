@@ -20,6 +20,6 @@
                      Text="{Binding Entity.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Email}" />
         </StackPanel>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}" />
     </StackPanel>
 </UserControl>

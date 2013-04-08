@@ -122,7 +122,7 @@
                                          HorizontalAlignment="Left" Grid.Column="4" Grid.Row="4" />
         </Grid>
 
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}"/>
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}" />
 
     </StackPanel>
 </UserControl>

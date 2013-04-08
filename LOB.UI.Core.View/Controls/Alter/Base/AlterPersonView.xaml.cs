@@ -31,13 +31,20 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public int Index { get; set; }
 
-        public void InitializeServices() { throw new NotImplementedException(); }
+        public void InitializeServices() { }
 
-        public void Refresh() { throw new NotImplementedException(); }
+        public void Refresh() { }
 
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+        #region Implementation of IDisposable
 
+        public void Dispose() {
+            if(ViewModel != null) ViewModel.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Globalization;
@@ -75,8 +76,11 @@ namespace LOB.UI.Core.View {
                                                                       if(type.Type ==
                                                                          UIOperationType.Main) Close();
                                                                   });
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(new Notification { Message = Strings.App_License_Information, Progress = 0, Severity = Severity.Information });
-
+            _eventAggregator.GetEvent<NotificationEvent>()
+                            .Publish(new Notification {
+                                Message = Strings.App_License_Information,
+                                Severity = Severity.Warning
+                            });
         }
 
         public void Refresh() {
@@ -114,6 +118,14 @@ namespace LOB.UI.Core.View {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+        #region Implementation of IDisposable
+
+        public void Dispose() {
+            if(ViewModel != null) ViewModel.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
         #region Themes
 
 // ReSharper disable UnusedMember.Local

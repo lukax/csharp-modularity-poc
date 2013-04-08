@@ -19,8 +19,8 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public void AddView<TView>(TView view, string regionName) where TView : IBaseView {
             var region = _regionManager.Regions[regionName];
-            var previousView = region.GetView(view.Operation.ToString());
-            if(previousView != null) if(region.Views.Contains(previousView)) region.Remove(previousView);
+            var previousView = region.GetView(view.Operation.ToString()) as IBaseView;
+            if(previousView != null) if(region.Views.Contains(previousView)) RemoveView(previousView.Operation, regionName);
             region.Add(view, view.Operation.ToString());
         }
 
@@ -32,12 +32,15 @@ namespace LOB.UI.Core.View.Infrastructure {
         public void RemoveView(UIOperation param, string regionName) {
             if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             var region = _regionManager.Regions[regionName];
-            var view = region.GetView(param.ToString());
-            if(ContainsView(param, regionName)) region.Remove(view);
+            var view = region.GetView(param.ToString()) as IBaseView;
+            if(ContainsView(param, regionName)) {
+                region.Remove(view);
+                if(view != null) view.Dispose();
+            }
         }
 
         public bool ContainsView(UIOperation param, string regionName) {
-            if (param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+            if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
             var region = _regionManager.Regions[regionName];
             var view = region.GetView(param.ToString());
             return region.Views.Contains(view);

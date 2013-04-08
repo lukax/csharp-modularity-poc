@@ -22,6 +22,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
         public UIOperation Operation {
             get { return _operation; }
         }
+        #region Implementation of IDisposable
 
+        public void Dispose() { GC.SuppressFinalize(this); }
+
+        #endregion
     }
 }

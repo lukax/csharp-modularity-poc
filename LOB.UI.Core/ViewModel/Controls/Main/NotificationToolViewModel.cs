@@ -1,5 +1,9 @@
 ﻿#region Usings
 
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using LOB.Core.Localization;
@@ -19,6 +23,7 @@ using NullGuard;
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
 
+        private readonly BackgroundWorker _worker = new BackgroundWorker();
         [AllowNull]
         public Notification Entity { get; set; }
         public MThreadObservableCollection<Notification> Entitys { get; set; }
@@ -44,7 +49,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             Entitys = new MThreadObservableCollection<Notification>();
             IsVisible = false;
             _eventAggregator.GetEvent<NotificationEvent>().Subscribe(NotificationListener);
+            InitWorker();
         }
+
         private void Dismiss(object o) {
             if(Entity != null) Entitys.Remove(Entity);
             if(Entitys.Count == 0) IsVisible = false;
@@ -57,7 +64,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             IsVisible = true;
         }
 
+        private void InitWorker() {
+            _worker.DoWork += AutoCleanEntititys;
+            _worker.RunWorkerAsync();
+        }
+
+        private void AutoCleanEntititys(object sender, DoWorkEventArgs doWorkEventArgs) {
+            var worker = sender as BackgroundWorker;
+            if(worker == null) return;
+            worker.WorkerSupportsCancellation = true;
+            do {
+                Thread.Sleep(10000);
+                var currentStack = Entitys.ToList(); //Thread Safe
+                foreach(var notification in currentStack) if(notification.Severity == Severity.Ok) Entitys.Remove(notification);
+            } while(!_worker.CancellationPending);
+        }
+
         public override void Refresh() { }
+        public override void Dispose() {
+            _worker.CancelAsync();
+            _worker.Dispose();
+            GC.SuppressFinalize(this);
+        }
 
         public override UIOperation Operation {
             get { return _operation; }

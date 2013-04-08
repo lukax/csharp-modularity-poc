@@ -22,6 +22,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
         public void InitializeServices() { throw new NotImplementedException(); }
 
         public void Refresh() { throw new NotImplementedException(); }
+        #region Implementation of IDisposable
 
+        public void Dispose() { GC.SuppressFinalize(this); }
+
+        #endregion
     }
 }

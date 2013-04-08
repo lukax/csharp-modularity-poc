@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -111,6 +112,13 @@ namespace LOB.UI.Core.View.Controls.Util {
         public UIOperation Operation {
             get { return ViewModel.Operation; }
         }
+        #region Implementation of IDisposable
 
+        public void Dispose() {
+            if(ViewModel != null) ViewModel.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

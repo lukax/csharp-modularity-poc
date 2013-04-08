@@ -48,7 +48,7 @@
                     <util:ListContextToolMenuView x:Name="ViewListContextTool" />
                 </ListView.ContextMenu>
             </ListView>
-            
+
         </StackPanel>
         <Border.Effect>
             <DropShadowEffect ShadowDepth="4" Direction="50" />

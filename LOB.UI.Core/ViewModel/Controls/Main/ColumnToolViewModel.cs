@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -89,16 +90,32 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private void InitWorker() {
             _worker.DoWork += UpdateStatus;
-            _worker.WorkerSupportsCancellation = true;
             _worker.RunWorkerAsync();
         }
 
         private async void UpdateStatus(object sender, DoWorkEventArgs doWorkEventArgs) {
+            var worker = sender as BackgroundWorker;
+            if(worker == null) return;
+            worker.WorkerSupportsCancellation = true;
             do {
                 await Task.Delay(1000);
                 NotificationStatus = _unityContainer.Resolve<INotificationToolViewModel>().Status;
             } while(!_worker.CancellationPending);
         }
+        #region Implementation of IDisposable
 
+        //~ColumnToolViewModel() { Disposing(false); }
+
+        public override void Dispose() {
+            Disposing(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Disposing(bool disposing) {
+            _worker.CancelAsync();
+            if(disposing) _worker.Dispose();
+        }
+
+        #endregion
     }
 }

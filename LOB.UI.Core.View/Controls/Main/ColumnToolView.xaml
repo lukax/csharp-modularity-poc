@@ -12,30 +12,33 @@
     </UserControl.Resources>
 
     <Expander IsExpanded="True" ExpandDirection="Left">
-    <DockPanel Grid.Column="1" MinWidth="70" HorizontalAlignment="Center">
+        <DockPanel Grid.Column="1" MinWidth="70" HorizontalAlignment="Center">
 
-        <Button FontSize="14" Width="42" Height="42" Margin="0,20,0,0" Padding="0" BorderThickness="0" DockPanel.Dock="Top"
-                       Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Operations}" Focusable="False"
-                       Command="{Binding OperationCommand}">
+            <Button FontSize="14" Width="42" Height="42" Margin="0,20,0,0" Padding="0" BorderThickness="0"
+                    DockPanel.Dock="Top"
+                    Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Operations}" Focusable="False"
+                    Command="{Binding OperationCommand}">
                 <Rectangle Width="38.667" Height="38.667">
-                <Rectangle.Fill>
-                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_tiles_nine}" />
-                </Rectangle.Fill>
-            </Rectangle>
-        </Button>
-            <Button FontSize="14" Width="42" Height="42" Margin="0,10,0,5" Padding="0" BorderThickness="0" DockPanel.Dock="Top"
-                       Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Sales}" Focusable="False"
-                       Command="{Binding ShopCommand}">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_tiles_nine}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button FontSize="14" Width="42" Height="42" Margin="0,10,0,5" Padding="0" BorderThickness="0"
+                    DockPanel.Dock="Top"
+                    Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Sales}" Focusable="False"
+                    Command="{Binding ShopCommand}">
                 <Rectangle Width="38.667" Height="38.667">
-                <Rectangle.Fill>
-                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cart}" />
-                </Rectangle.Fill>
-            </Rectangle>
-        </Button>
-        <Separator DockPanel.Dock="Top"/>
-            <Button FontSize="14" Width="42" Height="42" Margin="0,10,0,0" Padding="0" BorderThickness="0" DockPanel.Dock="Top"
-                       Background="Transparent" ToolTip="{Binding NotificationStatus}" Focusable="False"
-                       Command="{Binding NotificationCommand}">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cart}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Separator DockPanel.Dock="Top" />
+            <Button FontSize="14" Width="42" Height="42" Margin="0,10,0,0" Padding="0" BorderThickness="0"
+                    DockPanel.Dock="Top"
+                    Background="Transparent" ToolTip="{Binding NotificationStatus}" Focusable="False"
+                    Command="{Binding NotificationCommand}">
                 <Rectangle Width="38.667" Height="38.667">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_message}" />
@@ -43,8 +46,8 @@
                 </Rectangle>
             </Button>
             <Button FontSize="14" Width="42" Height="42" Padding="0" BorderThickness="0" VerticalAlignment="Bottom"
-                       Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Logout}" Focusable="False"
-                       Command="{Binding LogoutCommand}">
+                    Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Logout}" Focusable="False"
+                    Command="{Binding LogoutCommand}">
                 <Rectangle Width="28.667" Height="28.667">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_door_leave}" />

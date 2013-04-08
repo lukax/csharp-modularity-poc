@@ -111,5 +111,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             }
         }
 
+        public override void Dispose() 
+        {
+            
+        }
+
     }
 }

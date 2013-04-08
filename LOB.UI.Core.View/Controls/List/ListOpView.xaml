@@ -42,11 +42,11 @@
             </ScrollViewer.Background>
             <ScrollViewer.Resources>
                 <DataTemplate DataType="{x:Type system:String}">
-<!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+                    <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
                     <controls:Tile Title="{Binding}"
                                    Command="{Binding ElementName=PanoramaEntitys, Path=DataContext.SaveChangesCommand}"
                                    CommandParameter="{Binding}" Width="100" Height="100">
-<!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+                        <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
                         <Image Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons/Logo.png"
                                Opacity="0.5" Stretch="UniformToFill">
                             <Image.Effect>

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
@@ -22,6 +23,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return _operation; }
             set { _operation = value; }
         }
+        #region Implementation of IDisposable
 
+        public override void Dispose() { GC.SuppressFinalize(this); }
+
+        #endregion
     }
 }
