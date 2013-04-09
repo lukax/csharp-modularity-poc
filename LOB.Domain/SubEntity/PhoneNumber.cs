@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Diagnostics;
 using System.Threading;
 using LOB.Domain.Base;
 
@@ -8,12 +9,23 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain.SubEntity {
     [Serializable]
-    public class PhoneNumber : BaseEntity {
+    public class PhoneNumber : BaseEntity, IEquatable<PhoneNumber> {
 
         public string Number { get; set; }
         public PhoneNumberType PhoneNumberType { get; set; }
         public string Description { get; set; }
 
+        public bool Equals(PhoneNumber other) {
+            try {
+                return base.Equals(other) && other.Number.Equals(Number) && other.PhoneNumberType.Equals(PhoneNumberType) &&
+                       other.Description.Equals(Description);
+            } catch(NullReferenceException ex) {
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+                return false;
+            }
+        }
         public override string ToString() { return Number.ToString(Thread.CurrentThread.CurrentCulture); }
 
     }

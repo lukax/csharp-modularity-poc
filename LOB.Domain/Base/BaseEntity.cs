@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using LOB.Domain.Logic;
 using NullGuard;
@@ -11,7 +12,7 @@ using NullGuard;
 
 namespace LOB.Domain.Base {
     [Serializable]
-    public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo {
+    public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo, IEquatable<BaseEntity> {
 
         private readonly IList<ValidationDelegate> _validationFuncs = new List<ValidationDelegate>();
 // ReSharper disable UnusedAutoPropertyAccessor.Local, NHibernate Set ID
@@ -41,6 +42,19 @@ namespace LOB.Domain.Base {
                                 .Where(result => result.FieldName == propertyName)
                                 .ToList();
         }
+        #region Implementation of IEquatable<BaseEntity>
 
+        public bool Equals(BaseEntity other) {
+            try {
+                return other.Code.Equals(Code) && other.Id.Equals(Id);
+            } catch(NullReferenceException ex) {
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

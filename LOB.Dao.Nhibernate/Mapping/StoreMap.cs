@@ -1,16 +1,17 @@
 ﻿#region Usings
 
+using FluentNHibernate.Mapping;
 using LOB.Dao.Nhibernate.Mapping.Base;
 using LOB.Domain;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping {
-    public class StoreMap : BaseEntityMap<Store> {
+    public class StoreMap : SubclassMap<Store> {
 
         public StoreMap() {
-            HasMany(x => x.Employees).Cascade.All();
             Map(x => x.Name);
+            HasMany(x => x.Employees).Cascade.All();
             HasManyToMany(x => x.Products).Table("ProductStore").Cascade.All();
             HasManyToMany(x => x.Clients).Cascade.All();
             HasMany(x => x.Sales);

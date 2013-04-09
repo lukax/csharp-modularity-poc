@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using LOB.Domain.Base;
 using LOB.Domain.SubEntity;
 
@@ -9,7 +11,7 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Domain {
     [Serializable]
-    public class Product : Service {
+    public class Product : Service, IEquatable<Product> {
 
         public Category Category { get; set; }
         public ProductStatus Status { get; set; }
@@ -28,7 +30,26 @@ namespace LOB.Domain {
         public IList<Sale> Sales { get; set; }
         public IList<Supplier> Suppliers { get; set; }
         public ShipmentInfo ShipmentInfo { get; set; }
+        #region Implementation of IEquatable<Product>
 
+        public bool Equals(Product other) {
+            try {
+                return base.Equals(other) && other.Category.Equals(Category) && other.Status.Equals(Status) && other.CodBarras.Equals(CodBarras) &&
+                       other.CodNCM.Equals(CodNCM) && other.CFOP.Equals(CFOP) && other.Image.Equals(Image) && other.UnitsInStock.Equals(UnitsInStock) &&
+                       other.MaxUnitsOfStock.Equals(MaxUnitsOfStock) && other.MinUnitsOfStock.Equals(MinUnitsOfStock) &&
+                       Equals(other.UnitCostPrice, UnitCostPrice) && Equals(other.UnitSalePrice, UnitSalePrice) &&
+                       Equals(other.ProfitMargin, ProfitMargin) && other.QuantityPerUnit.Equals(QuantityPerUnit) &&
+                       other.StockedStores.SequenceEqual(StockedStores) && other.Sales.SequenceEqual(Sales) &&
+                       other.Suppliers.SequenceEqual(Suppliers) && other.ShipmentInfo.Equals(ShipmentInfo);
+            } catch(NullReferenceException ex) {
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+                return false;
+            }
+        }
+
+        #endregion
     }
 
     [Serializable]

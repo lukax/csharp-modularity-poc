@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Base\Service.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logic\Notification.cs" />
     <Compile Include="Logic\ValidationResult.cs" />
     <Compile Include="Logic\ValidationDelegate.cs" />

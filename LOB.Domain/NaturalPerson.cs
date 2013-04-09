@@ -1,13 +1,14 @@
 ﻿#region Usings
 
 using System;
+using System.Diagnostics;
 using LOB.Domain.Base;
 
 #endregion
 
 namespace LOB.Domain {
     [Serializable]
-    public class NaturalPerson : Person {
+    public class NaturalPerson : Person, IEquatable<NaturalPerson> {
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -21,6 +22,20 @@ namespace LOB.Domain {
         public int CPF { get; set; }
         public int RG { get; set; }
         public string RGUF { get; set; }
+        #region Implementation of IEquatable<NaturalPerson>
 
+        public bool Equals(NaturalPerson other) {
+            try {
+                return base.Equals(other) && other.FirstName.Equals(FirstName) && other.LastName.Equals(LastName) && other.NickName.Equals(NickName) &&
+                       other.BirthDate.Equals(BirthDate) && other.CPF.Equals(CPF) && other.RG.Equals(RG) && other.RGUF.Equals(RGUF);
+            } catch(NullReferenceException ex) {
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

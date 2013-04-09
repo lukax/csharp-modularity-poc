@@ -67,8 +67,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void ExecuteAlterCategory(object o) {
-            var op = new UIOperation().Type(UIOperationType.Address);
-            op.State(Entity.Category == null ? UIOperationState.Add : UIOperationState.Update);
+            var op = new UIOperation().Type(UIOperationType.Address).State(Entity.Category.Equals(_facade.GenerateEntity().Category) ? UIOperationState.Add : UIOperationState.Update);
             op.Entity = Entity.Category;
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
