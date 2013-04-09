@@ -29,26 +29,26 @@
                 <Button Command="{Binding AddCommand}" HorizontalAlignment="Right" Width="20" Height="20"
                         Padding="0" BorderThickness="0"
                         Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Add}">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png" />
                 </Button>
                 <Button Command="{Binding UpdateCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Width="20"
                         Height="20" Background="Transparent" Padding="0" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/file_edit2_2.png" />
                 </Button>
                 <Button Command="{Binding DeleteCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Delete}"
                         Width="20" Height="20" Background="Transparent" BorderThickness="0" Padding="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/file_delete2_2.png" />
                 </Button>
                 <Button Command="{Binding FetchCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Update}" Width="20"
                         Height="20" BorderThickness="0" Padding="0"
                         Background="Transparent">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Refresh48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/refresh.png" />
                 </Button>
                 <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Close}" Width="20"
-                        BorderBrush="Red"
-                        Height="20" BorderThickness="1" Padding="1"
+                        BorderBrush="Black"
+                        Height="20" BorderThickness="2" Padding="2"
                         Background="Transparent">
-                    <Rectangle Width="20" Height="20">
+                    <Rectangle Width="18" Height="18">
                         <Rectangle.Effect>
                             <DropShadowEffect ShadowDepth="3" Direction="50" Color="{DynamicResource AccentColor4}" />
                         </Rectangle.Effect>

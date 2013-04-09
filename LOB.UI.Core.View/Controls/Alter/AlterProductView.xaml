@@ -82,12 +82,12 @@
                             HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Focusable="False"
                             Background="Transparent"
                             Grid.Column="5" Padding="0" BorderThickness="0">
-                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/pencil.png" />
                     </Button>
                     <Button Width="18" Height="18" Background="Transparent" CommandParameter="ListCategory"
                             Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0"
                             ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Padding="0">
-                        <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/magnify.png" />
                     </Button>
                 </StackPanel>
 

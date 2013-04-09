@@ -21,7 +21,7 @@
         <Button Command="{Binding QuickSearchCommand}" Focusable="False"
                 ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Width="18" Height="18" Background="Transparent"
                 Padding="1" BorderThickness="0">
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/magnify.png" />
         </Button>
     </StackPanel>
 

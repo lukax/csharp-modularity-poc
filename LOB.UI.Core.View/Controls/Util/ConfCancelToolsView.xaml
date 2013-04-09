@@ -12,19 +12,62 @@
     </UserControl.Resources>
 
     <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5"
-                Visibility="{Binding ConfCancelToolVisibility}">
+                Visibility="{Binding Operation.IsChild}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ButtonCancel" Command="{Binding CancelCommand}" IsCancel="True" >
+            <Button x:Name="ButtonCancel" Command="{Binding CancelCommand}" IsCancel="True">
                 <DockPanel>
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" Height="26" Width="26" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/no_2.png" Height="26" Width="26" />
                     <Label Content="{x:Static loc:Strings.Common_Cancel}" />
                 </DockPanel>
             </Button>
-            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}" >
-                <DockPanel>
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" Height="26" Width="26" />
-                    <Label Content="{Binding ConfirmText}" />
-                </DockPanel>
+            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Operation.State}" Value="Add">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <DockPanel>
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png" Height="26" Width="26" />
+                                            <Label Content="{x:Static loc:Strings.Common_Confirm_Add}" />
+                                        </DockPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Operation.State}" Value="Update">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <DockPanel>
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/redo_2.png" Height="26" Width="26" />
+                                            <Label Content="{x:Static loc:Strings.Common_Confirm_Update}" />
+                                        </DockPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Operation.State}" Value="Delete">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <DockPanel>
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/x_2.png" Height="26" Width="26" />
+                                            <Label Content="{x:Static loc:Strings.Common_Confirm_Delete}" />
+                                        </DockPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Operation.State}" Value="List">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <DockPanel>
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/download_2.png" Height="26" Width="26" />
+                                            <Label Content="{x:Static loc:Strings.Common_Confirm_List}" />
+                                        </DockPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
             </Button>
         </StackPanel>
     </StackPanel>

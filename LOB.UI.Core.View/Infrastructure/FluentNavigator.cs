@@ -90,7 +90,11 @@ namespace LOB.UI.Core.View.Infrastructure {
             return this;
         }
 
-        public void AddToRegion(string regionName) { _regionAdapter.AddView(GetView(), regionName); }
+        public void AddToRegion(string regionName) {
+            var view = GetView();
+            view.ViewModel.Operation.IsChild(false);
+            _regionAdapter.AddView(view, regionName);
+        }
 
         public void Show(bool asDialog = false) {
             var asUc = GetView() as UserControl;

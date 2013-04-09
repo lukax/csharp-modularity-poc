@@ -70,7 +70,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected abstract void Cancel(object arg);
 
         protected virtual void QuickSearch(object arg) {
-            Operation.State = UIOperationState.QuickSearch;
+            Operation.State(UIOperationState.QuickSearch);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
             _currentSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
         }
@@ -89,17 +89,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             set {
                 _previousOperation = value;
                 _operation = value;
-                ListenOpState(value, new PropertyChangedEventArgs("State"));
-                value.PropertyChanged += ListenOpState;
-                ConfCancelToolVisibility = Operation.IsChild ? Visibility.Visible : Visibility.Collapsed;
+                //value.PropertyChanged += ListenOpChanged;
+                //ListenOpChanged(value, new PropertyChangedEventArgs("State"));
             }
         }
 
-        private void ListenOpState(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
-            if (propertyChangedEventArgs.PropertyName != "State") return; 
+        private void ListenOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
             var op = sender as UIOperation;
+            if(op == null) return;
 
-            if(op != null)
+            if(propertyChangedEventArgs.PropertyName == "State")
                 switch(op.State) {
                     case UIOperationState.Add:
                         ConfirmText = Strings.Common_Confirm_Add;
@@ -107,13 +106,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     case UIOperationState.Update:
                         ConfirmText = Strings.Common_Confirm_Update;
                         break;
-                    case UIOperationState.Discard:
+                    case UIOperationState.Delete:
                         ConfirmText = Strings.Common_Confirm_Delete;
                         break;
                     default:
                         ConfirmText = Strings.Common_Confirm;
                         break;
                 }
+            if(propertyChangedEventArgs.PropertyName == "IsChild") ConfCancelToolVisibility = Operation.IsChild ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public override void Dispose() { }

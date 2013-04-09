@@ -8,7 +8,7 @@ namespace LOB.UI.Interface.Infrastructure {
         //Altering
         Add = 9,
         Update = 27,
-        Discard = 81,
+        Delete = 81,
 
         //Listing
         List = 5,

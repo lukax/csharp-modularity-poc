@@ -46,11 +46,11 @@
                 <Button x:Name="ButtonAddPhoneNumber" IsDefault="True" Width="18" Height="18"
                         Background="Transparent" Padding="1"
                         Command="{Binding AddPhoneNumberCommand}" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/plus.png" />
                 </Button>
                 <Button x:Name="ButtonDeletePhoneNumber" Width="18" Height="18" Background="Transparent" Padding="1"
                         Command="{Binding DeletePhoneNumberCommand}" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/x.png" />
                 </Button>
             </StackPanel>
 
@@ -63,11 +63,11 @@
                 <Button x:Name="ButtonAddEmail" IsDefault="True" Width="18" Height="18" Background="Transparent"
                         Padding="1"
                         Command="{Binding AddEmailCommand}" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Add48.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/plus.png" />
                 </Button>
                 <Button x:Name="ButtonDeleteEmail" Width="18" Height="18" Background="Transparent" Padding="1"
                         Command="{Binding DeleteEmailCommand}" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/Delete.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/x.png" />
                 </Button>
             </StackPanel>
 

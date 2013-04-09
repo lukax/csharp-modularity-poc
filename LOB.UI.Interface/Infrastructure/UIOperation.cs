@@ -2,19 +2,23 @@
 
 using System;
 using LOB.Domain.Base;
-using PropertyChanged;
+using NullGuard;
 
 #endregion
 
 namespace LOB.UI.Interface.Infrastructure {
     public class UIOperation : BaseNotifyChange, IEquatable<UIOperation> {
 
-        public UIOperation() { IsChild = true; }
+        public UIOperation() {
+            IsChild = true;
+            Entity = null;
+        }
         public UIOperationType Type { get; set; }
         public UIOperationState State { get; set; }
         public UIOperationStatus Status { get; set; }
         public bool IsChild { get; set; }
 
+        [AllowNull]
         public BaseEntity Entity { get; set; } //TODO: Find a better way for this
         public override string ToString() { return string.Format("{0}_{1}", State.ToString(), Type.ToString()); }
         #region Equality members

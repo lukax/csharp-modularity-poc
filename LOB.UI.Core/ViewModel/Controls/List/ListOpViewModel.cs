@@ -109,7 +109,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Person));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Internal));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Update));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Discard));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Delete));
             catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.QuickSearch));
             var operationTypes = new Dictionary<string, UIOperation>(catalog.Count);
             var stringsType = typeof(Strings);
