@@ -18,6 +18,11 @@ namespace LOB.Domain.Logic {
         public string Detail { get; set; }
         [AllowNull]
         public Command Fix { get; set; }
+        /// <summary>
+        /// Value: -2 = Indeterminate progress
+        /// Value: -1 = Hidden
+        /// Value: 0 -> 100 = Normal progress
+        /// </summary>
         public int Progress { get; set; }
         #region Implementation of IEquatable<Notification>
 
@@ -49,7 +54,7 @@ namespace LOB.Domain.Logic {
 
         public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
 
-        public static Notification Sevirity(this Notification notification, Severity severity) {
+        public static Notification Severity(this Notification notification, Severity severity) {
             notification.Severity = severity;
             return notification;
         }

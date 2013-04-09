@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -51,10 +52,15 @@ namespace LOB.Business.Logic.SubEntity {
                 _entity.AddValidation(
                     (sender, name) => string.IsNullOrWhiteSpace(_entity.Street) ? new ValidationResult("Street", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.StreetNumber) ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty) : null);
+                    (sender, name) =>string.IsNullOrWhiteSpace(_entity.StreetNumber) ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => !Regex.IsMatch(_entity.StreetNumber, @"\d") ? new ValidationResult("StreetNumber", Strings.Error_Field_WrongFormat) : null);
                 _entity.AddValidation(
                     (sender, name) => string.IsNullOrWhiteSpace(_entity.ZipCode) ? new ValidationResult("ZipCode", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => !Regex.IsMatch(_entity.ZipCode, @"\d") ? new ValidationResult("ZipCode", Strings.Error_Field_WrongFormat) : null);
+                _entity.AddValidation(
+                    (sender, name) => _entity.ZipCode.Length != 8 ? new ValidationResult("ZipCode", Strings.Error_Field_WrongFormat) : null);
                 _entity.AddValidation(
                     (sender, name) => string.IsNullOrWhiteSpace(_entity.County) ? new ValidationResult("County", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(

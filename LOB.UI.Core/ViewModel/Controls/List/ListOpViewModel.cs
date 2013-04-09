@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using LOB.Core.Localization;
+using LOB.Domain.Logic;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
@@ -96,7 +98,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
 
         private void SaveChanges(object arg) {
             var parsedUIOperation = _operationDictLazy.Value[arg.ToString()];
+            var not = new Notification {
+                Message =
+                    string.Format("{0} {1}", Strings.Common_Initializing,
+                                  _operationDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key),
+                Progress = -2,
+                Severity = Severity.Info
+            };
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(not);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedUIOperation);
+            var stringy = string.Format("{0} {1}", Strings.Common_Initialized,
+                                        _operationDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key);
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(not.Message(stringy).Progress(-1).Severity(Severity.Ok));
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation);
         }
 
@@ -118,12 +131,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             //Parse to localized string
             foreach(var uiOperation in catalog) {
                 UIOperation operation = uiOperation;
-                foreach(
-                    string name in
-                        from propertyInfo in stringsTypeProps
-                        let name = propertyInfo.Name
-                        where propertyInfo.Name.Contains("Command_" + operation)
-                        select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
+                foreach(string name in
+                    from propertyInfo in stringsTypeProps
+                    let name = propertyInfo.Name
+                    where propertyInfo.Name.Contains("Command_" + operation)
+                    select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
             }
             return operationTypes;
         }

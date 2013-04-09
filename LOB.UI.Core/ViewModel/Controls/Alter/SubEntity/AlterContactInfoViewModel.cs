@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Data;
 using System.Windows.Input;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -31,10 +31,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private readonly BackgroundWorker _worker = new BackgroundWorker();
 
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade, Notification singleNotification)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _contactInfoFacade = contactInfoFacade;
             _eventAggregator = eventAggregator;
+            _singleNotification = singleNotification;
             Entity = entity;
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
             DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
@@ -124,8 +125,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
             while(!_worker.CancellationPending) {
-                _worker.ReportProgress(0);
-                Task.Delay(2000);
+                _worker.ReportProgress(-1);
+                Thread.Sleep(2000);
                 _worker.ReportProgress(5);
                 var result = new object[2];
                 _worker.ReportProgress(10);
@@ -146,24 +147,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
+        private readonly Notification _singleNotification;
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            var k = new Notification {Message = Strings.Notification_List_Updating, Progress = args.ProgressPercentage};
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(k);
+            _singleNotification.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating);
+            _singleNotification.Progress(args.ProgressPercentage);
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(_singleNotification);
         }
 
         #endregion
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) {
-            Entity = new ContactInfo {
-                Code = 0,
-                Emails = new List<Email>(),
-                PhoneNumbers = new List<PhoneNumber>(),
-                SpeakWith = "",
-                Status = default(ContactStatus),
-                PS = "",
-                WebSite = "",
-            };
+            Entity = _contactInfoFacade.GenerateEntity();
             _contactInfoFacade.SetEntity(Entity);
             _contactInfoFacade.ConfigureValidations();
         }

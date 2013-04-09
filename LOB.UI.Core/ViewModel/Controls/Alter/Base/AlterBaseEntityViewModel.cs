@@ -2,9 +2,7 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Windows;
 using System.Windows.Input;
-using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.UI.Core.Events.View;
@@ -25,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 // ReSharper disable NotAccessedField.Local
         private readonly ILoggerFacade _loggerFacade;
 // ReSharper restore NotAccessedField.Local
-        private UIOperation _previousOperation;
+        private UIOperationState _previousState;
         private SubscriptionToken _currentSubscription;
         private UIOperation _operation;
         public T Entity { get; set; }
@@ -36,8 +34,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public ICommand QuickSearchCommand { get; set; }
         public int Index { get; set; }
         protected IRepository Repository { get; set; }
-        public Visibility ConfCancelToolVisibility { get; set; }
-        public virtual string ConfirmText { get; set; }
 
         [InjectionConstructor]
         protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
@@ -77,43 +73,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         private void ChangeUIState(UIOperation obj) {
             if(Operation.State == UIOperationState.QuickSearch) {
-                Operation.State = _previousOperation.State;
+                Operation.State(_previousState);
                 _currentSubscription.Dispose();
             }
         }
 
+        private int _previousCounter = 2;
         protected abstract void ClearEntity(object arg);
 
         public override UIOperation Operation {
             get { return _operation; }
             set {
-                _previousOperation = value;
                 _operation = value;
-                //value.PropertyChanged += ListenOpChanged;
-                //ListenOpChanged(value, new PropertyChangedEventArgs("State"));
+                UIOpChanged(null, new PropertyChangedEventArgs("State"));
+                value.PropertyChanged += UIOpChanged;
             }
         }
-
-        private void ListenOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
-            var op = sender as UIOperation;
-            if(op == null) return;
-
-            if(propertyChangedEventArgs.PropertyName == "State")
-                switch(op.State) {
-                    case UIOperationState.Add:
-                        ConfirmText = Strings.Common_Confirm_Add;
-                        break;
-                    case UIOperationState.Update:
-                        ConfirmText = Strings.Common_Confirm_Update;
-                        break;
-                    case UIOperationState.Delete:
-                        ConfirmText = Strings.Common_Confirm_Delete;
-                        break;
-                    default:
-                        ConfirmText = Strings.Common_Confirm;
-                        break;
-                }
-            if(propertyChangedEventArgs.PropertyName == "IsChild") ConfCancelToolVisibility = Operation.IsChild ? Visibility.Collapsed : Visibility.Visible;
+        private void UIOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
+            if(propertyChangedEventArgs.PropertyName == "State") {
+                if(Operation.State == UIOperationState.QuickSearch) return;
+                _previousState = Operation.State;
+            }
         }
 
         public override void Dispose() { }

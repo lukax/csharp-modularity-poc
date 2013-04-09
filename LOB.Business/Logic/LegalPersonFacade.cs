@@ -37,11 +37,11 @@ namespace LOB.Business.Logic {
                 Address = localPerson.Address,
                 ContactInfo = localPerson.ContactInfo,
                 Notes = "",
-                CNAEFiscal = 0,
-                CNPJ = 0,
+                CNAEFiscal = "",
+                CNPJ = "",
                 CorporateName = "",
-                InscEstadual = 0,
-                InscMunicipal = 0,
+                InscEstadual = "",
+                InscMunicipal = "",
                 TradingName = "",
             };
         }
@@ -59,7 +59,10 @@ namespace LOB.Business.Logic {
                 _entity.AddValidation(
                     (sender, name) =>
                     string.IsNullOrWhiteSpace(_entity.TradingName) ? new ValidationResult("TradingName", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation((sender, name) => _entity.CNPJ < 0 ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.CNPJ) ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.CNAEFiscal) ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) => _entity.CNPJ.ToString(culture).Length > 14 ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong) : null);
                 _entity.AddValidation(

@@ -1456,6 +1456,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Add.
+        /// </summary>
+        public static string Error_Field_Add {
+            get {
+                return ResourceManager.GetString("Error_Field_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Error_Field_DateWrong.
         /// </summary>
         public static string Error_Field_DateInvalid {
@@ -1483,6 +1492,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Delete.
+        /// </summary>
+        public static string Error_Field_Delete {
+            get {
+                return ResourceManager.GetString("Error_Field_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Error_Field_Deprecated.
         /// </summary>
         public static string Error_Field_Deprecated {
@@ -1506,6 +1524,15 @@ namespace LOB.Core.Localization {
         public static string Error_Field_IntOnly {
             get {
                 return ResourceManager.GetString("Error_Field_IntOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Invalid.
+        /// </summary>
+        public static string Error_Field_Invalid {
+            get {
+                return ResourceManager.GetString("Error_Field_Invalid", resourceCulture);
             }
         }
         
@@ -1578,6 +1605,15 @@ namespace LOB.Core.Localization {
         public static string Error_Field_TooShort {
             get {
                 return ResourceManager.GetString("Error_Field_TooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Error_Field_Update.
+        /// </summary>
+        public static string Error_Field_Update {
+            get {
+                return ResourceManager.GetString("Error_Field_Update", resourceCulture);
             }
         }
         
@@ -2275,11 +2311,29 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Added.
+        /// </summary>
+        public static string Notification_Field_Added {
+            get {
+                return ResourceManager.GetString("Notification_Field_Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Attention.
         /// </summary>
         public static string Notification_Field_Attention {
             get {
                 return ResourceManager.GetString("Notification_Field_Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Deleted.
+        /// </summary>
+        public static string Notification_Field_Deleted {
+            get {
+                return ResourceManager.GetString("Notification_Field_Deleted", resourceCulture);
             }
         }
         
@@ -2298,6 +2352,24 @@ namespace LOB.Core.Localization {
         public static string Notification_Field_Information {
             get {
                 return ResourceManager.GetString("Notification_Field_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Listed.
+        /// </summary>
+        public static string Notification_Field_Listed {
+            get {
+                return ResourceManager.GetString("Notification_Field_Listed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Updated.
+        /// </summary>
+        public static string Notification_Field_Updated {
+            get {
+                return ResourceManager.GetString("Notification_Field_Updated", resourceCulture);
             }
         }
         

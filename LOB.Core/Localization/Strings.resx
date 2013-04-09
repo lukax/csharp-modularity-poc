@@ -504,6 +504,9 @@
   <data name="Error_Field_WrongFormat" xml:space="preserve">
     <value>@Error_Field_WrongFormat</value>
   </data>
+  <data name="Error_Field_Invalid" xml:space="preserve">
+    <value>@Error_Field_Invalid</value>
+  </data>
   <data name="Error_Info" xml:space="preserve">
     <value>@Error_Info</value>
   </data>
@@ -941,5 +944,26 @@
   </data>
   <data name="ToolTip_List" xml:space="preserve">
     <value>@ToolTip_List</value>
+  </data>
+  <data name="Notification_Field_Added" xml:space="preserve">
+    <value>@Notification_Field_Added</value>
+  </data>
+  <data name="Notification_Field_Deleted" xml:space="preserve">
+    <value>@Notification_Field_Deleted</value>
+  </data>
+  <data name="Notification_Field_Listed" xml:space="preserve">
+    <value>@Notification_Field_Listed</value>
+  </data>
+  <data name="Notification_Field_Updated" xml:space="preserve">
+    <value>@Notification_Field_Updated</value>
+  </data>
+  <data name="Error_Field_Add" xml:space="preserve">
+    <value>@Error_Field_Add</value>
+  </data>
+  <data name="Error_Field_Delete" xml:space="preserve">
+    <value>@Error_Field_Delete</value>
+  </data>
+  <data name="Error_Field_Update" xml:space="preserve">
+    <value>@Error_Field_Update</value>
   </data>
 </root>

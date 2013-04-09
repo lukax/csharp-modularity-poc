@@ -72,7 +72,7 @@ namespace LOB.Dao.Nhibernate.Test {
         [TestMethod]
         public void SaveGetPolymorphismTest() {
             var repo = new Repository(new UnityOfWork(new SessionCreator(new Logger()), new Logger()));
-            var person = new LegalPerson {CNPJ = 123456, InscEstadual = 1234,};
+            var person = new LegalPerson {CNPJ = "123456", InscEstadual = "1234",};
             var client = new Customer {Person = person, Status = CustomerStatus.New};
 
             using(repo.Uow) {

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:behaviours="clr-namespace:LOB.UI.Core.View.Styles.Behaviours"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600">
 
@@ -14,10 +15,15 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <ListView ItemsSource="{Binding Entitys}" SelectedItem="{Binding Entity}" SelectionMode="Single"
-                      BorderThickness="0">
+                      BorderThickness="0" behaviours:GridViewColumnResize.Enabled="True">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
-                        <GridViewColumn>
+                        <!--<GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                                <Setter Property="Template" V></Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>-->
+                        <GridViewColumn Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel>
@@ -117,33 +123,38 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Message}">
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Message}" behaviours:GridViewColumnResize.Width="*">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding Message}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Details}">
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Details}" behaviours:GridViewColumnResize.Width="2*">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding Detail}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn>
+                        <GridViewColumn Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ProgressBar MinWidth="50" Value="{Binding Progress}" MinHeight="10">
                                         <ProgressBar.Style>
                                             <Style TargetType="ProgressBar" BasedOn="{StaticResource MetroProgressBar}">
                                                 <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Progress}" Value="-2">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="IsIndeterminate" Value="True"/>
+                                                    </DataTrigger>
                                                     <DataTrigger Binding="{Binding Progress}" Value="-1">
                                                         <Setter Property="Visibility" Value="Hidden" />
+                                                        <Setter Property="IsIndeterminate" Value="False"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Progress}" Value="0">
                                                         <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="IsIndeterminate" Value="False"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>

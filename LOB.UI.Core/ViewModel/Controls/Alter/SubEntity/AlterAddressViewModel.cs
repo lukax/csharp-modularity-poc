@@ -74,12 +74,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _worker.DoWork += UpdateUFList;
             _worker.RunWorkerAsync();
             _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
-            _eventAggregator.GetEvent<NotificationEvent>()
-                            .Publish(new Notification {
-                                Message = string.Format("{0} {1}", Strings.Common_Initialized, Strings.Command_Add_Address),
-                                Progress = 0,
-                                Severity = Severity.Info
-                            });
         }
 
         private void Include(BaseEntity obj) {

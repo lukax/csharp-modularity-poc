@@ -124,6 +124,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Alter\AlterSupplierView.xaml.cs">
+      <DependentUpon>AlterSupplierView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Alter\AlterStoreView.xaml.cs">
       <DependentUpon>AlterStoreView.xaml</DependentUpon>
     </Compile>
@@ -261,12 +264,17 @@
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\RegionAdapter.cs" />
+    <Compile Include="Styles\Behaviours\GridViewColumnResize.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Alter\AlterSupplierView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Alter\AlterCustomerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

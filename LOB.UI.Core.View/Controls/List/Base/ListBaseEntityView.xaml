@@ -33,7 +33,7 @@
                 </Button>
                 <Button Command="{Binding UpdateCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Width="20"
                         Height="20" Background="Transparent" Padding="0" BorderThickness="0">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/file_edit2_2.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/pencil_2.png" />
                 </Button>
                 <Button Command="{Binding DeleteCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Delete}"
                         Width="20" Height="20" Background="Transparent" BorderThickness="0" Padding="0">
@@ -44,6 +44,7 @@
                         Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/refresh.png" />
                 </Button>
+                <Separator/>
                 <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Close}" Width="20"
                         BorderBrush="Black"
                         Height="20" BorderThickness="2" Padding="2"

@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
@@ -26,13 +27,14 @@ namespace LOB.Business.Logic.SubEntity {
         public ContactInfo GenerateEntity() {
             return new ContactInfo {
                 Code = 0,
+                Description = "",
                 Error = null,
                 Status = default(ContactStatus),
                 PS = "",
                 Emails = new List<Email>(),
                 PhoneNumbers = new List<PhoneNumber>(),
                 SpeakWith = "",
-                WebSite = "",
+                WebSite = "http://",
             };
         }
 
@@ -40,10 +42,14 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) => _entity.WebSite.Length > 300 ? new ValidationResult("WebSite", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation(
                     (sender, name) =>
                     string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    !Regex.IsMatch(_entity.WebSite,
+                                   @"^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$")
+                        ? new ValidationResult("WebSite", Strings.Error_Field_WrongFormat)
+                        : null);
                 _entity.AddValidation(
                     (sender, name) => _entity.SpeakWith.Length > 300 ? new ValidationResult("SpeakWith", Strings.Error_Field_TooLong) : null);
             }

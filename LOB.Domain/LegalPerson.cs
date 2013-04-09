@@ -12,10 +12,10 @@ namespace LOB.Domain {
 
         public string CorporateName { get; set; }
         public string TradingName { get; set; }
-        public int CNPJ { get; set; }
-        public int InscEstadual { get; set; }
-        public int InscMunicipal { get; set; }
-        public int CNAEFiscal { get; set; }
+        public string CNPJ { get; set; }
+        public string InscEstadual { get; set; }
+        public string InscMunicipal { get; set; }
+        public string CNAEFiscal { get; set; }
         #region Implementation of IEquatable<LegalPerson>
 
         public bool Equals(LegalPerson other) {

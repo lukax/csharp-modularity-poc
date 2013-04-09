@@ -44,8 +44,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            IEnumerable<ValidationResult> results;
-            return _emailFacade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Add) {
+                IEnumerable<ValidationResult> results;
+                return _emailFacade.CanAdd(out results);
+            }
+            if(Operation.State == UIOperationState.Update) {
+                IEnumerable<ValidationResult> results;
+                return _emailFacade.CanUpdate(out results);
+            }
+            return false;
         }
 
         protected override void ClearEntity(object arg) {

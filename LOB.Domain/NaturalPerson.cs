@@ -19,8 +19,8 @@ namespace LOB.Domain {
 
         public string NickName { get; set; }
         public DateTime BirthDate { get; set; }
-        public int CPF { get; set; }
-        public int RG { get; set; }
+        public string CPF { get; set; }
+        public string RG { get; set; }
         public string RGUF { get; set; }
         #region Implementation of IEquatable<NaturalPerson>
 

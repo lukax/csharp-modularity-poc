@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
@@ -50,6 +51,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 Entity = Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
+            _eventAggregator.GetEvent<NotificationEvent>()
+                            .Publish(new Notification {Message = Strings.Notification_Field_Added, Severity = Severity.Ok});
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
@@ -73,6 +76,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _categoryFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation { Type = UIOperationType.Category, State = UIOperationState.Add };
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add};
+
     }
 }

@@ -174,8 +174,6 @@
   <data name="Command_Add_Service" xml:space="preserve">
     <value>Novo Serviço</value>
   </data>
-
-
   <data name="Command_Update_Address" xml:space="preserve">
     <value>Novo Endereço</value>
   </data>
@@ -221,7 +219,6 @@
   <data name="Command_Update_Service" xml:space="preserve">
     <value>Novo Serviço</value>
   </data>
-  
   <data name="Command_List_Address" xml:space="preserve">
     <value>Listar Endereços</value>
   </data>
@@ -944,5 +941,29 @@
   </data>
   <data name="ToolTip_List" xml:space="preserve">
     <value>Listar</value>
+  </data>
+  <data name="Error_Field_Add" xml:space="preserve">
+    <value>Erro ao adicionar entidade</value>
+  </data>
+  <data name="Error_Field_Delete" xml:space="preserve">
+    <value>Erro ao excluir entidade</value>
+  </data>
+  <data name="Error_Field_Update" xml:space="preserve">
+    <value>Erro ao atualizar entidade</value>
+  </data>
+  <data name="Notification_Field_Added" xml:space="preserve">
+    <value>Entidade adicionada com sucesso!</value>
+  </data>
+  <data name="Notification_Field_Deleted" xml:space="preserve">
+    <value>Entidade excluida com sucesso!</value>
+  </data>
+  <data name="Notification_Field_Listed" xml:space="preserve">
+    <value>Entidade listada com sucesso!</value>
+  </data>
+  <data name="Notification_Field_Updated" xml:space="preserve">
+    <value>Entidade atualizada com sucesso!</value>
+  </data>
+  <data name="Error_Field_Invalid" xml:space="preserve">
+    <value>Campo Inválido</value>
   </data>
 </root>

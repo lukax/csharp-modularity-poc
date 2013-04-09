@@ -103,10 +103,10 @@
 
             <Label Content="{x:Static loc:Strings.Common_ZipCode}" HorizontalAlignment="Right" Grid.Column="3"
                    Grid.Row="3" />
-            <xctk:MaskedTextBox
+            <TextBox
                 Text="{Binding Entity.ZipCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Right"
-                MinWidth="100" Mask="00000-000"
+                MinWidth="100" 
                 MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
             <Label Content="{x:Static loc:Strings.Common_Status}" Grid.Column="1" Grid.Row="4"
