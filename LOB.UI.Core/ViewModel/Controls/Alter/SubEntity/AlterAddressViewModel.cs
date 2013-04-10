@@ -92,6 +92,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
+            _eventAggregator.GetEvent<NotificationEvent>()
+                .Publish(new Notification { Message = Strings.Notification_Field_Added, Severity = Severity.Ok });
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }

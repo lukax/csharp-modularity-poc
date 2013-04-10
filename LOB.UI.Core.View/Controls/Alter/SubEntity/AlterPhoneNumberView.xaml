@@ -43,14 +43,14 @@
                         </ObjectDataProvider.MethodParameters>
                     </ObjectDataProvider>
                 </StackPanel.Resources>
-                <xctk:MaskedTextBox
-                    Text="{Binding Entity.PhoneNumber, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                    MinWidth="100" Mask="(00) 0000-0000" />
-                <ComboBox SelectedItem="{Binding Entity.PhoneType}"
+                <xctk:MaskedTextBox Style="{StaticResource MetroTextBox}"
+                    Text="{Binding Entity.Number, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" IncludeLiteralsInValue="False" IncludePromptInValue="False"
+                    MinWidth="100" Mask="(00) 0000-0000" HorizontalContentAlignment="Right"/>
+                <ComboBox SelectedItem="{Binding Entity.Type}"
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>
 
-            <TextBox Text="{Binding Entity.Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+            <TextBox Text="{Binding Entity.Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
                      Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
         </Grid>

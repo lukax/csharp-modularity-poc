@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
@@ -23,13 +24,20 @@ namespace LOB.Business.Logic.SubEntity {
             _entity = entity;
         }
 
-        public PhoneNumber GenerateEntity() { return new PhoneNumber {Code = 0, Error = null, Description = "", Number = "", PhoneNumberType = default(PhoneNumberType),}; }
+        public PhoneNumber GenerateEntity() { return new PhoneNumber {Code = 0, Error = null, Description = "", Number = "", Type = default(PhoneNumberType),}; }
 
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Number) ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Number) ? new ValidationResult("Number", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(
+                    (sender, name) => _entity.Number.Length < 10 ? new ValidationResult("Number", Strings.Error_Field_TooShort) : null);
+                _entity.AddValidation(
+                    (sender, name) => !Regex.IsMatch(_entity.Number, @"\d") ? new ValidationResult("Number", Strings.Error_Field_WrongFormat) : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    string.IsNullOrWhiteSpace(_entity.Type.ToString()) ? new ValidationResult("Type", Strings.Error_Field_Empty) : null);
                 _entity.AddValidation(
                     (sender, name) =>
                     string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);

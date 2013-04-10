@@ -2,9 +2,11 @@
 
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -39,6 +41,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 Repository.Save(Entity);
                 Repository.Uow.CommitTransaction();
             }
+            _eventAggregator.GetEvent<NotificationEvent>()
+                            .Publish(new Notification {Message = Strings.Notification_Field_Added, Severity = Severity.Ok});
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
@@ -56,7 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override void ClearEntity(object arg) {
-            Entity = new Email {Value = "", Code = 0};
+            Entity = _emailFacade.GenerateEntity();
             _emailFacade.SetEntity(Entity);
             _emailFacade.ConfigureValidations();
         }

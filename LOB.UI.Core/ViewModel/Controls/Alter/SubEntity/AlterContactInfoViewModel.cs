@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -37,6 +38,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _eventAggregator = eventAggregator;
             _singleNotification = singleNotification;
             Entity = entity;
+            EmailOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.Email};
+            PhoneNumberOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.PhoneNumber};
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
             DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
             AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber, CanAddPhoneNumber);
@@ -68,14 +71,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
         #region UI Validations
 
-        private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation); }
+        public UIOperation EmailOperation { get; set; }
+        public UIOperation PhoneNumberOperation { get; set; }
+
+        private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation); }
 
         private bool CanAddEmail(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        private void AddPhoneNumber(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation); }
+        private void AddPhoneNumber(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(PhoneNumberOperation); }
 
         private bool CanAddPhoneNumber(object arg) {
             //TODO: Business logic
@@ -119,12 +125,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _worker.DoWork += WorkerListsGetFromRepo;
             _worker.RunWorkerCompleted += WorkerListsSetFromRepo;
             _worker.ProgressChanged += WorkerListsProgress;
+            _worker.WorkerSupportsCancellation = true;
             _worker.WorkerReportsProgress = true;
             _worker.RunWorkerAsync();
         }
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
-            while(!_worker.CancellationPending) {
+            do {
                 _worker.ReportProgress(-1);
                 Thread.Sleep(2000);
                 _worker.ReportProgress(5);
@@ -136,7 +143,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 _worker.ReportProgress(90);
                 args.Result = result;
                 _worker.ReportProgress(100);
-            }
+            } while(!_worker.CancellationPending);
         }
 
         private void WorkerListsSetFromRepo(object sender, RunWorkerCompletedEventArgs args) {
@@ -169,6 +176,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override bool CanCancel(object arg) { return true; }
+
+        ~AlterContactInfoViewModel() { Dispose(false); }
+
+        public override void Dispose() {
+            base.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing) {
+            _worker.CancelAsync();
+            if(disposing) _worker.Dispose();
+            Email = null;
+            Emails = null;
+            PhoneNumber = null;
+            PhoneNumbers = null;
+        }
 
     }
 }

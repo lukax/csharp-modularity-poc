@@ -12,12 +12,12 @@ namespace LOB.Domain.SubEntity {
     public class PhoneNumber : BaseEntity, IEquatable<PhoneNumber> {
 
         public string Number { get; set; }
-        public PhoneNumberType PhoneNumberType { get; set; }
+        public PhoneNumberType Type { get; set; }
         public string Description { get; set; }
 
         public bool Equals(PhoneNumber other) {
             try {
-                return base.Equals(other) && other.Number.Equals(Number) && other.PhoneNumberType.Equals(PhoneNumberType) &&
+                return base.Equals(other) && other.Number.Equals(Number) && other.Type.Equals(Type) &&
                        other.Description.Equals(Description);
             } catch(NullReferenceException ex) {
 #if DEBUG
