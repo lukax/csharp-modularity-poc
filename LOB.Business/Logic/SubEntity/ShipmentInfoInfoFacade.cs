@@ -27,17 +27,12 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) => _entity.DaySchedule.Length < 1 ? new ValidationResult("DaySchedule", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.DeliverDate.CompareTo(new DateTime(2013, 1, 1)) < 0
-                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.DeliverDate.CompareTo(new DateTime(2015, 1, 1)) > 0
-                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooLate)
-                        : null);
+                    (sender, name) => _entity.DaySchedule.Length < 1 ? new ValidationResult("DaySchedule", Strings.Notification_Field_Empty) : null);
+                _entity.AddValidation(delegate {
+                                          if(_entity.DeliverDate.CompareTo(new DateTime(2013, 1, 1)) < 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooEarly);
+                                          if(_entity.DeliverDate.CompareTo(new DateTime(2015, 1, 1)) > 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooLate);
+                                          return null;
+                                      });
             }
         }
 

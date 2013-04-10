@@ -38,7 +38,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Employee; }
+            get { return Strings.UI_Header_Alter_Employee; }
         }
 
         public int Index {

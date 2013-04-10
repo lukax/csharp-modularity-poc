@@ -31,6 +31,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private readonly IEventAggregator _eventAggregator;
         private string _status;
         private IList<string> _statuses;
+        private Notification Notification { get; set; }
+        private NotificationEvent NotificationEvent {
+            get { return _eventAggregator.GetEvent<NotificationEvent>(); }
+        }
         public ObservableCollection<UF> UFs { get; set; }
         public ObservableCollection<string> Districts { get; set; }
         private UF _uf;
@@ -57,6 +61,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             : base(entity, repository, eventAggregator, loggerFacade) {
             _addressFacade = addressFacade;
             _eventAggregator = eventAggregator;
+            Notification = new Notification();
         }
 
         public IList<string> Statuses {
@@ -88,12 +93,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public override void Refresh() { ClearEntity(null); }
 
         protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-            _eventAggregator.GetEvent<NotificationEvent>()
-                .Publish(new Notification { Message = Strings.Notification_Field_Added, Severity = Severity.Ok });
+            _worker.DoWork += SaveChanges;
+            _worker.RunWorkerAsync();
+        }
+
+        private void SaveChanges(object sender, DoWorkEventArgs e) {
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Progress(-2).Severity(Severity.Info));
+            using(Repository.Uow.BeginTransaction())
+                if(!_worker.CancellationPending) {
+                    NotificationEvent.Publish(Notification.Progress(50));
+                    Repository.SaveOrUpdate(Entity);
+                    Repository.Uow.CommitTransaction();
+                }
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(Severity.Ok));
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }

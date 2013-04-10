@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
-using NullGuard;
+//using NullGuard;
 
 #endregion
 
@@ -14,9 +14,9 @@ namespace LOB.Domain.Logic {
         public Notification() { Progress = -1; }
         public Severity Severity { get; set; }
         public string Message { get; set; }
-        [AllowNull]
+        //[AllowNull]
         public string Detail { get; set; }
-        [AllowNull]
+        //[AllowNull]
         public Command Fix { get; set; }
         /// <summary>
         /// Value: -2 = Indeterminate progress

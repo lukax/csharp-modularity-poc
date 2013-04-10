@@ -27,9 +27,9 @@ namespace LOB.Business.Logic.Base {
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation((sender, name) => _entity.Name.Length < 1 ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => string.IsNullOrWhiteSpace(_entity.Name) ? new ValidationResult("Name", Strings.Notification_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) => _entity.Description.Length > 300 ? new ValidationResult("Description", Strings.Error_Field_TooLong) : null);
+                    (sender, name) => _entity.Description.Length > 300 ? new ValidationResult("Description", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
             }
         }
 

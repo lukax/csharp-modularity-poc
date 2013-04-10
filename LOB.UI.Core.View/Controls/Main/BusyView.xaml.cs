@@ -22,7 +22,7 @@ namespace LOB.UI.Core.View.Controls.Main {
         public IBaseViewModel ViewModel { get; set; }
 
         public string Header {
-            get { return Strings.Header_Main_Busy; }
+            get { return Strings.UI_Header_Main_Busy; }
         }
 
         public int Index { get; set; }

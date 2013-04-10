@@ -109,6 +109,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -130,6 +131,7 @@
     <Compile Include="Events\View\CloseViewEvent.cs" />
     <Compile Include="Events\View\OpenViewEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
+    <Compile Include="netfx\System\StringFormatWith.cs" />
     <Compile Include="Util\EnumToPicConverter.cs" />
     <Compile Include="Infrastructure\UIOperationCatalog.cs" />
     <Compile Include="Modularity\Module.cs" />

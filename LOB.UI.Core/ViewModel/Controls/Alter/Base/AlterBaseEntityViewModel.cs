@@ -1,7 +1,7 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Input;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
@@ -43,28 +43,21 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Entity = entity;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
             DiscardChangesCommand = new DelegateCommand(Cancel, CanCancel);
-            QuickSearchCommand = new DelegateCommand(QuickSearch);
-            ClearEntityCommand = new DelegateCommand(ClearEntity);
+            QuickSearchCommand = new DelegateCommand(QuickSearch, CanQuickSearch);
+            ClearEntityCommand = new DelegateCommand(ClearEntity, CanClearEntity);
         }
-
-        protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
 
         protected virtual bool CanCancel(object arg) {
             if(Operation.State == UIOperationState.Add) return true;
             if(Operation.State == UIOperationState.Update) return true;
             return false;
         }
-
-        protected virtual void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Debug.Write("Saving changes...");
-                Entity = Repository.SaveOrUpdate(Entity);
-            }
-            Cancel(arg);
-        }
-
         protected abstract void Cancel(object arg);
 
+        protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
+        protected abstract void SaveChanges(object arg);
+
+        protected virtual bool CanQuickSearch(object obj) { return Operation.State != UIOperationState.QuickSearch; }
         protected virtual void QuickSearch(object arg) {
             Operation.State(UIOperationState.QuickSearch);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
@@ -78,7 +71,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             }
         }
 
-        private int _previousCounter = 2;
+        protected virtual bool CanClearEntity(object obj) { return Operation.State == UIOperationState.Add; }
         protected abstract void ClearEntity(object arg);
 
         public override UIOperation Operation {

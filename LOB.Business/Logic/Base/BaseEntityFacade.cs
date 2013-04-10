@@ -16,18 +16,18 @@ namespace LOB.Business.Logic.Base {
 
         public void SetEntity<T>(T entity) where T : BaseEntity { _entity = entity; }
 
-        public void ConfigureValidations() { if(_entity != null) _entity.AddValidation((sender, name) => _entity.Code < 0 ? new ValidationResult("Code", Strings.Error_Field_WrongFormat) : null); }
+        public void ConfigureValidations() { if(_entity != null) _entity.AddValidation((sender, name) => _entity.Code < 0 ? new ValidationResult("Code", Strings.Notification_Field_WrongFormat) : null); }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = true;
             IList<ValidationResult> results = new List<ValidationResult>();
             if(_entity.Code != default(int)) {
                 result = false;
-                results.Add(new ValidationResult("Code", Strings.Error_Field_NotEmpty));
+                results.Add(new ValidationResult("Code", Strings.Notification_Field_NotEmpty));
             }
             if(_entity.Id != default(Guid)) {
                 result = false;
-                results.Add(new ValidationResult("Id", Strings.Error_Field_NotEmpty));
+                results.Add(new ValidationResult("Id", Strings.Notification_Field_NotEmpty));
             }
             invalidFields = results;
             return result;
@@ -38,11 +38,11 @@ namespace LOB.Business.Logic.Base {
             IList<ValidationResult> results = new List<ValidationResult>();
             if(_entity.Code == default(int)) {
                 result = false;
-                results.Add(new ValidationResult("Code", Strings.Error_Field_Empty));
+                results.Add(new ValidationResult("Code", Strings.Notification_Field_Empty));
             }
             if(_entity.Id == default(Guid)) {
                 result = false;
-                results.Add(new ValidationResult("Id", Strings.Error_Field_Empty));
+                results.Add(new ValidationResult("Id", Strings.Notification_Field_Empty));
             }
             invalidFields = results;
             return result;

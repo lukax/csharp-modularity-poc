@@ -24,7 +24,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Product; }
+            get { return Strings.UI_Header_Alter_Product; }
         }
 
         public int Index { get; set; }

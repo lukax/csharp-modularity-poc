@@ -12,49 +12,49 @@
     </UserControl.Resources>
 
     <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0" Background="{DynamicResource Foreground}">
-        <MenuItem Header="{x:Static loc:Strings.Menu_File}">
-            <MenuItem Header="{x:Static loc:Strings.Menu_File_Save}" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_File_Quit}" />
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_File}">
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_File_Save}" />
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_File_Quit}" />
         </MenuItem>
-        <MenuItem Header="{x:Static loc:Strings.Menu_Sales}">
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_New}" Command="{Binding OpenTabCommand}"
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_Sales}">
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Sales_New}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterSale" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_History}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Sales_History}" Command="{Binding OpenTabCommand}"
                       CommandParameter="ListSale" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_Alter}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Sales_Alter}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterSale" />
         </MenuItem>
-        <MenuItem Header="{x:Static loc:Strings.Menu_Register}">
-            <MenuItem Header="{x:Static loc:Strings.Menu_Register_Client}" Command="{Binding OpenTabCommand}"
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_Register}">
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Register_Client}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterClient" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Register_Company}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Register_Company}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterCompany" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Register_Supplier}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Register_Supplier}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterSupplier" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Register_Employee}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Register_Employee}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterEmployee" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Sales_Alter}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Sales_Alter}" Command="{Binding OpenTabCommand}"
                       CommandParameter="AlterProduct" />
         </MenuItem>
-        <MenuItem Header="{x:Static loc:Strings.Menu_List}">
-            <MenuItem Header="{x:Static loc:Strings.Menu_List_Client}" Command="{Binding OpenTabCommand}"
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_List}">
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_List_Client}" Command="{Binding OpenTabCommand}"
                       CommandParameter="ListClient" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_List_Company}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_List_Company}" Command="{Binding OpenTabCommand}"
                       CommandParameter="ListCompany" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_List_Supplier}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_List_Supplier}" Command="{Binding OpenTabCommand}"
                       CommandParameter="ListSupplier" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_List_Employee}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_List_Employee}" Command="{Binding OpenTabCommand}"
                       CommandParameter="ListEmployee" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_List_Product}" Command="{Binding OpenTabCommand}"
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_List_Product}" Command="{Binding OpenTabCommand}"
                       CommandParameter="ListProduct" />
         </MenuItem>
-        <MenuItem Header="{x:Static loc:Strings.Menu_Util}">
-            <MenuItem Header="{x:Static loc:Strings.Menu_Util_Address}" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Util_ContactInfo}" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Util_Paycheck}" />
-            <MenuItem Header="{x:Static loc:Strings.Menu_Util_Comission}" />
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_Util}">
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Util_Address}" />
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Util_ContactInfo}" />
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Util_Paycheck}" />
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_Util_Comission}" />
         </MenuItem>
-        <MenuItem Header="{x:Static loc:Strings.Menu_Report}">
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_Report}">
 
         </MenuItem>
     </Menu>

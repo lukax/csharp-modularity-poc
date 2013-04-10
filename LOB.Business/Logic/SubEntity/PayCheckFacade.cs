@@ -28,11 +28,9 @@ namespace LOB.Business.Logic.SubEntity {
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation((sender, name) => _entity.Bonus > 30000 ? new ValidationResult("Bonus", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.CurrentSalary < 1 ? new ValidationResult("CurrentSalary", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.PS) ? new ValidationResult("PS", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation((sender, name) => _entity.Bonus > 30000 ? new ValidationResult("Bonus", Strings.Notification_Field_TooLong) : null);
+                _entity.AddValidation((sender, name) => _entity.CurrentSalary < 0 ? new ValidationResult("CurrentSalary", Strings.Notification_Field_Negative) : null);
+                _entity.AddValidation((sender, name) => string.IsNullOrWhiteSpace(_entity.PS) ? new ValidationResult("PS", Strings.Notification_Field_Empty) : null);
             }
         }
 

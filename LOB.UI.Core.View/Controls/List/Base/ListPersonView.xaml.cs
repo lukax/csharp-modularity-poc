@@ -23,7 +23,7 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         }
 
         public string Header {
-            get { return Strings.Header_List_Category; }
+            get { return Strings.UI_Header_List_Category; }
         }
 
         public int Index { get; set; }

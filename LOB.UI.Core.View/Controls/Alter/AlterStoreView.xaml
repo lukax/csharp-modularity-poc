@@ -42,10 +42,10 @@
 
             <TabControl Grid.Row="3" Grid.ColumnSpan="4">
                 <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
-                <TabItem Header="{x:Static loc:Strings.Header_List_Employee}" />
-                <TabItem Header="{x:Static loc:Strings.Header_List_Product}" />
-                <TabItem Header="{x:Static loc:Strings.Header_List_Client}" />
-                <TabItem Header="{x:Static loc:Strings.Header_List_Sale}" />
+                <TabItem Header="{x:Static loc:Strings.UI_Header_List_Employee}" />
+                <TabItem Header="{x:Static loc:Strings.UI_Header_List_Product}" />
+                <TabItem Header="{x:Static loc:Strings.UI_Header_List_Client}" />
+                <TabItem Header="{x:Static loc:Strings.UI_Header_List_Sale}" />
             </TabControl>
         </Grid>
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}" />

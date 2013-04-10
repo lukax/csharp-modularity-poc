@@ -22,7 +22,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Service; }
+            get { return Strings.UI_Header_Alter_Service; }
         }
 
         public int Index { get; set; }

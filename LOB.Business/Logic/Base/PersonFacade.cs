@@ -42,7 +42,7 @@ namespace LOB.Business.Logic.Base {
             _baseEntityFacade.ConfigureValidations();
             _addressFacade.ConfigureValidations();
             _contactInfoFacade.ConfigureValidations();
-            if(_entity != null) _entity.AddValidation((sender, name) => _entity.Notes.Length > 300 ? new ValidationResult("Notes", Strings.Error_Field_TooLong) : null);
+            if (_entity != null) _entity.AddValidation((sender, name) => _entity.Notes.Length > 300 ? new ValidationResult("Notes", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {

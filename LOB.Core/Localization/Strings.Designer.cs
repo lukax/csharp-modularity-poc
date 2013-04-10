@@ -70,15 +70,6 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to App_Title.
-        /// </summary>
-        public static string App_Title {
-            get {
-                return ResourceManager.GetString("App_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to @Command_AddAddress.
         /// </summary>
         public static string Command_Add_Address {
@@ -1456,771 +1447,6 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Add.
-        /// </summary>
-        public static string Error_Field_Add {
-            get {
-                return ResourceManager.GetString("Error_Field_Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_DateWrong.
-        /// </summary>
-        public static string Error_Field_DateInvalid {
-            get {
-                return ResourceManager.GetString("Error_Field_DateInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_DateEarly.
-        /// </summary>
-        public static string Error_Field_DateTooEarly {
-            get {
-                return ResourceManager.GetString("Error_Field_DateTooEarly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_DateLate.
-        /// </summary>
-        public static string Error_Field_DateTooLate {
-            get {
-                return ResourceManager.GetString("Error_Field_DateTooLate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Delete.
-        /// </summary>
-        public static string Error_Field_Delete {
-            get {
-                return ResourceManager.GetString("Error_Field_Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Deprecated.
-        /// </summary>
-        public static string Error_Field_Deprecated {
-            get {
-                return ResourceManager.GetString("Error_Field_Deprecated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Empty.
-        /// </summary>
-        public static string Error_Field_Empty {
-            get {
-                return ResourceManager.GetString("Error_Field_Empty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_IntOnly.
-        /// </summary>
-        public static string Error_Field_IntOnly {
-            get {
-                return ResourceManager.GetString("Error_Field_IntOnly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Invalid.
-        /// </summary>
-        public static string Error_Field_Invalid {
-            get {
-                return ResourceManager.GetString("Error_Field_Invalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Necessary.
-        /// </summary>
-        public static string Error_Field_Necessary {
-            get {
-                return ResourceManager.GetString("Error_Field_Necessary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Negative.
-        /// </summary>
-        public static string Error_Field_Negative {
-            get {
-                return ResourceManager.GetString("Error_Field_Negative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Nescessary.
-        /// </summary>
-        public static string Error_Field_Nescessary {
-            get {
-                return ResourceManager.GetString("Error_Field_Nescessary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_NotEmpty.
-        /// </summary>
-        public static string Error_Field_NotEmpty {
-            get {
-                return ResourceManager.GetString("Error_Field_NotEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_NotNecessary.
-        /// </summary>
-        public static string Error_Field_NotNecessary {
-            get {
-                return ResourceManager.GetString("Error_Field_NotNecessary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Positive.
-        /// </summary>
-        public static string Error_Field_Positive {
-            get {
-                return ResourceManager.GetString("Error_Field_Positive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_TooLong.
-        /// </summary>
-        public static string Error_Field_TooLong {
-            get {
-                return ResourceManager.GetString("Error_Field_TooLong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_TooShort.
-        /// </summary>
-        public static string Error_Field_TooShort {
-            get {
-                return ResourceManager.GetString("Error_Field_TooShort", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_Update.
-        /// </summary>
-        public static string Error_Field_Update {
-            get {
-                return ResourceManager.GetString("Error_Field_Update", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Field_WrongFormat.
-        /// </summary>
-        public static string Error_Field_WrongFormat {
-            get {
-                return ResourceManager.GetString("Error_Field_WrongFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Info.
-        /// </summary>
-        public static string Error_Info {
-            get {
-                return ResourceManager.GetString("Error_Info", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Internal.
-        /// </summary>
-        public static string Error_Internal {
-            get {
-                return ResourceManager.GetString("Error_Internal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Navigator_View_ResolveFirst.
-        /// </summary>
-        public static string Error_Navigator_View_ResolveFirst {
-            get {
-                return ResourceManager.GetString("Error_Navigator_View_ResolveFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Error_Navigator_ViewModel_ResolveFirst.
-        /// </summary>
-        public static string Error_Navigator_ViewModel_ResolveFirst {
-            get {
-                return ResourceManager.GetString("Error_Navigator_ViewModel_ResolveFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter.
-        /// </summary>
-        public static string Header_Alter {
-            get {
-                return ResourceManager.GetString("Header_Alter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Address.
-        /// </summary>
-        public static string Header_Alter_Address {
-            get {
-                return ResourceManager.GetString("Header_Alter_Address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_BaseEntity.
-        /// </summary>
-        public static string Header_Alter_BaseEntity {
-            get {
-                return ResourceManager.GetString("Header_Alter_BaseEntity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Category.
-        /// </summary>
-        public static string Header_Alter_Category {
-            get {
-                return ResourceManager.GetString("Header_Alter_Category", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_ContactInfo.
-        /// </summary>
-        public static string Header_Alter_ContactInfo {
-            get {
-                return ResourceManager.GetString("Header_Alter_ContactInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Customer.
-        /// </summary>
-        public static string Header_Alter_Customer {
-            get {
-                return ResourceManager.GetString("Header_Alter_Customer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Email.
-        /// </summary>
-        public static string Header_Alter_Email {
-            get {
-                return ResourceManager.GetString("Header_Alter_Email", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Employee.
-        /// </summary>
-        public static string Header_Alter_Employee {
-            get {
-                return ResourceManager.GetString("Header_Alter_Employee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_LegalPerson.
-        /// </summary>
-        public static string Header_Alter_LegalPerson {
-            get {
-                return ResourceManager.GetString("Header_Alter_LegalPerson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_NaturalPerson.
-        /// </summary>
-        public static string Header_Alter_NaturalPerson {
-            get {
-                return ResourceManager.GetString("Header_Alter_NaturalPerson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_PayCheck.
-        /// </summary>
-        public static string Header_Alter_PayCheck {
-            get {
-                return ResourceManager.GetString("Header_Alter_PayCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Person.
-        /// </summary>
-        public static string Header_Alter_Person {
-            get {
-                return ResourceManager.GetString("Header_Alter_Person", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_PhoneNumber.
-        /// </summary>
-        public static string Header_Alter_PhoneNumber {
-            get {
-                return ResourceManager.GetString("Header_Alter_PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Product.
-        /// </summary>
-        public static string Header_Alter_Product {
-            get {
-                return ResourceManager.GetString("Header_Alter_Product", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Sale.
-        /// </summary>
-        public static string Header_Alter_Sale {
-            get {
-                return ResourceManager.GetString("Header_Alter_Sale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Alter_Service.
-        /// </summary>
-        public static string Header_Alter_Service {
-            get {
-                return ResourceManager.GetString("Header_Alter_Service", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List.
-        /// </summary>
-        public static string Header_List {
-            get {
-                return ResourceManager.GetString("Header_List", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Address.
-        /// </summary>
-        public static string Header_List_Address {
-            get {
-                return ResourceManager.GetString("Header_List_Address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_BaseEntity.
-        /// </summary>
-        public static string Header_List_BaseEntity {
-            get {
-                return ResourceManager.GetString("Header_List_BaseEntity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Category.
-        /// </summary>
-        public static string Header_List_Category {
-            get {
-                return ResourceManager.GetString("Header_List_Category", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Client.
-        /// </summary>
-        public static string Header_List_Client {
-            get {
-                return ResourceManager.GetString("Header_List_Client", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_ContactInfo.
-        /// </summary>
-        public static string Header_List_ContactInfo {
-            get {
-                return ResourceManager.GetString("Header_List_ContactInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Customer.
-        /// </summary>
-        public static string Header_List_Customer {
-            get {
-                return ResourceManager.GetString("Header_List_Customer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Email.
-        /// </summary>
-        public static string Header_List_Email {
-            get {
-                return ResourceManager.GetString("Header_List_Email", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Employee.
-        /// </summary>
-        public static string Header_List_Employee {
-            get {
-                return ResourceManager.GetString("Header_List_Employee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Op.
-        /// </summary>
-        public static string Header_List_Op {
-            get {
-                return ResourceManager.GetString("Header_List_Op", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_PhoneNumber.
-        /// </summary>
-        public static string Header_List_PhoneNumber {
-            get {
-                return ResourceManager.GetString("Header_List_PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Product.
-        /// </summary>
-        public static string Header_List_Product {
-            get {
-                return ResourceManager.GetString("Header_List_Product", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_List_Sale.
-        /// </summary>
-        public static string Header_List_Sale {
-            get {
-                return ResourceManager.GetString("Header_List_Sale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_ListService.
-        /// </summary>
-        public static string Header_List_Service {
-            get {
-                return ResourceManager.GetString("Header_List_Service", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Main_Busy.
-        /// </summary>
-        public static string Header_Main_Busy {
-            get {
-                return ResourceManager.GetString("Header_Main_Busy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Main_Column.
-        /// </summary>
-        public static string Header_Main_Column {
-            get {
-                return ResourceManager.GetString("Header_Main_Column", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Main_Header.
-        /// </summary>
-        public static string Header_Main_Header {
-            get {
-                return ResourceManager.GetString("Header_Main_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Main_Message.
-        /// </summary>
-        public static string Header_Main_Message {
-            get {
-                return ResourceManager.GetString("Header_Main_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Sell.
-        /// </summary>
-        public static string Header_Sell {
-            get {
-                return ResourceManager.GetString("Header_Sell", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Sell_Product.
-        /// </summary>
-        public static string Header_Sell_Product {
-            get {
-                return ResourceManager.GetString("Header_Sell_Product", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Header_Sell_Service.
-        /// </summary>
-        public static string Header_Sell_Service {
-            get {
-                return ResourceManager.GetString("Header_Sell_Service", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_File.
-        /// </summary>
-        public static string Menu_File {
-            get {
-                return ResourceManager.GetString("Menu_File", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Quit.
-        /// </summary>
-        public static string Menu_File_Quit {
-            get {
-                return ResourceManager.GetString("Menu_File_Quit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Save.
-        /// </summary>
-        public static string Menu_File_Save {
-            get {
-                return ResourceManager.GetString("Menu_File_Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_List.
-        /// </summary>
-        public static string Menu_List {
-            get {
-                return ResourceManager.GetString("Menu_List", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_List_Client.
-        /// </summary>
-        public static string Menu_List_Client {
-            get {
-                return ResourceManager.GetString("Menu_List_Client", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_List_Company.
-        /// </summary>
-        public static string Menu_List_Company {
-            get {
-                return ResourceManager.GetString("Menu_List_Company", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_List_Employee.
-        /// </summary>
-        public static string Menu_List_Employee {
-            get {
-                return ResourceManager.GetString("Menu_List_Employee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_List_Product.
-        /// </summary>
-        public static string Menu_List_Product {
-            get {
-                return ResourceManager.GetString("Menu_List_Product", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_List_Supplier.
-        /// </summary>
-        public static string Menu_List_Supplier {
-            get {
-                return ResourceManager.GetString("Menu_List_Supplier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Register.
-        /// </summary>
-        public static string Menu_Register {
-            get {
-                return ResourceManager.GetString("Menu_Register", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Register_Client.
-        /// </summary>
-        public static string Menu_Register_Client {
-            get {
-                return ResourceManager.GetString("Menu_Register_Client", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Register_Company.
-        /// </summary>
-        public static string Menu_Register_Company {
-            get {
-                return ResourceManager.GetString("Menu_Register_Company", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Register_Employee.
-        /// </summary>
-        public static string Menu_Register_Employee {
-            get {
-                return ResourceManager.GetString("Menu_Register_Employee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Register_Product.
-        /// </summary>
-        public static string Menu_Register_Product {
-            get {
-                return ResourceManager.GetString("Menu_Register_Product", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Register_Supplier.
-        /// </summary>
-        public static string Menu_Register_Supplier {
-            get {
-                return ResourceManager.GetString("Menu_Register_Supplier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Report.
-        /// </summary>
-        public static string Menu_Report {
-            get {
-                return ResourceManager.GetString("Menu_Report", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Sales.
-        /// </summary>
-        public static string Menu_Sales {
-            get {
-                return ResourceManager.GetString("Menu_Sales", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Sales_Alter.
-        /// </summary>
-        public static string Menu_Sales_Alter {
-            get {
-                return ResourceManager.GetString("Menu_Sales_Alter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Sales_History.
-        /// </summary>
-        public static string Menu_Sales_History {
-            get {
-                return ResourceManager.GetString("Menu_Sales_History", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Sales_New.
-        /// </summary>
-        public static string Menu_Sales_New {
-            get {
-                return ResourceManager.GetString("Menu_Sales_New", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Util.
-        /// </summary>
-        public static string Menu_Util {
-            get {
-                return ResourceManager.GetString("Menu_Util", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Util_Address.
-        /// </summary>
-        public static string Menu_Util_Address {
-            get {
-                return ResourceManager.GetString("Menu_Util_Address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Util_Comission.
-        /// </summary>
-        public static string Menu_Util_Comission {
-            get {
-                return ResourceManager.GetString("Menu_Util_Comission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Util_ContactInfo.
-        /// </summary>
-        public static string Menu_Util_ContactInfo {
-            get {
-                return ResourceManager.GetString("Menu_Util_ContactInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Menu_Util_Paycheck.
-        /// </summary>
-        public static string Menu_Util_Paycheck {
-            get {
-                return ResourceManager.GetString("Menu_Util_Paycheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to @Notification_Connecting.
         /// </summary>
         public static string Notification_Connecting {
@@ -2311,11 +1537,65 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyActivated.
+        /// </summary>
+        public static string Notification_Dao_Transaction_AlreadyActivated {
+            get {
+                return ResourceManager.GetString("Notification_Dao_Transaction_AlreadyActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyInitialized.
+        /// </summary>
+        public static string Notification_Dao_Transaction_AlreadyInitialized {
+            get {
+                return ResourceManager.GetString("Notification_Dao_Transaction_AlreadyInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotActivated.
+        /// </summary>
+        public static string Notification_Dao_Transaction_NotActivated {
+            get {
+                return ResourceManager.GetString("Notification_Dao_Transaction_NotActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotInitialized.
+        /// </summary>
+        public static string Notification_Dao_Transaction_NotInitialized {
+            get {
+                return ResourceManager.GetString("Notification_Dao_Transaction_NotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Add.
+        /// </summary>
+        public static string Notification_Field_Add {
+            get {
+                return ResourceManager.GetString("Notification_Field_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Added.
         /// </summary>
         public static string Notification_Field_Added {
             get {
                 return ResourceManager.GetString("Notification_Field_Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Adding.
+        /// </summary>
+        public static string Notification_Field_Adding {
+            get {
+                return ResourceManager.GetString("Notification_Field_Adding", resourceCulture);
             }
         }
         
@@ -2329,11 +1609,74 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_DateInvalid.
+        /// </summary>
+        public static string Notification_Field_DateInvalid {
+            get {
+                return ResourceManager.GetString("Notification_Field_DateInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_DateTooEarly.
+        /// </summary>
+        public static string Notification_Field_DateTooEarly {
+            get {
+                return ResourceManager.GetString("Notification_Field_DateTooEarly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_DateTooLate.
+        /// </summary>
+        public static string Notification_Field_DateTooLate {
+            get {
+                return ResourceManager.GetString("Notification_Field_DateTooLate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Delete.
+        /// </summary>
+        public static string Notification_Field_Delete {
+            get {
+                return ResourceManager.GetString("Notification_Field_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Deleted.
         /// </summary>
         public static string Notification_Field_Deleted {
             get {
                 return ResourceManager.GetString("Notification_Field_Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Deleting.
+        /// </summary>
+        public static string Notification_Field_Deleting {
+            get {
+                return ResourceManager.GetString("Notification_Field_Deleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Deprecated.
+        /// </summary>
+        public static string Notification_Field_Deprecated {
+            get {
+                return ResourceManager.GetString("Notification_Field_Deprecated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Empty.
+        /// </summary>
+        public static string Notification_Field_Empty {
+            get {
+                return ResourceManager.GetString("Notification_Field_Empty", resourceCulture);
             }
         }
         
@@ -2347,11 +1690,38 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Filtering.
+        /// </summary>
+        public static string Notification_Field_Filtering {
+            get {
+                return ResourceManager.GetString("Notification_Field_Filtering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Information.
         /// </summary>
         public static string Notification_Field_Information {
             get {
                 return ResourceManager.GetString("Notification_Field_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_IntOnly.
+        /// </summary>
+        public static string Notification_Field_IntOnly {
+            get {
+                return ResourceManager.GetString("Notification_Field_IntOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Invalid.
+        /// </summary>
+        public static string Notification_Field_Invalid {
+            get {
+                return ResourceManager.GetString("Notification_Field_Invalid", resourceCulture);
             }
         }
         
@@ -2365,11 +1735,191 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Listing.
+        /// </summary>
+        public static string Notification_Field_Listing {
+            get {
+                return ResourceManager.GetString("Notification_Field_Listing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Necessary.
+        /// </summary>
+        public static string Notification_Field_Necessary {
+            get {
+                return ResourceManager.GetString("Notification_Field_Necessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Negative.
+        /// </summary>
+        public static string Notification_Field_Negative {
+            get {
+                return ResourceManager.GetString("Notification_Field_Negative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Nescessary.
+        /// </summary>
+        public static string Notification_Field_Nescessary {
+            get {
+                return ResourceManager.GetString("Notification_Field_Nescessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_NotEmpty.
+        /// </summary>
+        public static string Notification_Field_NotEmpty {
+            get {
+                return ResourceManager.GetString("Notification_Field_NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_NotNecessary.
+        /// </summary>
+        public static string Notification_Field_NotNecessary {
+            get {
+                return ResourceManager.GetString("Notification_Field_NotNecessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Positive.
+        /// </summary>
+        public static string Notification_Field_Positive {
+            get {
+                return ResourceManager.GetString("Notification_Field_Positive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Searching.
+        /// </summary>
+        public static string Notification_Field_Searching {
+            get {
+                return ResourceManager.GetString("Notification_Field_Searching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_TooLong.
+        /// </summary>
+        public static string Notification_Field_TooLong {
+            get {
+                return ResourceManager.GetString("Notification_Field_TooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_TooShort.
+        /// </summary>
+        public static string Notification_Field_TooShort {
+            get {
+                return ResourceManager.GetString("Notification_Field_TooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Update.
+        /// </summary>
+        public static string Notification_Field_Update {
+            get {
+                return ResourceManager.GetString("Notification_Field_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Updated.
         /// </summary>
         public static string Notification_Field_Updated {
             get {
                 return ResourceManager.GetString("Notification_Field_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Updating.
+        /// </summary>
+        public static string Notification_Field_Updating {
+            get {
+                return ResourceManager.GetString("Notification_Field_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_WrongFormat.
+        /// </summary>
+        public static string Notification_Field_WrongFormat {
+            get {
+                return ResourceManager.GetString("Notification_Field_WrongFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_X_Invalid.
+        /// </summary>
+        public static string Notification_Field_X_Invalid {
+            get {
+                return ResourceManager.GetString("Notification_Field_X_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_X_CharShort.
+        /// </summary>
+        public static string Notification_Field_X_Length {
+            get {
+                return ResourceManager.GetString("Notification_Field_X_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_CharOnly.
+        /// </summary>
+        public static string Notification_Field_X_MaxLength {
+            get {
+                return ResourceManager.GetString("Notification_Field_X_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_X_CharLong.
+        /// </summary>
+        public static string Notification_Field_X_MinLength {
+            get {
+                return ResourceManager.GetString("Notification_Field_X_MinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_X_Valid.
+        /// </summary>
+        public static string Notification_Field_X_Valid {
+            get {
+                return ResourceManager.GetString("Notification_Field_X_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Info.
+        /// </summary>
+        public static string Notification_Info {
+            get {
+                return ResourceManager.GetString("Notification_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Internal.
+        /// </summary>
+        public static string Notification_Internal {
+            get {
+                return ResourceManager.GetString("Notification_Internal", resourceCulture);
             }
         }
         
@@ -2410,6 +1960,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Navigator_View_ResolveFirst.
+        /// </summary>
+        public static string Notification_Navigator_View_ResolveFirst {
+            get {
+                return ResourceManager.GetString("Notification_Navigator_View_ResolveFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Navigator_ViewModel_ResolveFirst.
+        /// </summary>
+        public static string Notification_Navigator_ViewModel_ResolveFirst {
+            get {
+                return ResourceManager.GetString("Notification_Navigator_ViewModel_ResolveFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_RequisitionFailed.
         /// </summary>
         public static string Notification_RequisitionFailed {
@@ -2428,182 +1996,749 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Add.
+        ///   Looks up a localized string similar to @UI_Header_Alter.
         /// </summary>
-        public static string ToolTip_Add {
+        public static string UI_Header_Alter {
             get {
-                return ResourceManager.GetString("ToolTip_Add", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_AlterCustomer.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Address.
         /// </summary>
-        public static string ToolTip_AlterCustomer {
+        public static string UI_Header_Alter_Address {
             get {
-                return ResourceManager.GetString("ToolTip_AlterCustomer", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Address", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Cancel.
+        ///   Looks up a localized string similar to @UI_Header_Alter_BaseEntity.
         /// </summary>
-        public static string ToolTip_Cancel {
+        public static string UI_Header_Alter_BaseEntity {
             get {
-                return ResourceManager.GetString("ToolTip_Cancel", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_BaseEntity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Clear.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Category.
         /// </summary>
-        public static string ToolTip_Clear {
+        public static string UI_Header_Alter_Category {
             get {
-                return ResourceManager.GetString("ToolTip_Clear", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Category", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Close.
+        ///   Looks up a localized string similar to @UI_Header_Alter_ContactInfo.
         /// </summary>
-        public static string ToolTip_Close {
+        public static string UI_Header_Alter_ContactInfo {
             get {
-                return ResourceManager.GetString("ToolTip_Close", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_ContactInfo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Code.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Customer.
         /// </summary>
-        public static string ToolTip_Code {
+        public static string UI_Header_Alter_Customer {
             get {
-                return ResourceManager.GetString("ToolTip_Code", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Customer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Confirm.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Email.
         /// </summary>
-        public static string ToolTip_Confirm {
+        public static string UI_Header_Alter_Email {
             get {
-                return ResourceManager.GetString("ToolTip_Confirm", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Email", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Delete.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Employee.
         /// </summary>
-        public static string ToolTip_Delete {
+        public static string UI_Header_Alter_Employee {
             get {
-                return ResourceManager.GetString("ToolTip_Delete", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Employee", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Edit.
+        ///   Looks up a localized string similar to @UI_Header_Alter_LegalPerson.
         /// </summary>
-        public static string ToolTip_Edit {
+        public static string UI_Header_Alter_LegalPerson {
             get {
-                return ResourceManager.GetString("ToolTip_Edit", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_LegalPerson", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Filter.
+        ///   Looks up a localized string similar to @UI_Header_Alter_NaturalPerson.
         /// </summary>
-        public static string ToolTip_Filter {
+        public static string UI_Header_Alter_NaturalPerson {
             get {
-                return ResourceManager.GetString("ToolTip_Filter", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_NaturalPerson", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_List.
+        ///   Looks up a localized string similar to @UI_Header_Alter_PayCheck.
         /// </summary>
-        public static string ToolTip_List {
+        public static string UI_Header_Alter_PayCheck {
             get {
-                return ResourceManager.GetString("ToolTip_List", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_PayCheck", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Login.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Person.
         /// </summary>
-        public static string ToolTip_Login {
+        public static string UI_Header_Alter_Person {
             get {
-                return ResourceManager.GetString("ToolTip_Login", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Person", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Logout.
+        ///   Looks up a localized string similar to @UI_Header_Alter_PhoneNumber.
         /// </summary>
-        public static string ToolTip_Logout {
+        public static string UI_Header_Alter_PhoneNumber {
             get {
-                return ResourceManager.GetString("ToolTip_Logout", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_PhoneNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Messages.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Product.
         /// </summary>
-        public static string ToolTip_Messages {
+        public static string UI_Header_Alter_Product {
             get {
-                return ResourceManager.GetString("ToolTip_Messages", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Product", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Notifications.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Sale.
         /// </summary>
-        public static string ToolTip_Notifications {
+        public static string UI_Header_Alter_Sale {
             get {
-                return ResourceManager.GetString("ToolTip_Notifications", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Sale", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Operations.
+        ///   Looks up a localized string similar to @UI_Header_Alter_Service.
         /// </summary>
-        public static string ToolTip_Operations {
+        public static string UI_Header_Alter_Service {
             get {
-                return ResourceManager.GetString("ToolTip_Operations", resourceCulture);
+                return ResourceManager.GetString("UI_Header_Alter_Service", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_QuickSearch.
+        ///   Looks up a localized string similar to @UI_Header_List.
         /// </summary>
-        public static string ToolTip_QuickSearch {
+        public static string UI_Header_List {
             get {
-                return ResourceManager.GetString("ToolTip_QuickSearch", resourceCulture);
+                return ResourceManager.GetString("UI_Header_List", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Sales.
+        ///   Looks up a localized string similar to @UI_Header_List_Address.
         /// </summary>
-        public static string ToolTip_Sales {
+        public static string UI_Header_List_Address {
             get {
-                return ResourceManager.GetString("ToolTip_Sales", resourceCulture);
+                return ResourceManager.GetString("UI_Header_List_Address", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Search.
+        ///   Looks up a localized string similar to @UI_Header_List_BaseEntity.
         /// </summary>
-        public static string ToolTip_Search {
+        public static string UI_Header_List_BaseEntity {
             get {
-                return ResourceManager.GetString("ToolTip_Search", resourceCulture);
+                return ResourceManager.GetString("UI_Header_List_BaseEntity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @ToolTip_Update.
+        ///   Looks up a localized string similar to @UI_Header_List_Category.
         /// </summary>
-        public static string ToolTip_Update {
+        public static string UI_Header_List_Category {
             get {
-                return ResourceManager.GetString("ToolTip_Update", resourceCulture);
+                return ResourceManager.GetString("UI_Header_List_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Client.
+        /// </summary>
+        public static string UI_Header_List_Client {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_ContactInfo.
+        /// </summary>
+        public static string UI_Header_List_ContactInfo {
+            get {
+                return ResourceManager.GetString("UI_Header_List_ContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Customer.
+        /// </summary>
+        public static string UI_Header_List_Customer {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Email.
+        /// </summary>
+        public static string UI_Header_List_Email {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Employee.
+        /// </summary>
+        public static string UI_Header_List_Employee {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Op.
+        /// </summary>
+        public static string UI_Header_List_Op {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Op", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_PhoneNumber.
+        /// </summary>
+        public static string UI_Header_List_PhoneNumber {
+            get {
+                return ResourceManager.GetString("UI_Header_List_PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Product.
+        /// </summary>
+        public static string UI_Header_List_Product {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_List_Sale.
+        /// </summary>
+        public static string UI_Header_List_Sale {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Sale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_ListService.
+        /// </summary>
+        public static string UI_Header_List_Service {
+            get {
+                return ResourceManager.GetString("UI_Header_List_Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Main_Busy.
+        /// </summary>
+        public static string UI_Header_Main_Busy {
+            get {
+                return ResourceManager.GetString("UI_Header_Main_Busy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Main_Column.
+        /// </summary>
+        public static string UI_Header_Main_Column {
+            get {
+                return ResourceManager.GetString("UI_Header_Main_Column", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Main_Header.
+        /// </summary>
+        public static string UI_Header_Main_Header {
+            get {
+                return ResourceManager.GetString("UI_Header_Main_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Main_Message.
+        /// </summary>
+        public static string UI_Header_Main_Message {
+            get {
+                return ResourceManager.GetString("UI_Header_Main_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Sell.
+        /// </summary>
+        public static string UI_Header_Sell {
+            get {
+                return ResourceManager.GetString("UI_Header_Sell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Sell_Product.
+        /// </summary>
+        public static string UI_Header_Sell_Product {
+            get {
+                return ResourceManager.GetString("UI_Header_Sell_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Header_Sell_Service.
+        /// </summary>
+        public static string UI_Header_Sell_Service {
+            get {
+                return ResourceManager.GetString("UI_Header_Sell_Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_File.
+        /// </summary>
+        public static string UI_Menu_File {
+            get {
+                return ResourceManager.GetString("UI_Menu_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Quit.
+        /// </summary>
+        public static string UI_Menu_File_Quit {
+            get {
+                return ResourceManager.GetString("UI_Menu_File_Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Save.
+        /// </summary>
+        public static string UI_Menu_File_Save {
+            get {
+                return ResourceManager.GetString("UI_Menu_File_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_List.
+        /// </summary>
+        public static string UI_Menu_List {
+            get {
+                return ResourceManager.GetString("UI_Menu_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_List_Client.
+        /// </summary>
+        public static string UI_Menu_List_Client {
+            get {
+                return ResourceManager.GetString("UI_Menu_List_Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_List_Company.
+        /// </summary>
+        public static string UI_Menu_List_Company {
+            get {
+                return ResourceManager.GetString("UI_Menu_List_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_List_Employee.
+        /// </summary>
+        public static string UI_Menu_List_Employee {
+            get {
+                return ResourceManager.GetString("UI_Menu_List_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_List_Product.
+        /// </summary>
+        public static string UI_Menu_List_Product {
+            get {
+                return ResourceManager.GetString("UI_Menu_List_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_List_Supplier.
+        /// </summary>
+        public static string UI_Menu_List_Supplier {
+            get {
+                return ResourceManager.GetString("UI_Menu_List_Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Register.
+        /// </summary>
+        public static string UI_Menu_Register {
+            get {
+                return ResourceManager.GetString("UI_Menu_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Register_Client.
+        /// </summary>
+        public static string UI_Menu_Register_Client {
+            get {
+                return ResourceManager.GetString("UI_Menu_Register_Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Register_Company.
+        /// </summary>
+        public static string UI_Menu_Register_Company {
+            get {
+                return ResourceManager.GetString("UI_Menu_Register_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Register_Employee.
+        /// </summary>
+        public static string UI_Menu_Register_Employee {
+            get {
+                return ResourceManager.GetString("UI_Menu_Register_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Register_Product.
+        /// </summary>
+        public static string UI_Menu_Register_Product {
+            get {
+                return ResourceManager.GetString("UI_Menu_Register_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Register_Supplier.
+        /// </summary>
+        public static string UI_Menu_Register_Supplier {
+            get {
+                return ResourceManager.GetString("UI_Menu_Register_Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Report.
+        /// </summary>
+        public static string UI_Menu_Report {
+            get {
+                return ResourceManager.GetString("UI_Menu_Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Sales.
+        /// </summary>
+        public static string UI_Menu_Sales {
+            get {
+                return ResourceManager.GetString("UI_Menu_Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Sales_Alter.
+        /// </summary>
+        public static string UI_Menu_Sales_Alter {
+            get {
+                return ResourceManager.GetString("UI_Menu_Sales_Alter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Sales_History.
+        /// </summary>
+        public static string UI_Menu_Sales_History {
+            get {
+                return ResourceManager.GetString("UI_Menu_Sales_History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Sales_New.
+        /// </summary>
+        public static string UI_Menu_Sales_New {
+            get {
+                return ResourceManager.GetString("UI_Menu_Sales_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Util.
+        /// </summary>
+        public static string UI_Menu_Util {
+            get {
+                return ResourceManager.GetString("UI_Menu_Util", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Util_Address.
+        /// </summary>
+        public static string UI_Menu_Util_Address {
+            get {
+                return ResourceManager.GetString("UI_Menu_Util_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Util_Comission.
+        /// </summary>
+        public static string UI_Menu_Util_Comission {
+            get {
+                return ResourceManager.GetString("UI_Menu_Util_Comission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Util_ContactInfo.
+        /// </summary>
+        public static string UI_Menu_Util_ContactInfo {
+            get {
+                return ResourceManager.GetString("UI_Menu_Util_ContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_Util_Paycheck.
+        /// </summary>
+        public static string UI_Menu_Util_Paycheck {
+            get {
+                return ResourceManager.GetString("UI_Menu_Util_Paycheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App_Title.
+        /// </summary>
+        public static string UI_Title_Shell {
+            get {
+                return ResourceManager.GetString("UI_Title_Shell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Add.
+        /// </summary>
+        public static string UI_ToolTip_Add {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_AlterCustomer.
+        /// </summary>
+        public static string UI_ToolTip_AlterCustomer {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_AlterCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Cancel.
+        /// </summary>
+        public static string UI_ToolTip_Cancel {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Clear.
+        /// </summary>
+        public static string UI_ToolTip_Clear {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Close.
+        /// </summary>
+        public static string UI_ToolTip_Close {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Code.
+        /// </summary>
+        public static string UI_ToolTip_Code {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Confirm.
+        /// </summary>
+        public static string UI_ToolTip_Confirm {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Delete.
+        /// </summary>
+        public static string UI_ToolTip_Delete {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Edit.
+        /// </summary>
+        public static string UI_ToolTip_Edit {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Filter.
+        /// </summary>
+        public static string UI_ToolTip_Filter {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_List.
+        /// </summary>
+        public static string UI_ToolTip_List {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Login.
+        /// </summary>
+        public static string UI_ToolTip_Login {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Logout.
+        /// </summary>
+        public static string UI_ToolTip_Logout {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Messages.
+        /// </summary>
+        public static string UI_ToolTip_Messages {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Notifications.
+        /// </summary>
+        public static string UI_ToolTip_Notifications {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Operations.
+        /// </summary>
+        public static string UI_ToolTip_Operations {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Operations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_QuickSearch.
+        /// </summary>
+        public static string UI_ToolTip_QuickSearch {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_QuickSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Sales.
+        /// </summary>
+        public static string UI_ToolTip_Sales {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Search.
+        /// </summary>
+        public static string UI_ToolTip_Search {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Update.
+        /// </summary>
+        public static string UI_ToolTip_Update {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Update", resourceCulture);
             }
         }
     }

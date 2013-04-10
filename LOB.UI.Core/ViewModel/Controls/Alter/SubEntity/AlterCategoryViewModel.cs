@@ -22,12 +22,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private readonly ICategoryFacade _categoryFacade;
         private readonly IEventAggregator _eventAggregator;
-
+        private readonly Notification _notification;
         public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _categoryFacade = categoryFacade;
             _eventAggregator = eventAggregator;
+            _notification = new Notification();
             Refresh();
         }
 
@@ -51,8 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 Entity = Repository.SaveOrUpdate(Entity);
                 Repository.Uow.CommitTransaction();
             }
-            _eventAggregator.GetEvent<NotificationEvent>()
-                            .Publish(new Notification {Message = Strings.Notification_Field_Added, Severity = Severity.Ok});
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
         }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }

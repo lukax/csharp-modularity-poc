@@ -39,7 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public ICommand DismissCommand { get; set; }
         public Visibility Visibility { get; set; }
         public string Status {
-            get { return string.Format("{0} {1}", Entitys.Count, Strings.ToolTip_Notifications); }
+            get { return string.Format("{0} {1}", Entitys.Count, Strings.UI_ToolTip_Notifications); }
         }
 
         [InjectionConstructor]

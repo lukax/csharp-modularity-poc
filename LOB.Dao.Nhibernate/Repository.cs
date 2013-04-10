@@ -35,9 +35,11 @@ namespace LOB.Dao.Nhibernate {
             return entity;
         }
 
-        public void Delete<T>(T entity) where T : BaseEntity { Uow.Delete(entity); }
+        public T Delete<T>(T entity) where T : BaseEntity { Uow.Delete(entity);
+            return entity;
+        }
 
-        public T Get<T>(object primaryKey) where T : BaseEntity { return GetSession().Get<T>(primaryKey); }
+        public T Get<T>(object id) where T : BaseEntity { return GetSession().Get<T>(id); }
 
         public bool Contains<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return GetSession().Query<T>().Contains(GetSession().Query<T>().FirstOrDefault(criteria)); }
 

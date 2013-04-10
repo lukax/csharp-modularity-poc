@@ -20,7 +20,7 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         public int Index { get; set; }
 
         public string Header {
-            get { return Strings.Header_List_BaseEntity; }
+            get { return Strings.UI_Header_List_BaseEntity; }
         }
 
         public void InitializeServices() { }

@@ -18,7 +18,7 @@ namespace LOB.UI.Core.View.Controls.Util {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_BaseEntity; }
+            get { return Strings.UI_Header_Alter_BaseEntity; }
         }
 
         public int Index { get; set; }

@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using Microsoft.Practices.Prism.Logging;
@@ -72,30 +73,35 @@ namespace LOB.Dao.Nhibernate {
 
         public IUnityOfWork BeginTransaction() {
             if(_transaction == null) _transaction = ((ISession)ORM).BeginTransaction();
-            else if(_transaction.IsActive) throw new InvalidOperationException("Transaction has already been initialized, dispose first");
+            else if(_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_AlreadyActivated);
             return this;
         }
 
         public void CommitTransaction() {
-            if(_transaction == null) throw new InvalidOperationException("Transaction not initialized");
-            if(!_transaction.IsActive) throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
+            if(_transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
+            if(!_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
             _transaction.Commit();
         }
 
         public void RollbackTransaction() {
-            if(_transaction == null) throw new InvalidOperationException("Transaction not initialized");
-            if(!_transaction.IsActive) throw new InvalidOperationException("Transaction has not been activated, first Begin the Transaction");
+            if(_transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
+            if(!_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
             _transaction.Rollback();
         }
 
+        ~UnityOfWork() { Dispose(false); }
+
         public void Dispose() {
             Dispose(true);
-            //GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing) {
-            if(!disposing) return;
-            _transaction.Dispose();
+            if(disposing) {
+                if(_transaction.IsActive) _transaction.Rollback();
+                _transaction.Dispose();
+                ((ISession)ORM).Dispose();
+            }
             _transaction = null;
         }
 

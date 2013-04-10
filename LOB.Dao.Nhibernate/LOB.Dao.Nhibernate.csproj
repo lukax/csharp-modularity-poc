@@ -85,6 +85,7 @@
     <Reference Include="System.Core" />
     <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\ShipperMap.cs" />

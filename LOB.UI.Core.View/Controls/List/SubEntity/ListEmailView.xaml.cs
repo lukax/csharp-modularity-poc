@@ -19,7 +19,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
         }
 
         public string Header {
-            get { return Strings.Header_List_Email; }
+            get { return Strings.UI_Header_List_Email; }
         }
 
         public int Index { get; set; }

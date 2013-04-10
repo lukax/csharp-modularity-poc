@@ -79,14 +79,14 @@
                               MinWidth="150" />
                     <Button DockPanel.Dock="Left" Height="18" Width="18"
                             Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
-                            HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Focusable="False"
+                            HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Edit}" Focusable="False"
                             Background="Transparent"
                             Grid.Column="5" Padding="0" BorderThickness="0">
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/pencil.png" />
                     </Button>
                     <Button Width="18" Height="18" Background="Transparent" CommandParameter="ListCategory"
                             Command="{Binding ListCategoryCommand}" IsCancel="True" BorderThickness="0"
-                            ToolTip="{x:Static loc:Strings.ToolTip_QuickSearch}" Padding="0">
+                            ToolTip="{x:Static loc:Strings.UI_ToolTip_QuickSearch}" Padding="0">
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/magnify.png" />
                     </Button>
                 </StackPanel>
@@ -143,7 +143,7 @@
                         <ListBox ItemsSource="{Binding Entity.Suppliers}" MinWidth="150" />
                         <controls:Tile DockPanel.Dock="Left" Height="18" Width="18"
                                        Command="{Binding ClearEntityCommand}"
-                                       HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}"
+                                       HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Clear}"
                                        Focusable="False"
                                        Background="Transparent" Grid.Column="5">
                             <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />

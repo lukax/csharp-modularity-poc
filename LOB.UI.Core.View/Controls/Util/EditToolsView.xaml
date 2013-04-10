@@ -9,14 +9,14 @@
 
     <DockPanel HorizontalAlignment="Right">
         <Button DockPanel.Dock="Left" Height="18" Width="18" Command="{Binding ClearEntity}"
-                HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.ToolTip_Clear}" Focusable="False"
+                HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Clear}" Focusable="False"
                 Background="Transparent"
                 Grid.Column="5" Padding="0" BorderThickness="0">
             <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
         </Button>
 
         <Button x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
-                ToolTip="{x:Static loc:Strings.ToolTip_Cancel}"
+                ToolTip="{x:Static loc:Strings.UI_ToolTip_Cancel}"
                 Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0" Padding="0">
             <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
         </Button>

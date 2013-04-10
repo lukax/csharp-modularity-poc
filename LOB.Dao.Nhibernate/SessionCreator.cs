@@ -66,7 +66,7 @@ namespace LOB.Dao.Nhibernate {
 
         private ISessionFactory SessionCreatorFactory() {
             if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_Connecting));
-            Configuration cfg = null;
+            Configuration cfg;
             ISessionFactory factory = null;
             switch(_persistType) {
                 case PersistType.MySql:

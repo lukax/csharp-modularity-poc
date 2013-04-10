@@ -40,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             ShopCommand = new DelegateCommand(ShowShop);
             NotificationCommand = new DelegateCommand(ShowNotification);
             LogoutCommand = new DelegateCommand(Logout);
-            NotificationStatus = Strings.ToolTip_Notifications;
+            NotificationStatus = Strings.UI_ToolTip_Notifications;
             InitWorker();
         }
         public override void InitializeServices() { }

@@ -477,208 +477,208 @@
   <data name="Notification_Dao_RequisitionSucessful" xml:space="preserve">
     <value>Operação concluída</value>
   </data>
-  <data name="Error_Field_Empty" xml:space="preserve">
+  <data name="Notification_Field_Empty" xml:space="preserve">
     <value>Campo vazio</value>
   </data>
-  <data name="Error_Field_IntOnly" xml:space="preserve">
+  <data name="Notification_Field_IntOnly" xml:space="preserve">
     <value>Campo suporta apenas números</value>
   </data>
-  <data name="Error_Field_Necessary" xml:space="preserve">
+  <data name="Notification_Field_Necessary" xml:space="preserve">
     <value>Campo nescessário</value>
   </data>
-  <data name="Error_Field_NotEmpty" xml:space="preserve">
+  <data name="Notification_Field_NotEmpty" xml:space="preserve">
     <value>Campo não está vazio</value>
   </data>
-  <data name="Error_Field_NotNecessary" xml:space="preserve">
+  <data name="Notification_Field_NotNecessary" xml:space="preserve">
     <value>Campo não nescessário</value>
   </data>
-  <data name="Error_Field_TooLong" xml:space="preserve">
+  <data name="Notification_Field_TooLong" xml:space="preserve">
     <value>Campo excedeu limite de caracters</value>
   </data>
-  <data name="Error_Field_TooShort" xml:space="preserve">
+  <data name="Notification_Field_TooShort" xml:space="preserve">
     <value>Campo nescessita o mínimo de caracters</value>
   </data>
-  <data name="Error_Field_WrongFormat" xml:space="preserve">
+  <data name="Notification_Field_WrongFormat" xml:space="preserve">
     <value>Campo com formato inválido</value>
   </data>
-  <data name="Error_Info" xml:space="preserve">
+  <data name="Notification_Info" xml:space="preserve">
     <value>Aconteceu um erro ao processar seu comando. Por favor, contate o administrador.</value>
   </data>
-  <data name="Error_Internal" xml:space="preserve">
+  <data name="Notification_Internal" xml:space="preserve">
     <value>Aconteceu um erro interno ao processar requisição. Por favor, contate um administrador.</value>
   </data>
-  <data name="Header_Alter" xml:space="preserve">
+  <data name="UI_Header_Alter" xml:space="preserve">
     <value>Novo</value>
   </data>
-  <data name="Header_Alter_Address" xml:space="preserve">
+  <data name="UI_Header_Alter_Address" xml:space="preserve">
     <value>Novo Endereço</value>
   </data>
-  <data name="Header_Alter_BaseEntity" xml:space="preserve">
+  <data name="UI_Header_Alter_BaseEntity" xml:space="preserve">
     <value>Novo Código</value>
   </data>
-  <data name="Header_Alter_Category" xml:space="preserve">
+  <data name="UI_Header_Alter_Category" xml:space="preserve">
     <value>Nova Categoria</value>
   </data>
-  <data name="Header_Alter_ContactInfo" xml:space="preserve">
+  <data name="UI_Header_Alter_ContactInfo" xml:space="preserve">
     <value>Nova Informação de Contato</value>
   </data>
-  <data name="Header_Alter_Customer" xml:space="preserve">
+  <data name="UI_Header_Alter_Customer" xml:space="preserve">
     <value>Novo Cliente</value>
   </data>
-  <data name="Header_Alter_Email" xml:space="preserve">
+  <data name="UI_Header_Alter_Email" xml:space="preserve">
     <value>Novo Email</value>
   </data>
-  <data name="Header_Alter_Employee" xml:space="preserve">
+  <data name="UI_Header_Alter_Employee" xml:space="preserve">
     <value>Novo Funcionário</value>
   </data>
-  <data name="Header_Alter_LegalPerson" xml:space="preserve">
+  <data name="UI_Header_Alter_LegalPerson" xml:space="preserve">
     <value>Nova Pessoa Legal</value>
   </data>
-  <data name="Header_Alter_NaturalPerson" xml:space="preserve">
+  <data name="UI_Header_Alter_NaturalPerson" xml:space="preserve">
     <value>Nova Pessoa Física</value>
   </data>
-  <data name="Header_Alter_PayCheck" xml:space="preserve">
+  <data name="UI_Header_Alter_PayCheck" xml:space="preserve">
     <value>Nova Folha de Pagamento</value>
   </data>
-  <data name="Header_Alter_Person" xml:space="preserve">
+  <data name="UI_Header_Alter_Person" xml:space="preserve">
     <value>Nova Pessoa</value>
   </data>
-  <data name="Header_Alter_PhoneNumber" xml:space="preserve">
+  <data name="UI_Header_Alter_PhoneNumber" xml:space="preserve">
     <value>Novo Numero de Telefone</value>
   </data>
-  <data name="Header_Alter_Product" xml:space="preserve">
+  <data name="UI_Header_Alter_Product" xml:space="preserve">
     <value>Novo Produto</value>
   </data>
-  <data name="Header_Alter_Sale" xml:space="preserve">
+  <data name="UI_Header_Alter_Sale" xml:space="preserve">
     <value>Nova Venda</value>
   </data>
-  <data name="Header_Alter_Service" xml:space="preserve">
+  <data name="UI_Header_Alter_Service" xml:space="preserve">
     <value>Novo Serviço</value>
   </data>
-  <data name="Header_List" xml:space="preserve">
+  <data name="UI_Header_List" xml:space="preserve">
     <value>Listagem</value>
   </data>
-  <data name="Header_List_Service" xml:space="preserve">
+  <data name="UI_Header_List_Service" xml:space="preserve">
     <value>Listar Serviços</value>
   </data>
-  <data name="Header_List_BaseEntity" xml:space="preserve">
+  <data name="UI_Header_List_BaseEntity" xml:space="preserve">
     <value>Listar Códigos</value>
   </data>
-  <data name="Header_List_Category" xml:space="preserve">
+  <data name="UI_Header_List_Category" xml:space="preserve">
     <value>Listar Categorias</value>
   </data>
-  <data name="Header_List_Customer" xml:space="preserve">
+  <data name="UI_Header_List_Customer" xml:space="preserve">
     <value>Listar Clientes</value>
   </data>
-  <data name="Header_List_Email" xml:space="preserve">
+  <data name="UI_Header_List_Email" xml:space="preserve">
     <value>Listar Emails</value>
   </data>
-  <data name="Header_List_Employee" xml:space="preserve">
+  <data name="UI_Header_List_Employee" xml:space="preserve">
     <value>Listar Funcionários</value>
   </data>
-  <data name="Header_List_Op" xml:space="preserve">
+  <data name="UI_Header_List_Op" xml:space="preserve">
     <value>Listar Operações</value>
   </data>
-  <data name="Header_List_PhoneNumber" xml:space="preserve">
+  <data name="UI_Header_List_PhoneNumber" xml:space="preserve">
     <value>Listar Numeros de Telefone</value>
   </data>
-  <data name="Header_List_Product" xml:space="preserve">
+  <data name="UI_Header_List_Product" xml:space="preserve">
     <value>Listar Produtos</value>
   </data>
-  <data name="Header_Main_Busy" xml:space="preserve">
+  <data name="UI_Header_Main_Busy" xml:space="preserve">
     <value>Aguarde...</value>
   </data>
-  <data name="Header_Main_Column" xml:space="preserve">
+  <data name="UI_Header_Main_Column" xml:space="preserve">
     <value>Coluna Operações</value>
   </data>
-  <data name="Header_Main_Header" xml:space="preserve">
+  <data name="UI_Header_Main_Header" xml:space="preserve">
     <value>Menu Principal</value>
   </data>
-  <data name="Header_Main_Message" xml:space="preserve">
+  <data name="UI_Header_Main_Message" xml:space="preserve">
     <value>Popup</value>
   </data>
-  <data name="Header_Sell" xml:space="preserve">
+  <data name="UI_Header_Sell" xml:space="preserve">
     <value>Vendas</value>
   </data>
-  <data name="Header_Sell_Product" xml:space="preserve">
+  <data name="UI_Header_Sell_Product" xml:space="preserve">
     <value>Vender Produto</value>
   </data>
-  <data name="Header_Sell_Service" xml:space="preserve">
+  <data name="UI_Header_Sell_Service" xml:space="preserve">
     <value>Vender Serviço</value>
   </data>
-  <data name="Menu_File" xml:space="preserve">
+  <data name="UI_Menu_File" xml:space="preserve">
     <value>Arquivo</value>
   </data>
-  <data name="Menu_File_Quit" xml:space="preserve">
+  <data name="UI_Menu_File_Quit" xml:space="preserve">
     <value>Sair</value>
   </data>
-  <data name="Menu_File_Save" xml:space="preserve">
+  <data name="UI_Menu_File_Save" xml:space="preserve">
     <value>Salvar</value>
   </data>
-  <data name="Menu_List" xml:space="preserve">
+  <data name="UI_Menu_List" xml:space="preserve">
     <value>Listar</value>
   </data>
-  <data name="Menu_List_Client" xml:space="preserve">
+  <data name="UI_Menu_List_Client" xml:space="preserve">
     <value>Cliente</value>
   </data>
-  <data name="Menu_List_Company" xml:space="preserve">
+  <data name="UI_Menu_List_Company" xml:space="preserve">
     <value>Compania</value>
   </data>
-  <data name="Menu_List_Employee" xml:space="preserve">
+  <data name="UI_Menu_List_Employee" xml:space="preserve">
     <value>Funcionário</value>
   </data>
-  <data name="Menu_List_Product" xml:space="preserve">
+  <data name="UI_Menu_List_Product" xml:space="preserve">
     <value>Produto</value>
   </data>
-  <data name="Menu_List_Supplier" xml:space="preserve">
+  <data name="UI_Menu_List_Supplier" xml:space="preserve">
     <value>Fornecedor</value>
   </data>
-  <data name="Menu_Register" xml:space="preserve">
+  <data name="UI_Menu_Register" xml:space="preserve">
     <value>Registrar</value>
   </data>
-  <data name="Menu_Register_Client" xml:space="preserve">
+  <data name="UI_Menu_Register_Client" xml:space="preserve">
     <value>Cliente</value>
   </data>
-  <data name="Menu_Register_Company" xml:space="preserve">
+  <data name="UI_Menu_Register_Company" xml:space="preserve">
     <value>Compania</value>
   </data>
-  <data name="Menu_Register_Employee" xml:space="preserve">
+  <data name="UI_Menu_Register_Employee" xml:space="preserve">
     <value>Funcionário</value>
   </data>
-  <data name="Menu_Register_Product" xml:space="preserve">
+  <data name="UI_Menu_Register_Product" xml:space="preserve">
     <value>Produto</value>
   </data>
-  <data name="Menu_Register_Supplier" xml:space="preserve">
+  <data name="UI_Menu_Register_Supplier" xml:space="preserve">
     <value>Fornecedor</value>
   </data>
-  <data name="Menu_Report" xml:space="preserve">
+  <data name="UI_Menu_Report" xml:space="preserve">
     <value>Relatórios</value>
   </data>
-  <data name="Menu_Sales" xml:space="preserve">
+  <data name="UI_Menu_Sales" xml:space="preserve">
     <value>Vendas</value>
   </data>
-  <data name="Menu_Sales_Alter" xml:space="preserve">
+  <data name="UI_Menu_Sales_Alter" xml:space="preserve">
     <value>Alterar</value>
   </data>
-  <data name="Menu_Sales_History" xml:space="preserve">
+  <data name="UI_Menu_Sales_History" xml:space="preserve">
     <value>Histórico</value>
   </data>
-  <data name="Menu_Sales_New" xml:space="preserve">
+  <data name="UI_Menu_Sales_New" xml:space="preserve">
     <value>Nova</value>
   </data>
-  <data name="Menu_Util" xml:space="preserve">
+  <data name="UI_Menu_Util" xml:space="preserve">
     <value>Util</value>
   </data>
-  <data name="Menu_Util_Address" xml:space="preserve">
+  <data name="UI_Menu_Util_Address" xml:space="preserve">
     <value>Endereços</value>
   </data>
-  <data name="Menu_Util_Comission" xml:space="preserve">
+  <data name="UI_Menu_Util_Comission" xml:space="preserve">
     <value>Comissão</value>
   </data>
-  <data name="Menu_Util_ContactInfo" xml:space="preserve">
+  <data name="UI_Menu_Util_ContactInfo" xml:space="preserve">
     <value>Informações de contato</value>
   </data>
-  <data name="Menu_Util_Paycheck" xml:space="preserve">
+  <data name="UI_Menu_Util_Paycheck" xml:space="preserve">
     <value>Folha de pagamento</value>
   </data>
   <data name="Notification_Dao_Conected" xml:space="preserve">
@@ -702,46 +702,46 @@
   <data name="Common_Tab_Hide" xml:space="preserve">
     <value>&gt;</value>
   </data>
-  <data name="ToolTip_AlterCustomer" xml:space="preserve">
+  <data name="UI_ToolTip_AlterCustomer" xml:space="preserve">
     <value>Alterar Funcionário</value>
   </data>
-  <data name="ToolTip_Clear" xml:space="preserve">
+  <data name="UI_ToolTip_Clear" xml:space="preserve">
     <value>Limpar Campo</value>
   </data>
-  <data name="ToolTip_Close" xml:space="preserve">
+  <data name="UI_ToolTip_Close" xml:space="preserve">
     <value>Fechar</value>
   </data>
-  <data name="ToolTip_Code" xml:space="preserve">
+  <data name="UI_ToolTip_Code" xml:space="preserve">
     <value>Código de Indentificação</value>
   </data>
-  <data name="ToolTip_Operations" xml:space="preserve">
+  <data name="UI_ToolTip_Operations" xml:space="preserve">
     <value>Operações</value>
   </data>
-  <data name="ToolTip_QuickSearch" xml:space="preserve">
+  <data name="UI_ToolTip_QuickSearch" xml:space="preserve">
     <value>Busca Rápida</value>
   </data>
-  <data name="ToolTip_Sales" xml:space="preserve">
+  <data name="UI_ToolTip_Sales" xml:space="preserve">
     <value>Vendas</value>
   </data>
-  <data name="App_Title" xml:space="preserve">
+  <data name="UI_Title_Shell" xml:space="preserve">
     <value>LOB APP</value>
   </data>
-  <data name="ToolTip_Add" xml:space="preserve">
+  <data name="UI_ToolTip_Add" xml:space="preserve">
     <value>Adicionar</value>
   </data>
-  <data name="ToolTip_Confirm" xml:space="preserve">
+  <data name="UI_ToolTip_Confirm" xml:space="preserve">
     <value>Confirmar</value>
   </data>
-  <data name="ToolTip_Delete" xml:space="preserve">
+  <data name="UI_ToolTip_Delete" xml:space="preserve">
     <value>Excluir</value>
   </data>
-  <data name="ToolTip_Edit" xml:space="preserve">
+  <data name="UI_ToolTip_Edit" xml:space="preserve">
     <value>Editar</value>
   </data>
-  <data name="ToolTip_Search" xml:space="preserve">
+  <data name="UI_ToolTip_Search" xml:space="preserve">
     <value>Pesquisar</value>
   </data>
-  <data name="ToolTip_Update" xml:space="preserve">
+  <data name="UI_ToolTip_Update" xml:space="preserve">
     <value>Atualizar</value>
   </data>
   <data name="Common_CFOP" xml:space="preserve">
@@ -771,16 +771,16 @@
   <data name="Common_Include" xml:space="preserve">
     <value>Incluir</value>
   </data>
-  <data name="Error_Field_Deprecated" xml:space="preserve">
+  <data name="Notification_Field_Deprecated" xml:space="preserve">
     <value>Campo Descontinuado</value>
   </data>
-  <data name="Error_Field_Negative" xml:space="preserve">
+  <data name="Notification_Field_Negative" xml:space="preserve">
     <value>Campo Negativo</value>
   </data>
-  <data name="Error_Field_Nescessary" xml:space="preserve">
+  <data name="Notification_Field_Nescessary" xml:space="preserve">
     <value>Campo Nescessário</value>
   </data>
-  <data name="Error_Field_Positive" xml:space="preserve">
+  <data name="Notification_Field_Positive" xml:space="preserve">
     <value>Campo Positivo</value>
   </data>
   <data name="Common_SpeakWith" xml:space="preserve">
@@ -795,28 +795,28 @@
   <data name="Common_Id" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Header_List_Client" xml:space="preserve">
+  <data name="UI_Header_List_Client" xml:space="preserve">
     <value>Clientes</value>
   </data>
-  <data name="Header_List_Address" xml:space="preserve">
+  <data name="UI_Header_List_Address" xml:space="preserve">
     <value>Endereços</value>
   </data>
-  <data name="Header_List_ContactInfo" xml:space="preserve">
+  <data name="UI_Header_List_ContactInfo" xml:space="preserve">
     <value>Informações de Contato</value>
   </data>
-  <data name="Header_List_Sale" xml:space="preserve">
+  <data name="UI_Header_List_Sale" xml:space="preserve">
     <value>Vendas</value>
   </data>
-  <data name="ToolTip_Messages" xml:space="preserve">
+  <data name="UI_ToolTip_Messages" xml:space="preserve">
     <value>Mensagens</value>
   </data>
-  <data name="ToolTip_Notifications" xml:space="preserve">
+  <data name="UI_ToolTip_Notifications" xml:space="preserve">
     <value>Notificações</value>
   </data>
-  <data name="ToolTip_Login" xml:space="preserve">
+  <data name="UI_ToolTip_Login" xml:space="preserve">
     <value>Entrar</value>
   </data>
-  <data name="ToolTip_Logout" xml:space="preserve">
+  <data name="UI_ToolTip_Logout" xml:space="preserve">
     <value>Sair</value>
   </data>
   <data name="Common_Detail" xml:space="preserve">
@@ -840,13 +840,13 @@
   <data name="Common_Report" xml:space="preserve">
     <value>Reportar</value>
   </data>
-  <data name="Error_Field_DateTooEarly" xml:space="preserve">
+  <data name="Notification_Field_DateTooEarly" xml:space="preserve">
     <value>Data muito antiga</value>
   </data>
-  <data name="Error_Field_DateInvalid" xml:space="preserve">
+  <data name="Notification_Field_DateInvalid" xml:space="preserve">
     <value>Data Inválida</value>
   </data>
-  <data name="Error_Field_DateTooLate" xml:space="preserve">
+  <data name="Notification_Field_DateTooLate" xml:space="preserve">
     <value>Data muito posterior</value>
   </data>
   <data name="Common_County" xml:space="preserve">
@@ -891,10 +891,10 @@
   <data name="Notification_RequisitionSucessful" xml:space="preserve">
     <value>Requisição completada com sucesso</value>
   </data>
-  <data name="Error_Navigator_View_ResolveFirst" xml:space="preserve">
+  <data name="Notification_Navigator_View_ResolveFirst" xml:space="preserve">
     <value>Resolva primeiro a View</value>
   </data>
-  <data name="Error_Navigator_ViewModel_ResolveFirst" xml:space="preserve">
+  <data name="Notification_Navigator_ViewModel_ResolveFirst" xml:space="preserve">
     <value>Resolva primeiro a ViewModel</value>
   </data>
   <data name="Notification_Connecting" xml:space="preserve">
@@ -933,22 +933,22 @@
   <data name="Common_Filter" xml:space="preserve">
     <value>Filtrar</value>
   </data>
-  <data name="ToolTip_Cancel" xml:space="preserve">
+  <data name="UI_ToolTip_Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="ToolTip_Filter" xml:space="preserve">
+  <data name="UI_ToolTip_Filter" xml:space="preserve">
     <value>Filtrar</value>
   </data>
-  <data name="ToolTip_List" xml:space="preserve">
+  <data name="UI_ToolTip_List" xml:space="preserve">
     <value>Listar</value>
   </data>
-  <data name="Error_Field_Add" xml:space="preserve">
+  <data name="Notification_Field_Add" xml:space="preserve">
     <value>Erro ao adicionar entidade</value>
   </data>
-  <data name="Error_Field_Delete" xml:space="preserve">
+  <data name="Notification_Field_Delete" xml:space="preserve">
     <value>Erro ao excluir entidade</value>
   </data>
-  <data name="Error_Field_Update" xml:space="preserve">
+  <data name="Notification_Field_Update" xml:space="preserve">
     <value>Erro ao atualizar entidade</value>
   </data>
   <data name="Notification_Field_Added" xml:space="preserve">
@@ -963,7 +963,55 @@
   <data name="Notification_Field_Updated" xml:space="preserve">
     <value>Entidade atualizada com sucesso!</value>
   </data>
-  <data name="Error_Field_Invalid" xml:space="preserve">
+  <data name="Notification_Field_Invalid" xml:space="preserve">
     <value>Campo Inválido</value>
+  </data>
+  <data name="Notification_Field_Adding" xml:space="preserve">
+    <value>Adicionando entidade...</value>
+  </data>
+  <data name="Notification_Field_Deleting" xml:space="preserve">
+    <value>Excluindo entidade...</value>
+  </data>
+  <data name="Notification_Field_Filtering" xml:space="preserve">
+    <value>Filtrando entidade...</value>
+  </data>
+  <data name="Notification_Field_Listing" xml:space="preserve">
+    <value>Listando entidade...</value>
+  </data>
+  <data name="Notification_Field_Searching" xml:space="preserve">
+    <value>Procurando entidade...</value>
+  </data>
+  <data name="Notification_Field_Updating" xml:space="preserve">
+    <value>Atualizando entidade...</value>
+  </data>
+  <data name="Notification_Field_CharOnly" xml:space="preserve">
+    <value>Campo suporta apenas letras</value>
+  </data>
+  <data name="Notification_Field_X_Length" xml:space="preserve">
+    <value>Campo precisa ter {0} carácters</value>
+  </data>
+  <data name="Notification_Field_X_MaxLength" xml:space="preserve">
+    <value>Campo precisa ter no máximo {0} carácters</value>
+  </data>
+  <data name="Notification_Field_X_MinLength" xml:space="preserve">
+    <value>Campo precisa ter no mínimo {0} carácters</value>
+  </data>
+  <data name="Notification_Field_X_Invalid" xml:space="preserve">
+    <value>{0} Inválido</value>
+  </data>
+  <data name="Notification_Field_X_Valid" xml:space="preserve">
+    <value>{0} Válido</value>
+  </data>
+  <data name="Notification_Dao_Transaction_AlreadyActivated" xml:space="preserve">
+    <value>Transação do banco de dados já foi Ativada</value>
+  </data>
+  <data name="Notification_Dao_Transaction_AlreadyInitialized" xml:space="preserve">
+    <value>Transação do banco de dados já foi Inicializada</value>
+  </data>
+  <data name="Notification_Dao_Transaction_NotActivated" xml:space="preserve">
+    <value>Transação do banco de dados não ativada</value>
+  </data>
+  <data name="Notification_Dao_Transaction_NotInitialized" xml:space="preserve">
+    <value>Transação do banco de dados não inicializada</value>
   </data>
 </root>

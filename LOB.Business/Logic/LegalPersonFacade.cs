@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
@@ -54,20 +55,30 @@ namespace LOB.Business.Logic {
             _personFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.CorporateName) ? new ValidationResult("CorporateName", Strings.Error_Field_Empty) : null);
+                    delegate {
+                        if (string.IsNullOrWhiteSpace(_entity.CorporateName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
+                        if (Regex.IsMatch(_entity.CorporateName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                            return new ValidationResult("CorporateName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CorporateName));
+                        return null;
+                    });
                 _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.TradingName) ? new ValidationResult("TradingName", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.CNPJ) ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.CNAEFiscal) ? new ValidationResult("CNPJ", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.CNPJ.ToString(culture).Length > 14 ? new ValidationResult("CNPJ", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.CNAEFiscal.ToString(culture).Length > 7 ? new ValidationResult("CNAEFiscal", Strings.Error_Field_TooLong) : null);
+                    delegate {
+                        if (string.IsNullOrWhiteSpace(_entity.TradingName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
+                        if (Regex.IsMatch(_entity.TradingName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                            return new ValidationResult("TradingName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_TradingName));
+                        return null;
+                    });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.CNPJ)) return new ValidationResult("CNPJ", Strings.Notification_Field_Empty);
+                                          if(_entity.CNPJ.Length != 14) return new ValidationResult("CNPJ", string.Format(Strings.Notification_Field_X_Length, 14));
+                                          //if (Regex.IsMatch(_entity.CNPJ, @"^\d{3}.?\d{3}.?\d{3}/?\d{3}-?\d{2}$")) return new ValidationResult("CNPJ", string.Format(Strings.Notification_Field_X_Invalid, "CNPJ"));
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.CNAEFiscal)) return new ValidationResult("CNPJ", Strings.Notification_Field_Empty);
+                                          if(_entity.CNAEFiscal.Length != 7) return new ValidationResult("CNAEFiscal", string.Format(Strings.Notification_Field_X_Length, 7));
+                                          return null;
+                                      });
             }
         }
 

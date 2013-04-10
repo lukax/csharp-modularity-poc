@@ -26,7 +26,7 @@ namespace LOB.UI.Core.View.Controls.Main {
         }
 
         public string Header {
-            get { return Strings.Header_Main_Header; }
+            get { return Strings.UI_Header_Main_Header; }
         }
 
         public int Index { get; set; }

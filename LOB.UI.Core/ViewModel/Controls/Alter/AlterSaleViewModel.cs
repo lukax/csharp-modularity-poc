@@ -1,7 +1,10 @@
 ﻿#region Usings
 
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.Logic;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -20,15 +23,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             get { return _operation; }
             set { _operation = value; }
         }
-
+        private readonly Notification _notification;
         public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _eventAggregator = eventAggregator;
+            _notification = new Notification();
+        }
 
         public override void InitializeServices() {
             Operation = _operation;
             ClearEntity(null);
         }
-
+        protected override void SaveChanges(object arg) {
+            using(Repository.Uow.BeginTransaction()) {
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
+        }
         public override void Refresh() { ClearEntity(null); }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }

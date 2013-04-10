@@ -6,7 +6,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using LOB.Domain.Logic;
-using NullGuard;
+
+//using NullGuard;
 
 #endregion
 
@@ -20,7 +21,7 @@ namespace LOB.Domain.Base {
 // ReSharper restore UnusedAutoPropertyAccessor.Local
         public int Code { get; set; }
 
-        [AllowNull]
+        //[AllowNull]
         public virtual string this[string columnName] {
             get {
                 var firstOrDefault = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
@@ -28,13 +29,11 @@ namespace LOB.Domain.Base {
             }
         }
 
-        [AllowNull]
+        //[AllowNull]
         public virtual string Error { get; set; }
-
         public void AddValidation(ValidationDelegate func) { _validationFuncs.Add(func); }
-
-        public void RemoveValidation(ValidationDelegate func) { if(_validationFuncs.Contains(func)) _validationFuncs.Remove(func); }
-
+        public void RemoveValidation(ValidationDelegate func) { if(ContainsValidation(func)) _validationFuncs.Remove(func); }
+        public bool ContainsValidation(ValidationDelegate func) { return _validationFuncs.Contains(func); }
         public IList<ValidationResult> GetValidations(string propertyName) {
             return
                 _validationFuncs.Select(validationDel => validationDel(this, propertyName))

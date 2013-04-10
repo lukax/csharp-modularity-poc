@@ -29,18 +29,14 @@ namespace LOB.Business.Logic.SubEntity {
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Number) ? new ValidationResult("Number", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.Number.Length < 10 ? new ValidationResult("Number", Strings.Error_Field_TooShort) : null);
-                _entity.AddValidation(
-                    (sender, name) => !Regex.IsMatch(_entity.Number, @"\d") ? new ValidationResult("Number", Strings.Error_Field_WrongFormat) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Type.ToString()) ? new ValidationResult("Type", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.Number)) return new ValidationResult("Number", Strings.Notification_Field_Empty);
+                                          if(_entity.Number.Length < 8) return new ValidationResult("Number", string.Format(Strings.Notification_Field_X_MinLength, 8));
+                                          if(!Regex.IsMatch(_entity.Number, @"\d")) return new ValidationResult("Number", Strings.Notification_Field_IntOnly);
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate { return string.IsNullOrWhiteSpace(_entity.Type.ToString()) ? new ValidationResult("Type", Strings.Notification_Field_Empty) : null; });
+                _entity.AddValidation(delegate { return string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Notification_Field_Empty) : null; });
             }
         }
 

@@ -23,7 +23,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Category; }
+            get { return Strings.UI_Header_Alter_Category; }
         }
 
         public int Index { get; set; }

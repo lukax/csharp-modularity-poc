@@ -78,17 +78,17 @@ namespace LOB.Business.Logic {
             _naturalPersonFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Title) ? new ValidationResult("Title", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.HireDate.CompareTo(new DateTime(1990, 1, 1)) < 0
-                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.HireDate.CompareTo(new DateTime(2015, 1, 1)) > 0
-                        ? new ValidationResult("HireDate", Strings.Error_Field_DateTooLate)
-                        : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Title) ? new ValidationResult("Title", Strings.Notification_Field_Empty) : null);
+                _entity.AddValidation(delegate {
+                                          if(_entity.HireDate.CompareTo(new DateTime(1990, 1, 1)) < 0) return new ValidationResult("HireDate", Strings.Notification_Field_DateTooEarly);
+                                          if(_entity.HireDate.CompareTo(new DateTime(2015, 1, 1)) > 0) return new ValidationResult("HireDate", Strings.Notification_Field_DateTooLate);
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(_entity.BirthDate.CompareTo(new DateTime(1900, 1, 1)) < 0) return new ValidationResult("BirthDate", Strings.Notification_Field_DateTooEarly);
+                                          if(_entity.BirthDate.CompareTo(new DateTime(2013, 1, 1)) > 0) return new ValidationResult("BirthDate", Strings.Notification_Field_DateTooLate);
+                                          return null;
+                                      });
             }
         }
 

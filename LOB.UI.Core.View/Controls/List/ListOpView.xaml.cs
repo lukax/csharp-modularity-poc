@@ -30,7 +30,7 @@ namespace LOB.UI.Core.View.Controls.List {
         }
 
         public string Header {
-            get { return Strings.Header_List_Op; }
+            get { return Strings.UI_Header_List_Op; }
         }
 
         public int Index { get; set; }

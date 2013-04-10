@@ -29,7 +29,7 @@ namespace LOB.UI.Core.View.Controls.Main {
         }
 
         public string Header {
-            get { return Strings.Header_Main_Column; }
+            get { return Strings.UI_Header_Main_Column; }
         }
 
         public int Index { get; set; }

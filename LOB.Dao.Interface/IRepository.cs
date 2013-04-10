@@ -15,7 +15,7 @@ namespace LOB.Dao.Interface {
         T Save<T>(T entity) where T : BaseEntity;
         T Update<T>(T entity) where T : BaseEntity;
         T SaveOrUpdate<T>(T entity) where T : BaseEntity;
-        void Delete<T>(T entity) where T : BaseEntity;
+        T Delete<T>(T entity) where T : BaseEntity;
         T Get<T>(object primaryKey) where T : BaseEntity;
         bool Contains<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
         bool Contains<T>(T entity) where T : BaseEntity;

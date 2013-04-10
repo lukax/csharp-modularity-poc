@@ -30,13 +30,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IEventAggregator _eventAggregator;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
-
+        private readonly Notification _notification;
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade, Notification singleNotification)
+            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _contactInfoFacade = contactInfoFacade;
             _eventAggregator = eventAggregator;
-            _singleNotification = singleNotification;
+            _notification = new Notification();
             Entity = entity;
             EmailOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.Email};
             PhoneNumberOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.PhoneNumber};
@@ -65,7 +65,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             ClearEntity(null);
             InitBackgroundWorker();
         }
-
+        protected override void SaveChanges(object arg)
+        {
+            using (Repository.Uow.BeginTransaction())
+            {
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
+        }
         public override void Refresh() { ClearEntity(null); }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
@@ -188,10 +196,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private void Dispose(bool disposing) {
             _worker.CancelAsync();
             if(disposing) _worker.Dispose();
-            Email = null;
-            Emails = null;
-            PhoneNumber = null;
-            PhoneNumbers = null;
         }
 
     }

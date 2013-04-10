@@ -1,7 +1,10 @@
 ﻿#region Usings
 
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.Logic;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -20,7 +23,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         [InjectionConstructor]
         public AlterEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
+            : base(entity, repository, eventAggregator, loggerFacade) {
+            _eventAggregator = eventAggregator;
+            _notification = new Notification();
+        }
 
         public override void InitializeServices() {
             Operation = _operation;
@@ -30,6 +36,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void Refresh() { ClearEntity(null); }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add};
+        private readonly Notification _notification;
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
@@ -37,6 +44,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override bool CanSaveChanges(object arg) {
             //TODO: Business logic
             return true;
+        }
+        protected override void SaveChanges(object arg) {
+            using(Repository.Uow.BeginTransaction()) {
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
         }
 
         protected override bool CanCancel(object arg) {

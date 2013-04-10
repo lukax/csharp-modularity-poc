@@ -66,7 +66,7 @@
                         <TextBox Text="{Binding ClientLastName}" HorizontalAlignment="Left" MinWidth="200" />
 
                         <metrocontrols:Tile Background="Transparent" Width="20" Height="20"
-                                            ToolTip="{x:Static loc:Strings.ToolTip_AlterCustomer}">
+                                            ToolTip="{x:Static loc:Strings.UI_ToolTip_AlterCustomer}">
                             <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit48.png" />
                         </metrocontrols:Tile>
                     </DockPanel>

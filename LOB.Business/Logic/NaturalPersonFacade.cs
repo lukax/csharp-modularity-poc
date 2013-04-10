@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.Base;
@@ -59,29 +60,36 @@ namespace LOB.Business.Logic {
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.FirstName)) return new ValidationResult("FirstName", Strings.Notification_Field_Empty);
+                                          if(Regex.IsMatch(_entity.FirstName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                                              return new ValidationResult("FirstName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_FirstName));
+                                          return null;
+                                      });
                 _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.FirstName) ? new ValidationResult("Name", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(_entity.LastName) ? new ValidationResult("Description", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.CPF.ToString(culture).Length < 1 ? new ValidationResult("CPF", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.CPF.ToString(culture).Length > 11 ? new ValidationResult("CPF", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.RG.ToString(culture).Length < 1 ? new ValidationResult("RG", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.RG.ToString(culture).Length > 9 ? new ValidationResult("RG", Strings.Error_Field_TooLong) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.BirthDate.CompareTo(new DateTime(1910, 1, 1)) < 0
-                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
-                        : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.BirthDate.CompareTo(new DateTime(2014, 1, 1)) > 0
-                        ? new ValidationResult("DeliverDate", Strings.Error_Field_DateTooEarly)
-                        : null);
+                    delegate {
+                        if (string.IsNullOrWhiteSpace(_entity.LastName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
+                        if (Regex.IsMatch(_entity.LastName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                            return new ValidationResult("LastName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_LastName));
+                        return null;
+                    });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.CPF)) return new ValidationResult("CPF", Strings.Notification_Field_Empty);
+                                          if(_entity.CPF.Length != 11) return new ValidationResult("CPF", string.Format(Strings.Notification_Field_X_Length, 11));
+                                          //if (Regex.IsMatch(_entity.CPF, @"^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$")) return new ValidationResult("CPF", string.Format(Strings.Notification_Field_X_Invalid, "CPF"));
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.RG)) return new ValidationResult("RG", Strings.Notification_Field_Empty);
+                                          if(_entity.RG.ToString(culture).Length != 9) return new ValidationResult("RG", string.Format(Strings.Notification_Field_X_Length, 9));
+                                          //if (Regex.IsMatch(_entity.RG, @"^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$")) return new ValidationResult("RG", string.Format(Strings.Notification_Field_X_Invalid, "RG"));
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(_entity.BirthDate.CompareTo(new DateTime(1910, 1, 1)) < 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooEarly);
+                                          if(_entity.BirthDate.CompareTo(new DateTime(2014, 1, 1)) > 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooEarly);
+                                          return null;
+                                      });
             }
         }
 

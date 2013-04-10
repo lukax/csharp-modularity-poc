@@ -26,13 +26,11 @@ namespace LOB.Business.Logic.SubEntity {
         public void ConfigureValidations() {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Value) ? new ValidationResult("Value", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) =>
-                    !Regex.IsMatch(_entity.Value, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
-                        ? new ValidationResult("Value", Strings.Error_Field_WrongFormat)
-                        : null);
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.Value)) return new ValidationResult("Value", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.Value, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")) return new ValidationResult("Value", Strings.Notification_Field_WrongFormat);
+                                          return null;
+                                      });
             }
         }
 

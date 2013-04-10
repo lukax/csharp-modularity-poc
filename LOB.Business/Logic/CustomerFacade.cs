@@ -60,7 +60,7 @@ namespace LOB.Business.Logic {
             _naturalPersonFacade.ConfigureValidations();
             if(_entity != null)
                 _entity.AddValidation(
-                    (sender, name) => _entity.CustomerOf.Count < 1 ? new ValidationResult("CustomerOf", Strings.Error_Field_Empty) : null);
+                    (sender, name) => _entity.CustomerOf.Count < 1 ? new ValidationResult("CustomerOf", Strings.Notification_Field_Empty) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {

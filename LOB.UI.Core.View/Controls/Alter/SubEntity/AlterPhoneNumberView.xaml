@@ -9,7 +9,6 @@
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
-             xmlns:subEntity="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              mc:Ignorable="d"
              Height="110" Width="300">
 
@@ -44,8 +43,9 @@
                     </ObjectDataProvider>
                 </StackPanel.Resources>
                 <xctk:MaskedTextBox Style="{StaticResource MetroTextBox}"
-                    Text="{Binding Entity.Number, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" IncludeLiteralsInValue="False" IncludePromptInValue="False"
-                    MinWidth="100" Mask="(00) 0000-0000" HorizontalContentAlignment="Right"/>
+                    Value="{Binding Entity.Number, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
+                    IncludeLiteralsInValue="False" IncludePromptInValue="False" SkipLiterals="True"
+                    ValueDataType="{x:Type system:String}" MinWidth="100" Mask="(##) 0000-0000" HorizontalContentAlignment="Right"/>
                 <ComboBox SelectedItem="{Binding Entity.Type}"
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>

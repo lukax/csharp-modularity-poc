@@ -36,15 +36,15 @@ namespace LOB.UI.Core.View.Infrastructure {
         public event OnOpenViewEventHandler OnOpenView;
 
         public IBaseView GetView() {
-            if(_resolvedView == null) throw new ArgumentException(Strings.Error_Navigator_View_ResolveFirst);
-            if(_resolvedView.ViewModel == null) throw new ArgumentException(Strings.Error_Navigator_ViewModel_ResolveFirst);
+            if(_resolvedView == null) throw new ArgumentException(Strings.Notification_Navigator_View_ResolveFirst);
+            if(_resolvedView.ViewModel == null) throw new ArgumentException(Strings.Notification_Navigator_ViewModel_ResolveFirst);
             if(_resolvedViewModel != null) _resolvedViewModel.InitializeServices();
             _resolvedView.InitializeServices();
             return _resolvedView;
         }
 
         public IBaseViewModel GetViewModel() {
-            if(_resolvedViewModel == null) throw new ArgumentException(Strings.Error_Navigator_ViewModel_ResolveFirst);
+            if(_resolvedViewModel == null) throw new ArgumentException(Strings.Notification_Navigator_ViewModel_ResolveFirst);
             return _resolvedViewModel;
         }
 

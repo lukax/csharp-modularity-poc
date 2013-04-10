@@ -30,7 +30,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_LegalPerson; }
+            get { return Strings.UI_Header_Alter_LegalPerson; }
         }
 
         public int Index { get; set; }

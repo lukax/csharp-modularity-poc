@@ -1,8 +1,11 @@
 ﻿#region Usings
 
 using LOB.Business.Interface.Logic.Base;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.Domain.Logic;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -16,12 +19,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         private readonly IServiceFacade _serviceFacade;
         private readonly IEventAggregator _eventAggregator;
-
+        private readonly Notification _notification;
         protected AlterServiceViewModel(Service entity, IRepository repository, IServiceFacade serviceFacade, IEventAggregator eventAggregator,
             ILoggerFacade loggerFacade)
             : base(entity, repository, eventAggregator, loggerFacade) {
             _serviceFacade = serviceFacade;
             _eventAggregator = eventAggregator;
+            _notification = new Notification();
         }
         #region Overrides of BaseViewModel
 
@@ -30,6 +34,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntity(null);
         }
 
+        protected override void SaveChanges(object arg)
+        {
+            using (Repository.Uow.BeginTransaction())
+            {
+                Entity = Repository.SaveOrUpdate(Entity);
+                Repository.Uow.CommitTransaction();
+            }
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
+        }
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         public override void Refresh() { ClearEntity(null); }

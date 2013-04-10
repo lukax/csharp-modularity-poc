@@ -22,7 +22,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Email; }
+            get { return Strings.UI_Header_Alter_Email; }
         }
 
         public int Index { get; set; }

@@ -19,7 +19,7 @@ namespace LOB.UI.Core.View.Controls.List {
         }
 
         public string Header {
-            get { return Strings.Header_List_Product; }
+            get { return Strings.UI_Header_List_Product; }
         }
 
         public int Index { get; set; }

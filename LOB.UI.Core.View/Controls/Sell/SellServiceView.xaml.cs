@@ -16,7 +16,7 @@ namespace LOB.UI.Core.View.Controls.Sell {
         public IBaseViewModel ViewModel { get; set; }
 
         public string Header {
-            get { return Strings.Header_Sell_Service; }
+            get { return Strings.UI_Header_Sell_Service; }
         }
 
         public int Index { get; set; }

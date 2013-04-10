@@ -16,7 +16,7 @@
         <DockPanel Grid.Row="0" Dock="Top" Width="Auto" HorizontalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                 <Button x:Name="ButtonSave" IsDefault="True" Width="20" Height="20" Background="Transparent"
-                        Padding="0" BorderThickness="0" ToolTip="{x:Static loc:Strings.ToolTip_Confirm}"
+                        Padding="0" BorderThickness="0" ToolTip="{x:Static loc:Strings.UI_ToolTip_Confirm}"
                         Command="{Binding SearchCommand}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -28,24 +28,24 @@
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Command="{Binding AddCommand}" HorizontalAlignment="Right" Width="20" Height="20"
                         Padding="0" BorderThickness="0"
-                        Background="Transparent" ToolTip="{x:Static loc:Strings.ToolTip_Add}">
+                        Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_Add}">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png" />
                 </Button>
-                <Button Command="{Binding UpdateCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Edit}" Width="20"
+                <Button Command="{Binding UpdateCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Edit}" Width="20"
                         Height="20" Background="Transparent" Padding="0" BorderThickness="0">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/pencil_2.png" />
                 </Button>
-                <Button Command="{Binding DeleteCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Delete}"
+                <Button Command="{Binding DeleteCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Delete}"
                         Width="20" Height="20" Background="Transparent" BorderThickness="0" Padding="0">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/file_delete2_2.png" />
                 </Button>
-                <Button Command="{Binding FetchCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Update}" Width="20"
+                <Button Command="{Binding FetchCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Update}" Width="20"
                         Height="20" BorderThickness="0" Padding="0"
                         Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/refresh.png" />
                 </Button>
                 <Separator/>
-                <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.ToolTip_Close}" Width="20"
+                <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Close}" Width="20"
                         BorderBrush="Black"
                         Height="20" BorderThickness="2" Padding="2"
                         Background="Transparent">

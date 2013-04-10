@@ -4,14 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
-             xmlns:domainSub="clr-namespace:LOB.Domain.SubEntity;assembly=LOB.Domain"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
 
@@ -103,10 +101,10 @@
 
             <Label Content="{x:Static loc:Strings.Common_ZipCode}" HorizontalAlignment="Right" Grid.Column="3"
                    Grid.Row="3" />
-            <TextBox
-                Text="{Binding Entity.ZipCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                HorizontalAlignment="Left" HorizontalContentAlignment="Right"
-                MinWidth="100" 
+            <xctk:MaskedTextBox Style="{StaticResource MetroTextBox}"
+                Value="{Binding Entity.ZipCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Right" ValueDataType="{x:Type system:String}"
+                MinWidth="100" Mask="00000-000" IncludeLiteralsInValue="False" IncludePromptInValue="False" SkipLiterals="True"
                 MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
             <Label Content="{x:Static loc:Strings.Common_Status}" Grid.Column="1" Grid.Row="4"

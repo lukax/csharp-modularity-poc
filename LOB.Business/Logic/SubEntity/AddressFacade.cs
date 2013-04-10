@@ -50,23 +50,25 @@ namespace LOB.Business.Logic.SubEntity {
             _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Street) ? new ValidationResult("Street", Strings.Error_Field_Empty) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Street) ? new ValidationResult("Street", Strings.Notification_Field_Empty) : null);
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.StreetNumber)) return new ValidationResult("StreetNumber", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.StreetNumber, @"\d")) return new ValidationResult("StreetNumber", Strings.Notification_Field_IntOnly);
+
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.ZipCode)) return new ValidationResult("ZipCode", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.ZipCode, @"\d")) return new ValidationResult("ZipCode", Strings.Notification_Field_IntOnly);
+                                          if(_entity.ZipCode.Length != 8) return new ValidationResult("ZipCode", string.Format(Strings.Notification_Field_X_Length, 8));
+                                          return null;
+                                      });
                 _entity.AddValidation(
-                    (sender, name) =>string.IsNullOrWhiteSpace(_entity.StreetNumber) ? new ValidationResult("StreetNumber", Strings.Error_Field_Empty) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.County) ? new ValidationResult("County", Strings.Notification_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) => !Regex.IsMatch(_entity.StreetNumber, @"\d") ? new ValidationResult("StreetNumber", Strings.Error_Field_WrongFormat) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.District) ? new ValidationResult("District", Strings.Notification_Field_Empty) : null);
                 _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.ZipCode) ? new ValidationResult("ZipCode", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => !Regex.IsMatch(_entity.ZipCode, @"\d") ? new ValidationResult("ZipCode", Strings.Error_Field_WrongFormat) : null);
-                _entity.AddValidation(
-                    (sender, name) => _entity.ZipCode.Length != 8 ? new ValidationResult("ZipCode", Strings.Error_Field_WrongFormat) : null);
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.County) ? new ValidationResult("County", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.District) ? new ValidationResult("District", Strings.Error_Field_Empty) : null);
-                _entity.AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(_entity.State) ? new ValidationResult("State", Strings.Error_Field_Empty) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.State) ? new ValidationResult("State", Strings.Notification_Field_Empty) : null);
             }
         }
 

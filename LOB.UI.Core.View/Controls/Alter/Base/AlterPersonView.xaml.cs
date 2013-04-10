@@ -26,7 +26,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_Person; }
+            get { return Strings.UI_Header_Alter_Person; }
         }
 
         public int Index { get; set; }

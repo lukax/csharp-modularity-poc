@@ -27,7 +27,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         public string Header {
-            get { return Strings.Header_Alter_NaturalPerson; }
+            get { return Strings.UI_Header_Alter_NaturalPerson; }
         }
 
         public int Index { get; set; }

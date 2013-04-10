@@ -54,7 +54,7 @@ namespace LOB.UI.Core.View.Controls.Util {
         }
 
         public string Header {
-            get { return Strings.Header_Main_Message; }
+            get { return Strings.UI_Header_Main_Message; }
         }
 
         public int Index { get; set; }

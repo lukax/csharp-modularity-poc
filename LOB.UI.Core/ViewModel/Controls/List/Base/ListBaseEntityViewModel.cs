@@ -31,8 +31,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
-        private UIOperation _operation;
-        private UIOperation _previousOperation;
+        //private UIOperation _previousOperation;
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
@@ -57,13 +56,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ObservableCollection<T> Entitys { get; set; }
         public string Search { get; set; }
         protected IRepository Repository { get; set; }
-        public override UIOperation Operation {
-            get { return _operation; }
-            set {
-                _previousOperation = value;
-                _operation = value;
-            }
-        }
+        public override UIOperation Operation { get; set; }
 
         [InjectionConstructor]
         protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
@@ -103,7 +96,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
-            worker.WorkerReportsProgress = true;
+            //worker.WorkerReportsProgress = true;
             //TODO: Dynamic set based on selected tab
 
             var notification = new Notification();
@@ -132,11 +125,20 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
         protected virtual void Fetch(object arg = null) { Entitys = new ObservableCollection<T>(Repository.GetList<T>().ToList()); }
+        #region Implementation of IDisposable
+
+        ~ListBaseEntityViewModel() { Dispose(false); }
 
         public override void Dispose() {
-            _worker.CancelAsync();
-            _worker.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
+        private void Dispose(bool disposing) {
+            if(_worker.WorkerSupportsCancellation) _worker.CancelAsync();
+            if(disposing) _worker.Dispose();
+        }
+
+        #endregion
     }
 }
