@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow
+﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -6,12 +6,13 @@
     xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
     x:Class="LOB.UI.Core.View.Shell"
     Title="{x:Static loc:Strings.UI_Title_Shell}"
-    Height="Auto" Width="Auto" SaveWindowPosition="True">
+    Height="Auto" Width="Auto">
 
-    <controls:MetroWindow.Resources>
+    <Window.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroVSSkin.xaml" />
-    </controls:MetroWindow.Resources>
+    </Window.Resources>
     <!--<Window.Background>
+     SaveWindowPosition="True"
         <ImageBrush ImageSource="pack://application:,,,/LOB.UI.Core.Resources;component/background_maze.png"/>
     </Window.Background>-->
 
@@ -55,4 +56,4 @@
                         HorizontalAlignment="Stretch"
                         regions:RegionManager.RegionName="ModalRegion" />
     </Grid>
-</controls:MetroWindow>
+</Window>

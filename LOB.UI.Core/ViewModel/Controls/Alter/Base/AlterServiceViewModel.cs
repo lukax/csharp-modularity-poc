@@ -1,11 +1,8 @@
 ﻿#region Usings
 
 using LOB.Business.Interface.Logic.Base;
-using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -18,15 +15,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public class AlterServiceViewModel : AlterBaseEntityViewModel<Service>, IAlterServiceViewModel {
 
         private readonly IServiceFacade _serviceFacade;
-        private readonly IEventAggregator _eventAggregator;
-        private readonly Notification _notification;
         protected AlterServiceViewModel(Service entity, IRepository repository, IServiceFacade serviceFacade, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _serviceFacade = serviceFacade;
-            _eventAggregator = eventAggregator;
-            _notification = new Notification();
-        }
+            ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) { _serviceFacade = serviceFacade; }
         #region Overrides of BaseViewModel
 
         public override void InitializeServices() {
@@ -34,15 +25,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntity(null);
         }
 
-        protected override void SaveChanges(object arg)
-        {
-            using (Repository.Uow.BeginTransaction())
-            {
-                Entity = Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
-        }
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         public override void Refresh() { ClearEntity(null); }
@@ -50,7 +32,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         #endregion
         #region Overrides of AlterBaseEntityViewModel<Service>
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
         protected override void ClearEntity(object arg) {
             Entity = _serviceFacade.GenerateEntity();
             _serviceFacade.SetEntity(Entity);

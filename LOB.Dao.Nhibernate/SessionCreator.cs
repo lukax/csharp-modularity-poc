@@ -26,17 +26,6 @@ namespace LOB.Dao.Nhibernate {
         private object _orm;
         private readonly PersistType _persistType;
         private SchemaExport _sqlSchema;
-
-        [InjectionConstructor]
-        public SessionCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MySql) { }
-
-        private SessionCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
-            if(connectionString != null) ConnectionString = connectionString;
-            _logger = logger;
-            _persistType = persistIn;
-        }
-
         [AllowNull]
         public string ConnectionString {
             get {
@@ -47,18 +36,27 @@ namespace LOB.Dao.Nhibernate {
             }
             set { _connectionString = value; }
         }
-
         [AllowNull]
-        public Object ORM {
+        public object ORM {
             get {
                 try {
-                    return _orm ?? (_orm = SessionCreatorFactory().OpenSession());
+                    return _orm ?? (_orm = SessionCreatorFactory());
                 } catch(NullReferenceException e) {
                     _logger.Log(e.Message, Category.Exception, Priority.Low);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed));
                 }
                 return null;
             }
+        }
+
+        [InjectionConstructor]
+        public SessionCreator(ILoggerFacade logger)
+            : this(logger, PersistType.MySql) { }
+
+        private SessionCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
+            if(connectionString != null) ConnectionString = connectionString;
+            _logger = logger;
+            _persistType = persistIn;
         }
 
         public event SessionCreatorEventHandler OnCreatingSession;
@@ -96,11 +94,8 @@ namespace LOB.Dao.Nhibernate {
         }
 
         private Configuration StoreInMySqlConfiguration() { return Mapping().Database(MySQLConfiguration.Standard.ConnectionString(ConnectionString)).BuildConfiguration(); }
-
         private Configuration StoreInMsSqlConfiguration() { return Mapping().Database(MsSqlConfiguration.MsSql2008.ConnectionString(ConnectionString)).BuildConfiguration(); }
-
         private Configuration StoreInMemoryConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.InMemory()).BuildConfiguration(); }
-
         private Configuration StoreInFileConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration(); }
 
         private FluentConfiguration Mapping() {

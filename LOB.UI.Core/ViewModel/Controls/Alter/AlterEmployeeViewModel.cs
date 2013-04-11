@@ -1,10 +1,10 @@
 ﻿#region Usings
 
+using System;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -19,14 +19,9 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
 
-        private readonly IEventAggregator _eventAggregator;
-
         [InjectionConstructor]
-        public AlterEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _eventAggregator = eventAggregator;
-            _notification = new Notification();
-        }
+        public AlterEmployeeViewModel(Employee entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) { }
 
         public override void InitializeServices() {
             Operation = _operation;
@@ -36,7 +31,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void Refresh() { ClearEntity(null); }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add};
-        private readonly Notification _notification;
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
@@ -45,22 +39,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             //TODO: Business logic
             return true;
         }
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Entity = Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
-        }
 
         protected override bool CanCancel(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
-        protected override void ClearEntity(object arg) { Entity = new Employee {}; }
-
+        protected override void ClearEntity(object arg) { Entity = new Employee(); }
     }
 }

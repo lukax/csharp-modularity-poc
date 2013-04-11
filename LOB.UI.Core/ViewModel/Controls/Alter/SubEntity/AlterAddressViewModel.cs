@@ -26,15 +26,9 @@ using NullGuard;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
 
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IAddressFacade _addressFacade;
-        private readonly IEventAggregator _eventAggregator;
         private string _status;
         private IList<string> _statuses;
-        private Notification Notification { get; set; }
-        private NotificationEvent NotificationEvent {
-            get { return _eventAggregator.GetEvent<NotificationEvent>(); }
-        }
         public ObservableCollection<UF> UFs { get; set; }
         public ObservableCollection<string> Districts { get; set; }
         private UF _uf;
@@ -57,12 +51,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         [InjectionConstructor]
         public AlterAddressViewModel(Address entity, IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _addressFacade = addressFacade;
-            _eventAggregator = eventAggregator;
-            Notification = new Notification();
-        }
+            ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) { _addressFacade = addressFacade; }
 
         public IList<string> Statuses {
             get {
@@ -76,9 +66,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public override void InitializeServices() {
             ClearEntity(null);
             Operation = _operation;
-            _worker.DoWork += UpdateUFList;
-            _worker.RunWorkerAsync();
-            _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
+            Worker.DoWork += UpdateUFList;
+            Worker.RunWorkerAsync();
+            EventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
         }
 
         private void Include(BaseEntity obj) {
@@ -92,23 +82,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void SaveChanges(object arg) {
-            _worker.DoWork += SaveChanges;
-            _worker.RunWorkerAsync();
-        }
-
-        private void SaveChanges(object sender, DoWorkEventArgs e) {
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Progress(-2).Severity(Severity.Info));
-            using(Repository.Uow.BeginTransaction())
-                if(!_worker.CancellationPending) {
-                    NotificationEvent.Publish(Notification.Progress(50));
-                    Repository.SaveOrUpdate(Entity);
-                    Repository.Uow.CommitTransaction();
-                }
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(Severity.Ok));
-        }
-
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;

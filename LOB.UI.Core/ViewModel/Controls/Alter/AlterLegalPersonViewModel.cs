@@ -1,5 +1,7 @@
 ﻿#region Usings
 
+using System;
+using System.ComponentModel;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.Events.View;
@@ -27,8 +29,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         [InjectionConstructor]
         public AlterLegalPersonViewModel(LegalPerson entity, AlterPersonViewModel alterPersonViewModel, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
+            IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) {
             _alterPersonViewModel = alterPersonViewModel;
             _eventAggregator = eventAggregator;
         }
@@ -39,13 +41,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void Refresh() { ClearEntity(null); }
-
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-        }
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 

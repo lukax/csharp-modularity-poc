@@ -52,7 +52,7 @@ namespace LOB.Dao.Nhibernate.Test {
             //public void Compose(object obj) { _container.ComposeParts(obj); }
             //public IRepository GetInstance(PersistType type = PersistType.MySql) {
             //    if(type == PersistType.MySql) return _container.GetExportedValue<IRepository>("Sql");
-            //    if(type == PersistType.Memory) return _container.GetExportedValue<IRepository>("GetList");
+            //    if(type == PersistType.Memory) return _container.GetExportedValue<IRepository>("GetAll");
             //    if(type == PersistType.File) return _container.GetExportedValue<IRepository>("File");
             //    throw new ArgumentNullException();
             //}

@@ -15,7 +15,8 @@ namespace LOB.Domain.Base {
 
         public bool Equals(Service other) {
             try {
-                return other.Name.Equals(Name) && other.Description.Equals(Description);
+                if(other == null) return false;
+                return string.Equals(Name, other.Name) && string.Equals(Description, other.Description);
             } catch(InvalidOperationException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

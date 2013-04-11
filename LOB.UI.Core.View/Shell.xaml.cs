@@ -16,7 +16,6 @@ using LOB.UI.Core.Events.View;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
-using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
@@ -25,7 +24,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.View {
-    public partial class Shell : MetroWindow, IBaseView {
+    public partial class Shell : IBaseView {
 
         private static bool _loaded;
         private readonly IUnityContainer _container;

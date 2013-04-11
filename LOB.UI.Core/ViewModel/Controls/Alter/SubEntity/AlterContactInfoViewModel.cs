@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,7 +11,6 @@ using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
@@ -28,15 +26,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
 
         private readonly IContactInfoFacade _contactInfoFacade;
-        private readonly IEventAggregator _eventAggregator;
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
-        private readonly Notification _notification;
+
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
+            IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) {
             _contactInfoFacade = contactInfoFacade;
-            _eventAggregator = eventAggregator;
-            _notification = new Notification();
             Entity = entity;
             EmailOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.Email};
             PhoneNumberOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.PhoneNumber};
@@ -65,15 +59,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             ClearEntity(null);
             InitBackgroundWorker();
         }
-        protected override void SaveChanges(object arg)
-        {
-            using (Repository.Uow.BeginTransaction())
-            {
-                Entity = Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
-        }
+
         public override void Refresh() { ClearEntity(null); }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
@@ -82,14 +68,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public UIOperation EmailOperation { get; set; }
         public UIOperation PhoneNumberOperation { get; set; }
 
-        private void AddEmail(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation); }
+        private void AddEmail(object arg) { EventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation); }
 
         private bool CanAddEmail(object arg) {
             //TODO: Business logic
             return true;
         }
 
-        private void AddPhoneNumber(object arg) { _eventAggregator.GetEvent<OpenViewEvent>().Publish(PhoneNumberOperation); }
+        private void AddPhoneNumber(object arg) { EventAggregator.GetEvent<OpenViewEvent>().Publish(PhoneNumberOperation); }
 
         private bool CanAddPhoneNumber(object arg) {
             //TODO: Business logic
@@ -130,28 +116,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         #region Repo Operations
 
         private void InitBackgroundWorker() {
-            _worker.DoWork += WorkerListsGetFromRepo;
-            _worker.RunWorkerCompleted += WorkerListsSetFromRepo;
-            _worker.ProgressChanged += WorkerListsProgress;
-            _worker.WorkerSupportsCancellation = true;
-            _worker.WorkerReportsProgress = true;
-            _worker.RunWorkerAsync();
+            Worker.DoWork += WorkerListsGetFromRepo;
+            Worker.RunWorkerCompleted += WorkerListsSetFromRepo;
+            Worker.ProgressChanged += WorkerListsProgress;
+            Worker.WorkerSupportsCancellation = true;
+            Worker.WorkerReportsProgress = true;
+            Worker.RunWorkerAsync();
         }
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
             do {
-                _worker.ReportProgress(-1);
+                Worker.ReportProgress(-1);
                 Thread.Sleep(2000);
-                _worker.ReportProgress(5);
+                Worker.ReportProgress(5);
                 var result = new object[2];
-                _worker.ReportProgress(10);
-                Emails = new ListCollectionView(Repository.GetList<Email>().ToList());
-                _worker.ReportProgress(50);
-                PhoneNumbers = new ListCollectionView(Repository.GetList<PhoneNumber>().ToList());
-                _worker.ReportProgress(90);
+                Worker.ReportProgress(10);
+                Emails = new ListCollectionView(Repository.GetAll<Email>().ToList());
+                Worker.ReportProgress(50);
+                PhoneNumbers = new ListCollectionView(Repository.GetAll<PhoneNumber>().ToList());
+                Worker.ReportProgress(90);
                 args.Result = result;
-                _worker.ReportProgress(100);
-            } while(!_worker.CancellationPending);
+                Worker.ReportProgress(100);
+            } while(!Worker.CancellationPending);
         }
 
         private void WorkerListsSetFromRepo(object sender, RunWorkerCompletedEventArgs args) {
@@ -162,15 +148,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        private readonly Notification _singleNotification;
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            _singleNotification.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating);
-            _singleNotification.Progress(args.ProgressPercentage);
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(_singleNotification);
+            Notification.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating);
+            Notification.Progress(args.ProgressPercentage);
+            NotificationEvent.Publish(Notification);
         }
 
         #endregion
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) {
             Entity = _contactInfoFacade.GenerateEntity();
@@ -184,19 +169,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override bool CanCancel(object arg) { return true; }
-
-        ~AlterContactInfoViewModel() { Dispose(false); }
-
-        public override void Dispose() {
-            base.Dispose();
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing) {
-            _worker.CancelAsync();
-            if(disposing) _worker.Dispose();
-        }
 
     }
 }

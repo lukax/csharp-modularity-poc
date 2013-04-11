@@ -17,33 +17,23 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {
 
-        private readonly IEventAggregator _eventAggregator;
         private UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
         public override UIOperation Operation {
             get { return _operation; }
             set { _operation = value; }
         }
-        private readonly Notification _notification;
-        public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
-            _eventAggregator = eventAggregator;
-            _notification = new Notification();
+        public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) {
         }
 
         public override void InitializeServices() {
             Operation = _operation;
             ClearEntity(null);
         }
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Entity = Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
-        }
+
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         //protected override void QuickSearch(object arg) {
         //    _previousState = _operation.State;

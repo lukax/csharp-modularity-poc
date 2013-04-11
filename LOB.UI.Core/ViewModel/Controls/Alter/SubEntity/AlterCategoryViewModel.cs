@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
-using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
@@ -21,21 +20,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {
 
         private readonly ICategoryFacade _categoryFacade;
-        private readonly IEventAggregator _eventAggregator;
-        private readonly Notification _notification;
         public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
+            ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) {
             _categoryFacade = categoryFacade;
-            _eventAggregator = eventAggregator;
-            _notification = new Notification();
             Refresh();
         }
 
         public override void InitializeServices() {
             Operation = _operation;
             ClearEntity(null);
-            _eventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
+            EventAggregator.GetEvent<IncludeEvent>().Subscribe(Include);
         }
 
         private void Include(BaseEntity baseEntity) {
@@ -47,15 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Entity = Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(_notification.Message(Strings.Notification_Field_Added).Severity(Severity.Ok));
-        }
-
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;

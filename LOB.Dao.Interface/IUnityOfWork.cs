@@ -11,20 +11,22 @@ namespace LOB.Dao.Interface {
         /// <summary>
         ///     ORM's 'Session' goes in here.
         /// </summary>
-        object ORM { get; }
+        //object ORM { get; }
 
         /// <summary>
         ///     string Error Message
         /// </summary>
         event EventHandler<string> OnError;
 
-        void Save<T>(T entity) where T : BaseEntity;
-        void SaveOrUpdate<T>(T entity) where T : BaseEntity;
-        void Update<T>(T entity) where T : BaseEntity;
-        void Delete<T>(T entity) where T : BaseEntity;
+        //void Save<T>(T entity) where T : BaseEntity;
+        //void SaveOrUpdate<T>(T entity) where T : BaseEntity;
+        //void Update<T>(T entity) where T : BaseEntity;
+        //void Delete<T>(T entity) where T : BaseEntity;
         IUnityOfWork BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
+        void FlushTransaction();
+        bool IsTransactionActive();
 
     }
 }

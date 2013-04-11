@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:metrocontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
@@ -47,8 +46,8 @@
             <Label Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Cnpj}"
                    Grid.Column="1" />
             <xctk:MaskedTextBox
-                Text="{Binding Entity.Cnpj, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                HorizontalAlignment="Left"
+                Value="{Binding Entity.Cnpj, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                HorizontalAlignment="Left" Text="" ValueDataType="{x:Type system:String}"
                 MinWidth="120" MaxWidth="250" Grid.Column="2" Grid.Row="2" Mask="00.000.000/0000-00" />
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2"
@@ -60,9 +59,9 @@
 
             <Label Grid.Column="1" HorizontalAlignment="Right" Grid.Row="3"
                    Content="{x:Static loc:Strings.Common_CnaeFiscal}" />
-            <TextBox
-                Text="{Binding Entity.CnaeFiscal, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                HorizontalAlignment="Left"
+            <xctk:MaskedTextBox 
+                Value="{Binding Entity.CnaeFiscal, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                HorizontalAlignment="Left" Mask="0000-0/00" ValueDataType="{x:Type system:String}" Text=""
                 MinWidth="120" MaxWidth="350" Grid.Column="2" Grid.Row="3" />
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="3"

@@ -19,7 +19,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private readonly AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private readonly AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
-        private readonly IEventAggregator _eventAggregator;
         private readonly IFluentNavigator _navigator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
@@ -28,10 +27,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         [InjectionConstructor]
         public AlterCustomerViewModel(Customer entity, IRepository repository, IFluentNavigator navigator,
             AlterLegalPersonViewModel alterLegalPersonViewModel, AlterNaturalPersonViewModel alterNaturalPersonViewModel,
-            IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
+            IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) {
             _navigator = navigator;
-            _eventAggregator = eventAggregator;
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             //default init customer as natural person
@@ -74,14 +72,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override bool CanCancel(object arg) { return true; }
 
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Repository.Uow.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-        }
-
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) { Entity = new Customer {}; }
 

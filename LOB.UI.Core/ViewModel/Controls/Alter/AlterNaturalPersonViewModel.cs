@@ -17,14 +17,13 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
 
-        private readonly IEventAggregator _eventAggregator;
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         [InjectionConstructor]
-        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) { _eventAggregator = eventAggregator; }
+        public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) { }
 
         public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }
@@ -43,16 +42,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-        }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
-
-        protected override void ClearEntity(object arg) { Entity = new NaturalPerson {}; }
+        protected override void ClearEntity(object arg) { Entity = new NaturalPerson(); }
 
     }
 }

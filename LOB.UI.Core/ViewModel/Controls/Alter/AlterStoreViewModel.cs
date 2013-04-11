@@ -25,19 +25,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterStoreViewModel : AlterBaseEntityViewModel<Store>, IAlterProductViewModel {
 
         private readonly IStoreFacade _storeFacade;
-        private readonly IEventAggregator _eventAggregator;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Store, State = UIOperationState.Add};
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
-
         [InjectionConstructor]
         public AlterStoreViewModel(Store entity, IRepository repository, IStoreFacade storeFacade, IEventAggregator eventAggregator,
-            ILoggerFacade loggerFacade)
-            : base(entity, repository, eventAggregator, loggerFacade) {
+            ILoggerFacade logger)
+            : base(entity, repository, eventAggregator, logger) {
             _storeFacade = storeFacade;
-            _eventAggregator = eventAggregator;
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
         }
@@ -46,10 +42,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             Operation = _operation;
             ClearEntity(null);
 
-            _worker.DoWork += UpdateCategoryList;
-            _worker.WorkerSupportsCancellation = true;
-            _worker.WorkerReportsProgress = true;
-            _worker.RunWorkerAsync();
+            Worker.DoWork += UpdateCategoryList;
+            Worker.WorkerSupportsCancellation = true;
+            Worker.WorkerReportsProgress = true;
+            Worker.RunWorkerAsync();
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -57,8 +53,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private async void UpdateCategoryList(object sender, DoWorkEventArgs doWorkEventArgs) {
             do {
                 await Task.Delay(2000); // TODO: Configuration based update time
-                Categories = Repository.GetList<Category>().ToList();
-            } while(!_worker.CancellationPending);
+                Categories = Repository.GetAll<Category>().ToList();
+            } while(!Worker.CancellationPending);
         }
 
         private void ExecuteListCategory(object o) {
@@ -77,14 +73,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             //_navigator.ResolveView(oP).Show(true);
         }
 
-        protected override void SaveChanges(object arg) {
-            using(Repository.Uow.BeginTransaction()) {
-                Entity = Repository.SaveOrUpdate(Entity);
-                Repository.Uow.CommitTransaction();
-            }
-        }
-
-        protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: If viewState == Add : ..., If viewState == Update : ....

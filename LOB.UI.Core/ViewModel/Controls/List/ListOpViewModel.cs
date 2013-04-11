@@ -17,6 +17,7 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Unity;
 using NullGuard;
 
 #endregion
@@ -32,15 +33,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         public string Entity { get; set; }
         public ObservableCollection<PanoramaGroup> Entitys { get; set; }
         public ICommand SaveChangesCommand { get; set; }
-
-        public ListOpViewModel(IEventAggregator eventAggregator) {
-            _eventAggregator = eventAggregator;
-            SaveChangesCommand = new DelegateCommand(SaveChanges);
-            _operationDictLazy = new Lazy<IDictionary<string, UIOperation>>(CreateList);
-            //Search = "";
-            Entity = "";
-        }
-
         [AllowNull]
         public string Search {
             get { return _search ?? ""; }
@@ -50,10 +42,18 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
+        [InjectionConstructor]
+        public ListOpViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            SaveChangesCommand = new DelegateCommand(SaveChanges);
+            _operationDictLazy = new Lazy<IDictionary<string, UIOperation>>(CreateList);
+            Entity = "";
+        }
+
         public override void InitializeServices() {
             Operation = _operation;
             _worker.DoWork += UpdateList;
-            _worker.WorkerSupportsCancellation = true;
             _worker.RunWorkerAsync();
         }
 
@@ -62,9 +62,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List};
 
         private void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
-            //var worker = sender as BackgroundWorker;
-            //if(worker == null) return;
-            //worker.WorkerSupportsCancellation = true;
+            var worker = sender as BackgroundWorker;
+            if(worker == null) return;
+            worker.WorkerSupportsCancellation = true;
 
             //Thread.Sleep(1000);
             if(string.IsNullOrEmpty(Search)) {

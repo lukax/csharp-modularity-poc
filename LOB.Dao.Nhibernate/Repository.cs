@@ -3,7 +3,6 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using Microsoft.Practices.Unity;
@@ -15,47 +14,45 @@ using NHibernate.Linq;
 namespace LOB.Dao.Nhibernate {
     public class Repository : IRepository {
 
+        protected ISession Session {
+            get { return ((UnityOfWork)Uow).ORM as ISession; }
+        }
+        public IUnityOfWork Uow { get; private set; }
+
         [InjectionConstructor]
         public Repository(IUnityOfWork unityOfWork) { Uow = unityOfWork; }
 
-        public IUnityOfWork Uow { get; private set; }
-
+        public T Get<T>(object id) where T : BaseEntity { return Session.Get<T>(id); }
+        public T Load<T>(object id) where T : BaseEntity { return Session.Load<T>(id); }
         public T Save<T>(T entity) where T : BaseEntity {
-            Uow.Save(entity);
+            Session.Save(entity);
             return entity;
         }
-
         public T Update<T>(T entity) where T : BaseEntity {
-            Uow.Update(entity);
+            Session.Update(entity);
             return entity;
         }
-
         public T SaveOrUpdate<T>(T entity) where T : BaseEntity {
-            Uow.SaveOrUpdate(entity);
+            Session.SaveOrUpdate(entity);
             return entity;
         }
-
-        public T Delete<T>(T entity) where T : BaseEntity { Uow.Delete(entity);
+        public T SaveOrUpdateCopy<T>(T entity) where T : BaseEntity {
+            Session.SaveOrUpdate(entity);
             return entity;
         }
-
-        public T Get<T>(object id) where T : BaseEntity { return GetSession().Get<T>(id); }
-
-        public bool Contains<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return GetSession().Query<T>().Contains(GetSession().Query<T>().FirstOrDefault(criteria)); }
-
-        public bool Contains<T>(T entity) where T : BaseEntity { return GetSession().Query<T>().Contains(GetSession().Query<T>().FirstOrDefault(x => x == entity)); }
-
-        public IQueryable<T> GetList<T>() where T : BaseEntity { return GetSession().Query<T>(); }
-
-        public IQueryable<T> GetList<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return GetSession().Query<T>().Where(criteria); }
-
-        public async Task<IQueryable<T>> GetListAsync<T>() where T : BaseEntity { return await Task.Run(() => GetSession().Query<T>()); }
-
-        public async Task<IQueryable<T>> GetListAsync<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return await Task.Run(() => GetSession().Query<T>().Where(criteria)); }
-
-        private ISession GetSession() { return Uow.ORM as ISession; }
-
-        public bool Contains<T>(int code) where T : BaseEntity { return GetSession().Query<T>().Contains(GetSession().Query<T>().FirstOrDefault(x => x.Code == code)); }
+        public void Delete<T>(T entity) where T : BaseEntity { Session.Delete(entity); }
+        public void DeleteAll<T>() where T : BaseEntity { Session.Delete(string.Format("from {0}", typeof(T).Name)); }
+        public bool Contains<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(criteria)); }
+        public long Count<T>() where T : BaseEntity { return GetAll<T>().Count(); }
+        public long Count<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return GetAll(criteria).Count(); }
+        public bool Contains<T>(T entity) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(x => x == entity)); }
+        public IQueryable<T> GetAll<T>() where T : BaseEntity { return Session.Query<T>(); }
+        public IQueryable<T> GetAll<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return Session.Query<T>().Where(criteria); }
+        public T GetOne<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity {
+            var temp = Session.Query<T>().FirstOrDefault();
+            return temp == default(T) ? null : temp;
+        }
+        public bool Contains<T>(int code) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(x => x.Code == code)); }
 
     }
 }

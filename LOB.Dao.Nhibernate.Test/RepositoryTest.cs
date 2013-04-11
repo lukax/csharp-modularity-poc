@@ -103,9 +103,9 @@ namespace LOB.Dao.Nhibernate.Test {
                 repo.Save(person2);
                 repo.Uow.CommitTransaction();
 
-                var list1 = repo.GetList<NaturalPerson>(x => x.LastName == "Martin");
+                var list1 = repo.GetAll<NaturalPerson>(x => x.LastName == "Martin");
                 Assert.IsTrue(list1.Any());
-                var list2 = repo.GetList<Customer>(x => x.Status == CustomerStatus.New);
+                var list2 = repo.GetAll<Customer>(x => x.Status == CustomerStatus.New);
                 Assert.IsTrue(list1.Count() > 1);
             }
         }

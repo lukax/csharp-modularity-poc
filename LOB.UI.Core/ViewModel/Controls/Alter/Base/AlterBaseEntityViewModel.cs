@@ -3,8 +3,11 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
+using LOB.Domain.Logic;
+using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
@@ -19,26 +22,29 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
 
-        private readonly IEventAggregator _eventAggregator;
-// ReSharper disable NotAccessedField.Local
-        private readonly ILoggerFacade _loggerFacade;
-// ReSharper restore NotAccessedField.Local
         private UIOperationState _previousState;
         private SubscriptionToken _currentSubscription;
         private UIOperation _operation;
         public T Entity { get; set; }
+        public int Index { get; set; }
         public ICommand SaveChangesCommand { get; set; }
         public ICommand DiscardChangesCommand { get; set; }
         public ICommand ClearEntityCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand QuickSearchCommand { get; set; }
-        public int Index { get; set; }
-        protected IRepository Repository { get; set; }
+        protected IRepository Repository { get; private set; }
+        protected IEventAggregator EventAggregator { get; private set; }
+        protected ILoggerFacade Logger { get; private set; }
+        protected BackgroundWorker Worker { get; private set; }
+        protected NotificationEvent NotificationEvent { get { return EventAggregator.GetEvent<NotificationEvent>(); } }
+        protected Notification Notification { get; private set; }
 
         [InjectionConstructor]
-        protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade loggerFacade) {
-            _eventAggregator = eventAggregator;
-            _loggerFacade = loggerFacade;
+        protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger) {
+            EventAggregator = eventAggregator;
+            Logger = logger;
+            Worker = new BackgroundWorker();
+            Notification = new Notification();
             Repository = repository;
             Entity = entity;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
@@ -55,13 +61,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected abstract void Cancel(object arg);
 
         protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
-        protected abstract void SaveChanges(object arg);
+        protected virtual void SaveChanges(object arg) {
+            Worker.DoWork += SaveChanges;
+            Worker.RunWorkerAsync();
+        }
+        private void SaveChanges(object sender, DoWorkEventArgs e) {
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Progress(-2).Severity(Severity.Info));
+            using(Repository.Uow.BeginTransaction())
+                if(!Worker.CancellationPending) {
+                    NotificationEvent.Publish(Notification.Progress(50));
+                    Repository.SaveOrUpdate(Entity);
+                    NotificationEvent.Publish(Notification.Progress(70));
+                    Repository.Uow.CommitTransaction();
+                    NotificationEvent.Publish(Notification.Progress(90));
+                }
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(Severity.Ok));
+        }
 
         protected virtual bool CanQuickSearch(object obj) { return Operation.State != UIOperationState.QuickSearch; }
         protected virtual void QuickSearch(object arg) {
             Operation.State(UIOperationState.QuickSearch);
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
-            _currentSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
+            EventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
+            _currentSubscription = EventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
         }
 
         private void ChangeUIState(UIOperation obj) {
@@ -88,8 +109,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                 _previousState = Operation.State;
             }
         }
+        #region Implementation of IDisposable
 
-        public override void Dispose() { }
+        ~AlterBaseEntityViewModel() { Dispose(false); }
+        public override void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        private void Dispose(bool disposing) {
+            if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
+            if(!disposing) return;
+            Worker.Dispose();
+        }
 
+        #endregion
     }
 }
