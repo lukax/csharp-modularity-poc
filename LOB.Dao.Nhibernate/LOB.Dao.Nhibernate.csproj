@@ -112,7 +112,7 @@
     <Compile Include="Mapping\SupplierMap.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionCreator.cs" />
+    <Compile Include="SessionFactoryCreator.cs" />
     <Compile Include="UnityOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

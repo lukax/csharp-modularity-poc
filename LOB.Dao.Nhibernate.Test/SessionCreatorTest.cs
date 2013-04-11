@@ -14,13 +14,13 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [TestMethod]
         public void CreateSessionTest() {
-            var creator = new SessionCreator(new Logger());
-            Assert.IsNotNull(creator.ORM);
+            var creator = new SessionFactoryCreator(new Logger());
+            Assert.IsNotNull(creator.ORMFactory);
         }
 
         [TestMethod]
         public void TransactionTest() {
-            var sCreator = new SessionCreator(new Logger());
+            var sCreator = new SessionFactoryCreator(new Logger());
 
             var address = new Address {
                 Country = "Brazil",
@@ -53,7 +53,7 @@ namespace LOB.Dao.Nhibernate.Test {
                 // Stores = stores,
             };
 
-            var session = ((ISession)sCreator.ORM);
+            var session = ((ISession)sCreator.ORMFactory);
             using(session) {
                 session.BeginTransaction();
                 session.Save(entity);

@@ -131,12 +131,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 Worker.ReportProgress(5);
                 var result = new object[2];
                 Worker.ReportProgress(10);
-                Emails = new ListCollectionView(Repository.GetAll<Email>().ToList());
-                Worker.ReportProgress(50);
-                PhoneNumbers = new ListCollectionView(Repository.GetAll<PhoneNumber>().ToList());
-                Worker.ReportProgress(90);
-                args.Result = result;
-                Worker.ReportProgress(100);
+                using(Repository.Uow.BeginTransaction()) {
+                    Emails = new ListCollectionView(Repository.GetAll<Email>().ToList());
+                    Worker.ReportProgress(50);
+                    PhoneNumbers = new ListCollectionView(Repository.GetAll<PhoneNumber>().ToList());
+                    Worker.ReportProgress(90);
+                    args.Result = result;
+                    Worker.ReportProgress(100);
+                }
             } while(!Worker.CancellationPending);
         }
 

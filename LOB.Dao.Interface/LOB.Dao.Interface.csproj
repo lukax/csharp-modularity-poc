@@ -49,9 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGenericTransaction.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="ISessionCreator.cs" />
+    <Compile Include="ISessionFactoryCreator.cs" />
     <Compile Include="IUnityOfWork.cs" />
     <Compile Include="PersistType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

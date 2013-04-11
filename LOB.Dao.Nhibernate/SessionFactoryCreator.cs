@@ -15,7 +15,7 @@ using NullGuard;
 #endregion
 
 namespace LOB.Dao.Nhibernate {
-    public class SessionCreator : ISessionCreator {
+    public class SessionFactoryCreator : ISessionFactoryCreator {
 
         private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 
@@ -37,10 +37,10 @@ namespace LOB.Dao.Nhibernate {
             set { _connectionString = value; }
         }
         [AllowNull]
-        public object ORM {
+        public object ORMFactory {
             get {
                 try {
-                    return _orm ?? (_orm = SessionCreatorFactory());
+                    return _orm ?? (_orm = CreateSessionFactory());
                 } catch(NullReferenceException e) {
                     _logger.Log(e.Message, Category.Exception, Priority.Low);
                     if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed));
@@ -50,10 +50,10 @@ namespace LOB.Dao.Nhibernate {
         }
 
         [InjectionConstructor]
-        public SessionCreator(ILoggerFacade logger)
+        public SessionFactoryCreator(ILoggerFacade logger)
             : this(logger, PersistType.MySql) { }
 
-        private SessionCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
+        private SessionFactoryCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
             if(connectionString != null) ConnectionString = connectionString;
             _logger = logger;
             _persistType = persistIn;
@@ -62,7 +62,7 @@ namespace LOB.Dao.Nhibernate {
         public event SessionCreatorEventHandler OnCreatingSession;
         public event SessionCreatorEventHandler OnSessionCreated;
 
-        private ISessionFactory SessionCreatorFactory() {
+        private ISessionFactory CreateSessionFactory() {
             if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_Connecting));
             Configuration cfg;
             ISessionFactory factory = null;
@@ -99,7 +99,7 @@ namespace LOB.Dao.Nhibernate {
         private Configuration StoreInFileConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration(); }
 
         private FluentConfiguration Mapping() {
-            return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionCreator>())
+            return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionFactoryCreator>())
                 //Disable to much logging
                            .Diagnostics(x => x.Enable(false))
                 //Generate Tables
@@ -113,12 +113,23 @@ namespace LOB.Dao.Nhibernate {
                     _sqlSchema.Create(false, true);
                     return;
                 }
-                _sqlSchema.Drop(false, true);
-                _sqlSchema.Create(false, true);
+                //_sqlSchema.Drop(false, true);
+                //_sqlSchema.Create(false, true);
             } catch(Exception e) {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }
         }
+        #region Implementation of IDisposable
 
+        ~SessionFactoryCreator() { Dispose(false); }
+        public void Dispose() { Dispose(true); }
+        public void Dispose(bool disposing) {
+            var orm = _orm as ISessionFactory;
+            if(orm == null) return;
+            if(!disposing) orm.Close();
+            else orm.Dispose();
+        }
+
+        #endregion
     }
 }

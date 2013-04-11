@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -45,18 +44,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
-            Worker.WorkerSupportsCancellation = true;
-            Worker.WorkerReportsProgress = true;
             Worker.RunWorkerAsync();
         }
 
         public override void Refresh() { ClearEntity(null); }
 
         private async void UpdateCategoryList(object sender, DoWorkEventArgs doWorkEventArgs) {
+            var worker = sender as BackgroundWorker;
+            if(worker == null) return;
+            worker.WorkerSupportsCancellation = true;
+
             do {
                 await Task.Delay(2000); // TODO: Configuration based update time
                 Categories = Repository.GetAll<Category>().ToList();
-            } while(!Worker.CancellationPending);
+            } while(!worker.CancellationPending);
         }
 
         private void ExecuteListCategory(object o) {
@@ -65,7 +66,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void ExecuteAlterCategory(object o) {
-            var op = new UIOperation().Type(UIOperationType.Address).State(Entity.Category.Equals(_facade.GenerateEntity().Category) ? UIOperationState.Add : UIOperationState.Update);
+            var op =
+                new UIOperation().Type(UIOperationType.Address)
+                                 .State(Entity.Category.Equals(_facade.GenerateEntity().Category) ? UIOperationState.Add : UIOperationState.Update);
             op.Entity = Entity.Category;
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }

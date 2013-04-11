@@ -70,11 +70,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             using(Repository.Uow.BeginTransaction())
                 if(!Worker.CancellationPending) {
                     NotificationEvent.Publish(Notification.Progress(50));
-                    Repository.SaveOrUpdate(Entity);
+                    Entity = Repository.SaveOrUpdate(Entity);
                     NotificationEvent.Publish(Notification.Progress(70));
                     Repository.Uow.CommitTransaction();
                     NotificationEvent.Publish(Notification.Progress(90));
                 }
+            Operation.State(UIOperationState.Update);
             NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(Severity.Ok));
         }
 
@@ -82,10 +83,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected virtual void QuickSearch(object arg) {
             Operation.State(UIOperationState.QuickSearch);
             EventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
-            _currentSubscription = EventAggregator.GetEvent<CloseViewEvent>().Subscribe(ChangeUIState);
+            _currentSubscription = EventAggregator.GetEvent<CloseViewEvent>().Subscribe(RestoreUIState);
         }
 
-        private void ChangeUIState(UIOperation obj) {
+        private void RestoreUIState(UIOperation obj) {
             if(Operation.State == UIOperationState.QuickSearch) {
                 Operation.State(_previousState);
                 _currentSubscription.Dispose();

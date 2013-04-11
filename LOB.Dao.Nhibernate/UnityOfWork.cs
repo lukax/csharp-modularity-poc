@@ -13,25 +13,28 @@ using NHibernate.Linq;
 namespace LOB.Dao.Nhibernate {
     public class UnityOfWork : IUnityOfWork {
 
+// ReSharper disable NotAccessedField.Local
         private readonly ILoggerFacade _loggerFacade;
+// ReSharper restore NotAccessedField.Local
         //TODO: Try and catches and some logging later..
-        private readonly Lazy<object> _lazyOrm;
+        private readonly Lazy<ISession> _lazyOrm;
         private ITransaction _transaction;
-        public object ORM {
-            get { return _lazyOrm.Value; }
-        }
-        protected ISessionCreator SessionCreator { get; set; }
+        public object ORM { get { return _lazyOrm.Value; } }
+        protected ISessionFactoryCreator SessionFactoryCreator { get; set; }
         public event EventHandler<string> OnError;
 
         [InjectionConstructor]
-        public UnityOfWork(ISessionCreator sessionCreator, ILoggerFacade loggerFacade) {
-            SessionCreator = sessionCreator;
+        public UnityOfWork(ISessionFactoryCreator sessionFactoryCreator, ILoggerFacade loggerFacade) {
+            SessionFactoryCreator = sessionFactoryCreator;
             _loggerFacade = loggerFacade;
-            _lazyOrm = new Lazy<object>(() => sessionCreator.ORM.As<ISessionFactory>().OpenSession());
+            _lazyOrm = new Lazy<ISession>(() => sessionFactoryCreator.ORMFactory.As<ISessionFactory>().OpenSession());
         }
 
         public IUnityOfWork BeginTransaction() {
-            if(_transaction == null) _transaction = ORM.As<ISession>().BeginTransaction();
+            if(_transaction == null) {
+                if(!ORM.As<ISession>().IsConnected) ORM.As<ISession>().Reconnect();
+                _transaction = ORM.As<ISession>().BeginTransaction();
+            }
             else if(_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_AlreadyActivated);
             return this;
         }
@@ -64,8 +67,12 @@ namespace LOB.Dao.Nhibernate {
         protected virtual void Dispose(bool disposing) {
             if(_transaction != null) if(_transaction.IsActive) _transaction.Rollback();
             if(!disposing) return;
-            if(_transaction != null) _transaction.Dispose();
-            ORM.As<ISession>().Dispose();
+            if(_transaction != null) {
+                _transaction.Dispose();
+                _transaction = null;
+            }
+            ORM.As<ISession>().Disconnect();
+            //ORMFactory.As<ISession>().Dispose();
         }
 
         #endregion
@@ -73,7 +80,7 @@ namespace LOB.Dao.Nhibernate {
 
         //public void Save<T>(T entity) where T : BaseEntity {
         //    try {
-        //        ((ISession)ORM).Save(entity);
+        //        ((ISession)ORMFactory).Save(entity);
         //    } catch(Exception e) {
         //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
         //        if(OnError != null) OnError.Invoke(this, e.Message);
@@ -82,7 +89,7 @@ namespace LOB.Dao.Nhibernate {
 
         //public void SaveOrUpdate<T>(T entity) where T : BaseEntity {
         //    try {
-        //        ((ISession)ORM).SaveOrUpdate(entity);
+        //        ((ISession)ORMFactory).SaveOrUpdate(entity);
         //    } catch(Exception e) {
         //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
         //        if(OnError != null) OnError.Invoke(this, e.Message);
@@ -91,7 +98,7 @@ namespace LOB.Dao.Nhibernate {
 
         //public void Update<T>(T entity) where T : BaseEntity {
         //    try {
-        //        ((ISession)ORM).Update(entity);
+        //        ((ISession)ORMFactory).Update(entity);
         //    } catch(Exception e) {
         //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
         //        if(OnError != null) OnError.Invoke(this, e.Message);
@@ -100,7 +107,7 @@ namespace LOB.Dao.Nhibernate {
 
         //public void Delete<T>(T entity) where T : BaseEntity {
         //    try {
-        //        ((ISession)ORM).Delete(entity);
+        //        ((ISession)ORMFactory).Delete(entity);
         //    } catch(Exception e) {
         //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
         //        if(OnError != null) OnError.Invoke(this, e.Message);

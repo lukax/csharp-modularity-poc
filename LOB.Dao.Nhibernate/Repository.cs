@@ -15,7 +15,7 @@ namespace LOB.Dao.Nhibernate {
     public class Repository : IRepository {
 
         protected ISession Session {
-            get { return ((UnityOfWork)Uow).ORM as ISession; }
+            get { return Uow.As<UnityOfWork>().ORM.As<ISession>(); }
         }
         public IUnityOfWork Uow { get; private set; }
 

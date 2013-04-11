@@ -5,13 +5,9 @@ using System;
 #endregion
 
 namespace LOB.Dao.Interface {
-    public interface ISessionCreator {
+    public interface ISessionFactoryCreator : IDisposable {
 
-        /// <summary>
-        ///     ORM's Session
-        /// </summary>
-        object ORM { get; }
-
+        object ORMFactory { get; }
         event SessionCreatorEventHandler OnCreatingSession;
         event SessionCreatorEventHandler OnSessionCreated;
 
@@ -22,7 +18,6 @@ namespace LOB.Dao.Interface {
     public class SessionCreatorEventArgs : EventArgs {
 
         public SessionCreatorEventArgs(string message) { Message = message; }
-
         public string Message { get; private set; }
 
     }

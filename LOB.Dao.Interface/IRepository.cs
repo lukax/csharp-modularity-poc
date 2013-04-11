@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using LOB.Dao.Nhibernate;
 using LOB.Domain.Base;
 
 #endregion

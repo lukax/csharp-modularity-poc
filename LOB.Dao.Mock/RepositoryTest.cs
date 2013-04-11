@@ -13,14 +13,14 @@ namespace LOB.Dao.Mock {
 
         [TestMethod]
         public void MockstartTest() {
-            //var session = new Mock<ISessionCreator>(MockBehavior.Strict);
+            //var session = new Mock<ISessionFactoryCreator>(MockBehavior.Strict);
             //var uow = new Mock<IUnityOfWork>(MockBehavior.Strict);
             //var repo = new Mock<IRepository>(MockBehavior.Strict);
 
             //var product = new Product {Description = "Teste description", UnitsInStock = 12};
             //var operations = new {Add = "1", Update = "2", Remove = "3"};
 
-            //uow.Setup(x => x.ORM).Returns(() => operations);
+            //uow.Setup(x => x.ORMFactory).Returns(() => operations);
             //repo.Setup(x => x.Save(product)).Returns(() => {
             //                                             uow.Object.Save(product);
             //                                             return product;
