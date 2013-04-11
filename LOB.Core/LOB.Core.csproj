@@ -87,6 +87,7 @@
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\TrialMaker.cs" />
+    <Compile Include="Util\IntExtensions.cs" />
     <Compile Include="Util\ImageUtility.cs" />
     <Compile Include="Util\MThreadObservableCollection.cs" />
     <Compile Include="Util\RegistryUtility.cs" />
