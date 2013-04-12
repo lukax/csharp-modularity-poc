@@ -36,12 +36,12 @@
             </DockPanel>
 
             <TextBox HorizontalAlignment="Left" MinWidth="300" MaxWidth="500" Grid.Column="1"
-                     Text="{Binding Path=Entity.Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
+                     Text="{Binding Path=Entity.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3" MaxLines="10"
                      MaxWidth="800" Grid.Row="2" Grid.Column="1"
                      TextWrapping="Wrap" Height="Auto" AcceptsReturn="True" HorizontalContentAlignment="Left"
-                     Text="{Binding Entity.Description, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
+                     Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
         </Grid>
     </StackPanel>
 </UserControl>

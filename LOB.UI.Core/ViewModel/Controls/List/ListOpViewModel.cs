@@ -20,6 +20,7 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
 using NullGuard;
 
+//
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
@@ -31,9 +32,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         private string _search;
         public override UIOperation Operation { get; set; }
         public string Entity { get; set; }
-        public ObservableCollection<PanoramaGroup> Entitys { get; set; }
+        [AllowNull]public ObservableCollection<PanoramaGroup> Entitys { get; set; }
         public ICommand SaveChangesCommand { get; set; }
-        [AllowNull]
         public string Search {
             get { return _search ?? ""; }
             set {

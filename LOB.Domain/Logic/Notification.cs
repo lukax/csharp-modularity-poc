@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
+
 //using NullGuard;
 
 #endregion
@@ -14,22 +15,21 @@ namespace LOB.Domain.Logic {
         public Notification() { Progress = -1; }
         public Severity Severity { get; set; }
         public string Message { get; set; }
-        //[AllowNull]
         public string Detail { get; set; }
-        //[AllowNull]
         public Command Fix { get; set; }
         /// <summary>
-        /// Value: -2 = Indeterminate progress
-        /// Value: -1 = Hidden
-        /// Value: 0 -> 100 = Normal progress
+        ///     Value: -2 = Indeterminate progress
+        ///     Value: -1 = Hidden
+        ///     Value: 0 -> 100 = Normal progress
         /// </summary>
         public int Progress { get; set; }
         #region Implementation of IEquatable<Notification>
 
         public bool Equals(Notification other) {
             try {
-                return other.Severity.Equals(Severity) && other.Message.Equals(Message) && other.Detail == Detail && other.Fix == (Fix) &&
-                       other.Progress.Equals(Progress); //Comparison with == so dont throw null
+                if(ReferenceEquals(null, other)) return false;
+                return Severity == other.Severity && Message == other.Message && Detail == other.Detail &&
+                       Fix == other.Fix && Progress == other.Progress; //Comparison with == so dont throw null
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

@@ -2,7 +2,7 @@
 
 using System;
 using LOB.Domain.Base;
-using NullGuard;
+//using NullGuard;
 
 #endregion
 
@@ -18,7 +18,7 @@ namespace LOB.UI.Interface.Infrastructure {
         public UIOperationStatus Status { get; set; }
         public bool IsChild { get; set; }
 
-        [AllowNull]
+        //[AllowNull]
         public BaseEntity Entity { get; set; } //TODO: Find a better way for this
         public override string ToString() { return string.Format("{0}_{1}", State.ToString(), Type.ToString()); }
         #region Equality members

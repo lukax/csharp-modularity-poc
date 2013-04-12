@@ -24,9 +24,9 @@ namespace LOB.Domain.SubEntity {
 
         public bool Equals(Address other) {
             try {
-                return base.Equals(other) && other.Status.Equals(Status) && other.Street.Equals(Street) && other.StreetNumber.Equals(StreetNumber) &&
-                       other.StreetComplement.Equals(StreetComplement) && other.ZipCode.Equals(ZipCode) && other.Country.Equals(Country) &&
-                       other.State.Equals(State) && other.District.Equals(District) && other.Country.Equals(Country) && other.IsDefault.Equals(IsDefault);
+                return base.Equals(other) && Status.Equals(other.Status) && Street.Equals(other.Street) && StreetNumber.Equals(other.StreetNumber) &&
+                       StreetComplement.Equals(other.StreetComplement) && ZipCode.Equals(other.ZipCode) && Country.Equals(other.Country) &&
+                       State.Equals(other.State) && District.Equals(other.District) && Country.Equals(other.Country) && IsDefault.Equals(other.IsDefault);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

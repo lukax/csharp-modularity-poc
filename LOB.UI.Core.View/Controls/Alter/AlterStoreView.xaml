@@ -48,6 +48,6 @@
                 <TabItem Header="{x:Static loc:Strings.UI_Header_List_Sale}" />
             </TabControl>
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" Visibility="{Binding ConfCancelToolVisibility}" />
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>
 </UserControl>

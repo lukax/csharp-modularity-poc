@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using LOB.Domain.Logic;
 
 //using NullGuard;
@@ -22,11 +23,13 @@ namespace LOB.Domain.Base {
         public int Code { get; set; }
 
         //[AllowNull]
-        public virtual string this[string columnName] {
-            get {
-                var firstOrDefault = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
-                return firstOrDefault != null ? firstOrDefault.ErrorDescription : null;
-            }
+        public virtual string this[string columnName] { get { return GetVal(columnName); } }
+
+        private string GetVal(string columnName) {
+            if(string.IsNullOrWhiteSpace(columnName)) return null;
+            ValidationResult validation = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName);
+            //Task.Run(() => { validation = GetValidations(columnName).FirstOrDefault(x => x.FieldName == columnName); });
+            return validation != null ? validation.ErrorDescription : null;
         }
 
         //[AllowNull]
@@ -34,12 +37,12 @@ namespace LOB.Domain.Base {
         public void AddValidation(ValidationDelegate func) { _validationFuncs.Add(func); }
         public void RemoveValidation(ValidationDelegate func) { if(ContainsValidation(func)) _validationFuncs.Remove(func); }
         public bool ContainsValidation(ValidationDelegate func) { return _validationFuncs.Contains(func); }
-        public IList<ValidationResult> GetValidations(string propertyName) {
+        public IEnumerable<ValidationResult> GetValidations(string propertyName) {
+            var propName = propertyName;
             return
                 _validationFuncs.Select(validationDel => validationDel(this, propertyName))
                                 .Where(result => result != null)
-                                .Where(result => result.FieldName == propertyName)
-                                .ToList();
+                                .Where(result => result.FieldName == propName);
         }
         #region Implementation of IEquatable<BaseEntity>
 

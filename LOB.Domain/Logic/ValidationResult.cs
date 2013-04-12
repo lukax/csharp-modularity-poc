@@ -21,7 +21,7 @@ namespace LOB.Domain.Logic {
 
         public bool Equals(ValidationResult other) {
             try {
-                return other.FieldName.Equals(FieldName) && other.ErrorDescription.Equals(ErrorDescription);
+                return FieldName == other.FieldName && ErrorDescription == other.ErrorDescription;
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

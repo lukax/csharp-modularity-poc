@@ -19,7 +19,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
-using NullGuard;
 
 #endregion
 
@@ -40,7 +39,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                 Districts = new ObservableCollection<string>(value.GetDistricts());
             }
         }
-        [AllowNull]
         public string Status {
             get { return _status; }
             set {

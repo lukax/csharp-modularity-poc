@@ -20,7 +20,6 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
-using NullGuard;
 
 #endregion
 
@@ -48,9 +47,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ICommand DeleteCommand { get; set; }
         public ICommand FetchCommand { get; set; }
         public ICommand CloseCommand { get; set; }
-        [AllowNull]
         public T Entity { get; set; }
-        [AllowNull]
         public ObservableCollection<T> Entitys { get; set; }
         public string Search { get; set; }
         protected IRepository Repository { get; private set; }

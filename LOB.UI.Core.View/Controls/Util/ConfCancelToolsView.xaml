@@ -11,8 +11,19 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5"
-                Visibility="{Binding Operation.IsChild}">
+    <StackPanel x:Name="Control" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5">
+        <StackPanel.Style>
+            <Style TargetType="StackPanel">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Operation.IsChild}" Value="False">
+                        <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Operation.IsChild}" Value="True">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Style>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="ButtonCancel" Command="{Binding CancelCommand}" IsCancel="True">
                 <DockPanel>
@@ -28,7 +39,8 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png" Height="26" Width="26" />
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png"
+                                                   Height="26" Width="26" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_Add}" />
                                         </DockPanel>
                                     </Setter.Value>
@@ -38,7 +50,8 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/redo_2.png" Height="26" Width="26" />
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/redo_2.png"
+                                                   Height="26" Width="26" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_Update}" />
                                         </DockPanel>
                                     </Setter.Value>
@@ -48,7 +61,8 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/x_2.png" Height="26" Width="26" />
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/x_2.png" Height="26"
+                                                   Width="26" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_Delete}" />
                                         </DockPanel>
                                     </Setter.Value>
@@ -58,7 +72,8 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/download_2.png" Height="26" Width="26" />
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/download_2.png"
+                                                   Height="26" Width="26" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_List}" />
                                         </DockPanel>
                                     </Setter.Value>
