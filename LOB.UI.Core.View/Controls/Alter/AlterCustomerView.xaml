@@ -11,6 +11,7 @@
              xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              xmlns:alter="clr-namespace:LOB.UI.Core.View.Controls.Alter"
+             xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -22,12 +23,12 @@
         <util:EditToolsView x:Name="ViewEditTools" />
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <base:AlterBaseEntityView x:Name="ViewAlterBaseEntity" />
+                <base:CodeView x:Name="ViewCode"/>
 
-                <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
-                <TextBlock Text="{Binding Entity.Status, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                <Label Content="{x:Static loc:Strings.Common_Status}" HorizontalAlignment="Right" />
+                <TextBox Text="{Binding Status, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, Mode=OneWay}"
                            HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
-                           VerticalAlignment="Center" />
+                           IsReadOnly="True" />
 
                 <Label Content="{x:Static loc:Strings.Common_PersonType}" HorizontalAlignment="Right" />
 
@@ -37,31 +38,10 @@
             <StackPanel>
                 <TabControl>
                     <TabItem Header=">"></TabItem>
-                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" IsSelected="True">
-                        <ContentControl>
-                            <ContentControl.Style>
-                                <Style TargetType="ContentControl">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Entity.PersonType}" Value="Natural">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <alter:AlterNaturalPersonView DataContext="{Binding AlterPersonViewModel}"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Entity.PersonType}" Value="Legal">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <alter:AlterLegalPersonView DataContext="{Binding AlterPersonViewModel}"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-
-                        </ContentControl>
+                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" IsSelected="True" >
+                        <ContentControl regions:RegionManager.RegionName="Customer_PersonRegion"/>
                     </TabItem>
+                    
                 </TabControl>
             </StackPanel>
 

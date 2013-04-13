@@ -15,14 +15,14 @@ using NullGuard;
 #endregion
 
 namespace LOB.UI.Core.View.Controllers {
-    public class MainRegionController {
+    public class MainRegionController : IDisposable {
 
         private readonly IServiceLocator _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
         private readonly IFluentNavigator _navigator;
         private readonly IRegionAdapter _regionAdapter;
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
+        //private readonly BackgroundWorker _worker = new BackgroundWorker();
 
         public MainRegionController(IServiceLocator container, IRegionAdapter regionAdapter, IEventAggregator eventAggregator, ILoggerFacade logger,
             IFluentNavigator navigator) {
@@ -35,9 +35,11 @@ namespace LOB.UI.Core.View.Controllers {
             OnLoad();
         }
 
+        private SubscriptionToken _openViewEventSubscription;
+        private SubscriptionToken _closeViewEventSubscription;
         private void OnLoad() {
-            _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
+            _openViewEventSubscription = _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
+            _closeViewEventSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
             //_eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
             //_eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
         }
@@ -80,12 +82,24 @@ namespace LOB.UI.Core.View.Controllers {
         public void MessageHide([AllowNull] string param) {
             _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool}, RegionName.ModalRegion);
 
-            if(param != null) {
-                MessageShow(param, false);
+            if(param != null) MessageShow(param, false);
                 //await Task.Delay(4000);
                 //MessageHide(null);
-            }
+        }
+        #region Implementation of IDisposable
+
+        ~MainRegionController() { Dispose(false); }
+        private void Dispose(bool disposing) {
+
+            if(!disposing) return;
+            _openViewEventSubscription.Dispose();
+            _closeViewEventSubscription.Dispose();
+        }
+        public void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
+        #endregion
     }
 }

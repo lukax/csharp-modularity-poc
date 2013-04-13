@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -12,20 +13,18 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPayCheckView : UserControl, IBaseView {
 
-        public AlterPayCheckView() { InitializeComponent(); }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterPayCheckViewModel; }
-            set {
-                DataContext = value;
-                ViewAlterBaseEntity.DataContext = value;
-                ViewConfCancelTools.DataContext = value;
-            }
+        public AlterPayCheckView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_PayCheck; }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+            ViewAlterBaseEntity.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_Alter_PayCheck; } }
 
         public int Index { get; set; }
 
@@ -33,9 +32,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

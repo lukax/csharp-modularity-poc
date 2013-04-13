@@ -124,6 +124,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CustomerRegionController.cs" />
     <Compile Include="Controls\Alter\AlterSupplierView.xaml.cs">
       <DependentUpon>AlterSupplierView.xaml</DependentUpon>
     </Compile>
@@ -182,8 +183,8 @@
     <Compile Include="Controls\Alter\AlterSaleView.xaml.cs">
       <DependentUpon>AlterSaleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Alter\Base\AlterBaseEntityView.xaml.cs">
-      <DependentUpon>AlterBaseEntityView.xaml</DependentUpon>
+    <Compile Include="Controls\Alter\Base\CodeView.xaml.cs">
+      <DependentUpon>CodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Alter\Base\AlterPersonView.xaml.cs">
       <DependentUpon>AlterPersonView.xaml</DependentUpon>
@@ -384,7 +385,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\Alter\Base\AlterBaseEntityView.xaml">
+    <Page Include="Controls\Alter\Base\CodeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

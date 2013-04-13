@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-
+            <base2:CodeView x:Name="ViewCode"/>
             <Label Grid.Column="1" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_FirstName}" />
             <TextBox
                 Text="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
@@ -58,7 +58,7 @@
                    Content="{x:Static loc:Strings.Common_BirthDate}" />
             <xctk:DateTimePicker
                 Text="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Left" TimeFormat="ShortTime"
                 MinWidth="200" MaxWidth="350" Grid.Row="1" Grid.Column="4" />
 
             <Label Grid.Row="2" HorizontalAlignment="Right" Content="{x:Static loc:Strings.Common_Rg}" Grid.Column="1" />
@@ -71,16 +71,18 @@
                     </ObjectDataProvider>
                 </StackPanel.Resources>
                 <xctk:MaskedTextBox
-                    Text="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                    HorizontalAlignment="Left" MinWidth="120" MaxWidth="250" Mask="000.000.000-00" />
+                    Value="{Binding Entity.Rg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                    Text="" ValueDataType="{x:Type system:String}" Style="{StaticResource MetroTextBox}"
+                    HorizontalAlignment="Left" MinWidth="120" MaxWidth="250" Mask="000.000.000-00" HorizontalContentAlignment="Right" />
                 <ComboBox MinWidth="50" MaxWidth="100" ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
                           SelectedItem="{Binding Entity.RgUf, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
             </StackPanel>
 
             <Label Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" Content="{x:Static loc:Strings.Common_Cpf}" />
             <xctk:MaskedTextBox
-                Text="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Column="4" Grid.Row="2"
+                Value="{Binding Entity.Cpf, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                HorizontalAlignment="Left" MinWidth="100" MaxWidth="350" Grid.Column="4" Grid.Row="2" Text="" ValueDataType="{x:Type system:String}"
+                HorizontalContentAlignment="Right" Style="{StaticResource MetroTextBox}"
                 Mask="00.000.000-0" />
         </Grid>
 

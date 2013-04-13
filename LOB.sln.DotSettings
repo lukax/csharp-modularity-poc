@@ -81,4 +81,12 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=RG/@EntryIndexedValue">RG</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=RGUF/@EntryIndexedValue">RGUF</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=UF/@EntryIndexedValue">UF</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=UI/@EntryIndexedValue">UI</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=UI/@EntryIndexedValue">UI</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/Color/@EntryValue">HotTrack</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/MatchComments/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/MatchIdentifiers/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/MatchStrings/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/Name/@EntryValue">INFO</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/Pattern/@EntryValue">(?&lt;=\W|^)(?&lt;TAG&gt;INFO)(\W|$)(.*)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=89E5CC6378E2B74DA475B60BB7B75328/TodoIconStyle/@EntryValue">Normal</s:String></wpf:ResourceDictionary>

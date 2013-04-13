@@ -40,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
@@ -67,7 +67,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private void ExecuteAlterCategory(object o) {
             var op =
-                new UIOperation().Type(UIOperationType.Address)
+                new UIOperation().Type(UIOperationType.Category)
                                  .State(Entity.Category.Equals(_facade.GenerateEntity().Category) ? UIOperationState.Add : UIOperationState.Update);
             op.Entity = Entity.Category;
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);

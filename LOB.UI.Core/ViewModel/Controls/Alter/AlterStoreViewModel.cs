@@ -39,7 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;

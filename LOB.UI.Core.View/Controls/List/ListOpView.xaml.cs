@@ -26,7 +26,7 @@ namespace LOB.UI.Core.View.Controls.List {
         }
 
         public IBaseViewModel ViewModel {
-            get { return DataContext as IListOpViewModel; }
+            get { return DataContext as IBaseViewModel; }
             set { DataContext = value; }
         }
 

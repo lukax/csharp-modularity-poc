@@ -3,11 +3,9 @@
 using System;
 using System.Windows;
 using LOB.Core.Localization;
-using LOB.UI.Core.Events.Operation;
+using LOB.UI.Core.View.Controllers;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -15,18 +13,20 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterCustomerView : IBaseView {
 
-        [InjectionConstructor]
-        public AlterCustomerView() { InitializeComponent(); }
+        [Dependency]
+        public CustomerRegionController Controller { get; set; }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
-            set {
-                DataContext = value;
-                ViewEditTools.DataContext = value;
-                ViewAlterBaseEntity.DataContext = value;
-                ViewConfCancelTools.DataContext = value;
-            }
+        [InjectionConstructor]
+        public AlterCustomerView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
         }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+        }
+
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
 
         public string Header { get { return Strings.UI_Header_Alter_Customer; } }
 
@@ -41,10 +41,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Dispose() {
             if(ViewModel != null) ViewModel.Dispose();
+            if(Controller != null) Controller.Dispose();
             GC.SuppressFinalize(this);
         }
 
         #endregion
-
     }
 }

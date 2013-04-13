@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -12,20 +13,18 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterContactInfoView : UserControl, IBaseView {
 
-        public AlterContactInfoView() { InitializeComponent(); }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterContactInfoViewModel; }
-            set {
-                DataContext = value;
-                ViewAlterBaseEntity.DataContext = value;
-                ViewConfCancelTools.DataContext = value;
-            }
+        public AlterContactInfoView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_ContactInfo; }
-        }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_Alter_ContactInfo; } }
 
         public int Index { get; set; }
 
@@ -33,9 +32,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

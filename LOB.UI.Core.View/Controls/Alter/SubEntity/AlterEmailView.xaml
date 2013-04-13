@@ -6,14 +6,16 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
-             Height="65" Width="300">
+             Height="300" Width="500">
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
     <StackPanel>
+        <base:CodeView x:Name="ViewCode"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="{x:Static loc:Strings.Common_Email}" />
             <TextBox MinWidth="250"

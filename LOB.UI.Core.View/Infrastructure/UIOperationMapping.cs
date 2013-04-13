@@ -37,7 +37,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                 #endregion   
                 #region Add
                 {new UIOperation {Type = UIOperationType.Address, State = UIOperationState.Add}, typeof(AlterAddressView)},
-                {new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.Add}, typeof(AlterBaseEntityView)},
+                {new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.Add}, typeof(CodeView)},
                 {new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add}, typeof(AlterCategoryView)},
                 {new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add}, typeof(AlterContactInfoView)},
                 {new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.Add}, typeof(AlterCustomerView)},
@@ -55,7 +55,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                 #endregion Add
                 #region State
                 {new UIOperation {Type = UIOperationType.Address, State = UIOperationState.Update}, typeof(AlterAddressView)},
-                {new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.Update}, typeof(AlterBaseEntityView)},
+                {new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.Update}, typeof(CodeView)},
                 {new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Update}, typeof(AlterCategoryView)},
                 {new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Update}, typeof(AlterContactInfoView)},
                 {new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.Update}, typeof(AlterCustomerView)},

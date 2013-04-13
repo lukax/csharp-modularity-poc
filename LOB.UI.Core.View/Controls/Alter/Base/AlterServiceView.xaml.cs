@@ -1,29 +1,25 @@
 #region Usings
 
 using System;
+using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
     public partial class AlterServiceView : IBaseView {
 
-        public AlterServiceView() { InitializeComponent(); }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterServiceViewModel; }
-            set {
-                DataContext = value;
-                ViewAlterBaseEntity.DataContext = value;
-            }
+        public AlterServiceView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
         }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { ViewAlterBaseEntity.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel; }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_Service; }
-        }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_Alter_Service; } }
 
         public int Index { get; set; }
 
@@ -31,9 +27,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

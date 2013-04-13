@@ -9,6 +9,7 @@
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              mc:Ignorable="d"
              Height="110" Width="300">
 
@@ -17,6 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel>
+        <base:CodeView x:Name="ViewCode"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -51,8 +53,8 @@
             </StackPanel>
 
             <TextBox Text="{Binding Entity.Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
-                     Grid.ColumnSpan="4" MinLines="2" TextWrapping="Wrap" />
+                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MaxHeight="100"
+                     Grid.ColumnSpan="4" TextWrapping="Wrap" />
         </Grid>
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>

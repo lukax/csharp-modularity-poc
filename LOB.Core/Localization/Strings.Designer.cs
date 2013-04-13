@@ -502,6 +502,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Active.
+        /// </summary>
+        public static string Common_Active {
+            get {
+                return ResourceManager.GetString("Common_Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Add.
         /// </summary>
         public static string Common_Add {
@@ -862,6 +871,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Deprecated.
+        /// </summary>
+        public static string Common_Deprecated {
+            get {
+                return ResourceManager.GetString("Common_Deprecated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Description.
         /// </summary>
         public static string Common_Description {
@@ -1006,6 +1024,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Inactive.
+        /// </summary>
+        public static string Common_Inactive {
+            get {
+                return ResourceManager.GetString("Common_Inactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Include.
         /// </summary>
         public static string Common_Include {
@@ -1119,6 +1146,15 @@ namespace LOB.Core.Localization {
         public static string Common_NCM {
             get {
                 return ResourceManager.GetString("Common_NCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_New.
+        /// </summary>
+        public static string Common_New {
+            get {
+                return ResourceManager.GetString("Common_New", resourceCulture);
             }
         }
         

@@ -35,7 +35,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <base2:AlterBaseEntityView Width="Auto" Grid.Column="1" x:Name="ViewAlterBaseEntity"
+            <base2:CodeView Width="Auto" Grid.Column="1" x:Name="ViewCode"
                                        HorizontalAlignment="Left" />
             <ContentControl regions:RegionManager.RegionName="AlterBaseEntity" Width="Auto" Height="Auto" />
 

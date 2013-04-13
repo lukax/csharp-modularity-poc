@@ -12,18 +12,18 @@
                 HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Clear}" Focusable="False"
                 Background="Transparent"
                 Grid.Column="5" Padding="0" BorderThickness="0">
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/File48.png" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/file_new2_2.png" />
         </Button>
 
         <Button x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
                 ToolTip="{x:Static loc:Strings.UI_ToolTip_Cancel}"
                 Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0" Padding="0">
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/Cancel48.png" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/file_delete2_2.png" />
         </Button>
         <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                 ToolTip="{Binding ConfirmText}"
                 Command="{Binding SaveChangesCommand}" BorderThickness="0" Padding="0" Grid.Column="4" Grid.Row="3">
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/Accept48.png" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/save3_2.png" />
         </Button>
     </DockPanel>
 </UserControl>

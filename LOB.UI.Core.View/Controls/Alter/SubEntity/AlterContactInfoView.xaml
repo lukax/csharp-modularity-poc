@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <base2:AlterBaseEntityView Grid.Row="0" x:Name="ViewAlterBaseEntity" />
+            <base2:CodeView Grid.Row="0" x:Name="ViewCode" />
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                 <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" MinWidth="200" />
@@ -83,7 +83,7 @@
                      HorizontalAlignment="Left" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Left"
-                     MinWidth="300" MaxWidth="400" MinLines="2" Grid.Row="5" Grid.Column="1"
+                     MinWidth="300" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" MaxHeight="50" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                      Text="{Binding Entity.PS, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
 
         </Grid>

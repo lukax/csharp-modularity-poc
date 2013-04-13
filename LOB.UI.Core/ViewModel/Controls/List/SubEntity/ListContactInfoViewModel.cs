@@ -34,7 +34,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        public override void InitializeServices() { Operation = _operation; }
+        public override void InitializeServices() { if (Equals(Operation, default(UIOperation))) Operation = _operation; }
 
         public override void Refresh() { Search = ""; }
 

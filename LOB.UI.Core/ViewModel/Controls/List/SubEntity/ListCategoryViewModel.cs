@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void InitializeServices() {
             base.InitializeServices();
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
         }
 
         public override void Refresh() { Search = ""; }

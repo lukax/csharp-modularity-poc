@@ -1,33 +1,28 @@
 #region Usings
 
 using System;
+using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
     public partial class AlterPersonView : IBaseView {
 
-        public AlterPersonView() { InitializeComponent(); }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterPersonViewModel; }
-            set {
-                DataContext = value;
-                var localViewModel = value as IAlterPersonViewModel;
-                if(localViewModel != null) {
-                    ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
-                    ViewAlterContactInfo.DataContext = localViewModel.AlterContactInfoViewModel;
-                }
-            }
+        public AlterPersonView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+            ViewAlterAddress.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewAlterContactInfo.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_Person; }
-        }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_Alter_Person; } }
 
         public int Index { get; set; }
 
@@ -35,9 +30,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

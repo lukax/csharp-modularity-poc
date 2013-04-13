@@ -5,7 +5,6 @@ using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.Operation;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
@@ -29,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
             EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
         }

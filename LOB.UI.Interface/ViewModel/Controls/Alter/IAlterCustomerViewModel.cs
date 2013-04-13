@@ -6,6 +6,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Interface.ViewModel.Controls.Alter {
     public interface IAlterCustomerViewModel : IAlterBaseEntityViewModel {
-        IAlterPersonViewModel AlterPersonViewModel { get; }
+        //IAlterPersonViewModel AlterPersonViewModel { get; }
     }
 }

@@ -15,6 +15,7 @@
     </UserControl.Resources>
 
     <StackPanel>
+        <base:CodeView x:Name="ViewCode"/>
         <StackPanel>
             
         </StackPanel>

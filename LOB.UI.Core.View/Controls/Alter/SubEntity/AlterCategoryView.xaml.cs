@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -11,20 +12,18 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterCategoryView : IBaseView {
 
-        public AlterCategoryView() { InitializeComponent(); }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterCategoryViewModel; }
-            set {
-                DataContext = value;
-                ViewAlterService.DataContext = value;
-                ViewConfCancelTools.DataContext = value;
-            }
+        public AlterCategoryView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+            ViewAlterService.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_Category; }
-        }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_Alter_Category; } }
 
         public int Index { get; set; }
 
@@ -32,9 +31,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

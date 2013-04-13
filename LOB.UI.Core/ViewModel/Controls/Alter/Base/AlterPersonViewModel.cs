@@ -6,7 +6,6 @@ using LOB.Business.Interface.Logic.Base;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Interface.Infrastructure;
@@ -56,7 +55,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add};
         #region Overrides of BaseViewModel
 
-        public override void InitializeServices() { }
+        public override void InitializeServices() { if (Equals(Operation, default(UIOperation))) Operation = _operation; }
         public override void Refresh() { }
 
         #endregion

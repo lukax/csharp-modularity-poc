@@ -25,7 +25,7 @@
         <DockPanel Grid.Row="0">
             <controls:Tile x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                            Command="{Binding SaveChangesCommand}">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/Arrow_Right_Thin.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/arrow-east.png" />
             </controls:Tile>
             <TextBox MinWidth="200" Width="Auto" Height="Auto"
                      Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"

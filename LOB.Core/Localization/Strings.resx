@@ -1017,4 +1017,16 @@
   <data name="Common_NaturalPerson" xml:space="preserve">
     <value>@Common_NaturalPerson</value>
   </data>
+  <data name="Common_Active" xml:space="preserve">
+    <value>@Common_Active</value>
+  </data>
+  <data name="Common_Deprecated" xml:space="preserve">
+    <value>@Common_Deprecated</value>
+  </data>
+  <data name="Common_Inactive" xml:space="preserve">
+    <value>@Common_Inactive</value>
+  </data>
+  <data name="Common_New" xml:space="preserve">
+    <value>@Common_New</value>
+  </data>
 </root>

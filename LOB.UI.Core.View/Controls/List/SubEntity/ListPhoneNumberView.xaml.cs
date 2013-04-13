@@ -1,26 +1,25 @@
 ﻿#region Usings
 
 using System;
+using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     public partial class ListPhoneNumberView : IBaseView {
 
-        public ListPhoneNumberView() { InitializeComponent(); }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IListPhoneNumberViewModel; }
-            set { DataContext = value; }
+        public ListPhoneNumberView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
         }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { }
 
-        public string Header {
-            get { return Strings.UI_Header_List_PhoneNumber; }
-        }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_List_PhoneNumber; } }
 
         public int Index { get; set; }
 
@@ -28,9 +27,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

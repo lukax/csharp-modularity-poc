@@ -532,7 +532,7 @@
     <value>Novo Funcionário</value>
   </data>
   <data name="UI_Header_Alter_LegalPerson" xml:space="preserve">
-    <value>Nova Pessoa Legal</value>
+    <value>Nova Pessoa Jurídica</value>
   </data>
   <data name="UI_Header_Alter_NaturalPerson" xml:space="preserve">
     <value>Nova Pessoa Física</value>
@@ -1019,5 +1019,17 @@
   </data>
   <data name="Common_NaturalPerson" xml:space="preserve">
     <value>Pessoa Física</value>
+  </data>
+  <data name="Common_Active" xml:space="preserve">
+    <value>Ativo</value>
+  </data>
+  <data name="Common_Deprecated" xml:space="preserve">
+    <value>Desatualizado</value>
+  </data>
+  <data name="Common_Inactive" xml:space="preserve">
+    <value>Inativo</value>
+  </data>
+  <data name="Common_New" xml:space="preserve">
+    <value>Novo</value>
   </data>
 </root>

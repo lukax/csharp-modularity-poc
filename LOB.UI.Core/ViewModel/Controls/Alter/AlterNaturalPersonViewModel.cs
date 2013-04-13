@@ -24,7 +24,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         [InjectionConstructor]
         public AlterNaturalPersonViewModel(NaturalPerson entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(entity, repository, eventAggregator, logger) {
-                Operation = _operation;
         }
 
         public string BirthDate {
@@ -38,7 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
         }
 

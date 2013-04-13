@@ -18,7 +18,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public override void InitializeServices() {
             base.InitializeServices();
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
         }
 
         public new Expression<Func<Service, bool>> SearchCriteria {

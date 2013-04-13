@@ -1,10 +1,7 @@
 ﻿#region Usings
 
-using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -18,16 +15,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {
 
         private UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
-        public override UIOperation Operation {
-            get { return _operation; }
-            set { _operation = value; }
-        }
+        public override UIOperation Operation { get { return _operation; } set { _operation = value; } }
         public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
-        }
+            : base(entity, repository, eventAggregator, logger) { }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
         }
 

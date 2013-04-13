@@ -20,6 +20,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
             var model = dependencyPropertyChangedEventArgs.NewValue as IAlterNaturalPersonViewModel;
             if(model != null) {
+                ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
                 ViewAlterPerson.DataContext = dependencyPropertyChangedEventArgs.NewValue;
                 ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
                 ViewAlterPerson.ViewAlterAddress.DataContext = model.AlterAddressViewModel;
@@ -27,7 +28,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
             }
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IAlterNaturalPersonViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
 
         public string Header { get { return Strings.UI_Header_Alter_NaturalPerson; } }
 

@@ -36,7 +36,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <base:AlterBaseEntityView Grid.Row="0" />
+                <base:CodeView Grid.Row="0" x:Name="ViewCode"/>
 
                 <Label Content="{x:Static loc:Strings.Common_State}" HorizontalAlignment="Right" Grid.Row="0"
                        Grid.Column="1" />
@@ -79,7 +79,7 @@
                     </TabItem>
                 </TabControl>
 
-                <TextBox Text="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Stretch" MinLines="2"
+                <TextBox Text="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                          metrocontrols:TextboxHelper.Watermark="PS" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" />
 
             </Grid>

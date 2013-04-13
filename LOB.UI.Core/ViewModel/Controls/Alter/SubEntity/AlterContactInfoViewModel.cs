@@ -18,7 +18,9 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
+
 //
+
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
@@ -44,17 +46,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
 
-     //   [AllowNull]
-       public Email Email { get; set; }
-    //    [AllowNull]
+        public Email Email { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
-     //   [AllowNull]
         public ICollectionView Emails { get; set; }
-     //   [AllowNull]
         public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
             InitBackgroundWorker();
         }

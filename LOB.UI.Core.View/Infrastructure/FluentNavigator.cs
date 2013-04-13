@@ -49,6 +49,8 @@ namespace LOB.UI.Core.View.Infrastructure {
         public IFluentNavigator ResolveViewModel(UIOperation param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve(UIOperationMapping.ViewModels[param]) as IBaseViewModel;
+            dynamic resolvedd = resolved;
+            if(resolvedd != null) resolvedd.Operation = param;
             if(param.State == UIOperationState.Update) resolved = _container.Resolve(UIOperationMapping.ViewModels[param], new ParameterOverride("entity", param.Entity)) as IBaseViewModel;
             if(resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);

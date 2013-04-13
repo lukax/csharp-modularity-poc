@@ -23,7 +23,10 @@ namespace LOB.UI.Interface.Infrastructure {
         public override string ToString() { return string.Format("{0}_{1}", State.ToString(), Type.ToString()); }
         #region Equality members
 
-        public bool Equals(UIOperation other) { return (Type == other.Type && State == other.State); }
+        public bool Equals(UIOperation other) {
+            if(ReferenceEquals(other, null)) return false;
+            return (Type == other.Type && State == other.State);
+        }
 
         public override int GetHashCode() {
             unchecked {

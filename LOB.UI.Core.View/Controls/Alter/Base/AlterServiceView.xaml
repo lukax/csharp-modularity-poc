@@ -31,16 +31,16 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel>
-                <base:AlterBaseEntityView HorizontalAlignment="Left" x:Name="ViewAlterBaseEntity" />
+                <base:CodeView HorizontalAlignment="Left" x:Name="ViewAlterBaseEntity" />
                 <Label Content="{x:Static loc:Strings.Common_Category}" HorizontalAlignment="Right" Grid.Column="1" />
             </DockPanel>
 
             <TextBox HorizontalAlignment="Left" MinWidth="300" MaxWidth="500" Grid.Column="1"
                      Text="{Binding Path=Entity.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
 
-            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" MinLines="3" MaxLines="10"
-                     MaxWidth="800" Grid.Row="2" Grid.Column="1"
-                     TextWrapping="Wrap" Height="Auto" AcceptsReturn="True" HorizontalContentAlignment="Left"
+            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}"
+                     Grid.Row="2" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap" Height="Auto" AcceptsReturn="True" HorizontalContentAlignment="Stretch" MaxHeight="100"
                      Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
         </Grid>
     </StackPanel>

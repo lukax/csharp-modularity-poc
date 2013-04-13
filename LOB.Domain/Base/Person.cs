@@ -34,6 +34,7 @@ namespace LOB.Domain.Base {
 
     [Serializable]
     public enum PersonType {
+        Unknown =0,
         Natural,
         Legal
 

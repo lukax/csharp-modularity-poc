@@ -21,7 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         #region Overrides of BaseViewModel
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
         }
 

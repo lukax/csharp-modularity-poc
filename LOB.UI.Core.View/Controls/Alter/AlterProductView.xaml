@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <base:AlterBaseEntityView Grid.Row="1" x:Name="ViewAlterBaseEntity" />
+                <base:CodeView Grid.Row="1" x:Name="ViewCode" />
 
                 <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}"
                        HorizontalAlignment="Right" />
@@ -109,22 +109,22 @@
 
                 <Label Grid.Row="5" Grid.Column="1" Content="{x:Static loc:Strings.Common_CodBarras}" />
                 <TextBox Grid.Row="5" Grid.Column="2"
-                         Text="{Binding Entity.CodBarras, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+                         Text="{Binding Entity.CodBarras, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label Grid.Row="5" Grid.Column="3" Content="{x:Static loc:Strings.Common_NCM}"
                        HorizontalAlignment="Right" />
                 <TextBox Grid.Row="5" Grid.Column="4"
-                         Text="{Binding Entity.CodNCM, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+                         Text="{Binding Entity.CodNCM, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label Grid.Row="6" Grid.Column="3" Content="{x:Static loc:Strings.Common_CFOP}"
                        HorizontalAlignment="Right" />
                 <TextBox Grid.Row="6" Grid.Column="4"
-                         Text="{Binding Entity.CFOP, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+                         Text="{Binding Entity.CFOP, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"
-                         VerticalScrollBarVisibility="Auto"
-                         HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" MaxWidth="400"
-                         Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                         VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True"
+                         HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4"  HorizontalScrollBarVisibility="Auto"
+                         Text="{Binding Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" MaxHeight="100"
                          MinWidth="360" MinLines="2" />
 
             </Grid>

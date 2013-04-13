@@ -25,7 +25,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             : base(entity, repository, eventAggregator, logger) { _phoneNumberFacade = phoneNumberFacade; }
 
         public override void InitializeServices() {
-            Operation = _operation;
+            if (Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
         }
 
