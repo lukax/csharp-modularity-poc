@@ -13,6 +13,7 @@ using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Core.Events;
+using LOB.UI.Core.Events.Operation;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
@@ -71,7 +72,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Search = "";
         }
 
-        private void Include(object o) { EventAggregator.GetEvent<IncludeEvent>().Publish(Entity); }
+        private void Include(object o) { EventAggregator.GetEvent<IncludeEntityEvent>().Publish(Entity); }
 
         protected virtual void SearchExecute(object obj) { throw new NotImplementedException(); }
 

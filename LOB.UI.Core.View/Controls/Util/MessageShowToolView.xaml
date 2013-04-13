@@ -12,7 +12,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <Border Background="{DynamicResource AccentBrush}" Opacity="0.6" x:Name="BorderOuter" />
+        <!--<Border Background="{DynamicResource AccentBrush}" Opacity="0.6" x:Name="BorderOuter" />-->
         <Border Width="Auto" x:Name="BorderInner"
                 Height="Auto"
                 HorizontalAlignment="Center"

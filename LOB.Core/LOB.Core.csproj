@@ -84,6 +84,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Licensing\ProductLicense.cs" />
+    <Compile Include="Localization\StringsExtensions.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\TrialMaker.cs" />

@@ -70,7 +70,7 @@ namespace LOB.UI.Core.View {
                                                                       if(type.Type == UIOperationType.Main) Close();
                                                                   });
             _eventAggregator.GetEvent<NotificationEvent>()
-                            .Publish(new Notification {Message = Strings.App_License_Information, Severity = Severity.Warning});
+                            .Publish(new Notification {Message = Strings.App_License_Information, AttentionState = AttentionState.Warning});
         }
 
         public void Refresh() {

@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
-      <Project>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</Project>
+      <Project>{79fb165f-3816-4a5f-b5a1-b5a64bed0218}</Project>
       <Name>LOB.Core</Name>
     </ProjectReference>
   </ItemGroup>

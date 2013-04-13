@@ -34,16 +34,16 @@
                                             <Rectangle.Style>
                                                 <Style TargetType="Rectangle">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Ok">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
                                                             <Setter Property="Visibility" Value="Visible" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Info">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Warning">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Error">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -57,16 +57,16 @@
                                             <Rectangle.Style>
                                                 <Style TargetType="Rectangle">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Ok">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Info">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
                                                             <Setter Property="Visibility" Value="Visible" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Warning">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Error">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -80,16 +80,16 @@
                                             <Rectangle.Style>
                                                 <Style TargetType="Rectangle">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Ok">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Info">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Warning">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
                                                             <Setter Property="Visibility" Value="Visible" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Error">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -103,16 +103,16 @@
                                             <Rectangle.Style>
                                                 <Style TargetType="Rectangle">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Ok">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Info">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Warning">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Severity}" Value="Error">
+                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
                                                             <Setter Property="Visibility" Value="Visible" />
                                                         </DataTrigger>
                                                     </Style.Triggers>

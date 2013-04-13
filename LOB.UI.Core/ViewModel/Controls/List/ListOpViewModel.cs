@@ -18,9 +18,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
-using NullGuard;
 
-//
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
@@ -32,7 +30,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         private string _search;
         public override UIOperation Operation { get; set; }
         public string Entity { get; set; }
-        [AllowNull]public ObservableCollection<PanoramaGroup> Entitys { get; set; }
+        //[AllowNull]
+        public ObservableCollection<PanoramaGroup> Entitys { get; set; }
         public ICommand SaveChangesCommand { get; set; }
         public string Search {
             get { return _search ?? ""; }
@@ -103,13 +102,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                     string.Format("{0} {1}", Strings.Common_Initializing,
                                   _operationDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key),
                 Progress = -2,
-                Severity = Severity.Info
+                AttentionState = AttentionState.Info
             };
             _eventAggregator.GetEvent<NotificationEvent>().Publish(not);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedUIOperation);
             var stringy = string.Format("{0} {1}", Strings.Common_Initialized,
                                         _operationDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key);
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(not.Message(stringy).Progress(-1).Severity(Severity.Ok));
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(not.Message(stringy).Progress(-1).Severity(AttentionState.Ok));
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation);
         }
 

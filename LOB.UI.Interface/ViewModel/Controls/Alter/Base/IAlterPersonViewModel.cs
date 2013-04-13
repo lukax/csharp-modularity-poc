@@ -7,8 +7,8 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 namespace LOB.UI.Interface.ViewModel.Controls.Alter.Base {
     public interface IAlterPersonViewModel : IAlterBaseEntityViewModel {
 
-        IAlterAddressViewModel AlterAddressViewModel { get; set; }
-        IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+        IAlterAddressViewModel AlterAddressViewModel { get; }
+        IAlterContactInfoViewModel AlterContactInfoViewModel { get; }
 
     }
 }

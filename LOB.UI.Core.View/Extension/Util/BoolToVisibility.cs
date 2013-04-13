@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LOB.UI.Core.View.Infrastructure
+﻿namespace LOB.UI.Core.View.Extension.Util
 {
     public class BoolToVisibility
     {

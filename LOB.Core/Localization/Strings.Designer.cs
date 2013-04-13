@@ -1069,6 +1069,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_LegalPerson.
+        /// </summary>
+        public static string Common_LegalPerson {
+            get {
+                return ResourceManager.GetString("Common_LegalPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_License.
         /// </summary>
         public static string Common_License {
@@ -1092,6 +1101,15 @@ namespace LOB.Core.Localization {
         public static string Common_Name {
             get {
                 return ResourceManager.GetString("Common_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_NaturalPerson.
+        /// </summary>
+        public static string Common_NaturalPerson {
+            get {
+                return ResourceManager.GetString("Common_NaturalPerson", resourceCulture);
             }
         }
         

@@ -2,7 +2,6 @@
 
 using System;
 using System.Diagnostics;
-using LOB.Core.Localization;
 using LOB.Domain.Base;
 
 //using NullGuard;
@@ -13,7 +12,7 @@ namespace LOB.Domain.Logic {
     public sealed class Notification : BaseNotifyChange, IEquatable<Notification> {
 
         public Notification() { Progress = -1; }
-        public Severity Severity { get; set; }
+        public AttentionState AttentionState { get; set; }
         public string Message { get; set; }
         public string Detail { get; set; }
         public Command Fix { get; set; }
@@ -28,7 +27,7 @@ namespace LOB.Domain.Logic {
         public bool Equals(Notification other) {
             try {
                 if(ReferenceEquals(null, other)) return false;
-                return Severity == other.Severity && Message == other.Message && Detail == other.Detail &&
+                return AttentionState == other.AttentionState && Message == other.Message && Detail == other.Detail &&
                        Fix == other.Fix && Progress == other.Progress; //Comparison with == so dont throw null
             } catch(NullReferenceException ex) {
 #if DEBUG
@@ -40,8 +39,8 @@ namespace LOB.Domain.Logic {
 
         #endregion
     }
-
-    public enum Severity {
+    
+    public enum AttentionState {
 
         Ok,
         Info,
@@ -52,10 +51,10 @@ namespace LOB.Domain.Logic {
 
     public static class NotificationExtensions {
 
-        public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
+       // public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
 
-        public static Notification Severity(this Notification notification, Severity severity) {
-            notification.Severity = severity;
+        public static Notification Severity(this Notification notification, AttentionState attentionState) {
+            notification.AttentionState = attentionState;
             return notification;
         }
         public static Notification Message(this Notification notification, string message) {

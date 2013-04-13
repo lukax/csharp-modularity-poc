@@ -66,7 +66,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Worker.RunWorkerAsync();
         }
         private void SaveChanges(object sender, DoWorkEventArgs e) {
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Progress(-2).Severity(Severity.Info));
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Progress(-2).Severity(AttentionState.Info));
             using(Repository.Uow.BeginTransaction())
                 if(!Worker.CancellationPending) {
                     NotificationEvent.Publish(Notification.Progress(50));
@@ -76,7 +76,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     NotificationEvent.Publish(Notification.Progress(90));
                 }
             Operation.State(UIOperationState.Update);
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(Severity.Ok));
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
         }
 
         protected virtual bool CanQuickSearch(object obj) { return Operation.State != UIOperationState.QuickSearch; }

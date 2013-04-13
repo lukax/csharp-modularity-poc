@@ -1,7 +1,5 @@
 ﻿#region Usings
 
-using System;
-using System.ComponentModel;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.Events.View;
@@ -22,7 +20,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly AlterPersonViewModel _alterPersonViewModel;
 // ReSharper restore NotAccessedField.Local
         private readonly IEventAggregator _eventAggregator;
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.NaturalPerson, State = UIOperationState.Add};
 
         public IAlterAddressViewModel AlterAddressViewModel { get; set; }
         public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
@@ -31,14 +29,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public AlterLegalPersonViewModel(LegalPerson entity, AlterPersonViewModel alterPersonViewModel, IRepository repository,
             IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(entity, repository, eventAggregator, logger) {
+            Operation = _operation;
             _alterPersonViewModel = alterPersonViewModel;
             _eventAggregator = eventAggregator;
         }
 
-        public override void InitializeServices() {
-            Operation = _operation;
-            ClearEntity(null);
-        }
+        public override void InitializeServices() { ClearEntity(null); }
 
         public override void Refresh() { ClearEntity(null); }
 

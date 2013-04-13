@@ -29,9 +29,7 @@ namespace LOB.UI.Core.View.Infrastructure {
         /// <summary>
         ///     Initialize with clean Fields
         /// </summary>
-        public IFluentNavigator Init {
-            get { return new FluentNavigator(_container, _regionAdapter); }
-        }
+        public IFluentNavigator Init { get { return new FluentNavigator(_container, _regionAdapter); } }
 
         public event OnOpenViewEventHandler OnOpenView;
 
@@ -81,7 +79,7 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator SetViewModel(IBaseViewModel viewModel) {
             _resolvedViewModel = viewModel;
-            _resolvedView.ViewModel = viewModel;
+            if(_resolvedView != null) _resolvedView.ViewModel = viewModel;
             return this;
         }
 

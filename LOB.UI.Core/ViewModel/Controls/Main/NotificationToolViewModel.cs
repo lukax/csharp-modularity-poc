@@ -16,7 +16,6 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
-using NullGuard;
 
 #endregion
 
@@ -24,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
 
         private readonly BackgroundWorker _worker = new BackgroundWorker();
-        [AllowNull]
+        //[AllowNull]
         public Notification Entity { get; set; }
         public MThreadObservableCollection<Notification> Entitys { get; set; }
         private readonly IEventAggregator _eventAggregator;
@@ -76,7 +75,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             do {
                 Thread.Sleep(10000);
                 var currentStack = Entitys.ToList(); //Thread Safe
-                foreach(var notification in currentStack) if(notification.Severity == Severity.Ok) Entitys.Remove(notification);
+                foreach(var notification in currentStack) if(notification.AttentionState == AttentionState.Ok) Entitys.Remove(notification);
             } while(!_worker.CancellationPending);
         }
 

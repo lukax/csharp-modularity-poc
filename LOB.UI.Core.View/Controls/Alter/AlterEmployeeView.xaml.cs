@@ -3,6 +3,7 @@
 using System;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events;
+using LOB.UI.Core.Events.Operation;
 using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;

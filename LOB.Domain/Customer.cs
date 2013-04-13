@@ -35,14 +35,6 @@ namespace LOB.Domain {
     }
 
     [Serializable]
-    public enum PersonType {
-
-        Natural,
-        Legal
-
-    }
-
-    [Serializable]
     public enum CustomerStatus {
 
         New,

@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -11,24 +12,24 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterNaturalPersonView : IBaseView {
 
-        public AlterNaturalPersonView() { InitializeComponent(); }
+        public AlterNaturalPersonView() {
+            InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IAlterNaturalPersonViewModel; }
-            set {
-                DataContext = value;
-                var localViewModel = value as IAlterNaturalPersonViewModel;
-                if(localViewModel != null) {
-                    ViewAlterPerson.DataContext = value;
-                    ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
-                    ViewAlterPerson.ViewAlterContactInfo.DataContext = localViewModel.AlterContactInfoViewModel;
-                }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
+            var model = dependencyPropertyChangedEventArgs.NewValue as IAlterNaturalPersonViewModel;
+            if(model != null) {
+                ViewAlterPerson.DataContext = dependencyPropertyChangedEventArgs.NewValue;
+                ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
+                ViewAlterPerson.ViewAlterAddress.DataContext = model.AlterAddressViewModel;
+                ViewAlterPerson.ViewAlterAddress.DataContext = model.AlterContactInfoViewModel;
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_NaturalPerson; }
-        }
+        public IBaseViewModel ViewModel { get { return DataContext as IAlterNaturalPersonViewModel; } set { DataContext = value; } }
+
+        public string Header { get { return Strings.UI_Header_Alter_NaturalPerson; } }
 
         public int Index { get; set; }
 
@@ -36,9 +37,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
-            get { return ViewModel.Operation; }
-        }
+        public UIOperation Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

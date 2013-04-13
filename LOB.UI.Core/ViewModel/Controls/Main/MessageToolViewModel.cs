@@ -2,7 +2,6 @@
 
 using System;
 using System.Windows.Input;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
@@ -28,15 +27,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private ICommand _closeCommand;
 
-        public ICommand CloseCommand {
-            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
-
-            set { _closeCommand = value; }
-        }
+        public ICommand CloseCommand { get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); } set { _closeCommand = value; } }
 
         public bool CanClose { get; set; }
 
-        public void CloseExecute() { _eventAggregator.GetEvent<MessageHideEvent>().Publish(null); }
+        public void CloseExecute() {
+            //_eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
+        }
 
         #endregion CloseExecute Command
         [InjectionConstructor]
@@ -48,10 +45,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool, State = UIOperationState.Internal};
 
-        public override UIOperation Operation {
-            get { return _operation; }
-            set { _operation = value; }
-        }
+        public override UIOperation Operation { get { return _operation; } set { _operation = value; } }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {
             Message = message;

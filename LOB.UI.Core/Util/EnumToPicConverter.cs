@@ -13,12 +13,12 @@ namespace LOB.UI.Core.Util {
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            switch((Severity)value) {
-                case Severity.Warning:
+            switch((AttentionState)value) {
+                case AttentionState.Warning:
                     return new StaticResourceExtension();
-                case Severity.Info:
+                case AttentionState.Info:
                     return new Uri("");
-                case Severity.Error:
+                case AttentionState.Error:
                     return new Uri("");
                 default:
                     throw new NotImplementedException();

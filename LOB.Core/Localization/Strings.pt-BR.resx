@@ -1014,4 +1014,10 @@
   <data name="Notification_Dao_Transaction_NotInitialized" xml:space="preserve">
     <value>Transação do banco de dados não inicializada</value>
   </data>
+  <data name="Common_LegalPerson" xml:space="preserve">
+    <value>Pessoa Jurídica</value>
+  </data>
+  <data name="Common_NaturalPerson" xml:space="preserve">
+    <value>Pessoa Física</value>
+  </data>
 </root>
