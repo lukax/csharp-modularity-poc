@@ -61,7 +61,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
             Worker.DoWork += UpdateUFList;
             Worker.RunWorkerAsync();
@@ -72,7 +72,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var entity = obj as Address;
             if(entity == null) return;
             Entity = entity;
-            Operation.State = UIOperationState.Update;
+            Operation.State = ViewState.Update;
         }
 
         private void UpdateUFList(object sender, DoWorkEventArgs doWorkEventArgs) { UFs = new ObservableCollection<UF>(Enum.GetValues(typeof(UF)).Cast<UF>()); }
@@ -83,14 +83,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == UIOperationState.Add) return _addressFacade.CanAdd(out results);
-            if(Operation.State == UIOperationState.Update) return _addressFacade.CanUpdate(out results);
+            if(Operation.State == ViewState.Add) return _addressFacade.CanAdd(out results);
+            if(Operation.State == ViewState.Update) return _addressFacade.CanUpdate(out results);
             return false;
         }
 
         protected override bool CanCancel(object arg) {
-            if(Operation.State == UIOperationState.Add) return true;
-            if(Operation.State == UIOperationState.Update) return true;
+            if(Operation.State == ViewState.Add) return true;
+            if(Operation.State == ViewState.Update) return true;
             return false;
         }
 
@@ -101,7 +101,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _addressFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Address, State = ViewState.Add};
 
     }
 }

@@ -20,7 +20,7 @@ namespace LOB.UI.Core.View.Controls.Main {
             ViewModel = viewModel;
         }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         public IBaseViewModel ViewModel {
@@ -38,8 +38,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() { }
 
-        public UIOperationType UIOperationType {
-            get { return UIOperationType.ColumnTool; }
+        public ViewType ViewType {
+            get { return ViewType.ColumnTool; }
         }
         #region Implementation of IDisposable
 

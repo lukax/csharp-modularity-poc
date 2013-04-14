@@ -22,9 +22,9 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
 
-        private UIOperationState _previousState;
+        private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
-        private UIOperation _operation;
+        private ViewID _operation;
         public T Entity { get; set; }
         public int Index { get; set; }
         public ICommand SaveChangesCommand { get; set; }
@@ -54,8 +54,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         protected virtual bool CanCancel(object arg) {
-            if(Operation.State == UIOperationState.Add) return true;
-            if(Operation.State == UIOperationState.Update) return true;
+            if(Operation.State == ViewState.Add) return true;
+            if(Operation.State == ViewState.Update) return true;
             return false;
         }
         protected abstract void Cancel(object arg);
@@ -75,31 +75,31 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     Repository.Uow.CommitTransaction();
                     NotificationEvent.Publish(Notification.Progress(90));
                 }
-            Operation.State(UIOperationState.Update);
+            Operation.State(ViewState.Update);
             NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
         }
 
         protected virtual bool CanQuickSearch(object obj) {
             if(Operation == null) return false;
-            return Operation.State != UIOperationState.QuickSearch;
+            return Operation.State != ViewState.QuickSearch;
         }
         protected virtual void QuickSearch(object arg) {
-            Operation.State(UIOperationState.QuickSearch);
+            Operation.State(ViewState.QuickSearch);
             EventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
             _currentSubscription = EventAggregator.GetEvent<CloseViewEvent>().Subscribe(RestoreUIState);
         }
 
-        private void RestoreUIState(UIOperation obj) {
-            if(Operation.State == UIOperationState.QuickSearch) {
+        private void RestoreUIState(ViewID obj) {
+            if(Operation.State == ViewState.QuickSearch) {
                 Operation.State(_previousState);
                 _currentSubscription.Dispose();
             }
         }
 
-        protected virtual bool CanClearEntity(object obj) { return Operation.State == UIOperationState.Add; }
+        protected virtual bool CanClearEntity(object obj) { return Operation.State == ViewState.Add; }
         protected abstract void ClearEntity(object arg);
 
-        public override UIOperation Operation {
+        public override ViewID Operation {
             get { return _operation; }
             set {
                 _operation = value;
@@ -109,7 +109,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
         private void UIOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
             if(propertyChangedEventArgs.PropertyName == "State") {
-                if(Operation.State == UIOperationState.QuickSearch) return;
+                if(Operation.State == ViewState.QuickSearch) return;
                 _previousState = Operation.State;
             }
         }

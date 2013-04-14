@@ -47,14 +47,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.ColumnTool, State = UIOperationState.Internal};
-        public override UIOperation Operation {
+        private ViewID _operation = new ViewID {Type = ViewType.ColumnTool, State = ViewState.Internal};
+        public override ViewID Operation {
             get { return _operation; }
             set { _operation = value; }
         }
 
         private void ShowOperations(object arg) {
-            var op = new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List};
+            var op = new ViewID {Type = ViewType.Op, State = ViewState.List};
             if(_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
             else _navigator.Init.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
@@ -66,9 +66,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private void ShowNotification(object o) {
             var vm = _unityContainer.Resolve<INotificationToolViewModel>();
             vm.IsVisible = !vm.IsVisible;
-            //var op = new UIOperation {
-            //    Type = UIOperationType.NotificationTool,
-            //    State = UIOperationState.Tool
+            //var op = new ViewID {
+            //    Type = ViewType.NotificationTool,
+            //    State = ViewState.Tool
             //};
             //if(_regionAdapter.ContainsView(op, RegionName.BottomRegion)) _regionAdapter.RemoveView(op, RegionName.BottomRegion);
             //else
@@ -77,7 +77,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             //              .AddToRegion(RegionName.BottomRegion);
         }
 
-        private void Logout(object o) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(new UIOperation {Type = UIOperationType.Main}); }
+        private void Logout(object o) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(new ViewID {Type = ViewType.Main}); }
 
         private void InitWorker() {
             _worker.DoWork += UpdateStatus;
@@ -95,7 +95,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
         #region Implementation of IDisposable
 
-        //~ColumnToolViewModel() { Disposing(false); }
+        //~ColumnToolIuiComponentModel() { Disposing(false); }
 
         public override void Dispose() {
             Disposing(true);

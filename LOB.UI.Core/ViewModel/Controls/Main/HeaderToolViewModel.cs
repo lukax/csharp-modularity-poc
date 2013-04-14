@@ -14,8 +14,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.HeaderTool, State = UIOperationState.Internal};
-        public override UIOperation Operation {
+        private ViewID _operation = new ViewID {Type = ViewType.HeaderTool, State = ViewState.Internal};
+        public override ViewID Operation {
             get { return _operation; }
             set { _operation = value; }
         }

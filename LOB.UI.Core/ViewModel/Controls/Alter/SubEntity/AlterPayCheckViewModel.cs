@@ -23,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             : base(entity, repository, eventAggregator, logger) { _payCheckFacade = payCheckFacade; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
         }
 
@@ -31,8 +31,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == UIOperationState.Add) return _payCheckFacade.CanAdd(out results);
-            if(Operation.State == UIOperationState.Update) return _payCheckFacade.CanUpdate(out results);
+            if(Operation.State == ViewState.Add) return _payCheckFacade.CanAdd(out results);
+            if(Operation.State == ViewState.Update) return _payCheckFacade.CanUpdate(out results);
             return false;
         }
 
@@ -49,7 +49,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _payCheckFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PayCheck, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.PayCheck, State = ViewState.Add};
 
     }
 }

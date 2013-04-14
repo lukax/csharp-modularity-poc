@@ -1,5 +1,5 @@
 ﻿namespace LOB.UI.Interface.Infrastructure {
-    public enum UIOperationStatus {
+    public enum ViewSubState {
 
         Free,
         Busy,

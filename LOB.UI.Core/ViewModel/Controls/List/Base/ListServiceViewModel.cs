@@ -18,7 +18,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public override void InitializeServices() {
             base.InitializeServices();
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
         }
 
         public new Expression<Func<Service, bool>> SearchCriteria {
@@ -36,7 +36,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.List};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Service, State = ViewState.List};
 
     }
 }

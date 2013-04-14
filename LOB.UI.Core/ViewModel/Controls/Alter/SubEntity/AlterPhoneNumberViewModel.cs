@@ -25,7 +25,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             : base(entity, repository, eventAggregator, logger) { _phoneNumberFacade = phoneNumberFacade; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
         }
 
@@ -33,8 +33,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == UIOperationState.Add) return _phoneNumberFacade.CanAdd(out results);
-            if(Operation.State == UIOperationState.Update) return _phoneNumberFacade.CanUpdate(out results);
+            if(Operation.State == ViewState.Add) return _phoneNumberFacade.CanAdd(out results);
+            if(Operation.State == ViewState.Update) return _phoneNumberFacade.CanUpdate(out results);
             return false;
         }
 
@@ -53,6 +53,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _phoneNumberFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation { Type = UIOperationType.PhoneNumber, State = UIOperationState.Add };
+        private readonly ViewID _operation = new ViewID { Type = ViewType.PhoneNumber, State = ViewState.Add };
     }
 }

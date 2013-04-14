@@ -42,7 +42,7 @@ namespace LOB.UI.Core.View.Controls.List {
             //ListViewEntitys.SelectedIndex = -1;
         }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

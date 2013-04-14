@@ -7,7 +7,7 @@ using System;
 namespace LOB.UI.Interface.Infrastructure {
     public interface IUIComponent : IDisposable {
 
-        UIOperation Operation { get; }
+        ViewID Operation { get; }
         string Header { get; }
 
     }

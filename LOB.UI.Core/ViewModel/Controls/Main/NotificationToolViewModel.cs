@@ -86,12 +86,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             GC.SuppressFinalize(this);
         }
 
-        public override UIOperation Operation {
+        public override ViewID Operation {
             get { return _operation; }
             set { _operation = value; }
         }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.NotificationTool, State = UIOperationState.Internal};
+        private ViewID _operation = new ViewID {Type = ViewType.NotificationTool, State = ViewState.Internal};
         private bool _isVisible;
 
     }

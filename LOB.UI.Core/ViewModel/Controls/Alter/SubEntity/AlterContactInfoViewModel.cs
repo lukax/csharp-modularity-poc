@@ -33,8 +33,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             : base(entity, repository, eventAggregator, logger) {
             _contactInfoFacade = contactInfoFacade;
             Entity = entity;
-            EmailOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.Email};
-            PhoneNumberOperation = new UIOperation {State = UIOperationState.Add, Type = UIOperationType.PhoneNumber};
+            EmailOperation = new ViewID {State = ViewState.Add, Type = ViewType.Email};
+            PhoneNumberOperation = new ViewID {State = ViewState.Add, Type = ViewType.PhoneNumber};
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
             DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
             AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber, CanAddPhoneNumber);
@@ -52,18 +52,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
             InitBackgroundWorker();
         }
 
         public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add};
         #region UI Validations
 
-        public UIOperation EmailOperation { get; set; }
-        public UIOperation PhoneNumberOperation { get; set; }
+        public ViewID EmailOperation { get; set; }
+        public ViewID PhoneNumberOperation { get; set; }
 
         private void AddEmail(object arg) { EventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation); }
 

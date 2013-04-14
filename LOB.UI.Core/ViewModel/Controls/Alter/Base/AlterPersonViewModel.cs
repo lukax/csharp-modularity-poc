@@ -45,12 +45,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _personFacade.CanAdd(out results) & _alterAddressViewModel.SaveChangesCommand.CanExecute(null) &&
                        _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _personFacade.CanUpdate(out results) & _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null) &&
                        _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null);
@@ -64,10 +64,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             _personFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Person, State = ViewState.Add};
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             AlterAddressViewModel.InitializeServices();
             AlterContactInfoViewModel.InitializeServices();
             ClearEntity(null);

@@ -40,8 +40,8 @@ namespace LOB.UI.Core.View.Controls.Util {
             MiLightBlue(null, null);
         }
 
-        public UIOperationType UIOperationType {
-            get { return UIOperationType.Main; }
+        public ViewType ViewType {
+            get { return ViewType.Main; }
         }
         #region Themes
 
@@ -70,9 +70,9 @@ namespace LOB.UI.Core.View.Controls.Util {
         private void MiLightOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light); }
 
         #endregion
-        //private void Busy() { ModalRegion = new BusyView(); }
+        //private void Busy() { ModalRegion = new BusyIuiComponent(); }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

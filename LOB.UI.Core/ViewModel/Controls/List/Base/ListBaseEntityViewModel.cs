@@ -29,7 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
-        //private UIOperation _previousOperation;
+        //private ViewID _previousOperation;
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
@@ -54,7 +54,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected IRepository Repository { get; private set; }
         protected IEventAggregator EventAggregator { get; private set; }
         protected BackgroundWorker Worker { get; private set; }
-        public override UIOperation Operation { get; set; }
+        public override ViewID Operation { get; set; }
 
         [InjectionConstructor]
         protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {

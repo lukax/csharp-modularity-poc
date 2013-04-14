@@ -11,7 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.Main;
 
 namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
-    ///     Interaction logic for ColumnToolView.xaml
+    ///     Interaction logic for ColumnToolIuiComponent.xaml
     /// </summary>
     public partial class NotificationToolView : UserControl, IBaseView {
 
@@ -35,7 +35,7 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

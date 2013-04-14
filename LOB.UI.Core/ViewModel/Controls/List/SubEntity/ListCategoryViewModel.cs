@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
 
         public override void InitializeServices() {
             base.InitializeServices();
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
         }
 
         public override void Refresh() { Search = ""; }
@@ -37,7 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.List};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Category, State = ViewState.List};
 
     }
 }

@@ -57,17 +57,17 @@ namespace LOB.UI.Core.View {
 
         public void InitializeServices() {
             _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
-                                                                     if(type.State == UIOperationState.QuickSearch) {
+                                                                     if(type.State == ViewState.QuickSearch) {
                                                                          BlurModal.Radius = 10;
                                                                          BorderModal.Visibility = Visibility.Visible;
                                                                      }
                                                                  });
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
-                                                                      if(type.State == UIOperationState.QuickSearch) {
+                                                                      if(type.State == ViewState.QuickSearch) {
                                                                           BlurModal.Radius = 0;
                                                                           BorderModal.Visibility = Visibility.Hidden;
                                                                       }
-                                                                      if(type.Type == UIOperationType.Main) Close();
+                                                                      if(type.Type == ViewType.Main) Close();
                                                                   });
             _eventAggregator.GetEvent<NotificationEvent>()
                             .Publish(new Notification {Message = Strings.App_License_Information, AttentionState = AttentionState.Warning});
@@ -78,12 +78,12 @@ namespace LOB.UI.Core.View {
             MiLightBlue(null, null);
         }
 
-        public UIOperationType UIOperationType {
-            get { return UIOperationType.Main; }
+        public ViewType ViewType {
+            get { return ViewType.Main; }
         }
 
         private void OnLoad() {
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new UIOperation {Type = UIOperationType.Main})) Close(); });
+            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewID {Type = ViewType.Main})) Close(); });
 
             if(_loaded) return;
             _module = _container.Resolve<IModuleManager>();
@@ -101,7 +101,7 @@ namespace LOB.UI.Core.View {
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

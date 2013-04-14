@@ -46,12 +46,12 @@ namespace LOB.UI.Core.View.Infrastructure {
             return _resolvedViewModel;
         }
 
-        public IFluentNavigator ResolveViewModel(UIOperation param) {
+        public IFluentNavigator ResolveViewModel(ViewID param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(UIOperationMapping.ViewModels[param]) as IBaseViewModel;
+            var resolved = _container.Resolve(ViewDictionary.ViewModels[param]) as IBaseViewModel;
             dynamic resolvedd = resolved;
             if(resolvedd != null) resolvedd.Operation = param;
-            if(param.State == UIOperationState.Update) resolved = _container.Resolve(UIOperationMapping.ViewModels[param], new ParameterOverride("entity", param.Entity)) as IBaseViewModel;
+            //if(param.State == ViewState.Update) resolved = _container.Resolve(ViewDictionary.ViewModels[param], new ParameterOverride("entity", param.Entity)) as IBaseIuiComponentModel;
             if(resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);
             return this;
@@ -64,9 +64,9 @@ namespace LOB.UI.Core.View.Infrastructure {
             return this;
         }
 
-        public IFluentNavigator ResolveView(UIOperation param) {
+        public IFluentNavigator ResolveView(ViewID param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(UIOperationMapping.Views[param]) as IBaseView;
+            var resolved = _container.Resolve(ViewDictionary.Views[param]) as IBaseView;
             if(resolved == null) throw new ArgumentException("param");
             SetView(resolved);
             return this;

@@ -31,7 +31,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public UIOperation Operation { get { return ViewModel.Operation; } }
+        public ViewID Operation { get { return ViewModel.Operation; } }
         #region Implementation of IDisposable
 
         public void Dispose() {

@@ -25,10 +25,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListOpViewModel : BaseViewModel, IListOpViewModel {
 
         private readonly IEventAggregator _eventAggregator;
-        private readonly Lazy<IDictionary<string, UIOperation>> _operationDictLazy;
+        private readonly Lazy<IDictionary<string, ViewID>> _operationDictLazy;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private string _search;
-        public override UIOperation Operation { get; set; }
+        public override ViewID Operation { get; set; }
         public string Entity { get; set; }
         //[AllowNull]
         public ObservableCollection<PanoramaGroup> Entitys { get; set; }
@@ -46,19 +46,19 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         {
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
-            _operationDictLazy = new Lazy<IDictionary<string, UIOperation>>(CreateList);
+            _operationDictLazy = new Lazy<IDictionary<string, ViewID>>(CreateList);
             Entity = "";
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             _worker.DoWork += UpdateList;
             _worker.RunWorkerAsync();
         }
 
         public override void Refresh() { }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Op, State = ViewState.List};
 
         private void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
             var worker = sender as BackgroundWorker;
@@ -112,24 +112,24 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(Operation);
         }
 
-        private IDictionary<string, UIOperation> CreateList() {
+        private IDictionary<string, ViewID> CreateList() {
             var catalog = UIOperationCatalog.UIOperations;
             //Remove Internal usage Types from user selection:
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Unknown));
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.BaseEntity));
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Service));
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == UIOperationType.Person));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Internal));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Update));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.Delete));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == UIOperationState.QuickSearch));
-            var operationTypes = new Dictionary<string, UIOperation>(catalog.Count);
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Unknown));
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.BaseEntity));
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Service));
+            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Person));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Internal));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Update));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Delete));
+            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.QuickSearch));
+            var operationTypes = new Dictionary<string, ViewID>(catalog.Count);
             var stringsType = typeof(Strings);
             var stringsTypeProps = stringsType.GetProperties();
 
             //Parse to localized string
             foreach(var uiOperation in catalog) {
-                UIOperation operation = uiOperation;
+                ViewID operation = uiOperation;
                 foreach(string name in
                     from propertyInfo in stringsTypeProps
                     let name = propertyInfo.Name

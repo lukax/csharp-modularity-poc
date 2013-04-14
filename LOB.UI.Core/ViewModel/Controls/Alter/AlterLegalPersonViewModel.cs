@@ -21,7 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private readonly ILegalPersonFacade _legalPersonFacade;
         private readonly IEventAggregator _eventAggregator;
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.LegalPerson, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.LegalPerson, State = ViewState.Add};
 
         public IAlterPersonViewModel AlterPersonViewModel { get; set; }
 
@@ -35,17 +35,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             AlterPersonViewModel.InitializeServices();
             ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _legalPersonFacade.CanAdd(out results);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _legalPersonFacade.CanUpdate(out results);
             }
@@ -60,6 +60,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             Entity = _legalPersonFacade.GenerateEntity();
             _legalPersonFacade.SetEntity(Entity);
             _legalPersonFacade.ConfigureValidations();
+        }
+
+        public override void Dispose() {
+            AlterPersonViewModel.Dispose();
+            base.Dispose();
         }
 
     }

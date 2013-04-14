@@ -5,7 +5,7 @@ using System;
 #endregion
 
 namespace LOB.UI.Interface.Infrastructure {
-    public enum UIOperationType {
+    public enum ViewType {
 
         Unknown = 0,
 
@@ -41,8 +41,8 @@ namespace LOB.UI.Interface.Infrastructure {
 
     public static class OperationTypeExtension {
 
-        public static UIOperationType ToUIOperationType(this string operationType) {
-            UIOperationType o;
+        public static ViewType ToUIOperationType(this string operationType) {
+            ViewType o;
             if(Enum.TryParse(operationType, out o)) return o;
             throw new ArgumentException("Not parsable to OperationTypeEnum", "operationType");
         }

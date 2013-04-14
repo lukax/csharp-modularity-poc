@@ -15,8 +15,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
 
         public void Refresh() { throw new NotImplementedException(); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
-        public UIOperation Operation {
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Service, State = ViewState.Add};
+        public ViewID Operation {
             get { return _operation; }
         }
         #region Implementation of IDisposable

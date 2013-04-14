@@ -22,7 +22,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private readonly INaturalPersonFacade _naturalPersonFacade;
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.NaturalPerson, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add};
         public IAlterPersonViewModel AlterPersonViewModel { get; set; }
 
         [InjectionConstructor]
@@ -44,18 +44,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             AlterPersonViewModel.InitializeServices();
             ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
-               //var s= AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+                //var s= AlterPersonIuiComponentModel.SaveChangesCommand.CanExecute(null);
                 return _naturalPersonFacade.CanAdd(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _naturalPersonFacade.CanUpdate(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
@@ -69,6 +69,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             Entity = _naturalPersonFacade.GenerateEntity();
             _naturalPersonFacade.SetEntity(Entity);
             _naturalPersonFacade.ConfigureValidations();
+        }
+
+        public override void Dispose() {
+            AlterPersonViewModel.Dispose();
+            base.Dispose();
         }
 
     }

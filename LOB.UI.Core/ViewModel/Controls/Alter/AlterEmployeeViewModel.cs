@@ -33,24 +33,21 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             AlterPersonViewModel.InitializeServices();
             ClearEntity(null);
         }
 
         public override void Refresh() { ClearEntity(null); }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add};
-
-        public IAlterAddressViewModel AlterAddressViewModel { get; set; }
-        public IAlterContactInfoViewModel AlterContactInfoViewModel { get; set; }
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Employee, State = ViewState.Add};
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _employeeFacade.CanAdd(out results);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _employeeFacade.CanUpdate(out results);
             }
@@ -65,6 +62,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             Entity = _employeeFacade.GenerateEntity();
             _employeeFacade.SetEntity(Entity);
             _employeeFacade.ConfigureValidations();
+        }
+
+        public override void Dispose() {
+            AlterPersonViewModel.Dispose();
+            base.Dispose();
         }
 
     }

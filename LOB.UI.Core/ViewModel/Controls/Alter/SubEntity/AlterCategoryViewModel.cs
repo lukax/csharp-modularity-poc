@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
             EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
         }
@@ -37,7 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var entity = baseEntity as Category;
             if(entity == null) return;
             Entity = entity;
-            Operation.State(UIOperationState.Update);
+            Operation.State(ViewState.Update);
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -46,14 +46,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == UIOperationState.Add) return _categoryFacade.CanAdd(out results);
-            if(Operation.State == UIOperationState.Update) return _categoryFacade.CanUpdate(out results);
+            if(Operation.State == ViewState.Add) return _categoryFacade.CanAdd(out results);
+            if(Operation.State == ViewState.Update) return _categoryFacade.CanUpdate(out results);
             return false;
         }
 
         protected override bool CanCancel(object arg) {
-            if(Operation.State == UIOperationState.Add) return true;
-            if(Operation.State == UIOperationState.Update) return true;
+            if(Operation.State == ViewState.Add) return true;
+            if(Operation.State == ViewState.Update) return true;
             return false;
         }
 
@@ -63,7 +63,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _categoryFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Category, State = ViewState.Add};
 
     }
 }

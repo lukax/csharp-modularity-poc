@@ -10,13 +10,13 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
-    ///     Interaction logic for BusyView.xaml
+    ///     Interaction logic for BusyIuiComponent.xaml
     /// </summary>
     public partial class BusyView : UserControl, IBaseView {
 
         public BusyView() { InitializeComponent(); }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         public IBaseViewModel ViewModel { get; set; }

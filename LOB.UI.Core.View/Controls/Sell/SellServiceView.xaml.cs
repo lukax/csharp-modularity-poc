@@ -25,7 +25,7 @@ namespace LOB.UI.Core.View.Controls.Sell {
 
         public void Refresh() { throw new NotImplementedException(); }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

@@ -44,26 +44,26 @@ namespace LOB.UI.Core.View.Controllers {
             //_eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
         }
 
-        private void OpenView(UIOperation param) {
-            if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+        private void OpenView(ViewID param) {
+            if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
             param.IsChild = false;
-            if(param.State == UIOperationState.QuickSearch) QuickSearch(param);
+            if(param.State == ViewState.QuickSearch) QuickSearch(param);
             else _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
         }
 
-        private void QuickSearch(UIOperation param) {
-            if(param.Type == default(UIOperationType)) throw new ArgumentException("param");
+        private void QuickSearch(ViewID param) {
+            if(param.Type == default(ViewType)) throw new ArgumentException("param");
             var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
             var baseViewModel = view.ViewModel as BaseViewModel;
-            if(baseViewModel != null) baseViewModel.Operation = new UIOperation {State = UIOperationState.QuickSearch, Type = view.Operation.Type};
-            // Let the viewModel know that it's in QuickSearch State
+            if(baseViewModel != null) baseViewModel.Operation = new ViewID {State = ViewState.QuickSearch, Type = view.Operation.Type};
+            // Let the IuiComponentModel know that it's in QuickSearch State
             _regionAdapter.AddView(view, RegionName.ModalRegion);
         }
 
-        private void CloseView(UIOperation param) {
+        private void CloseView(ViewID param) {
             try {
-                if(param.State != UIOperationState.QuickSearch) _regionAdapter.RemoveView(param, RegionName.TabRegion);
-                else if(param.State == UIOperationState.QuickSearch) _regionAdapter.RemoveView(param, RegionName.ModalRegion);
+                if(param.State != ViewState.QuickSearch) _regionAdapter.RemoveView(param, RegionName.TabRegion);
+                else if(param.State == ViewState.QuickSearch) _regionAdapter.RemoveView(param, RegionName.ModalRegion);
             } catch(Exception ex) {
                 _logger.Log(ex.Message, Category.Exception, Priority.High);
                 MessageHide(ex.Message);
@@ -74,13 +74,13 @@ namespace LOB.UI.Core.View.Controllers {
             MessageHide(null);
             var viewModel = _container.GetInstance<MessageToolViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            _navigator.Init.ResolveView(new UIOperation {Type = UIOperationType.MessageTool})
+            _navigator.Init.ResolveView(new ViewID {Type = ViewType.MessageTool})
                       .SetViewModel(viewModel)
                       .AddToRegion(RegionName.ModalRegion);
         }
 
         public void MessageHide([AllowNull] string param) {
-            _regionAdapter.RemoveView(new UIOperation {Type = UIOperationType.MessageTool}, RegionName.ModalRegion);
+            _regionAdapter.RemoveView(new ViewID {Type = ViewType.MessageTool}, RegionName.ModalRegion);
 
             if(param != null) MessageShow(param, false);
                 //await Task.Delay(4000);

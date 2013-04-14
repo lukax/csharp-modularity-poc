@@ -29,9 +29,9 @@ namespace LOB.UI.Core.View.Actions {
             get { return (TabItem)GetValue(TabItemProperty); }
             set {
                 SetValue(TabItemProperty, value);
-                //var view = value as IBaseView;
+                //var view = value as IBaseIuiComponent;
                 //if(view != null) //TODO: Get proper Index and assign to view
-                //var innerView = value.Content as IBaseView;
+                //var innerView = value.Content as IBaseIuiComponent;
                 //if(innerView != null)
             }
         }

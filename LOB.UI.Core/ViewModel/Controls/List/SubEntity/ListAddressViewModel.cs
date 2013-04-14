@@ -17,7 +17,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
         public ListAddressViewModel(Address entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
-        public override void InitializeServices() { if (Equals(Operation, default(UIOperation))) Operation = _operation; }
+        public override void InitializeServices() { if (Equals(Operation, default(ViewID))) Operation = _operation; }
 
         public override void Refresh() { Search = ""; }
 
@@ -40,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Address, State = UIOperationState.List};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Address, State = ViewState.List};
 
     }
 }

@@ -10,7 +10,7 @@ using NullGuard;
 
 namespace LOB.UI.Core.View.Controls.Util {
     /// <summary>
-    ///     Interaction logic for MessageShowToolView.xaml
+    ///     Interaction logic for MessageShowToolIuiComponent.xaml
     /// </summary>
     public partial class MessageShowToolView : IBaseView {
 
@@ -27,7 +27,7 @@ namespace LOB.UI.Core.View.Controls.Util {
                 IBaseViewModel result = value;
                 Dispatcher.Invoke(() => DataContext = result);
                 //this.DataContext = value;
-                //var vm = value as MessageToolViewModel;
+                //var vm = value as MessageToolIuiComponentModel;
                 //if (vm != null)
                 //    (vm).PropertyChanged += (sender, args) =>
                 //        {
@@ -63,7 +63,7 @@ namespace LOB.UI.Core.View.Controls.Util {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

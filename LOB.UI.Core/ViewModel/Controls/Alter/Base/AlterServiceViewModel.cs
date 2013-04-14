@@ -22,20 +22,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             : base(entity, repository, eventAggregator, logger) { _serviceFacade = serviceFacade; }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Service, State = ViewState.Add};
 
         public override void Refresh() { ClearEntity(null); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _serviceFacade.CanAdd(out results);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _serviceFacade.CanUpdate(out results);
             }

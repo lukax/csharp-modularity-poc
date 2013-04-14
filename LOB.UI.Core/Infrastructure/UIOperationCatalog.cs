@@ -18,94 +18,94 @@ namespace LOB.UI.Core.Infrastructure {
     public static class UIOperationCatalog {
         #region View
 
-        private static readonly Lazy<IList<UIOperation>> LazyUIOperations = new Lazy<IList<UIOperation>>(() => new List<UIOperation> { //
+        private static readonly Lazy<IList<ViewID>> LazyUIOperations = new Lazy<IList<ViewID>>(() => new List<ViewID> { //
             //Alter
-            new UIOperation {Type = UIOperationType.MessageTool, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.ColumnTool, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.HeaderTool, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Address, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Category, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.ContactInfo, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Email, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.LegalPerson, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.NaturalPerson, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.PayCheck, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Product, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Sale, State = UIOperationState.Add},
-            new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add},
+            new ViewID {Type = ViewType.MessageTool, State = ViewState.Add},
+            new ViewID {Type = ViewType.ColumnTool, State = ViewState.Add},
+            new ViewID {Type = ViewType.HeaderTool, State = ViewState.Add},
+            new ViewID {Type = ViewType.Address, State = ViewState.Add},
+            new ViewID {Type = ViewType.BaseEntity, State = ViewState.Add},
+            new ViewID {Type = ViewType.Category, State = ViewState.Add},
+            new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add},
+            new ViewID {Type = ViewType.Customer, State = ViewState.Add},
+            new ViewID {Type = ViewType.Email, State = ViewState.Add},
+            new ViewID {Type = ViewType.Employee, State = ViewState.Add},
+            new ViewID {Type = ViewType.LegalPerson, State = ViewState.Add},
+            new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add},
+            new ViewID {Type = ViewType.PayCheck, State = ViewState.Add},
+            new ViewID {Type = ViewType.Person, State = ViewState.Add},
+            new ViewID {Type = ViewType.PhoneNumber, State = ViewState.Add},
+            new ViewID {Type = ViewType.Product, State = ViewState.Add},
+            new ViewID {Type = ViewType.Sale, State = ViewState.Add},
+            new ViewID {Type = ViewType.Service, State = ViewState.Add},
 
             //List
-            //new Operation{ Type = UIOperationType.Address},
-            new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.List},
-            new UIOperation {Type = UIOperationType.Category, State = UIOperationState.List},
-            new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.List},
+            //new Operation{ Type = ViewType.Address},
+            new ViewID {Type = ViewType.BaseEntity, State = ViewState.List},
+            new ViewID {Type = ViewType.Category, State = ViewState.List},
+            new ViewID {Type = ViewType.Customer, State = ViewState.List},
             //Operation.ListContactInfo, typeof(ListContactInfoView),
-            new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.List},
+            new ViewID {Type = ViewType.Employee, State = ViewState.List},
             //Command.ListLegalPerson, typeof(ListLegalPersonView),
             //Command.ListNaturalPerson, typeof(ListNaturalPersonView),
-            new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List},
+            new ViewID {Type = ViewType.Op, State = ViewState.List},
             //Command.ListPayCheck, typeof(ListPayCheckView),
             //Command.ListPerson, typeof(ListPersonView),
-            new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.List},
-            new UIOperation {Type = UIOperationType.Product, State = UIOperationState.List},
-            new UIOperation {Type = UIOperationType.Service, State = UIOperationState.List},
+            new ViewID {Type = ViewType.PhoneNumber, State = ViewState.List},
+            new ViewID {Type = ViewType.Product, State = ViewState.List},
+            new ViewID {Type = ViewType.Service, State = ViewState.List},
 
             //Sell
-            new UIOperation {Type = UIOperationType.Product, State = UIOperationState.Sell},
-            new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Sell},
+            new ViewID {Type = ViewType.Product, State = ViewState.Sell},
+            new ViewID {Type = ViewType.Service, State = ViewState.Sell},
         });
 
         #endregion
-        #region ViewModel
+        #region IuiComponentModel
 
-        private static readonly Lazy<IDictionary<UIOperation, Type>> LazyViewModel =
-            new Lazy<IDictionary<UIOperation, Type>>(
+        private static readonly Lazy<IDictionary<ViewID, Type>> LazyViewModel =
+            new Lazy<IDictionary<ViewID, Type>>(
                 () =>
-                new Dictionary<UIOperation, Type> {
-                    {new UIOperation {Type = UIOperationType.MessageTool}, typeof(MessageToolViewModel)},
-                    {new UIOperation {Type = UIOperationType.ColumnTool}, typeof(ColumnToolViewModel)},
-                    {new UIOperation {Type = UIOperationType.HeaderTool}, typeof(HeaderToolViewModel)},
-                    {new UIOperation {Type = UIOperationType.Address}, typeof(AlterAddressViewModel)},
-                    {new UIOperation {Type = UIOperationType.BaseEntity}, typeof(AlterBaseEntityViewModel<BaseEntity>)},
-                    {new UIOperation {Type = UIOperationType.Category}, typeof(AlterCategoryViewModel)},
-                    {new UIOperation {Type = UIOperationType.ContactInfo}, typeof(AlterContactInfoViewModel)},
-                    {new UIOperation {Type = UIOperationType.Customer}, typeof(AlterCustomerViewModel)},
-                    {new UIOperation {Type = UIOperationType.Email}, typeof(AlterEmailViewModel)},
-                    {new UIOperation {Type = UIOperationType.Employee}, typeof(AlterEmployeeViewModel)},
-                    {new UIOperation {Type = UIOperationType.LegalPerson}, typeof(AlterLegalPersonViewModel)},
-                    {new UIOperation {Type = UIOperationType.NaturalPerson}, typeof(AlterNaturalPersonViewModel)},
-                    {new UIOperation {Type = UIOperationType.PayCheck}, typeof(AlterPayCheckViewModel)},
-                    {new UIOperation {Type = UIOperationType.Person}, typeof(AlterPersonViewModel)},
-                    {new UIOperation {Type = UIOperationType.PhoneNumber}, typeof(AlterPhoneNumberViewModel)},
-                    {new UIOperation {Type = UIOperationType.Product}, typeof(AlterProductViewModel)},
-                    {new UIOperation {Type = UIOperationType.Sale}, typeof(AlterSaleViewModel)},
-                    {new UIOperation {Type = UIOperationType.Service}, typeof(AlterServiceViewModel)},
-                    {new UIOperation {Type = UIOperationType.BaseEntity, State = UIOperationState.List}, typeof(ListBaseEntityViewModel<BaseEntity>)},
-                    {new UIOperation {Type = UIOperationType.Category, State = UIOperationState.List}, typeof(ListCategoryViewModel)},
-                    {new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.List}, typeof(ListCustomerViewModel)},
-                    //{Command.ListEmail, typeof(ListContactInfoViewModel)},
-                    {new UIOperation {Type = UIOperationType.Employee, State = UIOperationState.List}, typeof(ListEmployeeViewModel)},
-                    //{Command.ListLegalPerson, typeof(ListLegalPersonViewModel)},
-                    //{Command.ListNaturalPerson, typeof(ListNaturalPersonViewModel)},
-                    {new UIOperation {Type = UIOperationType.Op, State = UIOperationState.List}, typeof(ListOpViewModel)},
-                    //{Command.ListPayCheck, typeof(ListPayCheckViewModel)},
-                    //{Command.ListPerson, typeof(ListPersonViewModel)},
-                    {new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.List}, typeof(ListPhoneNumberViewModel)},
-                    {new UIOperation {Type = UIOperationType.Product, State = UIOperationState.List}, typeof(ListProductViewModel)},
-                    {new UIOperation {Type = UIOperationType.Service, State = UIOperationState.List}, typeof(ListServiceViewModel)},
+                new Dictionary<ViewID, Type> {
+                    {new ViewID {Type = ViewType.MessageTool}, typeof(MessageToolViewModel)},
+                    {new ViewID {Type = ViewType.ColumnTool}, typeof(ColumnToolViewModel)},
+                    {new ViewID {Type = ViewType.HeaderTool}, typeof(HeaderToolViewModel)},
+                    {new ViewID {Type = ViewType.Address}, typeof(AlterAddressViewModel)},
+                    {new ViewID {Type = ViewType.BaseEntity}, typeof(AlterBaseEntityViewModel<BaseEntity>)},
+                    {new ViewID {Type = ViewType.Category}, typeof(AlterCategoryViewModel)},
+                    {new ViewID {Type = ViewType.ContactInfo}, typeof(AlterContactInfoViewModel)},
+                    {new ViewID {Type = ViewType.Customer}, typeof(AlterCustomerViewModel)},
+                    {new ViewID {Type = ViewType.Email}, typeof(AlterEmailViewModel)},
+                    {new ViewID {Type = ViewType.Employee}, typeof(AlterEmployeeViewModel)},
+                    {new ViewID {Type = ViewType.LegalPerson}, typeof(AlterLegalPersonViewModel)},
+                    {new ViewID {Type = ViewType.NaturalPerson}, typeof(AlterNaturalPersonViewModel)},
+                    {new ViewID {Type = ViewType.PayCheck}, typeof(AlterPayCheckViewModel)},
+                    {new ViewID {Type = ViewType.Person}, typeof(AlterPersonViewModel)},
+                    {new ViewID {Type = ViewType.PhoneNumber}, typeof(AlterPhoneNumberViewModel)},
+                    {new ViewID {Type = ViewType.Product}, typeof(AlterProductViewModel)},
+                    {new ViewID {Type = ViewType.Sale}, typeof(AlterSaleViewModel)},
+                    {new ViewID {Type = ViewType.Service}, typeof(AlterServiceViewModel)},
+                    {new ViewID {Type = ViewType.BaseEntity, State = ViewState.List}, typeof(ListBaseEntityViewModel<BaseEntity>)},
+                    {new ViewID {Type = ViewType.Category, State = ViewState.List}, typeof(ListCategoryViewModel)},
+                    {new ViewID {Type = ViewType.Customer, State = ViewState.List}, typeof(ListCustomerViewModel)},
+                    //{Command.ListEmail, typeof(ListContactInfoIuiComponentModel)},
+                    {new ViewID {Type = ViewType.Employee, State = ViewState.List}, typeof(ListEmployeeViewModel)},
+                    //{Command.ListLegalPerson, typeof(ListLegalPersonIuiComponentModel)},
+                    //{Command.ListNaturalPerson, typeof(ListNaturalPersonIuiComponentModel)},
+                    {new ViewID {Type = ViewType.Op, State = ViewState.List}, typeof(ListOpViewModel)},
+                    //{Command.ListPayCheck, typeof(ListPayCheckIuiComponentModel)},
+                    //{Command.ListPerson, typeof(ListPersonIuiComponentModel)},
+                    {new ViewID {Type = ViewType.PhoneNumber, State = ViewState.List}, typeof(ListPhoneNumberViewModel)},
+                    {new ViewID {Type = ViewType.Product, State = ViewState.List}, typeof(ListProductViewModel)},
+                    {new ViewID {Type = ViewType.Service, State = ViewState.List}, typeof(ListServiceViewModel)},
                 });
 
         #endregion
-        public static IList<UIOperation> UIOperations {
+        public static IList<ViewID> UIOperations {
             get { return LazyUIOperations.Value; }
         }
 
-        public static IDictionary<UIOperation, Type> ViewModels {
+        public static IDictionary<ViewID, Type> ViewModels {
             get { return LazyViewModel.Value; }
         }
 

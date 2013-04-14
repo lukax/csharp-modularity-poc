@@ -33,7 +33,7 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         public void Refresh() { }
 
-        public UIOperation Operation {
+        public ViewID Operation {
             get { return ViewModel.Operation; }
         }
         #region Implementation of IDisposable

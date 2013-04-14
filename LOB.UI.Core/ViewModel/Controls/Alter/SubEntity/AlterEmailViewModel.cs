@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
         }
 
@@ -37,11 +37,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _emailFacade.CanAdd(out results);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _emailFacade.CanUpdate(out results);
             }
@@ -54,7 +54,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             _emailFacade.ConfigureValidations();
         }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Email, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Email, State = ViewState.Add};
 
     }
 }

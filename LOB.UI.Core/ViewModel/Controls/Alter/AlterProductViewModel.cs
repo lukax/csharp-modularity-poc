@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Service, State = ViewState.Add};
 
         [InjectionConstructor]
         public AlterProductViewModel(Product entity, IProductFacade productFacade, IRepository repository, IEventAggregator eventAggregator,
@@ -40,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
@@ -61,28 +61,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void ExecuteListCategory(object o) {
-            var op = new UIOperation().State(UIOperationState.QuickSearch).Type(UIOperationType.Category);
+            var op = new ViewID().State(ViewState.QuickSearch).Type(ViewType.Category);
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
         private void ExecuteAlterCategory(object o) {
             var op =
-                new UIOperation().Type(UIOperationType.Category)
+                new ViewID().Type(ViewType.Category)
                                  .State(Entity.Category.Equals(_productFacade.GenerateEntity().Category)
-                                            ? UIOperationState.Add
-                                            : UIOperationState.Update);
-            op.Entity = Entity.Category;
+                                            ? ViewState.Add
+                                            : ViewState.Update);
+            op.ViewModel = this;
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _productFacade.CanAdd(out results);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _productFacade.CanUpdate(out results);
             }

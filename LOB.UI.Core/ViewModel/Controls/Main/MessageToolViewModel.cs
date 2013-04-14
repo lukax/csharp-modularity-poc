@@ -43,9 +43,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             _eventAggregator = _container.Resolve<IEventAggregator>();
         }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.MessageTool, State = UIOperationState.Internal};
+        private ViewID _operation = new ViewID {Type = ViewType.MessageTool, State = ViewState.Internal};
 
-        public override UIOperation Operation { get { return _operation; } set { _operation = value; } }
+        public override ViewID Operation { get { return _operation; } set { _operation = value; } }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {
             Message = message;

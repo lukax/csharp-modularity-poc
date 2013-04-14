@@ -11,7 +11,7 @@ using LOB.UI.Interface.Infrastructure;
 namespace LOB.UI.Core.ViewModel.Base {
     public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel {
 
-        public abstract UIOperation Operation { get; set; }
+        public abstract ViewID Operation { get; set; }
         public string Header { get; set; }
         public abstract void InitializeServices();
         public abstract void Refresh();

@@ -32,7 +32,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
-        public IBaseView GetView(UIOperation param, string regionName) {
+        public IBaseView GetView(ViewID param, string regionName) {
             try {
                 var region = _regionManager.Regions[regionName];
                 return region.GetView(ApplyNamingConvention(param)) as IBaseView;
@@ -44,9 +44,9 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
-        public void RemoveView(UIOperation param, string regionName) {
+        public void RemoveView(ViewID param, string regionName) {
             try {
-                if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+                if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
                 var region = _regionManager.Regions[regionName];
                 var view = region.GetView(ApplyNamingConvention(param)) as IBaseView;
                 if(ContainsView(param, regionName)) {
@@ -61,9 +61,9 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
-        public bool ContainsView(UIOperation param, string regionName) {
+        public bool ContainsView(ViewID param, string regionName) {
             try {
-                if(param.Type == default(UIOperationType)) throw new ArgumentNullException("param");
+                if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
                 var region = _regionManager.Regions[regionName];
                 var view = region.GetView(ApplyNamingConvention(param));
                 return region.Views.Contains(view);
@@ -75,7 +75,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
-        private string ApplyNamingConvention(UIOperation op) {
+        private string ApplyNamingConvention(ViewID op) {
             string s = op.Type.ToString();
             //s = s.Split('_').First();
             //s = s + "_" + op.GetHashCode();

@@ -1,7 +1,7 @@
 ﻿using LOB.Domain.Base;
 
 namespace LOB.UI.Interface.Infrastructure {
-    public enum UIOperationState {
+    public enum ViewState {
 
         Internal = 0, //Internal Usage
 

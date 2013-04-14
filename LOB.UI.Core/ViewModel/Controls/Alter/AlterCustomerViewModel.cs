@@ -12,6 +12,7 @@ using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
+using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
@@ -22,25 +23,29 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
 
         private readonly ICustomerFacade _customerFacade;
-
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Customer, State = UIOperationState.Add};
-        //public IAlterPersonViewModel AlterPersonViewModel {
-        //    get {
-        //        if(Entity.PersonType == Domain.Base.PersonType.Natural) return _alterNaturalPersonViewModel;
-        //        if(Entity.PersonType == Domain.Base.PersonType.Legal) return _alterLegalPersonViewModel;
-        //        throw new NotImplementedException("PersonType");
-        //    }
-        //}
-        public UIOperation PersonOperation { get; set; }
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Customer, State = ViewState.Add};
+        private readonly IAlterNaturalPersonViewModel _alterNaturalPersonViewModel;
+        private readonly IAlterLegalPersonViewModel _alterLegalPersonViewModel;
+        public IAlterPersonViewModel AlterPersonViewModel {
+            get {
+                if(Entity.PersonType == Domain.Base.PersonType.Natural) return _alterNaturalPersonViewModel.AlterPersonViewModel;
+                if(Entity.PersonType == Domain.Base.PersonType.Legal) return _alterLegalPersonViewModel.AlterPersonViewModel;
+                return _alterNaturalPersonViewModel.AlterPersonViewModel;
+            }
+        }
+        public ViewID PersonOperation { get; set; }
         public IList<string> PersonTypes { get { return PersonExtensions.PersonTypesLocalizationsDict.Values.ToList(); } }
         public string PersonType { set { Entity.PersonType = value.ToPersonType(); } }
         public string Status { get { return Entity.Status.ToLocalizedString(); } }
+
         [InjectionConstructor]
         public AlterCustomerViewModel(Customer entity, ICustomerFacade customerFacade, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
+            ILoggerFacade logger, IAlterNaturalPersonViewModel alterNaturalPersonViewModel, IAlterLegalPersonViewModel alterLegalPersonViewModel)
             : base(entity, repository, eventAggregator, logger) {
             _customerFacade = customerFacade;
-            PersonOperation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add};
+            _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
+            _alterLegalPersonViewModel = alterLegalPersonViewModel;
+            PersonOperation = new ViewID {Type = ViewType.Person, State = ViewState.Add};
         }
 
         public override void Refresh() { }
@@ -61,32 +66,36 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void LegalPersonCfg() {
-            PersonOperation.Type(UIOperationType.LegalPerson);
+            PersonOperation.Type(ViewType.LegalPerson);
+            PersonOperation.ViewModel = _alterLegalPersonViewModel;
             ClearEntity(null);
-            PersonOperation.Entity = Entity.Person;
+            ((AlterLegalPersonViewModel)_alterLegalPersonViewModel).Entity = Entity.Person as LegalPerson;
             EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
         private void NaturalPersonCfg() {
-            PersonOperation.Type(UIOperationType.NaturalPerson);
+            PersonOperation.Type(ViewType.NaturalPerson);
+            PersonOperation.ViewModel = _alterNaturalPersonViewModel;
             ClearEntity(null);
-            PersonOperation.Entity = Entity.Person;
+            ((AlterNaturalPersonViewModel)_alterNaturalPersonViewModel).Entity = Entity.Person as NaturalPerson;
             EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(ViewID))) Operation = _operation;
+            _alterLegalPersonViewModel.InitializeServices();
+            _alterNaturalPersonViewModel.InitializeServices();
             ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == UIOperationState.Add) {
+            if(Operation.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
-                return _customerFacade.CanAdd(out results);
+                return _customerFacade.CanAdd(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
-            if(Operation.State == UIOperationState.Update) {
+            if(Operation.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
-                return _customerFacade.CanUpdate(out results);
+                return _customerFacade.CanUpdate(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
             return false;
         }
@@ -100,7 +109,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             PersonTypeChanged();
             _customerFacade.SetEntity(Entity);
             _customerFacade.ConfigureValidations();
-            ;
+        }
+
+        public override void Dispose() {
+            _alterLegalPersonViewModel.Dispose();
+            _alterNaturalPersonViewModel.Dispose();
+            base.Dispose();
         }
 
     }

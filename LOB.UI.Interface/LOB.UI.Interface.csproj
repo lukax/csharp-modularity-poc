@@ -65,10 +65,10 @@
     <Compile Include="Infrastructure\IFluentNavigator.cs" />
     <Compile Include="Infrastructure\IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
-    <Compile Include="Infrastructure\UIOperation.cs" />
-    <Compile Include="Infrastructure\UIOperationState.cs" />
-    <Compile Include="Infrastructure\UIOperationStatus.cs" />
-    <Compile Include="Infrastructure\UIOperationType.cs" />
+    <Compile Include="Infrastructure\ViewID.cs" />
+    <Compile Include="Infrastructure\ViewState.cs" />
+    <Compile Include="Infrastructure\ViewSubState.cs" />
+    <Compile Include="Infrastructure\ViewType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />

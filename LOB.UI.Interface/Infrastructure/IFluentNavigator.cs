@@ -6,15 +6,15 @@ using System;
 
 namespace LOB.UI.Interface.Infrastructure {
     public interface IFluentNavigator {
-
+        
         IFluentNavigator Init { get; }
         IBaseView GetView();
         IBaseViewModel GetViewModel();
         IFluentNavigator SetView(IBaseView view);
         IFluentNavigator SetViewModel(IBaseViewModel viewModel);
-        IFluentNavigator ResolveView(UIOperation param);
+        IFluentNavigator ResolveView(ViewID param);
         IFluentNavigator ResolveView<TView>() where TView : IBaseView;
-        IFluentNavigator ResolveViewModel(UIOperation param);
+        IFluentNavigator ResolveViewModel(ViewID param);
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
         event OnOpenViewEventHandler OnOpenView;
         void AddToRegion(string regionName);

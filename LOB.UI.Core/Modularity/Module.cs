@@ -38,13 +38,13 @@ namespace LOB.UI.Core.Modularity {
 
             _container.RegisterType<IColumnToolsViewModel, ColumnToolViewModel>();
             _container.RegisterType<IHeaderToolsViewModel, HeaderToolViewModel>();
-            //_container.RegisterType<INotificationToolViewModel, NotificationToolViewModel>();
+            //_container.RegisterType<INotificationToolIuiComponentModel, NotificationToolIuiComponentModel>();
             _container.RegisterType<IMessageToolViewModel, MessageToolViewModel>();
 
-            //_container.RegisterInstance<IMessageToolViewModel>(_container.Resolve<MessageToolViewModel>());
+            //_container.RegisterInstance<IMessageToolIuiComponentModel>(_container.Resolve<MessageToolIuiComponentModel>());
             _container.RegisterInstance<INotificationToolViewModel>(_container.Resolve<NotificationToolViewModel>());
-            //_container.RegisterInstance<IColumnToolsViewModel>(_container.Resolve<ColumnToolViewModel>());
-            //_container.RegisterInstance<IHeaderToolsViewModel>(_container.Resolve<HeaderToolViewModel>());
+            //_container.RegisterInstance<IColumnToolsIuiComponentModel>(_container.Resolve<ColumnToolIuiComponentModel>());
+            //_container.RegisterInstance<IHeaderToolsIuiComponentModel>(_container.Resolve<HeaderToolIuiComponentModel>());
 
             #endregion
             #region Alter

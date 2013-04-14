@@ -28,15 +28,15 @@ namespace LOB.UI.Core.ViewModel {
         public ICommand OpenTabCommand { get; set; }
         private IFluentNavigator Navigator { get; set; }
 
-        private UIOperation _operation = new UIOperation {Type = UIOperationType.Main};
-        public override UIOperation Operation {
+        private ViewID _operation = new ViewID {Type = ViewType.Main};
+        public override ViewID Operation {
             get { return _operation; }
             set { _operation = value; }
         }
 
         private void OpenTab(object arg) {
-            UIOperationType operationType = arg.ToString().ToUIOperationType();
-            var op = new UIOperation {Type = operationType};
+            ViewType operationType = arg.ToString().ToUIOperationType();
+            var op = new ViewID {Type = operationType};
             Navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 

@@ -28,7 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Store, State = UIOperationState.Add};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.Store, State = ViewState.Add};
         [InjectionConstructor]
         public AlterStoreViewModel(Store entity, IRepository repository, IStoreFacade storeFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
@@ -39,7 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if (Equals(Operation, default(ViewID))) Operation = _operation;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
@@ -58,16 +58,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void ExecuteListCategory(object o) {
-            //UIOperationType oP = o.ToString().ToUIOperationType();
+            //ViewType oP = o.ToString().ToUIOperationType();
             //_navigator.ResolveView(oP).Show(true);
         }
 
         private void ExecuteAlterCategory(object o) {
-            //UIOperationType oP = o.ToString().ToUIOperationType();
+            //ViewType oP = o.ToString().ToUIOperationType();
             //if(Entity.Category != null)
             //    _navigator.ResolveView(oP)
             //              .SetViewModel(
-            //                            _unityContainer.Resolve<AlterCategoryViewModel>(new ParameterOverride(
+            //                            _unityContainer.Resolve<AlterCategoryIuiComponentModel>(new ParameterOverride(
             //                                                                                "category", Entity.Category)))
             //              .Show(true);
             //_navigator.ResolveView(oP).Show(true);

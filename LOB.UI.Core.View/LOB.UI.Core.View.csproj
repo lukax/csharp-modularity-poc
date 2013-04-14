@@ -259,7 +259,7 @@
       <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\FluentNavigator.cs" />
-    <Compile Include="Infrastructure\UIOperationMapping.cs" />
+    <Compile Include="Infrastructure\ViewDictionary.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>

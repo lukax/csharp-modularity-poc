@@ -32,11 +32,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        public override void InitializeServices() { if (Equals(Operation, default(UIOperation))) Operation = _operation; }
+        public override void InitializeServices() { if (Equals(Operation, default(ViewID))) Operation = _operation; }
 
         public override void Refresh() { Search = ""; }
 
-        private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.PhoneNumber, State = UIOperationState.List};
+        private readonly ViewID _operation = new ViewID {Type = ViewType.PhoneNumber, State = ViewState.List};
 
     }
 }
