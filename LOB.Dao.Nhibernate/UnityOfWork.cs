@@ -65,7 +65,7 @@ namespace LOB.Dao.Nhibernate {
         }
 
         protected virtual void Dispose(bool disposing) {
-            if(_transaction != null) if(_transaction.IsActive) _transaction.Rollback();
+            //if(_transaction != null) if(_transaction.IsActive) _transaction.Rollback();
             if(!disposing) return;
             if(_transaction != null) {
                 _transaction.Dispose();

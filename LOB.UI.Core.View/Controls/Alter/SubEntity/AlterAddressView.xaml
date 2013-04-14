@@ -104,7 +104,7 @@
             <xctk:MaskedTextBox Style="{StaticResource MetroTextBox}"
                 Value="{Binding Entity.ZipCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Right" ValueDataType="{x:Type system:String}"
-                MinWidth="100" Mask="00000-000" IncludeLiteralsInValue="False" IncludePromptInValue="False" SkipLiterals="True"
+                MinWidth="100" Mask="00000-000" IncludeLiteralsInValue="False"
                 MaxWidth="250" Grid.Column="4" Grid.Row="3" />
 
             <Label Content="{x:Static loc:Strings.Common_Status}" Grid.Column="1" Grid.Row="4"

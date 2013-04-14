@@ -55,6 +55,7 @@ namespace LOB.UI.Core.Modularity {
 
             _container.RegisterType<IAlterAddressViewModel, AlterAddressViewModel>();
             _container.RegisterType<IAlterCategoryViewModel, AlterCategoryViewModel>();
+            _container.RegisterType<IAlterContactInfoViewModel, AlterContactInfoViewModel>();
             _container.RegisterType<IAlterEmailViewModel, AlterEmailViewModel>();
             _container.RegisterType<IAlterPayCheckViewModel, AlterPayCheckViewModel>();
             _container.RegisterType<IAlterPhoneNumberViewModel, AlterPhoneNumberViewModel>();

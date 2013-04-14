@@ -52,7 +52,7 @@
                         <DataGrid ItemsSource="{Binding Entity.BoughtHistory}" MinHeight="200"></DataGrid>
                     </TabItem>
                     <TabItem Header="{x:Static loc:Strings.Common_CustomerOf}">
-                        <DataGrid ItemsSource="{Binding Entity.ClientOf}" MinHeight="200"></DataGrid>
+                        <DataGrid ItemsSource="{Binding Entity.ClientOf, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" MinHeight="200"></DataGrid>
                     </TabItem>
                 </TabControl>
 

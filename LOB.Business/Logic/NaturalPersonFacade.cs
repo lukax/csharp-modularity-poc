@@ -21,9 +21,7 @@ namespace LOB.Business.Logic {
         private readonly IBaseEntityFacade _baseEntityFacade;
         private readonly IPersonFacade _personFacade;
         private NaturalPerson _entity;
-        private CultureInfo Culture {
-            get { return Thread.CurrentThread.CurrentCulture; }
-        }
+        private CultureInfo Culture { get { return Thread.CurrentThread.CurrentCulture; } }
 
         public NaturalPersonFacade(IBaseEntityFacade baseEntityFacade, IPersonFacade personFacade) {
             _baseEntityFacade = baseEntityFacade;
@@ -62,27 +60,21 @@ namespace LOB.Business.Logic {
             if(_entity != null) {
                 _entity.AddValidation(delegate {
                                           if(string.IsNullOrWhiteSpace(_entity.FirstName)) return new ValidationResult("FirstName", Strings.Notification_Field_Empty);
-                                          if(Regex.IsMatch(_entity.FirstName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
-                                              return new ValidationResult("FirstName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_FirstName));
+                                          if(!Regex.IsMatch(_entity.FirstName,@"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))return new ValidationResult("FirstName",string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_FirstName));return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.LastName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.LastName,@"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))return new ValidationResult("LastName",string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_LastName));
                                           return null;
                                       });
-                _entity.AddValidation(
-                    delegate {
-                        if (string.IsNullOrWhiteSpace(_entity.LastName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
-                        if (Regex.IsMatch(_entity.LastName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
-                            return new ValidationResult("LastName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_LastName));
-                        return null;
-                    });
                 _entity.AddValidation(delegate {
                                           if(string.IsNullOrWhiteSpace(_entity.CPF)) return new ValidationResult("CPF", Strings.Notification_Field_Empty);
-                                          if(_entity.CPF.Length != 11) return new ValidationResult("CPF", string.Format(Strings.Notification_Field_X_Length, 11));
-                                          //if (Regex.IsMatch(_entity.CPF, @"^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$")) return new ValidationResult("CPF", string.Format(Strings.Notification_Field_X_Invalid, "CPF"));
+                                          if(!Regex.IsMatch(_entity.CPF, @"^\d{3}.\d{3}.\d{3}-\d{2}$")) return new ValidationResult("CPF", string.Format(Strings.Notification_Field_X_Invalid, "CPF"));
                                           return null;
                                       });
                 _entity.AddValidation(delegate {
                                           if(string.IsNullOrWhiteSpace(_entity.RG)) return new ValidationResult("RG", Strings.Notification_Field_Empty);
-                                          if(_entity.RG.ToString(culture).Length != 9) return new ValidationResult("RG", string.Format(Strings.Notification_Field_X_Length, 9));
-                                          //if (Regex.IsMatch(_entity.RG, @"^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$")) return new ValidationResult("RG", string.Format(Strings.Notification_Field_X_Invalid, "RG"));
+                                          if (!Regex.IsMatch(_entity.RG, @"^\d{2}.\d{3}.\d{3}-\d{1}$")) return new ValidationResult("RG", string.Format(Strings.Notification_Field_X_Invalid, "RG"));
                                           return null;
                                       });
                 _entity.AddValidation(delegate {

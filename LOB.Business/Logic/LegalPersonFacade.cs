@@ -54,29 +54,24 @@ namespace LOB.Business.Logic {
             _baseEntityFacade.ConfigureValidations();
             _personFacade.ConfigureValidations();
             if(_entity != null) {
-                _entity.AddValidation(
-                    delegate {
-                        if (string.IsNullOrWhiteSpace(_entity.CorporateName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
-                        if (Regex.IsMatch(_entity.CorporateName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
-                            return new ValidationResult("CorporateName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CorporateName));
-                        return null;
-                    });
-                _entity.AddValidation(
-                    delegate {
-                        if (string.IsNullOrWhiteSpace(_entity.TradingName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
-                        if (Regex.IsMatch(_entity.TradingName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
-                            return new ValidationResult("TradingName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_TradingName));
-                        return null;
-                    });
                 _entity.AddValidation(delegate {
-                                          if(string.IsNullOrWhiteSpace(_entity.CNPJ)) return new ValidationResult("CNPJ", Strings.Notification_Field_Empty);
-                                          if(_entity.CNPJ.Length != 14) return new ValidationResult("CNPJ", string.Format(Strings.Notification_Field_X_Length, 14));
-                                          //if (Regex.IsMatch(_entity.CNPJ, @"^\d{3}.?\d{3}.?\d{3}/?\d{3}-?\d{2}$")) return new ValidationResult("CNPJ", string.Format(Strings.Notification_Field_X_Invalid, "CNPJ"));
+                                          if(string.IsNullOrWhiteSpace(_entity.CorporateName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.CorporateName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$")) return new ValidationResult("CorporateName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CorporateName));
                                           return null;
                                       });
                 _entity.AddValidation(delegate {
-                                          if(string.IsNullOrWhiteSpace(_entity.CNAEFiscal)) return new ValidationResult("CNPJ", Strings.Notification_Field_Empty);
-                                          if(_entity.CNAEFiscal.Length != 7) return new ValidationResult("CNAEFiscal", string.Format(Strings.Notification_Field_X_Length, 7));
+                                          if(string.IsNullOrWhiteSpace(_entity.TradingName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.TradingName, @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$")) return new ValidationResult("TradingName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_TradingName));
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.CNPJ)) return new ValidationResult("CNPJ", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.CNPJ, @"^\d{2}.\d{3}.\d{3}/\d{4}-\d{2}$")) return new ValidationResult("CNPJ",string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_Cnpj));
+                                          return null;
+                                      });
+                _entity.AddValidation(delegate {
+                                          if(string.IsNullOrWhiteSpace(_entity.CNAEFiscal)) return new ValidationResult("CNAEFiscal", Strings.Notification_Field_Empty);
+                                          if(!Regex.IsMatch(_entity.CNAEFiscal, @"^\d{4}-\d{1}/\d{2}$"))return new ValidationResult("CNAEFiscal",string.Format(Strings.Notification_Field_X_Invalid,Strings.Common_CnaeFiscal));
                                           return null;
                                       });
             }

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Dao.Interface;
@@ -18,7 +17,7 @@ using Microsoft.Practices.Unity;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    public class AlterPersonViewModel : AlterBaseEntityViewModel<LocalPerson>, IAlterPersonViewModel {
+    public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
 
         private readonly IPersonFacade _personFacade;
         private AlterAddressViewModel _alterAddressViewModel;
@@ -26,9 +25,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         [InjectionConstructor]
         public AlterPersonViewModel(IPersonFacade personFacade, AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger,
-            LocalPerson entity = null)
-            : base(entity, repository, eventAggregator, logger) {
+            AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(null, repository, eventAggregator, logger) {
             _personFacade = personFacade;
             _alterAddressViewModel = alterAddressViewModel;
             _alterContactInfoViewModel = alterContactInfoViewModel;
@@ -47,21 +45,34 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            IEnumerable<ValidationResult> results;
-            return _personFacade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Add) {
+                IEnumerable<ValidationResult> results;
+                return _personFacade.CanAdd(out results) & _alterAddressViewModel.SaveChangesCommand.CanExecute(null) &&
+                       _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null);
+            }
+            if(Operation.State == UIOperationState.Update) {
+                IEnumerable<ValidationResult> results;
+                return _personFacade.CanUpdate(out results) & _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null) &&
+                       _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null);
+            }
+            return false;
         }
-        protected override void ClearEntity(object arg) { throw new NotImplementedException(); }
+
+        protected override void ClearEntity(object arg) {
+            Entity = _personFacade.GenerateEntity();
+            _personFacade.SetEntity(Entity);
+            _personFacade.ConfigureValidations();
+        }
 
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Person, State = UIOperationState.Add};
-        #region Overrides of BaseViewModel
 
-        public override void InitializeServices() { if (Equals(Operation, default(UIOperation))) Operation = _operation; }
-        public override void Refresh() { }
-
-        #endregion
-    }
-
-    public class LocalPerson : Person {
+        public override void InitializeServices() {
+            if(Equals(Operation, default(UIOperation))) Operation = _operation;
+            AlterAddressViewModel.InitializeServices();
+            AlterContactInfoViewModel.InitializeServices();
+            ClearEntity(null);
+        }
+        public override void Refresh() { ClearEntity(null); }
 
     }
 }

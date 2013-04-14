@@ -7,8 +7,6 @@ using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -24,12 +22,6 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
             ViewEditTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
             ViewAlterNaturalPerson.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
-
-            var localViewModel = dependencyPropertyChangedEventArgs.NewValue as IAlterEmployeeViewModel;
-            if(localViewModel != null) {
-                ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterAddress.DataContext = localViewModel.AlterAddressViewModel;
-                ViewAlterNaturalPerson.ViewAlterPerson.ViewAlterContactInfo.DataContext = localViewModel.AlterContactInfoViewModel;
-            }
         }
 
         public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }

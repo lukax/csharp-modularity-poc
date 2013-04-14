@@ -79,7 +79,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
         }
 
-        protected virtual bool CanQuickSearch(object obj) { return Operation.State != UIOperationState.QuickSearch; }
+        protected virtual bool CanQuickSearch(object obj) {
+            if(Operation == null) return false;
+            return Operation.State != UIOperationState.QuickSearch;
+        }
         protected virtual void QuickSearch(object arg) {
             Operation.State(UIOperationState.QuickSearch);
             EventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);

@@ -67,9 +67,7 @@ namespace LOB.Business.Logic.Base {
             return true;
         }
 
-        private class LocalPerson : Person {
-
-        }
+        public class LocalPerson : Person {}
 
     }
 }

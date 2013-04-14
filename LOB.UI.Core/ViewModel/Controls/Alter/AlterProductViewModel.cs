@@ -24,23 +24,23 @@ using Category = LOB.Domain.SubEntity.Category;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
 
-        private readonly IProductFacade _facade;
+        private readonly IProductFacade _productFacade;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
         private readonly UIOperation _operation = new UIOperation {Type = UIOperationType.Service, State = UIOperationState.Add};
 
         [InjectionConstructor]
-        public AlterProductViewModel(Product entity, IRepository repository, IProductFacade facade, IEventAggregator eventAggregator,
+        public AlterProductViewModel(Product entity, IProductFacade productFacade, IRepository repository, IEventAggregator eventAggregator,
             ILoggerFacade logger)
             : base(entity, repository, eventAggregator, logger) {
-            _facade = facade;
+            _productFacade = productFacade;
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(UIOperation))) Operation = _operation;
+            if(Equals(Operation, default(UIOperation))) Operation = _operation;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
@@ -68,7 +68,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private void ExecuteAlterCategory(object o) {
             var op =
                 new UIOperation().Type(UIOperationType.Category)
-                                 .State(Entity.Category.Equals(_facade.GenerateEntity().Category) ? UIOperationState.Add : UIOperationState.Update);
+                                 .State(Entity.Category.Equals(_productFacade.GenerateEntity().Category)
+                                            ? UIOperationState.Add
+                                            : UIOperationState.Update);
             op.Entity = Entity.Category;
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
@@ -76,20 +78,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
 
         protected override bool CanSaveChanges(object arg) {
-            //TODO: If viewState == Add : ..., If viewState == Update : ....
-            IEnumerable<ValidationResult> results;
-            return _facade.CanAdd(out results);
+            if(Operation.State == UIOperationState.Add) {
+                IEnumerable<ValidationResult> results;
+                return _productFacade.CanAdd(out results);
+            }
+            if(Operation.State == UIOperationState.Update) {
+                IEnumerable<ValidationResult> results;
+                return _productFacade.CanUpdate(out results);
+            }
+            return false;
         }
 
-        protected override bool CanCancel(object arg) {
-            //TODO: Business logic
-            return true;
-        }
+        protected override bool CanCancel(object arg) { return true; }
 
         protected override void ClearEntity(object args) {
-            Entity = _facade.GenerateEntity();
-            _facade.SetEntity(Entity);
-            _facade.ConfigureValidations();
+            Entity = _productFacade.GenerateEntity();
+            _productFacade.SetEntity(Entity);
+            _productFacade.ConfigureValidations();
         }
 
     }

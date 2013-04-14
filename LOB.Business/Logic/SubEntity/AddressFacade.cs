@@ -59,8 +59,7 @@ namespace LOB.Business.Logic.SubEntity {
                                       });
                 _entity.AddValidation(delegate {
                                           if(string.IsNullOrWhiteSpace(_entity.ZipCode)) return new ValidationResult("ZipCode", Strings.Notification_Field_Empty);
-                                          if(!Regex.IsMatch(_entity.ZipCode, @"\d")) return new ValidationResult("ZipCode", Strings.Notification_Field_IntOnly);
-                                          if(_entity.ZipCode.Length != 8) return new ValidationResult("ZipCode", string.Format(Strings.Notification_Field_X_Length, 8));
+                                          if (Regex.IsMatch(_entity.ZipCode, @"^\d{5}-\d{3}$")) return new ValidationResult("ZipCode", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_ZipCode));
                                           return null;
                                       });
                 _entity.AddValidation(

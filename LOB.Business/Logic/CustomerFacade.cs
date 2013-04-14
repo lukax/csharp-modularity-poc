@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic;
@@ -52,7 +51,7 @@ namespace LOB.Business.Logic {
         Person IPersonFacade.GenerateEntity() {
             if(PersonType == PersonType.Natural) return _naturalPersonFacade.GenerateEntity();
             if(PersonType == PersonType.Legal) return _legalPersonFacade.GenerateEntity();
-            throw new NotImplementedException("PersonType");
+            return null;
         }
 
         public void ConfigureValidations() {

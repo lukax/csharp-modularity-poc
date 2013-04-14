@@ -18,14 +18,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
         }
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
-            var model = dependencyPropertyChangedEventArgs.NewValue as IAlterNaturalPersonViewModel;
-            if(model != null) {
-                ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
-                ViewAlterPerson.DataContext = dependencyPropertyChangedEventArgs.NewValue;
-                ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
-                ViewAlterPerson.ViewAlterAddress.DataContext = model.AlterAddressViewModel;
-                ViewAlterPerson.ViewAlterAddress.DataContext = model.AlterContactInfoViewModel;
-            }
+            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
+            var view = dependencyPropertyChangedEventArgs.NewValue as IAlterNaturalPersonViewModel;
+            ViewAlterPerson.DataContext = view != null ? view.AlterPersonViewModel : dependencyPropertyChangedEventArgs.NewValue;
         }
 
         public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }

@@ -35,7 +35,9 @@
             <base2:CodeView Grid.Row="0" x:Name="ViewCode" />
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" MinWidth="200" />
+                <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"
+                         Text="{Binding Entity.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                         HorizontalAlignment="Stretch" MinWidth="300" />
             </StackPanel>
             <GroupBox Header="{x:Static loc:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="1">
                 <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}"
@@ -83,7 +85,8 @@
                      HorizontalAlignment="Left" />
 
             <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" HorizontalAlignment="Left"
-                     MinWidth="300" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" MaxHeight="50" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                     MinWidth="300" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" MaxHeight="50"
+                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                      Text="{Binding Entity.PS, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
 
         </Grid>
