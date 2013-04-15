@@ -23,18 +23,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private AlterContactInfoViewModel _alterContactInfoViewModel;
 
         [InjectionConstructor]
-        public AlterPersonViewModel(IPersonFacade personFacade, AlterAddressViewModel alterAddressViewModel,
-            AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(repository, eventAggregator, logger) {
-            _personFacade = personFacade;
-            _alterAddressViewModel = alterAddressViewModel;
-            _alterContactInfoViewModel = alterContactInfoViewModel;
-        }
+        public AlterPersonViewModel(IPersonFacade personFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { _personFacade = personFacade; }
 
+        [Dependency]
         public IAlterAddressViewModel AlterAddressViewModel {
             get { return _alterAddressViewModel; }
             set { _alterAddressViewModel = value as AlterAddressViewModel; }
         }
+        [Dependency]
         public IAlterContactInfoViewModel AlterContactInfoViewModel {
             get { return _alterContactInfoViewModel; }
             set { _alterContactInfoViewModel = value as AlterContactInfoViewModel; }
@@ -73,6 +70,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             _personFacade.Entity = Entity;
             _alterAddressViewModel.Entity = Entity.Address;
             _alterContactInfoViewModel.Entity = Entity.ContactInfo;
+        }
+
+        public override void Dispose() {
+            _alterAddressViewModel.Dispose();
+            _alterContactInfoViewModel.Dispose();
+            base.Dispose();
         }
     }
 }

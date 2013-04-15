@@ -7,6 +7,7 @@ using LOB.Business.Interface.Logic;
 using LOB.Core.Localization;
 using LOB.Domain;
 using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -24,21 +25,21 @@ namespace LOB.Business.Logic {
             return new Employee {
                 Code = 0,
                 Error = null,
-                //Address = localNaturalPerson.Address,
-                //ContactInfo = localNaturalPerson.ContactInfo,
-                //Notes = localNaturalPerson.Notes,
-                //BirthDate = localNaturalPerson.BirthDate,
-                //CPF = localNaturalPerson.CPF,
-                //FirstName = localNaturalPerson.FirstName,
-                //LastName = localNaturalPerson.LastName,
+                Address = new Address(),
+                ContactInfo = new ContactInfo(),
+                Notes = "",
+                BirthDate = DateTime.Now,
+                CPF = "",
+                FirstName = "",
+                LastName = "",
                 HireDate = DateTime.Now,
-                //NickName = localNaturalPerson.NickName,
+                NickName = "",
                 Password = "",
-                //PayCheck = localPayCheck,
-                //RG = localNaturalPerson.RG,
-                //RGUF = localNaturalPerson.RGUF,
+                PayCheck = new PayCheck(),
+                RG = "",
+                RGUF = "",
                 Title = "",
-                //WorksIn = localStore,
+                WorksIn = new Store(),
             };
         }
 

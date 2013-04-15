@@ -22,14 +22,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly INaturalPersonFacade _naturalPersonFacade;
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add};
-        public IAlterPersonViewModel AlterPersonViewModel { get; set; }
+        private AlterPersonViewModel _alterPersonViewModel;
+        [Dependency]
+        public IAlterPersonViewModel AlterPersonViewModel {
+            get { return _alterPersonViewModel; }
+            set { _alterPersonViewModel = value as AlterPersonViewModel; }
+        }
 
         [InjectionConstructor]
-        public AlterNaturalPersonViewModel(INaturalPersonFacade naturalPersonFacade, IAlterPersonViewModel alterPersonViewModel,
-            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+        public AlterNaturalPersonViewModel(INaturalPersonFacade naturalPersonFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(repository, eventAggregator, logger) {
             _naturalPersonFacade = naturalPersonFacade;
-            AlterPersonViewModel = alterPersonViewModel;
         }
 
         public string BirthDate {
@@ -66,14 +69,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override void ClearEntity(object arg) { Entity = _naturalPersonFacade.GenerateEntity(); }
 
-        public override void Dispose() {
-            AlterPersonViewModel.Dispose();
-            base.Dispose();
-        }
-
         protected override void EntityChanged() {
             base.EntityChanged();
             _naturalPersonFacade.Entity = Entity;
+            _alterPersonViewModel.Entity = Entity;
+        }
+
+        public override void Dispose()
+        {
+            AlterPersonViewModel.Dispose();
+            base.Dispose();
         }
     }
 }

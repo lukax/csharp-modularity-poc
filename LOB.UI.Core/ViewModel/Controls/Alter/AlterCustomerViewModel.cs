@@ -23,8 +23,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private readonly ICustomerFacade _customerFacade;
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Customer, State = ViewState.Add};
-        private readonly IAlterNaturalPersonViewModel _alterNaturalPersonViewModel;
-        private readonly IAlterLegalPersonViewModel _alterLegalPersonViewModel;
+        private readonly AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
+        private readonly AlterLegalPersonViewModel _alterLegalPersonViewModel;
         public IAlterPersonViewModel AlterPersonViewModel {
             get {
                 if(Entity.PersonType == Domain.Base.PersonType.Natural) return _alterNaturalPersonViewModel.AlterPersonViewModel;
@@ -48,8 +48,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             IAlterNaturalPersonViewModel alterNaturalPersonViewModel, IAlterLegalPersonViewModel alterLegalPersonViewModel)
             : base(repository, eventAggregator, logger) {
             _customerFacade = customerFacade;
-            _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
-            _alterLegalPersonViewModel = alterLegalPersonViewModel;
+            _alterNaturalPersonViewModel = alterNaturalPersonViewModel as AlterNaturalPersonViewModel;
+            _alterLegalPersonViewModel = alterLegalPersonViewModel as AlterLegalPersonViewModel;
             PersonOperation = new ViewID {Type = ViewType.Person, State = ViewState.Add};
         }
 
@@ -110,7 +110,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void ClearEntity(object arg) {
             Entity = _customerFacade.GenerateEntity();
             PersonTypeChanged();
-            //_customerFacade.EnableValidations();
         }
 
         public override void Dispose() {
@@ -122,6 +121,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void EntityChanged() {
             base.EntityChanged();
             _customerFacade.Entity = Entity;
+            if (Entity.PersonType == Domain.Base.PersonType.Natural)  _alterNaturalPersonViewModel.Entity = Entity.Person as NaturalPerson;
+            if (Entity.PersonType == Domain.Base.PersonType.Legal)  _alterLegalPersonViewModel.Entity = Entity.Person as LegalPerson;
         }
     }
 }

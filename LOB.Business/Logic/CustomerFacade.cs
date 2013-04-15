@@ -3,9 +3,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic;
+using LOB.Business.Logic.Base;
 using LOB.Domain;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -26,8 +28,40 @@ namespace LOB.Business.Logic {
                 BoughtHistory = new List<Sale>(),
                 Status = default(CustomerStatus),
                 CustomerOf = new List<Store>(),
-                Person = null,
-                PersonType = default(PersonType) //default(PersonType),
+                Person =
+                    new PersonFacade.LocalPerson {
+                        Code = 0,
+                        Error = null,
+                        Address =
+                            new Address {
+                                Code = 0,
+                                County = "",
+                                Country = "Brasil",
+                                District = "",
+                                Error = null,
+                                IsDefault = false,
+                                State = "Rio de Janeiro",
+                                Status = default(AddressStatus),
+                                Street = "",
+                                StreetComplement = "",
+                                StreetNumber = "",
+                                ZipCode = "",
+                            },
+                        ContactInfo =
+                            new ContactInfo {
+                                Code = 0,
+                                Description = "",
+                                Error = null,
+                                Status = default(ContactStatus),
+                                PS = "",
+                                Emails = new List<Email>(),
+                                PhoneNumbers = new List<PhoneNumber>(),
+                                SpeakWith = "",
+                                WebSite = "http://",
+                            },
+                        Notes = "",
+                    },
+            PersonType = default(PersonType) //default(PersonType),
             };
         }
 

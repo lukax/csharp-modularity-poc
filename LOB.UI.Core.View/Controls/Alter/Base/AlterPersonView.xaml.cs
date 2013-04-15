@@ -3,6 +3,7 @@
 using System;
 using System.Windows;
 using LOB.Core.Localization;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
@@ -16,7 +17,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
             DataContextChanged += OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
-            var view = dependencyPropertyChangedEventArgs.NewValue as IAlterPersonViewModel;
+            var view = dependencyPropertyChangedEventArgs.NewValue as AlterPersonViewModel;
             if(view != null) {
                 ViewAlterAddress.DataContext = view.AlterAddressViewModel;
                 ViewAlterContactInfo.DataContext = view.AlterContactInfoViewModel;

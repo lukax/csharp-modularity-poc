@@ -120,20 +120,26 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
+            Worker.ReportProgress(10);
+            Repository.Uow.OnError += (o, s) => {
+                                          NotificationEvent.Publish(
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).Severity(AttentionState.Error));
+                                          Worker.CancelAsync();
+                                      };
             do {
                 Worker.ReportProgress(-1);
                 Thread.Sleep(2000);
                 Worker.ReportProgress(5);
                 var result = new object[2];
-                Worker.ReportProgress(10);
-                using(Repository.Uow.BeginTransaction()) {
-                    Emails = new ListCollectionView(Repository.GetAll<Email>().ToList());
-                    Worker.ReportProgress(50);
-                    PhoneNumbers = new ListCollectionView(Repository.GetAll<PhoneNumber>().ToList());
-                    Worker.ReportProgress(90);
-                    args.Result = result;
-                    Worker.ReportProgress(100);
-                }
+                using(Repository.Uow.BeginTransaction())
+                    if(!Worker.CancellationPending) {
+                        Emails = new ListCollectionView(Repository.GetAll<Email>().ToList());
+                        Worker.ReportProgress(50);
+                        PhoneNumbers = new ListCollectionView(Repository.GetAll<PhoneNumber>().ToList());
+                        Worker.ReportProgress(90);
+                        args.Result = result;
+                        Worker.ReportProgress(100);
+                    }
             } while(!Worker.CancellationPending);
         }
 
@@ -146,8 +152,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            Notification.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating);
-            Notification.Progress(args.ProgressPercentage);
+            Notification.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating)
+                        .Severity(AttentionState.Info)
+                        .Progress(args.ProgressPercentage);
             NotificationEvent.Publish(Notification);
         }
 

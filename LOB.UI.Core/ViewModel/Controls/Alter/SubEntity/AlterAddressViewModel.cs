@@ -102,7 +102,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         protected override void EntityChanged() {
             base.EntityChanged();
             _addressFacade.Entity = Entity;
-            if(Entity == null) {}
         }
     }
 }

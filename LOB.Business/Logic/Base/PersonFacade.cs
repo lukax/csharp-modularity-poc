@@ -6,6 +6,7 @@ using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -19,7 +20,40 @@ namespace LOB.Business.Logic.Base {
             }
         }
 
-        public Person GenerateEntity() { return new LocalPerson {Code = 0, Error = null, Address = null, ContactInfo = null, Notes = "",}; }
+        public Person GenerateEntity() {
+            return new LocalPerson {
+                Code = 0,
+                Error = null,
+                Address =
+                    new Address {
+                        Code = 0,
+                        County = "",
+                        Country = "Brasil",
+                        District = "",
+                        Error = null,
+                        IsDefault = false,
+                        State = "Rio de Janeiro",
+                        Status = default(AddressStatus),
+                        Street = "",
+                        StreetComplement = "",
+                        StreetNumber = "",
+                        ZipCode = "",
+                    },
+                ContactInfo =
+                    new ContactInfo {
+                        Code = 0,
+                        Description = "",
+                        Error = null,
+                        Status = default(ContactStatus),
+                        PS = "",
+                        Emails = new List<Email>(),
+                        PhoneNumbers = new List<PhoneNumber>(),
+                        SpeakWith = "",
+                        WebSite = "http://",
+                    },
+                Notes = "",
+            };
+        }
 
         public void ConfigureValidations() {
             if(_entity != null)

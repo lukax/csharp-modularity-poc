@@ -17,17 +17,17 @@ namespace LOB.Dao.Nhibernate {
         protected ILoggerFacade LoggerFacade { get; set; }
         protected ITransaction Transaction { get; set; }
         private object _orm;
-        [AllowNull] public object ORM {
-            get
-            {
-                return _orm ?? (_orm = Task.Run(()=> {
-                                            try {
-                                                SessionFactoryCreator.OnError += OnError;
-                                                return SessionFactoryCreator.ORMFactory.As<ISessionFactory>().OpenSession();
-                                            } catch(NullReferenceException) {
-                                                return null;
-                                            }
-                                        }).Result);
+        [AllowNull]
+        public object ORM {
+            get {
+                return _orm ?? (_orm = Task.Run(() => {
+                                                    try {
+                                                        if(OnError != null) SessionFactoryCreator.OnError += OnError;
+                                                        return SessionFactoryCreator.ORMFactory.As<ISessionFactory>().OpenSession();
+                                                    } catch(NullReferenceException) {
+                                                        return null;
+                                                    }
+                                                }).Result);
             }
         }
         protected ISessionFactoryCreator SessionFactoryCreator { get; set; }

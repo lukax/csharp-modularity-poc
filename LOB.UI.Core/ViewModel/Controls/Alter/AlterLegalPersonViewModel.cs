@@ -21,14 +21,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private readonly ILegalPersonFacade _legalPersonFacade;
         private readonly IEventAggregator _eventAggregator;
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.LegalPerson, State = ViewState.Add};
+        private AlterPersonViewModel _alterPersonViewModel;
 
-        public IAlterPersonViewModel AlterPersonViewModel { get; set; }
+        [Dependency]
+        public IAlterPersonViewModel AlterPersonViewModel {
+            get { return _alterPersonViewModel; }
+            set { _alterPersonViewModel = value as AlterPersonViewModel; }
+        }
 
         [InjectionConstructor]
-        public AlterLegalPersonViewModel(ILegalPersonFacade legalPersonFacade, IAlterPersonViewModel alterPersonViewModel, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade logger)
+        public AlterLegalPersonViewModel(ILegalPersonFacade legalPersonFacade, IRepository repository, IEventAggregator eventAggregator,ILoggerFacade logger)
             : base(repository, eventAggregator, logger) {
-            AlterPersonViewModel = alterPersonViewModel;
             _legalPersonFacade = legalPersonFacade;
             _eventAggregator = eventAggregator;
         }
@@ -65,6 +68,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void EntityChanged() {
             base.EntityChanged();
             _legalPersonFacade.Entity = Entity;
+            _alterPersonViewModel.Entity = Entity;
         }
     }
 }

@@ -20,14 +20,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
         private readonly IEmployeeFacade _employeeFacade;
 
-        public IAlterPersonViewModel AlterPersonViewModel { get; set; }
+        [Dependency]
+        public IAlterPersonViewModel AlterPersonViewModel {
+            get { return _alterPersonViewModel; }
+            set { _alterPersonViewModel = value as AlterPersonViewModel; }
+        }
 
         [InjectionConstructor]
         public AlterEmployeeViewModel(IEmployeeFacade employeeFacade, IAlterPersonViewModel alterPersonViewModel, IRepository repository,
             IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(repository, eventAggregator, logger) {
             _employeeFacade = employeeFacade;
-            AlterPersonViewModel = alterPersonViewModel;
         }
 
         public override void InitializeServices() {
@@ -39,6 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void Refresh() { ClearEntity(null); }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Employee, State = ViewState.Add};
+        private AlterPersonViewModel _alterPersonViewModel;
 
         protected override bool CanSaveChanges(object arg) {
             if(ViewID.State == ViewState.Add) {
@@ -66,6 +70,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void EntityChanged() {
             base.EntityChanged();
             _employeeFacade.Entity = Entity;
+            _alterPersonViewModel.Entity = Entity;
         }
     }
 }

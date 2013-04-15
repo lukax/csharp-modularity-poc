@@ -8,6 +8,7 @@ using LOB.Business.Interface.Logic;
 using LOB.Core.Localization;
 using LOB.Domain;
 using LOB.Domain.Logic;
+using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -31,8 +32,33 @@ namespace LOB.Business.Logic {
                 RGUF = "",
                 Code = 0,
                 Error = null,
-                //Address = localPerson.Address,
-                //ContactInfo = localPerson.ContactInfo,
+                Address =
+                    new Address {
+                        Code = 0,
+                        County = "",
+                        Country = "Brasil",
+                        District = "",
+                        Error = null,
+                        IsDefault = false,
+                        State = "Rio de Janeiro",
+                        Status = default(AddressStatus),
+                        Street = "",
+                        StreetComplement = "",
+                        StreetNumber = "",
+                        ZipCode = "",
+                    },
+                ContactInfo =
+                    new ContactInfo {
+                        Code = 0,
+                        Description = "",
+                        Error = null,
+                        Status = default(ContactStatus),
+                        PS = "",
+                        Emails = new List<Email>(),
+                        PhoneNumbers = new List<PhoneNumber>(),
+                        SpeakWith = "",
+                        WebSite = "http://",
+                    },
                 Notes = "",
             };
         }
