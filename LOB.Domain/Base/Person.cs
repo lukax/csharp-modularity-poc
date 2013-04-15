@@ -12,7 +12,6 @@ using LOB.Domain.SubEntity;
 namespace LOB.Domain.Base {
     [Serializable]
     public abstract class Person : BaseEntity, IEquatable<Person> {
-
         public Address Address { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public string Notes { get; set; }
@@ -34,22 +33,21 @@ namespace LOB.Domain.Base {
 
     [Serializable]
     public enum PersonType {
-        Unknown =0,
+        Unknown = 0,
         Natural,
         Legal
-
     }
 
     public static class PersonExtensions {
-
-        public static IDictionary<PersonType, string> PersonTypesLocalizationsDict { get {
-            return new Dictionary<PersonType, string> {
-                {PersonType.Natural, Strings.Common_NaturalPerson},
-                {PersonType.Legal, Strings.Common_LegalPerson}
-            };
-        } }
+        public static IDictionary<PersonType, string> PersonTypesLocalizationsDict {
+            get {
+                return new Dictionary<PersonType, string> {
+                    {PersonType.Natural, Strings.Common_NaturalPerson},
+                    {PersonType.Legal, Strings.Common_LegalPerson}
+                };
+            }
+        }
         public static PersonType ToPersonType(this string s) { return PersonTypesLocalizationsDict.FirstOrDefault(x => x.Value.ToLower() == s.ToLower()).Key; }
         public static string ToLocalizedString(this PersonType s) { return PersonTypesLocalizationsDict[s]; }
-
     }
 }

@@ -6,8 +6,6 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.Log.Interface {
     public interface ILogger {
-
         void Log(string message, Category category, Priority priority);
-
     }
 }

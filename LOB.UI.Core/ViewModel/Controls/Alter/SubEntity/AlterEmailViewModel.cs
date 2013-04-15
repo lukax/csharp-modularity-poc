@@ -1,9 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.ComponentModel;
 using LOB.Business.Interface.Logic.SubEntity;
-using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
@@ -18,30 +16,27 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {
-
         private readonly IEmailFacade _emailFacade;
 
         public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
-            _emailFacade = emailFacade;
-        }
+            : base(entity, repository, eventAggregator, logger) { _emailFacade = emailFacade; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
         }
 
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == ViewState.Add) {
+            if(ViewID.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _emailFacade.CanAdd(out results);
             }
-            if(Operation.State == ViewState.Update) {
+            if(ViewID.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _emailFacade.CanUpdate(out results);
             }
@@ -50,11 +45,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override void ClearEntity(object arg) {
             Entity = _emailFacade.GenerateEntity();
-            _emailFacade.SetEntity(Entity);
-            _emailFacade.ConfigureValidations();
+            _emailFacade.Entity = (Entity);
         }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Email, State = ViewState.Add};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Email, State = ViewState.Add};
     }
 }

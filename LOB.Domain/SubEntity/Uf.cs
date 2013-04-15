@@ -13,7 +13,6 @@ using System.Threading;
 namespace LOB.Domain.SubEntity {
     [DefaultValue(Outro)]
     public enum UF {
-
         // ReSharper disable InconsistentNaming
         AC = 12,
         AL = 27,
@@ -44,11 +43,9 @@ namespace LOB.Domain.SubEntity {
         TO = 17,
         // ReSharper restore InconsistentNaming
         Outro = 0
-
     }
 
     public static class UFDictionary {
-
         private static readonly Lazy<IDictionary<UF, string>> Lazy =
             new Lazy<IDictionary<UF, string>>(
                 () =>
@@ -86,11 +83,9 @@ namespace LOB.Domain.SubEntity {
         public static IDictionary<UF, string> Ufs {
             get { return Lazy.Value; }
         }
-
     }
 
     public static class UFExtensions {
-
         public static UF ToUF(this string s) {
             UF parsed;
             if(s.Length == 2) return Enum.TryParse(s, out parsed) ? parsed : default(UF);
@@ -106,6 +101,5 @@ namespace LOB.Domain.SubEntity {
             //Faster than Regex.Replace(input, @"[\d-]", "");
             return contents != null ? contents.Select(content => content.Remove(0, 8)) : null;
         }
-
     }
 }

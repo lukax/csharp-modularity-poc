@@ -16,14 +16,13 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {
-
         private readonly IPayCheckFacade _payCheckFacade;
         public AlterPayCheckViewModel(PayCheck entity, IPayCheckFacade payCheckFacade, IRepository repository, IEventAggregator eventAggregator,
             ILoggerFacade logger)
             : base(entity, repository, eventAggregator, logger) { _payCheckFacade = payCheckFacade; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
         }
 
@@ -31,8 +30,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == ViewState.Add) return _payCheckFacade.CanAdd(out results);
-            if(Operation.State == ViewState.Update) return _payCheckFacade.CanUpdate(out results);
+            if(ViewID.State == ViewState.Add) return _payCheckFacade.CanAdd(out results);
+            if(ViewID.State == ViewState.Update) return _payCheckFacade.CanUpdate(out results);
             return false;
         }
 
@@ -41,15 +40,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return true;
         }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override void ClearEntity(object arg) {
             Entity = _payCheckFacade.GenerateEntity();
-            _payCheckFacade.SetEntity(Entity);
-            _payCheckFacade.ConfigureValidations();
+            _payCheckFacade.Entity = (Entity);
         }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.PayCheck, State = ViewState.Add};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.PayCheck, State = ViewState.Add};
     }
 }

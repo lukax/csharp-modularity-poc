@@ -7,17 +7,11 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Interface.Logic.Base {
-    public interface IBaseEntityFacade {
-
-        void SetEntity<T>(T entity) where T : BaseEntity;
-        void ConfigureValidations();
+    public interface IBaseEntityFacade<TEntity> where TEntity : BaseEntity {
+        TEntity Entity { set; }
+        TEntity GenerateEntity();
         bool CanAdd(out IEnumerable<ValidationResult> invalidFields);
         bool CanUpdate(out IEnumerable<ValidationResult> invalidFields);
         bool CanDelete(out IEnumerable<ValidationResult> invalidFields);
-
-    }
-
-    internal interface IBaseEntityFacade<TEntity> where TEntity : BaseEntity {
-
     }
 }

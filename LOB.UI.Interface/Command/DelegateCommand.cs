@@ -7,7 +7,6 @@ using System.Windows.Input;
 
 namespace LOB.UI.Interface.Command {
     public class DelegateCommand : ICommand {
-
         private readonly Predicate<object> _canExecute;
         private readonly Action<Object> _execute;
 
@@ -27,6 +26,5 @@ namespace LOB.UI.Interface.Command {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
-
     }
 }

@@ -13,7 +13,6 @@ using NHibernate.Linq;
 
 namespace LOB.Dao.Nhibernate {
     public class Repository : IRepository {
-
         protected ISession Session {
             get { return Uow.As<UnityOfWork>().ORM.As<ISession>(); }
         }
@@ -53,6 +52,5 @@ namespace LOB.Dao.Nhibernate {
             return temp == default(T) ? null : temp;
         }
         public bool Contains<T>(int code) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(x => x.Code == code)); }
-
     }
 }

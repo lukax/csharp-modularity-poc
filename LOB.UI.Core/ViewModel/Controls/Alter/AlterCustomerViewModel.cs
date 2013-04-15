@@ -21,9 +21,8 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
-
         private readonly ICustomerFacade _customerFacade;
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Customer, State = ViewState.Add};
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Customer, State = ViewState.Add};
         private readonly IAlterNaturalPersonViewModel _alterNaturalPersonViewModel;
         private readonly IAlterLegalPersonViewModel _alterLegalPersonViewModel;
         public IAlterPersonViewModel AlterPersonViewModel {
@@ -34,9 +33,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             }
         }
         public ViewID PersonOperation { get; set; }
-        public IList<string> PersonTypes { get { return PersonExtensions.PersonTypesLocalizationsDict.Values.ToList(); } }
-        public string PersonType { set { Entity.PersonType = value.ToPersonType(); } }
-        public string Status { get { return Entity.Status.ToLocalizedString(); } }
+        public IList<string> PersonTypes {
+            get { return PersonExtensions.PersonTypesLocalizationsDict.Values.ToList(); }
+        }
+        public string PersonType {
+            set { Entity.PersonType = value.ToPersonType(); }
+        }
+        public string Status {
+            get { return Entity.Status.ToLocalizedString(); }
+        }
 
         [InjectionConstructor]
         public AlterCustomerViewModel(Customer entity, ICustomerFacade customerFacade, IRepository repository, IEventAggregator eventAggregator,
@@ -82,18 +87,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(ViewID))) Operation = _operation;
-            _alterLegalPersonViewModel.InitializeServices();
-            _alterNaturalPersonViewModel.InitializeServices();
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == ViewState.Add) {
+            if(ViewID.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _customerFacade.CanAdd(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
-            if(Operation.State == ViewState.Update) {
+            if(ViewID.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _customerFacade.CanUpdate(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
@@ -102,13 +105,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override bool CanCancel(object arg) { return true; }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override void ClearEntity(object arg) {
             Entity = _customerFacade.GenerateEntity();
             PersonTypeChanged();
-            _customerFacade.SetEntity(Entity);
-            _customerFacade.ConfigureValidations();
+            _customerFacade.Entity = (Entity);
+            //_customerFacade.EnableValidations();
         }
 
         public override void Dispose() {
@@ -116,6 +119,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             _alterNaturalPersonViewModel.Dispose();
             base.Dispose();
         }
-
     }
 }

@@ -18,17 +18,14 @@ using Category = LOB.Domain.SubEntity.Category;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {
-
         private readonly ICategoryFacade _categoryFacade;
+
         public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
-            _categoryFacade = categoryFacade;
-            Refresh();
-        }
+            : base(entity, repository, eventAggregator, logger) { _categoryFacade = categoryFacade; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultID;
             ClearEntity(null);
             EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
         }
@@ -37,33 +34,32 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var entity = baseEntity as Category;
             if(entity == null) return;
             Entity = entity;
-            Operation.State(ViewState.Update);
+            ViewID.State(ViewState.Update);
         }
 
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == ViewState.Add) return _categoryFacade.CanAdd(out results);
-            if(Operation.State == ViewState.Update) return _categoryFacade.CanUpdate(out results);
+            if(ViewID.State == ViewState.Add) return _categoryFacade.CanAdd(out results);
+            if(ViewID.State == ViewState.Update) return _categoryFacade.CanUpdate(out results);
             return false;
         }
 
         protected override bool CanCancel(object arg) {
-            if(Operation.State == ViewState.Add) return true;
-            if(Operation.State == ViewState.Update) return true;
+            if(ViewID.State == ViewState.Add) return true;
+            if(ViewID.State == ViewState.Update) return true;
             return false;
         }
 
         protected override void ClearEntity(object arg) {
             Entity = _categoryFacade.GenerateEntity();
-            _categoryFacade.SetEntity(Entity);
-            _categoryFacade.ConfigureValidations();
+            _categoryFacade.Entity = (Entity);
+            //_categoryFacade.ConfigureValidations();
         }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Category, State = ViewState.Add};
-
+        private readonly ViewID _defaultID = new ViewID {Type = ViewType.Category, State = ViewState.Add};
     }
 }

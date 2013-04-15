@@ -33,7 +33,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <base2:CodeView x:Name="ViewCode"/>
+            <base2:CodeView x:Name="ViewCode" />
 
             <Label Content="{x:Static loc:Strings.Common_Name}" Grid.Column="1" HorizontalAlignment="Right" />
             <TextBox Text="{Binding Name}" Grid.Column="2" HorizontalAlignment="Left" MinWidth="200" />

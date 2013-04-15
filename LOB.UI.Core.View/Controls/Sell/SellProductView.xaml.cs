@@ -10,7 +10,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Sell {
     public partial class SellProductView : UserControl, IBaseView {
-
         public SellProductView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel { get; set; }
@@ -25,8 +24,8 @@ namespace LOB.UI.Core.View.Controls.Sell {
 
         public void Refresh() { throw new NotImplementedException(); }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

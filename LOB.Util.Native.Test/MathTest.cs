@@ -8,7 +8,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LOB.Util.Native.Test {
     [TestClass]
     public class MathTest {
-
         [DllImport("..\\..\\..\\LOB.Util.Native\\Debug\\LOB.Util.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double Power(double x, int y);
 
@@ -27,6 +26,5 @@ namespace LOB.Util.Native.Test {
             var result2 = Random();
             Assert.AreNotEqual(result1, result2, "1: " + result1 + " 2: " + result2);
         }
-
     }
 }

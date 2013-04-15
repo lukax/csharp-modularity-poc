@@ -1,7 +1,5 @@
 ﻿#region Usings
 
-using LOB.Domain.Base;
-using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 
@@ -9,9 +7,7 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.Events.Operation {
     /// <summary>
-    /// object view
+    ///     object view
     /// </summary>
-    public class PersonTypeChangedEvent : CompositePresentationEvent<ViewID> {
-
-    }
+    public class PersonTypeChangedEvent : CompositePresentationEvent<ViewID> {}
 }

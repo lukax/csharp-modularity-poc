@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class NaturalPerson : Person, IEquatable<NaturalPerson> {
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

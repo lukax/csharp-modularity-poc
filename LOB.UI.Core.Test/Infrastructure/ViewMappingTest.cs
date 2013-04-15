@@ -9,13 +9,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LOB.UI.Core.Test.Infrastructure {
     [TestClass]
     public class ViewMappingTest {
-
         [TestMethod]
         public void Mapping() {
             var op1 = new ViewID {Type = ViewType.MessageTool};
             var op2 = ViewDictionary.ViewModels[op1];
             Assert.AreEqual(op1, op2);
         }
-
     }
 }

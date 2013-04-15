@@ -73,7 +73,6 @@
     <Compile Include="IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterPersonViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\Base\IAlterServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterStoreViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterEmployeeViewModel.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterPhoneNumberViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\IListBaseEntityViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\Base\IListPersonViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\Base\IListServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\IListOpViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\IListCustomerViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\IListEmployeeViewModel.cs" />

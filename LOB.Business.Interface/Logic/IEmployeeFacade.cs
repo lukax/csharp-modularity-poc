@@ -1,14 +1,10 @@
 ﻿#region Usings
 
+using LOB.Business.Interface.Logic.Base;
 using LOB.Domain;
 
 #endregion
 
 namespace LOB.Business.Interface.Logic {
-    public interface IEmployeeFacade : INaturalPersonFacade {
-
-        new void SetEntity<T>(T entity) where T : Employee;
-        new Employee GenerateEntity();
-
-    }
+    public interface IEmployeeFacade : IBaseEntityFacade<Employee> {}
 }

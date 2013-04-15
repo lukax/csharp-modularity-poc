@@ -10,7 +10,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterEmailView : IBaseView {
-
         public AlterEmailView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -20,9 +19,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_Email; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_Email; }
+        }
 
         public int Index { get; set; }
 
@@ -30,7 +34,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

@@ -123,14 +123,16 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Message}" behaviours:GridViewColumnResize.Width="*">
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Message}"
+                                        behaviours:GridViewColumnResize.Width="*">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding Message}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Details}" behaviours:GridViewColumnResize.Width="2*">
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Details}"
+                                        behaviours:GridViewColumnResize.Width="2*">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding Detail}" />
@@ -146,15 +148,15 @@
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Progress}" Value="-2">
                                                         <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="IsIndeterminate" Value="True"/>
+                                                        <Setter Property="IsIndeterminate" Value="True" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Progress}" Value="-1">
                                                         <Setter Property="Visibility" Value="Hidden" />
-                                                        <Setter Property="IsIndeterminate" Value="False"/>
+                                                        <Setter Property="IsIndeterminate" Value="False" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Progress}" Value="0">
                                                         <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="IsIndeterminate" Value="False"/>
+                                                        <Setter Property="IsIndeterminate" Value="False" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>

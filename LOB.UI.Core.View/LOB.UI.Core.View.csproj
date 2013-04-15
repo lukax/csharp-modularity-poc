@@ -189,9 +189,6 @@
     <Compile Include="Controls\Alter\Base\AlterPersonView.xaml.cs">
       <DependentUpon>AlterPersonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Alter\Base\AlterServiceView.xaml.cs">
-      <DependentUpon>AlterServiceView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Alter\SubEntity\AlterAddressView.xaml.cs">
       <DependentUpon>AlterAddressView.xaml</DependentUpon>
     </Compile>
@@ -212,9 +209,6 @@
     </Compile>
     <Compile Include="Controls\List\Base\ListBaseEntityView.xaml.cs">
       <DependentUpon>ListBaseEntityView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\List\Base\ListServiceView.xaml.cs">
-      <DependentUpon>ListServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\List\ListOpView.xaml.cs">
       <DependentUpon>ListOpView.xaml</DependentUpon>
@@ -397,12 +391,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\Alter\Base\AlterServiceView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Controls\Alter\SubEntity\AlterAddressView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -440,12 +428,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\List\Base\ListBaseEntityView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Controls\List\Base\ListServiceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

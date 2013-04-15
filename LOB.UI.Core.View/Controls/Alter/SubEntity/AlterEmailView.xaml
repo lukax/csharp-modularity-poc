@@ -15,7 +15,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <base:CodeView x:Name="ViewCode"/>
+        <base:CodeView x:Name="ViewCode" />
         <StackPanel Orientation="Horizontal">
             <Label Content="{x:Static loc:Strings.Common_Email}" />
             <TextBox MinWidth="250"

@@ -25,7 +25,6 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.Modularity {
     [Module(ModuleName = "UICoreModule")]
     public class Module : IModule {
-
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) { _container = container; }
@@ -51,7 +50,6 @@ namespace LOB.UI.Core.Modularity {
 
             _container.RegisterType<IAlterBaseEntityViewModel, AlterBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IAlterPersonViewModel, AlterPersonViewModel>();
-            _container.RegisterType<IAlterServiceViewModel, AlterServiceViewModel>();
 
             _container.RegisterType<IAlterAddressViewModel, AlterAddressViewModel>();
             _container.RegisterType<IAlterCategoryViewModel, AlterCategoryViewModel>();
@@ -72,7 +70,6 @@ namespace LOB.UI.Core.Modularity {
 
             _container.RegisterType<IListBaseEntityViewModel, ListBaseEntityViewModel<BaseEntity>>();
             _container.RegisterType<IListPersonViewModel, ListPersonViewModel>();
-            _container.RegisterType<IListServiceViewModel, ListServiceViewModel>();
 
             _container.RegisterType<IListAddressViewModel, ListAddressViewModel>();
             _container.RegisterType<IListCategoryViewModel, ListCategoryViewModel>();
@@ -94,6 +91,5 @@ namespace LOB.UI.Core.Modularity {
             log.Log("UICoreModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
-
     }
 }

@@ -79,7 +79,8 @@
                               MinWidth="150" />
                     <Button DockPanel.Dock="Left" Height="18" Width="18"
                             Command="{Binding AlterCategoryCommand}" CommandParameter="AlterCategory"
-                            HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Edit}" Focusable="False"
+                            HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Edit}"
+                            Focusable="False"
                             Background="Transparent"
                             Grid.Column="5" Padding="0" BorderThickness="0">
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/pencil.png" />
@@ -123,8 +124,10 @@
 
                 <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"
                          VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True"
-                         HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4"  HorizontalScrollBarVisibility="Auto"
-                         Text="{Binding Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" MaxHeight="100"
+                         HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4"
+                         HorizontalScrollBarVisibility="Auto"
+                         Text="{Binding Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                         MaxHeight="100"
                          MinWidth="360" MinLines="2" />
 
             </Grid>

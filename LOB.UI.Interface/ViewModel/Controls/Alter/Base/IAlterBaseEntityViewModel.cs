@@ -6,12 +6,9 @@ using System.Windows.Input;
 
 namespace LOB.UI.Interface.ViewModel.Controls.Alter.Base {
     public interface IAlterBaseEntityViewModel : IBaseViewModel {
-
-        int Index { get; set; }
         ICommand QuickSearchCommand { get; set; }
         ICommand SaveChangesCommand { get; set; }
         ICommand DiscardChangesCommand { get; set; }
         ICommand CloseCommand { get; set; }
-
     }
 }

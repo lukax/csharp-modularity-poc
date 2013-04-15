@@ -18,7 +18,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
-
         private readonly IPersonFacade _personFacade;
         private AlterAddressViewModel _alterAddressViewModel;
         private AlterContactInfoViewModel _alterContactInfoViewModel;
@@ -39,18 +38,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             //    }
         }
 
-        public IAlterAddressViewModel AlterAddressViewModel { get { return _alterAddressViewModel; } set { _alterAddressViewModel = value as AlterAddressViewModel; } }
-        public IAlterContactInfoViewModel AlterContactInfoViewModel { get { return _alterContactInfoViewModel; } set { _alterContactInfoViewModel = value as AlterContactInfoViewModel; } }
+        public IAlterAddressViewModel AlterAddressViewModel {
+            get { return _alterAddressViewModel; }
+            set { _alterAddressViewModel = value as AlterAddressViewModel; }
+        }
+        public IAlterContactInfoViewModel AlterContactInfoViewModel {
+            get { return _alterContactInfoViewModel; }
+            set { _alterContactInfoViewModel = value as AlterContactInfoViewModel; }
+        }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == ViewState.Add) {
+            if(ViewID.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _personFacade.CanAdd(out results) & _alterAddressViewModel.SaveChangesCommand.CanExecute(null) &&
                        _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null);
             }
-            if(Operation.State == ViewState.Update) {
+            if(ViewID.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _personFacade.CanUpdate(out results) & _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null) &&
                        _alterContactInfoViewModel.SaveChangesCommand.CanExecute(null);
@@ -60,19 +65,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         protected override void ClearEntity(object arg) {
             Entity = _personFacade.GenerateEntity();
-            _personFacade.SetEntity(Entity);
-            _personFacade.ConfigureValidations();
+            _personFacade.Entity = (Entity);
         }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Person, State = ViewState.Add};
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Person, State = ViewState.Add};
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             AlterAddressViewModel.InitializeServices();
             AlterContactInfoViewModel.InitializeServices();
             ClearEntity(null);
         }
         public override void Refresh() { ClearEntity(null); }
-
     }
 }

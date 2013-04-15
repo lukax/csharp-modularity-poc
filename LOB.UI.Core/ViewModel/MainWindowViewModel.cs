@@ -13,7 +13,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel {
     public class MainWindowViewModel : BaseViewModel {
-
         [InjectionConstructor]
         public MainWindowViewModel(IFluentNavigator navigator) {
             Navigator = navigator;
@@ -28,10 +27,10 @@ namespace LOB.UI.Core.ViewModel {
         public ICommand OpenTabCommand { get; set; }
         private IFluentNavigator Navigator { get; set; }
 
-        private ViewID _operation = new ViewID {Type = ViewType.Main};
-        public override ViewID Operation {
-            get { return _operation; }
-            set { _operation = value; }
+        private ViewID _viewID = new ViewID {Type = ViewType.Main};
+        public override ViewID ViewID {
+            get { return _viewID; }
+            set { _viewID = value; }
         }
 
         private void OpenTab(object arg) {

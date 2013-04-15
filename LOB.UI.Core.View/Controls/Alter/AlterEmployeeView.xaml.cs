@@ -3,16 +3,13 @@
 using System;
 using System.Windows;
 using LOB.Core.Localization;
-using LOB.UI.Core.ViewModel.Controls.Alter;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterEmployeeView : IBaseView {
-
         public AlterEmployeeView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -24,17 +21,24 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewAlterNaturalPerson.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_Employee; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_Employee; }
+        }
 
-        public int Index { get { return ((AlterEmployeeViewModel)DataContext).Index; } set { ((AlterEmployeeViewModel)DataContext).Index = value; } }
+        public int Index { get; set; }
 
         public void InitializeServices() { }
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

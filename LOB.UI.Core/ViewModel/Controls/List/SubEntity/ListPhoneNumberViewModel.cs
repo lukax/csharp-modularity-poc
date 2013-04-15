@@ -13,7 +13,6 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPhoneNumberViewModel : ListBaseEntityViewModel<PhoneNumber>, IListPhoneNumberViewModel {
-
         public ListPhoneNumberViewModel(PhoneNumber entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
@@ -23,8 +22,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                     return
                         (arg =>
                          arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Number.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Type.ToString().ToUpper().Contains(Search.ToUpper()) ||
+                         arg.Number.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.Type.ToString().ToUpper().Contains(Search.ToUpper()) ||
                          arg.Description.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
@@ -32,11 +30,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        public override void InitializeServices() { if (Equals(Operation, default(ViewID))) Operation = _operation; }
+        public override void InitializeServices() {
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
+        }
 
         public override void Refresh() { Search = ""; }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.PhoneNumber, State = ViewState.List};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.PhoneNumber, State = ViewState.List};
     }
 }

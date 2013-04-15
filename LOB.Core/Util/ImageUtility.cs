@@ -8,7 +8,6 @@ using System.IO;
 
 namespace LOB.Core.Util {
     public static class ImageUtility {
-
         public static byte[] ToBytes(this Image imageIn) {
             var ms = new MemoryStream();
             imageIn.Save(ms, ImageFormat.Gif);
@@ -20,6 +19,5 @@ namespace LOB.Core.Util {
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
-
     }
 }

@@ -10,7 +10,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.List {
     public partial class ListNaturalPersonView : IBaseView {
-
         public ListNaturalPersonView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -20,9 +19,14 @@ namespace LOB.UI.Core.View.Controls.List {
             ViewListContextTool.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_List_Category; } }
+        public string Header {
+            get { return Strings.UI_Header_List_Category; }
+        }
 
         public int Index { get; set; }
 
@@ -30,7 +34,9 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

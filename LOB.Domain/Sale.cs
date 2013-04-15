@@ -11,7 +11,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class Sale : BaseEntity, IEquatable<Sale> {
-
         public SaleState State { get; set; }
         public DateTime SaleDate { get; set; }
         public Customer Buyer { get; set; }
@@ -40,11 +39,9 @@ namespace LOB.Domain {
 
     [Serializable]
     public enum SaleState {
-
         Open,
         Finalized,
         Canceled,
         Paused
-
     }
 }

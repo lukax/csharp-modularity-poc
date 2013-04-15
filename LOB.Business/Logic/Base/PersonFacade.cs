@@ -1,10 +1,8 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic.Base;
-using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
@@ -13,49 +11,37 @@ using LOB.Domain.Logic;
 
 namespace LOB.Business.Logic.Base {
     public class PersonFacade : IPersonFacade {
-
-        private readonly IAddressFacade _addressFacade;
-        private readonly IBaseEntityFacade _baseEntityFacade;
-        private readonly IContactInfoFacade _contactInfoFacade;
         private Person _entity;
-
-        public PersonFacade(IBaseEntityFacade baseEntityFacade, IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade) {
-            _baseEntityFacade = baseEntityFacade;
-            _addressFacade = addressFacade;
-            _contactInfoFacade = contactInfoFacade;
+        public Person Entity {
+            set {
+                _entity = value;
+                ConfigureValidations();
+            }
         }
 
-        public void SetEntity<T>(T entity) where T : Person {
-            _baseEntityFacade.SetEntity(entity);
-            _addressFacade.SetEntity(entity.Address);
-            _contactInfoFacade.SetEntity(entity.ContactInfo);
-            _entity = entity;
-        }
-
-        public Person GenerateEntity() {
-            var localAddress = _addressFacade.GenerateEntity();
-            var localContactInfo = _contactInfoFacade.GenerateEntity();
-            return new LocalPerson {Code = 0, Error = null, Address = localAddress, ContactInfo = localContactInfo, Notes = "",};
-        }
+        public Person GenerateEntity() { return new LocalPerson {Code = 0, Error = null, Address = null, ContactInfo = null, Notes = "",}; }
 
         public void ConfigureValidations() {
-            _baseEntityFacade.ConfigureValidations();
-            _addressFacade.ConfigureValidations();
-            _contactInfoFacade.ConfigureValidations();
-            if (_entity != null) _entity.AddValidation((sender, name) => _entity.Notes.Length > 300 ? new ValidationResult("Notes", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
+            if(_entity != null)
+                _entity.AddValidation(
+                    (sender, name) =>
+                    _entity.Notes.Length > 300 ? new ValidationResult("Notes", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
         }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
-            //TODO: Repository validations here
             return result;
         }
 
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            return result;
+        }
 
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { throw new NotImplementedException(); }
-
-        void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
+            bool result = ProcessBasicValidations(out invalidFields);
+            return result;
+        }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
@@ -68,6 +54,5 @@ namespace LOB.Business.Logic.Base {
         }
 
         public class LocalPerson : Person {}
-
     }
 }

@@ -7,7 +7,6 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class AddressMap : BaseEntityMap<Address> {
-
         public AddressMap() {
             Map(x => x.Status);
             Map(x => x.Street);
@@ -20,6 +19,5 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
             Map(x => x.ZipCode);
             Map(x => x.IsDefault);
         }
-
     }
 }

@@ -8,7 +8,6 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain.SubEntity {
     public class Email : BaseEntity, IEquatable<Email> {
-
         public string Value { get; set; }
 
         public static implicit operator string(Email e) { return e.Value; }

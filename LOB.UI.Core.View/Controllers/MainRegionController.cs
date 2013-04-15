@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
@@ -16,7 +15,6 @@ using NullGuard;
 
 namespace LOB.UI.Core.View.Controllers {
     public class MainRegionController : IDisposable {
-
         private readonly IServiceLocator _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger;
@@ -55,7 +53,7 @@ namespace LOB.UI.Core.View.Controllers {
             if(param.Type == default(ViewType)) throw new ArgumentException("param");
             var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
             var baseViewModel = view.ViewModel as BaseViewModel;
-            if(baseViewModel != null) baseViewModel.Operation = new ViewID {State = ViewState.QuickSearch, Type = view.Operation.Type};
+            if(baseViewModel != null) baseViewModel.ViewID = new ViewID {State = ViewState.QuickSearch, Type = view.ViewID.Type};
             // Let the IuiComponentModel know that it's in QuickSearch State
             _regionAdapter.AddView(view, RegionName.ModalRegion);
         }
@@ -74,23 +72,20 @@ namespace LOB.UI.Core.View.Controllers {
             MessageHide(null);
             var viewModel = _container.GetInstance<MessageToolViewModel>();
             viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            _navigator.Init.ResolveView(new ViewID {Type = ViewType.MessageTool})
-                      .SetViewModel(viewModel)
-                      .AddToRegion(RegionName.ModalRegion);
+            _navigator.Init.ResolveView(new ViewID {Type = ViewType.MessageTool}).SetViewModel(viewModel).AddToRegion(RegionName.ModalRegion);
         }
 
         public void MessageHide([AllowNull] string param) {
             _regionAdapter.RemoveView(new ViewID {Type = ViewType.MessageTool}, RegionName.ModalRegion);
 
             if(param != null) MessageShow(param, false);
-                //await Task.Delay(4000);
-                //MessageHide(null);
+            //await Task.Delay(4000);
+            //MessageHide(null);
         }
         #region Implementation of IDisposable
 
         ~MainRegionController() { Dispose(false); }
         private void Dispose(bool disposing) {
-
             if(!disposing) return;
             _openViewEventSubscription.Dispose();
             _closeViewEventSubscription.Dispose();

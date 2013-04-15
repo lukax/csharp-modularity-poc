@@ -7,7 +7,6 @@ using LOB.Domain;
 
 namespace LOB.Dao.Nhibernate.Mapping {
     public class NaturalPersonMap : SubclassMap<NaturalPerson> {
-
         public NaturalPersonMap() {
             Map(x => x.FirstName);
             Map(x => x.LastName);
@@ -17,6 +16,5 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.RG);
             Map(x => x.RGUF);
         }
-
     }
 }

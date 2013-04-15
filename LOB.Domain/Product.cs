@@ -11,10 +11,11 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Domain {
     [Serializable]
-    public class Product : Service, IEquatable<Product> {
-
+    public class Product : BaseEntity, IEquatable<Product> {
         public Category Category { get; set; }
         public ProductStatus Status { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int CodBarras { get; set; }
         public int CodNCM { get; set; }
         public int CFOP { get; set; }
@@ -54,19 +55,15 @@ namespace LOB.Domain {
 
     [Serializable]
     public enum ProductStatus {
-
         Plenty,
         NotMany,
         Low,
         OutOfStorage,
         Discontinued
-
     }
 
     public static class ProductStatusExtensions {
-
         public static ProductStatus ToProductStatus(this string s) { return default(ProductStatus); }
         public static string ToLocalizedString(this ProductStatus s) { return ""; }
-
     }
 }

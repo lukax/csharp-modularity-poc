@@ -14,7 +14,6 @@ namespace LOB.Log {
     ///     *Note: Any logging framework could be plugged in here as long as we implement the ILoggerFacade interface.
     /// </summary>
     public class Logger : ILoggerFacade, ILogger {
-
         // Member variables
 // ReSharper disable InconsistentNaming
         private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));

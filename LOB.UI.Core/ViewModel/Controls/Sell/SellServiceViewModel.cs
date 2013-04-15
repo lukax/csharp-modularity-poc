@@ -8,10 +8,9 @@ using LOB.UI.Interface.ViewModel.Controls.Sell;
 
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
     public class SellServiceViewModel : ISellServiceViewModel {
-
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Service, State = ViewState.Sell};
-        public ViewID Operation {
-            get { return _operation; }
+        private readonly ViewID _viewID = new ViewID {Type = ViewType.Service, State = ViewState.Sell};
+        public ViewID ViewID {
+            get { return _viewID; }
         }
 
         public string Header { get; set; }

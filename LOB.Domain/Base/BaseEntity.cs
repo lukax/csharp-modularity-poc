@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using LOB.Domain.Logic;
 
 //using NullGuard;
@@ -15,7 +14,6 @@ using LOB.Domain.Logic;
 namespace LOB.Domain.Base {
     [Serializable]
     public abstract class BaseEntity : BaseNotifyChange, IDataErrorInfo, IEquatable<BaseEntity> {
-
         private readonly IList<ValidationDelegate> _validationFuncs = new List<ValidationDelegate>();
 // ReSharper disable UnusedAutoPropertyAccessor.Local, NHibernate Set ID
         public Guid Id { get; private set; }
@@ -23,7 +21,9 @@ namespace LOB.Domain.Base {
         public int Code { get; set; }
 
         //[AllowNull]
-        public virtual string this[string columnName] { get { return GetVal(columnName); } }
+        public virtual string this[string columnName] {
+            get { return GetVal(columnName); }
+        }
 
         private string GetVal(string columnName) {
             if(string.IsNullOrWhiteSpace(columnName)) return null;

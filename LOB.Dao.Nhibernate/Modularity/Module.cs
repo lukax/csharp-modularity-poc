@@ -11,7 +11,6 @@ using Microsoft.Practices.Unity;
 namespace LOB.Dao.Nhibernate.Modularity {
     [Module(ModuleName = "NHibernateModule")]
     public class Module : IModule {
-
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) { _container = container; }
@@ -26,6 +25,5 @@ namespace LOB.Dao.Nhibernate.Modularity {
             log.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
-
     }
 }

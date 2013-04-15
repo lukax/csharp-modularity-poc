@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using LOB.Business.Interface.Logic.SubEntity;
-using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
@@ -17,7 +16,6 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {
-
         private readonly IPhoneNumberFacade _phoneNumberFacade;
 
         public AlterPhoneNumberViewModel(PhoneNumber entity, IPhoneNumberFacade phoneNumberFacade, IRepository repository,
@@ -25,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             : base(entity, repository, eventAggregator, logger) { _phoneNumberFacade = phoneNumberFacade; }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
         }
 
@@ -33,8 +31,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == ViewState.Add) return _phoneNumberFacade.CanAdd(out results);
-            if(Operation.State == ViewState.Update) return _phoneNumberFacade.CanUpdate(out results);
+            if(ViewID.State == ViewState.Add) return _phoneNumberFacade.CanAdd(out results);
+            if(ViewID.State == ViewState.Update) return _phoneNumberFacade.CanUpdate(out results);
             return false;
         }
 
@@ -43,16 +41,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return true;
         }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         //protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(Operation); }
 
         protected override void ClearEntity(object arg) {
             Entity = _phoneNumberFacade.GenerateEntity();
-            _phoneNumberFacade.SetEntity(Entity);
-            _phoneNumberFacade.ConfigureValidations();
+            _phoneNumberFacade.Entity = (Entity);
         }
 
-        private readonly ViewID _operation = new ViewID { Type = ViewType.PhoneNumber, State = ViewState.Add };
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.PhoneNumber, State = ViewState.Add};
     }
 }

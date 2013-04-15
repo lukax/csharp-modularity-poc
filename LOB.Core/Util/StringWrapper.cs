@@ -1,6 +1,5 @@
 ﻿namespace LOB.Core.Util {
     public class StringWrapper {
-
         public StringWrapper(string s) { Value = s; }
 
         public string Value { get; set; }
@@ -20,6 +19,5 @@
         public static bool operator ==(StringWrapper s, string s2) { return s != null && s.Value == s2; }
 
         public static bool operator !=(StringWrapper s, string s2) { return !(s == s2); }
-
     }
 }

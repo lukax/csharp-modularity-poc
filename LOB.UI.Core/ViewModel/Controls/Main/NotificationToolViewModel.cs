@@ -21,7 +21,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
-
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         //[AllowNull]
         public Notification Entity { get; set; }
@@ -86,13 +85,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             GC.SuppressFinalize(this);
         }
 
-        public override ViewID Operation {
-            get { return _operation; }
-            set { _operation = value; }
+        public override ViewID ViewID {
+            get { return _viewID; }
+            set { _viewID = value; }
         }
 
-        private ViewID _operation = new ViewID {Type = ViewType.NotificationTool, State = ViewState.Internal};
+        private ViewID _viewID = new ViewID {Type = ViewType.NotificationTool, State = ViewState.Internal};
         private bool _isVisible;
-
     }
 }

@@ -1,16 +1,12 @@
 ﻿#region Usings
 
-using LOB.Dao.Interface;
-using LOB.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 #endregion
 
 namespace LOB.Dao.Mock {
     [TestClass]
     public class RepositoryTest {
-
         [TestMethod]
         public void MockstartTest() {
             //var session = new Mock<ISessionFactoryCreator>(MockBehavior.Strict);
@@ -28,6 +24,5 @@ namespace LOB.Dao.Mock {
 
             //repo.Setup(x=> x.)
         }
-
     }
 }

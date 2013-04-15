@@ -12,7 +12,6 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 namespace LOB.UI.Core.View.Infrastructure {
     public class RegionAdapter : IRegionAdapter {
-
         private readonly IRegionManager _regionManager;
 
         [InjectionConstructor]
@@ -21,9 +20,9 @@ namespace LOB.UI.Core.View.Infrastructure {
         public void AddView<TView>(TView view, string regionName) where TView : IBaseView {
             try {
                 var region = _regionManager.Regions[regionName];
-                var previousView = region.GetView(ApplyNamingConvention(view.Operation)) as IBaseView;
-                if(previousView != null) if(region.Views.Contains(previousView)) RemoveView(previousView.Operation, regionName);
-                region.Add(view, ApplyNamingConvention(view.Operation));
+                var previousView = region.GetView(ApplyNamingConvention(view.ViewID)) as IBaseView;
+                if(previousView != null) if(region.Views.Contains(previousView)) RemoveView(previousView.ViewID, regionName);
+                region.Add(view, ApplyNamingConvention(view.ViewID));
             } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -81,6 +80,5 @@ namespace LOB.UI.Core.View.Infrastructure {
             //s = s + "_" + op.GetHashCode();
             return s; //INFO: Only one Type can be opened at the same time like this  
         }
-
     }
 }

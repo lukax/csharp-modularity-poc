@@ -23,12 +23,11 @@ using Category = LOB.Domain.SubEntity.Category;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
-
         private readonly IProductFacade _productFacade;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Service, State = ViewState.Add};
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Service, State = ViewState.Add};
 
         [InjectionConstructor]
         public AlterProductViewModel(Product entity, IProductFacade productFacade, IRepository repository, IEventAggregator eventAggregator,
@@ -40,7 +39,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
@@ -68,21 +67,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private void ExecuteAlterCategory(object o) {
             var op =
                 new ViewID().Type(ViewType.Category)
-                                 .State(Entity.Category.Equals(_productFacade.GenerateEntity().Category)
-                                            ? ViewState.Add
-                                            : ViewState.Update);
+                            .State(Entity.Category.Equals(_productFacade.GenerateEntity().Category) ? ViewState.Add : ViewState.Update);
             op.ViewModel = this;
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == ViewState.Add) {
+            if(ViewID.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 return _productFacade.CanAdd(out results);
             }
-            if(Operation.State == ViewState.Update) {
+            if(ViewID.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _productFacade.CanUpdate(out results);
             }
@@ -93,9 +90,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override void ClearEntity(object args) {
             Entity = _productFacade.GenerateEntity();
-            _productFacade.SetEntity(Entity);
-            _productFacade.ConfigureValidations();
+            _productFacade.Entity = (Entity);
         }
-
     }
 }

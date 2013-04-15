@@ -10,24 +10,30 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.List.Base {
     public partial class ListBaseEntityView : IBaseViewModel {
-
         public ListBaseEntityView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
         public int Index { get; set; }
 
-        public string Header { get { return Strings.UI_Header_List_BaseEntity; } }
+        public string Header {
+            get { return Strings.UI_Header_List_BaseEntity; }
+        }
 
         public void InitializeServices() { }
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

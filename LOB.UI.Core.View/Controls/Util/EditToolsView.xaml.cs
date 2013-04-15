@@ -9,8 +9,6 @@ namespace LOB.UI.Core.View.Controls.Util {
     ///     Interaction logic for EditToolsView.xaml
     /// </summary>
     public partial class EditToolsView : UserControl {
-
         public EditToolsView() { InitializeComponent(); }
-
     }
 }

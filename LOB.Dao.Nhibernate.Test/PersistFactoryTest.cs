@@ -14,7 +14,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LOB.Dao.Nhibernate.Test {
     [TestClass]
     public class PersistFactoryTest {
-
         [Import("Sql")]
         public IRepository Repository { get; set; }
 
@@ -26,7 +25,6 @@ namespace LOB.Dao.Nhibernate.Test {
 
         [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
         private class PersistFactory {
-
             private readonly AggregateCatalog _catalog;
             private readonly CompositionContainer _container;
 
@@ -57,15 +55,11 @@ namespace LOB.Dao.Nhibernate.Test {
             //    throw new ArgumentNullException();
             //}
             private class Inner {
-
                 public readonly IUnityContainer Container;
 
                 [InjectionConstructor]
                 public Inner(IUnityContainer container) { Container = container; }
-
             }
-
         }
-
     }
 }

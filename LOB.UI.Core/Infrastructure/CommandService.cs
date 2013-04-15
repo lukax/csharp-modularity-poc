@@ -11,7 +11,6 @@ using LOB.UI.Interface.Command;
 namespace LOB.UI.Core.Infrastructure {
     [Obsolete("Use events now")]
     public class CommandService : ICommandService {
-
         private static readonly Lazy<ICommandService> Lazy = new Lazy<ICommandService>(() => new CommandService());
 
         private readonly IDictionary<object, IList<ICommand>> _commands;
@@ -34,6 +33,5 @@ namespace LOB.UI.Core.Infrastructure {
         public IEnumerable<ICommand> this[string token] {
             get { return _commands[token]; }
         }
-
     }
 }

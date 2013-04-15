@@ -12,7 +12,6 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace LOB.UI.Core.View.Actions {
     public class CloseTabItemAction : TriggerAction<DependencyObject> {
-
         public static readonly DependencyProperty TabControlProperty = DependencyProperty.Register("TabControl", typeof(TabControl),
                                                                                                    typeof(CloseTabItemAction),
                                                                                                    new PropertyMetadata(default(TabControl)));
@@ -45,17 +44,16 @@ namespace LOB.UI.Core.View.Actions {
                     var view = TabItem as IBaseView;
 // ReSharper restore SuspiciousTypeConversion.Global
                     var region = Container.GetInstance<IRegionAdapter>();
-                    if(view != null) region.RemoveView(view.Operation, RegionName.TabRegion);
+                    if(view != null) region.RemoveView(view.ViewID, RegionName.TabRegion);
                 }
                 else TabControl.Items.Remove(TabItem);
             else if(TabControl.Items.Contains(TabItem.Content))
                 if(Container != null) {
                     var view = TabItem.Content as IBaseView;
                     var region = Container.GetInstance<IRegionAdapter>();
-                    if(view != null) region.RemoveView(view.Operation, RegionName.TabRegion);
+                    if(view != null) region.RemoveView(view.ViewID, RegionName.TabRegion);
                 }
                 else TabControl.Items.Remove(TabItem.Content);
         }
-
     }
 }

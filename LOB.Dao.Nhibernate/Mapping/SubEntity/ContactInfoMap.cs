@@ -7,7 +7,6 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class ContactInfoMap : BaseEntityMap<ContactInfo> {
-
         public ContactInfoMap() {
             Map(x => x.Status);
             Map(x => x.Description);
@@ -17,6 +16,5 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
             Map(x => x.SpeakWith);
             Map(x => x.PS);
         }
-
     }
 }

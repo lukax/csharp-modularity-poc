@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 
 namespace LOB.UI.Interface.Infrastructure {
     public class ViewID : BaseNotifyChange, IEquatable<ViewID> {
-
         public ViewID() {
             IsChild = true;
             ViewModel = null;
@@ -43,7 +42,6 @@ namespace LOB.UI.Interface.Infrastructure {
     }
 
     public static class UIOperationExtensions {
-
         public static ViewID ToUIOperation(this string s) {
             string[] cutted = s.Split('_');
             ViewState parsedState;
@@ -67,6 +65,10 @@ namespace LOB.UI.Interface.Infrastructure {
         }
         public static ViewID IsChild(this ViewID op, bool isChild) {
             op.IsChild = isChild;
+            return op;
+        }
+        public static ViewID ViewModel(this ViewID op, IBaseViewModel viewModel) {
+            op.ViewModel = viewModel;
             return op;
         }
 

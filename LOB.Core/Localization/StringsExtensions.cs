@@ -1,11 +1,4 @@
-﻿#region Usings
-
-using System.Collections.Generic;
-using System.Linq;
-
-#endregion
-
-namespace LOB.Core.Localization {
+﻿namespace LOB.Core.Localization {
     //public static class StringsExtensions {
 
     //    public static string ToLocalizedString(this string s) {

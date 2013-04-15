@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain.Logic {
     [Serializable]
     public sealed class ValidationResult : BaseNotifyChange, IEquatable<ValidationResult> {
-
         public ValidationResult(string fieldName, string errorDescription) {
             FieldName = fieldName;
             ErrorDescription = errorDescription;
@@ -34,7 +33,6 @@ namespace LOB.Domain.Logic {
     }
 
     public static class ValidationResultExtensions {
-
         public static ValidationResult FieldName(this ValidationResult validationResult, string fieldName) {
             validationResult.FieldName = fieldName;
             return validationResult;
@@ -44,6 +42,5 @@ namespace LOB.Domain.Logic {
             validationResult.ErrorDescription = errorDescription;
             return validationResult;
         }
-
     }
 }

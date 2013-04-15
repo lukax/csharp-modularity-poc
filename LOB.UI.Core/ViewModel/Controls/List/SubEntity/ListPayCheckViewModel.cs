@@ -13,7 +13,6 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel {
-
         public ListPayCheckViewModel(PayCheck entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
 
@@ -32,11 +31,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             }
         }
 
-        public override void InitializeServices() { if (Equals(Operation, default(ViewID))) Operation = _operation; }
+        public override void InitializeServices() {
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
+        }
 
         public override void Refresh() { Search = ""; }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.PayCheck, State = ViewState.List};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.PayCheck, State = ViewState.List};
     }
 }

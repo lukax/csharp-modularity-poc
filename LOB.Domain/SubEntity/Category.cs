@@ -8,8 +8,9 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain.SubEntity {
     [Serializable]
-    public class Category : Service, IEquatable<Category> {
-
+    public class Category : BaseEntity, IEquatable<Category> {
+        public string Name { get; set; }
+        public string Description { get; set; }
         public bool Equals(Category other) {
             try {
                 return base.Equals(other);
@@ -21,6 +22,5 @@ namespace LOB.Domain.SubEntity {
             }
         }
         public override string ToString() { return Name; }
-
     }
 }

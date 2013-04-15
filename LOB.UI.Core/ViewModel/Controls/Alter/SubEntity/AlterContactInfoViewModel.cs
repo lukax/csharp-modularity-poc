@@ -25,14 +25,12 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
-
         private readonly IContactInfoFacade _contactInfoFacade;
 
         public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade,
             IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(entity, repository, eventAggregator, logger) {
             _contactInfoFacade = contactInfoFacade;
-            Entity = entity;
             EmailOperation = new ViewID {State = ViewState.Add, Type = ViewType.Email};
             PhoneNumberOperation = new ViewID {State = ViewState.Add, Type = ViewType.PhoneNumber};
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
@@ -52,14 +50,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
             InitBackgroundWorker();
         }
 
         public override void Refresh() { ClearEntity(null); }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add};
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add};
         #region UI Validations
 
         public ViewID EmailOperation { get; set; }
@@ -154,12 +152,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         #endregion
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override void ClearEntity(object arg) {
             Entity = _contactInfoFacade.GenerateEntity();
-            _contactInfoFacade.SetEntity(Entity);
-            _contactInfoFacade.ConfigureValidations();
+            _contactInfoFacade.Entity = (Entity);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -168,6 +165,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override bool CanCancel(object arg) { return true; }
-
     }
 }

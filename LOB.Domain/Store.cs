@@ -9,7 +9,6 @@ using System.Linq;
 
 namespace LOB.Domain {
     public class Store : LegalPerson, IEquatable<Store> {
-
         public string Name { get; set; }
         public IList<Employee> Employees { get; set; }
         public IList<Product> Products { get; set; }

@@ -13,7 +13,6 @@ namespace LOB.UI.Core.View.Controls.Util {
     ///     Interaction logic for MessageShowToolIuiComponent.xaml
     /// </summary>
     public partial class MessageShowToolView : IBaseView {
-
         public MessageShowToolView() { InitializeComponent(); }
 
         [AllowNull]
@@ -63,8 +62,8 @@ namespace LOB.UI.Core.View.Controls.Util {
 
         public void Refresh() { }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

@@ -53,7 +53,7 @@
 
         </Grid>
         <ContentControl Grid.Row="1" x:Name="ModalRegion" Margin="50" VerticalAlignment="Stretch"
-                        HorizontalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch"
                         regions:RegionManager.RegionName="ModalRegion" />
     </Grid>
 </controls:MetroWindow>

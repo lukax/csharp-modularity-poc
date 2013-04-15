@@ -1,9 +1,9 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using LOB.Business.Interface.Logic.Base;
+using System.Linq;
 using LOB.Business.Interface.Logic.SubEntity;
-using LOB.Domain.Base;
+using LOB.Core.Localization;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 
@@ -11,66 +11,42 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Logic.SubEntity {
     public class CategoryFacade : ICategoryFacade {
-
-        private readonly IServiceFacade _serviceFacade;
-
         private Category _entity;
 
-        public CategoryFacade(IServiceFacade serviceFacade) { _serviceFacade = serviceFacade; }
+        public void ConfigureValidations() {
+            if(_entity != null) {
+                _entity.AddValidation(
+                    (sender, name) => string.IsNullOrWhiteSpace(_entity.Name) ? new ValidationResult("Name", Strings.Common_Name) : null);
+                _entity.AddValidation(
+                    (sender, name) =>
+                    string.IsNullOrWhiteSpace(_entity.Description) ? new ValidationResult("Description", Strings.Common_Description) : null);
+            }
+        }
 
-        public void SetEntity<T>(T entity) where T : Category {
-            _serviceFacade.SetEntity(entity);
-            _entity = entity;
+        public Category Entity {
+            set {
+                _entity = value;
+                ConfigureValidations();
+            }
         }
 
         public Category GenerateEntity() { return new Category {Code = 0, Description = "", Error = null, Name = "",}; }
 
-        Service IServiceFacade.GenerateEntity() { return GenerateEntity(); }
+        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) { return ProcessBasicValidations(out invalidFields); }
 
-        public void ConfigureValidations() {
-            _serviceFacade.ConfigureValidations();
-            if(_entity != null) {}
-        }
+        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { return ProcessBasicValidations(out invalidFields); }
 
-        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            //TODO: custom validations for Category
-
-            IEnumerable<ValidationResult> validationResults;
-            bool result = _serviceFacade.CanAdd(out validationResults);
-            if(result) result = ProcessBasicValidations(out validationResults);
-            invalidFields = fields;
-            return result;
-        }
-
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            //TODO: custom validations for Category
-
-            IEnumerable<ValidationResult> validationResults;
-            bool result = _serviceFacade.CanUpdate(out validationResults);
-            invalidFields = fields;
-            return result;
-        }
-
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            //TODO: custom validations for Category
-
-            IEnumerable<ValidationResult> validationResults;
-            bool result = _serviceFacade.CanDelete(out validationResults);
-            invalidFields = fields;
-            return result;
-        }
-
-        void IBaseEntityFacade.SetEntity<T>(T entity) { ((IBaseEntityFacade)_serviceFacade).SetEntity(entity); }
-
-        void IServiceFacade.SetEntity<T>(T entity) { (_serviceFacade).SetEntity(entity); }
+        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { return ProcessBasicValidations(out invalidFields); }
 
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
-            invalidFields = null;
+            var fields = new List<ValidationResult>();
+            fields.AddRange(_entity.GetValidations("Name"));
+            fields.AddRange(_entity.GetValidations("Description"));
+            invalidFields = fields;
+            if(
+                fields.Where(validationResult => validationResult != null)
+                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
-
     }
 }

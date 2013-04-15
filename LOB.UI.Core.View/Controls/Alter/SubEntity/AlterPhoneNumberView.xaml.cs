@@ -11,7 +11,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPhoneNumberView : UserControl, IBaseView {
-
         public AlterPhoneNumberView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -21,9 +20,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_PhoneNumber; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_PhoneNumber; }
+        }
 
         public int Index { get; set; }
 
@@ -31,7 +35,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

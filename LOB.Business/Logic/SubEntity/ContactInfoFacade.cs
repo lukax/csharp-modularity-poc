@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
@@ -13,15 +12,12 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Business.Logic.SubEntity {
     public class ContactInfoFacade : IContactInfoFacade {
-
-        private readonly IBaseEntityFacade _baseEntityFacade;
         private ContactInfo _entity;
-
-        public ContactInfoFacade(IBaseEntityFacade baseEntityFacade) { _baseEntityFacade = baseEntityFacade; }
-
-        public void SetEntity<T>(T entity) where T : ContactInfo {
-            _baseEntityFacade.SetEntity(entity);
-            _entity = entity;
+        public ContactInfo Entity {
+            set {
+                _entity = value;
+                ConfigureValidations();
+            }
         }
 
         public ContactInfo GenerateEntity() {
@@ -39,7 +35,6 @@ namespace LOB.Business.Logic.SubEntity {
         }
 
         public void ConfigureValidations() {
-            _baseEntityFacade.ConfigureValidations();
             if(_entity != null) {
                 _entity.AddValidation(
                     (sender, name) =>
@@ -51,7 +46,10 @@ namespace LOB.Business.Logic.SubEntity {
                         ? new ValidationResult("WebSite", Strings.Notification_Field_WrongFormat)
                         : null);
                 _entity.AddValidation(
-                    (sender, name) => _entity.SpeakWith.Length > 300 ? new ValidationResult("SpeakWith", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
+                    (sender, name) =>
+                    _entity.SpeakWith.Length > 300
+                        ? new ValidationResult("SpeakWith", string.Format(Strings.Notification_Field_X_MaxLength, 300))
+                        : null);
             }
         }
 
@@ -70,8 +68,6 @@ namespace LOB.Business.Logic.SubEntity {
             return result;
         }
 
-        void IBaseEntityFacade.SetEntity<T>(T entity) { _baseEntityFacade.SetEntity(entity); }
-
         private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
             var fields = new List<ValidationResult>();
             fields.AddRange(_entity.GetValidations("WebSite"));
@@ -83,6 +79,5 @@ namespace LOB.Business.Logic.SubEntity {
                       .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
             return true;
         }
-
     }
 }

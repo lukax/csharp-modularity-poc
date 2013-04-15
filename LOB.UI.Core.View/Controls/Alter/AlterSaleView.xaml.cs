@@ -10,7 +10,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterSaleView : IBaseView {
-
         public AlterSaleView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -21,16 +20,23 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewEditTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
         public int Index { get; set; }
 
-        public string Header { get { return Strings.UI_Header_Alter_Sale; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_Sale; }
+        }
 
         public void InitializeServices() { }
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

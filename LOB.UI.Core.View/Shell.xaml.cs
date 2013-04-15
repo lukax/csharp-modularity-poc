@@ -25,7 +25,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View {
     public partial class Shell : IBaseView {
-
         private static bool _loaded;
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
@@ -101,8 +100,8 @@ namespace LOB.UI.Core.View {
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

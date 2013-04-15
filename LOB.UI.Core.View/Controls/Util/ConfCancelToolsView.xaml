@@ -15,21 +15,21 @@
         <StackPanel.Style>
             <Style TargetType="StackPanel">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding Operation.IsChild}" Value="False">
+                    <DataTrigger Binding="{Binding ViewID.IsChild}" Value="False">
                         <Setter Property="Visibility" Value="Visible" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Operation.IsChild}" Value="True">
+                    <DataTrigger Binding="{Binding ViewID.IsChild}" Value="True">
                         <Setter Property="Visibility" Value="Collapsed" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
         </StackPanel.Style>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}" Padding="2" >
+            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}" Padding="2">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Operation.State}" Value="Add">
+                            <DataTrigger Binding="{Binding ViewID.State}" Value="Add">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -40,7 +40,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Operation.State}" Value="Update">
+                            <DataTrigger Binding="{Binding ViewID.State}" Value="Update">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -51,7 +51,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Operation.State}" Value="Delete">
+                            <DataTrigger Binding="{Binding ViewID.State}" Value="Delete">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -62,7 +62,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Operation.State}" Value="List">
+                            <DataTrigger Binding="{Binding ViewID.State}" Value="List">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>

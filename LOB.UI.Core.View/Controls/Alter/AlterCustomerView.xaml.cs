@@ -12,7 +12,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterCustomerView : IBaseView {
-
         [Dependency]
         public CustomerRegionController Controller { get; set; }
 
@@ -26,9 +25,14 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_Customer; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_Customer; }
+        }
 
         public int Index { get; set; }
 
@@ -36,7 +40,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

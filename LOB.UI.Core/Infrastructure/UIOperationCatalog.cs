@@ -84,7 +84,6 @@ namespace LOB.UI.Core.Infrastructure {
                     {new ViewID {Type = ViewType.PhoneNumber}, typeof(AlterPhoneNumberViewModel)},
                     {new ViewID {Type = ViewType.Product}, typeof(AlterProductViewModel)},
                     {new ViewID {Type = ViewType.Sale}, typeof(AlterSaleViewModel)},
-                    {new ViewID {Type = ViewType.Service}, typeof(AlterServiceViewModel)},
                     {new ViewID {Type = ViewType.BaseEntity, State = ViewState.List}, typeof(ListBaseEntityViewModel<BaseEntity>)},
                     {new ViewID {Type = ViewType.Category, State = ViewState.List}, typeof(ListCategoryViewModel)},
                     {new ViewID {Type = ViewType.Customer, State = ViewState.List}, typeof(ListCustomerViewModel)},
@@ -97,7 +96,6 @@ namespace LOB.UI.Core.Infrastructure {
                     //{Command.ListPerson, typeof(ListPersonIuiComponentModel)},
                     {new ViewID {Type = ViewType.PhoneNumber, State = ViewState.List}, typeof(ListPhoneNumberViewModel)},
                     {new ViewID {Type = ViewType.Product, State = ViewState.List}, typeof(ListProductViewModel)},
-                    {new ViewID {Type = ViewType.Service, State = ViewState.List}, typeof(ListServiceViewModel)},
                 });
 
         #endregion
@@ -108,6 +106,5 @@ namespace LOB.UI.Core.Infrastructure {
         public static IDictionary<ViewID, Type> ViewModels {
             get { return LazyViewModel.Value; }
         }
-
     }
 }

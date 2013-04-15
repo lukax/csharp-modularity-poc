@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Core.Localization;
@@ -14,7 +15,6 @@ using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 namespace LOB.UI.Core.View.Infrastructure {
     public class FluentNavigator : IFluentNavigator {
-
         private readonly IUnityContainer _container;
         private readonly IRegionAdapter _regionAdapter;
         private IBaseView _resolvedView;
@@ -29,7 +29,9 @@ namespace LOB.UI.Core.View.Infrastructure {
         /// <summary>
         ///     Initialize with clean Fields
         /// </summary>
-        public IFluentNavigator Init { get { return new FluentNavigator(_container, _regionAdapter); } }
+        public IFluentNavigator Init {
+            get { return new FluentNavigator(_container, _regionAdapter); }
+        }
 
         public event OnOpenViewEventHandler OnOpenView;
 
@@ -50,8 +52,13 @@ namespace LOB.UI.Core.View.Infrastructure {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.Resolve(ViewDictionary.ViewModels[param]) as IBaseViewModel;
             dynamic resolvedd = resolved;
-            if(resolvedd != null) resolvedd.Operation = param;
-            //if(param.State == ViewState.Update) resolved = _container.Resolve(ViewDictionary.ViewModels[param], new ParameterOverride("entity", param.Entity)) as IBaseIuiComponentModel;
+            try {
+                resolvedd.ViewID = param; //TODO: Maybe change this later
+            } catch(NullReferenceException ex) {
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+            }
             if(resolved == null) throw new ArgumentException("param");
             SetViewModel(resolved);
             return this;
@@ -92,7 +99,7 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public void AddToRegion(string regionName) {
             var view = GetView();
-            view.ViewModel.Operation.IsChild(false);
+            view.ViewModel.ViewID.IsChild(false);
             _regionAdapter.AddView(view, regionName);
         }
 
@@ -123,6 +130,5 @@ namespace LOB.UI.Core.View.Infrastructure {
         }
 
         public bool PromptUser(string message) { return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes; }
-
     }
 }

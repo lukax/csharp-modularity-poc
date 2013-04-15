@@ -5,13 +5,11 @@ using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterAddressView : IBaseView {
-
         public AlterAddressView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -21,9 +19,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_Address; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_Address; }
+        }
 
         public int Index { get; set; }
 
@@ -31,7 +34,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

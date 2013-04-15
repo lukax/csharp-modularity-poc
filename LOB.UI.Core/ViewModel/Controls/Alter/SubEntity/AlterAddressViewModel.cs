@@ -23,7 +23,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
-
         private readonly IAddressFacade _addressFacade;
         private string _status;
         private IList<string> _statuses;
@@ -61,7 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
             Worker.DoWork += UpdateUFList;
             Worker.RunWorkerAsync();
@@ -72,36 +71,34 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             var entity = obj as Address;
             if(entity == null) return;
             Entity = entity;
-            Operation.State = ViewState.Update;
+            ViewID.State = ViewState.Update;
         }
 
         private void UpdateUFList(object sender, DoWorkEventArgs doWorkEventArgs) { UFs = new ObservableCollection<UF>(Enum.GetValues(typeof(UF)).Cast<UF>()); }
 
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
-            if(Operation.State == ViewState.Add) return _addressFacade.CanAdd(out results);
-            if(Operation.State == ViewState.Update) return _addressFacade.CanUpdate(out results);
+            if(ViewID.State == ViewState.Add) return _addressFacade.CanAdd(out results);
+            if(ViewID.State == ViewState.Update) return _addressFacade.CanUpdate(out results);
             return false;
         }
 
         protected override bool CanCancel(object arg) {
-            if(Operation.State == ViewState.Add) return true;
-            if(Operation.State == ViewState.Update) return true;
+            if(ViewID.State == ViewState.Add) return true;
+            if(ViewID.State == ViewState.Update) return true;
             return false;
         }
 
         protected override void ClearEntity(object arg) {
             Entity = _addressFacade.GenerateEntity();
             UF = Entity.State.ToUF();
-            _addressFacade.SetEntity(Entity);
-            _addressFacade.ConfigureValidations();
+            _addressFacade.Entity = Entity;
         }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Address, State = ViewState.Add};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Address, State = ViewState.Add};
     }
 }

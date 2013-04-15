@@ -35,8 +35,9 @@
 
         <TextBox
             Text="{Binding Entity.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-            HorizontalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="50" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" 
-            metrocontrols:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Notes}" 
+            HorizontalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="50"
+            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto"
+            metrocontrols:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Notes}"
             MinWidth="300" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" />
 
     </Grid>

@@ -44,7 +44,7 @@
                         Background="Transparent">
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/refresh.png" />
                 </Button>
-                <Separator/>
+                <Separator />
                 <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Close}" Width="20"
                         BorderBrush="Black"
                         Height="20" BorderThickness="2" Padding="2"

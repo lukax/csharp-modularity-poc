@@ -13,7 +13,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LOB.Dao.Nhibernate.Test {
     [TestClass]
     public class RepositoryTest {
-
         [TestMethod]
         public void AddDeleteTest() {
             var repo = new Repository(new UnityOfWork(new SessionFactoryCreator(new Logger()), new Logger()));
@@ -109,6 +108,5 @@ namespace LOB.Dao.Nhibernate.Test {
                 Assert.IsTrue(list1.Count() > 1);
             }
         }
-
     }
 }

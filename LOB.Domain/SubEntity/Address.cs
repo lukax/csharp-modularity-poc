@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain.SubEntity {
     [Serializable]
     public class Address : BaseEntity, IEquatable<Address> {
-
         public AddressStatus Status { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
@@ -26,7 +25,8 @@ namespace LOB.Domain.SubEntity {
             try {
                 return base.Equals(other) && Status.Equals(other.Status) && Street.Equals(other.Street) && StreetNumber.Equals(other.StreetNumber) &&
                        StreetComplement.Equals(other.StreetComplement) && ZipCode.Equals(other.ZipCode) && Country.Equals(other.Country) &&
-                       State.Equals(other.State) && District.Equals(other.District) && Country.Equals(other.Country) && IsDefault.Equals(other.IsDefault);
+                       State.Equals(other.State) && District.Equals(other.District) && Country.Equals(other.Country) &&
+                       IsDefault.Equals(other.IsDefault);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -40,10 +40,8 @@ namespace LOB.Domain.SubEntity {
 
     [Serializable]
     public enum AddressStatus {
-
         Active,
         Inactive,
         Deprecated
-
     }
 }

@@ -7,7 +7,6 @@ using LOB.Domain;
 
 namespace LOB.Dao.Nhibernate.Mapping {
     public class EmployeeMap : SubclassMap<Employee> {
-
         public EmployeeMap() {
             References(x => x.WorksIn);
             Map(x => x.Title);
@@ -15,6 +14,5 @@ namespace LOB.Dao.Nhibernate.Mapping {
             References(x => x.PayCheck).Cascade.All();
             Map(x => x.Password);
         }
-
     }
 }

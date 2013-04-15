@@ -9,7 +9,6 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.Util {
     public partial class ListContextToolMenuView : IBaseView {
-
         public ListContextToolMenuView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
@@ -27,8 +26,8 @@ namespace LOB.UI.Core.View.Controls.Util {
 
         public void Refresh() { }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

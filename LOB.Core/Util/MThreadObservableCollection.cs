@@ -10,7 +10,6 @@ using System.Windows.Threading;
 
 namespace LOB.Core.Util {
     public class MThreadObservableCollection<T> : ObservableCollection<T> {
-
         public override event NotifyCollectionChangedEventHandler CollectionChanged;
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e) {
             var eh = CollectionChanged;
@@ -25,6 +24,5 @@ namespace LOB.Core.Util {
                 else foreach(NotifyCollectionChangedEventHandler nh in eh.GetInvocationList()) nh.Invoke(this, e);
             }
         }
-
     }
 }

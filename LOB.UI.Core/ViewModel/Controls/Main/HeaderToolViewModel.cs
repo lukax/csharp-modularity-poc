@@ -9,15 +9,14 @@ using LOB.UI.Interface.ViewModel.Controls.Main;
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class HeaderToolViewModel : BaseViewModel, IHeaderToolsViewModel {
-
         public override void InitializeServices() { }
 
         public override void Refresh() { }
 
-        private ViewID _operation = new ViewID {Type = ViewType.HeaderTool, State = ViewState.Internal};
-        public override ViewID Operation {
-            get { return _operation; }
-            set { _operation = value; }
+        private ViewID _viewID = new ViewID {Type = ViewType.HeaderTool, State = ViewState.Internal};
+        public override ViewID ViewID {
+            get { return _viewID; }
+            set { _viewID = value; }
         }
         #region Implementation of IDisposable
 

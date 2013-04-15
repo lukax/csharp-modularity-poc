@@ -146,9 +146,7 @@
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterContactInfoViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterEmailViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPayCheckViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Alter\Base\AlterServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\AlterPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModel\Controls\List\Base\ListServiceViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\ListOpViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListEmailViewModel.cs" />
     <Compile Include="ViewModel\Controls\List\SubEntity\ListPhoneNumberViewModel.cs" />

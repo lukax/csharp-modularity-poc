@@ -48,12 +48,12 @@
                 MinWidth="150" HorizontalContentAlignment="Right"
                 MaxWidth="250" Grid.Row="1" Grid.Column="2" />
 
-            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}" 
+            <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Ps}"
                      Text="{Binding Entity.Ps, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                      Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" MaxHeight="100"
-                         AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                     AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                      Grid.ColumnSpan="3" HorizontalAlignment="Stretch" />
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools"  />
+        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>
 </UserControl>

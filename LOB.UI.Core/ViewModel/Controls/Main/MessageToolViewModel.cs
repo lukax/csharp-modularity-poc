@@ -13,7 +13,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
-
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         #region Props
@@ -27,7 +26,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private ICommand _closeCommand;
 
-        public ICommand CloseCommand { get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); } set { _closeCommand = value; } }
+        public ICommand CloseCommand {
+            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
+            set { _closeCommand = value; }
+        }
 
         public bool CanClose { get; set; }
 
@@ -43,9 +45,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             _eventAggregator = _container.Resolve<IEventAggregator>();
         }
 
-        private ViewID _operation = new ViewID {Type = ViewType.MessageTool, State = ViewState.Internal};
+        private ViewID _viewID = new ViewID {Type = ViewType.MessageTool, State = ViewState.Internal};
 
-        public override ViewID Operation { get { return _operation; } set { _operation = value; } }
+        public override ViewID ViewID {
+            get { return _viewID; }
+            set { _viewID = value; }
+        }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {
             Message = message;

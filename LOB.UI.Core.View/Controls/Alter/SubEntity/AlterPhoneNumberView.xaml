@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <base:CodeView x:Name="ViewCode"/>
+        <base:CodeView x:Name="ViewCode" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -45,16 +45,19 @@
                     </ObjectDataProvider>
                 </StackPanel.Resources>
                 <xctk:MaskedTextBox Style="{StaticResource MetroTextBox}"
-                    Value="{Binding Entity.Number, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
-                    IncludeLiteralsInValue="False" IncludePromptInValue="False" SkipLiterals="True"
-                    ValueDataType="{x:Type system:String}" MinWidth="100" Mask="(##) 0000-0000" HorizontalContentAlignment="Right"/>
+                                    Value="{Binding Entity.Number, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+                                    IncludeLiteralsInValue="False" IncludePromptInValue="False" SkipLiterals="True"
+                                    ValueDataType="{x:Type system:String}" MinWidth="100" Mask="(##) 0000-0000"
+                                    HorizontalContentAlignment="Right" />
                 <ComboBox SelectedItem="{Binding Entity.Type}"
                           ItemsSource="{Binding Source={StaticResource DataFromEnum}}" MinWidth="50" />
             </StackPanel>
 
-            <TextBox Text="{Binding Entity.Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MaxHeight="100"
-                     Grid.ColumnSpan="4" TextWrapping="Wrap" />
+            <TextBox
+                Text="{Binding Entity.Description, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+                controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}" Grid.Row="3"
+                HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MaxHeight="100"
+                Grid.ColumnSpan="4" TextWrapping="Wrap" />
         </Grid>
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>

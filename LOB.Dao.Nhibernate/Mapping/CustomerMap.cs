@@ -7,7 +7,6 @@ using LOB.Domain;
 
 namespace LOB.Dao.Nhibernate.Mapping {
     public class CustomerMap : BaseEntityMap<Customer> {
-
         public CustomerMap() {
             References(x => x.Person).Cascade.All();
             HasManyToMany(x => x.CustomerOf);
@@ -15,6 +14,5 @@ namespace LOB.Dao.Nhibernate.Mapping {
             HasMany(x => x.BoughtHistory);
             Map(x => x.PersonType);
         }
-
     }
 }

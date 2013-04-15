@@ -1,12 +1,15 @@
 ﻿#region Usings
 
-using FluentNHibernate.Mapping;
+using LOB.Dao.Nhibernate.Mapping.Base;
 using LOB.Domain.SubEntity;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
-    public class CategoryMap : SubclassMap<Category> {
-
+    public class CategoryMap : BaseEntityMap<Category> {
+        public CategoryMap() {
+            Map(x => x.Name);
+            Map(x => x.Description);
+        }
     }
 }

@@ -10,8 +10,7 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain.SubEntity {
     [Serializable]
-    public class ShipmentInfo : Service, IEquatable<ShipmentInfo> {
-
+    public class ShipmentInfo : BaseEntity, IEquatable<ShipmentInfo> {
         public Shipper Shipper { get; set; }
         public ShipmentStatus Status { get; set; }
         public Address Address { get; set; }
@@ -37,11 +36,9 @@ namespace LOB.Domain.SubEntity {
 
     [Serializable]
     public enum ShipmentStatus {
-
         Active,
         Paused,
         Finished,
         Cancelled
-
     }
 }

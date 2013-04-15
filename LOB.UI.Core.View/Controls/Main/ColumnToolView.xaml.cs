@@ -14,14 +14,13 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for ColumnToolsView.xaml
     /// </summary>
     public partial class ColumnToolView : UserControl, IBaseView {
-
         public ColumnToolView(IColumnToolsViewModel viewModel) {
             InitializeComponent();
             ViewModel = viewModel;
         }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }

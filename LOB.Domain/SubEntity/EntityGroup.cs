@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain.SubEntity {
     [Serializable]
     public class EntityGroup<T> : BaseEntity, IEquatable<EntityGroup<T>> where T : BaseEntity {
-
         public T Entity { get; set; }
         public string Description { get; set; }
         #region Implementation of IEquatable<EntityGroup<T>>

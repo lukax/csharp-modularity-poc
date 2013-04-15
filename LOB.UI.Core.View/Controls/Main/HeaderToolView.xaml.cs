@@ -14,7 +14,6 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for ColumnToolView.xaml
     /// </summary>
     public partial class HeaderToolView : UserControl, IBaseView {
-
         public HeaderToolView(IHeaderToolsViewModel viewModel) {
             InitializeComponent();
             ViewModel = viewModel;
@@ -35,8 +34,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() { }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

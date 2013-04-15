@@ -10,7 +10,6 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain.Logic {
     public sealed class Notification : BaseNotifyChange, IEquatable<Notification> {
-
         public Notification() { Progress = -1; }
         public AttentionState AttentionState { get; set; }
         public string Message { get; set; }
@@ -27,8 +26,8 @@ namespace LOB.Domain.Logic {
         public bool Equals(Notification other) {
             try {
                 if(ReferenceEquals(null, other)) return false;
-                return AttentionState == other.AttentionState && Message == other.Message && Detail == other.Detail &&
-                       Fix == other.Fix && Progress == other.Progress; //Comparison with == so dont throw null
+                return AttentionState == other.AttentionState && Message == other.Message && Detail == other.Detail && Fix == other.Fix &&
+                       Progress == other.Progress; //Comparison with == so dont throw null
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -39,19 +38,16 @@ namespace LOB.Domain.Logic {
 
         #endregion
     }
-    
-    public enum AttentionState {
 
+    public enum AttentionState {
         Ok,
         Info,
         Warning,
         Error,
-
     }
 
     public static class NotificationExtensions {
-
-       // public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
+        // public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
 
         public static Notification Severity(this Notification notification, AttentionState attentionState) {
             notification.AttentionState = attentionState;
@@ -73,6 +69,5 @@ namespace LOB.Domain.Logic {
             notification.Progress = progress;
             return notification;
         }
-
     }
 }

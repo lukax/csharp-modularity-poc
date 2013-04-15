@@ -86,7 +86,6 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
         ///     GridViewColumn class that gets attached to the GridViewColumn control
         /// </summary>
         public class GridViewColumnResizeBehavior {
-
             private readonly GridViewColumn _element;
 
             public GridViewColumnResizeBehavior(GridViewColumn element) { _element = element; }
@@ -129,7 +128,6 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
                     _element.Width = width;
                 }
             }
-
         }
 
         #endregion
@@ -139,7 +137,6 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
         ///     ListViewResizeBehavior class that gets attached to the ListView control
         /// </summary>
         public class ListViewResizeBehavior {
-
             private const int Margin = 25;
             private const long RefreshTime = Timeout.Infinite;
             private const long Delay = 500;
@@ -203,7 +200,6 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
                 }
                 return totalWidth;
             }
-
         }
 
         #endregion

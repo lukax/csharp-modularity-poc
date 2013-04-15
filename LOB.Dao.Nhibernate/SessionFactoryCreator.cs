@@ -16,7 +16,6 @@ using NullGuard;
 
 namespace LOB.Dao.Nhibernate {
     public class SessionFactoryCreator : ISessionFactoryCreator {
-
         private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 
         private const string MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
@@ -48,6 +47,8 @@ namespace LOB.Dao.Nhibernate {
                 return null;
             }
         }
+
+        public bool DropTables { get; set; }
 
         [InjectionConstructor]
         public SessionFactoryCreator(ILoggerFacade logger)
@@ -113,8 +114,10 @@ namespace LOB.Dao.Nhibernate {
                     _sqlSchema.Create(false, true);
                     return;
                 }
-                //_sqlSchema.Drop(false, true);
-                //_sqlSchema.Create(false, true);
+                if(DropTables) {
+                    _sqlSchema.Drop(false, true);
+                    _sqlSchema.Create(false, true);
+                }
             } catch(Exception e) {
                 _logger.Log(e.Message, Category.Exception, Priority.High);
             }

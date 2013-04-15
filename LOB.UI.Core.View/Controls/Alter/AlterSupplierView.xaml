@@ -15,9 +15,9 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <base:CodeView x:Name="ViewCode"/>
+        <base:CodeView x:Name="ViewCode" />
         <StackPanel>
-            
+
         </StackPanel>
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>

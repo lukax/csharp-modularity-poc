@@ -6,9 +6,5 @@ using LOB.Domain;
 #endregion
 
 namespace LOB.Business.Interface.Logic {
-    public interface IStoreFacade : IBaseEntityFacade {
-
-        Store GenerateEntity();
-
-    }
+    public interface IStoreFacade : IBaseEntityFacade<Store> {}
 }

@@ -6,13 +6,11 @@ using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     public partial class AlterPayCheckView : UserControl, IBaseView {
-
         public AlterPayCheckView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -22,9 +20,14 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewAlterBaseEntity.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_PayCheck; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_PayCheck; }
+        }
 
         public int Index { get; set; }
 
@@ -32,7 +35,9 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

@@ -14,7 +14,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
-
         [InjectionConstructor]
         public ListLegalPersonViewModel(LegalPerson entity, IRepository repository, EventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) { }
@@ -36,11 +35,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
-        public override void InitializeServices() { if (Equals(Operation, default(ViewID))) Operation = _operation; }
+        public override void InitializeServices() {
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
+        }
 
         public override void Refresh() { Search = ""; }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.LegalPerson, State = ViewState.List};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.LegalPerson, State = ViewState.List};
     }
 }

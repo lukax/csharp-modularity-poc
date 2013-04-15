@@ -7,12 +7,10 @@ using Microsoft.Win32;
 
 namespace LOB.Core.Util {
     public class RegistryUtility {
-
         /// <summary>
         ///     An useful class to read/write/delete/count registry keys
         /// </summary>
         public class ModifyRegistry {
-
             private RegistryKey _baseRegistryKey = Registry.LocalMachine;
 
             public ModifyRegistry() {
@@ -171,8 +169,6 @@ namespace LOB.Core.Util {
             }
 
             private void ShowErrorMessage(Exception e, string title) { throw new NotImplementedException(); }
-
         }
-
     }
 }

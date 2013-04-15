@@ -10,7 +10,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class Command : BaseEntity, IEquatable<Command> {
-
         public string Name { get; set; }
         public object Parameter { get; set; }
         public ICommand Task { get; set; }

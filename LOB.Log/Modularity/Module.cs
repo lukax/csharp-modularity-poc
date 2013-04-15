@@ -10,7 +10,6 @@ using Microsoft.Practices.Unity;
 namespace LOB.Log.Modularity {
     [Module(ModuleName = "LogModule")]
     public class Module : IModule {
-
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) { _container = container; }
@@ -19,6 +18,5 @@ namespace LOB.Log.Modularity {
             _container.RegisterType<ILogger, Logger>();
             _container.RegisterType<ILoggerFacade, Logger>();
         }
-
     }
 }

@@ -26,7 +26,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity {
-
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
         //private ViewID _previousOperation;
@@ -54,14 +53,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected IRepository Repository { get; private set; }
         protected IEventAggregator EventAggregator { get; private set; }
         protected BackgroundWorker Worker { get; private set; }
-        public override ViewID Operation { get; set; }
+        public override ViewID ViewID { get; set; }
 
         [InjectionConstructor]
         protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
             EventAggregator = eventAggregator;
             Repository = repository;
             Entity = entity;
-            Worker= new BackgroundWorker();
+            Worker = new BackgroundWorker();
             SearchCommand = new DelegateCommand(SearchExecute);
             IncludeCommand = new DelegateCommand(Include);
             AddCommand = new DelegateCommand(Save, CanSave);
@@ -76,7 +75,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         protected virtual void SearchExecute(object obj) { throw new NotImplementedException(); }
 
-        private void Exit(object obj) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        private void Exit(object obj) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         public int UpdateInterval {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
@@ -101,8 +100,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             var notification = new Notification();
             do {
                 Thread.Sleep(2000);
-                EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(0));
+                EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(10));
                 IList<T> localList = string.IsNullOrEmpty(Search) ? (Repository.GetAll<T>()).ToList() : (Repository.GetAll(SearchCriteria)).ToList();
+                EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(70));
                 if(Entitys == null || !localList.SequenceEqual(Entitys)) {
                     Entitys = new ObservableCollection<T>(localList);
                     EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(100));
@@ -124,7 +124,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
         protected virtual void Fetch(object arg = null) { Entitys = new ObservableCollection<T>(Repository.GetAll<T>().ToList()); }
-        
         #region Implementation of IDisposable
 
         ~ListBaseEntityViewModel() { Dispose(false); }

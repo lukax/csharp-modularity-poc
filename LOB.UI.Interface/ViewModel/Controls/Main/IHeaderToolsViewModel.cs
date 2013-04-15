@@ -1,5 +1,3 @@
 ﻿namespace LOB.UI.Interface.ViewModel.Controls.Main {
-    public interface IHeaderToolsViewModel : IBaseViewModel {
-
-    }
+    public interface IHeaderToolsViewModel : IBaseViewModel {}
 }

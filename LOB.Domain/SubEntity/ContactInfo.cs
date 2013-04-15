@@ -11,7 +11,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain.SubEntity {
     [Serializable]
     public class ContactInfo : BaseEntity, IEquatable<ContactInfo> {
-
         public ContactStatus Status { get; set; }
         public string Description { get; set; }
         public IList<PhoneNumber> PhoneNumbers { get; set; }
@@ -39,10 +38,8 @@ namespace LOB.Domain.SubEntity {
 
     [Serializable]
     public enum ContactStatus {
-
         Active,
         Inactive,
         Deprecated
-
     }
 }

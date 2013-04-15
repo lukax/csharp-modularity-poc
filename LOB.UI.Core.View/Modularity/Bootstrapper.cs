@@ -13,7 +13,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.View.Modularity {
     public class Bootstrapper : UnityBootstrapper {
-
         protected override ILoggerFacade CreateLogger() { return new Logger(); }
 
         protected override IModuleCatalog CreateModuleCatalog() {
@@ -63,6 +62,5 @@ namespace LOB.UI.Core.View.Modularity {
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
-
     }
 }

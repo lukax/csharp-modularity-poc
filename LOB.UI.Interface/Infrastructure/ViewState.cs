@@ -1,8 +1,5 @@
-﻿using LOB.Domain.Base;
-
-namespace LOB.UI.Interface.Infrastructure {
+﻿namespace LOB.UI.Interface.Infrastructure {
     public enum ViewState {
-
         Internal = 0, //Internal Usage
 
         //Altering
@@ -16,6 +13,5 @@ namespace LOB.UI.Interface.Infrastructure {
 
         //Business
         Sell = 7,
-
     }
 }

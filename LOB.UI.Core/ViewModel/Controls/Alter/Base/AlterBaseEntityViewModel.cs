@@ -21,12 +21,19 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
-
         private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
-        private ViewID _operation;
-        public T Entity { get; set; }
-        public int Index { get; set; }
+        private ViewID _viewID;
+        private T _entity;
+        public T Entity {
+            get { return _entity; }
+            set {
+                _entity = value;
+                EntityChanged();
+            }
+        }
+
+        protected virtual void EntityChanged() { }
         public ICommand SaveChangesCommand { get; set; }
         public ICommand DiscardChangesCommand { get; set; }
         public ICommand ClearEntityCommand { get; set; }
@@ -36,17 +43,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected IEventAggregator EventAggregator { get; private set; }
         protected ILoggerFacade Logger { get; private set; }
         protected BackgroundWorker Worker { get; private set; }
-        protected NotificationEvent NotificationEvent { get { return EventAggregator.GetEvent<NotificationEvent>(); } }
+        protected NotificationEvent NotificationEvent {
+            get { return EventAggregator.GetEvent<NotificationEvent>(); }
+        }
         protected Notification Notification { get; private set; }
 
         [InjectionConstructor]
         protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger) {
             EventAggregator = eventAggregator;
             Logger = logger;
+            Entity = entity;
             Worker = new BackgroundWorker();
             Notification = new Notification();
             Repository = repository;
-            Entity = entity;
             SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
             DiscardChangesCommand = new DelegateCommand(Cancel, CanCancel);
             QuickSearchCommand = new DelegateCommand(QuickSearch, CanQuickSearch);
@@ -54,8 +63,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         protected virtual bool CanCancel(object arg) {
-            if(Operation.State == ViewState.Add) return true;
-            if(Operation.State == ViewState.Update) return true;
+            if(ViewID.State == ViewState.Add) return true;
+            if(ViewID.State == ViewState.Update) return true;
             return false;
         }
         protected abstract void Cancel(object arg);
@@ -75,42 +84,42 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     Repository.Uow.CommitTransaction();
                     NotificationEvent.Publish(Notification.Progress(90));
                 }
-            Operation.State(ViewState.Update);
+            ViewID.State(ViewState.Update);
             NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
         }
 
         protected virtual bool CanQuickSearch(object obj) {
-            if(Operation == null) return false;
-            return Operation.State != ViewState.QuickSearch;
+            if(ViewID == null) return false;
+            return ViewID.State != ViewState.QuickSearch;
         }
         protected virtual void QuickSearch(object arg) {
-            Operation.State(ViewState.QuickSearch);
-            EventAggregator.GetEvent<OpenViewEvent>().Publish(Operation);
+            ViewID.State(ViewState.QuickSearch);
+            EventAggregator.GetEvent<OpenViewEvent>().Publish(ViewID);
             _currentSubscription = EventAggregator.GetEvent<CloseViewEvent>().Subscribe(RestoreUIState);
         }
 
         private void RestoreUIState(ViewID obj) {
-            if(Operation.State == ViewState.QuickSearch) {
-                Operation.State(_previousState);
+            if(ViewID.State == ViewState.QuickSearch) {
+                ViewID.State(_previousState);
                 _currentSubscription.Dispose();
             }
         }
 
-        protected virtual bool CanClearEntity(object obj) { return Operation.State == ViewState.Add; }
+        protected virtual bool CanClearEntity(object obj) { return ViewID.State == ViewState.Add; }
         protected abstract void ClearEntity(object arg);
 
-        public override ViewID Operation {
-            get { return _operation; }
+        public override ViewID ViewID {
+            get { return _viewID; }
             set {
-                _operation = value;
+                _viewID = value;
                 UIOpChanged(null, new PropertyChangedEventArgs("State"));
                 value.PropertyChanged += UIOpChanged;
             }
         }
         private void UIOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
             if(propertyChangedEventArgs.PropertyName == "State") {
-                if(Operation.State == ViewState.QuickSearch) return;
-                _previousState = Operation.State;
+                if(ViewID.State == ViewState.QuickSearch) return;
+                _previousState = ViewID.State;
             }
         }
         #region Implementation of IDisposable

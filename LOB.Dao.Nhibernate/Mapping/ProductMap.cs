@@ -1,15 +1,16 @@
 ﻿#region Usings
 
-using FluentNHibernate.Mapping;
+using LOB.Dao.Nhibernate.Mapping.Base;
 using LOB.Domain;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping {
-    public class ProductMap : SubclassMap<Product> {
-
+    public class ProductMap : BaseEntityMap<Product> {
         public ProductMap() {
             References(x => x.Category);
+            Map(x => x.Name);
+            Map(x => x.Description);
             Map(x => x.Status);
             Map(x => x.CodBarras);
             Map(x => x.CodNCM);
@@ -27,6 +28,5 @@ namespace LOB.Dao.Nhibernate.Mapping {
             HasMany(x => x.Suppliers);
             References(x => x.ShipmentInfo);
         }
-
     }
 }

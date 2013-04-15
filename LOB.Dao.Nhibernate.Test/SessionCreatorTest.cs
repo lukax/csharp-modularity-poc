@@ -11,7 +11,6 @@ using NHibernate;
 namespace LOB.Dao.Nhibernate.Test {
     [TestClass]
     public class SessionCreatorTest {
-
         [TestMethod]
         public void CreateSessionTest() {
             var creator = new SessionFactoryCreator(new Logger());
@@ -61,6 +60,5 @@ namespace LOB.Dao.Nhibernate.Test {
                 session.Transaction.Commit();
             }
         }
-
     }
 }

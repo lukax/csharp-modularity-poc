@@ -1,6 +1,5 @@
 ﻿namespace LOB.Core.Licensing {
     public class TrialMaker {
-
         private const int TrailRuns = 30;
         private static int _currentRun = 1;
         private static string _registryPath = "Software\\LOBAPP";
@@ -11,6 +10,5 @@
             //string key = RegistryUtility.GetFromRegistry(_registryPath, _trialVersionKey).ToString();
             return false;
         }
-
     }
 }

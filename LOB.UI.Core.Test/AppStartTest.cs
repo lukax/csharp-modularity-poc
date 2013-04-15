@@ -8,9 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LOB.UI.Core.Test {
     [TestClass]
     public class AppStartTest {
-
         [TestMethod]
         public void StartComposed() { var app = new App(); }
-
     }
 }

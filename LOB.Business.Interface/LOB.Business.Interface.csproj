@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="Logic\Base\IBaseEntityFacade.cs" />
     <Compile Include="Logic\Base\IPersonFacade.cs" />
-    <Compile Include="Logic\Base\IServiceFacade.cs" />
     <Compile Include="Logic\INaturalPersonFacade.cs" />
     <Compile Include="Logic\ICustomerFacade.cs" />
     <Compile Include="Logic\IEmployeeFacade.cs" />

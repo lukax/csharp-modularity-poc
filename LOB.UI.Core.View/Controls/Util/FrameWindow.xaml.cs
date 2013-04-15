@@ -14,7 +14,6 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.View.Controls.Util {
     public partial class FrameWindow : IBaseView {
-
         private readonly IEventAggregator _eventAggregator;
 
         public FrameWindow(IEventAggregator eventAggregator) {
@@ -72,8 +71,8 @@ namespace LOB.UI.Core.View.Controls.Util {
         #endregion
         //private void Busy() { ModalRegion = new BusyIuiComponent(); }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

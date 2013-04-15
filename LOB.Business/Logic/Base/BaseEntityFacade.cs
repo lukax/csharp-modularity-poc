@@ -10,13 +10,19 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic.Base {
-    public class BaseEntityFacade : IBaseEntityFacade {
-
+    public abstract class BaseEntityFacade : IBaseEntityFacade<BaseEntity> {
         private BaseEntity _entity;
 
-        public void SetEntity<T>(T entity) where T : BaseEntity { _entity = entity; }
-
         public void ConfigureValidations() { if(_entity != null) _entity.AddValidation((sender, name) => _entity.Code < 0 ? new ValidationResult("Code", Strings.Notification_Field_WrongFormat) : null); }
+
+        public BaseEntity Entity {
+            set {
+                _entity = value;
+                ConfigureValidations();
+            }
+        }
+
+        public BaseEntity GenerateEntity() { return null; }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = true;
@@ -49,6 +55,5 @@ namespace LOB.Business.Logic.Base {
         }
 
         public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) { return CanUpdate(out invalidFields); }
-
     }
 }

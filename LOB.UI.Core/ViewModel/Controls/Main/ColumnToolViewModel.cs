@@ -18,7 +18,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolsViewModel {
-
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IEventAggregator _eventAggregator;
         private readonly IFluentNavigator _navigator;
@@ -47,10 +46,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewID _operation = new ViewID {Type = ViewType.ColumnTool, State = ViewState.Internal};
-        public override ViewID Operation {
-            get { return _operation; }
-            set { _operation = value; }
+        private ViewID _viewID = new ViewID {Type = ViewType.ColumnTool, State = ViewState.Internal};
+        public override ViewID ViewID {
+            get { return _viewID; }
+            set { _viewID = value; }
         }
 
         private void ShowOperations(object arg) {

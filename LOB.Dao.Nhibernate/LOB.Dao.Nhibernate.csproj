@@ -105,7 +105,6 @@
     <Compile Include="Mapping\SubEntity\ContactInfoMap.cs" />
     <Compile Include="Mapping\SaleMap.cs" />
     <Compile Include="Mapping\Base\PersonMap.cs" />
-    <Compile Include="Mapping\Base\ServiceMap.cs" />
     <Compile Include="Mapping\Base\BaseEntityMap.cs" />
     <Compile Include="Mapping\StoreMap.cs" />
     <Compile Include="Mapping\SubEntity\UfMap.cs" />

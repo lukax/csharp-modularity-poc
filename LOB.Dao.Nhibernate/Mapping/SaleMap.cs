@@ -7,7 +7,6 @@ using LOB.Domain;
 
 namespace LOB.Dao.Nhibernate.Mapping {
     public class SaleMap : BaseEntityMap<Sale> {
-
         public SaleMap() {
             Map(x => x.State);
             Map(x => x.SaleDate);
@@ -18,6 +17,5 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.Quantity);
             Map(x => x.PS);
         }
-
     }
 }

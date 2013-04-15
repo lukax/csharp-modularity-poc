@@ -12,14 +12,15 @@ using NHibernate.Linq;
 
 namespace LOB.Dao.Nhibernate {
     public class UnityOfWork : IUnityOfWork {
-
 // ReSharper disable NotAccessedField.Local
         private readonly ILoggerFacade _loggerFacade;
 // ReSharper restore NotAccessedField.Local
         //TODO: Try and catches and some logging later..
         private readonly Lazy<ISession> _lazyOrm;
         private ITransaction _transaction;
-        public object ORM { get { return _lazyOrm.Value; } }
+        public object ORM {
+            get { return _lazyOrm.Value; }
+        }
         protected ISessionFactoryCreator SessionFactoryCreator { get; set; }
         public event EventHandler<string> OnError;
 

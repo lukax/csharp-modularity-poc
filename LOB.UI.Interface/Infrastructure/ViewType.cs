@@ -6,7 +6,6 @@ using System;
 
 namespace LOB.UI.Interface.Infrastructure {
     public enum ViewType {
-
         Unknown = 0,
 
         Main,
@@ -36,16 +35,13 @@ namespace LOB.UI.Interface.Infrastructure {
         Store,
 
         Op,
-
     }
 
     public static class OperationTypeExtension {
-
         public static ViewType ToUIOperationType(this string operationType) {
             ViewType o;
             if(Enum.TryParse(operationType, out o)) return o;
             throw new ArgumentException("Not parsable to OperationTypeEnum", "operationType");
         }
-
     }
 }

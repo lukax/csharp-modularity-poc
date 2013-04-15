@@ -1,14 +1,12 @@
 ﻿#region Usings
 
 using FluentNHibernate.Mapping;
-using LOB.Dao.Nhibernate.Mapping.Base;
 using LOB.Domain;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping {
     public class StoreMap : SubclassMap<Store> {
-
         public StoreMap() {
             Map(x => x.Name);
             HasMany(x => x.Employees).Cascade.All();
@@ -18,6 +16,5 @@ namespace LOB.Dao.Nhibernate.Mapping {
             //References(x => x.Address).Cascade.All();
             //References(x => x.ContactInfo).Cascade.All();
         }
-
     }
 }

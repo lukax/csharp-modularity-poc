@@ -23,12 +23,11 @@ using Category = LOB.Domain.SubEntity.Category;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterStoreViewModel : AlterBaseEntityViewModel<Store>, IAlterProductViewModel {
-
         private readonly IStoreFacade _storeFacade;
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Store, State = ViewState.Add};
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Store, State = ViewState.Add};
         [InjectionConstructor]
         public AlterStoreViewModel(Store entity, IRepository repository, IStoreFacade storeFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
@@ -39,7 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if (Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             ClearEntity(null);
 
             Worker.DoWork += UpdateCategoryList;
@@ -73,7 +72,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             //_navigator.ResolveView(oP).Show(true);
         }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override bool CanSaveChanges(object arg) {
             //TODO: If viewState == Add : ..., If viewState == Update : ....
@@ -88,9 +87,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override void ClearEntity(object args) {
             Entity = _storeFacade.GenerateEntity();
-            _storeFacade.SetEntity(Entity);
-            _storeFacade.ConfigureValidations();
+            _storeFacade.Entity = (Entity);
         }
-
     }
 }

@@ -13,11 +13,10 @@ namespace LOB.UI.Core.View.Controls.Main {
     ///     Interaction logic for BusyIuiComponent.xaml
     /// </summary>
     public partial class BusyView : UserControl, IBaseView {
-
         public BusyView() { InitializeComponent(); }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         public IBaseViewModel ViewModel { get; set; }
 

@@ -13,7 +13,6 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel {
-
         public ListCustomerViewModel(Customer entity, IRepository repository, IEventAggregator eventAggregator)
             : base(entity, repository, eventAggregator) {
             Entity = entity;
@@ -38,11 +37,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
-        public override void InitializeServices() { if (Equals(Operation, default(ViewID))) Operation = _operation; }
+        public override void InitializeServices() {
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
+        }
 
         public override void Refresh() { Search = ""; }
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.Customer, State = ViewState.List};
-
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Customer, State = ViewState.List};
     }
 }

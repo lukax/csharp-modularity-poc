@@ -12,7 +12,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class Customer : BaseEntity, IEquatable<Customer> {
-
         public Person Person { get; set; }
         public PersonType PersonType { get; set; }
         public IList<Store> CustomerOf { get; set; }
@@ -37,15 +36,12 @@ namespace LOB.Domain {
 
     [Serializable]
     public enum CustomerStatus {
-
         New,
         Active,
         Inactive
-
     }
 
     public static class CustomerExtensions {
-
         public static IDictionary<CustomerStatus, string> CustomerStatusLocalizationsDict {
             get {
                 return new Dictionary<CustomerStatus, string> {
@@ -57,6 +53,5 @@ namespace LOB.Domain {
         }
         public static CustomerStatus ToCustomerStatus(this string s) { return CustomerStatusLocalizationsDict.FirstOrDefault(x => x.Value.ToLower() == s.ToLower()).Key; }
         public static string ToLocalizedString(this CustomerStatus s) { return CustomerStatusLocalizationsDict[s]; }
-
     }
 }

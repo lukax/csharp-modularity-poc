@@ -2,7 +2,6 @@
 
 using System;
 using LOB.Core.Localization;
-using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.Operation;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -16,7 +15,6 @@ namespace LOB.UI.Core.View.Controls.List {
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
     public partial class ListOpView : IBaseView {
-
         private readonly IEventAggregator _eventAggregator;
 
         public ListOpView(IEventAggregator eventAggregator, IListOpViewModel viewModel) {
@@ -36,14 +34,14 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public int Index { get; set; }
 
-        public void InitializeServices() { _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o.Equals(Operation)) Refresh(); }); }
+        public void InitializeServices() { _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o.Equals(ViewID)) Refresh(); }); }
 
         public void Refresh() {
             //ListViewEntitys.SelectedIndex = -1;
         }
 
-        public ViewID Operation {
-            get { return ViewModel.Operation; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

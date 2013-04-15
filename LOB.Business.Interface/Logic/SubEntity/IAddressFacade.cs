@@ -9,15 +9,9 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Interface.Logic.SubEntity {
-    public interface IAddressFacade : IBaseEntityFacade {
-
-        new void SetEntity<T>(T entity) where T : Address;
-        Address GenerateEntity();
-
-    }
+    public interface IAddressFacade : IBaseEntityFacade<Address> {}
 
     public static class AddressStatusDictionary {
-
         private static readonly Lazy<IDictionary<string, AddressStatus>> Lazy =
             new Lazy<IDictionary<string, AddressStatus>>(
                 () =>
@@ -30,6 +24,5 @@ namespace LOB.Business.Interface.Logic.SubEntity {
         public static IDictionary<string, AddressStatus> Statuses {
             get { return Lazy.Value; }
         }
-
     }
 }

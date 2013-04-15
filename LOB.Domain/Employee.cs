@@ -9,7 +9,6 @@ using LOB.Domain.SubEntity;
 namespace LOB.Domain {
     [Serializable]
     public class Employee : NaturalPerson, IEquatable<Employee> {
-
         public Store WorksIn { get; set; }
         public string Title { get; set; }
         public DateTime HireDate { get; set; }

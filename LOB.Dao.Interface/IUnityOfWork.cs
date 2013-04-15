@@ -1,13 +1,11 @@
 ﻿#region Usings
 
 using System;
-using LOB.Domain.Base;
 
 #endregion
 
 namespace LOB.Dao.Interface {
     public interface IUnityOfWork : IDisposable {
-
         /// <summary>
         ///     string Error Message
         /// </summary>
@@ -17,6 +15,5 @@ namespace LOB.Dao.Interface {
         void RollbackTransaction();
         void FlushTransaction();
         bool IsTransactionActive();
-
     }
 }

@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class LegalPerson : Person, IEquatable<LegalPerson> {
-
         public string CorporateName { get; set; }
         public string TradingName { get; set; }
         public string CNPJ { get; set; }
@@ -20,8 +19,9 @@ namespace LOB.Domain {
 
         public bool Equals(LegalPerson other) {
             try {
-                return base.Equals(other) && other.CorporateName.Equals(CorporateName) && other.TradingName.Equals(TradingName) && other.CNPJ.Equals(CNPJ) &&
-                       other.InscEstadual.Equals(InscEstadual) && other.InscMunicipal.Equals(InscMunicipal) && other.CNAEFiscal.Equals(CNAEFiscal);
+                return base.Equals(other) && other.CorporateName.Equals(CorporateName) && other.TradingName.Equals(TradingName) &&
+                       other.CNPJ.Equals(CNPJ) && other.InscEstadual.Equals(InscEstadual) && other.InscMunicipal.Equals(InscMunicipal) &&
+                       other.CNAEFiscal.Equals(CNAEFiscal);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

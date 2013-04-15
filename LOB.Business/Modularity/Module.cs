@@ -6,6 +6,7 @@ using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic;
 using LOB.Business.Logic.Base;
 using LOB.Business.Logic.SubEntity;
+using LOB.Domain.Base;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
@@ -16,15 +17,13 @@ using Microsoft.Practices.Unity;
 namespace LOB.Business.Modularity {
     [Module(ModuleName = "BusinessModule")]
     public class Module : IModule {
-
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container) { _container = container; }
 
         public void Initialize() {
-            _container.RegisterType<IBaseEntityFacade, BaseEntityFacade>();
+            _container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade>();
             _container.RegisterType<IPersonFacade, PersonFacade>();
-            _container.RegisterType<IServiceFacade, ServiceFacade>();
 
             _container.RegisterType<IAddressFacade, AddressFacade>();
             _container.RegisterType<ICategoryFacade, CategoryFacade>();
@@ -47,6 +46,5 @@ namespace LOB.Business.Modularity {
             log.Log("BusinessModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
-
     }
 }

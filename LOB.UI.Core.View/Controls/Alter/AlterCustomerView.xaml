@@ -23,12 +23,12 @@
         <util:EditToolsView x:Name="ViewEditTools" />
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <base:CodeView x:Name="ViewCode"/>
+                <base:CodeView x:Name="ViewCode" />
 
                 <Label Content="{x:Static loc:Strings.Common_Status}" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Status, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, Mode=OneWay}"
-                           HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
-                           IsReadOnly="True" />
+                         HorizontalAlignment="Left" MinWidth="200" MaxWidth="150"
+                         IsReadOnly="True" />
 
                 <Label Content="{x:Static loc:Strings.Common_PersonType}" HorizontalAlignment="Right" />
 
@@ -38,10 +38,10 @@
             <StackPanel>
                 <TabControl>
                     <TabItem Header=">"></TabItem>
-                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" IsSelected="True" >
-                        <ContentControl regions:RegionManager.RegionName="Customer_PersonRegion"/>
+                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" IsSelected="True">
+                        <ContentControl regions:RegionManager.RegionName="Customer_PersonRegion" />
                     </TabItem>
-                    
+
                 </TabControl>
             </StackPanel>
 
@@ -52,7 +52,10 @@
                         <DataGrid ItemsSource="{Binding Entity.BoughtHistory}" MinHeight="200"></DataGrid>
                     </TabItem>
                     <TabItem Header="{x:Static loc:Strings.Common_CustomerOf}">
-                        <DataGrid ItemsSource="{Binding Entity.ClientOf, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" MinHeight="200"></DataGrid>
+                        <DataGrid
+                            ItemsSource="{Binding Entity.ClientOf, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+                            MinHeight="200">
+                        </DataGrid>
                     </TabItem>
                 </TabControl>
 

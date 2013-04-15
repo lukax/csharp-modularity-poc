@@ -11,7 +11,6 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterNaturalPersonView : IBaseView {
-
         public AlterNaturalPersonView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -24,9 +23,14 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewAlterPerson.DataContext = view != null ? view.AlterPersonViewModel : dependencyPropertyChangedEventArgs.NewValue;
         }
 
-        public IBaseViewModel ViewModel { get { return DataContext as IBaseViewModel; } set { DataContext = value; } }
+        public IBaseViewModel ViewModel {
+            get { return DataContext as IBaseViewModel; }
+            set { DataContext = value; }
+        }
 
-        public string Header { get { return Strings.UI_Header_Alter_NaturalPerson; } }
+        public string Header {
+            get { return Strings.UI_Header_Alter_NaturalPerson; }
+        }
 
         public int Index { get; set; }
 
@@ -34,7 +38,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         public void Refresh() { }
 
-        public ViewID Operation { get { return ViewModel.Operation; } }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
+        }
         #region Implementation of IDisposable
 
         public void Dispose() {

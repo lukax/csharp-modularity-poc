@@ -19,10 +19,9 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
-
         private readonly INaturalPersonFacade _naturalPersonFacade;
 
-        private readonly ViewID _operation = new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add};
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add};
         public IAlterPersonViewModel AlterPersonViewModel { get; set; }
 
         [InjectionConstructor]
@@ -44,18 +43,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(Operation, default(ViewID))) Operation = _operation;
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             AlterPersonViewModel.InitializeServices();
             ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
-            if(Operation.State == ViewState.Add) {
+            if(ViewID.State == ViewState.Add) {
                 IEnumerable<ValidationResult> results;
                 //var s= AlterPersonIuiComponentModel.SaveChangesCommand.CanExecute(null);
                 return _naturalPersonFacade.CanAdd(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
-            if(Operation.State == ViewState.Update) {
+            if(ViewID.State == ViewState.Update) {
                 IEnumerable<ValidationResult> results;
                 return _naturalPersonFacade.CanUpdate(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             }
@@ -63,18 +62,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
         public override void Refresh() { ClearEntity(null); }
 
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(Operation); }
+        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
         protected override void ClearEntity(object arg) {
             Entity = _naturalPersonFacade.GenerateEntity();
-            _naturalPersonFacade.SetEntity(Entity);
-            _naturalPersonFacade.ConfigureValidations();
+            _naturalPersonFacade.Entity = (Entity);
         }
 
         public override void Dispose() {
             AlterPersonViewModel.Dispose();
             base.Dispose();
         }
-
     }
 }

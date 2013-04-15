@@ -6,9 +6,7 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Interface {
     public interface IBaseViewModel : IUIComponent {
-
         void InitializeServices();
         void Refresh();
-
     }
 }

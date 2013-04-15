@@ -64,7 +64,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\Service.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logic\Notification.cs" />
