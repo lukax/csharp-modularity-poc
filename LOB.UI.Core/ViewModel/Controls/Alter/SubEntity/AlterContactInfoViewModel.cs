@@ -27,9 +27,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
         private readonly IContactInfoFacade _contactInfoFacade;
 
-        public AlterContactInfoViewModel(ContactInfo entity, IRepository repository, IContactInfoFacade contactInfoFacade,
-            IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
+        public AlterContactInfoViewModel(IRepository repository, IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
+            ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) {
             _contactInfoFacade = contactInfoFacade;
             EmailOperation = new ViewID {State = ViewState.Add, Type = ViewType.Email};
             PhoneNumberOperation = new ViewID {State = ViewState.Add, Type = ViewType.PhoneNumber};
@@ -51,7 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
+            base.InitializeServices();
             InitBackgroundWorker();
         }
 
@@ -154,10 +154,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         #endregion
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _contactInfoFacade.GenerateEntity();
-            _contactInfoFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _contactInfoFacade.GenerateEntity(); }
 
         protected override bool CanSaveChanges(object arg) {
             IEnumerable<ValidationResult> results;
@@ -165,5 +162,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         protected override bool CanCancel(object arg) { return true; }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _contactInfoFacade.Entity = Entity;
+        }
     }
 }

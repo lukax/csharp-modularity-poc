@@ -23,9 +23,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterPersonViewModel AlterPersonViewModel { get; set; }
 
         [InjectionConstructor]
-        public AlterEmployeeViewModel(Employee entity, IEmployeeFacade employeeFacade, IAlterPersonViewModel alterPersonViewModel,
-            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
+        public AlterEmployeeViewModel(IEmployeeFacade employeeFacade, IAlterPersonViewModel alterPersonViewModel, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) {
             _employeeFacade = employeeFacade;
             AlterPersonViewModel = alterPersonViewModel;
         }
@@ -33,7 +33,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             AlterPersonViewModel.InitializeServices();
-            ClearEntity(null);
+            base.InitializeServices();
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -56,14 +56,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _employeeFacade.GenerateEntity();
-            _employeeFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _employeeFacade.GenerateEntity(); }
 
         public override void Dispose() {
             AlterPersonViewModel.Dispose();
             base.Dispose();
+        }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _employeeFacade.Entity = Entity;
         }
     }
 }

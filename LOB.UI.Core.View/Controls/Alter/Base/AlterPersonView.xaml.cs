@@ -38,8 +38,6 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
 
         public int Index { get; set; }
 
-        public void InitializeServices() { }
-
         public void Refresh() { }
 
         public ViewID ViewID {

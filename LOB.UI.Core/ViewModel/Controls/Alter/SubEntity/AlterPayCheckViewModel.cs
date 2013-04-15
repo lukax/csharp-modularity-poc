@@ -17,13 +17,12 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {
         private readonly IPayCheckFacade _payCheckFacade;
-        public AlterPayCheckViewModel(PayCheck entity, IPayCheckFacade payCheckFacade, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) { _payCheckFacade = payCheckFacade; }
+        public AlterPayCheckViewModel(IPayCheckFacade payCheckFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { _payCheckFacade = payCheckFacade; }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
+            base.InitializeServices();
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -42,11 +41,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _payCheckFacade.GenerateEntity();
-            _payCheckFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _payCheckFacade.GenerateEntity(); }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.PayCheck, State = ViewState.Add};
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _payCheckFacade.Entity = Entity;
+        }
     }
 }

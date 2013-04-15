@@ -47,7 +47,7 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
                 GridViewColumnResizeBehavior behavior = GetOrCreateBehavior(element);
                 behavior.Width = e.NewValue as string;
             }
-            else Console.Error.WriteLine("Error: Expected type GridViewColumn but found " + dependencyObject.GetType().Name);
+            else Console.Error.WriteLine("Detail: Expected type GridViewColumn but found " + dependencyObject.GetType().Name);
         }
 
         private static void OnSetEnabledCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e) {
@@ -56,7 +56,7 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
                 ListViewResizeBehavior behavior = GetOrCreateBehavior(element);
                 behavior.Enabled = (bool)e.NewValue;
             }
-            else Console.Error.WriteLine("Error: Expected type ListView but found " + dependencyObject.GetType().Name);
+            else Console.Error.WriteLine("Detail: Expected type ListView but found " + dependencyObject.GetType().Name);
         }
 
         private static ListViewResizeBehavior GetOrCreateBehavior(ListView element) {

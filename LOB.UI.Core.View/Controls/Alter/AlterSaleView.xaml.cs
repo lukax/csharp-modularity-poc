@@ -30,8 +30,6 @@ namespace LOB.UI.Core.View.Controls.Alter {
             get { return Strings.UI_Header_Alter_Sale; }
         }
 
-        public void InitializeServices() { }
-
         public void Refresh() { }
 
         public ViewID ViewID {

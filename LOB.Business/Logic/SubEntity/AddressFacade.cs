@@ -34,7 +34,7 @@ namespace LOB.Business.Logic.SubEntity {
         public Address Entity {
             set {
                 _entity = value;
-                ConfigureValidations();
+                if(!ReferenceEquals(value, null)) ConfigureValidations();
             }
         }
 

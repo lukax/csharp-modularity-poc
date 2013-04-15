@@ -59,8 +59,8 @@ namespace LOB.UI.Interface.Infrastructure {
             op.State = state;
             return op;
         }
-        public static ViewID SubState(this ViewID op, ViewSubState status) {
-            op.SubState = status;
+        public static ViewID SubState(this ViewID op, ViewSubState subState) {
+            op.SubState = subState;
             return op;
         }
         public static ViewID IsChild(this ViewID op, bool isChild) {

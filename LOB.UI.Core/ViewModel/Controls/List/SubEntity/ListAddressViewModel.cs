@@ -13,8 +13,8 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel {
-        public ListAddressViewModel(Address entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) { }
+        public ListAddressViewModel(IRepository repository, IEventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;

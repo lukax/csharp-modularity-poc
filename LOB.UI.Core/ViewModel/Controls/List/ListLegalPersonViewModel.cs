@@ -15,8 +15,8 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
         [InjectionConstructor]
-        public ListLegalPersonViewModel(LegalPerson entity, IRepository repository, EventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) { }
+        public ListLegalPersonViewModel(IRepository repository, EventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public new Expression<Func<LegalPerson, bool>> SearchCriteria {
             get {

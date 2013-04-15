@@ -13,8 +13,8 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPhoneNumberViewModel : ListBaseEntityViewModel<PhoneNumber>, IListPhoneNumberViewModel {
-        public ListPhoneNumberViewModel(PhoneNumber entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) { }
+        public ListPhoneNumberViewModel(IRepository repository, IEventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public new Expression<Func<PhoneNumber, bool>> SearchCriteria {
             get {

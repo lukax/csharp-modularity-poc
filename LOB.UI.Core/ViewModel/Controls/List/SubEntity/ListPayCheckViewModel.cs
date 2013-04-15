@@ -13,8 +13,8 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel {
-        public ListPayCheckViewModel(PayCheck entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) { }
+        public ListPayCheckViewModel(IRepository repository, IEventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public new Expression<Func<PayCheck, bool>> SearchCriteria {
             get {

@@ -22,8 +22,6 @@ namespace LOB.UI.Core.View.Controls.Util {
 
         public int Index { get; set; }
 
-        public void InitializeServices() { }
-
         public void Refresh() { }
 
         public ViewID ViewID {

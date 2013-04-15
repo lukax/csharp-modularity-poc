@@ -12,175 +12,173 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <StackPanel>
-            <ListView ItemsSource="{Binding Entitys}" SelectedItem="{Binding Entity}" SelectionMode="Single"
-                      BorderThickness="0" behaviours:GridViewColumnResize.Enabled="True">
-                <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <!--<GridView.ColumnHeaderContainerStyle>
+    <StackPanel>
+        <ListView ItemsSource="{Binding Entitys}" SelectedItem="{Binding Entity}" SelectionMode="Single"
+                  BorderThickness="0" behaviours:GridViewColumnResize.Enabled="True">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <!--<GridView.ColumnHeaderContainerStyle>
                             <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
                                 <Setter Property="Template" V></Setter>
                             </Style>
                         </GridView.ColumnHeaderContainerStyle>-->
-                        <GridViewColumn Width="Auto">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <Rectangle Width="15" Height="15">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Visual="{StaticResource custom_check}" />
-                                            </Rectangle.Fill>
-                                            <Rectangle.Style>
-                                                <Style TargetType="Rectangle">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
-                                                            <Setter Property="Visibility" Value="Visible" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Rectangle.Style>
-                                        </Rectangle>
-                                        <Rectangle Width="15" Height="15">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Visual="{StaticResource appbar_information_circle}" />
-                                            </Rectangle.Fill>
-                                            <Rectangle.Style>
-                                                <Style TargetType="Rectangle">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
-                                                            <Setter Property="Visibility" Value="Visible" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Rectangle.Style>
-                                        </Rectangle>
-                                        <Rectangle Width="15" Height="15">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Visual="{StaticResource appbar_warning_circle}" />
-                                            </Rectangle.Fill>
-                                            <Rectangle.Style>
-                                                <Style TargetType="Rectangle">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
-                                                            <Setter Property="Visibility" Value="Visible" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Rectangle.Style>
-                                        </Rectangle>
-                                        <Rectangle Width="15" Height="15">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Visual="{StaticResource appbar_error}" />
-                                            </Rectangle.Fill>
-                                            <Rectangle.Style>
-                                                <Style TargetType="Rectangle">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Info">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AttentionState}" Value="Error">
-                                                            <Setter Property="Visibility" Value="Visible" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Rectangle.Style>
-                                        </Rectangle>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Message}"
-                                        behaviours:GridViewColumnResize.Width="*">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Message}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="{x:Static loc:Strings.Common_Details}"
-                                        behaviours:GridViewColumnResize.Width="2*">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Detail}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Width="Auto">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ProgressBar MinWidth="50" Value="{Binding Progress}" MinHeight="10">
-                                        <ProgressBar.Style>
-                                            <Style TargetType="ProgressBar" BasedOn="{StaticResource MetroProgressBar}">
+                    <GridViewColumn Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Rectangle Width="15" Height="15">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Visual="{StaticResource custom_check}" />
+                                        </Rectangle.Fill>
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Progress}" Value="-2">
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
                                                         <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="IsIndeterminate" Value="True" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Progress}" Value="-1">
-                                                        <Setter Property="Visibility" Value="Hidden" />
-                                                        <Setter Property="IsIndeterminate" Value="False" />
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Info">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Progress}" Value="0">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="IsIndeterminate" Value="False" />
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Error">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </ProgressBar.Style>
-                                    </ProgressBar>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="{x:Static loc:Strings.Common_OK}" Command="{Binding DismissCommand}">
-                            <MenuItem.Icon>
-                                <Rectangle Height="16" Width="16">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
-        </StackPanel>
-    </ScrollViewer>
+                                        </Rectangle.Style>
+                                    </Rectangle>
+                                    <Rectangle Width="15" Height="15">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Visual="{StaticResource appbar_information_circle}" />
+                                        </Rectangle.Fill>
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Info">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Error">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>
+                                    </Rectangle>
+                                    <Rectangle Width="15" Height="15">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Visual="{StaticResource appbar_warning_circle}" />
+                                        </Rectangle.Fill>
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Info">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Error">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>
+                                    </Rectangle>
+                                    <Rectangle Width="15" Height="15">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Visual="{StaticResource appbar_error}" />
+                                        </Rectangle.Fill>
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Ok">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Info">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Warning">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AttentionState}" Value="Error">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>
+                                    </Rectangle>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static loc:Strings.Common_Message}"
+                                    behaviours:GridViewColumnResize.Width="*">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Message}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static loc:Strings.Common_Details}"
+                                    behaviours:GridViewColumnResize.Width="2*">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Detail}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar MinWidth="100" Value="{Binding Progress}" MinHeight="10">
+                                    <ProgressBar.Style>
+                                        <Style TargetType="ProgressBar" BasedOn="{StaticResource MetroProgressBar}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Progress}" Value="-2">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Setter Property="IsIndeterminate" Value="True" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Progress}" Value="-1">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                    <Setter Property="IsIndeterminate" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Progress}" Value="0">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Setter Property="IsIndeterminate" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ProgressBar.Style>
+                                </ProgressBar>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static loc:Strings.Common_OK}" Command="{Binding DismissCommand}">
+                        <MenuItem.Icon>
+                            <Rectangle Height="16" Width="16">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+    </StackPanel>
 </UserControl>

@@ -1,60 +1,69 @@
 ﻿#region Usings
 
 using System;
+using System.Threading.Tasks;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Linq;
+using NullGuard;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate {
     public class UnityOfWork : IUnityOfWork {
-// ReSharper disable NotAccessedField.Local
-        private readonly ILoggerFacade _loggerFacade;
-// ReSharper restore NotAccessedField.Local
-        //TODO: Try and catches and some logging later..
-        private readonly Lazy<ISession> _lazyOrm;
-        private ITransaction _transaction;
-        public object ORM {
-            get { return _lazyOrm.Value; }
+        protected ILoggerFacade LoggerFacade { get; set; }
+        protected ITransaction Transaction { get; set; }
+        private object _orm;
+        [AllowNull] public object ORM {
+            get
+            {
+                return _orm ?? (_orm = Task.Run(()=> {
+                                            try {
+                                                SessionFactoryCreator.OnError += OnError;
+                                                return SessionFactoryCreator.ORMFactory.As<ISessionFactory>().OpenSession();
+                                            } catch(NullReferenceException) {
+                                                return null;
+                                            }
+                                        }).Result);
+            }
         }
         protected ISessionFactoryCreator SessionFactoryCreator { get; set; }
-        public event EventHandler<string> OnError;
+        public event SessionCreatorEventHandler OnError;
 
         [InjectionConstructor]
         public UnityOfWork(ISessionFactoryCreator sessionFactoryCreator, ILoggerFacade loggerFacade) {
             SessionFactoryCreator = sessionFactoryCreator;
-            _loggerFacade = loggerFacade;
-            _lazyOrm = new Lazy<ISession>(() => sessionFactoryCreator.ORMFactory.As<ISessionFactory>().OpenSession());
+            LoggerFacade = loggerFacade;
         }
 
         public IUnityOfWork BeginTransaction() {
-            if(_transaction == null) {
+            if(Transaction == null) {
+                if(ORM == null) return this;
                 if(!ORM.As<ISession>().IsConnected) ORM.As<ISession>().Reconnect();
-                _transaction = ORM.As<ISession>().BeginTransaction();
+                Transaction = ORM.As<ISession>().BeginTransaction();
             }
-            else if(_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_AlreadyActivated);
+            else if(Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_AlreadyActivated);
             return this;
         }
 
         public void CommitTransaction() {
-            if(_transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
-            if(!_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
-            _transaction.Commit();
+            if(Transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
+            if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
+            Transaction.Commit();
         }
 
         public void RollbackTransaction() {
-            if(_transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
-            if(!_transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
-            _transaction.Rollback();
+            if(Transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
+            if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
+            Transaction.Rollback();
         }
-        public void FlushTransaction() { ORM.As<ISession>().Flush(); }
+        public void FlushTransaction() { if(ORM != null) ORM.As<ISession>().Flush(); }
         public bool IsTransactionActive() {
-            if(_transaction == null) return false;
-            return _transaction.IsActive;
+            if(Transaction == null) return false;
+            return Transaction.IsActive;
         }
         #region Implementation of IDisposable
 
@@ -68,11 +77,11 @@ namespace LOB.Dao.Nhibernate {
         protected virtual void Dispose(bool disposing) {
             //if(_transaction != null) if(_transaction.IsActive) _transaction.Rollback();
             if(!disposing) return;
-            if(_transaction != null) {
-                _transaction.Dispose();
-                _transaction = null;
+            if(Transaction != null) {
+                Transaction.Dispose();
+                Transaction = null;
             }
-            ORM.As<ISession>().Disconnect();
+            if(_orm != null) _orm.As<ISession>().Disconnect();
             //ORMFactory.As<ISession>().Dispose();
         }
 
@@ -83,8 +92,8 @@ namespace LOB.Dao.Nhibernate {
         //    try {
         //        ((ISession)ORMFactory).Save(entity);
         //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Message);
+        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
+        //        if(OnError != null) OnError.Invoke(this, e.Description);
         //    }
         //}
 
@@ -92,8 +101,8 @@ namespace LOB.Dao.Nhibernate {
         //    try {
         //        ((ISession)ORMFactory).SaveOrUpdate(entity);
         //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Message);
+        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
+        //        if(OnError != null) OnError.Invoke(this, e.Description);
         //    }
         //}
 
@@ -101,8 +110,8 @@ namespace LOB.Dao.Nhibernate {
         //    try {
         //        ((ISession)ORMFactory).Update(entity);
         //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Message);
+        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
+        //        if(OnError != null) OnError.Invoke(this, e.Description);
         //    }
         //}
 
@@ -110,8 +119,8 @@ namespace LOB.Dao.Nhibernate {
         //    try {
         //        ((ISession)ORMFactory).Delete(entity);
         //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Message, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Message);
+        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
+        //        if(OnError != null) OnError.Invoke(this, e.Description);
         //    }
         //}
 

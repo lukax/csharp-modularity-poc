@@ -54,13 +54,17 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected IEventAggregator EventAggregator { get; private set; }
         protected BackgroundWorker Worker { get; private set; }
         public override ViewID ViewID { get; set; }
+        protected NotificationEvent NotificationEvent {
+            get { return EventAggregator.GetEvent<NotificationEvent>(); }
+        }
+        protected Notification Notification { get; private set; }
 
         [InjectionConstructor]
-        protected ListBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator) {
+        protected ListBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator) {
             EventAggregator = eventAggregator;
             Repository = repository;
-            Entity = entity;
             Worker = new BackgroundWorker();
+            Notification = new Notification();
             SearchCommand = new DelegateCommand(SearchExecute);
             IncludeCommand = new DelegateCommand(Include);
             AddCommand = new DelegateCommand(Save, CanSave);
@@ -94,21 +98,33 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
-            //worker.WorkerReportsProgress = true;
             //TODO: Dynamic set based on selected tab
-
-            var notification = new Notification();
+            Repository.Uow.OnError += (o, s) => {
+                                          NotificationEvent.Publish(
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).Severity(AttentionState.Error));
+                                          Worker.CancelAsync();
+                                          ViewID.SubState(ViewSubState.Locked);
+                                      };
             do {
+                using(Repository.Uow.BeginTransaction())
+                    if(!worker.CancellationPending) {
+                        EventAggregator.GetEvent<NotificationEvent>()
+                                       .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(10).Severity(AttentionState.Info));
+                        IList<T> localList = string.IsNullOrEmpty(Search)
+                                                 ? (Repository.GetAll<T>()).ToList()
+                                                 : (Repository.GetAll(SearchCriteria)).ToList();
+                        EventAggregator.GetEvent<NotificationEvent>().Publish(Notification.Message(Strings.Notification_List_Updating).Progress(70));
+                        if(Entitys == null || !localList.SequenceEqual(Entitys)) {
+                            Entitys = new ObservableCollection<T>(localList);
+                            EventAggregator.GetEvent<NotificationEvent>()
+                                           .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(100));
+                        }
+                        else
+                            EventAggregator.GetEvent<NotificationEvent>()
+                                           .Publish(Notification.Message(Strings.Notification_List_Updated).Progress(-1).Severity(AttentionState.Ok));
+                    }
                 Thread.Sleep(2000);
-                EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(10));
-                IList<T> localList = string.IsNullOrEmpty(Search) ? (Repository.GetAll<T>()).ToList() : (Repository.GetAll(SearchCriteria)).ToList();
-                EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(70));
-                if(Entitys == null || !localList.SequenceEqual(Entitys)) {
-                    Entitys = new ObservableCollection<T>(localList);
-                    EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updating).Progress(100));
-                }
-                else EventAggregator.GetEvent<NotificationEvent>().Publish(notification.Message(Strings.Notification_List_Updated).Progress(-1));
-            } while(!worker.CancellationPending);
+            } while(!Worker.CancellationPending);
         }
 
         protected virtual void Save(object arg) { }
@@ -123,7 +139,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
-        protected virtual void Fetch(object arg = null) { Entitys = new ObservableCollection<T>(Repository.GetAll<T>().ToList()); }
+        protected virtual void Fetch(object arg = null) {
+            Entitys = null;
+            if(!Worker.IsBusy) Worker.RunWorkerAsync();
+        }
         #region Implementation of IDisposable
 
         ~ListBaseEntityViewModel() { Dispose(false); }

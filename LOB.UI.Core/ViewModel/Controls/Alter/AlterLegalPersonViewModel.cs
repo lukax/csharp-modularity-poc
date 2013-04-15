@@ -25,9 +25,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterPersonViewModel AlterPersonViewModel { get; set; }
 
         [InjectionConstructor]
-        public AlterLegalPersonViewModel(LegalPerson entity, ILegalPersonFacade legalPersonFacade, IAlterPersonViewModel alterPersonViewModel,
-            IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
+        public AlterLegalPersonViewModel(ILegalPersonFacade legalPersonFacade, IAlterPersonViewModel alterPersonViewModel, IRepository repository,
+            IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) {
             AlterPersonViewModel = alterPersonViewModel;
             _legalPersonFacade = legalPersonFacade;
             _eventAggregator = eventAggregator;
@@ -35,8 +35,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
             AlterPersonViewModel.InitializeServices();
-            ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -55,14 +55,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override void Cancel(object arg) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _legalPersonFacade.GenerateEntity();
-            _legalPersonFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _legalPersonFacade.GenerateEntity(); }
 
         public override void Dispose() {
             AlterPersonViewModel.Dispose();
             base.Dispose();
+        }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _legalPersonFacade.Entity = Entity;
         }
     }
 }

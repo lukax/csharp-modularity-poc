@@ -29,9 +29,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IList<Category> Categories { get; set; }
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Store, State = ViewState.Add};
         [InjectionConstructor]
-        public AlterStoreViewModel(Store entity, IRepository repository, IStoreFacade storeFacade, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
+        public AlterStoreViewModel(IRepository repository, IStoreFacade storeFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) {
             _storeFacade = storeFacade;
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
@@ -39,8 +38,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
-
+            base.InitializeServices();
             Worker.DoWork += UpdateCategoryList;
             Worker.WorkerSupportsCancellation = true;
             Worker.WorkerReportsProgress = true;
@@ -85,9 +83,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             return true;
         }
 
-        protected override void ClearEntity(object args) {
-            Entity = _storeFacade.GenerateEntity();
-            _storeFacade.Entity = (Entity);
+        protected override void ClearEntity(object args) { Entity = _storeFacade.GenerateEntity(); }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _storeFacade.Entity = Entity;
         }
     }
 }

@@ -18,12 +18,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             get { return _viewID; }
             set { _viewID = value; }
         }
-        public AlterSaleViewModel(Sale entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) { }
+        public AlterSaleViewModel(IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _viewID;
-            ClearEntity(null);
+            base.InitializeServices();
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -45,5 +45,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         //}
 
         protected override void ClearEntity(object arg) { Entity = new Sale {}; }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            //_sal.Entity = Entity;
+        }
     }
 }

@@ -7,9 +7,9 @@ using System;
 namespace LOB.Dao.Interface {
     public interface IUnityOfWork : IDisposable {
         /// <summary>
-        ///     string Error Message
+        ///     string Detail Description
         /// </summary>
-        event EventHandler<string> OnError;
+        event SessionCreatorEventHandler OnError;
         IUnityOfWork BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();

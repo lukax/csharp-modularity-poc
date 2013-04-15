@@ -73,6 +73,12 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
+                            <DataTrigger Binding="{Binding ViewID.SubState}" Value="Locked">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ViewID.SubState}" Value="Unlocked">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

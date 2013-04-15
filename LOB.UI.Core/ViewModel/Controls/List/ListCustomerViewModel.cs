@@ -13,11 +13,8 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel {
-        public ListCustomerViewModel(Customer entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) {
-            Entity = entity;
-            if(Entity.Person == null) throw new ArgumentException("Entity has not defined a person");
-        }
+        public ListCustomerViewModel(IRepository repository, IEventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public new Expression<Func<Employee, bool>> SearchCriteria {
             get {

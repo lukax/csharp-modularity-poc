@@ -25,17 +25,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         [InjectionConstructor]
         public AlterPersonViewModel(IPersonFacade personFacade, AlterAddressViewModel alterAddressViewModel,
             AlterContactInfoViewModel alterContactInfoViewModel, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(null, repository, eventAggregator, logger) {
+            : base(repository, eventAggregator, logger) {
             _personFacade = personFacade;
             _alterAddressViewModel = alterAddressViewModel;
             _alterContactInfoViewModel = alterContactInfoViewModel;
-
-            ////TODO: Use business logic to set default params
-            //if(entity != null)
-            //    if(Entity.Address.State == null && Entity.Address.Country == null) {
-            //        Entity.Address.Country = "Brasil";
-            //        Entity.Address.State = UFDictionary.Ufs[UF.RJ];
-            //    }
         }
 
         public IAlterAddressViewModel AlterAddressViewModel {
@@ -63,19 +56,23 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             return false;
         }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _personFacade.GenerateEntity();
-            _personFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _personFacade.GenerateEntity(); }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Person, State = ViewState.Add};
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
             AlterAddressViewModel.InitializeServices();
             AlterContactInfoViewModel.InitializeServices();
-            ClearEntity(null);
         }
         public override void Refresh() { ClearEntity(null); }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _personFacade.Entity = Entity;
+            _alterAddressViewModel.Entity = Entity.Address;
+            _alterContactInfoViewModel.Entity = Entity.ContactInfo;
+        }
     }
 }

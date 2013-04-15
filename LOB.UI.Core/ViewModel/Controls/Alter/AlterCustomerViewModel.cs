@@ -44,9 +44,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         [InjectionConstructor]
-        public AlterCustomerViewModel(Customer entity, ICustomerFacade customerFacade, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade logger, IAlterNaturalPersonViewModel alterNaturalPersonViewModel, IAlterLegalPersonViewModel alterLegalPersonViewModel)
-            : base(entity, repository, eventAggregator, logger) {
+        public AlterCustomerViewModel(ICustomerFacade customerFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger,
+            IAlterNaturalPersonViewModel alterNaturalPersonViewModel, IAlterLegalPersonViewModel alterLegalPersonViewModel)
+            : base(repository, eventAggregator, logger) {
             _customerFacade = customerFacade;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel;
             _alterLegalPersonViewModel = alterLegalPersonViewModel;
@@ -88,7 +88,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
+            base.InitializeServices();
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -110,7 +110,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         protected override void ClearEntity(object arg) {
             Entity = _customerFacade.GenerateEntity();
             PersonTypeChanged();
-            _customerFacade.Entity = (Entity);
             //_customerFacade.EnableValidations();
         }
 
@@ -118,6 +117,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             _alterLegalPersonViewModel.Dispose();
             _alterNaturalPersonViewModel.Dispose();
             base.Dispose();
+        }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _customerFacade.Entity = Entity;
         }
     }
 }

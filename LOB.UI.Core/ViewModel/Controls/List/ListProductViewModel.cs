@@ -15,8 +15,8 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel {
         [InjectionConstructor]
-        public ListProductViewModel(Product entity, IRepository repository, EventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) { }
+        public ListProductViewModel(IRepository repository, EventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public new Expression<Func<Product, bool>> SearchCriteria {
             get {

@@ -25,9 +25,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public IAlterPersonViewModel AlterPersonViewModel { get; set; }
 
         [InjectionConstructor]
-        public AlterNaturalPersonViewModel(NaturalPerson entity, INaturalPersonFacade naturalPersonFacade, IAlterPersonViewModel alterPersonViewModel,
+        public AlterNaturalPersonViewModel(INaturalPersonFacade naturalPersonFacade, IAlterPersonViewModel alterPersonViewModel,
             IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) {
+            : base(repository, eventAggregator, logger) {
             _naturalPersonFacade = naturalPersonFacade;
             AlterPersonViewModel = alterPersonViewModel;
         }
@@ -44,8 +44,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
             AlterPersonViewModel.InitializeServices();
-            ClearEntity(null);
         }
 
         protected override bool CanSaveChanges(object arg) {
@@ -64,14 +64,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _naturalPersonFacade.GenerateEntity();
-            _naturalPersonFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _naturalPersonFacade.GenerateEntity(); }
 
         public override void Dispose() {
             AlterPersonViewModel.Dispose();
             base.Dispose();
+        }
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _naturalPersonFacade.Entity = Entity;
         }
     }
 }

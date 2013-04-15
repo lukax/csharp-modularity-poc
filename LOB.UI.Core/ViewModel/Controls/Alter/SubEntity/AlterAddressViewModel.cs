@@ -46,9 +46,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         [InjectionConstructor]
-        public AlterAddressViewModel(Address entity, IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) { _addressFacade = addressFacade; }
+        public AlterAddressViewModel(IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { _addressFacade = addressFacade; }
 
         public IList<string> Statuses {
             get {
@@ -61,7 +60,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
+            base.InitializeServices();
             Worker.DoWork += UpdateUFList;
             Worker.RunWorkerAsync();
             EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
@@ -96,9 +95,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         protected override void ClearEntity(object arg) {
             Entity = _addressFacade.GenerateEntity();
             UF = Entity.State.ToUF();
-            _addressFacade.Entity = Entity;
         }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Address, State = ViewState.Add};
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _addressFacade.Entity = Entity;
+            if(Entity == null) {}
+        }
     }
 }

@@ -41,12 +41,13 @@ namespace LOB.Dao.Nhibernate {
                 try {
                     return _orm ?? (_orm = CreateSessionFactory());
                 } catch(NullReferenceException e) {
-                    _logger.Log(e.Message, Category.Exception, Priority.Low);
-                    if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed));
+                    //_logger.Log(e.Message, Category.Exception, Priority.Low);
+                    //if(OnError != null) OnError.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed));
                 }
                 return null;
             }
         }
+        public event SessionCreatorEventHandler OnError;
 
         public bool DropTables { get; set; }
 
@@ -59,12 +60,8 @@ namespace LOB.Dao.Nhibernate {
             _logger = logger;
             _persistType = persistIn;
         }
-
-        public event SessionCreatorEventHandler OnCreatingSession;
-        public event SessionCreatorEventHandler OnSessionCreated;
-
+        
         private ISessionFactory CreateSessionFactory() {
-            if(OnCreatingSession != null) OnCreatingSession.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_Connecting));
             Configuration cfg;
             ISessionFactory factory = null;
             switch(_persistType) {
@@ -86,10 +83,9 @@ namespace LOB.Dao.Nhibernate {
             if(cfg != null)
                 try {
                     factory = cfg.BuildSessionFactory();
-                    if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_ConnectionSucessful));
                 } catch(Exception ex) {
                     _logger.Log(ex.Message, Category.Exception, Priority.High);
-                    if(OnSessionCreated != null) OnSessionCreated.Invoke(this, new SessionCreatorEventArgs(ex.Message));
+                    if(OnError != null) OnError.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_Connecting_Failed, ex.Message));
                 }
             return factory;
         }

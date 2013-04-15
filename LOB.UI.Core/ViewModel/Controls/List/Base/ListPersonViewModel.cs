@@ -13,8 +13,8 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
-        protected ListPersonViewModel(Person entity, IRepository repository, IEventAggregator eventAggregator)
-            : base(entity, repository, eventAggregator) { }
+        protected ListPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
+            : base(repository, eventAggregator) { }
 
         public new Expression<Func<Person, bool>> SearchCriteria {
             get {

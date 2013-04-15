@@ -21,7 +21,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public bool IsRestrictive { get; set; }
 
-        #endregion Message
+        #endregion Description
         #region CloseExecute Command
 
         private ICommand _closeCommand;

@@ -9,7 +9,7 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
-    public partial class ListBaseEntityView : IBaseViewModel {
+    public partial class ListBaseEntityView : IBaseView {
         public ListBaseEntityView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -26,8 +26,6 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         public string Header {
             get { return Strings.UI_Header_List_BaseEntity; }
         }
-
-        public void InitializeServices() { }
 
         public void Refresh() { }
 

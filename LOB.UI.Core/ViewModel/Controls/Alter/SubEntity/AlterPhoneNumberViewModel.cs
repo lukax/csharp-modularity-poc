@@ -18,13 +18,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {
         private readonly IPhoneNumberFacade _phoneNumberFacade;
 
-        public AlterPhoneNumberViewModel(PhoneNumber entity, IPhoneNumberFacade phoneNumberFacade, IRepository repository,
-            IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) { _phoneNumberFacade = phoneNumberFacade; }
+        public AlterPhoneNumberViewModel(IPhoneNumberFacade phoneNumberFacade, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { _phoneNumberFacade = phoneNumberFacade; }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
+            base.InitializeServices();
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -45,11 +45,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         //protected override void QuickSearch(object arg) { _eventAggregator.GetEvent<QuickSearchEvent>().Publish(Operation); }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _phoneNumberFacade.GenerateEntity();
-            _phoneNumberFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _phoneNumberFacade.GenerateEntity(); }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.PhoneNumber, State = ViewState.Add};
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _phoneNumberFacade.Entity = Entity;
+        }
     }
 }

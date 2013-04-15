@@ -18,13 +18,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {
         private readonly IEmailFacade _emailFacade;
 
-        public AlterEmailViewModel(Email entity, IRepository repository, IEmailFacade emailFacade, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) { _emailFacade = emailFacade; }
+        public AlterEmailViewModel(IRepository repository, IEmailFacade emailFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { _emailFacade = emailFacade; }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            ClearEntity(null);
+            base.InitializeServices();
         }
 
         public override void Refresh() { ClearEntity(null); }
@@ -43,11 +42,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return false;
         }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _emailFacade.GenerateEntity();
-            _emailFacade.Entity = (Entity);
-        }
+        protected override void ClearEntity(object arg) { Entity = _emailFacade.GenerateEntity(); }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Email, State = ViewState.Add};
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _emailFacade.Entity = Entity;
+        }
     }
 }

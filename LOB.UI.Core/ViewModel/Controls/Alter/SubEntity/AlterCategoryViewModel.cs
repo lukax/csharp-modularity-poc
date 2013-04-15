@@ -20,13 +20,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {
         private readonly ICategoryFacade _categoryFacade;
 
-        public AlterCategoryViewModel(Category entity, IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
-            : base(entity, repository, eventAggregator, logger) { _categoryFacade = categoryFacade; }
+        public AlterCategoryViewModel(IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
+            : base(repository, eventAggregator, logger) { _categoryFacade = categoryFacade; }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultID;
-            ClearEntity(null);
+            base.InitializeServices();
             EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
         }
 
@@ -54,12 +53,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return false;
         }
 
-        protected override void ClearEntity(object arg) {
-            Entity = _categoryFacade.GenerateEntity();
-            _categoryFacade.Entity = (Entity);
-            //_categoryFacade.ConfigureValidations();
-        }
+        protected override void ClearEntity(object arg) { Entity = _categoryFacade.GenerateEntity(); }
 
         private readonly ViewID _defaultID = new ViewID {Type = ViewType.Category, State = ViewState.Add};
+
+        protected override void EntityChanged() {
+            base.EntityChanged();
+            _categoryFacade.Entity = Entity;
+        }
     }
 }

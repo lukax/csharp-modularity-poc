@@ -49,10 +49,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected Notification Notification { get; private set; }
 
         [InjectionConstructor]
-        protected AlterBaseEntityViewModel(T entity, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger) {
+        protected AlterBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger) {
             EventAggregator = eventAggregator;
             Logger = logger;
-            Entity = entity;
             Worker = new BackgroundWorker();
             Notification = new Notification();
             Repository = repository;
@@ -61,6 +60,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             QuickSearchCommand = new DelegateCommand(QuickSearch, CanQuickSearch);
             ClearEntityCommand = new DelegateCommand(ClearEntity, CanClearEntity);
         }
+
+        public override void InitializeServices() { if(Entity == null) ClearEntity(null); }
 
         protected virtual bool CanCancel(object arg) {
             if(ViewID.State == ViewState.Add) return true;
@@ -72,20 +73,27 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
         protected virtual void SaveChanges(object arg) {
             Worker.DoWork += SaveChanges;
+            Worker.WorkerSupportsCancellation = true;
             Worker.RunWorkerAsync();
         }
         private void SaveChanges(object sender, DoWorkEventArgs e) {
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Progress(-2).Severity(AttentionState.Info));
+            ViewID.SubState(ViewSubState.Locked);
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).Severity(AttentionState.Info));
+            Repository.Uow.OnError += (o, s) => {
+                                          NotificationEvent.Publish(
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).Severity(AttentionState.Error));
+                                          Worker.CancelAsync();
+                                      };
             using(Repository.Uow.BeginTransaction())
                 if(!Worker.CancellationPending) {
                     NotificationEvent.Publish(Notification.Progress(50));
                     Entity = Repository.SaveOrUpdate(Entity);
                     NotificationEvent.Publish(Notification.Progress(70));
                     Repository.Uow.CommitTransaction();
-                    NotificationEvent.Publish(Notification.Progress(90));
+                    NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
+                    ViewID.State(ViewState.Update);
                 }
-            ViewID.State(ViewState.Update);
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
+            ViewID.SubState(ViewSubState.Unlocked);
         }
 
         protected virtual bool CanQuickSearch(object obj) {
