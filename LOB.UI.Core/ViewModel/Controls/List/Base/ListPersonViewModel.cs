@@ -16,6 +16,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected ListPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
             : base(repository, eventAggregator) { }
 
+        public override void InitializeServices() {
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
+        }
+
         public new Expression<Func<Person, bool>> SearchCriteria {
             get {
                 try {
@@ -28,13 +33,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 }
             }
         }
-
-        public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            base.InitializeServices();
-        }
-
-        public override void Refresh() { Search = ""; }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Person, State = ViewState.List};
     }

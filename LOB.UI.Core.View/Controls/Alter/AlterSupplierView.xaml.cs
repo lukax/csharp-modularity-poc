@@ -15,8 +15,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
             DataContextChanged += OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
-            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
-            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
         }
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }

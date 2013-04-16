@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
@@ -14,7 +15,7 @@ namespace LOB.Business.Logic.SubEntity {
     public class AddressFacade : IAddressFacade {
         private Address _entity;
 
-        public Address GenerateEntity() {
+        public static Address GenerateEntity() {
             return new Address {
                 Code = 0,
                 County = "",
@@ -68,6 +69,7 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
+        Address IBaseEntityFacade<Address>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             return result;

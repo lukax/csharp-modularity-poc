@@ -17,7 +17,6 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -40,7 +39,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
-        [InjectionConstructor]
         public ListOpViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);
@@ -53,8 +51,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             _worker.DoWork += UpdateList;
             _worker.RunWorkerAsync();
         }
-
-        public override void Refresh() { }
+        public override void Refresh() { Search = ""; }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Op, State = ViewState.List};
 

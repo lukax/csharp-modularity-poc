@@ -60,7 +60,7 @@ namespace LOB.Dao.Nhibernate {
             _logger = logger;
             _persistType = persistIn;
         }
-        
+
         private ISessionFactory CreateSessionFactory() {
             Configuration cfg;
             ISessionFactory factory = null;

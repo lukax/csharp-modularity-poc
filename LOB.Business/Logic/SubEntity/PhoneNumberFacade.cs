@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
@@ -20,7 +21,7 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
-        public PhoneNumber GenerateEntity() { return new PhoneNumber {Code = 0, Error = null, Description = "", Number = "", Type = default(PhoneNumberType),}; }
+        public static PhoneNumber GenerateEntity() { return new PhoneNumber {Code = 0, Error = null, Description = "", Number = "", Type = default(PhoneNumberType),}; }
 
         public void ConfigureValidations() {
             if(_entity != null) {
@@ -45,6 +46,7 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
+        PhoneNumber IBaseEntityFacade<PhoneNumber>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             return result;

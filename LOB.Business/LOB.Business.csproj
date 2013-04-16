@@ -125,7 +125,7 @@
     <Compile Include="Logic\SubEntity\PayCheckFacade.cs" />
     <Compile Include="Logic\SubEntity\EmailFacade.cs" />
     <Compile Include="Logic\SubEntity\PhoneNumberFacade.cs" />
-    <Compile Include="Logic\SubEntity\ShipmentInfoInfoFacade.cs" />
+    <Compile Include="Logic\SubEntity\ShipmentInfoFacade.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Logic\ProductFacade.cs" />
     <Compile Include="Logic\EmployeeFacade.cs" />

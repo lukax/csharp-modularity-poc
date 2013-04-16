@@ -74,17 +74,17 @@
                                 </Setter>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding ViewID.SubState}" Value="Locked">
-                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding ViewID.SubState}" Value="Unlocked">
-                                <Setter Property="IsEnabled" Value="True"/>
+                                <Setter Property="IsEnabled" Value="True" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
 
             </Button>
-            <Button x:Name="ButtonCancel" Padding="2" Command="{Binding CancelCommand}" IsCancel="True">
+            <Button x:Name="ButtonCancel" Padding="2" Command="{Binding DiscardChangesCommand}" IsCancel="True">
                 <DockPanel>
                     <Image Source="/LOB.UI.Core.Resources;component/Icons/no_2.png" Height="25" Width="25" />
                     <Label Content="{x:Static loc:Strings.Common_Cancel}" />

@@ -6,7 +6,6 @@ using LOB.Core.Localization;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 

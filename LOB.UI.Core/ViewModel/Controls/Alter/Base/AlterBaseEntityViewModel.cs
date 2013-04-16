@@ -1,13 +1,16 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Core.Events;
+using LOB.UI.Core.Events.Operation;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
@@ -15,7 +18,6 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -32,8 +34,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                 EntityChanged();
             }
         }
-
-        protected virtual void EntityChanged() { }
         public ICommand SaveChangesCommand { get; set; }
         public ICommand DiscardChangesCommand { get; set; }
         public ICommand ClearEntityCommand { get; set; }
@@ -47,9 +47,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             get { return EventAggregator.GetEvent<NotificationEvent>(); }
         }
         protected Notification Notification { get; private set; }
+        protected IBaseEntityFacade<T> BaseEntityFacade { get; private set; }
 
-        [InjectionConstructor]
-        protected AlterBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger) {
+        //[InjectionConstructor]
+        //protected AlterBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
+        //    : this(null, repository, eventAggregator, logger) { }
+
+        protected AlterBaseEntityViewModel(IBaseEntityFacade<T> baseEntityFacade, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade logger) {
+            BaseEntityFacade = baseEntityFacade;
             EventAggregator = eventAggregator;
             Logger = logger;
             Worker = new BackgroundWorker();
@@ -61,16 +67,34 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntityCommand = new DelegateCommand(ClearEntity, CanClearEntity);
         }
 
-        public override void InitializeServices() { if(Entity == null) ClearEntity(null); }
+        public override void InitializeServices() {
+            if(Entity == null) ClearEntity(null);
+            EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
+        }
+
+        protected virtual void Include(BaseEntity baseEntity) {
+            var entity = baseEntity as T;
+            if(entity == null) return;
+            Entity = entity;
+            ViewID.State(ViewState.Update);
+        }
 
         protected virtual bool CanCancel(object arg) {
             if(ViewID.State == ViewState.Add) return true;
             if(ViewID.State == ViewState.Update) return true;
             return false;
         }
-        protected abstract void Cancel(object arg);
+        protected virtual void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
-        protected virtual bool CanSaveChanges(object arg) { return Entity != null; }
+        protected virtual bool CanSaveChanges(object arg) {
+            if(BaseEntityFacade != null) {
+                IEnumerable<ValidationResult> results;
+                if(ViewID.State == ViewState.Add) return BaseEntityFacade.CanAdd(out results);
+                if(ViewID.State == ViewState.Update) return BaseEntityFacade.CanUpdate(out results);
+                return false;
+            }
+            return !ReferenceEquals(Entity, null);
+        }
         protected virtual void SaveChanges(object arg) {
             Worker.DoWork += SaveChanges;
             Worker.WorkerSupportsCancellation = true;
@@ -114,7 +138,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         protected virtual bool CanClearEntity(object obj) { return ViewID.State == ViewState.Add; }
-        protected abstract void ClearEntity(object arg);
+        protected virtual void ClearEntity(object arg) { Entity = BaseEntityFacade.GenerateEntity(); }
+
+        protected virtual void EntityChanged() { BaseEntityFacade.Entity = Entity; }
+
+        public override void Refresh() { ClearEntity(null); }
 
         public override ViewID ViewID {
             get { return _viewID; }

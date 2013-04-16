@@ -7,23 +7,18 @@ using System.ComponentModel;
 using System.Linq;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
-using LOB.Domain.Base;
-using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.Events.Operation;
-using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
-        private readonly IAddressFacade _addressFacade;
         private string _status;
         private IList<string> _statuses;
         public ObservableCollection<UF> UFs { get; set; }
@@ -45,9 +40,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        [InjectionConstructor]
         public AlterAddressViewModel(IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(repository, eventAggregator, logger) { _addressFacade = addressFacade; }
+            : base(addressFacade, repository, eventAggregator, logger) { }
 
         public IList<string> Statuses {
             get {
@@ -66,42 +60,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
         }
 
-        private void Include(BaseEntity obj) {
-            var entity = obj as Address;
-            if(entity == null) return;
-            Entity = entity;
-            ViewID.State = ViewState.Update;
-        }
-
         private void UpdateUFList(object sender, DoWorkEventArgs doWorkEventArgs) { UFs = new ObservableCollection<UF>(Enum.GetValues(typeof(UF)).Cast<UF>()); }
 
-        public override void Refresh() { ClearEntity(null); }
-
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
-
-        protected override bool CanSaveChanges(object arg) {
-            IEnumerable<ValidationResult> results;
-            if(ViewID.State == ViewState.Add) return _addressFacade.CanAdd(out results);
-            if(ViewID.State == ViewState.Update) return _addressFacade.CanUpdate(out results);
-            return false;
-        }
-
-        protected override bool CanCancel(object arg) {
-            if(ViewID.State == ViewState.Add) return true;
-            if(ViewID.State == ViewState.Update) return true;
-            return false;
-        }
-
         protected override void ClearEntity(object arg) {
-            Entity = _addressFacade.GenerateEntity();
+            base.ClearEntity(arg);
             UF = Entity.State.ToUF();
         }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Address, State = ViewState.Add};
-
-        protected override void EntityChanged() {
-            base.EntityChanged();
-            _addressFacade.Entity = Entity;
-        }
     }
 }

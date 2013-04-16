@@ -47,7 +47,10 @@ namespace LOB.Domain.Base {
                 };
             }
         }
-        public static PersonType ToPersonType(this string s) { return PersonTypesLocalizationsDict.FirstOrDefault(x => x.Value.ToLower() == s.ToLower()).Key; }
+        public static PersonType ToPersonType(this string s) {
+            if(string.IsNullOrWhiteSpace(s)) return default(PersonType);
+            return PersonTypesLocalizationsDict.FirstOrDefault(x => x.Value.ToLower() == s.ToLower()).Key;
+        }
         public static string ToLocalizedString(this PersonType s) { return PersonTypesLocalizationsDict[s]; }
     }
 }

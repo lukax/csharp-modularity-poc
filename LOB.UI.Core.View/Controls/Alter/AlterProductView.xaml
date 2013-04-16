@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:basecontrols="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:domain="clr-namespace:LOB.Domain;assembly=LOB.Domain"
@@ -149,11 +148,11 @@
                                        HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Clear}"
                                        Focusable="False"
                                        Background="Transparent" Grid.Column="5">
-                            <Image Source="/LOB.UI.Core.Resources;component/Icons/Edit.png" />
+                            <Image Source="/LOB.UI.Core.Resources;component/Icons/file_edit2_2.png" />
                         </controls:Tile>
                         <controls:Tile Width="18" Height="18" Background="Transparent"
                                        Command="{Binding CancelCommand}" IsCancel="True" BorderThickness="0">
-                            <Image Source="/LOB.UI.Core.Resources;component/Icons/Search48.png" />
+                            <Image Source="/LOB.UI.Core.Resources;component/Icons/magnify_2.png" />
                         </controls:Tile>
                     </StackPanel>
                 </TabItem>

@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
@@ -19,7 +20,7 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
-        public PayCheck GenerateEntity() { return new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, Error = null, PS = "",}; }
+        public static PayCheck GenerateEntity() { return new PayCheck {Bonus = 0, Code = 0, CurrentSalary = 0, Error = null, PS = "",}; }
 
         public void ConfigureValidations() {
             if(_entity != null) {
@@ -32,6 +33,7 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
+        PayCheck IBaseEntityFacade<PayCheck>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             return result;

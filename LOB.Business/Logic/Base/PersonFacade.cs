@@ -3,10 +3,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -20,37 +20,12 @@ namespace LOB.Business.Logic.Base {
             }
         }
 
-        public Person GenerateEntity() {
+        public static Person GenerateEntity() {
             return new LocalPerson {
                 Code = 0,
                 Error = null,
-                Address =
-                    new Address {
-                        Code = 0,
-                        County = "",
-                        Country = "Brasil",
-                        District = "",
-                        Error = null,
-                        IsDefault = false,
-                        State = "Rio de Janeiro",
-                        Status = default(AddressStatus),
-                        Street = "",
-                        StreetComplement = "",
-                        StreetNumber = "",
-                        ZipCode = "",
-                    },
-                ContactInfo =
-                    new ContactInfo {
-                        Code = 0,
-                        Description = "",
-                        Error = null,
-                        Status = default(ContactStatus),
-                        PS = "",
-                        Emails = new List<Email>(),
-                        PhoneNumbers = new List<PhoneNumber>(),
-                        SpeakWith = "",
-                        WebSite = "http://",
-                    },
+                Address = AddressFacade.GenerateEntity(),
+                ContactInfo = ContactInfoFacade.GenerateEntity(),
                 Notes = "",
             };
         }
@@ -62,6 +37,7 @@ namespace LOB.Business.Logic.Base {
                     _entity.Notes.Length > 300 ? new ValidationResult("Notes", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
         }
 
+        Person IBaseEntityFacade<Person>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             return result;

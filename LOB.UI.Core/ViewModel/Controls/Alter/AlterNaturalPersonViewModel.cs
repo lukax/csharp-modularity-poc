@@ -1,12 +1,9 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using LOB.Business.Interface.Logic;
 using LOB.Dao.Interface;
 using LOB.Domain;
-using LOB.Domain.Logic;
-using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -19,8 +16,6 @@ using Microsoft.Practices.Unity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
-        private readonly INaturalPersonFacade _naturalPersonFacade;
-
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add};
         private AlterPersonViewModel _alterPersonViewModel;
         [Dependency]
@@ -29,11 +24,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             set { _alterPersonViewModel = value as AlterPersonViewModel; }
         }
 
-        [InjectionConstructor]
-        public AlterNaturalPersonViewModel(INaturalPersonFacade naturalPersonFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(repository, eventAggregator, logger) {
-            _naturalPersonFacade = naturalPersonFacade;
-        }
+        public AlterNaturalPersonViewModel(INaturalPersonFacade naturalPersonFacade, IRepository repository, IEventAggregator eventAggregator,
+            ILoggerFacade logger)
+            : base(naturalPersonFacade, repository, eventAggregator, logger) { }
 
         public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }
@@ -52,31 +45,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         protected override bool CanSaveChanges(object arg) {
-            if(ViewID.State == ViewState.Add) {
-                IEnumerable<ValidationResult> results;
-                //var s= AlterPersonIuiComponentModel.SaveChangesCommand.CanExecute(null);
-                return _naturalPersonFacade.CanAdd(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            }
-            if(ViewID.State == ViewState.Update) {
-                IEnumerable<ValidationResult> results;
-                return _naturalPersonFacade.CanUpdate(out results) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            }
+            if(ReferenceEquals(Entity, null)) return false;
+            if(ViewID.State == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(ViewID.State == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             return false;
         }
-        public override void Refresh() { ClearEntity(null); }
-
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
-
-        protected override void ClearEntity(object arg) { Entity = _naturalPersonFacade.GenerateEntity(); }
 
         protected override void EntityChanged() {
             base.EntityChanged();
-            _naturalPersonFacade.Entity = Entity;
             _alterPersonViewModel.Entity = Entity;
         }
 
-        public override void Dispose()
-        {
+        public override void Dispose() {
             AlterPersonViewModel.Dispose();
             base.Dispose();
         }

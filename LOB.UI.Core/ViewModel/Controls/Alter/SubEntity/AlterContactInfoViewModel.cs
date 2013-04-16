@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
@@ -25,12 +24,9 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
-        private readonly IContactInfoFacade _contactInfoFacade;
-
         public AlterContactInfoViewModel(IRepository repository, IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
-            : base(repository, eventAggregator, logger) {
-            _contactInfoFacade = contactInfoFacade;
+            : base(contactInfoFacade, repository, eventAggregator, logger) {
             EmailOperation = new ViewID {State = ViewState.Add, Type = ViewType.Email};
             PhoneNumberOperation = new ViewID {State = ViewState.Add, Type = ViewType.PhoneNumber};
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
@@ -54,11 +50,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             base.InitializeServices();
             InitBackgroundWorker();
         }
-
-        public override void Refresh() { ClearEntity(null); }
-
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add};
-        #region UI Validations
+        #region Member Validations
 
         public ViewID EmailOperation { get; set; }
         public ViewID PhoneNumberOperation { get; set; }
@@ -159,20 +151,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         #endregion
-        protected override void Cancel(object arg) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
-
-        protected override void ClearEntity(object arg) { Entity = _contactInfoFacade.GenerateEntity(); }
-
-        protected override bool CanSaveChanges(object arg) {
-            IEnumerable<ValidationResult> results;
-            return _contactInfoFacade.CanAdd(out results);
-        }
-
-        protected override bool CanCancel(object arg) { return true; }
-
-        protected override void EntityChanged() {
-            base.EntityChanged();
-            _contactInfoFacade.Entity = Entity;
-        }
+        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add};
     }
 }

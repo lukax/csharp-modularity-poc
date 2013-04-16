@@ -3,11 +3,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic;
-using LOB.Business.Logic.Base;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Domain;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -21,48 +20,28 @@ namespace LOB.Business.Logic {
             }
         }
 
-        public Customer GenerateEntity() {
-            return new Customer {
-                Code = 0,
-                Error = null,
-                BoughtHistory = new List<Sale>(),
-                Status = default(CustomerStatus),
-                CustomerOf = new List<Store>(),
-                Person =
-                    new PersonFacade.LocalPerson {
-                        Code = 0,
-                        Error = null,
-                        Address =
-                            new Address {
-                                Code = 0,
-                                County = "",
-                                Country = "Brasil",
-                                District = "",
-                                Error = null,
-                                IsDefault = false,
-                                State = "Rio de Janeiro",
-                                Status = default(AddressStatus),
-                                Street = "",
-                                StreetComplement = "",
-                                StreetNumber = "",
-                                ZipCode = "",
-                            },
-                        ContactInfo =
-                            new ContactInfo {
-                                Code = 0,
-                                Description = "",
-                                Error = null,
-                                Status = default(ContactStatus),
-                                PS = "",
-                                Emails = new List<Email>(),
-                                PhoneNumbers = new List<PhoneNumber>(),
-                                SpeakWith = "",
-                                WebSite = "http://",
-                            },
-                        Notes = "",
-                    },
-            PersonType = default(PersonType) //default(PersonType),
-            };
+        public static Customer GenerateEntity(PersonType personType) {
+            if(personType == PersonType.Natural)
+                return new Customer {
+                    Code = 0,
+                    Error = null,
+                    BoughtHistory = new List<Sale>(),
+                    Status = default(CustomerStatus),
+                    CustomerOf = new List<Store>(),
+                    Person = NaturalPersonFacade.GenerateEntity(),
+                    PersonType = default(PersonType)
+                };
+            if(personType == PersonType.Legal)
+                return new Customer {
+                    Code = 0,
+                    Error = null,
+                    BoughtHistory = new List<Sale>(),
+                    Status = default(CustomerStatus),
+                    CustomerOf = new List<Store>(),
+                    Person = LegalPersonFacade.GenerateEntity(),
+                    PersonType = default(PersonType)
+                };
+            return new Customer();
         }
 
         public void ConfigureValidations() {
@@ -70,6 +49,9 @@ namespace LOB.Business.Logic {
             //    _entity.AddValidation(
             //        (sender, name) => _entity.CustomerOf.Count < 1 ? new ValidationResult("CustomerOf", Strings.Notification_Field_Empty) : null);
         }
+
+        Customer IBaseEntityFacade<Customer>.GenerateEntity() { return GenerateEntity(default(PersonType)); }
+        Customer ICustomerFacade.GenerateEntity(PersonType personType) { return GenerateEntity(personType); }
 
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);

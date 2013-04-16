@@ -38,7 +38,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         #endregion CloseExecute Command
-        [InjectionConstructor]
         public MessageToolViewModel(IUnityContainer container) {
             Message = "Please wait...";
             _container = container;

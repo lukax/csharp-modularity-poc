@@ -7,13 +7,11 @@ using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel {
     public class MainWindowViewModel : BaseViewModel {
-        [InjectionConstructor]
         public MainWindowViewModel(IFluentNavigator navigator) {
             Navigator = navigator;
 

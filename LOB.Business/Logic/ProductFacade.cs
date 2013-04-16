@@ -3,10 +3,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic;
+using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -20,15 +21,15 @@ namespace LOB.Business.Logic {
             }
         }
 
-        public Product GenerateEntity() {
+        public static Product GenerateEntity() {
             return new Product {
                 Code = 0,
                 Error = null,
                 Status = default(ProductStatus),
-                Category = new Category(),
+                Category = CategoryFacade.GenerateEntity(),
                 Description = "",
                 Name = "",
-                ShipmentInfo = new ShipmentInfo(),
+                ShipmentInfo = ShipmentInfoFacade.GenerateEntity(),
                 CodBarras = 0,
                 Image = new byte[8],
                 MaxUnitsOfStock = 0,
@@ -63,6 +64,7 @@ namespace LOB.Business.Logic {
             }
         }
 
+        Product IBaseEntityFacade<Product>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) { return ProcessBasicValidations(out invalidFields); }
 
         public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {

@@ -3,15 +3,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
+using LOB.Domain;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    public class ShipmentInfoInfoFacade : IShipmentInfoFacade {
+    public class ShipmentInfoFacade : IShipmentInfoFacade {
         private ShipmentInfo _entity;
         public ShipmentInfo Entity {
             set {
@@ -32,17 +34,16 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
-        public ShipmentInfo GenerateEntity() {
+        ShipmentInfo IBaseEntityFacade<ShipmentInfo>.GenerateEntity() { return GenerateEntity(); }
+        public static ShipmentInfo GenerateEntity() {
             return new ShipmentInfo {
                 Code = 0,
-                Address = null,
+                Address = AddressFacade.GenerateEntity(),
                 Error = null,
-                //Description = "",
                 Status = default(ShipmentStatus),
                 DaySchedule = "",
                 DeliverDate = DateTime.Now,
-                //Name = "",
-                Products = null,
+                Products = new List<Product>(),
             };
         }
 

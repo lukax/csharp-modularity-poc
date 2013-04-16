@@ -32,7 +32,7 @@ namespace LOB.Business.Modularity {
             _container.RegisterType<IEmailFacade, EmailFacade>();
             _container.RegisterType<IContactInfoFacade, ContactInfoFacade>();
             _container.RegisterType<IPhoneNumberFacade, PhoneNumberFacade>();
-            _container.RegisterType<IShipmentInfoFacade, ShipmentInfoInfoFacade>();
+            _container.RegisterType<IShipmentInfoFacade, ShipmentInfoFacade>();
 
             _container.RegisterType<ICustomerFacade, CustomerFacade>();
             _container.RegisterType<IEmployeeFacade, EmployeeFacade>();

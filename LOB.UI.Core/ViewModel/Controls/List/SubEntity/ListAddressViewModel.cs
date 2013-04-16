@@ -21,8 +21,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
             base.InitializeServices();
         }
 
-        public override void Refresh() { Search = ""; }
-
         public new Expression<Func<Address, bool>> SearchCriteria {
             get {
                 try {

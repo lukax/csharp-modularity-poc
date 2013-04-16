@@ -20,7 +20,6 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -28,7 +27,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity {
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
-        //private ViewID _previousOperation;
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
@@ -59,7 +57,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         }
         protected Notification Notification { get; private set; }
 
-        [InjectionConstructor]
         protected ListBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator) {
             EventAggregator = eventAggregator;
             Repository = repository;
@@ -138,6 +135,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected virtual void Delete(object arg) { Repository.Delete(Entity); }
 
         protected virtual bool CanDelete(object arg) { return Entity != null; }
+
+        public override void Refresh() { Search = ""; }
 
         protected virtual void Fetch(object arg = null) {
             Entitys = null;

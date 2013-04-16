@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LOB.Business.Interface.Logic;
+using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain;
 using LOB.Domain.Logic;
-using LOB.Domain.SubEntity;
 
 #endregion
 
@@ -21,12 +22,12 @@ namespace LOB.Business.Logic {
             }
         }
 
-        public Employee GenerateEntity() {
+        public static Employee GenerateEntity() {
             return new Employee {
                 Code = 0,
                 Error = null,
-                Address = new Address(),
-                ContactInfo = new ContactInfo(),
+                Address = AddressFacade.GenerateEntity(),
+                ContactInfo = ContactInfoFacade.GenerateEntity(),
                 Notes = "",
                 BirthDate = DateTime.Now,
                 CPF = "",
@@ -35,11 +36,11 @@ namespace LOB.Business.Logic {
                 HireDate = DateTime.Now,
                 NickName = "",
                 Password = "",
-                PayCheck = new PayCheck(),
+                PayCheck = PayCheckFacade.GenerateEntity(),
                 RG = "",
                 RGUF = "",
                 Title = "",
-                WorksIn = new Store(),
+                WorksIn = new Store(), //TODO
             };
         }
 
@@ -61,6 +62,7 @@ namespace LOB.Business.Logic {
             }
         }
 
+        Employee IBaseEntityFacade<Employee>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
             bool result = ProcessBasicValidations(out invalidFields);
             return result;

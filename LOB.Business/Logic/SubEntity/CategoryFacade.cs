@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
@@ -30,8 +31,9 @@ namespace LOB.Business.Logic.SubEntity {
             }
         }
 
-        public Category GenerateEntity() { return new Category {Code = 0, Description = "", Error = null, Name = "",}; }
+        public static Category GenerateEntity() { return new Category {Code = 0, Description = "", Error = null, Name = "",}; }
 
+        Category IBaseEntityFacade<Category>.GenerateEntity() { return GenerateEntity(); }
         public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) { return ProcessBasicValidations(out invalidFields); }
 
         public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) { return ProcessBasicValidations(out invalidFields); }

@@ -15,7 +15,6 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -40,7 +39,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return string.Format("{0} {1}", Entitys.Count, Strings.UI_ToolTip_Notifications); }
         }
 
-        [InjectionConstructor]
         public NotificationToolViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             DismissCommand = new DelegateCommand(Dismiss);

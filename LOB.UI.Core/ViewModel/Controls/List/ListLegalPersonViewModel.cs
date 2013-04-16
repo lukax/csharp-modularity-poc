@@ -8,15 +8,18 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
-        [InjectionConstructor]
         public ListLegalPersonViewModel(IRepository repository, EventAggregator eventAggregator)
             : base(repository, eventAggregator) { }
+
+        public override void InitializeServices() {
+            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            base.InitializeServices();
+        }
 
         public new Expression<Func<LegalPerson, bool>> SearchCriteria {
             get {
@@ -34,13 +37,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 }
             }
         }
-
-        public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            base.InitializeServices();
-        }
-
-        public override void Refresh() { Search = ""; }
 
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.LegalPerson, State = ViewState.List};
     }
