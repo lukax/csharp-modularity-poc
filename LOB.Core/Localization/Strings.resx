@@ -1029,4 +1029,34 @@
   <data name="Common_New" xml:space="preserve">
     <value>@Common_New</value>
   </data>
+  <data name="Common_Redo" xml:space="preserve">
+    <value>@Common_Redo</value>
+  </data>
+  <data name="Common_Undo" xml:space="preserve">
+    <value>@Common_Undo</value>
+  </data>
+  <data name="UI_ToolTip_Redo" xml:space="preserve">
+    <value>@UI_ToolTip_Redo</value>
+  </data>
+  <data name="UI_ToolTip_Undo" xml:space="preserve">
+    <value>@UI_ToolTip_Undo</value>
+  </data>
+  <data name="UI_Menu_DB_TestConnection" xml:space="preserve">
+    <value>@UI_Menu_DB_TestConnection</value>
+  </data>
+  <data name="UI_Menu_DB" xml:space="preserve">
+    <value>@UI_Menu_DB</value>
+  </data>
+  <data name="Notification_Implemented" xml:space="preserve">
+    <value>@Notification_Implemented</value>
+  </data>
+  <data name="Notification_NotImplemented" xml:space="preserve">
+    <value>@Notification_NotImplemented</value>
+  </data>
+  <data name="Common_Clear" xml:space="preserve">
+    <value>@Common_Clear</value>
+  </data>
+  <data name="Common_ClearAll" xml:space="preserve">
+    <value>@Common_ClearAll</value>
+  </data>
 </root>

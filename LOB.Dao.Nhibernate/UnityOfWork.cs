@@ -31,6 +31,14 @@ namespace LOB.Dao.Nhibernate {
             }
         }
         protected ISessionFactoryCreator SessionFactoryCreator { get; set; }
+        public bool TestConnection() {
+            try {
+                if(!ORM.As<ISession>().IsConnected) ORM.As<ISession>().Reconnect();
+            } catch(NullReferenceException) {
+                return false;
+            }
+            return true;
+        }
         public event SessionCreatorEventHandler OnError;
 
         [InjectionConstructor]

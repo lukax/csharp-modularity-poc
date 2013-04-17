@@ -1,11 +1,11 @@
 ﻿#region Usings
 
 using System;
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
+using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -13,11 +13,13 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolView.xaml
     /// </summary>
-    public partial class HeaderToolView : UserControl, IBaseView {
-        public HeaderToolView(IHeaderToolsViewModel viewModel) {
-            InitializeComponent();
-            ViewModel = viewModel;
+    public partial class HeaderToolView : IBaseView {
+        [Dependency]
+        public IHeaderToolsViewModel HeaderToolsViewModel {
+            set { DataContext = value; }
         }
+
+        public HeaderToolView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }

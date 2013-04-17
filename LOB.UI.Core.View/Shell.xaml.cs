@@ -19,6 +19,7 @@ using MahApps.Metro;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 
 #endregion
@@ -26,12 +27,12 @@ using Microsoft.Practices.Unity;
 namespace LOB.UI.Core.View {
     public partial class Shell : IBaseView {
         private static bool _loaded;
-        private readonly IUnityContainer _container;
+        private readonly IServiceLocator _container;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
         private IModuleManager _module;
 
-        public Shell(IUnityContainer container, ILogger logger, IEventAggregator eventAggregator) {
+        public Shell(IServiceLocator container, ILogger logger, IEventAggregator eventAggregator) {
             //CULTURE INFO
             Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
             //
@@ -69,7 +70,7 @@ namespace LOB.UI.Core.View {
                                                                       if(type.Type == ViewType.Main) Close();
                                                                   });
             _eventAggregator.GetEvent<NotificationEvent>()
-                            .Publish(new Notification {Message = Strings.App_License_Information, AttentionState = AttentionState.Warning});
+                            .Publish(new Notification {Message = Strings.App_License_Information, State = NotificationState.Warning});
         }
 
         public void Refresh() {
@@ -85,7 +86,7 @@ namespace LOB.UI.Core.View {
             _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewID {Type = ViewType.Main})) Close(); });
 
             if(_loaded) return;
-            _module = _container.Resolve<IModuleManager>();
+            _module = _container.GetInstance<IModuleManager>();
             _module.LoadModule("UICoreViewModule");
             _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
             _loaded = true;

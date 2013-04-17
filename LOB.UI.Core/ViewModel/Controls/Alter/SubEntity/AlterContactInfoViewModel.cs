@@ -115,7 +115,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             Worker.ReportProgress(10);
             Repository.Uow.OnError += (o, s) => {
                                           NotificationEvent.Publish(
-                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).Severity(AttentionState.Error));
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
                                           Worker.CancelAsync();
                                       };
             do {
@@ -145,7 +145,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
             Notification.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating)
-                        .Severity(AttentionState.Info)
+                        .State(NotificationState.Info)
                         .Progress(args.ProgressPercentage);
             NotificationEvent.Publish(Notification);
         }

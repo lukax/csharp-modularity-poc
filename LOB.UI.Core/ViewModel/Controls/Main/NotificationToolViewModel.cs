@@ -29,8 +29,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return _isVisible; }
             set {
                 _isVisible = value;
-                if(Entitys == null || Entitys.Count == 0) Visibility = Visibility.Collapsed;
-                else Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                //if(Entitys == null || Entitys.Count == 0) Visibility = Visibility.Collapsed;
+                //else 
+                Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
         public ICommand DismissCommand { get; set; }
@@ -41,20 +42,22 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public NotificationToolViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
-            DismissCommand = new DelegateCommand(Dismiss);
+            DismissCommand = new DelegateCommand(DismissNotification);
             Entitys = new MThreadObservableCollection<Notification>();
             IsVisible = false;
             _eventAggregator.GetEvent<NotificationEvent>().Subscribe(NotificationListener);
             InitWorker();
         }
 
-        private void Dismiss(object o) {
-            if(Entity != null) Entitys.Remove(Entity);
+        private void DismissNotification(object o) {
+            if(Equals(o, "All")) Entitys.Clear();
+            else if(Entity != null) Entitys.Remove(Entity);
             if(Entitys.Count == 0) IsVisible = false;
         }
 
         public override void InitializeServices() { }
         private void NotificationListener(Notification notification) {
+            notification.Time = DateTime.Now.ToShortTimeString();
             if(Entitys.Contains(notification)) Entitys[Entitys.IndexOf(notification)] = notification;
             else Entitys.Add(notification);
             IsVisible = true;
@@ -72,16 +75,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             do {
                 Thread.Sleep(10000);
                 var currentStack = Entitys.ToList(); //Thread Safe
-                foreach(var notification in currentStack) if(notification.AttentionState == AttentionState.Ok) Entitys.Remove(notification);
+                foreach(var notification in currentStack) if(notification.State == NotificationState.Ok) Entitys.Remove(notification);
             } while(!_worker.CancellationPending);
         }
 
         public override void Refresh() { }
-        public override void Dispose() {
-            _worker.CancelAsync();
-            _worker.Dispose();
-            GC.SuppressFinalize(this);
-        }
 
         public override ViewID ViewID {
             get { return _viewID; }
@@ -90,5 +88,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private ViewID _viewID = new ViewID {Type = ViewType.NotificationTool, State = ViewState.Internal};
         private bool _isVisible;
+        #region Implementation of IDisposable
+
+        ~NotificationToolViewModel() { Dispose(false); }
+
+        private void Dispose(bool disposing) {
+            _worker.CancelAsync();
+            if(disposing) _worker.Dispose();
+        }
+
+        public override void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

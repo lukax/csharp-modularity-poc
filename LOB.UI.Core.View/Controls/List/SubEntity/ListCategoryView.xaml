@@ -14,7 +14,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Border BorderThickness="2" BorderBrush="{DynamicResource AccentBrush2}" Background="{DynamicResource Foreground}">
+    <Border BorderThickness="2" BorderBrush="{DynamicResource AccentBrush2}" Background="Transparent" >
         <StackPanel Margin="2">
             <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
             <ListView ItemsSource="{Binding Entitys, UpdateSourceTrigger=PropertyChanged}"
@@ -33,8 +33,5 @@
                 </ListView.ContextMenu>
             </ListView>
         </StackPanel>
-        <Border.Effect>
-            <DropShadowEffect ShadowDepth="4" Direction="50" />
-        </Border.Effect>
     </Border>
 </UserControl>

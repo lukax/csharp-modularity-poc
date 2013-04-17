@@ -102,10 +102,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
         private void SaveChanges(object sender, DoWorkEventArgs e) {
             ViewID.SubState(ViewSubState.Locked);
-            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).Severity(AttentionState.Info));
+            NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationState.Info));
             Repository.Uow.OnError += (o, s) => {
                                           NotificationEvent.Publish(
-                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).Severity(AttentionState.Error));
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
                                           Worker.CancelAsync();
                                       };
             using(Repository.Uow.BeginTransaction())
@@ -114,7 +114,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     Entity = Repository.SaveOrUpdate(Entity);
                     NotificationEvent.Publish(Notification.Progress(70));
                     Repository.Uow.CommitTransaction();
-                    NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).Severity(AttentionState.Ok));
+                    NotificationEvent.Publish(Notification.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationState.Ok));
                     ViewID.State(ViewState.Update);
                 }
             ViewID.SubState(ViewSubState.Unlocked);

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using LOB.Business.Interface.Logic;
 using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.Domain.Logic;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
@@ -43,10 +44,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
+            Repository.Uow.OnError += (o, s) => {
+                                          NotificationEvent.Publish(
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
+                                          //Worker.CancelAsync();
+                                          ViewID.SubState(ViewSubState.Locked);
+                                      };
 
             do {
+                if(Repository.Uow.TestConnection()) {
+                    Categories = Repository.GetAll<Category>().ToList();
+                    ViewID.SubState(ViewSubState.Unlocked);
+                }
                 Thread.Sleep(2000); // TODO: Configuration based update time
-                Categories = Repository.GetAll<Category>().ToList();
             } while(!worker.CancellationPending);
         }
 

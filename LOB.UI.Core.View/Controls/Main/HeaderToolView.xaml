@@ -11,7 +11,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0" Background="{DynamicResource Foreground}">
+    <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0" Background="Transparent">
         <MenuItem Header="{x:Static loc:Strings.UI_Menu_File}">
             <MenuItem Header="{x:Static loc:Strings.UI_Menu_File_Save}" />
             <MenuItem Header="{x:Static loc:Strings.UI_Menu_File_Quit}" />
@@ -55,7 +55,9 @@
             <MenuItem Header="{x:Static loc:Strings.UI_Menu_Util_Comission}" />
         </MenuItem>
         <MenuItem Header="{x:Static loc:Strings.UI_Menu_Report}">
-
+        </MenuItem>
+        <MenuItem Header="{x:Static loc:Strings.UI_Menu_DB}">
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_DB_TestConnection}" Command="{Binding DbTestConnectionCommand}"/>
         </MenuItem>
     </Menu>
 </UserControl>

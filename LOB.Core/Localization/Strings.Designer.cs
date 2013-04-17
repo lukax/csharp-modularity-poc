@@ -637,6 +637,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Clear.
+        /// </summary>
+        public static string Common_Clear {
+            get {
+                return ResourceManager.GetString("Common_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_ClearAll.
+        /// </summary>
+        public static string Common_ClearAll {
+            get {
+                return ResourceManager.GetString("Common_ClearAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Close.
         /// </summary>
         public static string Common_Close {
@@ -1276,6 +1294,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Common_Redo.
+        /// </summary>
+        public static string Common_Redo {
+            get {
+                return ResourceManager.GetString("Common_Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Common_Report.
         /// </summary>
         public static string Common_Report {
@@ -1443,6 +1470,15 @@ namespace LOB.Core.Localization {
         public static string Common_Uf {
             get {
                 return ResourceManager.GetString("Common_Uf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Common_Undo.
+        /// </summary>
+        public static string Common_Undo {
+            get {
+                return ResourceManager.GetString("Common_Undo", resourceCulture);
             }
         }
         
@@ -1960,6 +1996,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Implemented.
+        /// </summary>
+        public static string Notification_Implemented {
+            get {
+                return ResourceManager.GetString("Notification_Implemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Info.
         /// </summary>
         public static string Notification_Info {
@@ -2028,6 +2073,15 @@ namespace LOB.Core.Localization {
         public static string Notification_Navigator_ViewModel_ResolveFirst {
             get {
                 return ResourceManager.GetString("Notification_Navigator_ViewModel_ResolveFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_NotImplemented.
+        /// </summary>
+        public static string Notification_NotImplemented {
+            get {
+                return ResourceManager.GetString("Notification_NotImplemented", resourceCulture);
             }
         }
         
@@ -2379,6 +2433,24 @@ namespace LOB.Core.Localization {
         public static string UI_Header_Sell_Service {
             get {
                 return ResourceManager.GetString("UI_Header_Sell_Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_DB.
+        /// </summary>
+        public static string UI_Menu_DB {
+            get {
+                return ResourceManager.GetString("UI_Menu_DB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_Menu_DB_TestConnection.
+        /// </summary>
+        public static string UI_Menu_DB_TestConnection {
+            get {
+                return ResourceManager.GetString("UI_Menu_DB_TestConnection", resourceCulture);
             }
         }
         
@@ -2770,6 +2842,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Redo.
+        /// </summary>
+        public static string UI_ToolTip_Redo {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @UI_ToolTip_Sales.
         /// </summary>
         public static string UI_ToolTip_Sales {
@@ -2784,6 +2865,15 @@ namespace LOB.Core.Localization {
         public static string UI_ToolTip_Search {
             get {
                 return ResourceManager.GetString("UI_ToolTip_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_Undo.
+        /// </summary>
+        public static string UI_ToolTip_Undo {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_Undo", resourceCulture);
             }
         }
         

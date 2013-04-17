@@ -17,7 +17,7 @@
                 Height="Auto"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Background="{DynamicResource Background}"
+                Background="Transparent"
                 BorderBrush="{DynamicResource HighlightDarkColorBrush}"
                 BorderThickness="1" Opacity="0.8"
                 Padding="5,10,5,5">

@@ -74,7 +74,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         private void Include(object o) { EventAggregator.GetEvent<IncludeEntityEvent>().Publish(Entity); }
 
-        protected virtual void SearchExecute(object obj) { throw new NotImplementedException(); }
+        protected virtual void SearchExecute(object obj) { if(Worker.CancellationPending) if(!Worker.IsBusy) Worker.RunWorkerAsync(); }
 
         private void Exit(object obj) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
 
@@ -98,28 +98,34 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             //TODO: Dynamic set based on selected tab
             Repository.Uow.OnError += (o, s) => {
                                           NotificationEvent.Publish(
-                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).Severity(AttentionState.Error));
-                                          Worker.CancelAsync();
+                                              Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
+                                          //Worker.CancelAsync();
                                           ViewID.SubState(ViewSubState.Locked);
                                       };
             do {
-                using(Repository.Uow.BeginTransaction())
-                    if(!worker.CancellationPending) {
-                        EventAggregator.GetEvent<NotificationEvent>()
-                                       .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(10).Severity(AttentionState.Info));
-                        IList<T> localList = string.IsNullOrEmpty(Search)
-                                                 ? (Repository.GetAll<T>()).ToList()
-                                                 : (Repository.GetAll(SearchCriteria)).ToList();
-                        EventAggregator.GetEvent<NotificationEvent>().Publish(Notification.Message(Strings.Notification_List_Updating).Progress(70));
-                        if(Entitys == null || !localList.SequenceEqual(Entitys)) {
-                            Entitys = new ObservableCollection<T>(localList);
+                if(Repository.Uow.TestConnection())
+                    using(Repository.Uow.BeginTransaction())
+                        if(!worker.CancellationPending) {
                             EventAggregator.GetEvent<NotificationEvent>()
-                                           .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(100));
+                                           .Publish(Notification.Message(Strings.Notification_List_Updating)
+                                                                .Progress(10)
+                                                                .State(NotificationState.Info));
+                            IList<T> localList = string.IsNullOrEmpty(Search)
+                                                     ? (Repository.GetAll<T>()).ToList()
+                                                     : (Repository.GetAll(SearchCriteria)).ToList();
+                            EventAggregator.GetEvent<NotificationEvent>()
+                                           .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(70));
+                            if(Entitys == null || !localList.SequenceEqual(Entitys)) {
+                                Entitys = new ObservableCollection<T>(localList);
+                                EventAggregator.GetEvent<NotificationEvent>()
+                                               .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(100));
+                            }
+                            else
+                                EventAggregator.GetEvent<NotificationEvent>()
+                                               .Publish(
+                                                   Notification.Message(Strings.Notification_List_Updated).Progress(-1).State(NotificationState.Ok));
+                            ViewID.SubState(ViewSubState.Unlocked);
                         }
-                        else
-                            EventAggregator.GetEvent<NotificationEvent>()
-                                           .Publish(Notification.Message(Strings.Notification_List_Updated).Progress(-1).Severity(AttentionState.Ok));
-                    }
                 Thread.Sleep(2000);
             } while(!Worker.CancellationPending);
         }

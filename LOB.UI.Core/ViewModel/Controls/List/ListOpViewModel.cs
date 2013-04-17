@@ -97,13 +97,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                     string.Format("{0} {1}", Strings.Common_Initializing,
                                   _defaultViewIDDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key),
                 Progress = -2,
-                AttentionState = AttentionState.Info
+                State = NotificationState.Info
             };
             _eventAggregator.GetEvent<NotificationEvent>().Publish(not);
             _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedUIOperation);
             var stringy = string.Format("{0} {1}", Strings.Common_Initialized,
                                         _defaultViewIDDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key);
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(not.Message(stringy).Progress(-1).Severity(AttentionState.Ok));
+            _eventAggregator.GetEvent<NotificationEvent>().Publish(not.Message(stringy).Progress(-1).State(NotificationState.Ok));
             _eventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID);
         }
 

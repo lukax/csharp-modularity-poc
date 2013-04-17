@@ -10,11 +10,19 @@ using LOB.Domain.Base;
 
 namespace LOB.Domain.Logic {
     public sealed class Notification : BaseNotifyChange, IEquatable<Notification> {
-        public Notification() { Progress = -1; }
-        public AttentionState AttentionState { get; set; }
+        public Notification(string message = null, string detail = null, int progress = -1, NotificationState state = NotificationState.Ok,
+            Command fixCommand = null) {
+            Message = message;
+            Detail = detail;
+            Progress = progress;
+            State = state;
+            FixCommand = fixCommand;
+        }
+        public NotificationState State { get; set; }
         public string Message { get; set; }
         public string Detail { get; set; }
-        public Command Fix { get; set; }
+        public string Time { get; set; }
+        public Command FixCommand { get; set; }
         /// <summary>
         ///     Value: -2 = Indeterminate progress
         ///     Value: -1 = Hidden
@@ -26,7 +34,7 @@ namespace LOB.Domain.Logic {
         public bool Equals(Notification other) {
             try {
                 if(ReferenceEquals(null, other)) return false;
-                return AttentionState == other.AttentionState && Message == other.Message && Detail == other.Detail && Fix == other.Fix &&
+                return State == other.State && Message == other.Message && Detail == other.Detail && //FixCommand == other.FixCommand &&
                        Progress == other.Progress; //Comparison with == so dont throw null
             } catch(NullReferenceException ex) {
 #if DEBUG
@@ -39,7 +47,7 @@ namespace LOB.Domain.Logic {
         #endregion
     }
 
-    public enum AttentionState {
+    public enum NotificationState {
         Ok,
         Info,
         Warning,
@@ -49,8 +57,8 @@ namespace LOB.Domain.Logic {
     public static class NotificationExtensions {
         // public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
 
-        public static Notification Severity(this Notification notification, AttentionState attentionState) {
-            notification.AttentionState = attentionState;
+        public static Notification State(this Notification notification, NotificationState state) {
+            notification.State = state;
             return notification;
         }
         public static Notification Message(this Notification notification, string message) {
@@ -62,7 +70,7 @@ namespace LOB.Domain.Logic {
             return notification;
         }
         public static Notification Fix(this Notification notification, Command fix) {
-            notification.Fix = fix;
+            notification.FixCommand = fix;
             return notification;
         }
         public static Notification Progress(this Notification notification, int progress) {

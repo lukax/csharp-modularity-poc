@@ -463,7 +463,7 @@
     <value>CEP</value>
   </data>
   <data name="Notification_Dao_Connecting" xml:space="preserve">
-    <value>Conectando no banco de dados...</value>
+    <value>Conectando ao banco de dados...</value>
   </data>
   <data name="Notification_Dao_ConnectionFailed" xml:space="preserve">
     <value>Conexão ao banco de dados falhou</value>
@@ -682,7 +682,7 @@
     <value>Folha de pagamento</value>
   </data>
   <data name="Notification_Dao_Conected" xml:space="preserve">
-    <value>Conectado ao Banco de Dados</value>
+    <value>Conectado no Banco de Dados</value>
   </data>
   <data name="Notification_Dao_Connecting_Failed" xml:space="preserve">
     <value>Conexão ao Banco de Dados falhou!</value>
@@ -1031,5 +1031,35 @@
   </data>
   <data name="Common_New" xml:space="preserve">
     <value>Novo</value>
+  </data>
+  <data name="Common_Redo" xml:space="preserve">
+    <value>Refazer</value>
+  </data>
+  <data name="Common_Undo" xml:space="preserve">
+    <value>Desfazer</value>
+  </data>
+  <data name="UI_ToolTip_Redo" xml:space="preserve">
+    <value>Refazer Operação</value>
+  </data>
+  <data name="UI_ToolTip_Undo" xml:space="preserve">
+    <value>Desfazer Operação</value>
+  </data>
+  <data name="UI_Menu_DB_TestConnection" xml:space="preserve">
+    <value>Testar Conexão</value>
+  </data>
+  <data name="UI_Menu_DB" xml:space="preserve">
+    <value>Banco de Dados</value>
+  </data>
+  <data name="Notification_Implemented" xml:space="preserve">
+    <value>Operação Implementada</value>
+  </data>
+  <data name="Notification_NotImplemented" xml:space="preserve">
+    <value>Operação não foi Implementada até o momento</value>
+  </data>
+  <data name="Common_Clear" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+  <data name="Common_ClearAll" xml:space="preserve">
+    <value>Limpar todos</value>
   </data>
 </root>
