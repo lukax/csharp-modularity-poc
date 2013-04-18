@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Specialized;
+using System.ComponentModel.Composition;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
@@ -10,91 +11,74 @@ using System.Windows;
 using System.Windows.Data;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
-using LOB.Log.Interface;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
+using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
 namespace LOB.UI.Core.View {
-    public partial class Shell : IBaseView {
-        private static bool _loaded;
-        private readonly IServiceLocator _container;
-        private readonly IEventAggregator _eventAggregator;
-        private readonly ILogger _logger;
-        private IModuleManager _module;
-
-        public Shell(IServiceLocator container, ILogger logger, IEventAggregator eventAggregator) {
-            //CULTURE INFO
-            Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]);
-            //
-            _container = container;
-            _logger = logger;
-            _eventAggregator = eventAggregator;
-            InitializeComponent();
-            OnLoad();
-
-            //Change to Last added Tab
-            var defaultView = CollectionViewSource.GetDefaultView(TabRegion.Items);
-            defaultView.CollectionChanged += TabRegion_OnSelectionChanged;
-        }
-
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+    [Export]
+    public partial class Shell : IBaseView<ShellViewModel> {
+        [Import] public IEventAggregator EventAggregator { get; set; }
+        [Import] public ILoggerFacade Logger { get; set; }
+        [Import] public IModuleManager ModuleManager { get; set; }
+        [Import] public ShellViewModel ViewModel {
+            get { return DataContext as ShellViewModel; }
             set { DataContext = value; }
         }
-
-        public string Header { get; set; }
+        public string Header {
+            get { return Strings.UI_Title_Shell; }
+        }
         public int Index { get; set; }
 
-        public void InitializeServices() {
-            _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
-                                                                     if(type.State == ViewState.QuickSearch) {
-                                                                         BlurModal.Radius = 10;
-                                                                         BorderModal.Visibility = Visibility.Visible;
-                                                                     }
-                                                                 });
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
-                                                                      if(type.State == ViewState.QuickSearch) {
-                                                                          BlurModal.Radius = 0;
-                                                                          BorderModal.Visibility = Visibility.Hidden;
-                                                                      }
-                                                                      if(type.Type == ViewType.Main) Close();
-                                                                  });
-            _eventAggregator.GetEvent<NotificationEvent>()
-                            .Publish(new Notification {Message = Strings.App_License_Information, State = NotificationState.Warning});
+        public Shell() {
+            Strings.Culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"]); //INFO: CULTURE
+            InitializeComponent();
+
+            ContentRendered += OnLoad;
         }
 
         public void Refresh() { UpdateLayout(); }
 
-        public ViewType ViewType {
-            get { return ViewType.Main; }
-        }
+        private void OnLoad(object sender, EventArgs eventArgs) {
+            EventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewID {Type = ViewType.Main})) Close(); });
+            EventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
+                                                                    if(type.State == ViewState.QuickSearch) {
+                                                                        BlurModal.Radius = 15;
+                                                                        BorderModal.Visibility = Visibility.Visible;
+                                                                    }
+                                                                });
+            EventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
+                                                                     if(type.State == ViewState.QuickSearch) {
+                                                                         BlurModal.Radius = 0;
+                                                                         BorderModal.Visibility = Visibility.Hidden;
+                                                                     }
+                                                                     if(type.Type == ViewType.Main) Close();
+                                                                 });
+            EventAggregator.GetEvent<NotificationEvent>()
+                           .Publish(new Notification {Message = Strings.App_License_Information, State = NotificationState.Warning});
 
-        private void OnLoad() {
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewID {Type = ViewType.Main})) Close(); });
+            ModuleManager.LoadModule("UICoreViewModule");
+            //_logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
 
-            if(_loaded) return;
-            _module = _container.GetInstance<IModuleManager>();
-            _module.LoadModule("UICoreViewModule");
-            _logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);
-            _loaded = true;
+            var defaultView = CollectionViewSource.GetDefaultView(TabRegion.Items);
+            defaultView.CollectionChanged += TabRegion_OnSelectionChanged;
         }
 
         private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             TabRegion.SelectedIndex = -1;
             ProgressRing.IsActive = true;
-            await Task.Delay(100); //BUG: STUPID RESOURCES LOADING ASYNC
+            await Task.Delay(50); //BUG: STUPID RESOURCES LOADING ASYNC
             // Fix validation color border in textboxes
-            ProgressRing.IsActive = false;
-            await Task.Delay(1);
+            //ProgressRing.IsActive = false;
+            //await Task.Delay(1);
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 

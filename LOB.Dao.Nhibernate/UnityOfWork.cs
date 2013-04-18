@@ -1,11 +1,11 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Linq;
 using NullGuard;
@@ -17,8 +17,7 @@ namespace LOB.Dao.Nhibernate {
         protected ILoggerFacade LoggerFacade { get; set; }
         protected ITransaction Transaction { get; set; }
         private object _orm;
-        [AllowNull]
-        public object ORM {
+        [AllowNull] public object ORM {
             get {
                 return _orm ?? (_orm = Task.Run(() => {
                                                     try {
@@ -41,7 +40,7 @@ namespace LOB.Dao.Nhibernate {
         }
         public event SessionCreatorEventHandler OnError;
 
-        [InjectionConstructor]
+        [ImportingConstructor]
         public UnityOfWork(ISessionFactoryCreator sessionFactoryCreator, ILoggerFacade loggerFacade) {
             SessionFactoryCreator = sessionFactoryCreator;
             LoggerFacade = loggerFacade;

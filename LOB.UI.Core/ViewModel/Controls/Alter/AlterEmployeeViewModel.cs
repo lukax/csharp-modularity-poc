@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.ComponentModel.Composition;
 using LOB.Business.Interface.Logic;
 using LOB.Dao.Interface;
 using LOB.Domain;
@@ -8,7 +9,6 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -16,8 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Employee, State = ViewState.Add};
         private AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
-        [Dependency]
-        public IAlterNaturalPersonViewModel AlterNaturalPersonViewModel {
+        [Import] public IAlterNaturalPersonViewModel AlterNaturalPersonViewModel {
             get { return _alterNaturalPersonViewModel; }
             set { _alterNaturalPersonViewModel = value as AlterNaturalPersonViewModel; }
         }

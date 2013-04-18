@@ -1,4 +1,7 @@
-﻿namespace LOB.UI.Interface.Infrastructure {
+﻿using System.ComponentModel.Composition;
+
+namespace LOB.UI.Interface.Infrastructure {
+    [InheritedExport]
     public interface IRegionAdapter {
         void AddView<TView>(TView view, string regionName) where TView : IBaseView;
         IBaseView GetView(ViewID param, string regionName);

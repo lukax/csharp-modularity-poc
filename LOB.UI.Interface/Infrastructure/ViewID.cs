@@ -41,8 +41,7 @@ namespace LOB.UI.Interface.Infrastructure {
         #endregion
     }
 
-    public enum ViewType
-    {
+    public enum ViewType {
         Unknown = 0,
 
         Main,
@@ -74,8 +73,7 @@ namespace LOB.UI.Interface.Infrastructure {
         Op,
     }
 
-   public enum ViewState
-    {
+    public enum ViewState {
         Internal = 0, //Internal Usage
 
         //Altering
@@ -91,8 +89,7 @@ namespace LOB.UI.Interface.Infrastructure {
         Sell = 7,
     }
 
-    public enum ViewSubState
-    {
+    public enum ViewSubState {
         Unlocked,
         Locked,
     }
@@ -131,14 +128,11 @@ namespace LOB.UI.Interface.Infrastructure {
         #endregion
     }
 
-    public static class ViewTypeExtension
-    {
-        public static ViewType ToUIOperationType(this string operationType)
-        {
+    public static class ViewTypeExtension {
+        public static ViewType ToUIOperationType(this string operationType) {
             ViewType o;
-            if (Enum.TryParse(operationType, out o)) return o;
+            if(Enum.TryParse(operationType, out o)) return o;
             throw new ArgumentException("Not parsable to OperationTypeEnum", "operationType");
         }
     }
-
 }

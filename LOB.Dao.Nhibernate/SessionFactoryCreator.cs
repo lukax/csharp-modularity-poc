@@ -1,13 +1,13 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -26,8 +26,7 @@ namespace LOB.Dao.Nhibernate {
         private object _orm;
         private readonly PersistType _persistType;
         private SchemaExport _sqlSchema;
-        [AllowNull]
-        public string ConnectionString {
+        [AllowNull] public string ConnectionString {
             get {
                 if(_connectionString != null) return _connectionString;
                 if(_persistType == PersistType.MsSql) return MsSqlDefaultConnectionString;
@@ -36,12 +35,11 @@ namespace LOB.Dao.Nhibernate {
             }
             set { _connectionString = value; }
         }
-        [AllowNull]
-        public object ORMFactory {
+        [AllowNull] public object ORMFactory {
             get {
                 try {
                     return _orm ?? (_orm = CreateSessionFactory());
-                } catch(NullReferenceException e) {
+                } catch(NullReferenceException) {
                     //_logger.Log(e.Message, Category.Exception, Priority.Low);
                     //if(OnError != null) OnError.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed));
                 }
@@ -52,7 +50,7 @@ namespace LOB.Dao.Nhibernate {
 
         public bool DropTables { get; set; }
 
-        [InjectionConstructor]
+        [ImportingConstructor]
         public SessionFactoryCreator(ILoggerFacade logger)
             : this(logger, PersistType.MySql) {
             //DropTables = true;

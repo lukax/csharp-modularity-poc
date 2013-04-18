@@ -54,6 +54,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -99,8 +100,8 @@
     <Compile Include="ViewModel\Controls\List\SubEntity\IListPhoneNumberViewModel.cs" />
     <Compile Include="ViewModel\Controls\Main\IMessageToolViewModel.cs" />
     <Compile Include="ViewModel\Controls\Main\INotificationToolViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Main\IColumnToolsViewModel.cs" />
-    <Compile Include="ViewModel\Controls\Main\IHeaderToolsViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\IColumnToolViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Main\IHeaderToolViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\ISellProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Sell\ISellServiceViewModel.cs" />
   </ItemGroup>

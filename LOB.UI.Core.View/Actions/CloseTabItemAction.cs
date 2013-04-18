@@ -6,7 +6,6 @@ using System.Windows.Interactivity;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
@@ -35,23 +34,21 @@ namespace LOB.UI.Core.View.Actions {
             }
         }
 
-        public static IServiceLocator Container { get; set; }
+        public static IRegionAdapter RegionAdapter { get; set; }
 
         protected override void Invoke(object parameter) {
             if(TabControl.Items.Contains(TabItem))
-                if(Container != null) {
+                if(RegionAdapter != null) {
 // ReSharper disable SuspiciousTypeConversion.Global
                     var view = TabItem as IBaseView;
 // ReSharper restore SuspiciousTypeConversion.Global
-                    var region = Container.GetInstance<IRegionAdapter>();
-                    if(view != null) region.RemoveView(view.ViewID, RegionName.TabRegion);
+                    if(view != null) RegionAdapter.RemoveView(view.ViewID, RegionName.TabRegion);
                 }
                 else TabControl.Items.Remove(TabItem);
             else if(TabControl.Items.Contains(TabItem.Content))
-                if(Container != null) {
+                if(RegionAdapter != null) {
                     var view = TabItem.Content as IBaseView;
-                    var region = Container.GetInstance<IRegionAdapter>();
-                    if(view != null) region.RemoveView(view.ViewID, RegionName.TabRegion);
+                    if(view != null) RegionAdapter.RemoveView(view.ViewID, RegionName.TabRegion);
                 }
                 else TabControl.Items.Remove(TabItem.Content);
         }

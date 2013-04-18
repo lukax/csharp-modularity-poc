@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Business.Interface", "L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{C2ED6073-C1DC-4D8D-A9EB-7B4DA130E4ED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAO", "DAO", "{2C13863D-814F-4991-9139-519A437CEAAA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dao", "Dao", "{2C13863D-814F-4991-9139-519A437CEAAA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4465ED19-4084-4277-B0E1-4447A42990AB}"
 EndProject
@@ -374,7 +374,7 @@ Global
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D} = {B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System;
-using System.Windows.Controls;
+using System.ComponentModel.Composition;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -13,14 +13,12 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolIuiComponent.xaml
     /// </summary>
-    public partial class NotificationToolView : UserControl, IBaseView {
-        public NotificationToolView(INotificationToolViewModel viewModel) {
-            InitializeComponent();
-            ViewModel = viewModel;
-        }
+    [Export]
+    public partial class NotificationToolView : IBaseView<INotificationToolViewModel> {
+        public NotificationToolView() { InitializeComponent(); }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public INotificationToolViewModel ViewModel {
+            get { return DataContext as INotificationToolViewModel; }
             set { DataContext = value; }
         }
 

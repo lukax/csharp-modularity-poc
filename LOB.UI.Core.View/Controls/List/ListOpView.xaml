@@ -48,7 +48,7 @@
                                    CommandParameter="{Binding}" Width="100" Height="100">
                         <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/256x256/module.png"
-                               Opacity="0.1" Stretch="UniformToFill"/>
+                               Opacity="0.1" Stretch="UniformToFill" />
                     </controls:Tile>
                 </DataTemplate>
             </ScrollViewer.Resources>

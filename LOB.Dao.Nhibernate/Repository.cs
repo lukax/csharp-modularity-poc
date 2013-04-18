@@ -1,11 +1,11 @@
 #region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.Base;
-using Microsoft.Practices.Unity;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -18,7 +18,7 @@ namespace LOB.Dao.Nhibernate {
         }
         public IUnityOfWork Uow { get; private set; }
 
-        [InjectionConstructor]
+        [ImportingConstructor]
         public Repository(IUnityOfWork unityOfWork) { Uow = unityOfWork; }
 
         public T Get<T>(object id) where T : BaseEntity { return Session.Get<T>(id); }

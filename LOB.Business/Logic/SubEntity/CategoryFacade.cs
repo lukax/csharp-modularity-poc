@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Threading.Tasks;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;

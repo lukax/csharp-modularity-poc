@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.Core.Licensing;
 using LOB.UI.Core.Infrastructure;
@@ -11,19 +12,16 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.ViewModel {
-    public class MainWindowViewModel : BaseViewModel {
-        public MainWindowViewModel(IFluentNavigator navigator) {
-            Navigator = navigator;
-
-            OpenTabCommand = new DelegateCommand(OpenTab);
-        }
+    [Export]
+    public class ShellViewModel : BaseViewModel {
+        public ShellViewModel() { OpenTabCommand = new DelegateCommand(OpenTab); }
 
         public string LicenseInformation {
             get { return ProductLicense.LicenseInformation(); }
         }
 
         public ICommand OpenTabCommand { get; set; }
-        private IFluentNavigator Navigator { get; set; }
+        [Import] private IFluentNavigator Navigator { get; set; }
 
         private ViewID _viewID = new ViewID {Type = ViewType.Main};
         public override ViewID ViewID {

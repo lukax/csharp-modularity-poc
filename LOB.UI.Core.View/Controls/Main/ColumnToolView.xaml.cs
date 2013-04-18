@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -13,17 +14,12 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolsView.xaml
     /// </summary>
-    public partial class ColumnToolView : UserControl, IBaseView {
-        public ColumnToolView(IColumnToolsViewModel viewModel) {
-            InitializeComponent();
-            ViewModel = viewModel;
-        }
+    [Export]
+    public partial class ColumnToolView : IBaseView<IColumnToolViewModel> {
+        public ColumnToolView() { InitializeComponent(); }
 
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IColumnToolViewModel ViewModel {
+            get { return DataContext as IColumnToolViewModel; }
             set { DataContext = value; }
         }
 
@@ -35,8 +31,8 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         public void Refresh() { }
 
-        public ViewType ViewType {
-            get { return ViewType.ColumnTool; }
+        public ViewID ViewID {
+            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 

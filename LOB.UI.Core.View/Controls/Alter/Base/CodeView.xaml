@@ -12,7 +12,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Border BorderThickness=".3" BorderBrush="{DynamicResource AccentBrush4}" HorizontalAlignment="Left" >
+    <Border BorderThickness=".3" BorderBrush="{DynamicResource AccentBrush4}" HorizontalAlignment="Left">
         <StackPanel Orientation="Horizontal">
             <TextBlock VerticalAlignment="Center" TextAlignment="Center"
                        ToolTip="{x:Static loc:Strings.UI_ToolTip_Code}"

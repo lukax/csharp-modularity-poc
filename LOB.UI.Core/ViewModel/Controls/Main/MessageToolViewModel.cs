@@ -7,13 +7,11 @@ using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
-        private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         #region Props
 
@@ -38,10 +36,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         #endregion CloseExecute Command
-        public MessageToolViewModel(IUnityContainer container) {
+        public MessageToolViewModel(IEventAggregator eventAggregator) {
             Message = "Please wait...";
-            _container = container;
-            _eventAggregator = _container.Resolve<IEventAggregator>();
+            _eventAggregator = eventAggregator;
         }
 
         private ViewID _viewID = new ViewID {Type = ViewType.MessageTool, State = ViewState.Internal};

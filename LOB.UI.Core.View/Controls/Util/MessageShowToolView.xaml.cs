@@ -15,8 +15,7 @@ namespace LOB.UI.Core.View.Controls.Util {
     public partial class MessageShowToolView : IBaseView {
         public MessageShowToolView() { InitializeComponent(); }
 
-        [AllowNull]
-        public IBaseViewModel ViewModel {
+        [AllowNull] public IBaseViewModel ViewModel {
             get {
                 IBaseViewModel result = null;
                 Dispatcher.Invoke(() => result = DataContext as IBaseViewModel);

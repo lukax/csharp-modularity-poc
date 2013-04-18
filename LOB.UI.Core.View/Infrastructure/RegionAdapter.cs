@@ -1,11 +1,11 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Unity;
 using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
@@ -14,7 +14,7 @@ namespace LOB.UI.Core.View.Infrastructure {
     public class RegionAdapter : IRegionAdapter {
         private readonly IRegionManager _regionManager;
 
-        [InjectionConstructor]
+        [ImportingConstructor]
         public RegionAdapter(IRegionManager regionManager) { _regionManager = regionManager; }
 
         public void AddView<TView>(TView view, string regionName) where TView : IBaseView {

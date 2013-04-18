@@ -10,7 +10,6 @@ using LOB.Core.Localization;
 using LOB.Domain.Logic;
 using LOB.UI.Core.Events;
 using LOB.UI.Core.Events.View;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -108,30 +107,31 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         }
 
         private IDictionary<string, ViewID> CreateList() {
-            var catalog = UIOperationCatalog.UIOperations;
-            //Remove Internal usage Types from user selection:
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Unknown));
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.BaseEntity));
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Service));
-            catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Person));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Internal));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Update));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Delete));
-            catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.QuickSearch));
-            var operationTypes = new Dictionary<string, ViewID>(catalog.Count);
-            var stringsType = typeof(Strings);
-            var stringsTypeProps = stringsType.GetProperties();
+            //var catalog = UIOperationCatalog.UIOperations;
+            ////Remove Internal usage Types from user selection:
+            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Unknown));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.BaseEntity));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Service));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Person));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Internal));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Update));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.Delete));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.State == ViewState.QuickSearch));
+            //var operationTypes = new Dictionary<string, ViewID>(catalog.Count);
+            //var stringsType = typeof(Strings);
+            //var stringsTypeProps = stringsType.GetProperties();
 
-            //Parse to localized string
-            foreach(var uiOperation in catalog) {
-                ViewID operation = uiOperation;
-                foreach(string name in
-                    from propertyInfo in stringsTypeProps
-                    let name = propertyInfo.Name
-                    where propertyInfo.Name.Contains("Command_" + operation)
-                    select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
-            }
-            return operationTypes;
+            ////Parse to localized string
+            //foreach(var uiOperation in catalog) {
+            //    ViewID operation = uiOperation;
+            //    foreach(string name in
+            //        from propertyInfo in stringsTypeProps
+            //        let name = propertyInfo.Name
+            //        where propertyInfo.Name.Contains("Command_" + operation)
+            //        select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
+            //}
+            //return operationTypes;
+            return null;
         }
         #region Implementation of IDisposable
 

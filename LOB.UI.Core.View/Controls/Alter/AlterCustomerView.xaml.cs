@@ -1,21 +1,20 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Core.View.Controllers;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
     public partial class AlterCustomerView : IBaseView {
-        [Dependency]
-        public CustomerRegionController Controller { get; set; }
+        [Import] public CustomerRegionController Controller { get; set; }
 
-        [InjectionConstructor]
+        [ImportingConstructor]
         public AlterCustomerView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;

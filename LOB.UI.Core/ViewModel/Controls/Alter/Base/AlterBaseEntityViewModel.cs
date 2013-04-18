@@ -49,7 +49,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected Notification Notification { get; private set; }
         protected IBaseEntityFacade<T> BaseEntityFacade { get; private set; }
 
-        //[InjectionConstructor]
+        //[ImportingConstructor]
         //protected AlterBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
         //    : this(null, repository, eventAggregator, logger) { }
 

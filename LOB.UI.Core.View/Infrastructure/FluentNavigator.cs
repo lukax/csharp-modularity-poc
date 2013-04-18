@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,20 +9,21 @@ using LOB.Core.Localization;
 using LOB.UI.Core.View.Controls.Util;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using Microsoft.Practices.Unity;
+using Microsoft.Practices.ServiceLocation;
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 #endregion
 
 namespace LOB.UI.Core.View.Infrastructure {
+    [Export]
     public class FluentNavigator : IFluentNavigator {
-        private readonly IUnityContainer _container;
+        private readonly IServiceLocator _container;
         private readonly IRegionAdapter _regionAdapter;
         private IBaseView _resolvedView;
         private IBaseViewModel _resolvedViewModel;
 
-        [InjectionConstructor]
-        public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter) {
+        [ImportingConstructor]
+        public FluentNavigator(IServiceLocator container, IRegionAdapter regionAdapter) {
             _container = container;
             _regionAdapter = regionAdapter;
         }
@@ -49,7 +51,7 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator ResolveViewModel(ViewID param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(ViewDictionary.ViewModels[param]) as IBaseViewModel;
+            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseViewModel;
             dynamic resolvedd = resolved;
             try {
                 resolvedd.ViewID = param; //TODO: Maybe change this later
@@ -65,14 +67,14 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve<TViewModel>();
+            var resolved = _container.GetInstance<TViewModel>();
             SetViewModel(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveView(ViewID param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(ViewDictionary.Views[param]) as IBaseView;
+            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseView;
             if(resolved == null) throw new ArgumentException("param");
             SetView(resolved);
             return this;
@@ -80,7 +82,7 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator ResolveView<TView>() where TView : IBaseView {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve<TView>();
+            var resolved = _container.GetInstance<TView>();
             SetView(resolved);
             return this;
         }
@@ -105,7 +107,7 @@ namespace LOB.UI.Core.View.Infrastructure {
         public void Show(bool asDialog = false) {
             var asUc = GetView() as UserControl;
             if(asUc != null) {
-                var window = _container.Resolve<FrameWindow>();
+                var window = _container.GetInstance<FrameWindow>();
                 window.Content = asUc;
                 window.DataContext = _resolvedView.ViewModel;
                 window.Height = asUc.Height + 50;

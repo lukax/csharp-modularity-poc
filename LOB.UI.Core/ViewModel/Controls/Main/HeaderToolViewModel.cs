@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
@@ -17,13 +18,15 @@ using Microsoft.Practices.ServiceLocation;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class HeaderToolViewModel : BaseViewModel, IHeaderToolsViewModel {
+    [Export(typeof(IHeaderToolViewModel))]
+    public class HeaderToolViewModel : BaseViewModel, IHeaderToolViewModel {
         private readonly IServiceLocator _serviceLocator;
         private readonly IEventAggregator _eventAggregator;
 
         public ICommand DbTestConnectionCommand { get; set; }
         public ICommand OpenTabCommand { get; set; }
 
+        [ImportingConstructor]
         public HeaderToolViewModel(IServiceLocator serviceLocator, IEventAggregator eventAggregator) {
             _serviceLocator = serviceLocator;
             _eventAggregator = eventAggregator;

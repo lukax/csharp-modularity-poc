@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -40,6 +41,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return string.Format("{0} {1}", Entitys.Count, Strings.UI_ToolTip_Notifications); }
         }
 
+        [ImportingConstructor]
         public NotificationToolViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             DismissCommand = new DelegateCommand(DismissNotification);

@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
@@ -12,29 +13,29 @@ using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolsViewModel {
+    public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolViewModel {
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IEventAggregator _eventAggregator;
         private readonly IFluentNavigator _navigator;
         private readonly IRegionAdapter _regionAdapter;
-        private readonly IUnityContainer _unityContainer;
+        private readonly INotificationToolViewModel _notificationToolViewModel;
         public string NotificationStatus { get; set; }
         public ICommand OperationCommand { get; set; }
         public ICommand ShopCommand { get; set; }
         public ICommand NotificationCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
 
+        [ImportingConstructor]
         public ColumnToolViewModel(IEventAggregator eventAggregator, IFluentNavigator navigator, IRegionAdapter regionAdapter,
-            IUnityContainer unityContainer) {
+            INotificationToolViewModel notificationToolViewModel) {
             _eventAggregator = eventAggregator;
             _navigator = navigator;
             _regionAdapter = regionAdapter;
-            _unityContainer = unityContainer;
+            _notificationToolViewModel = notificationToolViewModel;
             OperationCommand = new DelegateCommand(ShowOperations);
             ShopCommand = new DelegateCommand(ShowShop);
             NotificationCommand = new DelegateCommand(ShowNotification);
@@ -63,8 +64,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void ShowNotification(object o) {
-            var vm = _unityContainer.Resolve<INotificationToolViewModel>();
-            vm.IsVisible = !vm.IsVisible;
+            _notificationToolViewModel.IsVisible = !_notificationToolViewModel.IsVisible;
             //var op = new ViewID {
             //    Type = ViewType.NotificationTool,
             //    State = ViewState.Tool
@@ -89,7 +89,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             worker.WorkerSupportsCancellation = true;
             do {
                 await Task.Delay(1000);
-                NotificationStatus = _unityContainer.Resolve<INotificationToolViewModel>().Status;
+                NotificationStatus = _notificationToolViewModel.Status;
             } while(!_worker.CancellationPending);
         }
         #region Implementation of IDisposable
