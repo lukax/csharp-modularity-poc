@@ -19,7 +19,7 @@ namespace LOB.Domain.Base {
             get { return ValidationFunc(columnName); }
         }
         /// <summary>
-        ///     Function which gets executed when Indexer is called
+        ///     Function which gets executed when Indexer is called.
         ///     In: columnName, Out: error message
         /// </summary>
         public Func<string, string> ValidationFunc { get; set; }

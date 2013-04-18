@@ -126,9 +126,9 @@
     <Compile Include="Events\View\CloseViewEvent.cs" />
     <Compile Include="Events\View\OpenViewEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
+    <Compile Include="Infrastructure\ViewModelDictionary.cs" />
     <Compile Include="netfx\System\StringFormatWith.cs" />
     <Compile Include="Util\EnumToPicConverter.cs" />
-    <Compile Include="Infrastructure\UIOperationCatalog.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Infrastructure\RegionName.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />

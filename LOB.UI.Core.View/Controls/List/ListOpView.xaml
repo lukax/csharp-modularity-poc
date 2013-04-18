@@ -25,7 +25,7 @@
         <DockPanel Grid.Row="0">
             <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
                     Command="{Binding SaveChangesCommand}" Padding="0" BorderThickness="0">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/arrow-east.png" />
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/enter.png" />
             </Button>
             <TextBox MinWidth="200" Width="Auto" Height="Auto" Background="Transparent"
                      Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
@@ -47,12 +47,8 @@
                                    Command="{Binding ElementName=PanoramaEntitys, Path=DataContext.SaveChangesCommand}"
                                    CommandParameter="{Binding}" Width="100" Height="100">
                         <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
-                        <Image Source="pack://application:,,,/LOB.UI.Core.Resources;component/Icons/Logo.png"
-                               Opacity="0.5" Stretch="UniformToFill">
-                            <Image.Effect>
-                                <effect:GrayscaleEffect x:Name="grayscaleEffect" />
-                            </Image.Effect>
-                        </Image>
+                        <Image Source="/LOB.UI.Core.Resources;component/Icons/256x256/module.png"
+                               Opacity="0.1" Stretch="UniformToFill"/>
                     </controls:Tile>
                 </DataTemplate>
             </ScrollViewer.Resources>

@@ -41,7 +41,63 @@ namespace LOB.UI.Interface.Infrastructure {
         #endregion
     }
 
-    public static class UIOperationExtensions {
+    public enum ViewType
+    {
+        Unknown = 0,
+
+        Main,
+
+        MessageTool,
+        NotificationTool,
+        ColumnTool,
+        HeaderTool,
+
+        BaseEntity,
+        Person,
+        Service,
+
+        Address,
+        Category,
+        ContactInfo,
+        Email,
+        PayCheck,
+        PhoneNumber,
+
+        Customer,
+        Employee,
+        LegalPerson,
+        NaturalPerson,
+        Product,
+        Sale,
+        Store,
+
+        Op,
+    }
+
+   public enum ViewState
+    {
+        Internal = 0, //Internal Usage
+
+        //Altering
+        Add = 9,
+        Update = 27,
+        Delete = 81,
+
+        //Listing
+        List = 5,
+        QuickSearch = 25, //Internal Usage
+
+        //Business
+        Sell = 7,
+    }
+
+    public enum ViewSubState
+    {
+        Unlocked,
+        Locked,
+    }
+
+    public static class ViewIDExtension {
         public static ViewID ToUIOperation(this string s) {
             string[] cutted = s.Split('_');
             ViewState parsedState;
@@ -74,4 +130,15 @@ namespace LOB.UI.Interface.Infrastructure {
 
         #endregion
     }
+
+    public static class ViewTypeExtension
+    {
+        public static ViewType ToUIOperationType(this string operationType)
+        {
+            ViewType o;
+            if (Enum.TryParse(operationType, out o)) return o;
+            throw new ArgumentException("Not parsable to OperationTypeEnum", "operationType");
+        }
+    }
+
 }
