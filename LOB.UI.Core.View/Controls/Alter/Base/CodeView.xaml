@@ -6,23 +6,26 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="30" d:DesignWidth="300">
 
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal">
-        <TextBlock VerticalAlignment="Center" TextAlignment="Center" ToolTip="{x:Static loc:Strings.UI_ToolTip_Code}"
-                   Focusable="False"
-                   Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
-                   MinWidth="40" />
+    <Border BorderThickness=".3" BorderBrush="{DynamicResource AccentBrush4}" HorizontalAlignment="Left" >
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center"
+                       ToolTip="{x:Static loc:Strings.UI_ToolTip_Code}"
+                       Focusable="False" HorizontalAlignment="Right" Background="Transparent"
+                       Text="{Binding Path=Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                       MinWidth="20" Height="18" />
 
-        <Button Command="{Binding QuickSearchCommand}" Focusable="False"
-                ToolTip="{x:Static loc:Strings.UI_ToolTip_QuickSearch}" Width="18" Height="18" Background="Transparent"
-                Padding="1" BorderThickness="0">
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/magnify.png" />
-        </Button>
-    </StackPanel>
-
+            <Button Command="{Binding QuickSearchCommand}" Focusable="False"
+                    ToolTip="{x:Static loc:Strings.UI_ToolTip_QuickSearch}" Background="Transparent"
+                    HorizontalAlignment="Left"
+                    Width="18" Height="18" Padding="0" BorderThickness="0">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/search.png" />
+            </Button>
+        </StackPanel>
+    </Border>
 </UserControl>

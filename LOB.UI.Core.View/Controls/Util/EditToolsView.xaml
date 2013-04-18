@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d"
-             d:DesignHeight="100" d:DesignWidth="300">
+             d:DesignHeight="30" d:DesignWidth="500">
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
@@ -16,86 +17,68 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
-                <Button IsEnabled="False" Focusable="False" Background="Transparent"
-                        Padding="1" BorderThickness="0" Width="18" Height="18"
-                        ToolTip="{x:Static loc:Strings.UI_ToolTip_Undo}">
-                    <Rectangle Height="16" Width="16">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Button>
-                <Button IsEnabled="False" Focusable="False" Background="Transparent"
-                        Padding="1" BorderThickness="0" Width="18" Height="18"
-                        ToolTip="{x:Static loc:Strings.Common_Redo}">
-                    <Rectangle Height="16" Width="16">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_arrow_right}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Button>
-                
-            
-                <Button IsEnabled="False" Focusable="False" Background="Transparent"
-                        Padding="1" BorderThickness="0" Width="18" Height="18"
-                        ToolTip="{x:Static loc:Strings.UI_ToolTip_Undo}">
-                    <Rectangle Height="16" Width="16">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_undo}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Button>
-                <Button IsEnabled="False" Focusable="False" Background="Transparent" Padding="1"
-                        BorderThickness="0" Width="18" Height="18" ToolTip="{x:Static loc:Strings.Common_Redo}">
-                    <Rectangle Height="16" Width="16">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_redo}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Button>
-            </StackPanel>
-        
+            <Button IsEnabled="False" Focusable="False" Background="Transparent" BorderThickness="0" Height="18"
+                    Width="18" Padding="0"
+                    ToolTip="{x:Static loc:Strings.UI_ToolTip_Undo}">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/arrow-1-backward.png" />
+            </Button>
+            <Button IsEnabled="False" Focusable="False" Background="Transparent" BorderThickness="0" Height="18"
+                    Width="18" Padding="0"
+                    ToolTip="{x:Static loc:Strings.Common_Redo}">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/arrow-1-forward.png" />
+            </Button>
+            <Separator />
+
+            <Button IsEnabled="False" Focusable="False" Background="Transparent" BorderThickness="0" Height="18"
+                    Width="18" Padding="0"
+                    ToolTip="{x:Static loc:Strings.UI_ToolTip_Undo}">
+                <Rectangle Height="15" Width="15">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_undo}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button IsEnabled="False" Focusable="False" Background="Transparent" BorderThickness="0" Height="18"
+                    Width="18" Padding="0"
+                    ToolTip="{x:Static loc:Strings.Common_Redo}">
+                <Rectangle Height="15" Width="15">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_redo}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+        </StackPanel>
+
         <StackPanel Orientation="Horizontal" Grid.Column="2">
-            <Button Height="18" Width="18" Command="{Binding ClearEntity}" Focusable="False"
+            <Button Command="{Binding ClearEntity}" Focusable="False" BorderThickness="0" Height="18" Width="18"
+                    Padding="0"
                     HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Clear}"
-                    Background="Transparent" Padding="0" BorderThickness="0">
-                <Rectangle Width="16" Height="16">
-                    <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_page_new}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                    Background="Transparent">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/file-add.png" />
             </Button>
-            <Button Height="18" Width="18" Command="{Binding EditEntity}" Focusable="False"
+            <Button Command="{Binding EditEntity}" Focusable="False" BorderThickness="0" Height="18" Width="18"
+                    Padding="0"
                     HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Edit}"
-                    Background="Transparent" Padding="0" BorderThickness="0">
-                <Rectangle Width="16" Height="16">
-                    <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_page_edit}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                    Background="Transparent">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/file-edit.png" />
             </Button>
-            <Button Height="18" Width="18" Command="{Binding DeleteEntity}" Focusable="False"
+            <Button Command="{Binding DeleteEntity}" Focusable="False" BorderThickness="0" Height="18" Width="18"
+                    Padding="0"
                     HorizontalAlignment="Left" ToolTip="{x:Static loc:Strings.UI_ToolTip_Delete}"
-                    Background="Transparent" Padding="0" BorderThickness="0">
-                <Rectangle Width="16" Height="16">
-                    <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_page_delete}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                    Background="Transparent">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/file-remove.png" />
             </Button>
-            <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
+            <Separator />
+            <Button x:Name="ButtonSave" IsDefault="True" Background="Transparent" BorderThickness="0" Height="18"
+                    Width="18" Padding="0"
                     ToolTip="{Binding ConfirmText}" Focusable="False"
-                    Command="{Binding SaveChangesCommand}" BorderThickness="0" Padding="0">
-                <Rectangle Height="16" Width="16">
-                    <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_save}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                    Command="{Binding SaveChangesCommand}">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/save.png" />
             </Button>
-            <!--<Button x:Name="ButtonCancel" Width="18" Height="18" Background="Transparent"
+            <!--<Button x:Name="ButtonCancel" Width="17" Height="17" Background="Transparent"
                 ToolTip="{x:Static loc:Strings.UI_ToolTip_Cancel}" Focusable="False"
                 Command="{Binding DiscardChangesCommand}" BorderThickness="0" Padding="0">
-                <Rectangle Height="16" Width="16">
+                <Rectangle Height="17" Width="17">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{StaticResource appbar_cancel}"/>
                     </Rectangle.Fill>

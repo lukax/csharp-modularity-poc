@@ -1,68 +1,38 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
-using System.Linq;
 using LOB.Business.Interface.Logic.Base;
-using LOB.Business.Logic.SubEntity;
+using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
+using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 
 #endregion
 
 namespace LOB.Business.Logic.Base {
-    public class PersonFacade : IPersonFacade {
-        private Person _entity;
-        public Person Entity {
-            set {
-                _entity = value;
-                ConfigureValidations();
-            }
+    public class PersonFacade : BaseEntityFacade<Person>, IPersonFacade {
+        private readonly IAddressFacade _addressFacade;
+        private readonly IContactInfoFacade _contactInfoFacade;
+
+        public PersonFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IRepository repository)
+            : base(repository) {
+            _addressFacade = addressFacade;
+            _contactInfoFacade = contactInfoFacade;
+            ConfigureValidations();
         }
 
-        public static Person GenerateEntity() {
-            return new LocalPerson {
-                Code = 0,
-                Error = null,
-                Address = AddressFacade.GenerateEntity(),
-                ContactInfo = ContactInfoFacade.GenerateEntity(),
-                Notes = "",
-            };
+        public override Person GenerateEntity() {
+            var local = base.GenerateEntity();
+            local.Address = _addressFacade.GenerateEntity();
+            local.ContactInfo = _contactInfoFacade.GenerateEntity();
+            local.Notes = "";
+            return local;
         }
 
         public void ConfigureValidations() {
-            if(_entity != null)
-                _entity.AddValidation(
-                    (sender, name) =>
-                    _entity.Notes.Length > 300 ? new ValidationResult("Notes", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
+            AddValidation(
+                (sender, name) =>
+                Entity.Notes.Length > 300 ? new ValidationResult("Notes", string.Format(Strings.Notification_Field_X_MaxLength, 300)) : null);
         }
-
-        Person IBaseEntityFacade<Person>.GenerateEntity() { return GenerateEntity(); }
-        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            fields.AddRange(_entity.GetValidations("Notes"));
-            invalidFields = fields;
-            if(
-                fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
-            return true;
-        }
-
-        public class LocalPerson : Person {}
     }
 }

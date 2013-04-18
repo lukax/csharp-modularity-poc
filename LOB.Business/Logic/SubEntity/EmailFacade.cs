@@ -1,63 +1,34 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
+using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    public class EmailFacade : IEmailFacade {
-        private Email _entity;
-        public Email Entity {
-            set {
-                _entity = value;
-                ConfigureValidations();
-            }
-        }
+    public sealed class EmailFacade : BaseEntityFacade<Email>, IEmailFacade {
+        public EmailFacade(IRepository repository)
+            : base(repository) { ConfigureValidations(); }
 
-        public static Email GenerateEntity() { return new Email {Code = 0, Error = null, Value = "",}; }
+        public override Email GenerateEntity() {
+            var result = base.GenerateEntity();
+            result.Value = "";
+            return result;
+        }
 
         public void ConfigureValidations() {
-            if(_entity != null)
-                _entity.AddValidation(delegate {
-                                          if(string.IsNullOrWhiteSpace(_entity.Value)) return new ValidationResult("Value", Strings.Notification_Field_Empty);
-                                          if(
-                                              !Regex.IsMatch(_entity.Value,
-                                                             @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")) return new ValidationResult("Value", Strings.Notification_Field_WrongFormat);
-                                          return null;
-                                      });
-        }
-
-        Email IBaseEntityFacade<Email>.GenerateEntity() { return GenerateEntity(); }
-        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            fields.AddRange(_entity.GetValidations("Value"));
-            invalidFields = fields;
-            if(
-                fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
-            return true;
+            AddValidation(delegate {
+                              if(string.IsNullOrWhiteSpace(Entity.Value)) return new ValidationResult("Value", Strings.Notification_Field_Empty);
+                              if(
+                                  !Regex.IsMatch(Entity.Value,
+                                                 @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")) return new ValidationResult("Value", Strings.Notification_Field_WrongFormat);
+                              return null;
+                          });
         }
     }
 }

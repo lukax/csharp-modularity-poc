@@ -2,10 +2,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
+using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
@@ -13,66 +13,33 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    public class ShipmentInfoFacade : IShipmentInfoFacade {
-        private ShipmentInfo _entity;
-        public ShipmentInfo Entity {
-            set {
-                _entity = value;
-                ConfigureValidations();
-            }
+    public sealed class ShipmentInfoFacade : BaseEntityFacade<ShipmentInfo>, IShipmentInfoFacade {
+        private readonly IAddressFacade _addressFacade;
+
+        public ShipmentInfoFacade(IAddressFacade addressFacade, IRepository repository)
+            : base(repository) {
+            _addressFacade = addressFacade;
+            ConfigureValidations();
+        }
+
+        public override ShipmentInfo GenerateEntity() {
+            var result = base.GenerateEntity();
+            result.Address = _addressFacade.GenerateEntity();
+            result.Status = default(ShipmentStatus);
+            result.DaySchedule = "";
+            result.DeliverDate = DateTime.Now;
+            result.Products = new List<Product>();
+            return result;
         }
 
         public void ConfigureValidations() {
-            if(_entity != null) {
-                _entity.AddValidation(
-                    (sender, name) => _entity.DaySchedule.Length < 1 ? new ValidationResult("DaySchedule", Strings.Notification_Field_Empty) : null);
-                _entity.AddValidation(delegate {
-                                          if(_entity.DeliverDate.CompareTo(new DateTime(2013, 1, 1)) < 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooEarly);
-                                          if(_entity.DeliverDate.CompareTo(new DateTime(2015, 1, 1)) > 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooLate);
-                                          return null;
-                                      });
-            }
-        }
-
-        ShipmentInfo IBaseEntityFacade<ShipmentInfo>.GenerateEntity() { return GenerateEntity(); }
-        public static ShipmentInfo GenerateEntity() {
-            return new ShipmentInfo {
-                Code = 0,
-                Address = AddressFacade.GenerateEntity(),
-                Error = null,
-                Status = default(ShipmentStatus),
-                DaySchedule = "",
-                DeliverDate = DateTime.Now,
-                Products = new List<Product>(),
-            };
-        }
-
-        public void SetEntity<T>(T entity) where T : ShipmentInfo { _entity = entity; }
-
-        public bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        public bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        public bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
-        }
-
-        private bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
-            var fields = new List<ValidationResult>();
-            fields.AddRange(_entity.GetValidations("DaySchedule"));
-            fields.AddRange(_entity.GetValidations("DeliverDate"));
-            invalidFields = fields;
-            if(
-                fields.Where(validationResult => validationResult != null)
-                      .Count(validationResult => !string.IsNullOrEmpty(validationResult.ErrorDescription)) > 0) return false;
-            return true;
+            AddValidation(
+                (sender, name) => Entity.DaySchedule.Length < 1 ? new ValidationResult("DaySchedule", Strings.Notification_Field_Empty) : null);
+            AddValidation(delegate {
+                              if(Entity.DeliverDate.CompareTo(new DateTime(2013, 1, 1)) < 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooEarly);
+                              if(Entity.DeliverDate.CompareTo(new DateTime(2015, 1, 1)) > 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooLate);
+                              return null;
+                          });
         }
     }
 }

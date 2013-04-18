@@ -57,7 +57,8 @@
         <MenuItem Header="{x:Static loc:Strings.UI_Menu_Report}">
         </MenuItem>
         <MenuItem Header="{x:Static loc:Strings.UI_Menu_DB}">
-            <MenuItem Header="{x:Static loc:Strings.UI_Menu_DB_TestConnection}" Command="{Binding DbTestConnectionCommand}"/>
+            <MenuItem Header="{x:Static loc:Strings.UI_Menu_DB_TestConnection}"
+                      Command="{Binding DbTestConnectionCommand}" />
         </MenuItem>
     </Menu>
 </UserControl>

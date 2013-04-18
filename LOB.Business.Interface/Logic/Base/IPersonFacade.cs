@@ -6,4 +6,6 @@ using LOB.Domain.Base;
 
 namespace LOB.Business.Interface.Logic.Base {
     public interface IPersonFacade : IBaseEntityFacade<Person> {}
+
+    //public class LocalPerson : Person {}
 }

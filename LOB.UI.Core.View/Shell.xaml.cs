@@ -20,7 +20,6 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
 
 #endregion
 
@@ -73,10 +72,7 @@ namespace LOB.UI.Core.View {
                             .Publish(new Notification {Message = Strings.App_License_Information, State = NotificationState.Warning});
         }
 
-        public void Refresh() {
-            UpdateLayout();
-            MiLightBlue(null, null);
-        }
+        public void Refresh() { UpdateLayout(); }
 
         public ViewType ViewType {
             get { return ViewType.Main; }
@@ -95,9 +91,10 @@ namespace LOB.UI.Core.View {
         private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             TabRegion.SelectedIndex = -1;
             ProgressRing.IsActive = true;
-            await Task.Delay(400);
-            // Fix validation color border in textboxes TODO: Check this issue
+            await Task.Delay(100); //BUG: STUPID RESOURCES LOADING ASYNC
+            // Fix validation color border in textboxes
             ProgressRing.IsActive = false;
+            await Task.Delay(1);
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
         }
 

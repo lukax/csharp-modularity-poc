@@ -44,7 +44,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            
+
             <Button FontSize="14" Width="42" Height="42" Padding="0" BorderThickness="0" VerticalAlignment="Bottom"
                     Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_Logout}" Focusable="False"
                     Command="{Binding LogoutCommand}">

@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
             <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
-                           Command="{Binding SaveChangesCommand}" Padding="0" BorderThickness="0">
+                    Command="{Binding SaveChangesCommand}" Padding="0" BorderThickness="0">
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/arrow-east.png" />
             </Button>
             <TextBox MinWidth="200" Width="Auto" Height="Auto" Background="Transparent"

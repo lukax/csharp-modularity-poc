@@ -18,46 +18,36 @@
                 <Button x:Name="ButtonSave" IsDefault="True" Width="20" Height="20" Background="Transparent"
                         Padding="0" BorderThickness="0" ToolTip="{x:Static loc:Strings.UI_ToolTip_Confirm}"
                         Command="{Binding SearchCommand}">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/arrow-east.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/enter.png" />
                 </Button>
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Command="{Binding AddCommand}" HorizontalAlignment="Right" Width="20" Height="20"
                         Padding="0" BorderThickness="0"
                         Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_Add}">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/add.png" />
                 </Button>
                 <Button Command="{Binding UpdateCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Edit}" Width="20"
                         Height="20" Background="Transparent" Padding="0" BorderThickness="0">
-                    <Rectangle Height="20" Width="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_edit}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/edit.png" />
                 </Button>
                 <Button Command="{Binding DeleteCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Delete}"
                         Width="20" Height="20" Background="Transparent" BorderThickness="0" Padding="0">
-                    <Rectangle Height="20" Width="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_delete}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/trash-empty.png" />
+
                 </Button>
                 <Button Command="{Binding FetchCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Update}" Width="20"
                         Height="20" BorderThickness="0" Padding="0"
                         Background="Transparent">
-                    <Rectangle Height="20" Width="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource appbar_refresh}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/3D-Z-Axis-Rotation.png" />
                 </Button>
                 <Separator />
                 <Button Command="{Binding CloseCommand}" ToolTip="{x:Static loc:Strings.UI_ToolTip_Close}" Width="18"
                         BorderBrush="Black"
-                        Height="18" BorderThickness="2" Padding="0"
+                        Height="18" BorderThickness="0.5" Padding="0"
                         Background="Transparent">
-                    <Rectangle Width="18" Height="18">
+                    <Rectangle Width="15" Height="15">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                         </Rectangle.Fill>

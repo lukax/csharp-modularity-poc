@@ -33,7 +33,7 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/plus_2.png"
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/add.png"
                                                    Height="25" Width="25" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_Add}" />
                                         </DockPanel>
@@ -44,7 +44,7 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/redo_2.png"
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/MD-reload.png"
                                                    Height="25" Width="25" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_Update}" />
                                         </DockPanel>
@@ -55,7 +55,8 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/x_2.png" Height="25"
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/delete.png"
+                                                   Height="25"
                                                    Width="25" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_Delete}" />
                                         </DockPanel>
@@ -66,7 +67,7 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
-                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/download_2.png"
+                                            <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/list.png"
                                                    Height="25" Width="25" />
                                             <Label Content="{x:Static loc:Strings.Common_Confirm_List}" />
                                         </DockPanel>
@@ -86,7 +87,7 @@
             </Button>
             <Button x:Name="ButtonCancel" Padding="2" Command="{Binding DiscardChangesCommand}" IsCancel="True">
                 <DockPanel>
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/no_2.png" Height="25" Width="25" />
+                    <!--<Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/cancel.png" Height="25" Width="25" />-->
                     <Label Content="{x:Static loc:Strings.Common_Cancel}" />
                 </DockPanel>
             </Button>

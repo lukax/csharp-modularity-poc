@@ -6,7 +6,6 @@ using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic;
 using LOB.Business.Logic.Base;
 using LOB.Business.Logic.SubEntity;
-using LOB.Domain.Base;
 using LOB.Log.Interface;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
@@ -22,7 +21,7 @@ namespace LOB.Business.Modularity {
         public Module(IUnityContainer container) { _container = container; }
 
         public void Initialize() {
-            _container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade>();
+            //_container.RegisterType<IBaseEntityFacade<BaseEntity>, BaseEntityFacade<BaseEntity>>();
             _container.RegisterType<IPersonFacade, PersonFacade>();
 
             _container.RegisterType<IAddressFacade, AddressFacade>();

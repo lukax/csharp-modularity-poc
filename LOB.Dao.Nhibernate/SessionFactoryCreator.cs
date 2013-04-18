@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Threading.Tasks;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using LOB.Core.Localization;
@@ -53,7 +54,10 @@ namespace LOB.Dao.Nhibernate {
 
         [InjectionConstructor]
         public SessionFactoryCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MySql) { }
+            : this(logger, PersistType.MySql) {
+            //DropTables = true;
+            Task.Run(() => _orm = CreateSessionFactory()); // Load Configurations at Startup so first connection to DB wont hang
+        }
 
         private SessionFactoryCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
             if(connectionString != null) ConnectionString = connectionString;

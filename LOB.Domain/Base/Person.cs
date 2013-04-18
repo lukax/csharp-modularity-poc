@@ -11,7 +11,7 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Domain.Base {
     [Serializable]
-    public abstract class Person : BaseEntity, IEquatable<Person> {
+    public class Person : BaseEntity, IEquatable<Person> {
         public Address Address { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public string Notes { get; set; }

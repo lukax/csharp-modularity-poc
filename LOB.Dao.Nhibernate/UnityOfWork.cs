@@ -90,7 +90,7 @@ namespace LOB.Dao.Nhibernate {
                 Transaction = null;
             }
             if(_orm != null) _orm.As<ISession>().Disconnect();
-            //ORMFactory.As<ISession>().Dispose();
+            //ORMFactory.As<ISession>().Dispose(); INFO: Disconnecting instead of disposing // Allows Multi-usage
         }
 
         #endregion
