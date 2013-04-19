@@ -1,12 +1,14 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Sell;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
+    [Export(typeof(ISellProductViewModel))]
     public class SellProductViewModel : ISellProductViewModel {
         public string Header { get; set; }
 

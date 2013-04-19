@@ -14,11 +14,13 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
+    [Export(typeof(IAlterPersonViewModel))]
     public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Person, State = ViewState.Add};
         private AlterAddressViewModel _alterAddressViewModel;
         private AlterContactInfoViewModel _alterContactInfoViewModel;
 
+        [ImportingConstructor]
         public AlterPersonViewModel(IPersonFacade personFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(personFacade, repository, eventAggregator, logger) { }
 

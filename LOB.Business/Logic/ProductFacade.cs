@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
@@ -12,10 +13,12 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic {
+    [Export(typeof(IProductFacade))]
     public sealed class ProductFacade : BaseEntityFacade<Product>, IProductFacade {
         private readonly ICategoryFacade _categoryFacade;
         private readonly IShipmentInfoFacade _shipmentInfoFacade;
 
+        [ImportingConstructor]
         public ProductFacade(ICategoryFacade categoryFacade, IShipmentInfoFacade shipmentInfoFacade, IRepository repository)
             : base(repository) {
             _categoryFacade = categoryFacade;

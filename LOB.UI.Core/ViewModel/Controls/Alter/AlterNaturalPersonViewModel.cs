@@ -15,17 +15,19 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
+    [Export(typeof(IAlterNaturalPersonViewModel))]
     public sealed class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.NaturalPerson, State = ViewState.Add};
         private AlterPersonViewModel _alterPersonViewModel;
-        [Import] public IAlterPersonViewModel AlterPersonViewModel {
+        public IAlterPersonViewModel AlterPersonViewModel {
             get { return _alterPersonViewModel; }
             set { _alterPersonViewModel = value as AlterPersonViewModel; }
         }
 
+        [ImportingConstructor]
         public AlterNaturalPersonViewModel(INaturalPersonFacade naturalPersonFacade, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade logger)
-            : base(naturalPersonFacade, repository, eventAggregator, logger) { }
+            ILoggerFacade logger, IAlterPersonViewModel alterPersonViewModel)
+            : base(naturalPersonFacade, repository, eventAggregator, logger) { AlterPersonViewModel = alterPersonViewModel; }
 
         public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }

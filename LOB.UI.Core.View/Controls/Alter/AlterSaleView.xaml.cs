@@ -24,7 +24,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         [Import] public IAlterSaleViewModel ViewModel {
             get { return DataContext as IAlterSaleViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
         public int Index { get; set; }
 

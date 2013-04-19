@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Business.Interface.Logic;
 using LOB.Dao.Interface;
@@ -17,6 +18,7 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
+    [Export(typeof(IAlterCustomerViewModel))]
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private readonly ICustomerFacade _customerFacade;
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Customer, State = ViewState.Add};
@@ -45,6 +47,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             get { return Entity.Status.ToLocalizedString(); }
         }
 
+        [ImportingConstructor]
         public AlterCustomerViewModel(ICustomerFacade customerFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger,
             IAlterNaturalPersonViewModel alterNaturalPersonViewModel, IAlterLegalPersonViewModel alterLegalPersonViewModel)
             : base(customerFacade, repository, eventAggregator, logger) {

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.ComponentModel.Composition;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
@@ -10,7 +11,9 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
+    [Export(typeof(IPayCheckFacade))]
     public sealed class PayCheckFacade : BaseEntityFacade<PayCheck>, IPayCheckFacade {
+        [ImportingConstructor]
         public PayCheckFacade(IRepository repository)
             : base(repository) { ConfigureValidations(); }
 

@@ -22,7 +22,10 @@ namespace LOB.UI.Core.View.Controls.List {
 
         [Import] public IListOpViewModel ViewModel {
             get { return DataContext as IListOpViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

@@ -23,7 +23,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         [Import] public IAlterSupplierViewModel ViewModel {
             get { return DataContext as IAlterSupplierViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

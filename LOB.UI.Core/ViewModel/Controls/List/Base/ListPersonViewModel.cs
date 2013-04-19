@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq.Expressions;
 using LOB.Dao.Interface;
@@ -12,8 +13,10 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
+    [Export(typeof(IListPersonViewModel))]
     public class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
-        protected ListPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
+        [ImportingConstructor]
+        public ListPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
             : base(repository, eventAggregator) { }
 
         public override void InitializeServices() {

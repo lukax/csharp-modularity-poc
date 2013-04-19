@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Dao.Interface;
@@ -18,6 +19,7 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    [Export(typeof(IAlterAddressViewModel))]
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
         private string _status;
         private IList<string> _statuses;
@@ -40,6 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
+        [ImportingConstructor]
         public AlterAddressViewModel(IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(addressFacade, repository, eventAggregator, logger) { }
 

@@ -18,11 +18,12 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel; }
 
-        [Import]
-        public IAlterCategoryViewModel ViewModel
-        {
+        [Import] public IAlterCategoryViewModel ViewModel {
             get { return DataContext as IAlterCategoryViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

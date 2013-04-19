@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows.Input;
 using LOB.Core.Localization;
@@ -20,6 +21,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
+    [Export(typeof(IListOpViewModel))]
     public class ListOpViewModel : BaseViewModel, IListOpViewModel {
         private readonly IEventAggregator _eventAggregator;
         private readonly Lazy<IDictionary<string, ViewID>> _defaultViewIDDictLazy;
@@ -38,6 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             }
         }
 
+        [ImportingConstructor]
         public ListOpViewModel(IEventAggregator eventAggregator) {
             _eventAggregator = eventAggregator;
             SaveChangesCommand = new DelegateCommand(SaveChanges);

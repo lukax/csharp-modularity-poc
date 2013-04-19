@@ -18,7 +18,7 @@
         <util:EditToolsView x:Name="ViewEditTools" />
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <base:CodeView x:Name="ViewCode" />
+                <base:BaseEntityView x:Name="ViewCode" />
 
                 <Label Content="{x:Static loc:Strings.Common_Status}" HorizontalAlignment="Right" />
                 <TextBox Text="{Binding Status, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, Mode=OneWay}"

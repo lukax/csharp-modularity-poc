@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using LOB.Business.Interface.Logic.Base;
@@ -11,6 +12,7 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic.Base {
+    [InheritedExport]
     public abstract class BaseEntityFacade<TEntity> : IBaseEntityFacade<TEntity> where TEntity : BaseEntity, new() {
         private TEntity _entity;
         private List<ValidationDelegate> ValidationDelegates { get; set; }

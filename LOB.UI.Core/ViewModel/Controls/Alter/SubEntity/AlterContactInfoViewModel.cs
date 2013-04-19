@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Windows.Data;
@@ -23,7 +24,9 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    [Export(typeof(IAlterContactInfoViewModel))]
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
+        [ImportingConstructor]
         public AlterContactInfoViewModel(IRepository repository, IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
             : base(contactInfoFacade, repository, eventAggregator, logger) {

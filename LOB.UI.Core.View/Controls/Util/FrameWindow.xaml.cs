@@ -4,7 +4,6 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface;
@@ -22,13 +21,15 @@ namespace LOB.UI.Core.View.Controls.Util {
         }
 
         public FrameWindow() { InitializeComponent(); }
-        
+
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
             set { DataContext = value; }
         }
 
-        public string Header { get { return Strings.UI_Title_Shell; } }
+        public string Header {
+            get { return Strings.UI_Title_Shell; }
+        }
         public int Index { get; set; }
 
         public void Refresh() {

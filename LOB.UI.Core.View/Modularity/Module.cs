@@ -8,6 +8,7 @@ using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
+using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
 #endregion
 
@@ -17,10 +18,10 @@ namespace LOB.UI.Core.View.Modularity {
     public class Module : IModule {
         private readonly ILoggerFacade _loggerFacade;
         private readonly IRegionManager _regionManager;
-        private readonly Interface.Infrastructure.IRegionAdapter _regionAdapter;
+        private readonly IRegionAdapter _regionAdapter;
 
         [ImportingConstructor]
-        public Module(ILoggerFacade loggerFacade, IRegionManager regionManager, Interface.Infrastructure.IRegionAdapter regionAdapter) {
+        public Module(ILoggerFacade loggerFacade, IRegionManager regionManager, IRegionAdapter regionAdapter) {
             _loggerFacade = loggerFacade;
             _regionManager = regionManager;
             _regionAdapter = regionAdapter;

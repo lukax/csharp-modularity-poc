@@ -17,10 +17,12 @@ namespace LOB.UI.Core.View.Controls.Main {
     public partial class HeaderToolView : IBaseView<IHeaderToolViewModel> {
         public HeaderToolView() { InitializeComponent(); }
 
-        [Import]
-        public IHeaderToolViewModel ViewModel {
+        [Import] public IHeaderToolViewModel ViewModel {
             get { return DataContext as IHeaderToolViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <base:CodeView x:Name="ViewCode" />
+        <base:BaseEntityView x:Name="ViewCode" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

@@ -13,6 +13,7 @@ using NullGuard;
 #endregion
 
 namespace LOB.Dao.Nhibernate {
+    [Export(typeof(IUnityOfWork))]
     public class UnityOfWork : IUnityOfWork {
         protected ILoggerFacade LoggerFacade { get; set; }
         protected ITransaction Transaction { get; set; }

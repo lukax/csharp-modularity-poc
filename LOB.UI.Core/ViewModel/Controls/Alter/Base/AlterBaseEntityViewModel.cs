@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.Business.Interface.Logic.Base;
 using LOB.Core.Localization;
@@ -22,7 +23,8 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel where T : BaseEntity {
+    [InheritedExport]
+    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel<T> where T : BaseEntity {
         private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
         private ViewID _viewID;

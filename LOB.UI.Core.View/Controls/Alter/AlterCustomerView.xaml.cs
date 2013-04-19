@@ -26,11 +26,12 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewEditTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
         }
 
-        [Import]
-        public IAlterCustomerViewModel ViewModel
-        {
+        [Import] public IAlterCustomerViewModel ViewModel {
             get { return DataContext as IAlterCustomerViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

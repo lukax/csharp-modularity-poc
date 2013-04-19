@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
@@ -11,6 +12,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
+    [Export(typeof(IMessageToolViewModel))]
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
         private readonly IEventAggregator _eventAggregator;
         #region Props

@@ -1,12 +1,10 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 
 #endregion
 
 namespace LOB.Dao.Interface {
-    [InheritedExport]
     public interface ISessionFactoryCreator : IDisposable {
         object ORMFactory { get; }
         event SessionCreatorEventHandler OnError;

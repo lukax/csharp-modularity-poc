@@ -1,6 +1,7 @@
 #region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -8,12 +9,16 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
-    public partial class CodeView : IBaseView<IBaseViewModel> {
-        public CodeView() { InitializeComponent(); }
+    [Export(typeof(IBaseView<IBaseViewModel>)), ExportMetadata(null, ViewType.BaseEntity)]
+    public partial class BaseEntityView : IBaseView<IBaseViewModel> {
+        public BaseEntityView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

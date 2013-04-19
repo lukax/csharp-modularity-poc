@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <base2:CodeView HorizontalAlignment="Left" x:Name="ViewCode" />
+            <base2:BaseEntityView HorizontalAlignment="Left" x:Name="ViewCode" />
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                 <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />

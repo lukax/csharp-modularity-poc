@@ -3,7 +3,6 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -22,11 +21,12 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        [Import]
-        public IAlterContactInfoViewModel ViewModel
-        {
+        [Import] public IAlterContactInfoViewModel ViewModel {
             get { return DataContext as IAlterContactInfoViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

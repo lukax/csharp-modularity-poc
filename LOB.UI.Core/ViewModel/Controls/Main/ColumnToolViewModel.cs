@@ -17,6 +17,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
+    [Export(typeof(IColumnToolViewModel))]
     public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolViewModel {
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private readonly IEventAggregator _eventAggregator;

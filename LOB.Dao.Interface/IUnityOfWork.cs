@@ -1,12 +1,10 @@
 ﻿#region Usings
 
 using System;
-using System.ComponentModel.Composition;
 
 #endregion
 
 namespace LOB.Dao.Interface {
-    [InheritedExport]
     public interface IUnityOfWork : IDisposable {
         /// <summary>
         ///     Tests the database connection if it's working.

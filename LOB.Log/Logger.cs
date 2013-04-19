@@ -14,9 +14,8 @@ namespace LOB.Log {
     ///     A log4Net implementation of PRISM' ILoggerFacade.
     ///     *Note: Any logging framework could be plugged in here as long as we implement the ILoggerFacade interface.
     /// </summary>
-    [Export(typeof(ILoggerFacade))]
+    [Export(typeof(ILoggerFacade)), Export(typeof(ILogger))]
     public class Logger : ILoggerFacade, ILogger {
-        // Member variables
 // ReSharper disable InconsistentNaming
         private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));
 // ReSharper restore InconsistentNaming

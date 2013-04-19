@@ -24,7 +24,10 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         [Import] public IListPersonViewModel ViewModel {
             get { return DataContext as IListPersonViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

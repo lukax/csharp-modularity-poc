@@ -2,7 +2,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -20,7 +19,10 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         [Import] public IColumnToolViewModel ViewModel {
             get { return DataContext as IColumnToolViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

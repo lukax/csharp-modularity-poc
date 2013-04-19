@@ -8,7 +8,6 @@
              xmlns:domainSub="clr-namespace:LOB.UI.Interface.Infrastructure;assembly=LOB.UI.Interface"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xtck="clr-namespace:Xceed.Wpf.Toolkit.Panels;assembly=Xceed.Wpf.Toolkit"
-             xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
 
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">

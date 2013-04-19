@@ -2,7 +2,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -13,13 +12,14 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 namespace LOB.UI.Core.View.Controls.List {
     [Export]
     public partial class ListCustomerView : IBaseView<IListCustomerViewModel> {
-        public ListCustomerView() {
-            InitializeComponent();
-        }
-        
+        public ListCustomerView() { InitializeComponent(); }
+
         [Import] public IListCustomerViewModel ViewModel {
             get { return DataContext as IListCustomerViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

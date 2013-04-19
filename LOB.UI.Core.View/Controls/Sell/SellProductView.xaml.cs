@@ -1,18 +1,18 @@
 ﻿#region Usings
 
 using System;
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Sell;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Sell {
-    public partial class SellProductView : UserControl, IBaseView {
+    public partial class SellProductView : IBaseView<ISellProductViewModel> {
         public SellProductView() { InitializeComponent(); }
 
-        public IBaseViewModel ViewModel { get; set; }
+        public ISellProductViewModel ViewModel { get; set; }
 
         public string Header {
             get { return Strings.Command_Sell_Product; }

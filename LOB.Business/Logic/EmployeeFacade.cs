@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
@@ -12,11 +13,13 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic {
+    [Export(typeof(IEmployeeFacade))]
     public class EmployeeFacade : BaseEntityFacade<Employee>, IEmployeeFacade {
         private readonly IAddressFacade _addressFacade;
         private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IPayCheckFacade _payCheckFacade;
 
+        [ImportingConstructor]
         public EmployeeFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IPayCheckFacade payCheckFacade,
             IRepository repository)
             : base(repository) {

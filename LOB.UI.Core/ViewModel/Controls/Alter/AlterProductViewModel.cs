@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
@@ -21,12 +22,14 @@ using Category = LOB.Domain.SubEntity.Category;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
+    [Export(typeof(IAlterProductViewModel))]
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Service, State = ViewState.Add};
 
+        [ImportingConstructor]
         public AlterProductViewModel(IProductFacade productFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
             : base(productFacade, repository, eventAggregator, logger) {
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);

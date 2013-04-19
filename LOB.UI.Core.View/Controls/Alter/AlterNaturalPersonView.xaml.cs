@@ -26,7 +26,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
 
         [Import] public IAlterNaturalPersonViewModel ViewModel {
             get { return DataContext as IAlterNaturalPersonViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

@@ -24,7 +24,10 @@ namespace LOB.UI.Core.View.Controls.List {
 
         [Import] public IListLegalPersonViewModel ViewModel {
             get { return DataContext as IListLegalPersonViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

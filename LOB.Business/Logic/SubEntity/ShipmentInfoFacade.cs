@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
@@ -13,9 +14,11 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
+    [Export(typeof(IShipmentInfoFacade))]
     public sealed class ShipmentInfoFacade : BaseEntityFacade<ShipmentInfo>, IShipmentInfoFacade {
         private readonly IAddressFacade _addressFacade;
 
+        [ImportingConstructor]
         public ShipmentInfoFacade(IAddressFacade addressFacade, IRepository repository)
             : base(repository) {
             _addressFacade = addressFacade;

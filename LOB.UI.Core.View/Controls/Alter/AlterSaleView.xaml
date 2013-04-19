@@ -36,7 +36,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <base:CodeView Grid.Row="0" x:Name="ViewCode" />
+                <base:BaseEntityView Grid.Row="0" x:Name="ViewCode" />
 
                 <Label Content="{x:Static loc:Strings.Common_State}" HorizontalAlignment="Right" Grid.Row="0"
                        Grid.Column="1" />

@@ -19,7 +19,10 @@ namespace LOB.UI.Core.View.Controls.Main {
 
         [Import] public INotificationToolViewModel ViewModel {
             get { return DataContext as INotificationToolViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

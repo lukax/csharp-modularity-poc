@@ -16,7 +16,10 @@ namespace LOB.UI.Core.View.Controls.List {
 
         [Import] public IListProductViewModel ViewModel {
             get { return DataContext as IListProductViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

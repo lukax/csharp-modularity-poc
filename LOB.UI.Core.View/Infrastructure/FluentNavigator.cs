@@ -3,23 +3,18 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
 using LOB.Core.Localization;
-using LOB.UI.Core.View.Controls.Util;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
-using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 #endregion
 
 namespace LOB.UI.Core.View.Infrastructure {
-    [Export]
     public class FluentNavigator : IFluentNavigator {
         private readonly IServiceLocator _container;
         private readonly IRegionAdapter _regionAdapter;
-        private IBaseView _resolvedView;
+        private IBaseView<IBaseViewModel> _resolvedView;
         private IBaseViewModel _resolvedViewModel;
 
         [ImportingConstructor]
@@ -37,10 +32,9 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public event OnOpenViewEventHandler OnOpenView;
 
-        public IBaseView GetView() {
+        public IBaseView<IBaseViewModel> GetView() {
             if(_resolvedView == null) throw new ArgumentException(Strings.Notification_Navigator_View_ResolveFirst);
             if(_resolvedView.ViewModel == null) throw new ArgumentException(Strings.Notification_Navigator_ViewModel_ResolveFirst);
-            if(_resolvedViewModel != null) _resolvedViewModel.InitializeServices();
             return _resolvedView;
         }
 
@@ -74,13 +68,13 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator ResolveView(ViewID param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseView;
+            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseView<IBaseViewModel>;
             if(resolved == null) throw new ArgumentException("param");
             SetView(resolved);
             return this;
         }
 
-        public IFluentNavigator ResolveView<TView>() where TView : IBaseView {
+        public IFluentNavigator ResolveView<TView>() where TView : IBaseView<IBaseViewModel> {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
             var resolved = _container.GetInstance<TView>();
             SetView(resolved);
@@ -93,43 +87,16 @@ namespace LOB.UI.Core.View.Infrastructure {
             return this;
         }
 
-        public IFluentNavigator SetView(IBaseView view) {
+        public IFluentNavigator SetView(IBaseView<IBaseViewModel> view) {
             _resolvedView = view;
             return this;
         }
 
-        public void AddToRegion(string regionName) {
+        public IFluentNavigator AddToRegion(string regionName) {
             var view = GetView();
             view.ViewModel.ViewID.IsChild(false);
             _regionAdapter.AddView(view, regionName);
+            return this;
         }
-
-        public void Show(bool asDialog = false) {
-            var asUc = GetView() as UserControl;
-            if(asUc != null) {
-                var window = _container.GetInstance<FrameWindow>();
-                window.Content = asUc;
-                window.DataContext = _resolvedView.ViewModel;
-                window.Height = asUc.Height + 50;
-                window.Width = asUc.Width + 50;
-                if(!string.IsNullOrEmpty(_resolvedView.Header)) window.Title = (_resolvedView).Header;
-
-                if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
-
-                if(asDialog) window.ShowDialog();
-                else window.Show();
-            }
-            else {
-                var asW = _resolvedView as Window;
-                if(asW != null) {
-                    if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
-
-                    if(asDialog) asW.ShowDialog();
-                    else asW.Show();
-                }
-            }
-        }
-
-        public bool PromptUser(string message) { return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes; }
     }
 }

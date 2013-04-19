@@ -93,9 +93,6 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MahApps.Metro.0.10.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -177,8 +174,8 @@
     <Compile Include="Controls\Alter\AlterSaleView.xaml.cs">
       <DependentUpon>AlterSaleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Alter\Base\CodeView.xaml.cs">
-      <DependentUpon>CodeView.xaml</DependentUpon>
+    <Compile Include="Controls\Alter\Base\BaseEntityView.xaml.cs">
+      <DependentUpon>BaseEntityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Alter\Base\AlterPersonView.xaml.cs">
       <DependentUpon>AlterPersonView.xaml</DependentUpon>
@@ -373,7 +370,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\Alter\Base\CodeView.xaml">
+    <Page Include="Controls\Alter\Base\BaseEntityView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -520,17 +517,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Interface.csproj">
-      <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
-      <Name>LOB.Business.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
       <Project>{79fb165f-3816-4a5f-b5a1-b5a64bed0218}</Project>
       <Name>LOB.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
-      <Project>{B275A849-EBA7-45D8-ABAD-A336F38153D9}</Project>
-      <Name>LOB.Dao.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>

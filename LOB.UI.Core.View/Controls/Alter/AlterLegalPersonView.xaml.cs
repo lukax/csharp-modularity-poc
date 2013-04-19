@@ -24,10 +24,12 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewAlterPerson.DataContext = view != null ? view.AlterPersonViewModel : dependencyPropertyChangedEventArgs.NewValue;
         }
 
-        [Import] public IAlterLegalPersonViewModel ViewModel
-        {
+        [Import] public IAlterLegalPersonViewModel ViewModel {
             get { return DataContext as IAlterLegalPersonViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Logic.Base;
 using LOB.Dao.Interface;
@@ -10,10 +11,12 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Business.Logic {
+    [Export(typeof(ICustomerFacade))]
     public sealed class CustomerFacade : BaseEntityFacade<Customer>, ICustomerFacade {
         private readonly INaturalPersonFacade _naturalPersonFacade;
         private readonly ILegalPersonFacade _legalPersonFacade;
 
+        [ImportingConstructor]
         public CustomerFacade(INaturalPersonFacade naturalPersonFacade, ILegalPersonFacade legalPersonFacade, IRepository repository)
             : base(repository) {
             _naturalPersonFacade = naturalPersonFacade;

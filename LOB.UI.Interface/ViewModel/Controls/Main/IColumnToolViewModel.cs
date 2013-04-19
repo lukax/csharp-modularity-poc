@@ -1,6 +1,3 @@
-﻿using System.ComponentModel.Composition;
-
-namespace LOB.UI.Interface.ViewModel.Controls.Main {
-    [InheritedExport]
+﻿namespace LOB.UI.Interface.ViewModel.Controls.Main {
     public interface IColumnToolViewModel : IBaseViewModel {}
 }

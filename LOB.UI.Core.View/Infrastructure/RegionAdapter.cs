@@ -17,10 +17,10 @@ namespace LOB.UI.Core.View.Infrastructure {
         [ImportingConstructor]
         public RegionAdapter(IRegionManager regionManager) { _regionManager = regionManager; }
 
-        public void AddView<TView>(TView view, string regionName) where TView : IBaseView {
+        public void AddView<TView>(TView view, string regionName) where TView : IBaseView<IBaseViewModel> {
             try {
                 var region = _regionManager.Regions[regionName];
-                var previousView = region.GetView(ApplyNamingConvention(view.ViewID)) as IBaseView;
+                var previousView = region.GetView(ApplyNamingConvention(view.ViewID)) as IBaseView<IBaseViewModel>;
                 if(previousView != null) if(region.Views.Contains(previousView)) RemoveView(previousView.ViewID, regionName);
                 region.Add(view, ApplyNamingConvention(view.ViewID));
             } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
@@ -31,10 +31,10 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
-        public IBaseView GetView(ViewID param, string regionName) {
+        public IBaseView<IBaseViewModel> GetView(ViewID param, string regionName) {
             try {
                 var region = _regionManager.Regions[regionName];
-                return region.GetView(ApplyNamingConvention(param)) as IBaseView;
+                return region.GetView(ApplyNamingConvention(param)) as IBaseView<IBaseViewModel>;
             } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -47,7 +47,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             try {
                 if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
                 var region = _regionManager.Regions[regionName];
-                var view = region.GetView(ApplyNamingConvention(param)) as IBaseView;
+                var view = region.GetView(ApplyNamingConvention(param)) as IBaseView<IBaseViewModel>;
                 if(ContainsView(param, regionName)) {
                     region.Remove(view);
                     if(view != null) view.Dispose();

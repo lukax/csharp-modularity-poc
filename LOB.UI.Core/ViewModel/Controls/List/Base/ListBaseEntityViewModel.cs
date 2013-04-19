@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -24,7 +25,8 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel where T : BaseEntity {
+    [InheritedExport]
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T> where T : BaseEntity {
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
         public virtual Expression<Func<T, bool>> SearchCriteria {
@@ -46,7 +48,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ICommand FetchCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public T Entity { get; set; }
-        public ObservableCollection<T> Entitys { get; set; }
+        public IEnumerable<T> Entities { get; set; }
         public string Search { get; set; }
         protected IRepository Repository { get; private set; }
         protected IEventAggregator EventAggregator { get; private set; }
@@ -115,8 +117,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                                      : (Repository.GetAll(SearchCriteria)).ToList();
                             EventAggregator.GetEvent<NotificationEvent>()
                                            .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(70));
-                            if(Entitys == null || !localList.SequenceEqual(Entitys)) {
-                                Entitys = new ObservableCollection<T>(localList);
+                            if(Entities == null || !localList.SequenceEqual(Entities)) {
+                                Entities = new ObservableCollection<T>(localList);
                                 EventAggregator.GetEvent<NotificationEvent>()
                                                .Publish(Notification.Message(Strings.Notification_List_Updating).Progress(100));
                             }
@@ -145,7 +147,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public override void Refresh() { Search = ""; }
 
         protected virtual void Fetch(object arg = null) {
-            Entitys = null;
+            Entities = null;
             if(!Worker.IsBusy) Worker.RunWorkerAsync();
         }
         #region Implementation of IDisposable

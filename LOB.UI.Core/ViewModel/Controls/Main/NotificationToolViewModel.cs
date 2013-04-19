@@ -20,6 +20,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
+    [Export(typeof(INotificationToolViewModel))]
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         //[AllowNull]
@@ -30,7 +31,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return _isVisible; }
             set {
                 _isVisible = value;
-                //if(Entitys == null || Entitys.Count == 0) Visibility = Visibility.Collapsed;
+                //if(Entities == null || Entities.Count == 0) Visibility = Visibility.Collapsed;
                 //else 
                 Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             }

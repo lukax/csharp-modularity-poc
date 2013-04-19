@@ -21,7 +21,10 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         [Import] public IListEmailViewModel ViewModel {
             get { return DataContext as IListEmailViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
@@ -11,7 +12,9 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
+    [Export(typeof(IPhoneNumberFacade))]
     public sealed class PhoneNumberFacade : BaseEntityFacade<PhoneNumber>, IPhoneNumberFacade {
+        [ImportingConstructor]
         public PhoneNumberFacade(IRepository repository)
             : base(repository) { ConfigureValidations(); }
 

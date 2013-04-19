@@ -50,9 +50,7 @@ namespace LOB.UI.Core.View.Modularity {
             AggregateCatalog.Catalogs.Add(new DirectoryCatalog("Modules"));
         }
 
-        protected override DependencyObject CreateShell() {
-            return Container.GetExportedValue<Shell>();
-        }
+        protected override DependencyObject CreateShell() { return Container.GetExportedValue<Shell>(); }
 
         protected override void InitializeShell() {
             base.InitializeShell();

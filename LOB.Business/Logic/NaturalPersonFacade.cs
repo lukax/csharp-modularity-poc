@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using LOB.Business.Interface.Logic;
 using LOB.Business.Interface.Logic.SubEntity;
@@ -13,9 +14,12 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic {
+    [Export(typeof(INaturalPersonFacade))]
     public class NaturalPersonFacade : BaseEntityFacade<NaturalPerson>, INaturalPersonFacade {
         private readonly IAddressFacade _addressFacade;
         private readonly IContactInfoFacade _contactInfoFacade;
+
+        [ImportingConstructor]
         public NaturalPersonFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IRepository repository)
             : base(repository) {
             _addressFacade = addressFacade;

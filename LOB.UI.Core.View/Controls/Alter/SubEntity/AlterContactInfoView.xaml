@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <base2:CodeView Grid.Row="0" x:Name="ViewCode" />
+            <base2:BaseEntityView Grid.Row="0" x:Name="ViewCode" />
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                 <TextBox controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Description}"

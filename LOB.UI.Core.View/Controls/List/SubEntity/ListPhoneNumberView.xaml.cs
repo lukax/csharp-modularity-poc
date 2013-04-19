@@ -13,10 +13,13 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export]
     public partial class ListPhoneNumberView : IBaseView<IListPhoneNumberViewModel> {
         public ListPhoneNumberView() { InitializeComponent(); }
-        
+
         [Import] public IListPhoneNumberViewModel ViewModel {
             get { return DataContext as IListPhoneNumberViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

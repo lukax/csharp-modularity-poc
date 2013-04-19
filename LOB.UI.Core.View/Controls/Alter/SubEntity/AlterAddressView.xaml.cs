@@ -23,7 +23,10 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         [Import] public IAlterAddressViewModel ViewModel {
             get { return DataContext as IAlterAddressViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {

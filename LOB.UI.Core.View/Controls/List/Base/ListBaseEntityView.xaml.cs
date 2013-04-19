@@ -13,7 +13,10 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public int Index { get; set; }

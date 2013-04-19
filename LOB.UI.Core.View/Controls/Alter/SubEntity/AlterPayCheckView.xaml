@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <base2:CodeView x:Name="ViewAlterBaseEntity" />
+            <base2:BaseEntityView x:Name="ViewAlterBaseEntity" />
 
             <Label Content="{x:Static loc:Strings.Common_CurrentSalary}" HorizontalAlignment="Right" Grid.Column="1" />
             <TextBox

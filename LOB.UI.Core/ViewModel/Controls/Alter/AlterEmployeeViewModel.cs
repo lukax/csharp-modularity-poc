@@ -13,16 +13,19 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
+    [Export(typeof(IAlterEmployeeViewModel))]
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
         private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Employee, State = ViewState.Add};
         private AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
-        [Import] public IAlterNaturalPersonViewModel AlterNaturalPersonViewModel {
+        public IAlterNaturalPersonViewModel AlterNaturalPersonViewModel {
             get { return _alterNaturalPersonViewModel; }
             set { _alterNaturalPersonViewModel = value as AlterNaturalPersonViewModel; }
         }
 
-        public AlterEmployeeViewModel(IEmployeeFacade employeeFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(employeeFacade, repository, eventAggregator, logger) { }
+        [ImportingConstructor]
+        public AlterEmployeeViewModel(IEmployeeFacade employeeFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger,
+            IAlterNaturalPersonViewModel alterNaturalPersonViewModel)
+            : base(employeeFacade, repository, eventAggregator, logger) { AlterNaturalPersonViewModel = alterNaturalPersonViewModel; }
 
         public override void InitializeServices() {
             if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;

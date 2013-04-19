@@ -41,7 +41,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <base:CodeView Grid.Row="1" x:Name="ViewCode" />
+                <base:BaseEntityView Grid.Row="1" x:Name="ViewCode" />
 
                 <Label Grid.Column="1" Grid.Row="1" Content="{x:Static loc:Strings.Common_Name}"
                        HorizontalAlignment="Right" />

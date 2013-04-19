@@ -22,10 +22,12 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        [Import]
-        public IAlterPayCheckViewModel ViewModel {
+        [Import] public IAlterPayCheckViewModel ViewModel {
             get { return DataContext as IAlterPayCheckViewModel; }
-            set { DataContext = value; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public string Header {
