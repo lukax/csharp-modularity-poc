@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
@@ -10,7 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterLegalPersonView : IBaseView {
+    public partial class AlterLegalPersonView : IBaseView<IAlterLegalPersonViewModel> {
         public AlterLegalPersonView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -23,8 +24,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewAlterPerson.DataContext = view != null ? view.AlterPersonViewModel : dependencyPropertyChangedEventArgs.NewValue;
         }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IAlterLegalPersonViewModel ViewModel
+        {
+            get { return DataContext as IAlterLegalPersonViewModel; }
             set { DataContext = value; }
         }
 

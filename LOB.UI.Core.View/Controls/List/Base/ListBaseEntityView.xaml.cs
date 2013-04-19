@@ -1,7 +1,6 @@
 #region Usings
 
 using System;
-using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -9,12 +8,8 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
-    public partial class ListBaseEntityView : IBaseView {
-        public ListBaseEntityView() {
-            InitializeComponent();
-            DataContextChanged += OnDataContextChanged;
-        }
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { }
+    public partial class ListBaseEntityView : IBaseView<IBaseViewModel> {
+        public ListBaseEntityView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }

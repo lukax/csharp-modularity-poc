@@ -8,15 +8,12 @@ using LOB.UI.Interface.Infrastructure;
 namespace LOB.UI.Interface {
     [InheritedExport]
     public interface IBaseView : IUIComponent {
-        IBaseViewModel ViewModel { get; set; }
         int Index { get; set; }
         void Refresh();
     }
 
     [InheritedExport]
-    public interface IBaseView<TViewModel> : IUIComponent where TViewModel : IBaseViewModel {
+    public interface IBaseView<TViewModel> : IBaseView where TViewModel : IBaseViewModel {
         TViewModel ViewModel { get; set; }
-        int Index { get; set; }
-        void Refresh();
     }
 }

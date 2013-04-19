@@ -12,8 +12,10 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroVSSkin.xaml" />
     </Window.Resources>
     <!--<Window.Background>
-     SaveWindowPosition="True"
-        <ImageBrush ImageSource="pack://application:,,,/LOB.UI.Core.Resources;component/background_maze.png"/>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="{DynamicResource AccentColor4}" Offset="0" />
+
+        </LinearGradientBrush>
     </Window.Background>-->
 
     <Grid>

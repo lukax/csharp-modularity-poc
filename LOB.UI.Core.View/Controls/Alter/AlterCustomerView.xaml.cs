@@ -7,11 +7,12 @@ using LOB.Core.Localization;
 using LOB.UI.Core.View.Controllers;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterCustomerView : IBaseView {
+    public partial class AlterCustomerView : IBaseView<IAlterCustomerViewModel> {
         [Import] public CustomerRegionController Controller { get; set; }
 
         [ImportingConstructor]
@@ -25,8 +26,10 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewEditTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
         }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import]
+        public IAlterCustomerViewModel ViewModel
+        {
+            get { return DataContext as IAlterCustomerViewModel; }
             set { DataContext = value; }
         }
 

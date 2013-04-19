@@ -9,12 +9,12 @@ namespace LOB.UI.Interface.Infrastructure {
     [InheritedExport]
     public interface IFluentNavigator {
         IFluentNavigator Init { get; }
-        IBaseView GetView();
+        IBaseView<TViewModel> GetView<TViewModel>() where TViewModel: IBaseViewModel;
         IBaseViewModel GetViewModel();
-        IFluentNavigator SetView(IBaseView view);
+        IFluentNavigator SetView<TViewModel>(IBaseView<TViewModel> view) where TViewModel : IBaseViewModel;
         IFluentNavigator SetViewModel(IBaseViewModel viewModel);
         IFluentNavigator ResolveView(ViewID param);
-        IFluentNavigator ResolveView<TView>() where TView : IBaseView;
+        IFluentNavigator ResolveView<TView>() where TView : IBaseView<IBaseViewModel>;
         IFluentNavigator ResolveViewModel(ViewID param);
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
         event OnOpenViewEventHandler OnOpenView;
@@ -27,9 +27,9 @@ namespace LOB.UI.Interface.Infrastructure {
     }
 
     public sealed class OnOpenViewEventArgs : EventArgs {
-        public OnOpenViewEventArgs(IBaseView baseView) { BaseView = baseView; }
+        public OnOpenViewEventArgs(IBaseView<IBaseViewModel> baseView) { BaseView = baseView; }
 
-        public IBaseView BaseView { get; private set; }
+        public IBaseView<IBaseViewModel> BaseView { get; private set; }
     }
 
     public delegate void OnOpenViewEventHandler(object sender, OnOpenViewEventArgs e);

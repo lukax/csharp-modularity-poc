@@ -1,10 +1,11 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using NullGuard;
+using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
 
@@ -12,42 +13,19 @@ namespace LOB.UI.Core.View.Controls.Util {
     /// <summary>
     ///     Interaction logic for MessageShowToolIuiComponent.xaml
     /// </summary>
-    public partial class MessageShowToolView : IBaseView {
+    [Export]
+    public partial class MessageShowToolView : IBaseView<IMessageToolViewModel> {
         public MessageShowToolView() { InitializeComponent(); }
 
-        [AllowNull] public IBaseViewModel ViewModel {
+        [Import] public IMessageToolViewModel ViewModel {
             get {
-                IBaseViewModel result = null;
-                Dispatcher.Invoke(() => result = DataContext as IBaseViewModel);
+                IMessageToolViewModel result = null;
+                Dispatcher.Invoke(() => result = DataContext as IMessageToolViewModel);
                 return result;
             }
             set {
-                IBaseViewModel result = value;
+                IMessageToolViewModel result = value;
                 Dispatcher.Invoke(() => DataContext = result);
-                //this.DataContext = value;
-                //var vm = value as MessageToolIuiComponentModel;
-                //if (vm != null)
-                //    (vm).PropertyChanged += (sender, args) =>
-                //        {
-                //            if (vm.IsRestrictive) {
-                //                BorderOuter.IsHitTestVisible = true;
-                //                GridInner.IsHitTestVisible = true;
-                //                BorderInner.IsHitTestVisible = true;
-                //                BorderInner.Opacity = .8;
-                //                ButtonClose.Visibility = Visibility.Visible;
-                //                Progress.Visibility = Visibility.Visible;
-                //                BorderOuter.Visibility = Visibility.Visible;
-                //            }
-                //            else {
-                //                BorderOuter.IsHitTestVisible = false;
-                //                GridInner.IsHitTestVisible = false;
-                //                BorderInner.IsHitTestVisible = false;
-                //                BorderInner.Opacity = .6;
-                //                ButtonClose.Visibility = Visibility.Hidden;
-                //                Progress.Visibility = Visibility.Hidden;
-                //                BorderOuter.Visibility = Visibility.Hidden;
-                //            }
-                //        };
             }
         }
 

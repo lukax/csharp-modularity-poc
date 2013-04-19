@@ -1,23 +1,27 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    public partial class AlterCategoryView : IBaseView {
+    public partial class AlterCategoryView : IBaseView<IAlterCategoryViewModel> {
         public AlterCategoryView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel; }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import]
+        public IAlterCategoryViewModel ViewModel
+        {
+            get { return DataContext as IAlterCategoryViewModel; }
             set { DataContext = value; }
         }
 

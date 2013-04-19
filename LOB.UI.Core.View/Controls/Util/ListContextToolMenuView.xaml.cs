@@ -1,6 +1,7 @@
 #region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
@@ -8,7 +9,8 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Util {
-    public partial class ListContextToolMenuView : IBaseView {
+    [Export]
+    public partial class ListContextToolMenuView : IBaseView<IBaseViewModel> {
         public ListContextToolMenuView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {

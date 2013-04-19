@@ -1,15 +1,17 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    public partial class AlterEmailView : IBaseView {
+    public partial class AlterEmailView : IBaseView<IAlterEmailViewModel> {
         public AlterEmailView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -19,8 +21,11 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+
+        [Import]
+        public IAlterEmailViewModel ViewModel
+        {
+            get { return DataContext as IAlterEmailViewModel; }
             set { DataContext = value; }
         }
 

@@ -1,16 +1,17 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    public partial class AlterPayCheckView : UserControl, IBaseView {
+    public partial class AlterPayCheckView : IBaseView<IAlterPayCheckViewModel> {
         public AlterPayCheckView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -20,8 +21,10 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewAlterBaseEntity.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+
+        [Import]
+        public IAlterPayCheckViewModel ViewModel {
+            get { return DataContext as IAlterPayCheckViewModel; }
             set { DataContext = value; }
         }
 

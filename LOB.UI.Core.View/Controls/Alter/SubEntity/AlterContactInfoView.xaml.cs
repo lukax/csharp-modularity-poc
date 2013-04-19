@@ -1,16 +1,18 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    public partial class AlterContactInfoView : UserControl, IBaseView {
+    public partial class AlterContactInfoView : IBaseView<IAlterContactInfoViewModel> {
         public AlterContactInfoView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -20,8 +22,10 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import]
+        public IAlterContactInfoViewModel ViewModel
+        {
+            get { return DataContext as IAlterContactInfoViewModel; }
             set { DataContext = value; }
         }
 

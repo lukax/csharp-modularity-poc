@@ -8,7 +8,7 @@ using LOB.UI.Interface.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
-    public partial class CodeView : IBaseView {
+    public partial class CodeView : IBaseView<IBaseViewModel> {
         public CodeView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {

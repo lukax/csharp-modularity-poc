@@ -1,15 +1,18 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    public partial class ListPayCheckView : IBaseView {
+    [Export]
+    public partial class ListPayCheckView : IBaseView<IListPayCheckViewModel> {
         public ListPayCheckView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -19,8 +22,8 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
             ViewListContextTool.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IListPayCheckViewModel ViewModel {
+            get { return DataContext as IListPayCheckViewModel; }
             set { DataContext = value; }
         }
 

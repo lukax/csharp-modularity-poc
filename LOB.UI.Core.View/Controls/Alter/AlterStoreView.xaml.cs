@@ -1,15 +1,17 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterStoreView : IBaseView {
+    public partial class AlterStoreView : IBaseView<IAlterStoreViewModel> {
         public AlterStoreView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -18,8 +20,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
         }
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+
+        [Import] public IAlterStoreViewModel ViewModel {
+            get { return DataContext as IAlterStoreViewModel; }
             set { DataContext = value; }
         }
 

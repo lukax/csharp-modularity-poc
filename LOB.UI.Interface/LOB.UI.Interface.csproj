@@ -78,6 +78,7 @@
     <Compile Include="ViewModel\Controls\Alter\IAlterNaturalPersonViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterProductViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\IAlterSaleViewModel.cs" />
+    <Compile Include="ViewModel\Controls\Alter\IAlterSupplierViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterAddressViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterCategoryViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\SubEntity\IAlterContactInfoViewModel.cs" />

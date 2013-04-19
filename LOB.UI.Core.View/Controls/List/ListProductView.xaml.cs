@@ -1,23 +1,21 @@
 ﻿#region Usings
 
 using System;
-using System.Windows;
+using System.ComponentModel.Composition;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    public partial class ListProductView : IBaseView {
-        public ListProductView() {
-            InitializeComponent();
-            DataContextChanged += OnDataContextChanged;
-        }
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { }
+    [Export]
+    public partial class ListProductView : IBaseView<IListProductViewModel> {
+        public ListProductView() { InitializeComponent(); }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IListProductViewModel ViewModel {
+            get { return DataContext as IListProductViewModel; }
             set { DataContext = value; }
         }
 

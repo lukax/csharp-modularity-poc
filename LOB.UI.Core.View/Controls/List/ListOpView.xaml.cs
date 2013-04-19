@@ -1,8 +1,8 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using LOB.Core.Localization;
-using LOB.UI.Core.Events.Operation;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
@@ -14,17 +14,14 @@ namespace LOB.UI.Core.View.Controls.List {
     /// <summary>
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
-    public partial class ListOpView : IBaseView {
-        private readonly IEventAggregator _eventAggregator;
+    [Export]
+    public partial class ListOpView : IBaseView<IListOpViewModel> {
+        [Import] public IEventAggregator EventAggregator { get; set; }
 
-        public ListOpView(IEventAggregator eventAggregator, IListOpViewModel viewModel) {
-            _eventAggregator = eventAggregator;
-            InitializeComponent();
-            ViewModel = viewModel;
-        }
+        public ListOpView() { InitializeComponent(); }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IListOpViewModel ViewModel {
+            get { return DataContext as IListOpViewModel; }
             set { DataContext = value; }
         }
 
@@ -34,11 +31,7 @@ namespace LOB.UI.Core.View.Controls.List {
 
         public int Index { get; set; }
 
-        public void InitializeServices() { _eventAggregator.GetEvent<RefreshEvent>().Subscribe(o => { if(o.Equals(ViewID)) Refresh(); }); }
-
-        public void Refresh() {
-            //ListViewEntitys.SelectedIndex = -1;
-        }
+        public void Refresh() { }
 
         public ViewID ViewID {
             get { return ViewModel.ViewID; }

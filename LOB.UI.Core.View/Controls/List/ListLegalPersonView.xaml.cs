@@ -1,15 +1,18 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    public partial class ListLegalPersonView : IBaseView {
+    [Export]
+    public partial class ListLegalPersonView : IBaseView<IListLegalPersonViewModel> {
         public ListLegalPersonView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -19,8 +22,8 @@ namespace LOB.UI.Core.View.Controls.List {
             ViewListContextTool.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
         }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IListLegalPersonViewModel ViewModel {
+            get { return DataContext as IListLegalPersonViewModel; }
             set { DataContext = value; }
         }
 

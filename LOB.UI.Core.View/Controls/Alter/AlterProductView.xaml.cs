@@ -1,15 +1,17 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    public partial class AlterProductView : IBaseView {
+    public partial class AlterProductView : IBaseView<IAlterProductViewModel> {
         public AlterProductView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -20,8 +22,8 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewEditTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
         }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
+        [Import] public IAlterProductViewModel ViewModel {
+            get { return DataContext as IAlterProductViewModel; }
             set { DataContext = value; }
         }
 
