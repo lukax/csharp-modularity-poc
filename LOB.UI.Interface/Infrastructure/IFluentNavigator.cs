@@ -9,11 +9,11 @@ namespace LOB.UI.Interface.Infrastructure {
         IFluentNavigator Init { get; }
         IBaseView<IBaseViewModel> GetView();
         IBaseViewModel GetViewModel();
-        IFluentNavigator SetView(IBaseView<IBaseViewModel> view);
-        IFluentNavigator SetViewModel(IBaseViewModel viewModel);
-        IFluentNavigator ResolveView(ViewID param);
+        IFluentNavigator SetView(Func<IBaseView<IBaseViewModel>> view);
+        IFluentNavigator SetViewModel(Func<IBaseViewModel> viewModel);
+        IFluentNavigator ResolveView(ViewModelState param);
         IFluentNavigator ResolveView<TView>() where TView : IBaseView<IBaseViewModel>;
-        IFluentNavigator ResolveViewModel(ViewID param);
+        IFluentNavigator ResolveViewModel(ViewModelState param);
         IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel;
         event OnOpenViewEventHandler OnOpenView;
         IFluentNavigator AddToRegion(string regionName);

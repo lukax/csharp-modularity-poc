@@ -27,7 +27,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Service, State = ViewState.Add};
+        private readonly ViewModelState _defaultViewModelState = new ViewModelState {ViewSubState = ViewSubState.Locked, ViewState = ViewState.Add};
 
         [ImportingConstructor]
         public AlterProductViewModel(IProductFacade productFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
@@ -37,7 +37,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
+            if(Equals(ViewModelState, default(ViewModelState))) ViewModelState = _defaultViewModelState;
             base.InitializeServices();
             Worker.DoWork += UpdateCategoryList;
             Worker.RunWorkerAsync();
@@ -51,27 +51,28 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                                           NotificationEvent.Publish(
                                               Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
                                           //Worker.CancelAsync();
-                                          ViewID.SubState(ViewSubState.Locked);
+                                          ViewModelState.SubState(ViewSubState.Locked);
                                       };
 
             do {
                 if(Repository.Uow.TestConnection()) {
                     Categories = Repository.GetAll<Category>().ToList();
-                    ViewID.SubState(ViewSubState.Unlocked);
+                    ViewModelState.SubState(ViewSubState.Unlocked);
                 }
                 Thread.Sleep(2000); // TODO: Configuration based update time
             } while(!worker.CancellationPending);
         }
 
         private void ExecuteListCategory(object o) {
-            var op = new ViewID().State(ViewState.QuickSearch).Type(ViewType.Category);
+            var op = new ViewModelState().State(ViewState.QuickSearch).SubState(ViewSubState.Locked);
             EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
         private void ExecuteAlterCategory(object o) {
-            var op = new ViewID().Type(ViewType.Category).State(string.IsNullOrWhiteSpace(Entity.Category.Name) ? ViewState.Add : ViewState.Update);
-            op.ViewModel = this;
-            EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
+            //var op =
+            //    new ViewModelState().State(string.IsNullOrWhiteSpace(Entity.Category.Name) ? ViewState.Add : ViewState.Update);
+            //op.ViewModel = this;
+            //EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
         public override void Dispose() {

@@ -6,8 +6,6 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
-using LOB.UI.Core.Events.View;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -48,16 +46,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewID _viewID = new ViewID {Type = ViewType.ColumnTool, State = ViewState.Internal};
-        public override ViewID ViewID {
-            get { return _viewID; }
-            set { _viewID = value; }
+        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
+        public override ViewModelState ViewModelState {
+            get { return _viewModelState; }
+            set { _viewModelState = value; }
         }
 
         private void ShowOperations(object arg) {
-            var op = new ViewID {Type = ViewType.Op, State = ViewState.List};
-            if(_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
-            else _navigator.Init.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
+            //var op = new ViewModelState {Type = ViewType.Op, ViewState = ViewState.List};
+            //if(_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
+            //else _navigator.Init.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
         private void ShowShop(object obj) {
@@ -66,9 +64,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         private void ShowNotification(object o) {
             _notificationToolViewModel.IsVisible = !_notificationToolViewModel.IsVisible;
-            //var op = new ViewID {
+            //var op = new ViewModelState {
             //    Type = ViewType.NotificationTool,
-            //    State = ViewState.Tool
+            //    ViewState = ViewState.Tool
             //};
             //if(_regionAdapter.ContainsView(op, RegionName.BottomRegion)) _regionAdapter.RemoveView(op, RegionName.BottomRegion);
             //else
@@ -77,7 +75,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             //              .AddToRegion(RegionName.BottomRegion);
         }
 
-        private void Logout(object o) { _eventAggregator.GetEvent<CloseViewEvent>().Publish(new ViewID {Type = ViewType.Main}); }
+        private void Logout(object o) { //_eventAggregator.GetEvent<CloseViewEvent>().Publish(new ViewModelState {Type = ViewType.Main}); 
+        }
 
         private void InitWorker() {
             _worker.DoWork += UpdateStatus;

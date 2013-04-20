@@ -25,14 +25,14 @@ namespace LOB.UI.Core.View.Controllers {
         private SubscriptionToken _personTypeChangedSubscription;
         private void OnLoad() { _personTypeChangedSubscription = _eventAggregator.GetEvent<PersonTypeChangedEvent>().Subscribe(PersonTypeChangedExecute, false); }
 
-        private void PersonTypeChangedExecute(ViewID id) {
-            var view = id.ViewModel != null
-                           ? _fluentNavigator.Init.ResolveView(id).SetViewModel(id.ViewModel).GetView()
-                           : _fluentNavigator.Init.ResolveView(id).ResolveViewModel(id).GetView();
-            //Remove everything first
-            _regionAdapter.RemoveView(id.Type(ViewType.LegalPerson), "Customer_PersonRegion");
-            _regionAdapter.RemoveView(id.Type(ViewType.NaturalPerson), "Customer_PersonRegion");
-            _regionAdapter.AddView(view, "Customer_PersonRegion");
+        private void PersonTypeChangedExecute(ViewModelState modelState) {
+            //var view = modelState.ViewModel != null
+            //               ? _fluentNavigator.Init.ResolveView(modelState).SetViewModel(() => modelState.ViewModel).GetView()
+            //               : _fluentNavigator.Init.ResolveView(modelState).ResolveViewModel(modelState).GetView();
+            ////Remove everything first
+            //_regionAdapter.RemoveView(modelState.Type(ViewType.LegalPerson), "Customer_PersonRegion");
+            //_regionAdapter.RemoveView(modelState.Type(ViewType.NaturalPerson), "Customer_PersonRegion");
+            //_regionAdapter.AddView(view, "Customer_PersonRegion");
         }
         #region Implementation of IDisposable
 

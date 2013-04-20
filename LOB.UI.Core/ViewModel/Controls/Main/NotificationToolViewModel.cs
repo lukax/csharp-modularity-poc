@@ -84,12 +84,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        public override ViewID ViewID {
-            get { return _viewID; }
-            set { _viewID = value; }
+        public override ViewModelState ViewModelState {
+            get { return _viewModelState; }
+            set { _viewModelState = value; }
         }
 
-        private ViewID _viewID = new ViewID {Type = ViewType.NotificationTool, State = ViewState.Internal};
+        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
         private bool _isVisible;
         #region Implementation of IDisposable
 

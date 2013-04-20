@@ -3,7 +3,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
@@ -11,7 +11,8 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    [Export]
+    [Export(typeof(IBaseView<IListEmailViewModel>))]
+    [ViewInfo(ViewType.Email, new[] { ViewState.List, ViewState.QuickSearch })]
     public partial class ListEmailView : IBaseView<IListEmailViewModel> {
         public ListEmailView() {
             InitializeComponent();
@@ -27,17 +28,9 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_List_Email; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

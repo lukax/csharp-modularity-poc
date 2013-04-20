@@ -4,6 +4,8 @@ using System.ComponentModel.Composition;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Actions;
 using LOB.UI.Core.View.Controls.Main;
+using LOB.UI.Interface;
+using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
@@ -28,9 +30,9 @@ namespace LOB.UI.Core.View.Modularity {
         }
 
         public void Initialize() {
-            _regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolView));
-            _regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolView));
-            _regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(NotificationToolView));
+            _regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(IBaseView<IHeaderToolViewModel>));
+            _regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(IBaseView<IColumnToolViewModel>));
+            _regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(IBaseView<INotificationToolViewModel>));
 
             CloseTabItemAction.RegionAdapter = _regionAdapter;
 

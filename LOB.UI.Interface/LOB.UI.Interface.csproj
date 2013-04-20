@@ -61,11 +61,13 @@
     <Compile Include="Command\ICommandService.cs" />
     <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="Event\IBaseEvent.cs" />
-    <Compile Include="Infrastructure\IUIComponent.cs" />
+    <Compile Include="IUIComponent.cs" />
     <Compile Include="Infrastructure\IFluentNavigator.cs" />
     <Compile Include="Infrastructure\IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
-    <Compile Include="Infrastructure\ViewID.cs" />
+    <Compile Include="Infrastructure\ViewModelState.cs" />
+    <Compile Include="Infrastructure\ViewState.cs" />
+    <Compile Include="Infrastructure\ViewType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />

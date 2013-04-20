@@ -1,13 +1,16 @@
 #region Usings
 
 using System;
-using LOB.Core.Localization;
+using System.ComponentModel.Composition;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
+    [Export(typeof(IBaseView<IBaseViewModel>))]
+    [ViewInfo(ViewType.BaseEntity, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListBaseEntityView : IBaseView<IBaseViewModel> {
         public ListBaseEntityView() { InitializeComponent(); }
 
@@ -21,15 +24,7 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         public int Index { get; set; }
 
-        public string Header {
-            get { return Strings.UI_Header_List_BaseEntity; }
-        }
-
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

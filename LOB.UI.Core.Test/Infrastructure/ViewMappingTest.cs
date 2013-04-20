@@ -9,7 +9,7 @@ namespace LOB.UI.Core.Test.Infrastructure {
     public class ViewMappingTest {
         [TestMethod]
         public void Mapping() {
-            //var op1 = new ViewID {Type = ViewType.MessageTool};
+            //var op1 = new ViewModelID {Type = ViewType.MessageTool};
             //var op2 = ViewDictionary.[op1];
             //Assert.AreEqual(op1, op2);
         }

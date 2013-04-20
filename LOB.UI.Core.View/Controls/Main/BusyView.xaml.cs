@@ -2,9 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Core.Localization;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
@@ -16,14 +14,7 @@ namespace LOB.UI.Core.View.Controls.Main {
     public partial class BusyView : IBaseView<IBaseViewModel> {
         public BusyView() { InitializeComponent(); }
 
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         public IBaseViewModel ViewModel { get; set; }
-
-        public string Header {
-            get { return Strings.UI_Header_Main_Busy; }
-        }
 
         public int Index { get; set; }
 

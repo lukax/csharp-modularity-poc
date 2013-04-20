@@ -10,13 +10,7 @@ using LOB.UI.Interface.ViewModel.Controls.Sell;
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
     [Export(typeof(ISellServiceViewModel))]
     public class SellServiceViewModel : ISellServiceViewModel {
-        private readonly ViewID _viewID = new ViewID {Type = ViewType.Service, State = ViewState.Sell};
-        public ViewID ViewID {
-            get { return _viewID; }
-        }
-
-        public string Header { get; set; }
-
+        public ViewModelState State { get; set; }
         public void InitializeServices() { throw new NotImplementedException(); }
 
         public void Refresh() { throw new NotImplementedException(); }

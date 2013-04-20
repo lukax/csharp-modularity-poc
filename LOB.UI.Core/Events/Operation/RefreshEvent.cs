@@ -7,5 +7,5 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.Events.Operation {
-    public class RefreshEvent : CompositePresentationEvent<ViewID>, IBaseEvent {}
+    public class RefreshEvent : CompositePresentationEvent<ViewModelState>, IBaseEvent {}
 }

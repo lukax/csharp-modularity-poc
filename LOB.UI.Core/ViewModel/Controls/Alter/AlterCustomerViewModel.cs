@@ -21,7 +21,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     [Export(typeof(IAlterCustomerViewModel))]
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private readonly ICustomerFacade _customerFacade;
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Customer, State = ViewState.Add};
         private readonly AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
         private readonly AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private string _personType;
@@ -32,7 +31,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                 return _alterNaturalPersonViewModel.AlterPersonViewModel;
             }
         }
-        public ViewID PersonOperation { get; set; }
+        public ViewModelState PersonOperation { get; set; }
         public IList<string> PersonTypes {
             get { return PersonExtensions.PersonTypesLocalizationsDict.Values.ToList(); }
         }
@@ -54,12 +53,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             _customerFacade = customerFacade;
             _alterNaturalPersonViewModel = alterNaturalPersonViewModel as AlterNaturalPersonViewModel;
             _alterLegalPersonViewModel = alterLegalPersonViewModel as AlterLegalPersonViewModel;
-            PersonOperation = new ViewID {Type = ViewType.Person, State = ViewState.Add};
-        }
-
-        public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            base.InitializeServices();
         }
 
         private void PersonTypeChanged() {
@@ -69,16 +62,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void LegalPersonCfg() {
-            PersonOperation.Type(ViewType.LegalPerson);
-            PersonOperation.ViewModel = _alterLegalPersonViewModel;
             ClearEntity(null);
             (_alterLegalPersonViewModel).Entity = Entity.Person as LegalPerson;
             EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
         private void NaturalPersonCfg() {
-            PersonOperation.Type(ViewType.NaturalPerson);
-            PersonOperation.ViewModel = _alterNaturalPersonViewModel;
             ClearEntity(null);
             (_alterNaturalPersonViewModel).Entity = Entity.Person as NaturalPerson;
             EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
@@ -86,8 +75,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override bool CanSaveChanges(object arg) {
             if(ReferenceEquals(Entity, null)) return false;
-            if(ViewID.State == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            if(ViewID.State == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(ViewModelState.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(ViewModelState.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             return false;
         }
 

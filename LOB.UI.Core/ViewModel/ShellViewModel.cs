@@ -4,7 +4,6 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.Core.Licensing;
-using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -23,18 +22,12 @@ namespace LOB.UI.Core.ViewModel {
         public ICommand OpenTabCommand { get; set; }
         [Import] private IFluentNavigator Navigator { get; set; }
 
-        private ViewID _viewID = new ViewID {Type = ViewType.Main};
-        public override ViewID ViewID {
-            get { return _viewID; }
-            set { _viewID = value; }
-        }
-
         private void OpenTab(object arg) {
-            ViewType operationType = arg.ToString().ToUIOperationType();
-            var op = new ViewID {Type = operationType};
-            Navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
+            //ViewType operationType = arg.ToString().ToUIOperationType();
+            //Navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
+        public override ViewModelState ViewModelState { get; set; }
         public override void InitializeServices() { }
 
         public override void Refresh() { }

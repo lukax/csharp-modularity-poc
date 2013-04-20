@@ -3,7 +3,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
@@ -11,6 +11,8 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
+    [Export(typeof(IBaseView<IAlterLegalPersonViewModel>))]
+    [ViewInfo(ViewType.LegalPerson, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
     public partial class AlterLegalPersonView : IBaseView<IAlterLegalPersonViewModel> {
         public AlterLegalPersonView() {
             InitializeComponent();
@@ -32,17 +34,9 @@ namespace LOB.UI.Core.View.Controls.Alter {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_LegalPerson; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

@@ -9,5 +9,5 @@ namespace LOB.UI.Core.Events.Operation {
     /// <summary>
     ///     object view
     /// </summary>
-    public class PersonTypeChangedEvent : CompositePresentationEvent<ViewID> {}
+    public class PersonTypeChangedEvent : CompositePresentationEvent<ViewModelState> {}
 }

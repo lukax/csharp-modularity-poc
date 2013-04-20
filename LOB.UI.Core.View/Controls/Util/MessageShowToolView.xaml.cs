@@ -2,7 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
@@ -13,7 +13,8 @@ namespace LOB.UI.Core.View.Controls.Util {
     /// <summary>
     ///     Interaction logic for MessageShowToolIuiComponent.xaml
     /// </summary>
-    [Export]
+    [Export(typeof(IBaseView<IMessageToolViewModel>)), Export]
+    [ViewInfo(ViewType.MessageTool, ViewState.Other)]
     public partial class MessageShowToolView : IBaseView<IMessageToolViewModel> {
         public MessageShowToolView() { InitializeComponent(); }
 
@@ -29,17 +30,9 @@ namespace LOB.UI.Core.View.Controls.Util {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Main_Message; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

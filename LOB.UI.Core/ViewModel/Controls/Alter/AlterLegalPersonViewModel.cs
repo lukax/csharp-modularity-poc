@@ -16,7 +16,6 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     [Export(typeof(IAlterLegalPersonViewModel))]
     public sealed class AlterLegalPersonViewModel : AlterBaseEntityViewModel<LegalPerson>, IAlterLegalPersonViewModel {
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.LegalPerson, State = ViewState.Add};
         private AlterPersonViewModel _alterPersonViewModel;
         public IAlterPersonViewModel AlterPersonViewModel {
             get { return _alterPersonViewModel; }
@@ -29,15 +28,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             : base(legalPersonFacade, repository, eventAggregator, logger) { AlterPersonViewModel = alterPersonViewModel; }
 
         public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             base.InitializeServices();
             AlterPersonViewModel.InitializeServices();
         }
 
         protected override bool CanSaveChanges(object arg) {
             if(ReferenceEquals(Entity, null)) return false;
-            if(ViewID.State == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            if(ViewID.State == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(ViewModelState.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(ViewModelState.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             return false;
         }
 

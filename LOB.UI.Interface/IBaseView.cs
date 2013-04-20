@@ -1,10 +1,4 @@
-﻿#region Usings
-
-using LOB.UI.Interface.Infrastructure;
-
-#endregion
-
-namespace LOB.UI.Interface {
+﻿namespace LOB.UI.Interface {
     public interface IBaseView : IUIComponent {
         int Index { get; set; }
         void Refresh();

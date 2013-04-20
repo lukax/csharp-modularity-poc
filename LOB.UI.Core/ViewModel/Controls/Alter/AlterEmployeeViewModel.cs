@@ -5,7 +5,6 @@ using LOB.Business.Interface.Logic;
 using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
@@ -15,7 +14,6 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     [Export(typeof(IAlterEmployeeViewModel))]
     public sealed class AlterEmployeeViewModel : AlterBaseEntityViewModel<Employee>, IAlterEmployeeViewModel {
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Employee, State = ViewState.Add};
         private AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
         public IAlterNaturalPersonViewModel AlterNaturalPersonViewModel {
             get { return _alterNaturalPersonViewModel; }
@@ -28,7 +26,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             : base(employeeFacade, repository, eventAggregator, logger) { AlterNaturalPersonViewModel = alterNaturalPersonViewModel; }
 
         public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             AlterNaturalPersonViewModel.InitializeServices();
             base.InitializeServices();
         }

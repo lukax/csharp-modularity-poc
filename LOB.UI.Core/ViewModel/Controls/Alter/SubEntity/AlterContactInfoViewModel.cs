@@ -30,8 +30,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public AlterContactInfoViewModel(IRepository repository, IContactInfoFacade contactInfoFacade, IEventAggregator eventAggregator,
             ILoggerFacade logger)
             : base(contactInfoFacade, repository, eventAggregator, logger) {
-            EmailOperation = new ViewID {State = ViewState.Add, Type = ViewType.Email};
-            PhoneNumberOperation = new ViewID {State = ViewState.Add, Type = ViewType.PhoneNumber};
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
             DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
             AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber, CanAddPhoneNumber);
@@ -49,14 +47,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         public ICollectionView PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
             base.InitializeServices();
             InitBackgroundWorker();
         }
         #region Member Validations
 
-        public ViewID EmailOperation { get; set; }
-        public ViewID PhoneNumberOperation { get; set; }
+        public ViewModelState EmailOperation { get; set; }
+        public ViewModelState PhoneNumberOperation { get; set; }
 
         private void AddEmail(object arg) { EventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation); }
 
@@ -154,6 +151,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         #endregion
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.ContactInfo, State = ViewState.Add};
     }
 }

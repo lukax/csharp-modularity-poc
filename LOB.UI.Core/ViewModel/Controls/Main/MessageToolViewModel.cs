@@ -43,11 +43,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             _eventAggregator = eventAggregator;
         }
 
-        private ViewID _viewID = new ViewID {Type = ViewType.MessageTool, State = ViewState.Internal};
+        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
 
-        public override ViewID ViewID {
-            get { return _viewID; }
-            set { _viewID = value; }
+        public override ViewModelState ViewModelState {
+            get { return _viewModelState; }
+            set { _viewModelState = value; }
         }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {

@@ -29,6 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T> where T : BaseEntity {
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
+        private ViewModelState _viewModelState;
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
@@ -53,7 +54,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected IRepository Repository { get; private set; }
         protected IEventAggregator EventAggregator { get; private set; }
         protected BackgroundWorker Worker { get; private set; }
-        public override ViewID ViewID { get; set; }
+        public override ViewModelState ViewModelState {
+            get {
+                return _viewModelState ??
+                       (_viewModelState = new ViewModelState {IsChild = true, ViewState = ViewState.Add, ViewSubState = ViewSubState.Locked});
+            }
+            set { _viewModelState = value; }
+        }
         protected NotificationEvent NotificationEvent {
             get { return EventAggregator.GetEvent<NotificationEvent>(); }
         }
@@ -78,7 +85,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
 
         protected virtual void SearchExecute(object obj) { if(Worker.CancellationPending) if(!Worker.IsBusy) Worker.RunWorkerAsync(); }
 
-        private void Exit(object obj) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewID); }
+        private void Exit(object obj) { EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewModelState); }
 
         public int UpdateInterval {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
@@ -102,7 +109,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                           NotificationEvent.Publish(
                                               Notification.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
                                           //Worker.CancelAsync();
-                                          ViewID.SubState(ViewSubState.Locked);
+                                          ViewModelState.SubState(ViewSubState.Locked);
                                       };
             do {
                 if(Repository.Uow.TestConnection())
@@ -126,7 +133,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                 EventAggregator.GetEvent<NotificationEvent>()
                                                .Publish(
                                                    Notification.Message(Strings.Notification_List_Updated).Progress(-1).State(NotificationState.Ok));
-                            ViewID.SubState(ViewSubState.Unlocked);
+                            ViewModelState.SubState(ViewSubState.Unlocked);
                         }
                 Thread.Sleep(2000);
             } while(!Worker.CancellationPending);

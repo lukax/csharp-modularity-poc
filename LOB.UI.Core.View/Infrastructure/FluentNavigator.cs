@@ -2,24 +2,25 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
+using System.ComponentModel.Composition.Hosting;
 using LOB.Core.Localization;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
 namespace LOB.UI.Core.View.Infrastructure {
+    [Export(typeof(IFluentNavigator))]
     public class FluentNavigator : IFluentNavigator {
-        private readonly IServiceLocator _container;
+        private readonly CompositionContainer _container;
         private readonly IRegionAdapter _regionAdapter;
         private IBaseView<IBaseViewModel> _resolvedView;
         private IBaseViewModel _resolvedViewModel;
 
         [ImportingConstructor]
-        public FluentNavigator(IServiceLocator container, IRegionAdapter regionAdapter) {
-            _container = container;
+        public FluentNavigator( //CompositionContainer container, 
+            IRegionAdapter regionAdapter) {
+            //_container = container;
             _regionAdapter = regionAdapter;
         }
 
@@ -27,7 +28,10 @@ namespace LOB.UI.Core.View.Infrastructure {
         ///     Initialize with clean Fields
         /// </summary>
         public IFluentNavigator Init {
-            get { return new FluentNavigator(_container, _regionAdapter); }
+            get {
+                return new FluentNavigator( //_container,
+                    _regionAdapter);
+            }
         }
 
         public event OnOpenViewEventHandler OnOpenView;
@@ -43,59 +47,60 @@ namespace LOB.UI.Core.View.Infrastructure {
             return _resolvedViewModel;
         }
 
-        public IFluentNavigator ResolveViewModel(ViewID param) {
+        public IFluentNavigator ResolveViewModel(ViewModelState param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseViewModel;
-            dynamic resolvedd = resolved;
-            try {
-                resolvedd.ViewID = param; //TODO: Maybe change this later
-            } catch(NullReferenceException ex) {
-#if DEBUG
-                Debug.WriteLine(ex.Message);
-#endif
-            }
-            if(resolved == null) throw new ArgumentException("param");
-            SetViewModel(resolved);
+
+//            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseViewModel;
+//            dynamic resolvedd = resolved;
+//            try {
+//                resolvedd.ViewModelState = param; //TODO: Maybe change this later
+//            } catch(NullReferenceException ex) {
+//#if DEBUG
+//                Debug.WriteLine(ex.Message);
+//#endif
+//            }
+//            if(resolved == null) throw new ArgumentException("param");
+//            SetViewModel(() => resolved);
             return this;
         }
 
         public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.GetInstance<TViewModel>();
-            SetViewModel(resolved);
+            //if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
+            //var resolved = _container.GetInstance<TViewModel>();
+            //SetViewModel(resolved);
             return this;
         }
 
-        public IFluentNavigator ResolveView(ViewID param) {
+        public IFluentNavigator ResolveView(ViewModelState param) {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseView<IBaseViewModel>;
-            if(resolved == null) throw new ArgumentException("param");
-            SetView(resolved);
+            //var resolved = _container.GetInstance(ViewDictionary.Views[param]) as IBaseView<IBaseViewModel>;
+            //if(resolved == null) throw new ArgumentException("param");
+            //SetView(resolved);
             return this;
         }
 
         public IFluentNavigator ResolveView<TView>() where TView : IBaseView<IBaseViewModel> {
             if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.GetInstance<TView>();
-            SetView(resolved);
+            //var resolved = _container.GetInstance<TView>();
+            //SetView(resolved);
             return this;
         }
 
-        public IFluentNavigator SetViewModel(IBaseViewModel viewModel) {
-            _resolvedViewModel = viewModel;
-            if(_resolvedView != null) _resolvedView.ViewModel = viewModel;
+        public IFluentNavigator SetViewModel(Func<IBaseViewModel> viewModel) {
+            _resolvedViewModel = viewModel();
+            if(_resolvedView != null) _resolvedView.ViewModel = _resolvedViewModel;
             return this;
         }
 
-        public IFluentNavigator SetView(IBaseView<IBaseViewModel> view) {
-            _resolvedView = view;
+        public IFluentNavigator SetView(Func<IBaseView<IBaseViewModel>> view) {
+            _resolvedView = view();
             return this;
         }
 
         public IFluentNavigator AddToRegion(string regionName) {
-            var view = GetView();
-            view.ViewModel.ViewID.IsChild(false);
-            _regionAdapter.AddView(view, regionName);
+            //var view = GetView();
+            //view.ViewModel.ViewID.IsChild(false);
+            //_regionAdapter.AddView(view, regionName);
             return this;
         }
     }

@@ -2,7 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
@@ -10,7 +10,8 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    [Export]
+    [Export(typeof(IBaseView<IListCustomerViewModel>))]
+    [ViewInfo(ViewType.Customer, new[] { ViewState.List, ViewState.QuickSearch })]
     public partial class ListCustomerView : IBaseView<IListCustomerViewModel> {
         public ListCustomerView() { InitializeComponent(); }
 
@@ -22,17 +23,9 @@ namespace LOB.UI.Core.View.Controls.List {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_List_Customer; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

@@ -2,7 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
@@ -14,7 +14,8 @@ namespace LOB.UI.Core.View.Controls.List {
     /// <summary>
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
-    [Export]
+    [Export(typeof(IBaseView<IListOpViewModel>))]
+    [ViewInfo(ViewType.Op, new[] { ViewState.List })]
     public partial class ListOpView : IBaseView<IListOpViewModel> {
         [Import] public IEventAggregator EventAggregator { get; set; }
 
@@ -28,17 +29,9 @@ namespace LOB.UI.Core.View.Controls.List {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_List_Op; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

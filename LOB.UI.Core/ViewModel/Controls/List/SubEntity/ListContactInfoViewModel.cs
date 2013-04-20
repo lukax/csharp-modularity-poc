@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
-using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 using Microsoft.Practices.Prism.Events;
 
@@ -19,10 +18,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
         public ListContactInfoViewModel(IRepository repository, IEventAggregator eventAggregator)
             : base(repository, eventAggregator) { }
 
-        public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            base.InitializeServices();
-        }
+        public override void InitializeServices() { base.InitializeServices(); }
 
         public new Expression<Func<ContactInfo, bool>> SearchCriteria {
             get {
@@ -40,7 +36,5 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 }
             }
         }
-
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.ContactInfo, State = ViewState.List};
     }
 }

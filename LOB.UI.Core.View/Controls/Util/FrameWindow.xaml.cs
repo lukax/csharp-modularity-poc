@@ -4,10 +4,8 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
-using LOB.Core.Localization;
 using LOB.UI.Core.Events.View;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
 using Microsoft.Practices.Prism.Events;
 
@@ -27,9 +25,6 @@ namespace LOB.UI.Core.View.Controls.Util {
             set { DataContext = value; }
         }
 
-        public string Header {
-            get { return Strings.UI_Title_Shell; }
-        }
         public int Index { get; set; }
 
         public void Refresh() {
@@ -63,9 +58,6 @@ namespace LOB.UI.Core.View.Controls.Util {
         private void MiLightOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light); }
 
         #endregion
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

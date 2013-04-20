@@ -2,7 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
@@ -13,7 +13,8 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolIuiComponent.xaml
     /// </summary>
-    [Export]
+    [Export(typeof(IBaseView<INotificationToolViewModel>)), Export]
+    [ViewInfo(ViewType.NotificationTool, ViewState.Other)]
     public partial class NotificationToolView : IBaseView<INotificationToolViewModel> {
         public NotificationToolView() { InitializeComponent(); }
 
@@ -25,17 +26,9 @@ namespace LOB.UI.Core.View.Controls.Main {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Main_Header; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

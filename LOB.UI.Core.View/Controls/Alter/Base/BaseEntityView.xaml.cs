@@ -2,14 +2,15 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Core.Localization;
+using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.Base {
-    [Export(typeof(IBaseView<IBaseViewModel>)), ExportMetadata(null, ViewType.BaseEntity)]
+    [Export(typeof(IBaseView<IBaseViewModel>))]
+    [ViewInfo(ViewType.BaseEntity, ViewState.Other)]
     public partial class BaseEntityView : IBaseView<IBaseViewModel> {
         public BaseEntityView() { InitializeComponent(); }
 
@@ -21,17 +22,9 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
             }
         }
 
-        public string Header {
-            get { return Strings.UI_Header_Alter_BaseEntity; }
-        }
-
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

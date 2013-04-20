@@ -12,10 +12,8 @@ using System.Windows.Data;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
 using LOB.UI.Core.Events;
-using LOB.UI.Core.Events.View;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
 using MahApps.Metro;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
@@ -29,13 +27,11 @@ namespace LOB.UI.Core.View {
         [Import] public IEventAggregator EventAggregator { get; set; }
         [Import] public ILoggerFacade Logger { get; set; }
         [Import] public IModuleManager ModuleManager { get; set; }
-        [Import] public ShellViewModel ViewModel {
+        public ShellViewModel ViewModel {
             get { return DataContext as ShellViewModel; }
             set { DataContext = value; }
         }
-        public string Header {
-            get { return Strings.UI_Title_Shell; }
-        }
+
         public int Index { get; set; }
 
         public Shell() {
@@ -48,20 +44,20 @@ namespace LOB.UI.Core.View {
         public void Refresh() { UpdateLayout(); }
 
         private void OnLoad(object sender, EventArgs eventArgs) {
-            EventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewID {Type = ViewType.Main})) Close(); });
-            EventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
-                                                                    if(type.State == ViewState.QuickSearch) {
-                                                                        BlurModal.Radius = 15;
-                                                                        BorderModal.Visibility = Visibility.Visible;
-                                                                    }
-                                                                });
-            EventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
-                                                                     if(type.State == ViewState.QuickSearch) {
-                                                                         BlurModal.Radius = 0;
-                                                                         BorderModal.Visibility = Visibility.Hidden;
-                                                                     }
-                                                                     if(type.Type == ViewType.Main) Close();
-                                                                 });
+            //EventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewModelState {Type = ViewType.Main})) Close(); });
+            //EventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
+            //                                                        if(type.ViewState == ViewState.QuickSearch) {
+            //                                                            BlurModal.Radius = 15;
+            //                                                            BorderModal.Visibility = Visibility.Visible;
+            //                                                        }
+            //                                                    });
+            //EventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
+            //                                                         if(type.ViewState == ViewState.QuickSearch) {
+            //                                                             BlurModal.Radius = 0;
+            //                                                             BorderModal.Visibility = Visibility.Hidden;
+            //                                                         }
+            //                                                         if(type.Type == ViewType.Main) Close();
+            //                                                     });
             EventAggregator.GetEvent<NotificationEvent>()
                            .Publish(new Notification {Message = Strings.App_License_Information, State = NotificationState.Warning});
 
@@ -80,10 +76,6 @@ namespace LOB.UI.Core.View {
             //ProgressRing.IsActive = false;
             //await Task.Delay(1);
             TabRegion.SelectedIndex = TabRegion.Items.Count - 1;
-        }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
         }
         #region Implementation of IDisposable
 
