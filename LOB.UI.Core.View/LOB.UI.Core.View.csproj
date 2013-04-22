@@ -154,7 +154,7 @@
     </Compile>
     <Compile Include="Extension\ControlExtension.cs" />
     <Compile Include="Extension\Util\BoolToVisibility.cs" />
-    <Compile Include="Infrastructure\ViewCapability.cs" />
+    <Compile Include="Infrastructure\ViewInfoAttribute.cs" />
     <Compile Include="Modularity\Bootstrapper.cs" />
     <Compile Include="Controllers\MainRegionController.cs" />
     <Compile Include="Controls\Alter\AlterCustomerView.xaml.cs">
@@ -245,7 +245,6 @@
       <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\FluentNavigator.cs" />
-    <Compile Include="Infrastructure\ViewDictionary.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>

@@ -7,47 +7,33 @@ using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(IMessageToolViewModel))]
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
-        private readonly IEventAggregator _eventAggregator;
-        #region Props
-
+        //[Import] private IEventAggregator EventAggregatorLazy { get; set; }
         public string Message { get; set; }
-
         public bool IsRestrictive { get; set; }
-
-        #endregion Description
-        #region CloseExecute Command
-
         private ICommand _closeCommand;
+        public bool CanClose { get; set; }
 
+        public MessageToolViewModel() { Message = "Please wait..."; }
+
+        public void CloseExecute() {
+            //_eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
+        }
         public ICommand CloseCommand {
             get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
             set { _closeCommand = value; }
         }
 
-        public bool CanClose { get; set; }
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
 
-        public void CloseExecute() {
-            //_eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
-        }
-
-        #endregion CloseExecute Command
-        public MessageToolViewModel(IEventAggregator eventAggregator) {
-            Message = "Please wait...";
-            _eventAggregator = eventAggregator;
-        }
-
-        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
-
-        public override ViewModelState ViewModelState {
-            get { return _viewModelState; }
-            set { _viewModelState = value; }
+        public override ViewModelInfo Info {
+            get { return _viewModelInfo; }
+            set { _viewModelInfo = value; }
         }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {

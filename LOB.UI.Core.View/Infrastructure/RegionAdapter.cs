@@ -3,8 +3,9 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Linq;
+using LOB.Core.Localization;
 using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
 using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 
@@ -13,75 +14,73 @@ using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
 namespace LOB.UI.Core.View.Infrastructure {
     [Export(typeof(IRegionAdapter))]
     public class RegionAdapter : IRegionAdapter {
-        private readonly IRegionManager _regionManager;
+        [Import] protected Lazy<IRegionManager> LazyRegionManager { get; set; }
 
-        [ImportingConstructor]
-        public RegionAdapter(IRegionManager regionManager) { _regionManager = regionManager; }
-
-        public void AddView<TView>(TView view, string regionName) where TView : IBaseView<IBaseViewModel> {
-//            try {
-//                var region = _regionManager.Regions[regionName];
-//                var previousView = region.GetView(ApplyNamingConvention(view.ViewID)) as IBaseView<IBaseViewModel>;
-//                if(previousView != null) if(region.Views.Contains(previousView)) RemoveView(previousView.ViewID, regionName);
-//                region.Add(view, ApplyNamingConvention(view.ViewID));
-//            } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
-//#if DEBUG
-//                Debug.WriteLine(ex.Message);
-//#endif
-//                AddView(view, regionName);
-//            }
-        }
-
-        public IBaseView<IBaseViewModel> GetView(ViewModelState param, string regionName) {
+        public void Add<TView>(TView view, string regionName) where TView : IBaseView<IBaseViewModel> {
             try {
-                var region = _regionManager.Regions[regionName];
-                return region.GetView(ApplyNamingConvention(param)) as IBaseView<IBaseViewModel>;
+                var region = LazyRegionManager.Value.Regions[regionName];
+                var previousView = region.GetView(ApplyConvention(view.ViewModel.Id)) as IBaseView<IBaseViewModel>;
+                if(previousView != null) if(region.Views.Contains(previousView)) Remove(Get(previousView.ViewModel.Id));
+                region.Add(view, ApplyConvention(view.ViewModel.Id));
             } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
 #if DEBUG
                 Debug.WriteLine(ex.Message);
 #endif
-                return GetView(param, regionName);
+                Add(view, regionName);
             }
         }
 
-        public void RemoveView(ViewModelState param, string regionName) {
-//            try {
-//                if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
-//                var region = _regionManager.Regions[regionName];
-//                var view = region.GetView(ApplyNamingConvention(param)) as IBaseView<IBaseViewModel>;
-//                if(ContainsView(param, regionName)) {
-//                    region.Remove(view);
-//                    if(view != null) view.Dispose();
-//                }
-//            } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
-//#if DEBUG
-//                Debug.WriteLine(ex.Message);
-//#endif
-//                RemoveView(param, regionName);
-//            }
+        public IBaseView<IBaseViewModel> Get(Guid viewId) {
+            if(viewId == default(Guid)) throw new ArgumentNullException("viewId");
+            try {
+                IBaseView<IBaseViewModel> view = null;
+                foreach(var region in LazyRegionManager.Value.Regions) foreach(var source in region.Views.Cast<IBaseView<IBaseViewModel>>().Where(x => x.ViewModel.Id.Equals(viewId))) view = source;
+
+                return view;
+            } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+                return Get(viewId);
+            }
         }
 
-        public bool ContainsView(ViewModelState param, string regionName) {
+        public void Remove(IBaseView<IBaseViewModel> param) {
+            try {
+                IBaseView<IBaseViewModel> view = null;
+                foreach(var region in LazyRegionManager.Value.Regions) foreach(var vieww in region.Views) if(vieww.Equals(param)) region.Remove(param);
+
+                return; //region.Get(ApplyConvention(viewId)) as IBaseView<IBaseViewModel>;
+            } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
+#if DEBUG
+                Debug.WriteLine(ex.Message);
+#endif
+                Remove(param);
+            }
+        }
+
+        public bool Contains(IBaseView<IBaseViewModel> param, string regionName) {
 //            try {
 //                if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
-//                var region = _regionManager.Regions[regionName];
-//                var view = region.GetView(ApplyNamingConvention(param));
+//                var region = LazyRegionManager.Regions[regionName];
+//                var view = region.Get(ApplyConvention(param));
 //                return region.Views.Contains(view);
 //            } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
 //#if DEBUG
 //                Debug.WriteLine(ex.Message);
 //#endif
-//                return ContainsView(param, regionName);
+//                return Contains(param, regionName);
 //            }
             throw new NotImplementedException();
         }
 
-        private string ApplyNamingConvention(ViewModelState op) {
-            //string s = op.Type.ToString();
+        protected string ApplyConvention(Guid param) {
+            if(param == default(Guid)) throw new ArgumentException(Strings.Notification_Param_NotUnique, "param");
+            string s = param.ToString();
             ////s = s.Split('_').First();
             ////s = s + "_" + op.GetHashCode();
             //return s; //INFO: Only one Type can be opened at the same time like this  
-            throw new NotImplementedException();
+            return s;
         }
     }
 }

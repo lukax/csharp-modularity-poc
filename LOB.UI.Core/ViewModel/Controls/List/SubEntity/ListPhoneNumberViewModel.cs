@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPhoneNumberViewModel : ListBaseEntityViewModel<PhoneNumber>, IListPhoneNumberViewModel {
         [ImportingConstructor]
         public ListPhoneNumberViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public new Expression<Func<PhoneNumber, bool>> SearchCriteria {
             get {

@@ -2,6 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
+using LOB.Business.Interface.Logic.Base;
 using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
@@ -12,7 +13,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IAddressFacade))]
+    [Export(typeof(IAddressFacade)), Export(typeof(IBaseEntityFacade<Address>))]
     public sealed class AddressFacade : BaseEntityFacade<Address>, IAddressFacade {
         [ImportingConstructor]
         public AddressFacade(IRepository repository)

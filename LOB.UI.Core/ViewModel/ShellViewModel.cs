@@ -27,7 +27,7 @@ namespace LOB.UI.Core.ViewModel {
             //Navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
 
-        public override ViewModelState ViewModelState { get; set; }
+        public override ViewModelInfo Info { get; set; }
         public override void InitializeServices() { }
 
         public override void Refresh() { }

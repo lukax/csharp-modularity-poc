@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListEmailViewModel : ListBaseEntityViewModel<Email>, IListEmailViewModel {
         [ImportingConstructor]
         public ListEmailViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public override void InitializeServices() { base.InitializeServices(); }
 

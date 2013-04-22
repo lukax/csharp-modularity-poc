@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel {
         [ImportingConstructor]
         public ListPayCheckViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public new Expression<Func<PayCheck, bool>> SearchCriteria {
             get {

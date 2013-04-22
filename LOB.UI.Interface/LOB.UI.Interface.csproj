@@ -54,6 +54,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -61,13 +62,13 @@
     <Compile Include="Command\ICommandService.cs" />
     <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="Event\IBaseEvent.cs" />
+    <Compile Include="Infrastructure\IViewInfo.cs" />
     <Compile Include="IUIComponent.cs" />
     <Compile Include="Infrastructure\IFluentNavigator.cs" />
     <Compile Include="Infrastructure\IRegionAdapter.cs" />
     <Compile Include="IBaseView.cs" />
-    <Compile Include="Infrastructure\ViewModelState.cs" />
+    <Compile Include="Infrastructure\ViewModelInfo.cs" />
     <Compile Include="Infrastructure\ViewState.cs" />
-    <Compile Include="Infrastructure\ViewType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IBaseViewModel.cs" />
     <Compile Include="ViewModel\Controls\Alter\Base\IAlterBaseEntityViewModel.cs" />
@@ -108,6 +109,10 @@
     <Compile Include="ViewModel\Controls\Sell\ISellServiceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
+      <Project>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</Project>
+      <Name>LOB.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>

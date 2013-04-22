@@ -6,9 +6,11 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
+using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Interface.ViewModel.Controls.List;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
 
@@ -17,24 +19,17 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(IColumnToolViewModel))]
     public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolViewModel {
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
-        private readonly IEventAggregator _eventAggregator;
-        private readonly IFluentNavigator _navigator;
-        private readonly IRegionAdapter _regionAdapter;
-        private readonly INotificationToolViewModel _notificationToolViewModel;
         public string NotificationStatus { get; set; }
         public ICommand OperationCommand { get; set; }
         public ICommand ShopCommand { get; set; }
         public ICommand NotificationCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
+        [Import] public Lazy<IEventAggregator> LazyEventAggregator { get; set; }
+        [Import] public Lazy<IFluentNavigator> LazyFluentNavigator { get; set; }
+        [Import] public Lazy<IRegionAdapter> LazyRegionAdapter { get; set; }
+        [Import] public Lazy<INotificationToolViewModel> LazyNotificationViewModel { get; set; }
 
-        [ImportingConstructor]
-        public ColumnToolViewModel(IEventAggregator eventAggregator, IFluentNavigator navigator, IRegionAdapter regionAdapter,
-            INotificationToolViewModel notificationToolViewModel) {
-            _eventAggregator = eventAggregator;
-            _navigator = navigator;
-            _regionAdapter = regionAdapter;
-            _notificationToolViewModel = notificationToolViewModel;
+        public ColumnToolViewModel() {
             OperationCommand = new DelegateCommand(ShowOperations);
             ShopCommand = new DelegateCommand(ShowShop);
             NotificationCommand = new DelegateCommand(ShowNotification);
@@ -46,16 +41,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
-        public override ViewModelState ViewModelState {
-            get { return _viewModelState; }
-            set { _viewModelState = value; }
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
+        public override ViewModelInfo Info {
+            get { return _viewModelInfo; }
+            set { _viewModelInfo = value; }
         }
 
         private void ShowOperations(object arg) {
-            //var op = new ViewModelState {Type = ViewType.Op, ViewState = ViewState.List};
-            //if(_regionAdapter.ContainsView(op, RegionName.TabRegion)) _regionAdapter.RemoveView(op, RegionName.TabRegion);
+            //var op = new ViewModelInfo {Type = ViewType.Op, ViewState = ViewState.List};
+            //if(_regionAdapter.Contains(op, RegionName.TabRegion)) _regionAdapter.Remove(op, RegionName.TabRegion);
             //else _navigator.Init.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
+            LazyFluentNavigator.Value.Init.ResolveView<IListOpViewModel>().AddToRegion(RegionName.TabRegion);
         }
 
         private void ShowShop(object obj) {
@@ -63,24 +59,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void ShowNotification(object o) {
-            _notificationToolViewModel.IsVisible = !_notificationToolViewModel.IsVisible;
-            //var op = new ViewModelState {
+            LazyNotificationViewModel.Value.IsVisible = !LazyNotificationViewModel.Value.IsVisible;
+            //var op = new ViewModelInfo {
             //    Type = ViewType.NotificationTool,
             //    ViewState = ViewState.Tool
             //};
-            //if(_regionAdapter.ContainsView(op, RegionName.BottomRegion)) _regionAdapter.RemoveView(op, RegionName.BottomRegion);
+            //if(_regionAdapter.Contains(op, RegionName.BottomRegion)) _regionAdapter.Remove(op, RegionName.BottomRegion);
             //else
             //    _navigator.Init.ResolveView(op)
             //              .ResolveViewModel(op)
             //              .AddToRegion(RegionName.BottomRegion);
         }
 
-        private void Logout(object o) { //_eventAggregator.GetEvent<CloseViewEvent>().Publish(new ViewModelState {Type = ViewType.Main}); 
+        private void Logout(object o) { //_eventAggregator.GetEvent<CloseViewEvent>().Publish(new ViewModelInfo {Type = ViewType.Main}); 
         }
 
         private void InitWorker() {
-            _worker.DoWork += UpdateStatus;
-            _worker.RunWorkerAsync();
+            Worker.DoWork += UpdateStatus;
+            Worker.RunWorkerAsync();
         }
 
         private async void UpdateStatus(object sender, DoWorkEventArgs doWorkEventArgs) {
@@ -89,8 +85,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             worker.WorkerSupportsCancellation = true;
             do {
                 await Task.Delay(1000);
-                NotificationStatus = _notificationToolViewModel.Status;
-            } while(!_worker.CancellationPending);
+                NotificationStatus = LazyNotificationViewModel.Value.Status;
+            } while(!Worker.CancellationPending);
         }
         #region Implementation of IDisposable
 
@@ -102,8 +98,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void Disposing(bool disposing) {
-            _worker.CancelAsync();
-            if(disposing) _worker.Dispose();
+            Worker.CancelAsync();
+            if(disposing) Worker.Dispose();
         }
 
         #endregion

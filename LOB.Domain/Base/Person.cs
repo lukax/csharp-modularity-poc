@@ -38,7 +38,7 @@ namespace LOB.Domain.Base {
         Legal
     }
 
-    public static class PersonExtensions {
+    public static class PersonExtension {
         public static IDictionary<PersonType, string> PersonTypesLocalizationsDict {
             get {
                 return new Dictionary<PersonType, string> {

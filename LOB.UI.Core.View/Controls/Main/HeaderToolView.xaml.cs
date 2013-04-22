@@ -13,7 +13,7 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolView.xaml
     /// </summary>
-    [Export(typeof(IBaseView<IHeaderToolViewModel>)), Export]
+    [Export(typeof(IBaseView<IHeaderToolViewModel>))]
     [ViewInfo(ViewType.HeaderTool, ViewState.Other)]
     public partial class HeaderToolView : IBaseView<IHeaderToolViewModel> {
         public HeaderToolView() { InitializeComponent(); }

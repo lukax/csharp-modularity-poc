@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public sealed class ListCategoryViewModel : ListBaseEntityViewModel<Category>, IListCategoryViewModel {
         [ImportingConstructor]
         public ListCategoryViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public override void InitializeServices() { base.InitializeServices(); }
 

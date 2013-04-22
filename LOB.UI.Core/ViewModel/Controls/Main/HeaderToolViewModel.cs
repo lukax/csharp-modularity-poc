@@ -7,7 +7,7 @@ using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Dao.Interface;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -20,27 +20,24 @@ using Microsoft.Practices.ServiceLocation;
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(IHeaderToolViewModel))]
     public class HeaderToolViewModel : BaseViewModel, IHeaderToolViewModel {
-        private readonly IServiceLocator _serviceLocator;
-        private readonly IEventAggregator _eventAggregator;
-
         public ICommand DbTestConnectionCommand { get; set; }
         public ICommand OpenTabCommand { get; set; }
+        [Import] private Lazy<IServiceLocator> LazyServiceLocator { get; set; }
+        [Import] private IEventAggregator EventAggregator {
+            set { _notificationEvent = value.GetEvent<NotificationEvent>(); }
+        }
 
-        [ImportingConstructor]
-        public HeaderToolViewModel(IServiceLocator serviceLocator, IEventAggregator eventAggregator) {
-            _serviceLocator = serviceLocator;
-            _eventAggregator = eventAggregator;
-            _notificationEvent = _eventAggregator.GetEvent<NotificationEvent>();
+        public HeaderToolViewModel() {
             DbTestConnectionCommand = new DelegateCommand(DbTestConnectionExecute);
             OpenTabCommand = new DelegateCommand(OpenTabExecute);
         }
 
-        private void OpenTabExecute(object o) { _notificationEvent.Publish(new Notification(message: Strings.Notification_Implemented, state: NotificationState.Ok)); }
+        private void OpenTabExecute(object o) { _notificationEvent.Publish(new Notification(Strings.Notification_Implemented, state: NotificationState.Ok)); }
 
         private async void DbTestConnectionExecute(object arg) {
             var notification = new Notification();
             _notificationEvent.Publish(notification.Message(Strings.Notification_Dao_Connecting).Detail("").State(NotificationState.Info).Progress(-2));
-            var uow = _serviceLocator.GetInstance<IUnityOfWork>();
+            var uow = LazyServiceLocator.Value.GetInstance<IUnityOfWork>();
             await Task.Run(() => {
                                uow.OnError +=
                                    (sender, args) =>
@@ -56,11 +53,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
-        private readonly NotificationEvent _notificationEvent;
-        public override ViewModelState ViewModelState {
-            get { return _viewModelState; }
-            set { _viewModelState = value; }
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
+        private NotificationEvent _notificationEvent;
+        public override ViewModelInfo Info {
+            get { return _viewModelInfo; }
+            set { _viewModelInfo = value; }
         }
         #region Implementation of IDisposable
 

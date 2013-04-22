@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Sell;
 
@@ -9,14 +10,13 @@ using LOB.UI.Interface.ViewModel.Controls.Sell;
 
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
     [Export(typeof(ISellServiceViewModel))]
-    public class SellServiceViewModel : ISellServiceViewModel {
-        public ViewModelState State { get; set; }
-        public void InitializeServices() { throw new NotImplementedException(); }
+    public class SellServiceViewModel : BaseViewModel, ISellServiceViewModel {
+        #region Overrides of BaseViewModel
 
-        public void Refresh() { throw new NotImplementedException(); }
-        #region Implementation of IDisposable
-
-        public void Dispose() { GC.SuppressFinalize(this); }
+        public override ViewModelInfo Info { get; set; }
+        public override void InitializeServices() { throw new NotImplementedException(); }
+        public override void Refresh() { throw new NotImplementedException(); }
+        public override void Dispose() { throw new NotImplementedException(); }
 
         #endregion
     }

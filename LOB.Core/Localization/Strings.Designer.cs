@@ -2086,6 +2086,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter is not a unique value.
+        /// </summary>
+        public static string Notification_Param_NotUnique {
+            get {
+                return ResourceManager.GetString("Notification_Param_NotUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_RequisitionFailed.
         /// </summary>
         public static string Notification_RequisitionFailed {

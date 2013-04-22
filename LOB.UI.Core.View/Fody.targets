@@ -79,11 +79,4 @@
           DefineConstants="$(DefineConstants)"
       />
   </Target>
-
-
-  <!--Support for ncrunch-->
-  <ItemGroup>
-    <None Include="$(FodyPath)\*.*" />
-  </ItemGroup>
-
 </Project>

@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
-using LOB.UI.Core.Events.View;
+using LOB.UI.Core.Event;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Base;
+using LOB.UI.Interface;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
@@ -22,35 +24,33 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     [Export(typeof(IListOpViewModel))]
-    public class ListOpViewModel : BaseViewModel, IListOpViewModel {
-        private readonly IEventAggregator _eventAggregator;
-        private readonly Lazy<IDictionary<string, ViewModelState>> _defaultViewIDDictLazy;
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
+    public sealed class ListOpViewModel : BaseViewModel, IListOpViewModel {
+        private Lazy<IDictionary<string, IViewInfo>> _defaultViewIDDictLazy;
         private string _search;
-        public override ViewModelState ViewModelState { get; set; }
         public string Entity { get; set; }
-        //[AllowNull]
         public ObservableCollection<PanoramaGroup> Entitys { get; set; }
         public ICommand SaveChangesCommand { get; set; }
         public string Search {
             get { return _search ?? ""; }
             set {
                 _search = value.ToLower();
-                if(!_worker.IsBusy) _worker.RunWorkerAsync();
+                if(!Worker.IsBusy) Worker.RunWorkerAsync();
             }
         }
-
-        [ImportingConstructor]
-        public ListOpViewModel(IEventAggregator eventAggregator) {
-            _eventAggregator = eventAggregator;
+        [ImportMany] public Lazy<IBaseView<IBaseViewModel>, IViewInfo>[] LazyViewInfos { get; set; }
+        [Import] public Lazy<IEventAggregator> LazyEventAggregator { get; set; }
+        [Import] public AggregateCatalog Type { get; set; }
+        public ListOpViewModel() {
             SaveChangesCommand = new DelegateCommand(SaveChanges);
-            _defaultViewIDDictLazy = new Lazy<IDictionary<string, ViewModelState>>(CreateList);
             Entity = "";
+            Info = new ViewModelInfo {IsChild = false, ViewSubState = ViewSubState.Unlocked, ViewState = ViewState.Other};
         }
 
+        public override ViewModelInfo Info { get; set; }
         public override void InitializeServices() {
-            _worker.DoWork += UpdateList;
-            _worker.RunWorkerAsync();
+            _defaultViewIDDictLazy = new Lazy<IDictionary<string, IViewInfo>>(CreateList);
+            Worker.DoWork += UpdateList;
+            Worker.RunWorkerAsync();
         }
         public override void Refresh() { Search = ""; }
 
@@ -62,11 +62,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             //Thread.Sleep(1000);
             if(string.IsNullOrEmpty(Search)) {
                 var alterGroup = new PanoramaGroup(Strings.UI_Header_Alter);
-                alterGroup.SetSource(_defaultViewIDDictLazy.Value.Keys.Where(x => _defaultViewIDDictLazy.Value[x].ToString().Contains("Add")).ToList());
+                alterGroup.SetSource(_defaultViewIDDictLazy.Value.Where(x => x.Value.ViewStates.Contains(ViewState.Add)).Select(x=> x.Key));
+                //alterGroup.SetSource(_defaultViewIDDictLazy.Value.Keys.Where(x => _defaultViewIDDictLazy.Value[x].ToString().Contains("Add")).ToList());
                 var listGroup = new PanoramaGroup(Strings.UI_Header_List);
-                listGroup.SetSource(_defaultViewIDDictLazy.Value.Keys.Where(x => _defaultViewIDDictLazy.Value[x].ToString().Contains("List")).ToList());
+                //listGroup.SetSource(_defaultViewIDDictLazy.Value.Keys.Where(x => _defaultViewIDDictLazy.Value[x].ToString().Contains("List")).ToList());
+                listGroup.SetSource(_defaultViewIDDictLazy.Value.Where(x => x.Value.ViewStates.Contains(ViewState.List)).Select(x => x.Key));
                 var sellGroup = new PanoramaGroup(Strings.UI_Header_Sell);
-                sellGroup.SetSource(_defaultViewIDDictLazy.Value.Keys.Where(x => _defaultViewIDDictLazy.Value[x].ToString().Contains("Sell")).ToList());
+                //sellGroup.SetSource(_defaultViewIDDictLazy.Value.Keys.Where(x => _defaultViewIDDictLazy.Value[x].ToString().Contains("Sell")).ToList());
+                sellGroup.SetSource(_defaultViewIDDictLazy.Value.Where(x => x.Value.ViewStates.Contains(ViewState.Sell)).Select(x => x.Key));
                 Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
             }
             else {
@@ -90,23 +93,24 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         }
 
         private void SaveChanges(object arg) {
-            var parsedUIOperation = _defaultViewIDDictLazy.Value[arg.ToString()];
-            var not = new Notification {
+            var viewInfo = _defaultViewIDDictLazy.Value[arg.ToString()];
+            var notification = new Notification {
                 Message =
                     string.Format("{0} {1}", Strings.Common_Initializing,
-                                  _defaultViewIDDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key),
+                                  _defaultViewIDDictLazy.Value.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key),
                 Progress = -2,
                 State = NotificationState.Info
             };
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(not);
-            _eventAggregator.GetEvent<OpenViewEvent>().Publish(parsedUIOperation);
+            LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification);
+            LazyEventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(viewInfo));
             var stringy = string.Format("{0} {1}", Strings.Common_Initialized,
-                                        _defaultViewIDDictLazy.Value.FirstOrDefault(x => x.Value.Equals(parsedUIOperation)).Key);
-            _eventAggregator.GetEvent<NotificationEvent>().Publish(not.Message(stringy).Progress(-1).State(NotificationState.Ok));
-            _eventAggregator.GetEvent<CloseViewEvent>().Publish(ViewModelState);
+                                        _defaultViewIDDictLazy.Value.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key);
+            LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification.Message(stringy).Progress(-1).State(NotificationState.Ok));
+            LazyEventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id);
         }
 
-        private IDictionary<string, ViewModelState> CreateList() {
+        private IDictionary<string, IViewInfo> CreateList() {
+            var catalog = LazyViewInfos.ToDictionary(item => ViewInfoExtension.ToString(item.Metadata), item => item.Metadata);
             //var catalog = UIOperationCatalog.UIOperations;
             ////Remove Other usage Types from user selection:
             //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Other));
@@ -115,15 +119,16 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Person));
             //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.Other));
             //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.Update));
+            //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.Update));
             //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.Delete));
             //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.QuickSearch));
-            //var operationTypes = new Dictionary<string, ViewModelState>(catalog.Count);
+            //var operationTypes = new Dictionary<string, ViewModelInfo>(catalog.Count);
             //var stringsType = typeof(Strings);
             //var stringsTypeProps = stringsType.GetProperties();
 
             ////Parse to localized string
             //foreach(var uiOperation in catalog) {
-            //    ViewModelState operation = uiOperation;
+            //    ViewModelInfo operation = uiOperation;
             //    foreach(string name in
             //        from propertyInfo in stringsTypeProps
             //        let name = propertyInfo.Name
@@ -131,7 +136,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             //        select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
             //}
             //return operationTypes;
-            return null;
+            return catalog;
         }
         #region Implementation of IDisposable
 
@@ -140,9 +145,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        protected void Dispose(bool disposing) {
-            if(_worker.WorkerSupportsCancellation) _worker.CancelAsync();
-            if(disposing) _worker.Dispose();
+        private void Dispose(bool disposing) {
+            if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
+            if(disposing) Worker.Dispose();
         }
 
         #endregion

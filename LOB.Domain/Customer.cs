@@ -41,7 +41,7 @@ namespace LOB.Domain {
         Inactive
     }
 
-    public static class CustomerExtensions {
+    public static class CustomerExtension {
         public static IDictionary<CustomerStatus, string> CustomerStatusLocalizationsDict {
             get {
                 return new Dictionary<CustomerStatus, string> {

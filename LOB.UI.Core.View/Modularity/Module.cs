@@ -3,6 +3,7 @@
 using System.ComponentModel.Composition;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Actions;
+using LOB.UI.Core.View.Controllers;
 using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Controls.Main;
@@ -21,6 +22,7 @@ namespace LOB.UI.Core.View.Modularity {
         private readonly ILoggerFacade _loggerFacade;
         private readonly IRegionManager _regionManager;
         private readonly IRegionAdapter _regionAdapter;
+        [Import] private MainRegionController _mainRegionController;
 
         [ImportingConstructor]
         public Module(ILoggerFacade loggerFacade, IRegionManager regionManager, IRegionAdapter regionAdapter) {

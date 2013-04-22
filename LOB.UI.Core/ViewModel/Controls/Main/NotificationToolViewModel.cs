@@ -10,7 +10,7 @@ using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Core.Util;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
 using LOB.UI.Interface.Infrastructure;
@@ -20,35 +20,31 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    [Export(typeof(INotificationToolViewModel))]
+    [Export(typeof(INotificationToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
-        //[AllowNull]
         public Notification Entity { get; set; }
         public MThreadObservableCollection<Notification> Entitys { get; set; }
-        private readonly IEventAggregator _eventAggregator;
         public bool IsVisible {
-            get { return _isVisible; }
+            get { return Visibility == Visibility.Visible; }
             set {
-                _isVisible = value;
                 //if(Entities == null || Entities.Count == 0) Visibility = Visibility.Collapsed;
                 //else 
                 Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
         public ICommand DismissCommand { get; set; }
-        public Visibility Visibility { get; set; }
+        public Visibility Visibility { get; private set; }
         public string Status {
             get { return string.Format("{0} {1}", Entitys.Count, Strings.UI_ToolTip_Notifications); }
         }
+        [Import] public IEventAggregator EventAggregator {
+            set { value.GetEvent<NotificationEvent>().Subscribe(NotificationListener); }
+        }
 
-        [ImportingConstructor]
-        public NotificationToolViewModel(IEventAggregator eventAggregator) {
-            _eventAggregator = eventAggregator;
+        public NotificationToolViewModel() {
             DismissCommand = new DelegateCommand(DismissNotification);
             Entitys = new MThreadObservableCollection<Notification>();
             IsVisible = false;
-            _eventAggregator.GetEvent<NotificationEvent>().Subscribe(NotificationListener);
             InitWorker();
         }
 
@@ -67,8 +63,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         private void InitWorker() {
-            _worker.DoWork += AutoCleanEntititys;
-            _worker.RunWorkerAsync();
+            Worker.DoWork += AutoCleanEntititys;
+            Worker.RunWorkerAsync();
         }
 
         private void AutoCleanEntititys(object sender, DoWorkEventArgs doWorkEventArgs) {
@@ -79,25 +75,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
                 Thread.Sleep(10000);
                 var currentStack = Entitys.ToList(); //Thread Safe
                 foreach(var notification in currentStack) if(notification.State == NotificationState.Ok) Entitys.Remove(notification);
-            } while(!_worker.CancellationPending);
+            } while(!Worker.CancellationPending);
         }
 
         public override void Refresh() { }
 
-        public override ViewModelState ViewModelState {
-            get { return _viewModelState; }
-            set { _viewModelState = value; }
+        public override ViewModelInfo Info {
+            get { return _viewModelInfo; }
+            set { _viewModelInfo = value; }
         }
 
-        private ViewModelState _viewModelState = new ViewModelState {ViewState = ViewState.Other};
-        private bool _isVisible;
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
         #region Implementation of IDisposable
 
         ~NotificationToolViewModel() { Dispose(false); }
 
         private void Dispose(bool disposing) {
-            _worker.CancelAsync();
-            if(disposing) _worker.Dispose();
+            Worker.CancelAsync();
+            if(disposing) Worker.Dispose();
         }
 
         public override void Dispose() {

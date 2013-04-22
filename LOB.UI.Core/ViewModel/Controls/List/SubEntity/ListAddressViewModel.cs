@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
     public class ListAddressViewModel : ListBaseEntityViewModel<Address>, IListAddressViewModel {
         [ImportingConstructor]
         public ListAddressViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public new Expression<Func<Address, bool>> SearchCriteria {
             get {

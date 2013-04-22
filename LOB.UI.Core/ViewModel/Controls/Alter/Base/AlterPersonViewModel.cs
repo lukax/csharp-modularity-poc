@@ -20,8 +20,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         private AlterContactInfoViewModel _alterContactInfoViewModel;
 
         [ImportingConstructor]
-        public AlterPersonViewModel(IPersonFacade personFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(personFacade, repository, eventAggregator, logger) { }
+        public AlterPersonViewModel(IPersonFacade personFacade)
+            : base(personFacade) { }
 
         [Import] public IAlterAddressViewModel AlterAddressViewModel {
             get { return _alterAddressViewModel; }
@@ -34,10 +34,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         protected override bool CanSaveChanges(object arg) {
             if(ReferenceEquals(Entity, null)) return false;
-            if(ViewModelState.ViewState == ViewState.Add)
+            if(Info.ViewState == ViewState.Add)
                 return base.CanSaveChanges(arg) & _alterAddressViewModel.SaveChangesCommand.CanExecute(arg) &&
                        _alterContactInfoViewModel.SaveChangesCommand.CanExecute(arg);
-            if(ViewModelState.ViewState == ViewState.Update)
+            if (Info.ViewState == ViewState.Update)
                 return base.CanSaveChanges(arg) & _alterContactInfoViewModel.SaveChangesCommand.CanExecute(arg) &&
                        _alterContactInfoViewModel.SaveChangesCommand.CanExecute(arg);
             return false;

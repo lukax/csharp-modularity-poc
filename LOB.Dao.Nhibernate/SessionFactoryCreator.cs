@@ -16,6 +16,7 @@ using NullGuard;
 #endregion
 
 namespace LOB.Dao.Nhibernate {
+    [Export(typeof(ISessionFactoryCreator)), PartCreationPolicy(CreationPolicy.Shared)]
     public class SessionFactoryCreator : ISessionFactoryCreator {
         private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
 

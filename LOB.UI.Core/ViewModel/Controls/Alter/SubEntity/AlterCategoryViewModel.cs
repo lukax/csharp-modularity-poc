@@ -15,11 +15,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     [Export(typeof(IAlterCategoryViewModel))]
     public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {
         [ImportingConstructor]
-        public AlterCategoryViewModel(IRepository repository, ICategoryFacade categoryFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(categoryFacade, repository, eventAggregator, logger) { }
+        public AlterCategoryViewModel(ICategoryFacade categoryFacade)
+            : base(categoryFacade) { }
 
         public override void InitializeServices() {
-            //if(Equals(ViewModelState, default(ViewModelState))) ViewModelState = _defaultModelState;
+            //if(Equals(ViewModelInfo, default(ViewModelInfo))) ViewModelInfo = _defaultModelState;
             //base.InitializeServices();
         }
     }

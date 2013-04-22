@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Core.Events.Operation;
+using LOB.UI.Core.Event.Operation;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 
@@ -23,16 +23,18 @@ namespace LOB.UI.Core.View.Controllers {
         }
 
         private SubscriptionToken _personTypeChangedSubscription;
-        private void OnLoad() { _personTypeChangedSubscription = _eventAggregator.GetEvent<PersonTypeChangedEvent>().Subscribe(PersonTypeChangedExecute, false); }
+        private void OnLoad() {
+            //_personTypeChangedSubscription = _eventAggregator.GetEvent<PersonTypeChangedEvent>().Subscribe(PersonTypeChangedExecute, false);
+        }
 
-        private void PersonTypeChangedExecute(ViewModelState modelState) {
-            //var view = modelState.ViewModel != null
-            //               ? _fluentNavigator.Init.ResolveView(modelState).SetViewModel(() => modelState.ViewModel).GetView()
-            //               : _fluentNavigator.Init.ResolveView(modelState).ResolveViewModel(modelState).GetView();
+        private void PersonTypeChangedExecute(ViewModelInfo modelInfo) {
+            //var view = modelInfo.ViewModel != null
+            //               ? _fluentNavigator.Init.ResolveView(modelInfo).SetViewModel(() => modelInfo.ViewModel).Get()
+            //               : _fluentNavigator.Init.ResolveView(modelInfo).ResolveViewModel(modelInfo).Get();
             ////Remove everything first
-            //_regionAdapter.RemoveView(modelState.Type(ViewType.LegalPerson), "Customer_PersonRegion");
-            //_regionAdapter.RemoveView(modelState.Type(ViewType.NaturalPerson), "Customer_PersonRegion");
-            //_regionAdapter.AddView(view, "Customer_PersonRegion");
+            //_regionAdapter.Remove(modelInfo.Type(ViewType.LegalPerson), "Customer_PersonRegion");
+            //_regionAdapter.Remove(modelInfo.Type(ViewType.NaturalPerson), "Customer_PersonRegion");
+            //_regionAdapter.Add(view, "Customer_PersonRegion");
         }
         #region Implementation of IDisposable
 

@@ -15,7 +15,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     [Export(typeof(IAlterSaleViewModel))]
     public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {
         [ImportingConstructor]
-        public AlterSaleViewModel(ISaleFacade saleFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(saleFacade, repository, eventAggregator, logger) { }
+        public AlterSaleViewModel(ISaleFacade saleFacade)
+            : base(saleFacade) { }
     }
 }

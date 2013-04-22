@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Data;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel;
 using LOB.UI.Interface;
 using MahApps.Metro;
@@ -44,14 +44,14 @@ namespace LOB.UI.Core.View {
         public void Refresh() { UpdateLayout(); }
 
         private void OnLoad(object sender, EventArgs eventArgs) {
-            //EventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewModelState {Type = ViewType.Main})) Close(); });
-            //EventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
+            //LazyEventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewModelInfo {Type = ViewType.Main})) Close(); });
+            //LazyEventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
             //                                                        if(type.ViewState == ViewState.QuickSearch) {
             //                                                            BlurModal.Radius = 15;
             //                                                            BorderModal.Visibility = Visibility.Visible;
             //                                                        }
             //                                                    });
-            //EventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
+            //LazyEventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
             //                                                         if(type.ViewState == ViewState.QuickSearch) {
             //                                                             BlurModal.Radius = 0;
             //                                                             BorderModal.Visibility = Visibility.Hidden;
@@ -70,8 +70,8 @@ namespace LOB.UI.Core.View {
 
         private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             TabRegion.SelectedIndex = -1;
-            ProgressRing.IsActive = true;
-            await Task.Delay(50); //BUG: STUPID RESOURCES LOADING ASYNC
+            //ProgressRing.IsActive = true;
+            await Task.Delay(150); //BUG: STUPID RESOURCES LOADING ASYNC
             // Fix validation color border in textboxes
             //ProgressRing.IsActive = false;
             //await Task.Delay(1);

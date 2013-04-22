@@ -12,7 +12,7 @@ using NHibernate.Linq;
 #endregion
 
 namespace LOB.Dao.Nhibernate {
-    [Export(typeof(IRepository))]
+    [Export(typeof(IRepository)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class Repository : IRepository {
         protected ISession Session {
             get { return Uow.As<UnityOfWork>().ORM.As<ISession>(); }

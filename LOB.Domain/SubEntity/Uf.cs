@@ -85,7 +85,7 @@ namespace LOB.Domain.SubEntity {
         }
     }
 
-    public static class UFExtensions {
+    public static class UFExtension {
         public static UF ToUF(this string s) {
             UF parsed;
             if(s.Length == 2) return Enum.TryParse(s, out parsed) ? parsed : default(UF);

@@ -6,6 +6,6 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Events {
+namespace LOB.UI.Core.Event {
     public class NotificationEvent : CompositePresentationEvent<Notification>, IBaseEvent {}
 }

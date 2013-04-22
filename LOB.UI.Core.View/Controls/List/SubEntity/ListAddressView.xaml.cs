@@ -11,7 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    [Export(typeof(IBaseView<IListAddressViewModel>))]
+    [Export(typeof(IBaseView<IListAddressViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
     [ViewInfo(ViewType.Address, new[] { ViewState.List, ViewState.QuickSearch })]
     public partial class ListAddressView : IBaseView<IListAddressViewModel> {
         public ListAddressView() {

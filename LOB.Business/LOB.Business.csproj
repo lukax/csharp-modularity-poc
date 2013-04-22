@@ -114,6 +114,7 @@
     <Compile Include="Logic\CustomerFacade.cs" />
     <Compile Include="Logic\LegalPersonFacade.cs" />
     <Compile Include="Logic\NaturalPersonFacade.cs" />
+    <Compile Include="Logic\NotificationFacade.cs" />
     <Compile Include="Logic\SaleFacade.cs" />
     <Compile Include="Logic\SubEntity\AddressFacade.cs" />
     <Compile Include="Logic\SubEntity\ContactInfoFacade.cs" />

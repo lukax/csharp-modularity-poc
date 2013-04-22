@@ -12,7 +12,6 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic.Base {
-    [InheritedExport]
     public abstract class BaseEntityFacade<TEntity> : IBaseEntityFacade<TEntity> where TEntity : BaseEntity, new() {
         private TEntity _entity;
         private List<ValidationDelegate> ValidationDelegates { get; set; }

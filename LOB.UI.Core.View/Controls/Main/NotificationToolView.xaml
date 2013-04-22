@@ -12,7 +12,7 @@
         <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
     </UserControl.Resources>
 
-    <Border BorderThickness=".3" BorderBrush="{DynamicResource AccentBrush4}">
+    <Border BorderThickness=".3" BorderBrush="{DynamicResource AccentBrush4}" Visibility="{Binding Visibility}">
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
 
             <ListView ItemsSource="{Binding Entitys}" SelectedItem="{Binding Entity}" SelectionMode="Single"

@@ -7,17 +7,14 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Business.Interface.Logic.SubEntity;
-using LOB.Dao.Interface;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.Logging;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterAddressViewModel))]
+    [Export(typeof(IAlterAddressViewModel)), Export(typeof(AlterBaseEntityViewModel<Address>))]
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
         private string _status;
         private IList<string> _statuses;
@@ -40,10 +37,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             }
         }
 
-        [ImportingConstructor]
-        public AlterAddressViewModel(IRepository repository, IAddressFacade addressFacade, IEventAggregator eventAggregator, ILoggerFacade logger)
-            : base(addressFacade, repository, eventAggregator, logger) { }
-
         public IList<string> Statuses {
             get {
                 if(_statuses != null) return _statuses;
@@ -54,11 +47,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         public override void InitializeServices() {
-            //if(Equals(ViewModelState, default(ViewModelState))) ViewModelState = _defaultViewModelState;
-            //base.InitializeServices();
-            //Worker.DoWork += UpdateUFList;
-            //Worker.RunWorkerAsync();
-            //EventAggregator.GetEvent<IncludeEntityEvent>().Subscribe(Include);
+            base.InitializeServices();
+            Worker.DoWork += UpdateUFList;
+            Worker.RunWorkerAsync();
         }
 
         private void UpdateUFList(object sender, DoWorkEventArgs doWorkEventArgs) { UFs = new ObservableCollection<UF>(Enum.GetValues(typeof(UF)).Cast<UF>()); }

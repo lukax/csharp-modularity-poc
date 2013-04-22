@@ -112,16 +112,14 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\Operation\IncludeEntityEvent.cs" />
-    <Compile Include="Events\Operation\CancelEvent.cs" />
-    <Compile Include="Events\Operation\RefreshEvent.cs" />
-    <Compile Include="Events\NotificationEvent.cs" />
-    <Compile Include="Events\Operation\SaveEvent.cs" />
-    <Compile Include="Events\Operation\PersonTypeChangedEvent.cs" />
-    <Compile Include="Events\View\CloseViewEvent.cs" />
-    <Compile Include="Events\View\OpenViewEvent.cs" />
+    <Compile Include="Event\Operation\IncludeEntityEvent.cs" />
+    <Compile Include="Event\Operation\CancelEvent.cs" />
+    <Compile Include="Event\Operation\RefreshEvent.cs" />
+    <Compile Include="Event\NotificationEvent.cs" />
+    <Compile Include="Event\Operation\PersonTypeChangedEvent.cs" />
+    <Compile Include="Event\View\CloseViewEvent.cs" />
+    <Compile Include="Event\View\OpenViewEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
-    <Compile Include="Infrastructure\ViewModelDictionary.cs" />
     <Compile Include="netfx\System\StringFormatWith.cs" />
     <Compile Include="Util\EnumToPicConverter.cs" />
     <Compile Include="Modularity\Module.cs" />
@@ -237,7 +235,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Folder Include="Command\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

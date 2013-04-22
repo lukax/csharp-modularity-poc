@@ -32,7 +32,7 @@ namespace LOB.Domain.Logic {
         #endregion
     }
 
-    public static class ValidationResultExtensions {
+    public static class ValidationResultExtension {
         public static ValidationResult FieldName(this ValidationResult validationResult, string fieldName) {
             validationResult.FieldName = fieldName;
             return validationResult;

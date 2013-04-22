@@ -4,16 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Business.Interface.Logic;
-using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.Domain.Base;
-using LOB.UI.Core.Events.Operation;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.Logging;
 
 #endregion
 
@@ -31,9 +27,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                 return _alterNaturalPersonViewModel.AlterPersonViewModel;
             }
         }
-        public ViewModelState PersonOperation { get; set; }
+        public ViewModelInfo PersonOperation { get; set; }
         public IList<string> PersonTypes {
-            get { return PersonExtensions.PersonTypesLocalizationsDict.Values.ToList(); }
+            get { return PersonExtension.PersonTypesLocalizationsDict.Values.ToList(); }
         }
         public string PersonType {
             get { return _personType ?? ""; }
@@ -47,13 +43,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         [ImportingConstructor]
-        public AlterCustomerViewModel(ICustomerFacade customerFacade, IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger,
-            IAlterNaturalPersonViewModel alterNaturalPersonViewModel, IAlterLegalPersonViewModel alterLegalPersonViewModel)
-            : base(customerFacade, repository, eventAggregator, logger) {
-            _customerFacade = customerFacade;
-            _alterNaturalPersonViewModel = alterNaturalPersonViewModel as AlterNaturalPersonViewModel;
-            _alterLegalPersonViewModel = alterLegalPersonViewModel as AlterLegalPersonViewModel;
-        }
+        public AlterCustomerViewModel(ICustomerFacade customerFacade)
+            : base(customerFacade) { _customerFacade = customerFacade; }
 
         private void PersonTypeChanged() {
             if(string.IsNullOrWhiteSpace(PersonType)) return;
@@ -64,19 +55,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         private void LegalPersonCfg() {
             ClearEntity(null);
             (_alterLegalPersonViewModel).Entity = Entity.Person as LegalPerson;
-            EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
+            //EventAggregatorLazy.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
         private void NaturalPersonCfg() {
             ClearEntity(null);
             (_alterNaturalPersonViewModel).Entity = Entity.Person as NaturalPerson;
-            EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
+            //EventAggregatorLazy.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
         protected override bool CanSaveChanges(object arg) {
             if(ReferenceEquals(Entity, null)) return false;
-            if(ViewModelState.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            if(ViewModelState.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(Info.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if(Info.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             return false;
         }
 

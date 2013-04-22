@@ -4,8 +4,6 @@ using System;
 using System.Diagnostics;
 using LOB.Domain.Base;
 
-//using NullGuard;
-
 #endregion
 
 namespace LOB.Domain.Logic {
@@ -54,7 +52,7 @@ namespace LOB.Domain.Logic {
         Error,
     }
 
-    public static class NotificationExtensions {
+    public static class NotificationExtension {
         // public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
 
         public static Notification State(this Notification notification, NotificationState state) {

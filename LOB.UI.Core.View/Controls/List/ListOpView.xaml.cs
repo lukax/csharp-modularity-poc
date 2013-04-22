@@ -6,7 +6,6 @@ using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.List;
-using Microsoft.Practices.Prism.Events;
 
 #endregion
 
@@ -14,11 +13,9 @@ namespace LOB.UI.Core.View.Controls.List {
     /// <summary>
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
-    [Export(typeof(IBaseView<IListOpViewModel>))]
-    [ViewInfo(ViewType.Op, new[] { ViewState.List })]
+    [Export(typeof(IBaseView<IListOpViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [ViewInfo(ViewType.Op, ViewState.List)]
     public partial class ListOpView : IBaseView<IListOpViewModel> {
-        [Import] public IEventAggregator EventAggregator { get; set; }
-
         public ListOpView() { InitializeComponent(); }
 
         [Import] public IListOpViewModel ViewModel {

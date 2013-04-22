@@ -10,15 +10,17 @@ using LOB.UI.Interface.ViewModel.Controls.Sell;
 namespace LOB.UI.Core.ViewModel.Controls.Sell {
     [Export(typeof(ISellProductViewModel))]
     public class SellProductViewModel : ISellProductViewModel {
-        public string Header { get; set; }
-
-        public ViewModelState State { get; set; }
-        public void InitializeServices() { throw new NotImplementedException(); }
-
-        public void Refresh() { throw new NotImplementedException(); }
         #region Implementation of IDisposable
 
-        public void Dispose() { GC.SuppressFinalize(this); }
+        public void Dispose() { throw new NotImplementedException(); }
+
+        #endregion
+        #region Implementation of IBaseViewModel
+
+        public Guid Id { get; private set; }
+        public ViewModelInfo Info { get; set; }
+        public void InitializeServices() { throw new NotImplementedException(); }
+        public void Refresh() { throw new NotImplementedException(); }
 
         #endregion
     }

@@ -8,15 +8,14 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.UI.Interface.Infrastructure {
-    public class ViewModelState : BaseNotifyChange, IEquatable<ViewModelState> {
-        public ViewModelState() { IsChild = true; }
+    public class ViewModelInfo : BaseNotifyChange, IEquatable<ViewModelInfo> {
         public ViewState ViewState { get; set; }
         public ViewSubState ViewSubState { get; set; }
         public bool IsChild { get; set; }
         public override string ToString() { return string.Format("{0}_{1}", ViewState.ToString(), ViewSubState.ToString()); }
         #region Equality members
 
-        public bool Equals(ViewModelState other) {
+        public bool Equals(ViewModelInfo other) {
             if(ReferenceEquals(other, null)) return false;
             return (IsChild == other.IsChild && ViewState == other.ViewState && ViewSubState == other.ViewSubState);
         }
@@ -28,37 +27,32 @@ namespace LOB.UI.Interface.Infrastructure {
         }
 
         public override bool Equals(object obj) {
-            var local = obj as ViewModelState;
+            var local = obj as ViewModelInfo;
             return local != null && Equals(local);
         }
 
         #endregion
     }
 
-    public enum ViewSubState {
-        Unlocked,
-        Locked,
-    }
-
     public static class ViewIDExtension {
-        public static ViewModelState ToUIOperation(this string s) {
+        public static ViewModelInfo ToUIOperation(this string s) {
             string[] cutted = s.Split('_');
             ViewState parsedState;
             ViewSubState parsedType;
-            if(Enum.TryParse(cutted[0], out parsedState)) if(Enum.TryParse(cutted[1], out parsedType)) if(Enum.TryParse(cutted[3], out parsedType)) return new ViewModelState {ViewState = parsedState, ViewSubState = parsedType};
+            if(Enum.TryParse(cutted[0], out parsedState)) if(Enum.TryParse(cutted[1], out parsedType)) if(Enum.TryParse(cutted[3], out parsedType)) return new ViewModelInfo {ViewState = parsedState, ViewSubState = parsedType};
             throw new ArgumentException("s");
         }
-        #region Fluent methods for ViewModelState
+        #region Fluent methods for ViewModelInfo
 
-        public static ViewModelState State(this ViewModelState op, ViewState state) {
+        public static ViewModelInfo State(this ViewModelInfo op, ViewState state) {
             op.ViewState = state;
             return op;
         }
-        public static ViewModelState SubState(this ViewModelState op, ViewSubState subState) {
+        public static ViewModelInfo SubState(this ViewModelInfo op, ViewSubState subState) {
             op.ViewSubState = subState;
             return op;
         }
-        public static ViewModelState IsChild(this ViewModelState op, bool isChild) {
+        public static ViewModelInfo IsChild(this ViewModelInfo op, bool isChild) {
             op.IsChild = isChild;
             return op;
         }

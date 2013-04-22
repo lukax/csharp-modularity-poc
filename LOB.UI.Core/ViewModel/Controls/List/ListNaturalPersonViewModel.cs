@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
     public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel {
         [ImportingConstructor]
         public ListNaturalPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public new Expression<Func<NaturalPerson, bool>> SearchCriteria {
             get {

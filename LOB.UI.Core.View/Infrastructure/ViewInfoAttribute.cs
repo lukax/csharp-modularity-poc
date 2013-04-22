@@ -8,7 +8,7 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.View.Infrastructure {
     [MetadataAttribute, AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class ViewInfoAttribute : ExportAttribute {
+    public class ViewInfoAttribute : ExportAttribute, IViewInfo {
         public ViewInfoAttribute(ViewType type = ViewType.Other, params ViewState[] states) {
             ViewType = type;
             ViewStates = states;

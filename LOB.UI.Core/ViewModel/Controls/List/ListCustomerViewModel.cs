@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
     public sealed class ListCustomerViewModel : ListBaseEntityViewModel<Customer>, IListCustomerViewModel {
         [ImportingConstructor]
         public ListCustomerViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public new Expression<Func<Employee, bool>> SearchCriteria {
             get {

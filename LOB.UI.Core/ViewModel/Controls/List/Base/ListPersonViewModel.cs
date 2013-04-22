@@ -16,7 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
         [ImportingConstructor]
         public ListPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
+            : base() { }
 
         public new Expression<Func<Person, bool>> SearchCriteria {
             get {

@@ -11,7 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    [Export(typeof(IBaseView<IAlterAddressViewModel>))]
+    [Export(typeof(IBaseView<IAlterAddressViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
     [ViewInfo(ViewType.Address, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterAddressView : IBaseView<IAlterAddressViewModel> {
         public AlterAddressView() {

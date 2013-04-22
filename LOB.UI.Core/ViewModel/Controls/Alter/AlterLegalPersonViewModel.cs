@@ -23,9 +23,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         [ImportingConstructor]
-        public AlterLegalPersonViewModel(ILegalPersonFacade legalPersonFacade, IRepository repository, IEventAggregator eventAggregator,
-            ILoggerFacade logger, IAlterPersonViewModel alterPersonViewModel)
-            : base(legalPersonFacade, repository, eventAggregator, logger) { AlterPersonViewModel = alterPersonViewModel; }
+        public AlterLegalPersonViewModel(ILegalPersonFacade legalPersonFacade)
+            : base(legalPersonFacade) { }
 
         public override void InitializeServices() {
             base.InitializeServices();
@@ -34,8 +33,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         protected override bool CanSaveChanges(object arg) {
             if(ReferenceEquals(Entity, null)) return false;
-            if(ViewModelState.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            if(ViewModelState.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if (Info.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
+            if (Info.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
             return false;
         }
 
