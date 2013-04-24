@@ -1,7 +1,7 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using LOB.Business.Interface.Logic.Base;
@@ -43,22 +43,25 @@ namespace LOB.Business.Logic.Base {
         }
 
         private void EntityPreprocessors(TEntity entity) { //TODO: Substitute with object interceptor in nhibernate 
-            entity.Code = Repository.Count<TEntity>() + 1;
+            using(Repository.Uow.BeginTransaction()) entity.Code = Repository.Count<TEntity>() + 1;
         }
 
-        public virtual bool CanAdd(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
+        public virtual Tuple<bool, IEnumerable<ValidationResult>> CanAdd() {
+            IEnumerable<ValidationResult> results;
+            bool result = ProcessBasicValidations(out results);
+            return new Tuple<bool, IEnumerable<ValidationResult>>(result, results);
         }
 
-        public virtual bool CanUpdate(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
+        public virtual Tuple<bool, IEnumerable<ValidationResult>> CanUpdate() {
+            IEnumerable<ValidationResult> results;
+            bool result = ProcessBasicValidations(out results);
+            return new Tuple<bool, IEnumerable<ValidationResult>>(result, results);
         }
 
-        public virtual bool CanDelete(out IEnumerable<ValidationResult> invalidFields) {
-            bool result = ProcessBasicValidations(out invalidFields);
-            return result;
+        public virtual Tuple<bool, IEnumerable<ValidationResult>> CanDelete() {
+            IEnumerable<ValidationResult> results;
+            bool result = ProcessBasicValidations(out results);
+            return new Tuple<bool, IEnumerable<ValidationResult>>(result, results);
         }
 
         protected virtual bool ProcessBasicValidations(out IEnumerable<ValidationResult> invalidFields) {
@@ -79,5 +82,19 @@ namespace LOB.Business.Logic.Base {
                                    .Where(result => result != null)
                                    .Where(result => result.FieldName == propName);
         }
+        #region Implementation of IDisposable
+
+        ~BaseEntityFacade() { Dispose(false); }
+        public void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        private void Dispose(bool b) {
+            if(Repository.Uow.IsTransactionActive()) Repository.Uow.FlushTransaction();
+            if(!b) return;
+            Repository.Uow.Dispose();
+        }
+
+        #endregion
     }
 }

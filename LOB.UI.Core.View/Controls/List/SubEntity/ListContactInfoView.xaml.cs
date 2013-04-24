@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export(typeof(IBaseView<IListContactInfoViewModel>))]
-    [ViewInfo(ViewType.ContactInfo, new[] { ViewState.List, ViewState.QuickSearch })]
+    [ViewInfo(ViewType.ContactInfo, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListContactInfoView : IBaseView<IListContactInfoViewModel> {
         public ListContactInfoView() {
             InitializeComponent();

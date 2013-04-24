@@ -6,6 +6,6 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.Event.Operation {
+namespace LOB.UI.Core.Event.Infrastructure {
     public class CancelEvent : CompositePresentationEvent<Guid>, IBaseEvent {}
 }

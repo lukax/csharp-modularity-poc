@@ -6,18 +6,12 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Data;
 using System.Windows.Input;
-using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
-using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.Logging;
 
 //
 
@@ -26,9 +20,7 @@ using Microsoft.Practices.Prism.Logging;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     [Export(typeof(IAlterContactInfoViewModel))]
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
-        [ImportingConstructor]
-        public AlterContactInfoViewModel(IContactInfoFacade contactInfoFacade)
-            : base(contactInfoFacade) {
+        public AlterContactInfoViewModel() {
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);
             DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
             AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber, CanAddPhoneNumber);
@@ -50,9 +42,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             InitBackgroundWorker();
         }
         #region Member Validations
-        
+
         private void AddEmail(object arg) {
-            //EventAggregatorLazy.GetEvent<OpenViewEvent>().Publish(EmailOperation);
+            //EventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation);
         }
 
         private bool CanAddEmail(object arg) {
@@ -61,7 +53,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void AddPhoneNumber(object arg) {
-            //EventAggregatorLazy.GetEvent<OpenViewEvent>().Publish(PhoneNumberOperation);
+            //EventAggregator.GetEvent<OpenViewEvent>().Publish(PhoneNumberOperation);
         }
 
         private bool CanAddPhoneNumber(object arg) {
@@ -72,10 +64,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private void DeleteEmail(object arg) {
             //TODO: Verify if can delete
             if(Email != null)
-                using(RepositoryLazy.Value.Uow) {
-                    RepositoryLazy.Value.Uow.BeginTransaction();
-                    RepositoryLazy.Value.Delete(Email);
-                    RepositoryLazy.Value.Uow.CommitTransaction();
+                using(Repository.Value.Uow) {
+                    Repository.Value.Uow.BeginTransaction();
+                    Repository.Value.Delete(Email);
+                    Repository.Value.Uow.CommitTransaction();
                 }
         }
 
@@ -87,10 +79,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         private void DeletePhoneNumber(object arg) {
             //TODO: Verify if can delete
             if(PhoneNumber != null)
-                using(RepositoryLazy.Value.Uow) {
-                    RepositoryLazy.Value.Uow.BeginTransaction();
-                    RepositoryLazy.Value.Delete(PhoneNumber);
-                    RepositoryLazy.Value.Uow.CommitTransaction();
+                using(Repository.Value.Uow) {
+                    Repository.Value.Uow.BeginTransaction();
+                    Repository.Value.Delete(PhoneNumber);
+                    Repository.Value.Uow.CommitTransaction();
                 }
         }
 
@@ -113,21 +105,24 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
             Worker.ReportProgress(10);
-            RepositoryLazy.Value.Uow.OnError += (o, s) => {
-                                          NotificationEvent.Publish(
-                                              NotificationLazy.Value.Message(s.Description).Detail(s.ErrorMessage).Progress(-1).State(NotificationState.Error));
-                                          Worker.CancelAsync();
-                                      };
+            Repository.Value.Uow.OnError += (o, s) => {
+                                                NotificationEvent.Publish(
+                                                    Notification.Value.Message(s.Description)
+                                                                .Detail(s.ErrorMessage)
+                                                                .Progress(-1)
+                                                                .State(NotificationState.Error));
+                                                Worker.CancelAsync();
+                                            };
             do {
                 Worker.ReportProgress(-1);
                 Thread.Sleep(2000);
                 Worker.ReportProgress(5);
                 var result = new object[2];
-                using(RepositoryLazy.Value.Uow.BeginTransaction())
+                using(Repository.Value.Uow.BeginTransaction())
                     if(!Worker.CancellationPending) {
-                        Emails = new ListCollectionView(RepositoryLazy.Value.GetAll<Email>().ToList());
+                        Emails = new ListCollectionView(Repository.Value.GetAll<Email>().ToList());
                         Worker.ReportProgress(50);
-                        PhoneNumbers = new ListCollectionView(RepositoryLazy.Value.GetAll<PhoneNumber>().ToList());
+                        PhoneNumbers = new ListCollectionView(Repository.Value.GetAll<PhoneNumber>().ToList());
                         Worker.ReportProgress(90);
                         args.Result = result;
                         Worker.ReportProgress(100);
@@ -144,10 +139,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         }
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
-            NotificationLazy.Value.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating)
+            Notification.Value.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating)
                         .State(NotificationState.Info)
                         .Progress(args.ProgressPercentage);
-            NotificationEvent.Publish(NotificationLazy.Value);
+            NotificationEvent.Publish(Notification.Value);
         }
 
         #endregion

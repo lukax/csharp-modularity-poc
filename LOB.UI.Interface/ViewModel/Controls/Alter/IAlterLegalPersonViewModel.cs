@@ -5,7 +5,5 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Interface.ViewModel.Controls.Alter {
-    public interface IAlterLegalPersonViewModel : IAlterBaseEntityViewModel {
-        IAlterPersonViewModel AlterPersonViewModel { get; set; }
-    }
+    public interface IAlterLegalPersonViewModel : IAlterBaseEntityViewModel {}
 }

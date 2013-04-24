@@ -37,8 +37,8 @@ namespace LOB.UI.Core.View.Controllers {
             //if(param.Type == default(ViewType)) throw new ArgumentException("param");
             //var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).Get();
             //var baseViewModel = view.ViewModel as BaseViewModel;
-            //if(baseViewModel != null) baseViewModel.ViewModelInfo = new ViewModelInfo {ViewState = ViewState.QuickSearch, Type = view.ViewID.Type};
-            //// Let the IuiComponentModel know that it's in QuickSearch ViewState
+            //if(baseViewModel != null) baseViewModel.ViewModelInfo = new ViewModelInfo {ViewState = ViewState.QuickSearchExecute, Type = view.ViewID.Type};
+            //// Let the IuiComponentModel know that it's in QuickSearchExecute ViewState
             //_regionAdapter.Add(view, RegionName.ModalRegion);
         }
 

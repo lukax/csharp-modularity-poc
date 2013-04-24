@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     [Export(typeof(IBaseView<IAlterEmailViewModel>))]
-    [ViewInfo(ViewType.Email, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.Email, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterEmailView : IBaseView<IAlterEmailViewModel> {
         public AlterEmailView() {
             InitializeComponent();

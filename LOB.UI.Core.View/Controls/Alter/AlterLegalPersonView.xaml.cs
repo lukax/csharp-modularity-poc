@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     [Export(typeof(IBaseView<IAlterLegalPersonViewModel>))]
-    [ViewInfo(ViewType.LegalPerson, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.LegalPerson, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterLegalPersonView : IBaseView<IAlterLegalPersonViewModel> {
         public AlterLegalPersonView() {
             InitializeComponent();
@@ -23,7 +23,6 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
             var view = dependencyPropertyChangedEventArgs.NewValue as IAlterLegalPersonViewModel;
-            ViewAlterPerson.DataContext = view != null ? view.AlterPersonViewModel : dependencyPropertyChangedEventArgs.NewValue;
         }
 
         [Import] public IAlterLegalPersonViewModel ViewModel {

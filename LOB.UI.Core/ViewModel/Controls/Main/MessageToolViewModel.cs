@@ -13,7 +13,7 @@ using Microsoft.Practices.Prism.Commands;
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(IMessageToolViewModel))]
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
-        //[Import] private IEventAggregator EventAggregatorLazy { get; set; }
+        //[Import] private IEventAggregator EventAggregator { get; set; }
         public string Message { get; set; }
         public bool IsRestrictive { get; set; }
         private ICommand _closeCommand;
@@ -29,7 +29,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             set { _closeCommand = value; }
         }
 
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
 
         public override ViewModelInfo Info {
             get { return _viewModelInfo; }

@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Actions;
 using LOB.UI.Core.View.Controllers;
-using LOB.UI.Core.View.Controls.Main;
 using LOB.UI.Interface;
 using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Logging;

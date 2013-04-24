@@ -5,7 +5,6 @@ using System.ComponentModel.Composition;
 using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Main;
 
 #endregion
 

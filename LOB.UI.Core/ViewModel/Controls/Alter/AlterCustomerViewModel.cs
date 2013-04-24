@@ -9,7 +9,6 @@ using LOB.Domain.Base;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 
 #endregion
 
@@ -17,16 +16,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     [Export(typeof(IAlterCustomerViewModel))]
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private readonly ICustomerFacade _customerFacade;
-        private readonly AlterNaturalPersonViewModel _alterNaturalPersonViewModel;
-        private readonly AlterLegalPersonViewModel _alterLegalPersonViewModel;
         private string _personType;
-        public IAlterPersonViewModel AlterPersonViewModel {
-            get {
-                if(Entity.PersonType == Domain.Base.PersonType.Natural) return _alterNaturalPersonViewModel.AlterPersonViewModel;
-                if(Entity.PersonType == Domain.Base.PersonType.Legal) return _alterLegalPersonViewModel.AlterPersonViewModel;
-                return _alterNaturalPersonViewModel.AlterPersonViewModel;
-            }
-        }
         public ViewModelInfo PersonOperation { get; set; }
         public IList<string> PersonTypes {
             get { return PersonExtension.PersonTypesLocalizationsDict.Values.ToList(); }
@@ -53,30 +43,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         }
 
         private void LegalPersonCfg() {
-            ClearEntity(null);
-            (_alterLegalPersonViewModel).Entity = Entity.Person as LegalPerson;
-            //EventAggregatorLazy.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
+            ClearEntityExecute(null);
+            //EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
         private void NaturalPersonCfg() {
-            ClearEntity(null);
-            (_alterNaturalPersonViewModel).Entity = Entity.Person as NaturalPerson;
-            //EventAggregatorLazy.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
+            ClearEntityExecute(null);
+            //EventAggregator.GetEvent<PersonTypeChangedEvent>().Publish(PersonOperation);
         }
 
-        protected override bool CanSaveChanges(object arg) {
-            if(ReferenceEquals(Entity, null)) return false;
-            if(Info.ViewState == ViewState.Add) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            if(Info.ViewState == ViewState.Update) return base.CanSaveChanges(arg) & AlterPersonViewModel.SaveChangesCommand.CanExecute(null);
-            return false;
-        }
-
-        protected override void ClearEntity(object arg) { Entity = _customerFacade.GenerateEntity(PersonType.ToPersonType()); }
-
-        public override void Dispose() {
-            _alterLegalPersonViewModel.Dispose();
-            _alterNaturalPersonViewModel.Dispose();
-            base.Dispose();
-        }
+        protected override void ClearEntityExecute(object arg) { Entity = _customerFacade.GenerateEntity(PersonType.ToPersonType()); }
     }
 }

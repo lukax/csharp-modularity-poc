@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     [Export(typeof(IBaseView<IAlterCategoryViewModel>))]
-    [ViewInfo(ViewType.Category, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.Category, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterCategoryView : IBaseView<IAlterCategoryViewModel> {
         public AlterCategoryView() {
             InitializeComponent();

@@ -54,8 +54,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void UpdateUFList(object sender, DoWorkEventArgs doWorkEventArgs) { UFs = new ObservableCollection<UF>(Enum.GetValues(typeof(UF)).Cast<UF>()); }
 
-        protected override void ClearEntity(object arg) {
-            base.ClearEntity(arg);
+        protected override void ClearEntityExecute(object arg) {
+            base.ClearEntityExecute(arg);
             UF = Entity.State.ToUF();
         }
     }

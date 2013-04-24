@@ -15,8 +15,9 @@ using NullGuard;
 namespace LOB.Dao.Nhibernate {
     [Export(typeof(IUnityOfWork)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class UnityOfWork : IUnityOfWork {
-        protected ILoggerFacade LoggerFacade { get; set; }
+        protected ILoggerFacade Logger { get; set; }
         protected ITransaction Transaction { get; set; }
+        public event SessionCreatorEventHandler OnError;
         private object _orm;
         [AllowNull] public object ORM {
             get {
@@ -30,7 +31,9 @@ namespace LOB.Dao.Nhibernate {
                                                 }).Result);
             }
         }
+
         protected ISessionFactoryCreator SessionFactoryCreator { get; set; }
+
         public bool TestConnection() {
             try {
                 if(!ORM.As<ISession>().IsConnected) ORM.As<ISession>().Reconnect();
@@ -39,12 +42,11 @@ namespace LOB.Dao.Nhibernate {
             }
             return true;
         }
-        public event SessionCreatorEventHandler OnError;
 
         [ImportingConstructor]
         public UnityOfWork(ISessionFactoryCreator sessionFactoryCreator, ILoggerFacade loggerFacade) {
             SessionFactoryCreator = sessionFactoryCreator;
-            LoggerFacade = loggerFacade;
+            Logger = loggerFacade;
         }
 
         public IUnityOfWork BeginTransaction() {

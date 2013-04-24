@@ -15,8 +15,12 @@ using LOB.UI.Interface.Infrastructure;
 namespace LOB.UI.Core.ViewModel.Base {
     public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel, IEquatable<BaseViewModel> {
         [Import("ViewId")] public Guid Id { get; private set; }
-        public virtual string Header {get { return Strings.Common_Title; }}
-        protected static CultureInfo Culture {get { return Thread.CurrentThread.CurrentCulture; }}
+        public virtual string Header {
+            get { return Strings.Common_Title; }
+        }
+        protected static CultureInfo Culture {
+            get { return Thread.CurrentThread.CurrentCulture; }
+        }
         protected BackgroundWorker Worker { get; private set; }
         protected BaseViewModel() { Worker = new BackgroundWorker(); }
         public abstract ViewModelInfo Info { get; set; }

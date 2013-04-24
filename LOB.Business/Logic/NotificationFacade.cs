@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LOB.Domain.Logic;
 
-namespace LOB.Business.Logic
-{
-    internal class NotificationFacade
-    {
-        [Export(typeof(Notification))]
-        public Notification CreateNotification() {
-            return new Notification();          
+#endregion
+
+namespace LOB.Business.Logic {
+    internal class NotificationFacade {
+        [Export(typeof(Notification))] public Notification CreateNotification {
+            get { return new Notification(); }
         }
     }
 }

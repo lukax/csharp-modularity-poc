@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     [Export(typeof(IBaseView<IAlterPayCheckViewModel>))]
-    [ViewInfo(ViewType.PayCheck, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.PayCheck, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterPayCheckView : IBaseView<IAlterPayCheckViewModel> {
         public AlterPayCheckView() {
             InitializeComponent();

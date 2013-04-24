@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.View.Controls.List {
     [Export(typeof(IBaseView<IListNaturalPersonViewModel>))]
-    [ViewInfo(ViewType.NaturalPerson, new[] { ViewState.List, ViewState.QuickSearch })]
+    [ViewInfo(ViewType.NaturalPerson, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListNaturalPersonView : IBaseView<IListNaturalPersonViewModel> {
         public ListNaturalPersonView() {
             InitializeComponent();

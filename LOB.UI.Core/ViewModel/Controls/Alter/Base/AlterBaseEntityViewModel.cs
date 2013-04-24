@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
@@ -11,7 +10,7 @@ using LOB.Dao.Interface;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Core.Event;
-using LOB.UI.Core.Event.Operation;
+using LOB.UI.Core.Event.Infrastructure;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Base;
 using LOB.UI.Interface.Command;
@@ -24,139 +23,130 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     [InheritedExport]
-    public abstract class AlterBaseEntityViewModel<T> : BaseViewModel, IAlterBaseEntityViewModel<T> where T : BaseEntity {
+    public abstract class AlterBaseEntityViewModel<TEntity> : BaseViewModel, IAlterBaseEntityViewModel<TEntity> where TEntity : BaseEntity {
         private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
         private ViewModelInfo _viewModelInfo;
-        private T _entity;
-        public T Entity {
+        private TEntity _entity;
+        public TEntity Entity {
             get { return _entity; }
-            set {
+            protected set {
                 _entity = value;
                 EntityChanged();
             }
         }
-        public ICommand SaveChangesCommand { get; set; }
-        public ICommand DiscardChangesCommand { get; set; }
-        public ICommand ClearEntityCommand { get; set; }
-        public ICommand CloseCommand { get; set; }
-        public ICommand QuickSearchCommand { get; set; }
-        [Import] protected Lazy<IRepository> RepositoryLazy { get; private set; }
-        [Import] protected Lazy<IEventAggregator> EventAggregatorLazy { get; private set; }
-        [Import] protected Lazy<ILoggerFacade> LoggerLazy { get; private set; }
-        protected BackgroundWorker Worker { get; private set; }
+        public ICommand SaveChangesCommand { get; private set; }
+        public ICommand DiscardChangesCommand { get; private set; }
+        public ICommand ClearEntityCommand { get; private set; }
+        public ICommand CloseCommand { get; private set; }
+        public ICommand QuickSearchCommand { get; private set; }
+        [Import] protected Lazy<IBaseEntityFacade<TEntity>> EntityFacade { get; private set; }
+        [Import] protected Lazy<IRepository> Repository { get; private set; }
+        [Import] protected Lazy<IEventAggregator> EventAggregator { get; private set; }
+        [Import] protected Lazy<ILoggerFacade> Logger { get; private set; }
+        [Import] protected Lazy<Notification> Notification { get; private set; }
         protected NotificationEvent NotificationEvent {
-            get { return EventAggregatorLazy.Value.GetEvent<NotificationEvent>(); }
-        }
-        [Import] protected Lazy<Notification> NotificationLazy { get; private set; }
-        [Import] protected IBaseEntityFacade<T> BaseEntityFacade { get; set; }
-
-        //[ImportingConstructor]
-        //protected AlterBaseEntityViewModel(IRepository repository, IEventAggregator eventAggregator, ILoggerFacade logger)
-        //    : this(null, repository, eventAggregator, logger) { }
-
-        protected AlterBaseEntityViewModel(IBaseEntityFacade<T> baseEntityFacade) {
-            if(baseEntityFacade != null) BaseEntityFacade = baseEntityFacade;
-            Worker = new BackgroundWorker();
-            SaveChangesCommand = new DelegateCommand(SaveChanges, CanSaveChanges);
-            DiscardChangesCommand = new DelegateCommand(Cancel, CanCancel);
-            QuickSearchCommand = new DelegateCommand(QuickSearch, CanQuickSearch);
-            ClearEntityCommand = new DelegateCommand(ClearEntity, CanClearEntity);
+            get { return EventAggregator.Value.GetEvent<NotificationEvent>(); }
         }
 
-        protected AlterBaseEntityViewModel()
-            : this(null) { }
+        protected AlterBaseEntityViewModel(IBaseEntityFacade<TEntity> customBaseEntityFacade = null, IRepository customRepository = null) {
+            if(customBaseEntityFacade != null) EntityFacade = new Lazy<IBaseEntityFacade<TEntity>>(() => customBaseEntityFacade);
+            if(customRepository != null) Repository = new Lazy<IRepository>(() => customRepository);
+            SaveChangesCommand = new RelayDelegateCommand(Id, SaveChangesExecute, CanSaveChanges, sharedCanExecute: true);
+            DiscardChangesCommand = new DelegateCommand(DiscardChangesExecute, CanDiscardChanges);
+            QuickSearchCommand = new DelegateCommand(QuickSearchExecute, CanQuickSearch);
+            ClearEntityCommand = new DelegateCommand(ClearEntityExecute, CanClearEntity);
+        }
 
         public override void InitializeServices() {
-            if(Entity == null) ClearEntity(null);
-            EventAggregatorLazy.Value.GetEvent<IncludeEntityEvent>().Subscribe(IncludeEventExecute);
+            if(Entity == null) ClearEntityExecute(null);
+            EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Subscribe(IncludeEventExecute);
+            Info.SubState(ViewSubState.Unlocked);
         }
 
-        protected virtual void IncludeEventExecute(IncludeEntityPayload includeEntityPayload) {
-            if(includeEntityPayload.ViewId != Id) return;
-            var entity = includeEntityPayload.Entity as T;
+        protected virtual void IncludeEventExecute(EntityIncludePayload<TEntity> entityIncludePayload) {
+            if(entityIncludePayload.ViewId != Id) return;
+            var entity = entityIncludePayload.Entity;
             if(entity == null) return;
             Entity = entity;
             Info.State(ViewState.Update);
         }
 
-        protected virtual bool CanCancel(object arg) {
-            if(Info.ViewState == ViewState.Add) return true;
-            if(Info.ViewState == ViewState.Update) return true;
+        protected virtual bool CanDiscardChanges(object arg) {
+            if(Info.State == ViewState.Add & Info.SubState == ViewSubState.Unlocked) return true;
+            if(Info.State == ViewState.Update & Info.SubState == ViewSubState.Unlocked) return true;
             return false;
         }
-        protected virtual void Cancel(object arg) { EventAggregatorLazy.Value.GetEvent<CloseViewEvent>().Publish(Id); }
+        protected virtual void DiscardChangesExecute(object arg) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id); }
 
         protected virtual bool CanSaveChanges(object arg) {
-            if(BaseEntityFacade != null) {
-                IEnumerable<ValidationResult> results;
-                if(Info.ViewState == ViewState.Add) return BaseEntityFacade.CanAdd(out results);
-                if(Info.ViewState == ViewState.Update) return BaseEntityFacade.CanUpdate(out results);
+            if(EntityFacade != null) {
+                if(Info.State == ViewState.Add & Info.SubState == ViewSubState.Unlocked) return EntityFacade.Value.CanAdd().Item1;
+                if(Info.State == ViewState.Update & Info.SubState == ViewSubState.Unlocked) return EntityFacade.Value.CanUpdate().Item1;
                 return false;
             }
             return !ReferenceEquals(Entity, null);
         }
-        protected virtual void SaveChanges(object arg) {
-            Worker.DoWork += SaveChanges;
+        private void SaveChangesExecute(object arg) {
+            Worker.DoWork += SaveChangesExecute;
             Worker.WorkerSupportsCancellation = true;
             Worker.RunWorkerAsync();
         }
-        private void SaveChanges(object sender, DoWorkEventArgs e) {
+        protected virtual void SaveChangesExecute(object sender, DoWorkEventArgs e) {
             Info.SubState(ViewSubState.Locked);
             NotificationEvent.Publish(
-                NotificationLazy.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationState.Info));
-            RepositoryLazy.Value.Uow.OnError += (o, s) => {
-                                                    NotificationEvent.Publish(
-                                                        NotificationLazy.Value.Message(s.Description)
-                                                                        .Detail(s.ErrorMessage)
-                                                                        .Progress(-1)
-                                                                        .State(NotificationState.Error));
-                                                    Worker.CancelAsync();
-                                                };
-            using(RepositoryLazy.Value.Uow.BeginTransaction())
+                Notification.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationState.Info));
+            Repository.Value.Uow.OnError += (o, s) => {
+                                                NotificationEvent.Publish(
+                                                    Notification.Value.Message(s.Description)
+                                                                .Detail(s.ErrorMessage)
+                                                                .Progress(-1)
+                                                                .State(NotificationState.Error));
+                                                Worker.CancelAsync();
+                                            };
+            using(Repository.Value.Uow.BeginTransaction())
                 if(!Worker.CancellationPending) {
-                    NotificationEvent.Publish(NotificationLazy.Value.Progress(50));
-                    Entity = RepositoryLazy.Value.SaveOrUpdate(Entity);
-                    NotificationEvent.Publish(NotificationLazy.Value.Progress(70));
-                    RepositoryLazy.Value.Uow.CommitTransaction();
-                    NotificationEvent.Publish(
-                        NotificationLazy.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationState.Ok));
+                    NotificationEvent.Publish(Notification.Value.Progress(50));
+                    Entity = Repository.Value.SaveOrUpdate(Entity);
+                    NotificationEvent.Publish(Notification.Value.Progress(70));
+                    Repository.Value.Uow.CommitTransaction();
+                    NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationState.Ok));
                     Info.State(ViewState.Update);
                 }
             Info.SubState(ViewSubState.Unlocked);
         }
 
         protected virtual bool CanQuickSearch(object obj) {
-            if(Info == null) return false;
-            return Info.ViewState != ViewState.QuickSearch;
+            if(Info == null || Info.SubState == ViewSubState.Locked) return false;
+            return Info.State != ViewState.QuickSearch;
         }
-        protected virtual void QuickSearch(object arg) {
+        protected virtual void QuickSearchExecute(object arg) {
             Info.State(ViewState.QuickSearch);
             var openPayload = new OpenViewPayload(ViewInfoExtension.New(ViewType.Address, new[] {ViewState.QuickSearch}));
-            EventAggregatorLazy.Value.GetEvent<OpenViewEvent>().Publish(openPayload);
+            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(openPayload);
             _currentSubscription =
-                EventAggregatorLazy.Value.GetEvent<CloseViewEvent>().Subscribe(delegate(Guid payloadId) { if(Id == payloadId) RestoreUIState(Info); });
+                EventAggregator.Value.GetEvent<CloseViewEvent>().Subscribe(delegate(Guid payloadId) { if(Id == payloadId) RestoreUIState(); });
         }
 
-        private void RestoreUIState(ViewModelInfo obj) {
-            if(Info.ViewState == ViewState.QuickSearch) {
+        private void RestoreUIState() {
+            if(Info.State == ViewState.QuickSearch) {
                 Info.State(_previousState);
                 _currentSubscription.Dispose();
             }
         }
 
-        protected virtual bool CanClearEntity(object obj) { return Info.ViewState == ViewState.Add; }
-        protected virtual void ClearEntity(object arg) { Entity = BaseEntityFacade.GenerateEntity(); }
+        protected virtual bool CanClearEntity(object obj) { return Info.State == ViewState.Add && Info.SubState == ViewSubState.Unlocked; }
+        protected virtual void ClearEntityExecute(object arg) { Entity = EntityFacade.Value.GenerateEntity(); }
 
-        protected virtual void EntityChanged() { BaseEntityFacade.Entity = Entity; }
+        protected virtual void EntityChanged() {
+            EntityFacade.Value.Entity = Entity;
+            EventAggregator.Value.GetEvent<EntityChangedEvent<TEntity>>().Publish(new EntityChangedPayload<TEntity>(Id, Entity));
+        }
 
-        public override void Refresh() { ClearEntity(null); }
+        public override void Refresh() { ClearEntityExecute(null); }
 
         public override ViewModelInfo Info {
-            get {
-                return _viewModelInfo ??
-                       (_viewModelInfo = new ViewModelInfo {IsChild = true, ViewState = ViewState.Add, ViewSubState = ViewSubState.Locked});
-            }
+            get { return _viewModelInfo ?? (_viewModelInfo = new ViewModelInfo {IsChild = true, State = ViewState.Add, SubState = ViewSubState.Locked}); }
             set {
                 _viewModelInfo = value;
                 UIOpChanged(null, new PropertyChangedEventArgs("ViewState"));
@@ -165,8 +155,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
         private void UIOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
             if(propertyChangedEventArgs.PropertyName == "ViewState") {
-                if(Info.ViewState == ViewState.QuickSearch) return;
-                _previousState = Info.ViewState;
+                if(Info.State == ViewState.QuickSearch) return;
+                _previousState = Info.State;
             }
         }
         #region Implementation of IDisposable
@@ -180,6 +170,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
             if(!disposing) return;
             Worker.Dispose();
+            Repository.Value.Uow.Dispose();
         }
 
         #endregion

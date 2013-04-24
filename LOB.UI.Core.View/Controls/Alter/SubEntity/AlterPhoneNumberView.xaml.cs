@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     [Export(typeof(IBaseView<IAlterPhoneNumberViewModel>))]
-    [ViewInfo(ViewType.PhoneNumber, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.PhoneNumber, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterPhoneNumberView : IBaseView<IAlterPhoneNumberViewModel> {
         public AlterPhoneNumberView() {
             InitializeComponent();

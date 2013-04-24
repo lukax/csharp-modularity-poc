@@ -13,7 +13,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     [Export(typeof(IBaseView<IAlterCustomerViewModel>))]
-    [ViewInfo(ViewType.Customer, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.Customer, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterCustomerView : IBaseView<IAlterCustomerViewModel> {
         [Import] public CustomerRegionController Controller { get; set; }
 

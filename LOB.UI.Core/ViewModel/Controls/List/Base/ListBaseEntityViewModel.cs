@@ -39,50 +39,47 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             }
             set { _searchCriteria = value; }
         }
-
-        public ICommand SearchCommand { get; set; }
-        public ICommand IncludeCommand { get; set; }
-        public ICommand AddCommand { get; set; }
-        public ICommand UpdateCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
-        public ICommand FetchCommand { get; set; }
-        public ICommand CloseCommand { get; set; }
-        public T Entity { get; set; }
-        public IEnumerable<T> Entities { get; set; }
-        public string Search { get; set; }
-        [Import] protected Lazy<IRepository> RepositoryLazy { get; private set; }
-        [Import] protected Lazy<IEventAggregator> EventAggregatorLazy { get; private set; }
         public override ViewModelInfo Info {
-            get {
-                return _viewModelInfo ??
-                       (_viewModelInfo = new ViewModelInfo {IsChild = true, ViewState = ViewState.Add, ViewSubState = ViewSubState.Locked});
-            }
+            get { return _viewModelInfo ?? (_viewModelInfo = new ViewModelInfo {IsChild = true, State = ViewState.List, SubState = ViewSubState.Locked}); }
             set { _viewModelInfo = value; }
         }
+        public ICommand SearchCommand { get; private set; }
+        public ICommand IncludeCommand { get; private set; }
+        public ICommand AddCommand { get; private set; }
+        public ICommand UpdateCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
+        public ICommand FetchCommand { get; private set; }
+        public ICommand CloseCommand { get; private set; }
+        public T Entity { get; set; }
+        public IEnumerable<T> Entities { get; private set; }
+        public string Search { get; set; }
+        [Import] protected Lazy<Notification> Notification { get; private set; }
+        [Import] protected Lazy<IRepository> Repository { get; private set; }
+        [Import] protected Lazy<IEventAggregator> EventAggregator { get; private set; }
         protected NotificationEvent NotificationEvent {
-            get { return EventAggregatorLazy.Value.GetEvent<NotificationEvent>(); }
+            get { return EventAggregator.Value.GetEvent<NotificationEvent>(); }
         }
-        [Import] protected Lazy<Notification> NotificationLazy { get; private set; }
 
-        protected ListBaseEntityViewModel() {
+        protected ListBaseEntityViewModel(IRepository customRepository = null) {
+            if(customRepository != null) Repository = new Lazy<IRepository>(() => customRepository);
             SearchCommand = new DelegateCommand(SearchExecute);
-            IncludeCommand = new DelegateCommand(Include);
-            AddCommand = new DelegateCommand(Save, CanSave);
-            UpdateCommand = new DelegateCommand(Update, CanUpdate);
-            DeleteCommand = new DelegateCommand(Delete, CanDelete);
-            FetchCommand = new DelegateCommand(Fetch);
-            CloseCommand = new DelegateCommand(Exit);
+            IncludeCommand = new DelegateCommand(IncludeExecute);
+            AddCommand = new DelegateCommand(SaveExecute, CanSave);
+            UpdateCommand = new DelegateCommand(UpdateExecute, CanUpdate);
+            DeleteCommand = new DelegateCommand(DeleteExecute, CanDelete);
+            FetchCommand = new DelegateCommand(FetchExecute);
+            CloseCommand = new DelegateCommand(ExitExecute);
             Search = "";
         }
 
-        private void Include(object o) {
-            //EventAggregatorLazy.GetEvent<IncludeEntityEvent>().Publish(Entity);
+        private void IncludeExecute(object o) {
+            //EventAggregator.GetEvent<EntityIncludeEvent>().Publish(Entity);
         }
 
         protected virtual void SearchExecute(object obj) { if(Worker.CancellationPending) if(!Worker.IsBusy) Worker.RunWorkerAsync(); }
 
-        private void Exit(object obj) {
-            //EventAggregatorLazy.GetEvent<CloseViewEvent>().Publish(ViewModelInfo);
+        private void ExitExecute(object obj) {
+            //EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewModelInfo);
         }
 
         public int UpdateInterval {
@@ -94,7 +91,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Worker.DoWork += WorkerUpdateList;
             Worker.RunWorkerAsync();
         }
-
+        public override void Refresh() { Search = ""; }
         /// <summary>
         ///     Constantly update the list async every 1000 miliseconds
         /// </summary>
@@ -103,61 +100,59 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
             //TODO: Dynamic set based on selected tab
-            RepositoryLazy.Value.Uow.OnError += (o, s) => {
-                                                    NotificationEvent.Publish(
-                                                        NotificationLazy.Value.Message(s.Description)
-                                                                        .Detail(s.ErrorMessage)
-                                                                        .Progress(-1)
-                                                                        .State(NotificationState.Error));
-                                                    //Worker.CancelAsync();
-                                                    Info.SubState(ViewSubState.Locked);
-                                                };
+            Repository.Value.Uow.OnError += (o, s) => {
+                                                NotificationEvent.Publish(
+                                                    Notification.Value.Message(s.Description)
+                                                                .Detail(s.ErrorMessage)
+                                                                .Progress(-1)
+                                                                .State(NotificationState.Error));
+                                                //Worker.CancelAsync();
+                                                Info.SubState(ViewSubState.Locked);
+                                            };
             do {
-                if(RepositoryLazy.Value.Uow.TestConnection())
-                    using(RepositoryLazy.Value.Uow.BeginTransaction())
+                if(Repository.Value.Uow.TestConnection())
+                    using(Repository.Value.Uow.BeginTransaction())
                         if(!worker.CancellationPending) {
-                            EventAggregatorLazy.Value.GetEvent<NotificationEvent>()
-                                               .Publish(
-                                                   NotificationLazy.Value.Message(Strings.Notification_List_Updating)
-                                                                   .Progress(10)
-                                                                   .State(NotificationState.Info));
+                            EventAggregator.Value.GetEvent<NotificationEvent>()
+                                           .Publish(
+                                               Notification.Value.Message(Strings.Notification_List_Updating)
+                                                           .Progress(10)
+                                                           .State(NotificationState.Info));
                             IList<T> localList = string.IsNullOrEmpty(Search)
-                                                     ? (RepositoryLazy.Value.GetAll<T>()).ToList()
-                                                     : (RepositoryLazy.Value.GetAll(SearchCriteria)).ToList();
-                            EventAggregatorLazy.Value.GetEvent<NotificationEvent>()
-                                               .Publish(NotificationLazy.Value.Message(Strings.Notification_List_Updating).Progress(70));
+                                                     ? (Repository.Value.GetAll<T>()).ToList()
+                                                     : (Repository.Value.GetAll(SearchCriteria)).ToList();
+                            EventAggregator.Value.GetEvent<NotificationEvent>()
+                                           .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
                             if(Entities == null || !localList.SequenceEqual(Entities)) {
                                 Entities = new ObservableCollection<T>(localList);
-                                EventAggregatorLazy.Value.GetEvent<NotificationEvent>()
-                                                   .Publish(NotificationLazy.Value.Message(Strings.Notification_List_Updating).Progress(100));
+                                EventAggregator.Value.GetEvent<NotificationEvent>()
+                                               .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
                             }
                             else
-                                EventAggregatorLazy.Value.GetEvent<NotificationEvent>()
-                                                   .Publish(
-                                                       NotificationLazy.Value.Message(Strings.Notification_List_Updated)
-                                                                       .Progress(-1)
-                                                                       .State(NotificationState.Ok));
+                                EventAggregator.Value.GetEvent<NotificationEvent>()
+                                               .Publish(
+                                                   Notification.Value.Message(Strings.Notification_List_Updated)
+                                                               .Progress(-1)
+                                                               .State(NotificationState.Ok));
                             Info.SubState(ViewSubState.Unlocked);
                         }
                 Thread.Sleep(2000);
             } while(!Worker.CancellationPending);
         }
 
-        protected virtual void Save(object arg) { }
+        protected virtual void SaveExecute(object arg) { }
 
         protected virtual bool CanSave(object arg) { return Entity != null; }
 
-        protected virtual void Update(object arg) { }
+        protected virtual void UpdateExecute(object arg) { }
 
         protected virtual bool CanUpdate(object arg) { return Entity != null; }
 
-        protected virtual void Delete(object arg) { RepositoryLazy.Value.Delete(Entity); }
+        protected virtual void DeleteExecute(object arg) { Repository.Value.Delete(Entity); }
 
         protected virtual bool CanDelete(object arg) { return Entity != null; }
 
-        public override void Refresh() { Search = ""; }
-
-        protected virtual void Fetch(object arg = null) {
+        protected virtual void FetchExecute(object arg = null) {
             Entities = null;
             if(!Worker.IsBusy) Worker.RunWorkerAsync();
         }
@@ -172,6 +167,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
             if(!disposing) return;
             Worker.Dispose();
+            Repository.Value.Uow.Dispose();
         }
 
         #endregion

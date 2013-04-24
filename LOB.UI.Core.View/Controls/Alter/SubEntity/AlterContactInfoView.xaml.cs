@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
     [Export(typeof(IBaseView<IAlterContactInfoViewModel>))]
-    [ViewInfo(ViewType.ContactInfo, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.ContactInfo, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterContactInfoView : IBaseView<IAlterContactInfoViewModel> {
         public AlterContactInfoView() {
             InitializeComponent();

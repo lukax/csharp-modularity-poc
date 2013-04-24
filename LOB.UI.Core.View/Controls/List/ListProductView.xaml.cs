@@ -11,7 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.List;
 
 namespace LOB.UI.Core.View.Controls.List {
     [Export(typeof(IBaseView<IListProductViewModel>))]
-    [ViewInfo(ViewType.Product, new[] { ViewState.List, ViewState.QuickSearch })]
+    [ViewInfo(ViewType.Product, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListProductView : IBaseView<IListProductViewModel> {
         public ListProductView() { InitializeComponent(); }
 

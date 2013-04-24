@@ -15,10 +15,10 @@
         <StackPanel.Style>
             <Style TargetType="StackPanel">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding ViewID.IsChild}" Value="False">
+                    <DataTrigger Binding="{Binding Info.IsChild}" Value="False">
                         <Setter Property="Visibility" Value="Visible" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding ViewID.IsChild}" Value="True">
+                    <DataTrigger Binding="{Binding Info.IsChild}" Value="True">
                         <Setter Property="Visibility" Value="Collapsed" />
                     </DataTrigger>
                 </Style.Triggers>
@@ -29,7 +29,7 @@
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ViewID.State}" Value="Add">
+                            <DataTrigger Binding="{Binding Info.State}" Value="Add">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -40,7 +40,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ViewID.State}" Value="Update">
+                            <DataTrigger Binding="{Binding Info.State}" Value="UpdateExecute">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -51,7 +51,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ViewID.State}" Value="Delete">
+                            <DataTrigger Binding="{Binding Info.State}" Value="DeleteExecute">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -63,7 +63,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ViewID.State}" Value="List">
+                            <DataTrigger Binding="{Binding Info.State}" Value="List">
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <DockPanel>
@@ -74,10 +74,10 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ViewID.SubState}" Value="Locked">
+                            <DataTrigger Binding="{Binding Info.SubState}" Value="Locked">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ViewID.SubState}" Value="Unlocked">
+                            <DataTrigger Binding="{Binding Info.SubState}" Value="Unlocked">
                                 <Setter Property="IsEnabled" Value="True" />
                             </DataTrigger>
                         </Style.Triggers>

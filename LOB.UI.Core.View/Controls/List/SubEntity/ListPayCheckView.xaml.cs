@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export(typeof(IBaseView<IListPayCheckViewModel>))]
-    [ViewInfo(ViewType.PayCheck, new[] { ViewState.List, ViewState.QuickSearch })]
+    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListPayCheckView : IBaseView<IListPayCheckViewModel> {
         public ListPayCheckView() {
             InitializeComponent();

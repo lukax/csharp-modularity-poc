@@ -9,20 +9,20 @@ using LOB.Domain.Base;
 
 namespace LOB.UI.Interface.Infrastructure {
     public class ViewModelInfo : BaseNotifyChange, IEquatable<ViewModelInfo> {
-        public ViewState ViewState { get; set; }
-        public ViewSubState ViewSubState { get; set; }
+        public ViewState State { get; set; }
+        public ViewSubState SubState { get; set; }
         public bool IsChild { get; set; }
-        public override string ToString() { return string.Format("{0}_{1}", ViewState.ToString(), ViewSubState.ToString()); }
+        public override string ToString() { return string.Format("{0}_{1}", State.ToString(), SubState.ToString()); }
         #region Equality members
 
         public bool Equals(ViewModelInfo other) {
             if(ReferenceEquals(other, null)) return false;
-            return (IsChild == other.IsChild && ViewState == other.ViewState && ViewSubState == other.ViewSubState);
+            return (IsChild == other.IsChild && State == other.State && SubState == other.SubState);
         }
 
         public override int GetHashCode() {
             unchecked {
-                return ((int)ViewState*(int)ViewSubState*397) ^ (int)ViewState + (IsChild ? 1 : 2);
+                return ((int)State*(int)SubState*397) ^ (int)State + (IsChild ? 1 : 2);
             }
         }
 
@@ -39,17 +39,17 @@ namespace LOB.UI.Interface.Infrastructure {
             string[] cutted = s.Split('_');
             ViewState parsedState;
             ViewSubState parsedType;
-            if(Enum.TryParse(cutted[0], out parsedState)) if(Enum.TryParse(cutted[1], out parsedType)) if(Enum.TryParse(cutted[3], out parsedType)) return new ViewModelInfo {ViewState = parsedState, ViewSubState = parsedType};
+            if(Enum.TryParse(cutted[0], out parsedState)) if(Enum.TryParse(cutted[1], out parsedType)) if(Enum.TryParse(cutted[3], out parsedType)) return new ViewModelInfo {State = parsedState, SubState = parsedType};
             throw new ArgumentException("s");
         }
         #region Fluent methods for ViewModelInfo
 
         public static ViewModelInfo State(this ViewModelInfo op, ViewState state) {
-            op.ViewState = state;
+            op.State = state;
             return op;
         }
         public static ViewModelInfo SubState(this ViewModelInfo op, ViewSubState subState) {
-            op.ViewSubState = subState;
+            op.SubState = subState;
             return op;
         }
         public static ViewModelInfo IsChild(this ViewModelInfo op, bool isChild) {

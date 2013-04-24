@@ -11,7 +11,7 @@ using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export(typeof(IBaseView<IListPhoneNumberViewModel>))]
-    [ViewInfo(ViewType.PhoneNumber, new[] { ViewState.List, ViewState.QuickSearch })]
+    [ViewInfo(ViewType.PhoneNumber, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListPhoneNumberView : IBaseView<IListPhoneNumberViewModel> {
         public ListPhoneNumberView() { InitializeComponent(); }
 

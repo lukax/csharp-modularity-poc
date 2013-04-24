@@ -7,13 +7,12 @@ using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
     [Export(typeof(IBaseView<IAlterNaturalPersonViewModel>))]
-    [ViewInfo(ViewType.NaturalPerson, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.NaturalPerson, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterNaturalPersonView : IBaseView<IAlterNaturalPersonViewModel> {
         public AlterNaturalPersonView() {
             InitializeComponent();
@@ -24,7 +23,6 @@ namespace LOB.UI.Core.View.Controls.Alter {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
             var view = dependencyPropertyChangedEventArgs.NewValue as IAlterNaturalPersonViewModel;
-            ViewAlterPerson.DataContext = view != null ? view.AlterPersonViewModel : dependencyPropertyChangedEventArgs.NewValue;
         }
 
         [Import] public IAlterNaturalPersonViewModel ViewModel {

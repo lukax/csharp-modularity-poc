@@ -3,22 +3,16 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq.Expressions;
-using LOB.Dao.Interface;
 using LOB.Domain;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
 using LOB.UI.Interface.ViewModel.Controls.List;
-using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     [Export(typeof(IListNaturalPersonViewModel))]
     public class ListNaturalPersonViewModel : ListBaseEntityViewModel<NaturalPerson>, IListNaturalPersonViewModel {
-        [ImportingConstructor]
-        public ListNaturalPersonViewModel(IRepository repository, IEventAggregator eventAggregator)
-            : base() { }
-
-        public new Expression<Func<NaturalPerson, bool>> SearchCriteria {
+        public override Expression<Func<NaturalPerson, bool>> SearchCriteria {
             get {
                 try {
                     return

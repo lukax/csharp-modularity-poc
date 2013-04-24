@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
-using LOB.Business.Interface.Logic.SubEntity;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
@@ -10,9 +9,5 @@ using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     [Export(typeof(IAlterPhoneNumberViewModel))]
-    public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {
-        [ImportingConstructor]
-        public AlterPhoneNumberViewModel(IPhoneNumberFacade phoneNumberFacade)
-            : base(phoneNumberFacade) { }
-    }
+    public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {}
 }

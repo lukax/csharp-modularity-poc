@@ -85,7 +85,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             set { _viewModelInfo = value; }
         }
 
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
         #region Implementation of IDisposable
 
         ~NotificationToolViewModel() { Dispose(false); }

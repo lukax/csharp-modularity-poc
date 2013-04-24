@@ -112,11 +112,11 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Event\Operation\IncludeEntityEvent.cs" />
-    <Compile Include="Event\Operation\CancelEvent.cs" />
-    <Compile Include="Event\Operation\RefreshEvent.cs" />
+    <Compile Include="Event\Infrastructure\EntityChangedEvent.cs" />
+    <Compile Include="Event\Infrastructure\EntityIncludeEvent.cs" />
+    <Compile Include="Event\Infrastructure\CancelEvent.cs" />
+    <Compile Include="Event\Infrastructure\RefreshEvent.cs" />
     <Compile Include="Event\NotificationEvent.cs" />
-    <Compile Include="Event\Operation\PersonTypeChangedEvent.cs" />
     <Compile Include="Event\View\CloseViewEvent.cs" />
     <Compile Include="Event\View\OpenViewEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />

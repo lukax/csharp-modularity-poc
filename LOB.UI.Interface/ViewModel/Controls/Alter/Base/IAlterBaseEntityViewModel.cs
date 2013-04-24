@@ -7,13 +7,13 @@ using LOB.Domain.Base;
 
 namespace LOB.UI.Interface.ViewModel.Controls.Alter.Base {
     public interface IAlterBaseEntityViewModel : IBaseViewModel {
-        ICommand QuickSearchCommand { get; set; }
-        ICommand SaveChangesCommand { get; set; }
-        ICommand DiscardChangesCommand { get; set; }
-        ICommand CloseCommand { get; set; }
+        ICommand SaveChangesCommand { get; }
+        ICommand DiscardChangesCommand { get; }
+        ICommand QuickSearchCommand { get; }
+        ICommand CloseCommand { get; }
     }
 
-    public interface IAlterBaseEntityViewModel<TEntity> : IAlterBaseEntityViewModel where TEntity : BaseEntity {
-        TEntity Entity { get; set; }
+    public interface IAlterBaseEntityViewModel<out TEntity> : IAlterBaseEntityViewModel where TEntity : BaseEntity {
+        TEntity Entity { get; }
     }
 }

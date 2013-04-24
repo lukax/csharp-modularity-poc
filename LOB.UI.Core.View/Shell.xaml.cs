@@ -46,13 +46,13 @@ namespace LOB.UI.Core.View {
         private void OnLoad(object sender, EventArgs eventArgs) {
             //LazyEventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => { if(o.Equals(new ViewModelInfo {Type = ViewType.Main})) Close(); });
             //LazyEventAggregator.GetEvent<OpenViewEvent>().Subscribe(type => {
-            //                                                        if(type.ViewState == ViewState.QuickSearch) {
+            //                                                        if(type.ViewState == ViewState.QuickSearchExecute) {
             //                                                            BlurModal.Radius = 15;
             //                                                            BorderModal.Visibility = Visibility.Visible;
             //                                                        }
             //                                                    });
             //LazyEventAggregator.GetEvent<CloseViewEvent>().Subscribe(type => {
-            //                                                         if(type.ViewState == ViewState.QuickSearch) {
+            //                                                         if(type.ViewState == ViewState.QuickSearchExecute) {
             //                                                             BlurModal.Radius = 0;
             //                                                             BorderModal.Visibility = Visibility.Hidden;
             //                                                         }

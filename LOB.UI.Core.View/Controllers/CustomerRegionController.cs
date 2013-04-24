@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Core.Event.Operation;
 using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 

@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region Usings
+
+using System;
+
+#endregion
 
 namespace LOB.UI.Interface.Infrastructure {
     public interface IRegionAdapter {

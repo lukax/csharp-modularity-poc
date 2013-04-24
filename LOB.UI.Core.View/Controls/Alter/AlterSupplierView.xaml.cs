@@ -12,7 +12,7 @@ using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 namespace LOB.UI.Core.View.Controls.Alter {
     [Export(typeof(IBaseView<IAlterSupplierViewModel>))]
-    [ViewInfo(ViewType.Supplier, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.Supplier, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterSupplierView : IBaseView<IAlterSupplierViewModel> {
         public AlterSupplierView() {
             InitializeComponent();

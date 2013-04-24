@@ -20,8 +20,7 @@
         Locked,
     }
 
-    public enum ViewType
-    {
+    public enum ViewType {
         Other = 0,
 
         Main,

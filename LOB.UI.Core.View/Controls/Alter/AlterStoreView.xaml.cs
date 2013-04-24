@@ -8,13 +8,12 @@ using LOB.UI.Core.View.Infrastructure;
 using LOB.UI.Interface;
 using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
     [Export(typeof(IBaseView<IAlterStoreViewModel>))]
-    [ViewInfo(ViewType.Store, new[] { ViewState.Add, ViewState.Update, ViewState.Delete })]
+    [ViewInfo(ViewType.Store, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterStoreView : IBaseView<IAlterStoreViewModel> {
         public AlterStoreView() {
             InitializeComponent();

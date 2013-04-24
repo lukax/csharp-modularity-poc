@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Command\ICommandService.cs" />
+    <Compile Include="Command\RelayDelegateCommand.cs" />
+    <Compile Include="Controls\IViewControl.cs" />
     <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="Event\IBaseEvent.cs" />
     <Compile Include="Infrastructure\IViewInfo.cs" />

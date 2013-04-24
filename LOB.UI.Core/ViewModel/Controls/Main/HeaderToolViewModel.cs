@@ -53,7 +53,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {ViewState = ViewState.Other};
+        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
         private NotificationEvent _notificationEvent;
         public override ViewModelInfo Info {
             get { return _viewModelInfo; }

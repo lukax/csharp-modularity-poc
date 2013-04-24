@@ -20,10 +20,7 @@ namespace LOB.UI.Core.View.Controls.Alter.Base {
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
             var view = dependencyPropertyChangedEventArgs.NewValue as IAlterPersonViewModel;
-            if(view != null) {
-                ViewAlterAddress.DataContext = view.AlterAddressViewModel;
-                ViewAlterContactInfo.DataContext = view.AlterContactInfoViewModel;
-            }
+            if(view != null) {}
             else {
                 ViewAlterAddress.DataContext = dependencyPropertyChangedEventArgs.NewValue;
                 ViewAlterContactInfo.DataContext = dependencyPropertyChangedEventArgs.NewValue;
