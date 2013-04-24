@@ -53,12 +53,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
         private NotificationEvent _notificationEvent;
-        public override ViewModelInfo Info {
-            get { return _viewModelInfo; }
-            set { _viewModelInfo = value; }
-        }
         #region Implementation of IDisposable
 
         public override void Dispose() { GC.SuppressFinalize(this); }

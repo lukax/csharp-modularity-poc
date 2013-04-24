@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -27,7 +26,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T> where T : BaseEntity {
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
-        private ViewModelInfo _viewModelInfo;
         public virtual Expression<Func<T, bool>> SearchCriteria {
             get {
                 try {
@@ -38,10 +36,6 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 }
             }
             set { _searchCriteria = value; }
-        }
-        public override ViewModelInfo Info {
-            get { return _viewModelInfo ?? (_viewModelInfo = new ViewModelInfo {IsChild = true, State = ViewState.List, SubState = ViewSubState.Locked}); }
-            set { _viewModelInfo = value; }
         }
         public ICommand SearchCommand { get; private set; }
         public ICommand IncludeCommand { get; private set; }
@@ -60,27 +54,31 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             get { return EventAggregator.Value.GetEvent<NotificationEvent>(); }
         }
 
-        protected ListBaseEntityViewModel(IRepository customRepository = null) {
-            if(customRepository != null) Repository = new Lazy<IRepository>(() => customRepository);
-            SearchCommand = new DelegateCommand(SearchExecute);
-            IncludeCommand = new DelegateCommand(IncludeExecute);
+        protected ListBaseEntityViewModel(Lazy<IRepository> customRepository = null) {
+            if(customRepository != null) Repository = customRepository;
+            SearchCommand = new DelegateCommand(SearchExecute, CanSearch);
+            IncludeCommand = new DelegateCommand(IncludeExecute, CanInclude);
             AddCommand = new DelegateCommand(SaveExecute, CanSave);
             UpdateCommand = new DelegateCommand(UpdateExecute, CanUpdate);
             DeleteCommand = new DelegateCommand(DeleteExecute, CanDelete);
-            FetchCommand = new DelegateCommand(FetchExecute);
-            CloseCommand = new DelegateCommand(ExitExecute);
+            FetchCommand = new DelegateCommand(FetchExecute, CanFetch);
+            CloseCommand = new DelegateCommand(ExitExecute, CanExit);
             Search = "";
-        }
-
-        private void IncludeExecute(object o) {
-            //EventAggregator.GetEvent<EntityIncludeEvent>().Publish(Entity);
         }
 
         protected virtual void SearchExecute(object obj) { if(Worker.CancellationPending) if(!Worker.IsBusy) Worker.RunWorkerAsync(); }
 
+        protected bool CanSearch(object obj) { return IsUnlocked; }
+
+        private void IncludeExecute(object o) {
+            //EventAggregator.GetEvent<EntityIncludeEvent>().Publish(Entity);
+        }
+        private bool CanInclude(object obj) { return IsUnlocked; }
+
         private void ExitExecute(object obj) {
             //EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewModelInfo);
         }
+        private bool CanExit(object obj) { return IsUnlocked; }
 
         public int UpdateInterval {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
@@ -88,14 +86,35 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         }
 
         public override void InitializeServices() {
+            ChangeState(ViewState.List);
             Worker.DoWork += WorkerUpdateList;
             Worker.RunWorkerAsync();
         }
+
         public override void Refresh() { Search = ""; }
-        /// <summary>
-        ///     Constantly update the list async every 1000 miliseconds
-        /// </summary>
+
+        protected virtual void SaveExecute(object arg) { }
+
+        protected virtual bool CanSave(object arg) { return Entity != null & IsUnlocked; }
+
+        protected virtual void UpdateExecute(object arg) { }
+
+        protected virtual bool CanUpdate(object arg) { return Entity != null & IsUnlocked; }
+
+        protected virtual void DeleteExecute(object arg) { Repository.Value.Delete(Entity); }
+
+        protected virtual bool CanDelete(object arg) { return Entity != null & IsUnlocked; }
+
+        protected virtual void FetchExecute(object arg = null) {
+            Entities = null;
+            Refresh();
+            if(!Worker.IsBusy) Worker.RunWorkerAsync();
+        }
+
+        protected virtual bool CanFetch(object obj) { return IsUnlocked; }
+
         private void WorkerUpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
+            Lock();
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
@@ -107,7 +126,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                                                 .Progress(-1)
                                                                 .State(NotificationState.Error));
                                                 //Worker.CancelAsync();
-                                                Info.SubState(ViewSubState.Locked);
+                                                Lock();
                                             };
             do {
                 if(Repository.Value.Uow.TestConnection())
@@ -124,7 +143,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                             EventAggregator.Value.GetEvent<NotificationEvent>()
                                            .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
                             if(Entities == null || !localList.SequenceEqual(Entities)) {
-                                Entities = new ObservableCollection<T>(localList);
+                                Entities = new List<T>(localList);
                                 EventAggregator.Value.GetEvent<NotificationEvent>()
                                                .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
                             }
@@ -134,27 +153,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                                    Notification.Value.Message(Strings.Notification_List_Updated)
                                                                .Progress(-1)
                                                                .State(NotificationState.Ok));
-                            Info.SubState(ViewSubState.Unlocked);
+                            Unlock();
                         }
                 Thread.Sleep(2000);
             } while(!Worker.CancellationPending);
-        }
-
-        protected virtual void SaveExecute(object arg) { }
-
-        protected virtual bool CanSave(object arg) { return Entity != null; }
-
-        protected virtual void UpdateExecute(object arg) { }
-
-        protected virtual bool CanUpdate(object arg) { return Entity != null; }
-
-        protected virtual void DeleteExecute(object arg) { Repository.Value.Delete(Entity); }
-
-        protected virtual bool CanDelete(object arg) { return Entity != null; }
-
-        protected virtual void FetchExecute(object arg = null) {
-            Entities = null;
-            if(!Worker.IsBusy) Worker.RunWorkerAsync();
         }
         #region Implementation of IDisposable
 

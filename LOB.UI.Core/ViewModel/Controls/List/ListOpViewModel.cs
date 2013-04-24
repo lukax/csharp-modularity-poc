@@ -43,10 +43,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         public ListOpViewModel() {
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             Entity = "";
-            Info = new ViewModelInfo {IsChild = false, SubState = ViewSubState.Unlocked, State = ViewState.Other};
+            IsChild = false;
+            ChangeState(ViewState.Other);
+            Unlock();
         }
 
-        public override ViewModelInfo Info { get; set; }
         public override void InitializeServices() {
             _defaultViewInfoDictLazy = new Lazy<IDictionary<string, IViewInfo>>(CreateList);
             Worker.DoWork += UpdateList;

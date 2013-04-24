@@ -17,7 +17,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private readonly ICustomerFacade _customerFacade;
         private string _personType;
-        public ViewModelInfo PersonOperation { get; set; }
         public IList<string> PersonTypes {
             get { return PersonExtension.PersonTypesLocalizationsDict.Values.ToList(); }
         }

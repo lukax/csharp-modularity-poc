@@ -26,7 +26,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     public abstract class AlterBaseEntityViewModel<TEntity> : BaseViewModel, IAlterBaseEntityViewModel<TEntity> where TEntity : BaseEntity {
         private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
-        private ViewModelInfo _viewModelInfo;
         private TEntity _entity;
         public TEntity Entity {
             get { return _entity; }
@@ -54,6 +53,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             if(customRepository != null) Repository = new Lazy<IRepository>(() => customRepository);
             SaveChangesCommand = new RelayDelegateCommand(Id, SaveChangesExecute, CanSaveChanges, sharedCanExecute: true);
             DiscardChangesCommand = new DelegateCommand(DiscardChangesExecute, CanDiscardChanges);
+            CloseCommand = DiscardChangesCommand;
             QuickSearchCommand = new DelegateCommand(QuickSearchExecute, CanQuickSearch);
             ClearEntityCommand = new DelegateCommand(ClearEntityExecute, CanClearEntity);
         }
@@ -61,7 +61,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public override void InitializeServices() {
             if(Entity == null) ClearEntityExecute(null);
             EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Subscribe(IncludeEventExecute);
-            Info.SubState(ViewSubState.Unlocked);
+            ChangeState(ViewState.Add);
+            Unlock();
         }
 
         protected virtual void IncludeEventExecute(EntityIncludePayload<TEntity> entityIncludePayload) {
@@ -69,20 +70,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             var entity = entityIncludePayload.Entity;
             if(entity == null) return;
             Entity = entity;
-            Info.State(ViewState.Update);
+            ChangeState(ViewState.Update);
         }
 
         protected virtual bool CanDiscardChanges(object arg) {
-            if(Info.State == ViewState.Add & Info.SubState == ViewSubState.Unlocked) return true;
-            if(Info.State == ViewState.Update & Info.SubState == ViewSubState.Unlocked) return true;
+            if(ViewState == ViewState.Add & IsUnlocked) return true;
+            if(ViewState == ViewState.Update & IsUnlocked) return true;
             return false;
         }
         protected virtual void DiscardChangesExecute(object arg) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id); }
 
         protected virtual bool CanSaveChanges(object arg) {
             if(EntityFacade != null) {
-                if(Info.State == ViewState.Add & Info.SubState == ViewSubState.Unlocked) return EntityFacade.Value.CanAdd().Item1;
-                if(Info.State == ViewState.Update & Info.SubState == ViewSubState.Unlocked) return EntityFacade.Value.CanUpdate().Item1;
+                if(ViewState == ViewState.Add & IsUnlocked) return EntityFacade.Value.CanAdd().Item1;
+                if(ViewState == ViewState.Update & IsUnlocked) return EntityFacade.Value.CanUpdate().Item1;
                 return false;
             }
             return !ReferenceEquals(Entity, null);
@@ -93,7 +94,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Worker.RunWorkerAsync();
         }
         protected virtual void SaveChangesExecute(object sender, DoWorkEventArgs e) {
-            Info.SubState(ViewSubState.Locked);
+            Lock();
             NotificationEvent.Publish(
                 Notification.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationState.Info));
             Repository.Value.Uow.OnError += (o, s) => {
@@ -111,17 +112,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     NotificationEvent.Publish(Notification.Value.Progress(70));
                     Repository.Value.Uow.CommitTransaction();
                     NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationState.Ok));
-                    Info.State(ViewState.Update);
+                    ChangeState(ViewState.Update);
                 }
-            Info.SubState(ViewSubState.Unlocked);
+            Unlock();
         }
 
         protected virtual bool CanQuickSearch(object obj) {
-            if(Info == null || Info.SubState == ViewSubState.Locked) return false;
-            return Info.State != ViewState.QuickSearch;
+            if(IsUnlocked) return false;
+            return ViewState != ViewState.QuickSearch;
         }
         protected virtual void QuickSearchExecute(object arg) {
-            Info.State(ViewState.QuickSearch);
+            _previousState = ViewState;
+            ChangeState(ViewState.QuickSearch);
             var openPayload = new OpenViewPayload(ViewInfoExtension.New(ViewType.Address, new[] {ViewState.QuickSearch}));
             EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(openPayload);
             _currentSubscription =
@@ -129,13 +131,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         private void RestoreUIState() {
-            if(Info.State == ViewState.QuickSearch) {
-                Info.State(_previousState);
+            if(ViewState == (ViewState.QuickSearch)) {
+                ChangeState(_previousState);
                 _currentSubscription.Dispose();
             }
         }
 
-        protected virtual bool CanClearEntity(object obj) { return Info.State == ViewState.Add && Info.SubState == ViewSubState.Unlocked; }
+        protected virtual bool CanClearEntity(object obj) { return ViewState == ViewState.Add & IsUnlocked; }
         protected virtual void ClearEntityExecute(object arg) { Entity = EntityFacade.Value.GenerateEntity(); }
 
         protected virtual void EntityChanged() {
@@ -144,21 +146,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         public override void Refresh() { ClearEntityExecute(null); }
-
-        public override ViewModelInfo Info {
-            get { return _viewModelInfo ?? (_viewModelInfo = new ViewModelInfo {IsChild = true, State = ViewState.Add, SubState = ViewSubState.Locked}); }
-            set {
-                _viewModelInfo = value;
-                UIOpChanged(null, new PropertyChangedEventArgs("ViewState"));
-                value.PropertyChanged += UIOpChanged;
-            }
-        }
-        private void UIOpChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
-            if(propertyChangedEventArgs.PropertyName == "ViewState") {
-                if(Info.State == ViewState.QuickSearch) return;
-                _previousState = Info.State;
-            }
-        }
         #region Implementation of IDisposable
 
         ~AlterBaseEntityViewModel() { Dispose(false); }

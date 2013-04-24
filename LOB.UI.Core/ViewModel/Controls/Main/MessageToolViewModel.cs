@@ -28,14 +28,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
             set { _closeCommand = value; }
         }
-
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
-
-        public override ViewModelInfo Info {
-            get { return _viewModelInfo; }
-            set { _viewModelInfo = value; }
-        }
-
+        
         public void Initialize(string message, bool canClose, bool isRestrictive) {
             Message = message;
             CanClose = canClose;

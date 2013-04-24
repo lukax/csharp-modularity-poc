@@ -13,7 +13,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Sell {
     public class SellServiceViewModel : BaseViewModel, ISellServiceViewModel {
         #region Overrides of BaseViewModel
 
-        public override ViewModelInfo Info { get; set; }
         public override void InitializeServices() { throw new NotImplementedException(); }
         public override void Refresh() { throw new NotImplementedException(); }
         public override void Dispose() { throw new NotImplementedException(); }

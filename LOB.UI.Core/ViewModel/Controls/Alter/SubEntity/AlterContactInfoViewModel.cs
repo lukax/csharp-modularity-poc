@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -9,8 +10,10 @@ using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
+using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 //
@@ -44,50 +47,32 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         #region Member Validations
 
         private void AddEmail(object arg) {
-            //EventAggregator.GetEvent<OpenViewEvent>().Publish(EmailOperation);
+            var emailId = new Guid();
+            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterEmailViewModel), id => { emailId = id; }));
+            Entity.PhoneNumbers.Add(Repository.Value.Get<PhoneNumber>(emailId));
         }
 
-        private bool CanAddEmail(object arg) {
-            //TODO: Business logic
-            return true;
-        }
+        private bool CanAddEmail(object arg) { return IsUnlocked; }
 
         private void AddPhoneNumber(object arg) {
-            //EventAggregator.GetEvent<OpenViewEvent>().Publish(PhoneNumberOperation);
+            var phoneNumberId = new Guid();
+            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterEmailViewModel), id => { phoneNumberId = id; }));
+            Entity.PhoneNumbers.Add(Repository.Value.Get<PhoneNumber>(phoneNumberId));
         }
 
-        private bool CanAddPhoneNumber(object arg) {
-            //TODO: Business logic
-            return true;
-        }
+        private bool CanAddPhoneNumber(object arg) { return IsUnlocked; }
 
-        private void DeleteEmail(object arg) {
-            //TODO: Verify if can delete
-            if(Email != null)
-                using(Repository.Value.Uow) {
-                    Repository.Value.Uow.BeginTransaction();
-                    Repository.Value.Delete(Email);
-                    Repository.Value.Uow.CommitTransaction();
-                }
-        }
+        private void DeleteEmail(object arg) { Entity.Emails.Remove(Email); }
 
         private bool CanDeleteEmail(object arg) {
-            if(Email != null) return true;
+            if(Email != null & IsUnlocked) return true;
             return false;
         }
 
-        private void DeletePhoneNumber(object arg) {
-            //TODO: Verify if can delete
-            if(PhoneNumber != null)
-                using(Repository.Value.Uow) {
-                    Repository.Value.Uow.BeginTransaction();
-                    Repository.Value.Delete(PhoneNumber);
-                    Repository.Value.Uow.CommitTransaction();
-                }
-        }
+        private void DeletePhoneNumber(object arg) { Entity.PhoneNumbers.Remove(PhoneNumber); }
 
         private bool CanDeletePhoneNumber(object arg) {
-            if(PhoneNumber != null) return true;
+            if(PhoneNumber != null & IsUnlocked) return true;
             return false;
         }
 

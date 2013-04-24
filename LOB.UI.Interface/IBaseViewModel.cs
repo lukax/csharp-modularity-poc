@@ -8,7 +8,8 @@ using LOB.UI.Interface.Infrastructure;
 namespace LOB.UI.Interface {
     public interface IBaseViewModel : IUIComponent {
         Guid Id { get; }
-        ViewModelInfo Info { get; set; }
+        ViewState ViewState { get; }
+        bool IsChild { get; set; }
         void InitializeServices();
         void Refresh();
     }

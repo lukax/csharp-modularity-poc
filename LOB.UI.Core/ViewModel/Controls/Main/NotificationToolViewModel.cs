@@ -79,13 +79,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         }
 
         public override void Refresh() { }
-
-        public override ViewModelInfo Info {
-            get { return _viewModelInfo; }
-            set { _viewModelInfo = value; }
-        }
-
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
         #region Implementation of IDisposable
 
         ~NotificationToolViewModel() { Dispose(false); }

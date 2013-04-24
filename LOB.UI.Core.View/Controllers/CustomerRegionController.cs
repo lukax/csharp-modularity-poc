@@ -26,7 +26,7 @@ namespace LOB.UI.Core.View.Controllers {
             //_personTypeChangedSubscription = _eventAggregator.GetEvent<PersonTypeChangedEvent>().Subscribe(PersonTypeChangedExecute, false);
         }
 
-        private void PersonTypeChangedExecute(ViewModelInfo modelInfo) {
+        private void PersonTypeChangedExecute() {
             //var view = modelInfo.ViewModel != null
             //               ? _fluentNavigator.Init.ResolveView(modelInfo).SetViewModel(() => modelInfo.ViewModel).Get()
             //               : _fluentNavigator.Init.ResolveView(modelInfo).ResolveViewModel(modelInfo).Get();

@@ -41,12 +41,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void Refresh() { }
 
-        private ViewModelInfo _viewModelInfo = new ViewModelInfo {State = ViewState.Other};
-        public override ViewModelInfo Info {
-            get { return _viewModelInfo; }
-            set { _viewModelInfo = value; }
-        }
-
         private void ShowOperations(object arg) {
             //var op = new ViewModelInfo {Type = ViewType.Op, ViewState = ViewState.List};
             //if(_regionAdapter.Contains(op, RegionName.TabRegion)) _regionAdapter.Remove(op, RegionName.TabRegion);

@@ -14,6 +14,8 @@ using LOB.UI.Interface.Infrastructure;
 
 namespace LOB.UI.Core.ViewModel.Base {
     public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel, IEquatable<BaseViewModel> {
+        private ViewSubState _subState;
+
         [Import("ViewId")] public Guid Id { get; private set; }
         public virtual string Header {
             get { return Strings.Common_Title; }
@@ -22,12 +24,25 @@ namespace LOB.UI.Core.ViewModel.Base {
             get { return Thread.CurrentThread.CurrentCulture; }
         }
         protected BackgroundWorker Worker { get; private set; }
+        public ViewState ViewState { get; private set; }
+
         protected BaseViewModel() { Worker = new BackgroundWorker(); }
-        public abstract ViewModelInfo Info { get; set; }
         public abstract void InitializeServices();
         public abstract void Refresh();
-        public abstract void Dispose();
+
+        protected virtual ViewState ChangeState(ViewState changeState) {
+            if(changeState != default(ViewState)) ViewState = changeState;
+            return ViewState;
+        }
+        protected virtual void Lock() { _subState = ViewSubState.Locked; }
+        protected virtual void Unlock() { _subState = ViewSubState.Unlocked; }
+        public virtual bool IsUnlocked {
+            get { return _subState == ViewSubState.Unlocked; }
+        }
+        public virtual bool IsChild { get; set; }
+
         public bool Equals(BaseViewModel other) { return Id == other.Id; }
+        public abstract void Dispose();
     }
 
     [PartCreationPolicy(CreationPolicy.NonShared)] //INFO: Makes property Id not shared across views

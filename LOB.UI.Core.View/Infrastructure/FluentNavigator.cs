@@ -48,7 +48,7 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator AddToRegion(string regionName) {
             var view = GetView();
-            view.ViewModel.Info.IsChild(false);
+            view.ViewModel.IsChild = (false);
             RegionAdapter.Value.Add(view, regionName);
             return this;
         }

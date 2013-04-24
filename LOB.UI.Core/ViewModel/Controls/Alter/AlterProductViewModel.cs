@@ -11,7 +11,6 @@ using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
 using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
@@ -23,7 +22,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
         public ICommand ListCategoryCommand { get; set; }
         public IList<Category> Categories { get; set; }
 
-        [ImportingConstructor]
         public AlterProductViewModel() {
             AlterCategoryCommand = new DelegateCommand(ExecuteAlterCategory);
             ListCategoryCommand = new DelegateCommand(ExecuteListCategory);
@@ -46,20 +44,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                                                                 .Progress(-1)
                                                                 .State(NotificationState.Error));
                                                 //Worker.CancelAsync();
-                                                Info.SubState(ViewSubState.Locked);
+                                                Lock();
                                             };
 
             do {
                 if(Repository.Value.Uow.TestConnection()) {
                     Categories = Repository.Value.GetAll<Category>().ToList();
-                    Info.SubState(ViewSubState.Unlocked);
+                    Unlock();
                 }
                 Thread.Sleep(2000); // TODO: Configuration based update time
             } while(!worker.CancellationPending);
         }
 
         private void ExecuteListCategory(object o) {
-            //var op = new ViewModelInfo().State(ViewState.QuickSearchExecute).SubState(ViewSubState.Locked);
+            //var op = new ViewModelInfo().ViewState(ViewState.QuickSearchExecute).SubState(ViewSubState.Locked);
             //EventAggregator.GetEvent<OpenViewEvent>().Publish(op);
         }
 
