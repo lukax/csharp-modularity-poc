@@ -4,9 +4,9 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Core.Localization;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Core.Infrastructure;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
 
 #endregion
@@ -48,7 +48,7 @@ namespace LOB.UI.Core.View.Infrastructure {
 
         public IFluentNavigator AddToRegion(string regionName) {
             var view = GetView();
-            view.ViewModel.IsChild = (false);
+            //view.ViewModel.IsChild = (false);
             RegionAdapter.Value.Add(view, regionName);
             return this;
         }

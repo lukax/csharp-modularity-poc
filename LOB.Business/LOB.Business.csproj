@@ -170,25 +170,25 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Interface.csproj">
+    <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Contract.csproj">
       <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
-      <Name>LOB.Business.Interface</Name>
+      <Name>LOB.Business.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
       <Project>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</Project>
       <Name>LOB.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
+    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Contract.csproj">
       <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
-      <Name>LOB.Dao.Interface</Name>
+      <Name>LOB.Dao.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Contract.csproj">
       <Project>{5ee9acb1-f25f-4a9d-ae79-517be03e02d9}</Project>
-      <Name>LOB.Log.Interface</Name>
+      <Name>LOB.Log.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,9 @@
 ﻿#region Usings
 
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using LOB.UI.Contract.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Alter {
+namespace LOB.UI.Contract.ViewModel.Controls.Alter {
     public interface IAlterSaleViewModel : IAlterBaseEntityViewModel {}
 }

@@ -4,8 +4,8 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq.Expressions;
 using LOB.Domain;
+using LOB.UI.Contract.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
-using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 

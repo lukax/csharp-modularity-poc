@@ -1,3 +1,3 @@
-﻿namespace LOB.UI.Interface.ViewModel.Controls.Main {
+﻿namespace LOB.UI.Contract.ViewModel.Controls.Main {
     public interface IColumnToolViewModel : IBaseViewModel {}
 }

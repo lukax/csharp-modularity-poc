@@ -10,11 +10,10 @@ using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 //
 
@@ -98,21 +97,22 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                                                                 .State(NotificationState.Error));
                                                 Worker.CancelAsync();
                                             };
-            do {
-                Worker.ReportProgress(-1);
-                Thread.Sleep(2000);
-                Worker.ReportProgress(5);
-                var result = new object[2];
-                using(Repository.Value.Uow.BeginTransaction())
-                    if(!Worker.CancellationPending) {
-                        Emails = new ListCollectionView(Repository.Value.GetAll<Email>().ToList());
-                        Worker.ReportProgress(50);
-                        PhoneNumbers = new ListCollectionView(Repository.Value.GetAll<PhoneNumber>().ToList());
-                        Worker.ReportProgress(90);
-                        args.Result = result;
-                        Worker.ReportProgress(100);
-                    }
-            } while(!Worker.CancellationPending);
+            //do {
+            Worker.ReportProgress(-1);
+            Thread.Sleep(2000);
+            Worker.ReportProgress(5);
+            var result = new object[2];
+            using(Repository.Value.Uow.BeginTransaction())
+                if(!Worker.CancellationPending) {
+                    Emails = new ListCollectionView(Repository.Value.GetAll<Email>().ToList());
+                    Worker.ReportProgress(50);
+                    PhoneNumbers = new ListCollectionView(Repository.Value.GetAll<PhoneNumber>().ToList());
+                    Worker.ReportProgress(90);
+                    args.Result = result;
+                    Worker.ReportProgress(100);
+                }
+            //} while(!Worker.CancellationPending);
+            Worker.ReportProgress(-1);
         }
 
         private void WorkerListsSetFromRepo(object sender, RunWorkerCompletedEventArgs args) {

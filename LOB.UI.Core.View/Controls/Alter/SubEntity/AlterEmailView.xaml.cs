@@ -3,15 +3,15 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    [Export(typeof(IBaseView<IAlterEmailViewModel>))]
+    [Export(typeof(IBaseView<IAlterEmailViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
     [ViewInfo(ViewType.Email, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterEmailView : IBaseView<IAlterEmailViewModel> {
         public AlterEmailView() {

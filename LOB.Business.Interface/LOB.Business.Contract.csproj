@@ -7,8 +7,8 @@
     <ProjectGuid>{2C4999EC-85EC-49FB-8236-8CF74F71EC2F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LOB.Business.Interface</RootNamespace>
-    <AssemblyName>LOB.Business.Interface</AssemblyName>
+    <RootNamespace>LOB.Business.Contract</RootNamespace>
+    <AssemblyName>LOB.Business.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

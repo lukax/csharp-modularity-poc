@@ -3,18 +3,19 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
-using LOB.Business.Interface.Logic;
-using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Contract.Logic;
+using LOB.Business.Contract.Logic.Base;
+using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain;
 using LOB.Domain.Logic;
 
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(INaturalPersonFacade))]
+    [Export(typeof(INaturalPersonFacade)), Export(typeof(IBaseEntityFacade<NaturalPerson>))]
     public class NaturalPersonFacade : BaseEntityFacade<NaturalPerson>, INaturalPersonFacade {
         private readonly IAddressFacade _addressFacade;
         private readonly IContactInfoFacade _contactInfoFacade;

@@ -5,7 +5,7 @@ using LOB.Core.Localization;
 
 #endregion
 
-namespace LOB.UI.Interface.Infrastructure {
+namespace LOB.UI.Contract.Infrastructure {
     public interface IViewInfo {
         ViewType ViewType { get; }
         ViewState[] ViewStates { get; }

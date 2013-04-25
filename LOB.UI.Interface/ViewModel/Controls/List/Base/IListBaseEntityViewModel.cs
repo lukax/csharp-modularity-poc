@@ -5,7 +5,7 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.List.Base {
+namespace LOB.UI.Contract.ViewModel.Controls.List.Base {
     public interface IListBaseEntityViewModel : IBaseViewModel {}
 
     public interface IListBaseEntityViewModel<out TEntity> : IListBaseEntityViewModel where TEntity : BaseEntity {

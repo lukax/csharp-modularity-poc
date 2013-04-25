@@ -1,12 +1,14 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Interface.Infrastructure;
+using System.ComponentModel.Composition;
+using LOB.UI.Contract.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controllers {
+    [Export]
     public class CustomerRegionController : IDisposable {
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionAdapter _regionAdapter;

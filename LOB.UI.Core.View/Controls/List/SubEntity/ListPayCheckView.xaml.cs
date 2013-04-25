@@ -3,16 +3,16 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.List.SubEntity;
 using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List.SubEntity;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export(typeof(IBaseView<IListPayCheckViewModel>))]
-    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch})]
+    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch}), Export(typeof(IBaseView<IBaseViewModel>))]
     public partial class ListPayCheckView : IBaseView<IListPayCheckViewModel> {
         public ListPayCheckView() {
             InitializeComponent();

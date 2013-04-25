@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace LOB.Dao.Interface {
+namespace LOB.Dao.Contract {
     public interface ISessionFactoryCreator : IDisposable {
         object ORMFactory { get; }
         event SessionCreatorEventHandler OnError;

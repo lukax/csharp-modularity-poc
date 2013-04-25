@@ -22,11 +22,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Core", "LOB.Core\LOB.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Core", "LOB.UI.Core\LOB.UI.Core.csproj", "{8FBD60E2-7E77-41DB-BAC2-6883A4209EA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Dao.Interface", "LOB.Dao.Interface\LOB.Dao.Interface.csproj", "{B275A849-EBA7-45D8-ABAD-A336F38153D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Dao.Contract", "LOB.Dao.Interface\LOB.Dao.Contract.csproj", "{B275A849-EBA7-45D8-ABAD-A336F38153D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Dao.Nhibernate", "LOB.Dao.Nhibernate\LOB.Dao.Nhibernate.csproj", "{C2E495A5-600D-4881-A1F7-2D8AB7E5367E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Business.Interface", "LOB.Business.Interface\LOB.Business.Interface.csproj", "{2C4999EC-85EC-49FB-8236-8CF74F71EC2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Business.Contract", "LOB.Business.Interface\LOB.Business.Contract.csproj", "{2C4999EC-85EC-49FB-8236-8CF74F71EC2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{C2ED6073-C1DC-4D8D-A9EB-7B4DA130E4ED}"
 EndProject
@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Dao.Mock", "LOB.Dao.Moc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Dao.Nhibernate.Test", "LOB.Dao.Nhibernate.Test\LOB.Dao.Nhibernate.Test.csproj", "{63BBD8C9-0916-4563-BB05-BFC7359FF5B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Interface", "LOB.UI.Interface\LOB.UI.Interface.csproj", "{A231C91C-A4D3-4BE7-BA4E-EE7DFB3D7EEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Contract", "LOB.UI.Interface\LOB.UI.Contract.csproj", "{A231C91C-A4D3-4BE7-BA4E-EE7DFB3D7EEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Core.Test", "LOB.UI.Core.Test\LOB.UI.Core.Test.csproj", "{3CAE34E4-7C14-4191-8662-CE30B947D440}"
 EndProject
@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Core.View", "LOB.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Log", "LOB.Log\LOB.Log.csproj", "{905AA680-50A8-4267-9A7E-0BD1E45AAACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Log.Interface", "LOB.Log.Interface\LOB.Log.Interface.csproj", "{5EE9ACB1-F25F-4A9D-AE79-517BE03E02D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Log.Contract", "LOB.Log.Interface\LOB.Log.Contract.csproj", "{5EE9ACB1-F25F-4A9D-AE79-517BE03E02D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.UI.Core.Resources", "LOB.UI.Core.Resources\LOB.UI.Core.Resources.csproj", "{22F1D5DE-172F-4BEA-8D4E-77B0C57A2A9C}"
 EndProject
@@ -374,7 +374,7 @@ Global
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D} = {B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

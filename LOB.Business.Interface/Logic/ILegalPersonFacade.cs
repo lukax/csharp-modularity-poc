@@ -1,10 +1,10 @@
 ﻿#region Usings
 
-using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Contract.Logic.Base;
 using LOB.Domain;
 
 #endregion
 
-namespace LOB.Business.Interface.Logic {
+namespace LOB.Business.Contract.Logic {
     public interface ILegalPersonFacade : IBaseEntityFacade<LegalPerson> {}
 }

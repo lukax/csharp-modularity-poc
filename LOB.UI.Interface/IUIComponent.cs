@@ -4,6 +4,6 @@ using System;
 
 #endregion
 
-namespace LOB.UI.Interface {
+namespace LOB.UI.Contract {
     public interface IUIComponent : IDisposable {}
 }

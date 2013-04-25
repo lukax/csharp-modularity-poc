@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace LOB.UI.Interface.Command {
+namespace LOB.UI.Contract.Command {
     public class RelayDelegateCommand : ICommand {
         private readonly bool _sharedExecute;
         private readonly bool _sharedCanExecute;

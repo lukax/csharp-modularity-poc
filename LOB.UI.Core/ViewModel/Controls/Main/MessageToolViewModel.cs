@@ -3,9 +3,8 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Commands;
 
 #endregion
@@ -28,7 +27,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
             set { _closeCommand = value; }
         }
-        
+
         public void Initialize(string message, bool canClose, bool isRestrictive) {
             Message = message;
             CanClose = canClose;

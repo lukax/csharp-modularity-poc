@@ -10,13 +10,13 @@ using System.Linq;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.List;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Events;
 
@@ -40,6 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         [ImportMany] public Lazy<IBaseView<IBaseViewModel>, IViewInfo>[] LazyViewInfos { get; set; }
         [Import] public Lazy<IEventAggregator> LazyEventAggregator { get; set; }
         [Import] public AggregateCatalog Type { get; set; }
+
         public ListOpViewModel() {
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             Entity = "";
@@ -108,7 +109,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
         }
 
         private IDictionary<string, IViewInfo> CreateList() {
-            var catalog = LazyViewInfos.ToDictionary(item => ViewInfoExtension.ToString(item.Metadata), item => item.Metadata);
+            var catalog =
+                LazyViewInfos.Where(x => !x.Metadata.ViewStates.Contains(ViewState.Other))
+                             .ToDictionary(item => ViewInfoExtension.ToString(item.Metadata), item => item.Metadata);
             //var catalog = UIOperationCatalog.UIOperations;
             ////Remove Other usage Types from user selection:
             //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Other));

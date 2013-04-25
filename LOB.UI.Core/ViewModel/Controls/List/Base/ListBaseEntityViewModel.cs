@@ -9,14 +9,14 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Windows.Input;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.List.Base;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List.Base;
 using Microsoft.Practices.Prism.Events;
 
 #endregion

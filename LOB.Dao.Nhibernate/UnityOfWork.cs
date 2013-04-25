@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Linq;

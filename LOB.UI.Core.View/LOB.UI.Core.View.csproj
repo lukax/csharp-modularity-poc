@@ -115,7 +115,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\NaturalPersonRegionController.cs" />
     <Compile Include="Controllers\CustomerRegionController.cs" />
+    <Compile Include="Controllers\PersonRegionController.cs" />
     <Compile Include="Controls\Alter\AlterSupplierView.xaml.cs">
       <DependentUpon>AlterSupplierView.xaml</DependentUpon>
     </Compile>
@@ -525,9 +527,9 @@
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Contract.csproj">
       <Project>{5ee9acb1-f25f-4a9d-ae79-517be03e02d9}</Project>
-      <Name>LOB.Log.Interface</Name>
+      <Name>LOB.Log.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Log\LOB.Log.csproj">
       <Project>{905aa680-50a8-4267-9a7e-0bd1e45aaaca}</Project>
@@ -541,9 +543,9 @@
       <Project>{8fbd60e2-7e77-41db-bac2-6883a4209ea3}</Project>
       <Name>LOB.UI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Interface.csproj">
+    <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Contract.csproj">
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>
-      <Name>LOB.UI.Interface</Name>
+      <Name>LOB.UI.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

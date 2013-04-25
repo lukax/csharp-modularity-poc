@@ -9,9 +9,9 @@ using System.Windows.Input;
 using LOB.Domain;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 

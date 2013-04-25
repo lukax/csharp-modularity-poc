@@ -1,4 +1,4 @@
-﻿namespace LOB.Dao.Interface {
+﻿namespace LOB.Dao.Contract {
     public enum PersistType {
         Memory,
         File,

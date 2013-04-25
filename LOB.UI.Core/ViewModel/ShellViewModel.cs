@@ -4,9 +4,9 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.Core.Licensing;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
 
 #endregion
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-[assembly: AssemblyTitle("LOB.UI.Interface")]
+[assembly: AssemblyTitle("LOB.UI.Contract")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LOB.UI.Interface")]
+[assembly: AssemblyProduct("LOB.UI.Contract")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

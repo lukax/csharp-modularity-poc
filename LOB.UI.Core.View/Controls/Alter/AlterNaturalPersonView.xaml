@@ -11,6 +11,7 @@
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -88,9 +89,7 @@
                 Mask="000.000.000-00" />
         </Grid>
 
-        <StackPanel>
-            <base2:AlterPersonView x:Name="ViewAlterPerson" />
-        </StackPanel>
+        <ContentControl prism:RegionManager.RegionName="PersonRegion" />
 
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
     </StackPanel>

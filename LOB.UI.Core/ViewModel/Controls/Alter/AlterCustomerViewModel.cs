@@ -3,12 +3,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using LOB.Business.Interface.Logic;
+using LOB.Business.Contract.Logic;
 using LOB.Domain;
 using LOB.Domain.Base;
+using LOB.UI.Contract.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 

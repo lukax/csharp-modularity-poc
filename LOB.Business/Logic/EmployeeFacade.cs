@@ -2,18 +2,19 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.Business.Interface.Logic;
-using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Contract.Logic;
+using LOB.Business.Contract.Logic.Base;
+using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain;
 using LOB.Domain.Logic;
 
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(IEmployeeFacade))]
+    [Export(typeof(IEmployeeFacade)), Export(typeof(IBaseEntityFacade<Employee>))]
     public class EmployeeFacade : BaseEntityFacade<Employee>, IEmployeeFacade {
         private readonly IAddressFacade _addressFacade;
         private readonly IContactInfoFacade _contactInfoFacade;

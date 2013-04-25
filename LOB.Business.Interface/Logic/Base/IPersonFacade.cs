@@ -4,6 +4,6 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Business.Interface.Logic.Base {
+namespace LOB.Business.Contract.Logic.Base {
     public interface IPersonFacade : IBaseEntityFacade<Person> {}
 }

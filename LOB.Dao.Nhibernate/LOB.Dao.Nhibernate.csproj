@@ -74,7 +74,7 @@
       <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
+      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\Lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -116,17 +116,17 @@
       <Project>{79fb165f-3816-4a5f-b5a1-b5a64bed0218}</Project>
       <Name>LOB.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
+    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Contract.csproj">
       <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
-      <Name>LOB.Dao.Interface</Name>
+      <Name>LOB.Dao.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Contract.csproj">
       <Project>{5EE9ACB1-F25F-4A9D-AE79-517BE03E02D9}</Project>
-      <Name>LOB.Log.Interface</Name>
+      <Name>LOB.Log.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

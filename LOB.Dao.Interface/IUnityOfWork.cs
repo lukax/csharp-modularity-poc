@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace LOB.Dao.Interface {
+namespace LOB.Dao.Contract {
     public interface IUnityOfWork : IDisposable {
         /// <summary>
         ///     Tests the database connection if it's working.

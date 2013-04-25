@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using NHibernate;
 using NHibernate.Linq;

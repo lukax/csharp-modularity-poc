@@ -25,7 +25,7 @@
             </Style>
         </StackPanel.Style>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}" Padding="2" IsEnabled="{Binding IsUnlocked}">
+            <Button x:Name="ButtonSave" Command="{Binding SaveChangesCommand}" Padding="2">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
                         <Style.Triggers>
@@ -74,12 +74,6 @@
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
-                            <!--<DataTrigger Binding="{Binding IsUnlocked}" Value="False">
-                                <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsUnlocked}" Value="True">
-                                <Setter Property="IsEnabled" Value="True" />
-                            </DataTrigger>-->
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

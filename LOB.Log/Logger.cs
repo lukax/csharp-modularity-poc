@@ -2,7 +2,7 @@
 
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
-using LOB.Log.Interface;
+using LOB.Log.Contract;
 using Microsoft.Practices.Prism.Logging;
 using log4net;
 using log4net.Config;

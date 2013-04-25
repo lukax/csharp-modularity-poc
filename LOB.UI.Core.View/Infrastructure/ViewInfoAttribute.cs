@@ -2,7 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
-using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Contract.Infrastructure;
 
 #endregion
 

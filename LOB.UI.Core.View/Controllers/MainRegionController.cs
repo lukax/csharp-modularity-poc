@@ -2,9 +2,9 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
-using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using NullGuard;
@@ -34,12 +34,8 @@ namespace LOB.UI.Core.View.Controllers {
         }
 
         private void QuickSearch(OpenViewPayload openViewPayload) {
-            //if(param.Type == default(ViewType)) throw new ArgumentException("param");
-            //var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).Get();
-            //var baseViewModel = view.ViewModel as BaseViewModel;
-            //if(baseViewModel != null) baseViewModel.ViewModelInfo = new ViewModelInfo {ViewState = ViewState.QuickSearchExecute, Type = view.ViewID.Type};
-            //// Let the IuiComponentModel know that it's in QuickSearchExecute ViewState
-            //_regionAdapter.Add(view, RegionName.ModalRegion);
+            Navigator.Value.Init.ResolveView(openViewPayload.ViewInfo).AddToRegion(RegionName.ModalRegion);
+            if(openViewPayload.GetIdFunc != null) openViewPayload.GetIdFunc(Navigator.Value.GetViewId);
         }
 
         private void CloseView(Guid param) {

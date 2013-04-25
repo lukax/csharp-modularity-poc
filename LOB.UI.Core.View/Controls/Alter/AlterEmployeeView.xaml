@@ -3,11 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
-             xmlns:alter="clr-namespace:LOB.UI.Core.View.Controls.Alter"
-             xmlns:base2="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
-             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -17,7 +14,7 @@
 
     <StackPanel>
 
-        <util:EditToolsView x:Name="ViewEditTools" />
+        <!--<util:EditToolsView x:Name="ViewEditTools" />-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -32,7 +29,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <base2:BaseEntityView HorizontalAlignment="Left" x:Name="ViewCode" />
+            <!--<base:BaseEntityView HorizontalAlignment="Left" x:Name="ViewCode" />-->
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                 <Label Content="{x:Static loc:Strings.Common_Title}" HorizontalAlignment="Right" />
@@ -54,21 +51,17 @@
 
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <TabControl>
-                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}">
-                        <alter:AlterNaturalPersonView x:Name="ViewAlterNaturalPerson" />
-                    </TabItem>
+                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" prism:RegionManager.RegionName="NaturalPersonRegion"/>
                 </TabControl>
             </DockPanel>
 
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <TabControl>
                     <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
-                    <TabItem Header="{x:Static loc:Strings.Common_PayCheck}">
-                        <base:AlterPayCheckView x:Name="ViewAlterPayCheck" />
-                    </TabItem>
+                    <TabItem Header="{x:Static loc:Strings.Common_PayCheck}" prism:RegionManager.RegionName="PayCheckRegion"/>
                 </TabControl>
             </DockPanel>
         </Grid>
-        <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />
+        <!--<util:ConfCancelToolsView x:Name="ViewConfCancelTools" />-->
     </StackPanel>
 </UserControl>

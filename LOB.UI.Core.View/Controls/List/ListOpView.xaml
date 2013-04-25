@@ -5,9 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:domainSub="clr-namespace:LOB.UI.Interface.Infrastructure;assembly=LOB.UI.Interface"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
-             xmlns:xtck="clr-namespace:Xceed.Wpf.Toolkit.Panels;assembly=Xceed.Wpf.Toolkit"
 
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">

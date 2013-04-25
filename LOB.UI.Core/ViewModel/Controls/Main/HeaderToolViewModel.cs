@@ -5,13 +5,12 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain.Logic;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.ServiceLocation;
 

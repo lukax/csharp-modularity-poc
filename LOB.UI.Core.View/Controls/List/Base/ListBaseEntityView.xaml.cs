@@ -2,15 +2,15 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
     [Export(typeof(IBaseView<IBaseViewModel>))]
-    [ViewInfo(ViewType.BaseEntity, new[] {ViewState.List, ViewState.QuickSearch})]
+    [ViewInfo(ViewType.BaseEntity, ViewState.Other)]
     public partial class ListBaseEntityView : IBaseView<IBaseViewModel> {
         public ListBaseEntityView() { InitializeComponent(); }
 

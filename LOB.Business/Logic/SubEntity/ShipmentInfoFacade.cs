@@ -3,10 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Contract.Logic.Base;
+using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
@@ -14,7 +15,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IShipmentInfoFacade))]
+    [Export(typeof(IShipmentInfoFacade)), Export(typeof(IBaseEntityFacade<ShipmentInfo>))]
     public sealed class ShipmentInfoFacade : BaseEntityFacade<ShipmentInfo>, IShipmentInfoFacade {
         private readonly IAddressFacade _addressFacade;
 

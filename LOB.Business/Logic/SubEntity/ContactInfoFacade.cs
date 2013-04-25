@@ -3,17 +3,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
-using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Contract.Logic.Base;
+using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IContactInfoFacade))]
+    [Export(typeof(IContactInfoFacade)), Export(typeof(IBaseEntityFacade<ContactInfo>))]
     public sealed class ContactInfoFacade : BaseEntityFacade<ContactInfo>, IContactInfoFacade {
         [ImportingConstructor]
         public ContactInfoFacade(IRepository repository)

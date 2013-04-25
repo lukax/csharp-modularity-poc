@@ -9,23 +9,23 @@
 
     <MenuItem Header="{x:Static loc:Strings.Common_Include}" Command="{Binding IncludeCommand}">
         <MenuItem.Icon>
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/download.png" MaxHeight="20" MaxWidth="20" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/16x16/download.png" />
         </MenuItem.Icon>
     </MenuItem>
     <Separator />
     <MenuItem Header="{x:Static loc:Strings.Common_Add}" Command="{Binding AddCommand}">
         <MenuItem.Icon>
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/plus.png" MaxHeight="20" MaxWidth="20" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/16x16/add.png" />
         </MenuItem.Icon>
     </MenuItem>
     <MenuItem Header="{x:Static loc:Strings.Common_Edit}" Command="{Binding UpdateCommand}">
         <MenuItem.Icon>
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/pencil.png" MaxHeight="20" MaxWidth="20" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/16x16/edit.png" />
         </MenuItem.Icon>
     </MenuItem>
     <MenuItem Header="{x:Static loc:Strings.Common_Delete}" Command="{Binding DeleteCommand}">
         <MenuItem.Icon>
-            <Image Source="/LOB.UI.Core.Resources;component/Icons/no.png" MaxHeight="20" MaxWidth="20" />
+            <Image Source="/LOB.UI.Core.Resources;component/Icons/16x16/delete.png" />
         </MenuItem.Icon>
     </MenuItem>
 

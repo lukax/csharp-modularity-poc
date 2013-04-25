@@ -2,16 +2,17 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using LOB.Business.Interface.Logic;
+using LOB.Business.Contract.Logic;
+using LOB.Business.Contract.Logic.Base;
 using LOB.Business.Logic.Base;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain;
 using LOB.Domain.Base;
 
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(ICustomerFacade))]
+    [Export(typeof(ICustomerFacade)), Export(typeof(IBaseEntityFacade<Customer>))]
     public sealed class CustomerFacade : BaseEntityFacade<Customer>, ICustomerFacade {
         private readonly INaturalPersonFacade _naturalPersonFacade;
         private readonly ILegalPersonFacade _legalPersonFacade;

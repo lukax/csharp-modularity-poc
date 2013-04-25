@@ -6,10 +6,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Domain.SubEntity;
+using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 

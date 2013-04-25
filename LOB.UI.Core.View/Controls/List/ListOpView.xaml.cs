@@ -2,10 +2,10 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.List;
 using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List;
 
 #endregion
 
@@ -14,7 +14,7 @@ namespace LOB.UI.Core.View.Controls.List {
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
     [Export(typeof(IBaseView<IListOpViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
-    [ViewInfo(ViewType.Op, ViewState.List)]
+    [ViewInfo(ViewType.Op, ViewState.Other)]
     public partial class ListOpView : IBaseView<IListOpViewModel> {
         public ListOpView() { InitializeComponent(); }
 

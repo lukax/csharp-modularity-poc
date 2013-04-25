@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                    xmlns:actions="clr-namespace:LOB.UI.Core.View.Actions"
-                    xmlns:interface="clr-namespace:LOB.UI.Interface;assembly=LOB.UI.Interface">
+                    xmlns:actions="clr-namespace:LOB.UI.Core.View.Actions">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colours.xaml" />

@@ -7,16 +7,16 @@ using System.Globalization;
 using System.Threading;
 using LOB.Core.Localization;
 using LOB.Domain.Base;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Base {
-    public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel, IEquatable<BaseViewModel> {
+    public abstract class BaseViewModel : BaseNotifyChange, IBaseViewModel {
         private ViewSubState _subState;
 
-        [Import("ViewId")] public Guid Id { get; private set; }
+        [Import("ViewId")] public Guid Id { get; protected set; }
         public virtual string Header {
             get { return Strings.Common_Title; }
         }
@@ -39,9 +39,9 @@ namespace LOB.UI.Core.ViewModel.Base {
         public virtual bool IsUnlocked {
             get { return _subState == ViewSubState.Unlocked; }
         }
-        public virtual bool IsChild { get; set; }
+        public virtual bool IsChild { get; protected set; }
 
-        public bool Equals(BaseViewModel other) { return Id == other.Id; }
+        //public bool Equals(BaseViewModel other) { return Id == other.Id; }
         public abstract void Dispose();
     }
 

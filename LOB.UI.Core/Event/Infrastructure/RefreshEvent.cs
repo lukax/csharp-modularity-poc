@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Interface.Event;
+using LOB.UI.Contract.Event;
 using Microsoft.Practices.Prism.Events;
 
 #endregion

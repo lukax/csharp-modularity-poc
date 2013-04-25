@@ -1,8 +1,8 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Controls.Sell;
+using LOB.UI.Contract;
+using LOB.UI.Contract.ViewModel.Controls.Sell;
 
 #endregion
 

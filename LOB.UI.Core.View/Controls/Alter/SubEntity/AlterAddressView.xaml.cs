@@ -3,10 +3,10 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.SubEntity;
 
 #endregion
 
@@ -19,8 +19,8 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
             DataContextChanged += OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
-            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
-            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue as IBaseViewModel;
+            ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
+            ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
         }
 
         [Import] public IAlterAddressViewModel ViewModel {
@@ -32,8 +32,6 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         }
 
         public int Index { get; set; }
-
-        public void Refresh() { }
         #region Implementation of IDisposable
 
         public void Dispose() {

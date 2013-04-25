@@ -4,8 +4,8 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
+using LOB.UI.Contract;
 using LOB.UI.Core.Event.View;
-using LOB.UI.Interface;
 using MahApps.Metro;
 using Microsoft.Practices.Prism.Events;
 

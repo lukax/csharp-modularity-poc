@@ -2,8 +2,8 @@
 
 using System.ComponentModel.Composition;
 using LOB.Domain;
+using LOB.UI.Contract.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
-using LOB.UI.Interface.ViewModel.Controls.Alter;
 
 #endregion
 

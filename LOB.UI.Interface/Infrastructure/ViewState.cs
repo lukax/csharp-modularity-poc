@@ -1,4 +1,4 @@
-﻿namespace LOB.UI.Interface.Infrastructure {
+﻿namespace LOB.UI.Contract.Infrastructure {
     public enum ViewState {
         Other = 0, //Other Usage
 

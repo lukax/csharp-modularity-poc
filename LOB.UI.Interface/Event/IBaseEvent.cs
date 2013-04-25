@@ -1,3 +1,3 @@
-﻿namespace LOB.UI.Interface.Event {
+﻿namespace LOB.UI.Contract.Event {
     public interface IBaseEvent {}
 }

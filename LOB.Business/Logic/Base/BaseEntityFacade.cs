@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LOB.Business.Interface.Logic.Base;
-using LOB.Dao.Interface;
+using LOB.Business.Contract.Logic.Base;
+using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 

@@ -1,4 +1,4 @@
-﻿namespace LOB.UI.Interface {
+﻿namespace LOB.UI.Contract {
     /// <summary>
     ///     Internal usage only
     /// </summary>

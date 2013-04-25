@@ -4,18 +4,18 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
-using LOB.Business.Interface.Logic.Base;
+using LOB.Business.Contract.Logic.Base;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.Alter.Base;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.Event.Infrastructure;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 
@@ -61,6 +61,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public override void InitializeServices() {
             if(Entity == null) ClearEntityExecute(null);
             EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Subscribe(IncludeEventExecute);
+            EventAggregator.Value.GetEvent<SetupChildViewEvent>().Subscribe(x => {
+                                                                                if(Id != x.OldId) return;
+                                                                                Id = x.NewId;
+                                                                                IsChild = true;
+                                                                            });
             ChangeState(ViewState.Add);
             Unlock();
         }
@@ -117,15 +122,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Unlock();
         }
 
-        protected virtual bool CanQuickSearch(object obj) {
-            if(IsUnlocked) return false;
-            return ViewState != ViewState.QuickSearch;
-        }
+        protected virtual bool CanQuickSearch(object obj) { return ViewState != ViewState.QuickSearch & IsUnlocked; }
         protected virtual void QuickSearchExecute(object arg) {
             _previousState = ViewState;
             ChangeState(ViewState.QuickSearch);
-            var openPayload = new OpenViewPayload(ViewInfoExtension.New(ViewType.Address, new[] {ViewState.QuickSearch}));
-            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(openPayload);
+            EventAggregator.Value.GetEvent<OpenViewEvent>()
+                           .Publish(new OpenViewPayload(ViewInfoExtension.New(ViewType.Address, new[] {ViewState.QuickSearch})));
             _currentSubscription =
                 EventAggregator.Value.GetEvent<CloseViewEvent>().Subscribe(delegate(Guid payloadId) { if(Id == payloadId) RestoreUIState(); });
         }

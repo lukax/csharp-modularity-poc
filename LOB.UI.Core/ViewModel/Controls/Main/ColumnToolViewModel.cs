@@ -6,12 +6,12 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LOB.Core.Localization;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.List;
+using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List;
-using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Events;
 
 #endregion

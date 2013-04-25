@@ -5,7 +5,7 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Alter.Base {
+namespace LOB.UI.Contract.ViewModel.Controls.Alter.Base {
     public interface IAlterBaseEntityViewModel : IBaseViewModel {
         ICommand SaveChangesCommand { get; }
         ICommand DiscardChangesCommand { get; }

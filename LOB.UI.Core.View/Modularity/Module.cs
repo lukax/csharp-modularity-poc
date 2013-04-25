@@ -1,16 +1,16 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
+using LOB.UI.Contract;
+using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Actions;
 using LOB.UI.Core.View.Controllers;
-using LOB.UI.Interface;
-using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
-using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
+using IRegionAdapter = LOB.UI.Contract.Infrastructure.IRegionAdapter;
 
 #endregion
 

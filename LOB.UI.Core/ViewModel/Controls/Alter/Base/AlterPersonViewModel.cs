@@ -2,12 +2,12 @@
 
 using System.ComponentModel.Composition;
 using LOB.Domain.Base;
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using LOB.UI.Contract.ViewModel.Controls.Alter.Base;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    [Export(typeof(IAlterPersonViewModel))]
+    [Export(typeof(IAlterPersonViewModel)), Export(typeof(IAlterBaseEntityViewModel<Person>))]
     public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
         //protected override bool CanSaveChanges(object arg)
         //{

@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace LOB.UI.Interface.Infrastructure {
+namespace LOB.UI.Contract.Infrastructure {
     public interface IFluentNavigator {
         IFluentNavigator Init { get; }
         //IBaseView<IBaseViewModel> Get();

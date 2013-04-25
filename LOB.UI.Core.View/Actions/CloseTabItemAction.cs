@@ -3,8 +3,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
 
 #endregion
 

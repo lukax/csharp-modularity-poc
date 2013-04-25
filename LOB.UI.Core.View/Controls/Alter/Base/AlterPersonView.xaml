@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:metrocontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
-             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
-             xmlns:base1="clr-namespace:LOB.UI.Core.View.Controls.Alter.Base"
+             xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
@@ -26,12 +25,8 @@
         </Grid.ColumnDefinitions>
         <TabControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
             <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
-            <TabItem Header="{x:Static loc:Strings.Common_Address}">
-                <base:AlterAddressView x:Name="ViewAlterAddress" />
-            </TabItem>
-            <TabItem Header="{x:Static loc:Strings.Common_ContactInfo}">
-                <base:AlterContactInfoView x:Name="ViewAlterContactInfo" />
-            </TabItem>
+            <TabItem Header="{x:Static loc:Strings.Common_Address}" prism:RegionManager.RegionName="AddressRegion" />
+            <TabItem Header="{x:Static loc:Strings.Common_ContactInfo}" prism:RegionManager.RegionName="ContactInfoRegion" />
         </TabControl>
 
         <TextBox

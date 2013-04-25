@@ -2,9 +2,8 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Contract.ViewModel.Controls.Sell;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Sell;
 
 #endregion
 

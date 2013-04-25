@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace LOB.UI.Interface.Command {
+namespace LOB.UI.Contract.Command {
     public class DelegateCommand : ICommand {
         private readonly Predicate<object> _canExecute;
         private readonly Action<Object> _execute;

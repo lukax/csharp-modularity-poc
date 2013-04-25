@@ -1,9 +1,9 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
-using LOB.Business.Interface.Logic;
+using LOB.Business.Contract.Logic;
 using LOB.Business.Logic.Base;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain;
 
 #endregion

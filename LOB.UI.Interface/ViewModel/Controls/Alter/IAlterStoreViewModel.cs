@@ -1,3 +1,3 @@
-﻿namespace LOB.UI.Interface.ViewModel.Controls.Alter {
+﻿namespace LOB.UI.Contract.ViewModel.Controls.Alter {
     public interface IAlterStoreViewModel : IBaseViewModel {}
 }

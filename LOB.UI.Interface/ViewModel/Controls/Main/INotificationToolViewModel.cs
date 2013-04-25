@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Main {
+namespace LOB.UI.Contract.ViewModel.Controls.Main {
     public interface INotificationToolViewModel : IBaseViewModel {
         ICommand DismissCommand { get; set; }
         bool IsVisible { get; set; }

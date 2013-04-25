@@ -80,9 +80,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Contract.csproj">
       <Project>{5ee9acb1-f25f-4a9d-ae79-517be03e02d9}</Project>
-      <Name>LOB.Log.Interface</Name>
+      <Name>LOB.Log.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

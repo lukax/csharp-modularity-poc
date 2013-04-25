@@ -7,8 +7,8 @@ using LOB.Domain.Logic;
 
 #endregion
 
-namespace LOB.Business.Interface.Logic.Base {
-    public interface IBaseEntityFacade :IDisposable {
+namespace LOB.Business.Contract.Logic.Base {
+    public interface IBaseEntityFacade : IDisposable {
         Tuple<bool, IEnumerable<ValidationResult>> CanAdd();
         Tuple<bool, IEnumerable<ValidationResult>> CanUpdate();
         Tuple<bool, IEnumerable<ValidationResult>> CanDelete();

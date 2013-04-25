@@ -1,17 +1,17 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
-using LOB.Business.Interface.Logic.Base;
-using LOB.Business.Interface.Logic.SubEntity;
+using LOB.Business.Contract.Logic.Base;
+using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Core.Localization;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 
 #endregion
 
 namespace LOB.Business.Logic.Base {
-    [Export(typeof(IPersonFacade))]
+    [Export(typeof(IPersonFacade)), Export(typeof(IBaseEntityFacade<Person>))]
     public class PersonFacade : BaseEntityFacade<Person>, IPersonFacade {
         private readonly IAddressFacade _addressFacade;
         private readonly IContactInfoFacade _contactInfoFacade;
