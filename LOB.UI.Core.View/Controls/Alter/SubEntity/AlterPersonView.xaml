@@ -1,4 +1,4 @@
-<UserControl x:Class="LOB.UI.Core.View.Controls.Alter.Base.AlterPersonView"
+<UserControl x:Class="LOB.UI.Core.View.Controls.Alter.SubEntity.AlterPersonView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -26,7 +26,8 @@
         <TabControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
             <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
             <TabItem Header="{x:Static loc:Strings.Common_Address}" prism:RegionManager.RegionName="AddressRegion" />
-            <TabItem Header="{x:Static loc:Strings.Common_ContactInfo}" prism:RegionManager.RegionName="ContactInfoRegion" />
+            <TabItem Header="{x:Static loc:Strings.Common_ContactInfo}"
+                     prism:RegionManager.RegionName="ContactInfoRegion" />
         </TabControl>
 
         <TextBox

@@ -1,13 +1,15 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
-using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
 using LOB.UI.Contract.ViewModel.Controls.Alter.Base;
+using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
+using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    [Export(typeof(IAlterPersonViewModel)), Export(typeof(IAlterBaseEntityViewModel<Person>))]
+namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
+    [Export(typeof(IAlterPersonViewModel)), Export(typeof(IAlterBaseEntityViewModel<Person>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlterPersonViewModel : AlterBaseEntityViewModel<Person>, IAlterPersonViewModel {
         //protected override bool CanSaveChanges(object arg)
         //{

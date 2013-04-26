@@ -51,14 +51,16 @@
 
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <TabControl>
-                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}" prism:RegionManager.RegionName="NaturalPersonRegion"/>
+                    <TabItem Header="{x:Static loc:Strings.Common_PersonDetails}"
+                             prism:RegionManager.RegionName="NaturalPersonRegion" />
                 </TabControl>
             </DockPanel>
 
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <TabControl>
                     <TabItem Header="{x:Static loc:Strings.Common_Tab_Hide}" />
-                    <TabItem Header="{x:Static loc:Strings.Common_PayCheck}" prism:RegionManager.RegionName="PayCheckRegion"/>
+                    <TabItem Header="{x:Static loc:Strings.Common_PayCheck}"
+                             prism:RegionManager.RegionName="PayCheckRegion" />
                 </TabControl>
             </DockPanel>
         </Grid>

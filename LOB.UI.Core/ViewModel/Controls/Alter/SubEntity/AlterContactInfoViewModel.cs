@@ -20,7 +20,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterContactInfoViewModel))]
+    [Export(typeof(IAlterContactInfoViewModel)), Export(typeof(AlterBaseEntityViewModel<ContactInfo>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterContactInfoViewModel : AlterBaseEntityViewModel<ContactInfo>, IAlterContactInfoViewModel {
         public AlterContactInfoViewModel() {
             AddEmailCommand = new DelegateCommand(AddEmail, CanAddEmail);

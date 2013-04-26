@@ -9,7 +9,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
-    [Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.BaseEntity, ViewState.Other)]
     public partial class ListBaseEntityView : IBaseView<IBaseViewModel> {
         public ListBaseEntityView() { InitializeComponent(); }

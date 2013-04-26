@@ -22,8 +22,9 @@ using Microsoft.Practices.Prism.Logging;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
-    [InheritedExport]
-    public abstract class AlterBaseEntityViewModel<TEntity> : BaseViewModel, IAlterBaseEntityViewModel<TEntity> where TEntity : BaseEntity {
+    [InheritedExport, PartCreationPolicy(CreationPolicy.NonShared)]
+    public abstract class AlterBaseEntityViewModel<TEntity> : BaseViewModel, IAlterBaseEntityViewModel<TEntity>, IPartImportsSatisfiedNotification
+        where TEntity : BaseEntity {
         private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
         private TEntity _entity;
@@ -58,15 +59,20 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntityCommand = new DelegateCommand(ClearEntityExecute, CanClearEntity);
         }
 
-        public override void InitializeServices() {
-            if(Entity == null) ClearEntityExecute(null);
+        public void OnImportsSatisfied() {
             EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Subscribe(IncludeEventExecute);
-            EventAggregator.Value.GetEvent<SetupChildViewEvent>().Subscribe(x => {
-                                                                                if(Id != x.OldId) return;
-                                                                                Id = x.NewId;
+            EventAggregator.Value.GetEvent<SetupChildViewEvent>().Subscribe(payload => {
+                                                                                if(Id != payload.OldId) return;
+                                                                                Id = payload.NewId;
+                                                                                Entity = payload.Entity as TEntity;
                                                                                 IsChild = true;
                                                                             });
             ChangeState(ViewState.Add);
+            Lock();
+        }
+
+        public override void InitializeServices() {
+            if(ReferenceEquals(Entity, null)) ClearEntityExecute(null);
             Unlock();
         }
 

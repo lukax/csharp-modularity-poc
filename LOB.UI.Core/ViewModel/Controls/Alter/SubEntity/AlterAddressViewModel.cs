@@ -14,7 +14,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterAddressViewModel)), Export(typeof(AlterBaseEntityViewModel<Address>))]
+    [Export(typeof(IAlterAddressViewModel)), Export(typeof(AlterBaseEntityViewModel<Address>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
         private string _status;
         private IList<string> _statuses;

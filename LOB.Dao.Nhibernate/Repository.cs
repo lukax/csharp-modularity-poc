@@ -17,10 +17,10 @@ namespace LOB.Dao.Nhibernate {
         protected ISession Session {
             get { return Uow.As<UnityOfWork>().ORM.As<ISession>(); }
         }
-        public IUnityOfWork Uow { get; private set; }
+        [Import] public IUnityOfWork Uow { get; private set; }
 
-        [ImportingConstructor]
-        public Repository(IUnityOfWork unityOfWork) { Uow = unityOfWork; }
+        //[ImportingConstructor]
+        //public Repository(IUnityOfWork unityOfWork) { Uow = unityOfWork; }
 
         public T Get<T>(object id) where T : BaseEntity { return Session.Get<T>(id); }
         public T Load<T>(object id) where T : BaseEntity { return Session.Load<T>(id); }

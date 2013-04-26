@@ -2,18 +2,18 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Contract.Controller;
 using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using NullGuard;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controllers {
     [Export, PartCreationPolicy(CreationPolicy.Shared)]
-    public sealed class MainRegionController : IDisposable {
+    public sealed class MainRegionController : IBaseController {
         [Import] private IEventAggregator EventAggregator {
             set {
                 _openViewEventSubscription = value.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
@@ -54,7 +54,7 @@ namespace LOB.UI.Core.View.Controllers {
             //_navigator.Init.ResolveView(new ViewModelInfo {Type = ViewType.MessageTool}).SetViewModel(() => viewModel).AddToRegion(RegionName.ModalRegion);
         }
 
-        public void MessageHide([AllowNull] string param) {
+        public void MessageHide(string param) {
             //_regionAdapter.Remove(new ViewModelInfo {Type = ViewType.MessageTool}, RegionName.ModalRegion);
 
             //if(param != null) MessageShow(param, false);

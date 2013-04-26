@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using LOB.Core.Localization;
-using LOB.Domain.SubEntity;
+using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain.Base {
+namespace LOB.Domain.SubEntity {
     [Serializable]
     public class Person : BaseEntity, IEquatable<Person> {
         public Address Address { get; set; }

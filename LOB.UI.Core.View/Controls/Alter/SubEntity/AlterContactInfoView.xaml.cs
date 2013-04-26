@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.UI.Contract;
@@ -11,7 +10,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    [Export(typeof(IBaseView<IAlterContactInfoViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IAlterContactInfoViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.ContactInfo, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterContactInfoView : IBaseView<IAlterContactInfoViewModel> {
         public AlterContactInfoView() {
@@ -25,22 +24,11 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
 
         [Import] public IAlterContactInfoViewModel ViewModel {
             get { return DataContext as IAlterContactInfoViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }
-
-        public void Refresh() { }
-        #region Implementation of IDisposable
-
-        public void Dispose() {
-            if(ViewModel != null) ViewModel.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
+        
+        public void Dispose() { ViewModel.Dispose(); }
     }
 }

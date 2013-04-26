@@ -8,6 +8,7 @@ using LOB.Business.Contract.Logic.Base;
 using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using NullGuard;
 
 #endregion
 
@@ -24,11 +25,11 @@ namespace LOB.Business.Logic.Base {
             ValidationDelegates = new List<ValidationDelegate>();
         }
 
-        public TEntity Entity { //INFO: U probably dont wanna override this trust me
+        [AllowNull] public TEntity Entity { //INFO: U probably dont wanna override this trust me
             protected get { return _entity; }
             set {
-                _entity = value;
                 if(ReferenceEquals(value, null)) return;
+                _entity = value;
                 _entity.ValidationFunc += s => {
                                               var val = GetValidations(s).FirstOrDefault();
                                               return val != null ? val.ErrorDescription : null;

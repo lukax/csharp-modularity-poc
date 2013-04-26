@@ -78,7 +78,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="SubEntity\Email.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="Base\Person.cs" />
+    <Compile Include="SubEntity\Person.cs" />
     <Compile Include="SubEntity\ContactInfo.cs" />
     <Compile Include="SubEntity\EntityGroup.cs" />
     <Compile Include="LegalPerson.cs" />

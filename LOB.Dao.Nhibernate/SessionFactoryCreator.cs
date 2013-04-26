@@ -11,7 +11,6 @@ using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using NullGuard;
 
 #endregion
 
@@ -19,15 +18,13 @@ namespace LOB.Dao.Nhibernate {
     [Export(typeof(ISessionFactoryCreator)), PartCreationPolicy(CreationPolicy.Shared)]
     public class SessionFactoryCreator : ISessionFactoryCreator {
         private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=LOB;Pwd=LOBPASSWD;";
-
         private const string MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
-
-        private readonly ILoggerFacade _logger;
         private string _connectionString;
         private object _orm;
         private readonly PersistType _persistType;
         private SchemaExport _sqlSchema;
-        [AllowNull] public string ConnectionString {
+        protected bool DropTables { get; set; }
+        protected string ConnectionString {
             get {
                 if(_connectionString != null) return _connectionString;
                 if(_persistType == PersistType.MsSql) return MsSqlDefaultConnectionString;
@@ -36,32 +33,28 @@ namespace LOB.Dao.Nhibernate {
             }
             set { _connectionString = value; }
         }
-        [AllowNull] public object ORMFactory {
+        [Import] protected Lazy<ILoggerFacade> Logger { get; set; }
+        [Export("ORMFactory")] public object ORMFactory {
             get {
                 try {
                     return _orm ?? (_orm = CreateSessionFactory());
-                } catch(NullReferenceException) {
-                    //_logger.Log(e.Message, Category.Exception, Priority.Low);
-                    //if(OnError != null) OnError.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed));
+                } catch(NullReferenceException ex) {
+                    Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                    if(OnError != null) OnError.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_RequisitionFailed, ex.Message));
                 }
                 return null;
             }
         }
         public event SessionCreatorEventHandler OnError;
 
-        public bool DropTables { get; set; }
+        public SessionFactoryCreator()
+            : this(PersistType.MySql) { }
 
-        [ImportingConstructor]
-        public SessionFactoryCreator(ILoggerFacade logger)
-            : this(logger, PersistType.MySql) {
-            //DropTables = true;
-            Task.Run(() => _orm = CreateSessionFactory()); // Load Configurations at Startup so first connection to DB wont hang
-        }
-
-        private SessionFactoryCreator(ILoggerFacade logger, PersistType persistIn, [AllowNull] string connectionString = null) {
+        private SessionFactoryCreator(PersistType persistIn, string connectionString = null, bool dropTables = false) {
             if(connectionString != null) ConnectionString = connectionString;
-            _logger = logger;
             _persistType = persistIn;
+            DropTables = dropTables;
+            Task.Run(() => _orm = CreateSessionFactory());
         }
 
         private ISessionFactory CreateSessionFactory() {
@@ -87,7 +80,7 @@ namespace LOB.Dao.Nhibernate {
                 try {
                     factory = cfg.BuildSessionFactory();
                 } catch(Exception ex) {
-                    _logger.Log(ex.Message, Category.Exception, Priority.High);
+                    Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
                     if(OnError != null) OnError.Invoke(this, new SessionCreatorEventArgs(Strings.Notification_Dao_Connecting_Failed, ex.Message));
                 }
             return factory;
@@ -118,7 +111,7 @@ namespace LOB.Dao.Nhibernate {
                     _sqlSchema.Create(false, true);
                 }
             } catch(Exception e) {
-                _logger.Log(e.Message, Category.Exception, Priority.High);
+                Logger.Value.Log(e.Message, Category.Exception, Priority.High);
             }
         }
         #region Implementation of IDisposable

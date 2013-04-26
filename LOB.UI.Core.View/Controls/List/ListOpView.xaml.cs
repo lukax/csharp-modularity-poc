@@ -20,10 +20,7 @@ namespace LOB.UI.Core.View.Controls.List {
 
         [Import] public IListOpViewModel ViewModel {
             get { return DataContext as IListOpViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

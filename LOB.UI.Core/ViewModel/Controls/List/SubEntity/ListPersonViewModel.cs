@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq.Expressions;
-using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
 using LOB.UI.Contract.ViewModel.Controls.List.Base;
 
 #endregion

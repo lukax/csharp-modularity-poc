@@ -1,11 +1,13 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Business.Contract.Logic;
+using LOB.Business.Contract.Logic.Base;
 using LOB.Domain;
-using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
 using LOB.UI.Contract.ViewModel.Controls.Alter;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
@@ -36,8 +38,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
 
         private void PersonTypeChanged() {
             if(string.IsNullOrWhiteSpace(PersonType)) return;
-            if(PersonType.ToPersonType() == Domain.Base.PersonType.Natural) NaturalPersonCfg();
-            if(PersonType.ToPersonType() == Domain.Base.PersonType.Legal) LegalPersonCfg();
+            if(PersonType.ToPersonType() == Domain.SubEntity.PersonType.Natural) NaturalPersonCfg();
+            if(PersonType.ToPersonType() == Domain.SubEntity.PersonType.Legal) LegalPersonCfg();
         }
 
         private void LegalPersonCfg() {

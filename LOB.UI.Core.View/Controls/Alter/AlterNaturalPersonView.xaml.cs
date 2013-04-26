@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using LOB.UI.Contract;
@@ -15,6 +14,7 @@ namespace LOB.UI.Core.View.Controls.Alter {
     [Export(typeof(IBaseView<IAlterNaturalPersonViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
     [ViewInfo(ViewType.NaturalPerson, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterNaturalPersonView : IBaseView<IAlterNaturalPersonViewModel> {
+        private NaturalPersonRegionController _controller;
         public AlterNaturalPersonView() {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
@@ -23,29 +23,23 @@ namespace LOB.UI.Core.View.Controls.Alter {
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) {
             ViewCode.DataContext = dependencyPropertyChangedEventArgs.NewValue;
             ViewConfCancelTools.DataContext = dependencyPropertyChangedEventArgs.NewValue;
-            var view = dependencyPropertyChangedEventArgs.NewValue as IAlterNaturalPersonViewModel;
         }
 
-        [Import] public IAlterNaturalPersonViewModel ViewModel {
+        public IAlterNaturalPersonViewModel ViewModel {
             get { return DataContext as IAlterNaturalPersonViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         [Import] public NaturalPersonRegionController Controller {
-            set { value.ThisOne = new Lazy<IBaseViewModel>(() => ViewModel); }
+            get { return _controller; }
+            set {
+                _controller = value;
+                ViewModel = _controller.ViewModel;
+            }
         }
 
         public int Index { get; set; }
-        #region Implementation of IDisposable
 
-        public void Dispose() {
-            if(ViewModel != null) ViewModel.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
+        public void Dispose() { Controller.Dispose(); }
     }
 }

@@ -8,6 +8,7 @@
              xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:subEntity="clr-namespace:LOB.UI.Core.View.Controls.Alter.SubEntity"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
@@ -81,7 +82,7 @@
         </Grid>
 
         <StackPanel>
-            <base2:AlterPersonView x:Name="ViewAlterPerson" />
+            <subEntity:AlterPersonView x:Name="ViewAlterPerson" />
         </StackPanel>
 
         <util:ConfCancelToolsView x:Name="ViewConfCancelTools" />

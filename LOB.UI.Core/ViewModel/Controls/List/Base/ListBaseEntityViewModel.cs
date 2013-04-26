@@ -22,8 +22,9 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
-    [InheritedExport]
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T> where T : BaseEntity {
+    [InheritedExport, PartCreationPolicy(CreationPolicy.NonShared)]
+    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T>, IPartImportsSatisfiedNotification
+        where T : BaseEntity {
         private int _updateInterval;
         private Expression<Func<T, bool>> _searchCriteria;
         public virtual Expression<Func<T, bool>> SearchCriteria {
@@ -85,10 +86,15 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             set { _updateInterval = value; }
         }
 
-        public override void InitializeServices() {
+        public void OnImportsSatisfied() {
             ChangeState(ViewState.List);
+            Lock();
+        }
+
+        public override void InitializeServices() {
             Worker.DoWork += WorkerUpdateList;
             Worker.RunWorkerAsync();
+            Unlock();
         }
 
         public override void Refresh() { Search = ""; }

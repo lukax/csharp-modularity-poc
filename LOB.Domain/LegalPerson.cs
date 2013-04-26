@@ -2,7 +2,7 @@
 
 using System;
 using System.Diagnostics;
-using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
 
 #endregion
 

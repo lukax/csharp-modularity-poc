@@ -1,10 +1,11 @@
 ﻿#region Usings
 
-using LOB.Domain.Base;
+using LOB.Dao.Nhibernate.Mapping.Base;
+using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping.Base {
+namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
     public class PersonMap : BaseEntityMap<Person> {
         public PersonMap() {
             UseUnionSubclassForInheritanceMapping();

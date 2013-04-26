@@ -1,9 +1,10 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using LOB.UI.Contract;
-using LOB.UI.Contract.ViewModel.Controls.Alter.Base;
+using LOB.UI.Contract.Controller;
+using LOB.UI.Contract.ViewModel.Controls.Alter;
+using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.Event.View;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
@@ -12,20 +13,25 @@ using Microsoft.Practices.Prism.Regions;
 
 namespace LOB.UI.Core.View.Controllers {
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class NaturalPersonRegionController {
-        [Import] public Lazy<IEventAggregator> EventAggregator { get; set; }
-        [Import] public Lazy<IBaseView<IAlterPersonViewModel>> AlterPersonView { get; set; }
-        public Lazy<IBaseViewModel> ThisOne { get; set; }
+    public class NaturalPersonRegionController : IBaseController, IPartImportsSatisfiedNotification {
+        [Import] protected IEventAggregator EventAggregator { get; set; }
+        [Import] protected IRegionManager RegionManager { get; set; }
+        [Import] protected IBaseView<IAlterPersonViewModel> AlterPersonView { get; set; }
 
-        [Import] public IRegionManager Manager {
-            set {
-                value.RegisterViewWithRegion("PersonRegion", () => {
-                                                                 var view = AlterPersonView.Value;
-                                                                 EventAggregator.Value.GetEvent<SetupChildViewEvent>()
-                                                                                .Publish(new SetupChildPayload(view.ViewModel.Id, ThisOne.Value.Id));
-                                                                 return view;
-                                                             });
-            }
+        [Import] public IAlterNaturalPersonViewModel ViewModel { get; set; }
+
+        public void OnImportsSatisfied() {
+            EventAggregator.GetEvent<SetupChildViewEvent>()
+                           .Publish(new SetupChildPayload(AlterPersonView.ViewModel.Id, ViewModel.Id, ViewModel.Entity));
+
+            RegionManager.RegisterViewWithRegion("PersonRegion", () => AlterPersonView);
+
+            AlterPersonView.ViewModel.InitializeServices();
+        }
+
+        public void Dispose() {
+            AlterPersonView.Dispose();
+            ViewModel.Dispose();
         }
     }
 }

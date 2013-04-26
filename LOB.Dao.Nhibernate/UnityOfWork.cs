@@ -2,37 +2,24 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Linq;
-using NullGuard;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate {
     [Export(typeof(IUnityOfWork)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class UnityOfWork : IUnityOfWork {
-        protected ILoggerFacade Logger { get; set; }
         protected ITransaction Transaction { get; set; }
-        public event SessionCreatorEventHandler OnError;
-        private object _orm;
-        [AllowNull] public object ORM {
-            get {
-                return _orm ?? (_orm = Task.Run(() => {
-                                                    try {
-                                                        if(OnError != null) SessionFactoryCreator.OnError += OnError;
-                                                        return SessionFactoryCreator.ORMFactory.As<ISessionFactory>().OpenSession();
-                                                    } catch(NullReferenceException) {
-                                                        return null;
-                                                    }
-                                                }).Result);
-            }
+        [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
+        [Import("ORMFactory")] protected object ORMFactory {
+            set { ORM = value.As<ISessionFactory>().OpenSession(); }
         }
-
-        protected ISessionFactoryCreator SessionFactoryCreator { get; set; }
+        public object ORM { get; protected set; }
+        public event SessionCreatorEventHandler OnError;
 
         public bool TestConnection() {
             try {
@@ -41,12 +28,6 @@ namespace LOB.Dao.Nhibernate {
                 return false;
             }
             return true;
-        }
-
-        [ImportingConstructor]
-        public UnityOfWork(ISessionFactoryCreator sessionFactoryCreator, ILoggerFacade loggerFacade) {
-            SessionFactoryCreator = sessionFactoryCreator;
-            Logger = loggerFacade;
         }
 
         public IUnityOfWork BeginTransaction() {
@@ -91,7 +72,7 @@ namespace LOB.Dao.Nhibernate {
                 Transaction.Dispose();
                 Transaction = null;
             }
-            if(_orm != null) _orm.As<ISession>().Disconnect();
+            if(ORM != null) ORM.As<ISession>().Disconnect();
             //ORMFactory.As<ISession>().Dispose(); INFO: Disconnecting instead of disposing // Allows Multi-usage
         }
 

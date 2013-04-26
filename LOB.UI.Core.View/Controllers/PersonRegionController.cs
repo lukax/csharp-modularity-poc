@@ -1,8 +1,8 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using LOB.UI.Contract;
+using LOB.UI.Contract.Controller;
 using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.Event.View;
 using Microsoft.Practices.Prism.Events;
@@ -12,28 +12,31 @@ using Microsoft.Practices.Prism.Regions;
 
 namespace LOB.UI.Core.View.Controllers {
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class PersonRegionController {
-        [Import] public Lazy<IEventAggregator> EventAggregator { get; set; }
-        [Import] public Lazy<IBaseView<IAlterAddressViewModel>> AlterAddressView { get; set; }
-        [Import] public Lazy<IBaseView<IAlterContactInfoViewModel>> AlterContactInfoView { get; set; }
-        public Lazy<IBaseViewModel> ThisOne { get; set; }
+    public class PersonRegionController : IPartImportsSatisfiedNotification, IBaseController {
+        [Import] protected IEventAggregator EventAggregator { get; set; }
+        [Import] protected IBaseView<IAlterAddressViewModel> AlterAddressView { get; set; }
+        [Import] protected IBaseView<IAlterContactInfoViewModel> AlterContactInfoView { get; set; }
+        [Import] protected IRegionManager RegionManager { get; set; }
 
-        [Import] public IRegionManager Manager {
-            set {
-                value.RegisterViewWithRegion("AddressRegion", () => {
-                                                                  var view = AlterAddressView.Value;
-                                                                  EventAggregator.Value.GetEvent<SetupChildViewEvent>()
-                                                                                 .Publish(new SetupChildPayload(view.ViewModel.Id, ThisOne.Value.Id));
-                                                                  return view;
-                                                              });
-                value.RegisterViewWithRegion("ContactInfoRegion", () => {
-                                                                      var view = AlterContactInfoView.Value;
-                                                                      EventAggregator.Value.GetEvent<SetupChildViewEvent>()
-                                                                                     .Publish(new SetupChildPayload(view.ViewModel.Id,
-                                                                                                                    ThisOne.Value.Id));
-                                                                      return view;
-                                                                  });
-            }
+        [Import] public IAlterPersonViewModel ViewModel { get; set; }
+
+        public void OnImportsSatisfied() {
+            EventAggregator.GetEvent<SetupChildViewEvent>()
+                           .Publish(new SetupChildPayload(AlterAddressView.ViewModel.Id, ViewModel.Id, ViewModel.Entity));
+            EventAggregator.GetEvent<SetupChildViewEvent>()
+                           .Publish(new SetupChildPayload(AlterContactInfoView.ViewModel.Id, ViewModel.Id, ViewModel.Entity));
+
+            RegionManager.RegisterViewWithRegion("AddressRegion", () => AlterAddressView);
+            RegionManager.RegisterViewWithRegion("ContactInfoRegion", () => AlterContactInfoView);
+
+            AlterAddressView.ViewModel.InitializeServices();
+            AlterContactInfoView.ViewModel.InitializeServices();
+        }
+
+        public void Dispose() {
+            AlterAddressView.Dispose();
+            AlterContactInfoView.Dispose();
+            ViewModel.Dispose();
         }
     }
 }

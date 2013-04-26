@@ -73,14 +73,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\Lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
     <Reference Include="System.Data" />
   </ItemGroup>
@@ -101,7 +96,7 @@
     <Compile Include="Mapping\SubEntity\AdressMap.cs" />
     <Compile Include="Mapping\SubEntity\ContactInfoMap.cs" />
     <Compile Include="Mapping\SaleMap.cs" />
-    <Compile Include="Mapping\Base\PersonMap.cs" />
+    <Compile Include="Mapping\SubEntity\PersonMap.cs" />
     <Compile Include="Mapping\Base\BaseEntityMap.cs" />
     <Compile Include="Mapping\StoreMap.cs" />
     <Compile Include="Mapping\SubEntity\UfMap.cs" />
@@ -144,7 +139,6 @@ xcopy  /s /k /y "$(ProjectDir)$(OutDir)FluentNHibernate.dll" "$(SolutionDir)LOB.
 xcopy /s /k /y "$(ProjectDir)$(OutDir)Iesi.Collections.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
 xcopy  /s /k /y "$(ProjectDir)$(OutDir)NHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="Fody.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
