@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using LOB.UI.Contract.ViewModel.Controls.Main;
@@ -33,14 +32,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             CanClose = canClose;
             IsRestrictive = isRestrictive;
         }
-
-        public override void InitializeServices() { }
-
-        public override void Refresh() { }
-        #region Implementation of IDisposable
-
-        public override void Dispose() { GC.SuppressFinalize(this); }
-
-        #endregion
     }
 }

@@ -27,8 +27,14 @@ namespace LOB.UI.Core.ViewModel.Base {
         public ViewState ViewState { get; private set; }
 
         protected BaseViewModel() { Worker = new BackgroundWorker(); }
-        public abstract void InitializeServices();
-        public abstract void Refresh();
+        public virtual void InitializeServices() { }
+        public virtual void Refresh() {
+            // ReSharper disable ExplicitCallerInfoArgument
+            OnPropertyChanged("Header");
+            OnPropertyChanged("ViewState");
+            OnPropertyChanged("Id");
+            // ReSharper restore ExplicitCallerInfoArgument
+        }
 
         protected virtual ViewState ChangeState(ViewState changeState) {
             if(changeState != default(ViewState)) ViewState = changeState;
@@ -40,9 +46,21 @@ namespace LOB.UI.Core.ViewModel.Base {
             get { return _subState == ViewSubState.Unlocked; }
         }
         public virtual bool IsChild { get; protected set; }
+        #region Implementation of IDisposable
 
-        //public bool Equals(BaseViewModel other) { return Id == other.Id; }
-        public abstract void Dispose();
+        ~BaseViewModel() { Dispose(false); }
+
+        protected virtual void Dispose(bool disposing) {
+            if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
+            if(disposing) Worker.Dispose();
+        }
+
+        public void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 
     [PartCreationPolicy(CreationPolicy.NonShared)] //INFO: Makes property Id not shared across views

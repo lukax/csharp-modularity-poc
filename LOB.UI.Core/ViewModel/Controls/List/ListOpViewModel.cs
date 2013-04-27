@@ -54,7 +54,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             Worker.DoWork += UpdateList;
             Worker.RunWorkerAsync();
         }
-        public override void Refresh() { Search = ""; }
+        public override void Refresh() {
+            base.Refresh();
+            Search = "";
+        }
 
         private void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
             var worker = sender as BackgroundWorker;
@@ -139,18 +142,5 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
             //return operationTypes;
             return catalog;
         }
-        #region Implementation of IDisposable
-
-        ~ListOpViewModel() { Dispose(false); }
-        public override void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        private void Dispose(bool disposing) {
-            if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
-            if(disposing) Worker.Dispose();
-        }
-
-        #endregion
     }
 }

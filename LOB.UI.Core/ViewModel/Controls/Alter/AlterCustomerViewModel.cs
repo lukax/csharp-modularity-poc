@@ -1,11 +1,9 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using LOB.Business.Contract.Logic;
-using LOB.Business.Contract.Logic.Base;
 using LOB.Domain;
 using LOB.Domain.SubEntity;
 using LOB.UI.Contract.ViewModel.Controls.Alter;

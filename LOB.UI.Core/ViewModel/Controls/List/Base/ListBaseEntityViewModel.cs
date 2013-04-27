@@ -158,20 +158,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                 Thread.Sleep(2000);
             } while(!Worker.CancellationPending);
         }
-        #region Implementation of IDisposable
 
-        ~ListBaseEntityViewModel() { Dispose(false); }
-        public override void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+        protected override void Dispose(bool disposing) {
+            Dispose();
+            if(disposing) Repository.Value.Uow.Dispose();
         }
-        private void Dispose(bool disposing) {
-            if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
-            if(!disposing) return;
-            Worker.Dispose();
-            Repository.Value.Uow.Dispose();
-        }
-
-        #endregion
     }
 }

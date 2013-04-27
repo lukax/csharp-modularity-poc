@@ -155,20 +155,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         }
 
         public override void Refresh() { ClearEntityExecute(null); }
-        #region Implementation of IDisposable
 
-        ~AlterBaseEntityViewModel() { Dispose(false); }
-        public override void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        private void Dispose(bool disposing) {
-            if(Worker.WorkerSupportsCancellation) Worker.CancelAsync();
-            if(!disposing) return;
-            Worker.Dispose();
-            Repository.Value.Uow.Dispose();
-        }
-
-        #endregion
+        protected override void Dispose(bool disposing) { if(disposing) Repository.Value.Uow.Dispose(); }
     }
 }

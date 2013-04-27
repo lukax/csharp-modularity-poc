@@ -90,9 +90,9 @@ namespace LOB.Business.Logic.Base {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        private void Dispose(bool b) {
+        private void Dispose(bool disposing) {
             if(Repository.Uow.IsTransactionActive()) Repository.Uow.FlushTransaction();
-            if(!b) return;
+            if(!disposing) return;
             Repository.Uow.Dispose();
         }
 

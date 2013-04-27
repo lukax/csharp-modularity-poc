@@ -28,7 +28,7 @@ namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
         }
 
         public int Index { get; set; }
-        
+
         public void Dispose() { ViewModel.Dispose(); }
     }
 }

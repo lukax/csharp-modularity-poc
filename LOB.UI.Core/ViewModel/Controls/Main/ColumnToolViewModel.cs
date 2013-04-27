@@ -42,10 +42,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             InitWorker();
         }
 
-        public override void InitializeServices() { }
-
-        public override void Refresh() { }
-
         private void ShowOperations(object arg) {
             //var op = new ViewModelInfo {Type = ViewType.Op, ViewState = ViewState.List};
             //if(_regionAdapter.Contains(op, RegionName.TabRegion)) _regionAdapter.Remove(op, RegionName.TabRegion);
@@ -87,20 +83,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
                 NotificationStatus = LazyNotificationViewModel.Value.Status;
             } while(!Worker.CancellationPending);
         }
-        #region Implementation of IDisposable
-
-        //~ColumnToolIuiComponentModel() { Disposing(false); }
-
-        public override void Dispose() {
-            Disposing(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Disposing(bool disposing) {
-            Worker.CancelAsync();
-            if(disposing) Worker.Dispose();
-        }
-
-        #endregion
     }
 }

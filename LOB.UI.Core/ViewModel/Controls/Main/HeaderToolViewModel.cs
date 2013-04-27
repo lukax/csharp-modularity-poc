@@ -34,30 +34,21 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         private void OpenTabExecute(object o) { _notificationEvent.Publish(new Notification(Strings.Notification_Implemented)); }
 
         [Export("TestDbConnection", typeof(Action<object>))]
-        private async void DbTestConnectionExecute(object arg) {
+        private void DbTestConnectionExecute(object arg) {
             var notification = new Notification();
             _notificationEvent.Publish(notification.Message(Strings.Notification_Dao_Connecting).Detail("").State(NotificationType.Info).Progress(-2));
             var uow = LazyServiceLocator.Value.GetInstance<IUnityOfWork>();
-            await Task.Run(() => {
-                               uow.OnError +=
-                                   (sender, args) =>
-                                   notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
-                               if(uow.TestConnection())
-                                   _notificationEvent.Publish(
-                                       notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationType.Ok).Progress(-1));
-                           });
+            Task.Run(() => {
+                         uow.OnError +=
+                             (sender, args) =>
+                             notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
+                         if(uow.TestConnection())
+                             _notificationEvent.Publish(
+                                 notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationType.Ok).Progress(-1));
+                     });
             _notificationEvent.Publish(notification);
         }
 
-        public override void InitializeServices() { }
-
-        public override void Refresh() { }
-
         private NotificationEvent _notificationEvent;
-        #region Implementation of IDisposable
-
-        public override void Dispose() { GC.SuppressFinalize(this); }
-
-        #endregion
     }
 }

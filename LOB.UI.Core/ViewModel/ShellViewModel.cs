@@ -25,14 +25,5 @@ namespace LOB.UI.Core.ViewModel {
             //ViewType operationType = arg.ToString().ToUIOperationType();
             //Navigator.ResolveView(op).ResolveViewModel(op).AddToRegion(RegionName.TabRegion);
         }
-
-        public override void InitializeServices() { }
-
-        public override void Refresh() { }
-        #region Implementation of IDisposable
-
-        public override void Dispose() { GC.SuppressFinalize(this); }
-
-        #endregion
     }
 }
