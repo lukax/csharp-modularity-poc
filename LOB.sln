@@ -313,7 +313,6 @@ Global
 		{22F1D5DE-172F-4BEA-8D4E-77B0C57A2A9C}.Release|x86.ActiveCfg = Release|Any CPU
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Debug|Win32.ActiveCfg = Debug|Win32
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Debug|Win32.Build.0 = Debug|Win32
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66}.Debug|x64.ActiveCfg = Debug|Win32
@@ -330,7 +329,6 @@ Global
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|Win32.ActiveCfg = Debug|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -391,7 +389,7 @@ Global
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D} = {B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal
