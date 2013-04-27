@@ -1062,4 +1062,7 @@
   <data name="Notification_Param_NotUnique" xml:space="preserve">
     <value>Parameter is not a unique value</value>
   </data>
+  <data name="UI_ToolTip_TestDbConnection" xml:space="preserve">
+    <value>@UI_ToolTip_TestDbConnection</value>
+  </data>
 </root>

@@ -98,13 +98,13 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                     string.Format("{0} {1}", Strings.Common_Initializing,
                                   _defaultViewInfoDictLazy.Value.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key),
                 Progress = -2,
-                State = NotificationState.Info
+                Type = NotificationType.Info
             };
             LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification);
             LazyEventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(viewInfo));
             var stringy = string.Format("{0} {1}", Strings.Common_Initialized,
                                         _defaultViewInfoDictLazy.Value.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key);
-            LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification.Message(stringy).Progress(-1).State(NotificationState.Ok));
+            LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification.Message(stringy).Progress(-1).State(NotificationType.Ok));
             LazyEventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id);
         }
 

@@ -4,7 +4,6 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Threading;
 using System.Windows.Data;
 using System.Windows.Input;
 using LOB.Core.Localization;
@@ -27,12 +26,14 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             DeleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
             AddPhoneNumberCommand = new DelegateCommand(AddPhoneNumber, CanAddPhoneNumber);
             DeletePhoneNumberCommand = new DelegateCommand(DeletePhoneNumber, CanDeletePhoneNumber);
+            FetchCommand = new DelegateCommand(FetchExecute, CanFetch);
         }
 
         public ICommand AddEmailCommand { get; set; }
         public ICommand DeleteEmailCommand { get; set; }
         public ICommand AddPhoneNumberCommand { get; set; }
         public ICommand DeletePhoneNumberCommand { get; set; }
+        public ICommand FetchCommand { get; set; }
 
         public Email Email { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
@@ -43,8 +44,6 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             base.InitializeServices();
             InitBackgroundWorker();
         }
-        #region Member Validations
-
         private void AddEmail(object arg) {
             var emailId = new Guid();
             EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterEmailViewModel), id => { emailId = id; }));
@@ -75,7 +74,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             return false;
         }
 
-        #endregion
+        private void FetchExecute(object o) { Worker.RunWorkerAsync(); }
+        private bool CanFetch(object obj) { return IsUnlocked & !Worker.IsBusy; }
         #region Repo Operations
 
         private void InitBackgroundWorker() {
@@ -94,12 +94,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
                                                     Notification.Value.Message(s.Description)
                                                                 .Detail(s.ErrorMessage)
                                                                 .Progress(-1)
-                                                                .State(NotificationState.Error));
+                                                                .State(NotificationType.Error));
                                                 Worker.CancelAsync();
                                             };
             //do {
             Worker.ReportProgress(-1);
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
             Worker.ReportProgress(5);
             var result = new object[2];
             using(Repository.Value.Uow.BeginTransaction())
@@ -125,7 +125,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {
             Notification.Value.Message(args.ProgressPercentage == -1 ? Strings.Notification_List_Updated : Strings.Notification_List_Updating)
-                        .State(NotificationState.Info)
+                        .State(NotificationType.Info)
                         .Progress(args.ProgressPercentage);
             NotificationEvent.Publish(Notification.Value);
         }

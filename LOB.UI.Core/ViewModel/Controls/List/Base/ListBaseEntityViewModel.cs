@@ -16,6 +16,8 @@ using LOB.UI.Contract.Command;
 using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Contract.ViewModel.Controls.List.Base;
 using LOB.UI.Core.Event;
+using LOB.UI.Core.Event.Infrastructure;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Base;
 using Microsoft.Practices.Prism.Events;
 
@@ -23,11 +25,11 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List.Base {
     [InheritedExport, PartCreationPolicy(CreationPolicy.NonShared)]
-    public abstract class ListBaseEntityViewModel<T> : BaseViewModel, IListBaseEntityViewModel<T>, IPartImportsSatisfiedNotification
-        where T : BaseEntity {
+    public abstract class ListBaseEntityViewModel<TEntity> : BaseViewModel, IListBaseEntityViewModel<TEntity>, IPartImportsSatisfiedNotification
+        where TEntity : BaseEntity {
         private int _updateInterval;
-        private Expression<Func<T, bool>> _searchCriteria;
-        public virtual Expression<Func<T, bool>> SearchCriteria {
+        private Expression<Func<TEntity, bool>> _searchCriteria;
+        public virtual Expression<Func<TEntity, bool>> SearchCriteria {
             get {
                 try {
                     var converted = Convert.ToInt32(Search);
@@ -45,8 +47,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ICommand DeleteCommand { get; private set; }
         public ICommand FetchCommand { get; private set; }
         public ICommand CloseCommand { get; private set; }
-        public T Entity { get; set; }
-        public IEnumerable<T> Entities { get; private set; }
+        public TEntity Entity { get; set; }
+        public IEnumerable<TEntity> Entities { get; private set; }
         public string Search { get; set; }
         [Import] protected Lazy<Notification> Notification { get; private set; }
         [Import] protected Lazy<IRepository> Repository { get; private set; }
@@ -55,8 +57,9 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             get { return EventAggregator.Value.GetEvent<NotificationEvent>(); }
         }
 
-        protected ListBaseEntityViewModel(Lazy<IRepository> customRepository = null) {
-            if(customRepository != null) Repository = customRepository;
+        protected ListBaseEntityViewModel(Lazy<IRepository> customRepository = null) { if(customRepository != null) Repository = customRepository; }
+
+        public void OnImportsSatisfied() {
             SearchCommand = new DelegateCommand(SearchExecute, CanSearch);
             IncludeCommand = new DelegateCommand(IncludeExecute, CanInclude);
             AddCommand = new DelegateCommand(SaveExecute, CanSave);
@@ -65,36 +68,27 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             FetchCommand = new DelegateCommand(FetchExecute, CanFetch);
             CloseCommand = new DelegateCommand(ExitExecute, CanExit);
             Search = "";
+            ChangeState(ViewState.List);
+            Lock();
+        }
+        public override void InitializeServices() {
+            Worker.DoWork += WorkerUpdateList;
+            Worker.RunWorkerAsync();
+            Unlock();
         }
 
         protected virtual void SearchExecute(object obj) { if(Worker.CancellationPending) if(!Worker.IsBusy) Worker.RunWorkerAsync(); }
-
         protected bool CanSearch(object obj) { return IsUnlocked; }
 
-        private void IncludeExecute(object o) {
-            //EventAggregator.GetEvent<EntityIncludeEvent>().Publish(Entity);
-        }
-        private bool CanInclude(object obj) { return IsUnlocked; }
+        private void IncludeExecute(object o) { EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Publish(new EntityIncludePayload<TEntity>(Id, Entity)); }
+        private bool CanInclude(object obj) { return IsUnlocked & !ReferenceEquals(Entity, null); }
 
-        private void ExitExecute(object obj) {
-            //EventAggregator.GetEvent<CloseViewEvent>().Publish(ViewModelInfo);
-        }
+        private void ExitExecute(object obj) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id); }
         private bool CanExit(object obj) { return IsUnlocked; }
 
         public int UpdateInterval {
             get { return _updateInterval == default(int) ? 1000 : _updateInterval; }
             set { _updateInterval = value; }
-        }
-
-        public void OnImportsSatisfied() {
-            ChangeState(ViewState.List);
-            Lock();
-        }
-
-        public override void InitializeServices() {
-            Worker.DoWork += WorkerUpdateList;
-            Worker.RunWorkerAsync();
-            Unlock();
         }
 
         public override void Refresh() { Search = ""; }
@@ -130,7 +124,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                                     Notification.Value.Message(s.Description)
                                                                 .Detail(s.ErrorMessage)
                                                                 .Progress(-1)
-                                                                .State(NotificationState.Error));
+                                                                .State(NotificationType.Error));
                                                 //Worker.CancelAsync();
                                                 Lock();
                                             };
@@ -142,14 +136,14 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                            .Publish(
                                                Notification.Value.Message(Strings.Notification_List_Updating)
                                                            .Progress(10)
-                                                           .State(NotificationState.Info));
-                            IList<T> localList = string.IsNullOrEmpty(Search)
-                                                     ? (Repository.Value.GetAll<T>()).ToList()
-                                                     : (Repository.Value.GetAll(SearchCriteria)).ToList();
+                                                           .State(NotificationType.Info));
+                            IList<TEntity> localList = string.IsNullOrEmpty(Search)
+                                                           ? (Repository.Value.GetAll<TEntity>()).ToList()
+                                                           : (Repository.Value.GetAll(SearchCriteria)).ToList();
                             EventAggregator.Value.GetEvent<NotificationEvent>()
                                            .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
                             if(Entities == null || !localList.SequenceEqual(Entities)) {
-                                Entities = new List<T>(localList);
+                                Entities = new List<TEntity>(localList);
                                 EventAggregator.Value.GetEvent<NotificationEvent>()
                                                .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
                             }
@@ -158,7 +152,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
                                                .Publish(
                                                    Notification.Value.Message(Strings.Notification_List_Updated)
                                                                .Progress(-1)
-                                                               .State(NotificationState.Ok));
+                                                               .State(NotificationType.Ok));
                             Unlock();
                         }
                 Thread.Sleep(2000);

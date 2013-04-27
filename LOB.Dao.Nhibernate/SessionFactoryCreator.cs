@@ -34,7 +34,7 @@ namespace LOB.Dao.Nhibernate {
             set { _connectionString = value; }
         }
         [Import] protected Lazy<ILoggerFacade> Logger { get; set; }
-        [Export("ORMFactory")] public object ORMFactory {
+        public object ORMFactory {
             get {
                 try {
                     return _orm ?? (_orm = CreateSessionFactory());
@@ -54,7 +54,6 @@ namespace LOB.Dao.Nhibernate {
             if(connectionString != null) ConnectionString = connectionString;
             _persistType = persistIn;
             DropTables = dropTables;
-            Task.Run(() => _orm = CreateSessionFactory());
         }
 
         private ISessionFactory CreateSessionFactory() {
@@ -62,16 +61,16 @@ namespace LOB.Dao.Nhibernate {
             ISessionFactory factory = null;
             switch(_persistType) {
                 case PersistType.MySql:
-                    cfg = StoreInMySqlConfiguration();
+                    cfg = MySqlConfiguration();
                     break;
                 case PersistType.MsSql:
-                    cfg = StoreInMsSqlConfiguration();
+                    cfg = MsSqlConfiguration();
                     break;
                 case PersistType.File:
-                    cfg = StoreInFileConfiguration();
+                    cfg = FileConfiguration();
                     break;
                 case PersistType.Memory:
-                    cfg = StoreInMemoryConfiguration();
+                    cfg = InMemoryConfiguration();
                     break;
                 default:
                     throw new ArgumentException("PersistType");
@@ -86,10 +85,10 @@ namespace LOB.Dao.Nhibernate {
             return factory;
         }
 
-        private Configuration StoreInMySqlConfiguration() { return Mapping().Database(MySQLConfiguration.Standard.ConnectionString(ConnectionString)).BuildConfiguration(); }
-        private Configuration StoreInMsSqlConfiguration() { return Mapping().Database(MsSqlConfiguration.MsSql2008.ConnectionString(ConnectionString)).BuildConfiguration(); }
-        private Configuration StoreInMemoryConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.InMemory()).BuildConfiguration(); }
-        private Configuration StoreInFileConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration(); }
+        private Configuration MySqlConfiguration() { return Mapping().Database(MySQLConfiguration.Standard.ConnectionString(ConnectionString)).BuildConfiguration(); }
+        private Configuration MsSqlConfiguration() { return Mapping().Database(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2008.ConnectionString(ConnectionString)).BuildConfiguration(); }
+        private Configuration InMemoryConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.InMemory()).BuildConfiguration(); }
+        private Configuration FileConfiguration() { return Mapping().Database(SQLiteConfiguration.Standard.UsingFile("local.db")).BuildConfiguration(); }
 
         private FluentConfiguration Mapping() {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<SessionFactoryCreator>())

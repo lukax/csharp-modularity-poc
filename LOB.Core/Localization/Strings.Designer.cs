@@ -2878,6 +2878,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_TestDbConnection.
+        /// </summary>
+        public static string UI_ToolTip_TestDbConnection {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_TestDbConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @UI_ToolTip_Undo.
         /// </summary>
         public static string UI_ToolTip_Undo {

@@ -18,7 +18,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(IHeaderToolViewModel))]
-    public class HeaderToolViewModel : BaseViewModel, IHeaderToolViewModel {
+    public class HeaderToolViewModel : BaseViewModel, IHeaderToolViewModel, IPartImportsSatisfiedNotification {
         public ICommand DbTestConnectionCommand { get; set; }
         public ICommand OpenTabCommand { get; set; }
         [Import] private Lazy<IServiceLocator> LazyServiceLocator { get; set; }
@@ -26,24 +26,25 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             set { _notificationEvent = value.GetEvent<NotificationEvent>(); }
         }
 
-        public HeaderToolViewModel() {
+        public void OnImportsSatisfied() {
             DbTestConnectionCommand = new DelegateCommand(DbTestConnectionExecute);
             OpenTabCommand = new DelegateCommand(OpenTabExecute);
         }
 
-        private void OpenTabExecute(object o) { _notificationEvent.Publish(new Notification(Strings.Notification_Implemented, state: NotificationState.Ok)); }
+        private void OpenTabExecute(object o) { _notificationEvent.Publish(new Notification(Strings.Notification_Implemented)); }
 
+        [Export("TestDbConnection", typeof(Action<object>))]
         private async void DbTestConnectionExecute(object arg) {
             var notification = new Notification();
-            _notificationEvent.Publish(notification.Message(Strings.Notification_Dao_Connecting).Detail("").State(NotificationState.Info).Progress(-2));
+            _notificationEvent.Publish(notification.Message(Strings.Notification_Dao_Connecting).Detail("").State(NotificationType.Info).Progress(-2));
             var uow = LazyServiceLocator.Value.GetInstance<IUnityOfWork>();
             await Task.Run(() => {
                                uow.OnError +=
                                    (sender, args) =>
-                                   notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationState.Error).Progress(-1);
+                                   notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
                                if(uow.TestConnection())
                                    _notificationEvent.Publish(
-                                       notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationState.Ok).Progress(-1));
+                                       notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationType.Ok).Progress(-1));
                            });
             _notificationEvent.Publish(notification);
         }

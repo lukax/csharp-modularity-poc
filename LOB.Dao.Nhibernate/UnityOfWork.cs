@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using Microsoft.Practices.Prism.Logging;
@@ -12,14 +13,25 @@ using NHibernate.Linq;
 
 namespace LOB.Dao.Nhibernate {
     [Export(typeof(IUnityOfWork)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public class UnityOfWork : IUnityOfWork {
+    public class UnityOfWork : IUnityOfWork, IPartImportsSatisfiedNotification {
         protected ITransaction Transaction { get; set; }
         [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
-        [Import("ORMFactory")] protected object ORMFactory {
-            set { ORM = value.As<ISessionFactory>().OpenSession(); }
+        [Import] protected Lazy<ISessionFactoryCreator> SessionFactory { get; set; }
+        private object _orm;
+        public object ORM {
+            get {
+                return _orm ?? (_orm = Task.Run(() => {
+                                                    try {
+                                                        if(OnError != null) SessionFactory.Value.OnError += OnError;
+                                                        return SessionFactory.Value.ORMFactory.As<ISessionFactory>().OpenSession();
+                                                    } catch(NullReferenceException) {
+                                                        return null;
+                                                    }
+                                                }).Result);
+            }
         }
-        public object ORM { get; protected set; }
         public event SessionCreatorEventHandler OnError;
+        public void OnImportsSatisfied() { }
 
         public bool TestConnection() {
             try {

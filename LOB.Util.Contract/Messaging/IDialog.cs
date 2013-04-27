@@ -1,4 +1,4 @@
-﻿namespace LOB.UI.Contract.Dialog {
+﻿namespace LOB.Util.Contract.Messaging {
     public interface IDialog {
         bool? ShowDialogMessage(string title, string message);
         bool? ShowDialogView(object view, object viewModel);

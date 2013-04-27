@@ -52,14 +52,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected AlterBaseEntityViewModel(IBaseEntityFacade<TEntity> customBaseEntityFacade = null, IRepository customRepository = null) {
             if(customBaseEntityFacade != null) EntityFacade = new Lazy<IBaseEntityFacade<TEntity>>(() => customBaseEntityFacade);
             if(customRepository != null) Repository = new Lazy<IRepository>(() => customRepository);
+        }
+
+        public void OnImportsSatisfied() {
             SaveChangesCommand = new RelayDelegateCommand(Id, SaveChangesExecute, CanSaveChanges, sharedCanExecute: true);
             DiscardChangesCommand = new DelegateCommand(DiscardChangesExecute, CanDiscardChanges);
             CloseCommand = DiscardChangesCommand;
             QuickSearchCommand = new DelegateCommand(QuickSearchExecute, CanQuickSearch);
             ClearEntityCommand = new DelegateCommand(ClearEntityExecute, CanClearEntity);
-        }
 
-        public void OnImportsSatisfied() {
             EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Subscribe(IncludeEventExecute);
             EventAggregator.Value.GetEvent<SetupChildViewEvent>().Subscribe(payload => {
                                                                                 if(Id != payload.OldId) return;
@@ -107,13 +108,13 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected virtual void SaveChangesExecute(object sender, DoWorkEventArgs e) {
             Lock();
             NotificationEvent.Publish(
-                Notification.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationState.Info));
+                Notification.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationType.Info));
             Repository.Value.Uow.OnError += (o, s) => {
                                                 NotificationEvent.Publish(
                                                     Notification.Value.Message(s.Description)
                                                                 .Detail(s.ErrorMessage)
                                                                 .Progress(-1)
-                                                                .State(NotificationState.Error));
+                                                                .State(NotificationType.Error));
                                                 Worker.CancelAsync();
                                             };
             using(Repository.Value.Uow.BeginTransaction())
@@ -122,7 +123,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     Entity = Repository.Value.SaveOrUpdate(Entity);
                     NotificationEvent.Publish(Notification.Value.Progress(70));
                     Repository.Value.Uow.CommitTransaction();
-                    NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationState.Ok));
+                    NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationType.Ok));
                     ChangeState(ViewState.Update);
                 }
             Unlock();

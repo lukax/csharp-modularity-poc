@@ -62,7 +62,6 @@
     <Compile Include="Command\ICommandService.cs" />
     <Compile Include="Command\RelayDelegateCommand.cs" />
     <Compile Include="Controller\IBaseController.cs" />
-    <Compile Include="Dialog\IDialog.cs" />
     <Compile Include="Event\IBaseEvent.cs" />
     <Compile Include="Infrastructure\IViewInfo.cs" />
     <Compile Include="IUIComponent.cs" />

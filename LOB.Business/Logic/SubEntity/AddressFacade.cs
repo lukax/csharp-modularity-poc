@@ -52,7 +52,7 @@ namespace LOB.Business.Logic.SubEntity {
                 (sender, name) =>
                 string.IsNullOrWhiteSpace(Entity.District) ? new ValidationResult("District", Strings.Notification_Field_Empty) : null);
             AddValidation(
-                (sender, name) => string.IsNullOrWhiteSpace(Entity.State) ? new ValidationResult("State", Strings.Notification_Field_Empty) : null);
+                (sender, name) => string.IsNullOrWhiteSpace(Entity.State) ? new ValidationResult("type", Strings.Notification_Field_Empty) : null);
         }
     }
 }

@@ -94,7 +94,7 @@ namespace LOB.UI.Core.netfx.System {
                             }
                             break;
                         default:
-                            throw new InvalidOperationException("Invalid state.");
+                            throw new InvalidOperationException("Invalid type.");
                     }
                 } while(state != State.End);
             }

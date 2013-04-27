@@ -71,6 +71,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B10C1DDF-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Util.Native.Test", "LOB.Util.Native.Test\LOB.Util.Native.Test.csproj", "{C30DC940-7B17-4360-9037-C7B69C86BB9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOB.Util.Contract", "LOB.Util.Contract\LOB.Util.Contract.csproj", "{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -339,6 +341,20 @@ Global
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|Win32.ActiveCfg = Release|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|x64.ActiveCfg = Release|Any CPU
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D}.Release|x86.ActiveCfg = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|Win32.ActiveCfg = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|x64.ActiveCfg = Release|Any CPU
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -369,12 +385,13 @@ Global
 		{63BBD8C9-0916-4563-BB05-BFC7359FF5B8} = {637F7FE3-D594-4145-A24E-857AD97F326F}
 		{819764C7-2185-4096-8677-66BEE2A1B788} = {FFB141A2-45B1-47F9-8C81-52DF77FCAAE7}
 		{5BF0E95C-E62C-436C-91BC-043E53BC3734} = {4EA01FF6-83D2-48BD-9C34-95C7031E0D1B}
+		{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93} = {4EA01FF6-83D2-48BD-9C34-95C7031E0D1B}
 		{64B0DC83-CEF5-4EA4-9CBB-F0DD4A68EA66} = {5BF0E95C-E62C-436C-91BC-043E53BC3734}
 		{B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A} = {5BF0E95C-E62C-436C-91BC-043E53BC3734}
 		{C30DC940-7B17-4360-9037-C7B69C86BB9D} = {B10C1DDF-F445-4B63-A3B9-15DC0A83AC8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 		VisualSVNWorkingCopyRoot = .
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal

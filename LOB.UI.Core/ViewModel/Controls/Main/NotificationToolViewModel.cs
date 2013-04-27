@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(INotificationToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
         public Notification Entity { get; set; }
-        public MThreadObservableCollection<Notification> Entitys { get; set; }
+        public IList<Notification> Entitys { get; set; }
         public bool IsVisible {
             get { return Visibility == Visibility.Visible; }
             set {
@@ -40,9 +41,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             set { value.GetEvent<NotificationEvent>().Subscribe(NotificationListener); }
         }
 
+        [Export("NotificationSystem", typeof(Action<NotificationType, string, string>))]
+        protected void Notificate(NotificationType type, string message, string detail) {
+            var n = new Notification(message, detail, type: type);
+            NotificationListener(n);
+        }
+
         public NotificationToolViewModel() {
             DismissCommand = new DelegateCommand(DismissNotification);
-            Entitys = new MThreadObservableCollection<Notification>();
+            Entitys = new List<Notification>();
             IsVisible = false;
             InitWorker();
         }
@@ -55,7 +62,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public override void InitializeServices() { }
         private void NotificationListener(Notification notification) {
-            notification.Time = DateTime.Now.ToShortTimeString();
+            notification.Time = DateTime.Now;
             if(Entitys.Contains(notification)) Entitys[Entitys.IndexOf(notification)] = notification;
             else Entitys.Add(notification);
             IsVisible = true;
@@ -71,9 +78,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
             do {
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 var currentStack = Entitys.ToList(); //Thread Safe
-                foreach(var notification in currentStack) if(notification.State == NotificationState.Ok) Entitys.Remove(notification);
+                foreach(var notification in currentStack) if(notification.Type == NotificationType.Ok) if(notification.Time.AddSeconds(10) < DateTime.Now) Entitys.Remove(notification);
             } while(!Worker.CancellationPending);
         }
 

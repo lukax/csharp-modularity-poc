@@ -25,10 +25,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         [Import] public IListAddressViewModel ViewModel {
             get { return DataContext as IListAddressViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

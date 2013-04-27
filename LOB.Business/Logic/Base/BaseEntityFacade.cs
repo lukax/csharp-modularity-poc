@@ -44,7 +44,7 @@ namespace LOB.Business.Logic.Base {
         }
 
         private void EntityPreprocessors(TEntity entity) { //TODO: Substitute with object interceptor in nhibernate 
-            using(Repository.Uow.BeginTransaction()) entity.Code = Repository.Count<TEntity>() + 1;
+            entity.Code = Repository.Count<TEntity>() + 1;
         }
 
         public virtual Tuple<bool, IEnumerable<ValidationResult>> CanAdd() {

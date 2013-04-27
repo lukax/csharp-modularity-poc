@@ -13,6 +13,7 @@ namespace LOB.Dao.Contract {
         /// <returns>True if connection to the database sucessed</returns>
         bool TestConnection();
         event SessionCreatorEventHandler OnError;
+        object ORM { get; }
 
         IUnityOfWork BeginTransaction();
         void CommitTransaction();

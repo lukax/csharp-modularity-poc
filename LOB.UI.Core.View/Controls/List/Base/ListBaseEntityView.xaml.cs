@@ -16,15 +16,10 @@ namespace LOB.UI.Core.View.Controls.List.Base {
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }
-
-        public void Refresh() { }
         #region Implementation of IDisposable
 
         public void Dispose() {

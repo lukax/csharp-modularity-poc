@@ -59,7 +59,7 @@ namespace LOB.UI.Core.View {
             //                                                         if(type.Type == ViewType.Main) Close();
             //                                                     });
             EventAggregator.GetEvent<NotificationEvent>()
-                           .Publish(new Notification {Message = Strings.App_License_Information, State = NotificationState.Warning});
+                           .Publish(new Notification {Message = Strings.App_License_Information, Type = NotificationType.Warning});
 
             ModuleManager.LoadModule("UICoreViewModule");
             //_logger.Log("Shell window First Initialized", Category.Debug, Priority.Low);

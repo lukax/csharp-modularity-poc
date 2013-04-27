@@ -42,7 +42,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
                                                     Notification.Value.Message(s.Description)
                                                                 .Detail(s.ErrorMessage)
                                                                 .Progress(-1)
-                                                                .State(NotificationState.Error));
+                                                                .State(NotificationType.Error));
                                                 //Worker.CancelAsync();
                                                 Lock();
                                             };

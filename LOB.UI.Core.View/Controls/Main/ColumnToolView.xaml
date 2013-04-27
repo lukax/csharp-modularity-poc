@@ -13,7 +13,7 @@
     <Expander IsExpanded="True" ExpandDirection="Left">
         <DockPanel Grid.Column="1" MinWidth="70" HorizontalAlignment="Center">
 
-            <Button FontSize="14" Width="42" Height="42" Margin="0,20,0,0" Padding="0" BorderThickness="0"
+            <Button Width="42" Height="42" Margin="0,20,0,0" Padding="1" BorderThickness="0"
                     DockPanel.Dock="Top"
                     Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_Operations}" Focusable="False"
                     Command="{Binding OperationCommand}">
@@ -23,7 +23,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button FontSize="14" Width="42" Height="42" Margin="0,10,0,5" Padding="0" BorderThickness="0"
+            <Button Width="42" Height="42" Margin="0,10,0,5" Padding="1" BorderThickness="0"
                     DockPanel.Dock="Top"
                     Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_Sales}" Focusable="False"
                     Command="{Binding ShopCommand}">
@@ -33,8 +33,8 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Separator DockPanel.Dock="Top" />
-            <Button FontSize="14" Width="42" Height="42" Margin="0,10,0,0" Padding="0" BorderThickness="0"
+            <Separator DockPanel.Dock="Top"  Width="30"/>
+            <Button Width="42" Height="42" Margin="0,10,0,0" Padding="1" BorderThickness="0"
                     DockPanel.Dock="Top"
                     Background="Transparent" ToolTip="{Binding NotificationStatus}" Focusable="False"
                     Command="{Binding NotificationCommand}">
@@ -44,8 +44,17 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-
-            <Button FontSize="14" Width="42" Height="42" Padding="0" BorderThickness="0" VerticalAlignment="Bottom"
+            <Separator DockPanel.Dock="Top" Width="30" />
+            <Button FontSize="14" Width="42" Height="42" Padding="1" BorderThickness="0" VerticalAlignment="Bottom" DockPanel.Dock="Top"
+                    Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_TestDbConnection}" Focusable="False"
+                    Command="{Binding LogoutCommand}">
+                <Rectangle Width="28.667" Height="28.667">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_database}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Width="42" Height="42" Padding="1" BorderThickness="0" VerticalAlignment="Bottom"
                     Background="Transparent" ToolTip="{x:Static loc:Strings.UI_ToolTip_Logout}" Focusable="False"
                     Command="{Binding LogoutCommand}">
                 <Rectangle Width="28.667" Height="28.667">

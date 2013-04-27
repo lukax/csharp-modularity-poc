@@ -12,31 +12,36 @@ using LOB.UI.Contract.ViewModel.Controls.List;
 using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.ViewModel.Base;
+using Microsoft.Expression.Interactivity.Core;
 using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(IColumnToolViewModel))]
-    public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolViewModel {
+    public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolViewModel, IPartImportsSatisfiedNotification {
         public string NotificationStatus { get; set; }
         public ICommand OperationCommand { get; set; }
         public ICommand ShopCommand { get; set; }
         public ICommand NotificationCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
+        public ICommand TestDbConnection { get; set; }
         [Import] public Lazy<IEventAggregator> LazyEventAggregator { get; set; }
         [Import] public Lazy<IFluentNavigator> LazyFluentNavigator { get; set; }
         [Import] public Lazy<IRegionAdapter> LazyRegionAdapter { get; set; }
         [Import] public Lazy<INotificationToolViewModel> LazyNotificationViewModel { get; set; }
+        [Import("TestDbConnection", typeof(Action<object>))] private Action<object> _testDbConnection;
 
-        public ColumnToolViewModel() {
+        public void OnImportsSatisfied() {
             OperationCommand = new DelegateCommand(ShowOperations);
             ShopCommand = new DelegateCommand(ShowShop);
             NotificationCommand = new DelegateCommand(ShowNotification);
             LogoutCommand = new DelegateCommand(Logout);
+            TestDbConnection = new ActionCommand(_testDbConnection);
             NotificationStatus = Strings.UI_ToolTip_Notifications;
             InitWorker();
         }
+
         public override void InitializeServices() { }
 
         public override void Refresh() { }
