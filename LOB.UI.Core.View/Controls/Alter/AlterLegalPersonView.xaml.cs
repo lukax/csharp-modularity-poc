@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    [Export(typeof(IBaseView<IAlterLegalPersonViewModel>))]
+    [Export(typeof(IBaseView<IAlterLegalPersonViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.LegalPerson, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterLegalPersonView : IBaseView<IAlterLegalPersonViewModel> {
         public AlterLegalPersonView() {

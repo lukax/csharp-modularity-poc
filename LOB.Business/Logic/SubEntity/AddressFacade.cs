@@ -13,7 +13,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IAddressFacade)), Export(typeof(IBaseEntityFacade<Address>))]
+    [Export(typeof(IAddressFacade)), Export(typeof(IBaseEntityFacade<Address>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AddressFacade : BaseEntityFacade<Address>, IAddressFacade {
         [ImportingConstructor]
         public AddressFacade(IRepository repository)

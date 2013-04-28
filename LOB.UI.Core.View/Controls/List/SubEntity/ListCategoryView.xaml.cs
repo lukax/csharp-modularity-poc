@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    [Export(typeof(IBaseView<IListCategoryViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IListCategoryViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.Category, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListCategoryView : IBaseView<IListCategoryViewModel> {
         public ListCategoryView() {
@@ -25,10 +25,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         [Import] public IListCategoryViewModel ViewModel {
             get { return DataContext as IListCategoryViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

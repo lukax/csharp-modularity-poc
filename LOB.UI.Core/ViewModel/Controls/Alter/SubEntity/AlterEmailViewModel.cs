@@ -8,6 +8,6 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterEmailViewModel))]
+    [Export(typeof(IAlterEmailViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterEmailViewModel : AlterBaseEntityViewModel<Email>, IAlterEmailViewModel {}
 }

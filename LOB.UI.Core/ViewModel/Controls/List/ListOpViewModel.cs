@@ -23,7 +23,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    [Export(typeof(IListOpViewModel))]
+    [Export(typeof(IListOpViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public sealed class ListOpViewModel : BaseViewModel, IListOpViewModel {
         private Lazy<IDictionary<string, IViewInfo>> _defaultViewInfoDictLazy;
         private string _search;

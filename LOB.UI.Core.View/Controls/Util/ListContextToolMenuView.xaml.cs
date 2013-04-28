@@ -9,7 +9,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Util {
-    [Export]
+    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.MessageTool, ViewState.Other)]
     public partial class ListContextToolMenuView : IBaseView<IBaseViewModel> {
         public ListContextToolMenuView() { InitializeComponent(); }

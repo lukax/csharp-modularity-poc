@@ -13,7 +13,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IPhoneNumberFacade)), Export(typeof(IBaseEntityFacade<PhoneNumber>))]
+    [Export(typeof(IPhoneNumberFacade)), Export(typeof(IBaseEntityFacade<PhoneNumber>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class PhoneNumberFacade : BaseEntityFacade<PhoneNumber>, IPhoneNumberFacade {
         [ImportingConstructor]
         public PhoneNumberFacade(IRepository repository)

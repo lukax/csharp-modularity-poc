@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    [Export(typeof(IBaseView<IListEmailViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IListEmailViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.Email, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListEmailView : IBaseView<IListEmailViewModel> {
         public ListEmailView() {
@@ -22,10 +22,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         [Import] public IListEmailViewModel ViewModel {
             get { return DataContext as IListEmailViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

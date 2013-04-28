@@ -122,6 +122,10 @@
       <Project>{5EE9ACB1-F25F-4A9D-AE79-517BE03E02D9}</Project>
       <Name>LOB.Log.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

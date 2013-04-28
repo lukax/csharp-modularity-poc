@@ -9,6 +9,6 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterCategoryViewModel)), Export(typeof(IAlterBaseEntityViewModel<Category>))]
+    [Export(typeof(IAlterCategoryViewModel)), Export(typeof(IAlterBaseEntityViewModel<Category>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterCategoryViewModel : AlterBaseEntityViewModel<Category>, IAlterCategoryViewModel {}
 }

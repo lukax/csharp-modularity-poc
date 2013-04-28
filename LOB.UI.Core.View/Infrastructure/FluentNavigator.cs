@@ -1,12 +1,15 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
 using LOB.Core.Localization;
 using LOB.UI.Contract;
 using LOB.UI.Contract.Infrastructure;
-using LOB.UI.Core.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
 
 #endregion
@@ -17,7 +20,8 @@ namespace LOB.UI.Core.View.Infrastructure {
         protected IBaseView<IBaseViewModel> ResolvedView;
         [Import] protected Lazy<IRegionAdapter> RegionAdapter { get; set; }
         [Import] protected Lazy<IServiceLocator> ServiceLocator { get; set; }
-        [ImportMany] protected Lazy<IBaseView<IBaseViewModel>, IViewInfo>[] Views { get; set; }
+        //[ImportMany] protected Lazy<Type, IViewInfo>[] Views { get; set; }
+        [Import] protected Lazy<AggregateCatalog> Catalog { get; set; }
         /// <summary>
         ///     Initialize with clean Fields
         /// </summary>
@@ -28,12 +32,40 @@ namespace LOB.UI.Core.View.Infrastructure {
             }
         }
 
+        public IEnumerable<Type> GetExportedTypes<T>() { return Catalog.Value.Parts.Select(part => ComposablePartExportType<T>(part)).Where(t => t != null); }
+
+        private Type ComposablePartExportType<T>(ComposablePartDefinition part) {
+            return
+                part.ExportDefinitions.Any(
+                    def => def.Metadata.ContainsKey("ExportTypeIdentity") && def.Metadata["ExportTypeIdentity"].Equals(typeof(T).FullName))
+                    ? ReflectionModelServices.GetPartType(part).Value
+                    : null;
+        }
+
+        private Type ComposablePartExportType(ComposablePartDefinition part)
+        {
+            return
+                part.ExportDefinitions.Any(
+                    def => def.Metadata.ContainsKey("ExportTypeIdentity"))
+                    ? ReflectionModelServices.GetPartType(part).Value
+                    : null;
+        }
+
         public IFluentNavigator ResolveView(IViewInfo param) {
-            var firstOrDefault = Views.FirstOrDefault(x => ViewInfoExtension.Equals(x.Metadata, param));
-            if(firstOrDefault != null) {
-                ResolvedView = firstOrDefault.Value;
-                RegionAdapter.Value.Add(firstOrDefault.Value, RegionName.TabRegion);
-            }
+            var t =
+                Catalog.Value.FirstOrDefault(
+                    x =>
+                    x.ExportDefinitions.Any(
+                        y =>
+                        y.Metadata.Any(z => param.ViewType.Equals(z.Value)) &&
+                        x.ExportDefinitions.Any(
+                            a =>
+                            a.Metadata.Any(
+                                b => b.Value as IEnumerable<ViewState> != null && param.ViewStates.SequenceEqual(b.Value as IEnumerable<ViewState>)))));
+            if(t != null) ResolvedView = ServiceLocator.Value.GetInstance(ComposablePartExportType(t)) as IBaseView<IBaseViewModel>;
+
+           // var firstOrDefault = Views.FirstOrDefault(x => ViewInfoExtension.Equals(x.Metadata, param));
+            //if(firstOrDefault != null) ResolvedView = firstOrDefault.Value;
             return this;
         }
 

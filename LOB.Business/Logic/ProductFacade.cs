@@ -14,7 +14,7 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(IProductFacade)), Export(typeof(IBaseEntityFacade<Product>))]
+    [Export(typeof(IProductFacade)), Export(typeof(IBaseEntityFacade<Product>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class ProductFacade : BaseEntityFacade<Product>, IProductFacade {
         private readonly ICategoryFacade _categoryFacade;
         private readonly IShipmentInfoFacade _shipmentInfoFacade;

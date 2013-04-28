@@ -14,6 +14,7 @@ using LOB.UI.Contract.Command;
 using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
+using LOB.Util.Contract;
 using Microsoft.Practices.Prism.Events;
 
 #endregion
@@ -43,7 +44,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             InitWorker();
         }
 
-        [Export("NotificationSystem", typeof(Action<Notification>))]
+        [Export(ServiceName.NotificationService, typeof(Action<Notification>))]
         private void NotificationListener(Notification notification) {
             notification.Time = DateTime.Now;
             if(Entitys.Contains(notification)) Entitys[Entitys.IndexOf(notification)] = notification;

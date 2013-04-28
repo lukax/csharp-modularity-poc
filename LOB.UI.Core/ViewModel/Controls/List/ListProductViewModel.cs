@@ -10,7 +10,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    [Export(typeof(IListProductViewModel))]
+    [Export(typeof(IListProductViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel {
         public override Expression<Func<Product, bool>> SearchCriteria {
             get {

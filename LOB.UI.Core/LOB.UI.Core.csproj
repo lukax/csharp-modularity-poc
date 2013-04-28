@@ -217,6 +217,10 @@
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>
       <Name>LOB.UI.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

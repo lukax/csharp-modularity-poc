@@ -13,7 +13,7 @@ namespace LOB.UI.Core.View.Controls.Util {
     /// <summary>
     ///     Interaction logic for MessageShowToolIuiComponent.xaml
     /// </summary>
-    [Export(typeof(IBaseView<IMessageToolViewModel>)), Export]
+    [Export(typeof(IBaseView<IMessageToolViewModel>)), Export, PartCreationPolicy(CreationPolicy.Shared)]
     [ViewInfo(ViewType.MessageTool, ViewState.Other)]
     public partial class MessageShowToolView : IBaseView<IMessageToolViewModel> {
         public MessageShowToolView() { InitializeComponent(); }

@@ -12,7 +12,8 @@ using LOB.UI.Core.View.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export(typeof(IBaseView<IListPayCheckViewModel>))]
-    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch}), Export(typeof(IBaseView<IBaseViewModel>))]
+    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch}), Export(typeof(IBaseView<IBaseViewModel>)),
+     PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class ListPayCheckView : IBaseView<IListPayCheckViewModel> {
         public ListPayCheckView() {
             InitializeComponent();
@@ -25,10 +26,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         [Import] public IListPayCheckViewModel ViewModel {
             get { return DataContext as IListPayCheckViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

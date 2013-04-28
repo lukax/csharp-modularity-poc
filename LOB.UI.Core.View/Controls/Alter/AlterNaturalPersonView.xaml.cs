@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    [Export(typeof(IBaseView<IAlterNaturalPersonViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IAlterNaturalPersonViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.NaturalPerson, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterNaturalPersonView : IBaseView<IAlterNaturalPersonViewModel> {
         private NaturalPersonRegionController _controller;

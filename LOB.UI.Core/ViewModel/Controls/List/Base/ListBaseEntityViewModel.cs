@@ -160,7 +160,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         }
 
         protected override void Dispose(bool disposing) {
-            Dispose();
+            base.Dispose(disposing);
             if(disposing) Repository.Value.Uow.Dispose();
         }
     }

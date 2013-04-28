@@ -8,6 +8,6 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    [Export(typeof(IAlterSaleViewModel))]
+    [Export(typeof(IAlterSaleViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterSaleViewModel : AlterBaseEntityViewModel<Sale>, IAlterSaleViewModel {}
 }

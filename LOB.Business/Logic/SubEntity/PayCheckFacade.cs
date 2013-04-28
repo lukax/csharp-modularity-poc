@@ -12,7 +12,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IPayCheckFacade)), Export(typeof(IBaseEntityFacade<PayCheck>))]
+    [Export(typeof(IPayCheckFacade)), Export(typeof(IBaseEntityFacade<PayCheck>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class PayCheckFacade : BaseEntityFacade<PayCheck>, IPayCheckFacade {
         [ImportingConstructor]
         public PayCheckFacade(IRepository repository)

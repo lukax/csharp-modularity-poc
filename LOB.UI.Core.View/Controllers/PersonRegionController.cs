@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using LOB.UI.Contract;
 using LOB.UI.Contract.Controller;
@@ -17,7 +18,7 @@ namespace LOB.UI.Core.View.Controllers {
         [Import] protected IBaseView<IAlterAddressViewModel> AlterAddressView { get; set; }
         [Import] protected IBaseView<IAlterContactInfoViewModel> AlterContactInfoView { get; set; }
         [Import] protected IRegionManager RegionManager { get; set; }
-
+        [Import] protected Lazy<Contract.Infrastructure.IRegionAdapter> RegionAdapter { get; set; }
         [Import] public IAlterPersonViewModel ViewModel { get; set; }
 
         public void OnImportsSatisfied() {
@@ -34,8 +35,8 @@ namespace LOB.UI.Core.View.Controllers {
         }
 
         public void Dispose() {
-            AlterAddressView.Dispose();
-            AlterContactInfoView.Dispose();
+            RegionAdapter.Value.Remove(AlterAddressView);
+            RegionAdapter.Value.Remove(AlterContactInfoView);
             ViewModel.Dispose();
         }
     }

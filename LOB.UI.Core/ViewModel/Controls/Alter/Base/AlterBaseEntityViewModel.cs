@@ -156,6 +156,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
 
         public override void Refresh() { ClearEntityExecute(null); }
 
-        protected override void Dispose(bool disposing) { if(disposing) Repository.Value.Uow.Dispose(); }
+        protected override void Dispose(bool disposing) {
+            base.Dispose(disposing);
+            if(disposing) Repository.Value.Uow.Dispose();
+        }
     }
 }

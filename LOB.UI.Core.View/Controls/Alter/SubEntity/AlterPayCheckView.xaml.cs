@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter.SubEntity {
-    [Export(typeof(IBaseView<IAlterPayCheckViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IAlterPayCheckViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.PayCheck, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterPayCheckView : IBaseView<IAlterPayCheckViewModel> {
         public AlterPayCheckView() {

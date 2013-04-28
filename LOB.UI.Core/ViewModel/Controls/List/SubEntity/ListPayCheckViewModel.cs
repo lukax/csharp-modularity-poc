@@ -10,7 +10,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
-    [Export(typeof(IListPayCheckViewModel))]
+    [Export(typeof(IListPayCheckViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class ListPayCheckViewModel : ListBaseEntityViewModel<PayCheck>, IListPayCheckViewModel {
         public override Expression<Func<PayCheck, bool>> SearchCriteria {
             get {

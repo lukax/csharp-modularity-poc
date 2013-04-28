@@ -54,6 +54,7 @@ namespace LOB.UI.Core.View.Infrastructure {
             try {
                 if(regionName != null) RegionManager.Value.Regions[regionName].Remove(param);
                 else foreach(var region in RegionManager.Value.Regions) foreach(var vieww in region.Views) if(vieww.Equals(param)) region.Remove(param);
+                param.Dispose();
             } catch(UpdateRegionsException ex) { //BUG: Known bug to RegionManager, fix this later
 #if DEBUG
                 Debug.WriteLine(ex.Message);

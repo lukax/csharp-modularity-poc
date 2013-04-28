@@ -15,7 +15,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IShipmentInfoFacade)), Export(typeof(IBaseEntityFacade<ShipmentInfo>))]
+    [Export(typeof(IShipmentInfoFacade)), Export(typeof(IBaseEntityFacade<ShipmentInfo>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class ShipmentInfoFacade : BaseEntityFacade<ShipmentInfo>, IShipmentInfoFacade {
         private readonly IAddressFacade _addressFacade;
 

@@ -12,7 +12,7 @@ using LOB.UI.Core.View.Infrastructure;
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
     [Export(typeof(IBaseView<IListPersonViewModel>))]
-    [ViewInfo(ViewType.Person, new[] {ViewState.List, ViewState.QuickSearch})]
+    [ViewInfo(ViewType.Person, new[] {ViewState.List, ViewState.QuickSearch}), PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class ListPersonView : IBaseView<IListPersonViewModel> {
         public ListPersonView() {
             InitializeComponent();
@@ -25,10 +25,7 @@ namespace LOB.UI.Core.View.Controls.List.SubEntity {
 
         [Import] public IListPersonViewModel ViewModel {
             get { return DataContext as IListPersonViewModel; }
-            set {
-                DataContext = value;
-                value.InitializeServices();
-            }
+            set { DataContext = value; }
         }
 
         public int Index { get; set; }

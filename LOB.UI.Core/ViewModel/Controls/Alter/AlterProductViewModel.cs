@@ -16,7 +16,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    [Export(typeof(IAlterProductViewModel))]
+    [Export(typeof(IAlterProductViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterProductViewModel : AlterBaseEntityViewModel<Product>, IAlterProductViewModel {
         public ICommand AlterCategoryCommand { get; set; }
         public ICommand ListCategoryCommand { get; set; }

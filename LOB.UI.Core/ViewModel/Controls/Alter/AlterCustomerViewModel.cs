@@ -12,7 +12,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    [Export(typeof(IAlterCustomerViewModel))]
+    [Export(typeof(IAlterCustomerViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterCustomerViewModel : AlterBaseEntityViewModel<Customer>, IAlterCustomerViewModel {
         private readonly ICustomerFacade _customerFacade;
         private string _personType;

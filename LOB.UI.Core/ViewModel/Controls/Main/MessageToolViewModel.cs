@@ -9,7 +9,7 @@ using Microsoft.Practices.Prism.Commands;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    [Export(typeof(IMessageToolViewModel))]
+    [Export(typeof(IMessageToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
         //[Import] private IEventAggregator EventAggregator { get; set; }
         public string Message { get; set; }

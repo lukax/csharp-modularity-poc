@@ -110,7 +110,7 @@
   <ItemGroup>
     <Compile Include="Logic\Base\BaseEntityFacade.cs" />
     <Compile Include="Framework\Extension.cs" />
-    <Compile Include="Logic\Base\PersonFacade.cs" />
+    <Compile Include="Logic\SubEntity\PersonFacade.cs" />
     <Compile Include="Logic\CustomerFacade.cs" />
     <Compile Include="Logic\LegalPersonFacade.cs" />
     <Compile Include="Logic\NaturalPersonFacade.cs" />

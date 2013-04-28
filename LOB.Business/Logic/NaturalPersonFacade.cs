@@ -15,7 +15,7 @@ using LOB.Domain.Logic;
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(INaturalPersonFacade)), Export(typeof(IBaseEntityFacade<NaturalPerson>))]
+    [Export(typeof(INaturalPersonFacade)), Export(typeof(IBaseEntityFacade<NaturalPerson>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class NaturalPersonFacade : BaseEntityFacade<NaturalPerson>, INaturalPersonFacade {
         private readonly IAddressFacade _addressFacade;
         private readonly IContactInfoFacade _contactInfoFacade;

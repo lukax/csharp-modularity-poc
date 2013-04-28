@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    [Export(typeof(IBaseView<IAlterEmployeeViewModel>))]
+    [Export(typeof(IBaseView<IAlterEmployeeViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.Employee, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterEmployeeView : IBaseView<IAlterEmployeeViewModel> {
         public AlterEmployeeView() {

@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    [Export(typeof(IBaseView<IAlterSaleViewModel>))]
+    [Export(typeof(IBaseView<IAlterSaleViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.Sale, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterSaleView : IBaseView<IAlterSaleViewModel> {
         public AlterSaleView() {

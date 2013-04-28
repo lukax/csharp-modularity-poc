@@ -9,7 +9,7 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
-    [Export(typeof(IAlterNaturalPersonViewModel))]
+    [Export(typeof(IAlterNaturalPersonViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterNaturalPersonViewModel : AlterBaseEntityViewModel<NaturalPerson>, IAlterNaturalPersonViewModel {
         public string BirthDate {
             get { return Entity.BirthDate.ToShortDateString(); }

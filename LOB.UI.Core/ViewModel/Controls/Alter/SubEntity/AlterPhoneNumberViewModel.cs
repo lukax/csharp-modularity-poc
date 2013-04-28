@@ -8,6 +8,6 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterPhoneNumberViewModel))]
+    [Export(typeof(IAlterPhoneNumberViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterPhoneNumberViewModel : AlterBaseEntityViewModel<PhoneNumber>, IAlterPhoneNumberViewModel {}
 }

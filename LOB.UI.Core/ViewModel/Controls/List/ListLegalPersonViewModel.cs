@@ -10,7 +10,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
-    [Export(typeof(IListLegalPersonViewModel))]
+    [Export(typeof(IListLegalPersonViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class ListLegalPersonViewModel : ListBaseEntityViewModel<LegalPerson>, IListLegalPersonViewModel {
         public override Expression<Func<LegalPerson, bool>> SearchCriteria {
             get {

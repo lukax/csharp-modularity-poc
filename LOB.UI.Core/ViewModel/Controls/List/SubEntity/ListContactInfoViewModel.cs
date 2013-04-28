@@ -10,7 +10,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
-    [Export(typeof(IListContactInfoViewModel))]
+    [Export(typeof(IListContactInfoViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class ListContactInfoViewModel : ListBaseEntityViewModel<ContactInfo>, IListContactInfoViewModel {
         public override Expression<Func<ContactInfo, bool>> SearchCriteria {
             get {

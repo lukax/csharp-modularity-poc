@@ -14,7 +14,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IContactInfoFacade)), Export(typeof(IBaseEntityFacade<ContactInfo>))]
+    [Export(typeof(IContactInfoFacade)), Export(typeof(IBaseEntityFacade<ContactInfo>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class ContactInfoFacade : BaseEntityFacade<ContactInfo>, IContactInfoFacade {
         [ImportingConstructor]
         public ContactInfoFacade(IRepository repository)

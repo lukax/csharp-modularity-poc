@@ -17,7 +17,7 @@ using Microsoft.Practices.ServiceLocation;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    [Export(typeof(IHeaderToolViewModel))]
+    [Export(typeof(IHeaderToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public class HeaderToolViewModel : BaseViewModel, IHeaderToolViewModel, IPartImportsSatisfiedNotification {
         public ICommand DbTestConnectionCommand { get; set; }
         public ICommand OpenTabCommand { get; set; }

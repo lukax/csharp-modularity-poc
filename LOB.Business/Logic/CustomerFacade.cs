@@ -12,7 +12,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(ICustomerFacade)), Export(typeof(IBaseEntityFacade<Customer>))]
+    [Export(typeof(ICustomerFacade)), Export(typeof(IBaseEntityFacade<Customer>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class CustomerFacade : BaseEntityFacade<Customer>, ICustomerFacade {
         private readonly INaturalPersonFacade _naturalPersonFacade;
         private readonly ILegalPersonFacade _legalPersonFacade;

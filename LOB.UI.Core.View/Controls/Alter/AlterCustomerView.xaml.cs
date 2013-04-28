@@ -12,7 +12,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Alter {
-    [Export(typeof(IBaseView<IAlterCustomerViewModel>))]
+    [Export(typeof(IBaseView<IAlterCustomerViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.Customer, new[] {ViewState.Add, ViewState.Update, ViewState.Delete})]
     public partial class AlterCustomerView : IBaseView<IAlterCustomerViewModel> {
         [Import] public CustomerRegionController Controller { get; set; }

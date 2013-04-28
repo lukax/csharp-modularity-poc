@@ -11,7 +11,7 @@ using LOB.UI.Core.ViewModel.Controls.List.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
-    [Export(typeof(IListPersonViewModel))]
+    [Export(typeof(IListPersonViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class ListPersonViewModel : ListBaseEntityViewModel<Person>, IListPersonViewModel {
         public new Expression<Func<Person, bool>> SearchCriteria {
             get {

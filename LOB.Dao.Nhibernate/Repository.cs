@@ -8,6 +8,7 @@ using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
+using LOB.Util.Contract;
 using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Linq;
@@ -20,7 +21,7 @@ namespace LOB.Dao.Nhibernate {
         protected ISession Session { get; private set; }
         [Import(RequiredCreationPolicy = CreationPolicy.NonShared)] public IUnityOfWork Uow { get; private set; }
         [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; private set; }
-        [Import("NotificationSystem")] protected Lazy<Action<NotificationType, string, string>> NotificationSystem { get; private set; }
+        [Import(ServiceName.NotificationService)] protected Lazy<Action<Notification>> NotificationSystem { get; private set; }
         public void OnImportsSatisfied() { Session = Uow.ORM.As<ISession>(); }
 
         public T Get<T>(object id) where T : BaseEntity { return Session.Get<T>(id); }
@@ -49,7 +50,8 @@ namespace LOB.Dao.Nhibernate {
                 return GetAll<T>().Count();
             } catch(ADOException ex) {
                 LoggerFacade.Value.Log(ex.Message, Category.Exception, Priority.High);
-                NotificationSystem.Value(NotificationType.Error, Strings.Notification_RequisitionFailed, ex.Message);
+                NotificationSystem.Value(new Notification(type: NotificationType.Error, message: Strings.Notification_RequisitionFailed,
+                                                          detail: ex.Message));
                 return 0;
             }
         }

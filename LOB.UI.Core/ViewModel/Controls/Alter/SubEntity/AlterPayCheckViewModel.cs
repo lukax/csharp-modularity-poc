@@ -8,6 +8,6 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
-    [Export(typeof(IAlterPayCheckViewModel))]
+    [Export(typeof(IAlterPayCheckViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {}
 }

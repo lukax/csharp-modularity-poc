@@ -18,7 +18,7 @@ using Microsoft.Practices.Prism.Events;
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    [Export(typeof(IColumnToolViewModel))]
+    [Export(typeof(IColumnToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public sealed class ColumnToolViewModel : BaseViewModel, IColumnToolViewModel, IPartImportsSatisfiedNotification {
         public string NotificationStatus { get; set; }
         public ICommand OperationCommand { get; set; }

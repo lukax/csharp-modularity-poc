@@ -12,7 +12,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(ICategoryFacade)), Export(typeof(IBaseEntityFacade<Category>))]
+    [Export(typeof(ICategoryFacade)), Export(typeof(IBaseEntityFacade<Category>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class CategoryFacade : BaseEntityFacade<Category>, ICategoryFacade {
         [ImportingConstructor]
         public CategoryFacade(IRepository repository)

@@ -13,7 +13,7 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IEmailFacade)), Export(typeof(IBaseEntityFacade<Email>))]
+    [Export(typeof(IEmailFacade)), Export(typeof(IBaseEntityFacade<Email>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class EmailFacade : BaseEntityFacade<Email>, IEmailFacade {
         [ImportingConstructor]
         public EmailFacade(IRepository repository)
