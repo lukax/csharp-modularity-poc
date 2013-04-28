@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    [Export(typeof(IBaseView<IListNaturalPersonViewModel>))]
+    [Export(typeof(IBaseView<IListNaturalPersonViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.NaturalPerson, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListNaturalPersonView : IBaseView<IListNaturalPersonViewModel> {
         public ListNaturalPersonView() {

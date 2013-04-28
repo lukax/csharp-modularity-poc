@@ -42,13 +42,10 @@ namespace LOB.UI.Core.View.Infrastructure {
                     : null;
         }
 
-        private Type ComposablePartExportType(ComposablePartDefinition part)
-        {
-            return
-                part.ExportDefinitions.Any(
-                    def => def.Metadata.ContainsKey("ExportTypeIdentity"))
-                    ? ReflectionModelServices.GetPartType(part).Value
-                    : null;
+        private Type ComposablePartExportType(ComposablePartDefinition part) {
+            return part.ExportDefinitions.Any(def => def.Metadata.ContainsKey("ExportTypeIdentity"))
+                       ? ReflectionModelServices.GetPartType(part).Value
+                       : null;
         }
 
         public IFluentNavigator ResolveView(IViewInfo param) {
@@ -64,7 +61,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                                 b => b.Value as IEnumerable<ViewState> != null && param.ViewStates.SequenceEqual(b.Value as IEnumerable<ViewState>)))));
             if(t != null) ResolvedView = ServiceLocator.Value.GetInstance(ComposablePartExportType(t)) as IBaseView<IBaseViewModel>;
 
-           // var firstOrDefault = Views.FirstOrDefault(x => ViewInfoExtension.Equals(x.Metadata, param));
+            // var firstOrDefault = Views.FirstOrDefault(x => ViewInfoExtension.Equals(x.Metadata, param));
             //if(firstOrDefault != null) ResolvedView = firstOrDefault.Value;
             return this;
         }

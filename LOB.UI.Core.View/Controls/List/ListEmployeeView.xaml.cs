@@ -10,7 +10,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    [Export(typeof(IBaseView<IListEmployeeViewModel>))]
+    [Export(typeof(IBaseView<IListEmployeeViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.Employee, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListEmployeeView : IBaseView<IListEmployeeViewModel> {
         public ListEmployeeView() { InitializeComponent(); }

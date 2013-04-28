@@ -8,6 +8,7 @@ using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.Event.View;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
+using IRegionAdapter = LOB.UI.Contract.Infrastructure.IRegionAdapter;
 
 #endregion
 
@@ -18,7 +19,7 @@ namespace LOB.UI.Core.View.Controllers {
         [Import] protected IBaseView<IAlterAddressViewModel> AlterAddressView { get; set; }
         [Import] protected IBaseView<IAlterContactInfoViewModel> AlterContactInfoView { get; set; }
         [Import] protected IRegionManager RegionManager { get; set; }
-        [Import] protected Lazy<Contract.Infrastructure.IRegionAdapter> RegionAdapter { get; set; }
+        [Import] protected Lazy<IRegionAdapter> RegionAdapter { get; set; }
         [Import] public IAlterPersonViewModel ViewModel { get; set; }
 
         public void OnImportsSatisfied() {

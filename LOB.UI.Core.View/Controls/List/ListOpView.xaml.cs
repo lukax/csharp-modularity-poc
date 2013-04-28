@@ -13,7 +13,7 @@ namespace LOB.UI.Core.View.Controls.List {
     /// <summary>
     ///     Interaction logic for ListCommandView.xaml
     /// </summary>
-    [Export(typeof(IBaseView<IListOpViewModel>)), Export(typeof(IBaseView<IBaseViewModel>))]
+    [Export(typeof(IBaseView<IListOpViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.Shared)]
     [ViewInfo(ViewType.Op, ViewState.Other)]
     public partial class ListOpView : IBaseView<IListOpViewModel> {
         public ListOpView() { InitializeComponent(); }

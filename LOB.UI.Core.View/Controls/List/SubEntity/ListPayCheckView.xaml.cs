@@ -11,9 +11,8 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    [Export(typeof(IBaseView<IListPayCheckViewModel>))]
-    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch}), Export(typeof(IBaseView<IBaseViewModel>)),
-     PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export(typeof(IBaseView<IListPayCheckViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
+    [ViewInfo(ViewType.PayCheck, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListPayCheckView : IBaseView<IListPayCheckViewModel> {
         public ListPayCheckView() {
             InitializeComponent();

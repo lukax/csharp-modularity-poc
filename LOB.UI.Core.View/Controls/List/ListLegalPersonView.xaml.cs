@@ -11,7 +11,7 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List {
-    [Export(typeof(IBaseView<IListLegalPersonViewModel>))]
+    [Export(typeof(IBaseView<IListLegalPersonViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewInfo(ViewType.LegalPerson, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListLegalPersonView : IBaseView<IListLegalPersonViewModel> {
         public ListLegalPersonView() {

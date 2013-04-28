@@ -11,8 +11,8 @@ using LOB.UI.Core.View.Infrastructure;
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.SubEntity {
-    [Export(typeof(IBaseView<IListPersonViewModel>))]
-    [ViewInfo(ViewType.Person, new[] {ViewState.List, ViewState.QuickSearch}), PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export(typeof(IBaseView<IListPersonViewModel>)), Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
+    [ViewInfo(ViewType.Person, new[] {ViewState.List, ViewState.QuickSearch})]
     public partial class ListPersonView : IBaseView<IListPersonViewModel> {
         public ListPersonView() {
             InitializeComponent();
