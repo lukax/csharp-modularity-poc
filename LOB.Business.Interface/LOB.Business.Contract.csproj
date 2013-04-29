@@ -49,6 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exception\Base\GenericBusinessException.cs" />
+    <Compile Include="Exception\EntityGenerateException.cs" />
+    <Compile Include="Exception\EntityGenerateIdException.cs" />
+    <Compile Include="Exception\EntityValidationException.cs" />
     <Compile Include="Logic\Base\IBaseEntityFacade.cs" />
     <Compile Include="Logic\SubEntity\IPersonFacade.cs" />
     <Compile Include="Logic\INaturalPersonFacade.cs" />
@@ -75,6 +79,10 @@
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

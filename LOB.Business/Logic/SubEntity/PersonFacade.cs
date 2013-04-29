@@ -3,6 +3,7 @@
 using System.ComponentModel.Composition;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Business.Contract.Logic.SubEntity;
+using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain.Logic;
@@ -10,7 +11,7 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Business.Logic.Base {
+namespace LOB.Business.Logic.SubEntity {
     [Export(typeof(IPersonFacade)), Export(typeof(IBaseEntityFacade<Person>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class PersonFacade : BaseEntityFacade<Person>, IPersonFacade {
         private readonly IAddressFacade _addressFacade;

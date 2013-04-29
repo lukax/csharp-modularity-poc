@@ -2,7 +2,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using Microsoft.Practices.Prism.Logging;
@@ -13,61 +12,53 @@ using NHibernate.Linq;
 
 namespace LOB.Dao.Nhibernate {
     [Export(typeof(IUnityOfWork)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public class UnityOfWork : IUnityOfWork, IPartImportsSatisfiedNotification {
+    public class UnityOfWork : IUnityOfWork {
+        private bool _isDisposed;
+        private bool _isInitialized;
+        private object _orm;
         protected ITransaction Transaction { get; set; }
         [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
-        [Import] protected Lazy<ISessionFactoryCreator> SessionFactory { get; set; }
-        private object _orm;
-        public object ORM {
-            get {
-                return _orm ?? (_orm = Task.Run(() => {
-                                                    try {
-                                                        if(OnError != null) SessionFactory.Value.OnError += OnError;
-                                                        return SessionFactory.Value.ORMFactory.As<ISessionFactory>().OpenSession();
-                                                    } catch(NullReferenceException) {
-                                                        return null;
-                                                    }
-                                                }).Result);
-            }
-        }
-        public event SessionCreatorEventHandler OnError;
-        public void OnImportsSatisfied() { }
-
-        public bool TestConnection() {
-            try {
-                if(!ORM.As<ISession>().IsConnected) ORM.As<ISession>().Reconnect();
-            } catch(NullReferenceException) {
-                return false;
-            }
-            return true;
+        [Import] protected Lazy<ISession> Session { get; set; }
+        public object Orm {
+            get { return _orm ?? (_orm = Session.Value); }
         }
 
-        public IUnityOfWork BeginTransaction() {
-            if(Transaction == null) {
-                if(ORM == null) return this;
-                if(!ORM.As<ISession>().IsConnected) ORM.As<ISession>().Reconnect();
-                Transaction = ORM.As<ISession>().BeginTransaction();
-            }
-            else if(Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_AlreadyActivated);
+        public IUnityOfWork Initialize() {
+            check_is_disposed();
+            begin_new_Transaction();
+            _isInitialized = true;
             return this;
         }
 
-        public void CommitTransaction() {
-            if(Transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
-            if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
+        public void Commit() {
+            check_is_disposed();
+            check_is_not_initialized();
             Transaction.Commit();
+            begin_new_Transaction();
         }
 
-        public void RollbackTransaction() {
-            if(Transaction == null) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotInitialized);
-            if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated);
+        public void Rollback() {
+            check_is_disposed();
+            check_is_not_initialized();
             Transaction.Rollback();
+            begin_new_Transaction();
         }
-        public void FlushTransaction() { if(ORM != null) ORM.As<ISession>().Flush(); }
-        public bool IsTransactionActive() {
-            if(Transaction == null) return false;
-            return Transaction.IsActive;
+        public void Flush() {
+            check_is_disposed();
+            check_is_not_initialized();
+            Session.Value.Flush();
+            begin_new_Transaction();
         }
+
+        public bool IsInitialized() { return _isInitialized; }
+
+        protected void begin_new_Transaction() {
+            if(Transaction != null) Transaction.Dispose();
+            Transaction = Session.Value.BeginTransaction();
+        }
+        protected void check_is_not_initialized() { if(!_isInitialized) throw new InvalidOperationException("Must initialize (call Initialize()) on UnitOfWork before commiting or rolling back"); }
+        protected void check_is_disposed() { if(_isDisposed) throw new ObjectDisposedException(GetType().Name); }
+        protected void check_is_transaction_active() { if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated); }
         #region Implementation of IDisposable
 
         ~UnityOfWork() { Dispose(false); }
@@ -78,54 +69,13 @@ namespace LOB.Dao.Nhibernate {
         }
 
         protected virtual void Dispose(bool disposing) {
-            //if(_transaction != null) if(_transaction.IsActive) _transaction.Rollback();
-            if(!disposing) return;
-            if(Transaction != null) {
-                Transaction.Dispose();
-                Transaction = null;
-            }
-            if(ORM != null) if(ORM.As<ISession>().IsConnected) ORM.As<ISession>().Disconnect();
-            //ORMFactory.As<ISession>().Dispose(); INFO: Disconnecting instead of disposing // Allows Multi-usage
+            if(_isDisposed || ! _isInitialized) return;
+
+            Transaction.Dispose();
+            Session.Value.As<ISession>().Dispose();
+
+            _isDisposed = true;
         }
-
-        #endregion
-        #region old functionality
-
-        //public void Save<T>(T entity) where T : BaseEntity {
-        //    try {
-        //        ((ISession)ORMFactory).Save(entity);
-        //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Description);
-        //    }
-        //}
-
-        //public void SaveOrUpdate<T>(T entity) where T : BaseEntity {
-        //    try {
-        //        ((ISession)ORMFactory).SaveOrUpdate(entity);
-        //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Description);
-        //    }
-        //}
-
-        //public void Update<T>(T entity) where T : BaseEntity {
-        //    try {
-        //        ((ISession)ORMFactory).Update(entity);
-        //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Description);
-        //    }
-        //}
-
-        //public void Delete<T>(T entity) where T : BaseEntity {
-        //    try {
-        //        ((ISession)ORMFactory).Delete(entity);
-        //    } catch(Exception e) {
-        //        _loggerFacade.Log(e.Description, Category.Exception, Priority.High);
-        //        if(OnError != null) OnError.Invoke(this, e.Description);
-        //    }
-        //}
 
         #endregion
     }

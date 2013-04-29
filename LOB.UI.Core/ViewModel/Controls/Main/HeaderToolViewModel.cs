@@ -35,18 +35,18 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         [Export("TestDbConnection", typeof(Action<object>))]
         private void DbTestConnectionExecute(object arg) {
-            var notification = new Notification();
-            _notificationEvent.Publish(notification.Message(Strings.Notification_Dao_Connecting).Detail("").State(NotificationType.Info).Progress(-2));
-            var uow = LazyServiceLocator.Value.GetInstance<IUnityOfWork>();
-            Task.Run(() => {
-                         uow.OnError +=
-                             (sender, args) =>
-                             notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
-                         if(uow.TestConnection())
-                             _notificationEvent.Publish(
-                                 notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationType.Ok).Progress(-1));
-                     });
-            _notificationEvent.Publish(notification);
+            //var notification = new Notification();
+            //_notificationEvent.Publish(notification.Message(Strings.Notification_Dao_Connecting).Detail("").State(NotificationType.Info).Progress(-2));
+            //var uow = LazyServiceLocator.Value.GetInstance<IUnityOfWork>();
+            //Task.Run(() => {
+            //             uow.OnError +=
+            //                 (sender, args) =>
+            //                 notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
+            //             if(uow.TestConnection())
+            //                 _notificationEvent.Publish(
+            //                     notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationType.Ok).Progress(-1));
+            //         });
+            //_notificationEvent.Publish(notification);
         }
 
         private NotificationEvent _notificationEvent;

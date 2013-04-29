@@ -63,6 +63,9 @@
     <Compile Include="Command\RelayDelegateCommand.cs" />
     <Compile Include="Controller\IBaseController.cs" />
     <Compile Include="Event\IBaseEvent.cs" />
+    <Compile Include="Exception\Base\GenericUIException.cs" />
+    <Compile Include="Exception\ViewLoadException.cs" />
+    <Compile Include="Exception\ViewModelLoadException.cs" />
     <Compile Include="Infrastructure\IViewInfo.cs" />
     <Compile Include="IUIComponent.cs" />
     <Compile Include="Infrastructure\IFluentNavigator.cs" />
@@ -116,6 +119,10 @@
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

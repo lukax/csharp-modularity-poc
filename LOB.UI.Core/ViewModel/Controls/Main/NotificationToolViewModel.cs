@@ -14,7 +14,7 @@ using LOB.UI.Contract.Command;
 using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.Util.Contract;
+using LOB.Util.Contract.Service;
 using Microsoft.Practices.Prism.Events;
 
 #endregion

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Dao.Contract;
+using LOB.Dao.Contract.Exception;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using NullGuard;
@@ -39,7 +40,11 @@ namespace LOB.Business.Logic.Base {
 
         public virtual TEntity GenerateEntity() { //TODO: Substitude initial entity generation with repository.Load()
             var entity = new TEntity();
-            Task.Run(() => EntityPreprocessors(entity));
+            try {
+                Task.Run(() => EntityPreprocessors(entity));
+            } catch(DatabaseConnectionException) {
+                //TODO
+            }
             return entity;
         }
 
@@ -91,7 +96,7 @@ namespace LOB.Business.Logic.Base {
             GC.SuppressFinalize(this);
         }
         private void Dispose(bool disposing) {
-            if(Repository.Uow.IsTransactionActive()) Repository.Uow.FlushTransaction();
+            if(Repository.Uow.IsInitialized()) Repository.Uow.Flush();
             if(!disposing) return;
             Repository.Uow.Dispose();
         }

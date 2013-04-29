@@ -89,20 +89,12 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
             Worker.ReportProgress(10);
-            Repository.Value.Uow.OnError += (o, s) => {
-                                                NotificationEvent.Publish(
-                                                    Notification.Value.Message(s.Description)
-                                                                .Detail(s.ErrorMessage)
-                                                                .Progress(-1)
-                                                                .State(NotificationType.Error));
-                                                Worker.CancelAsync();
-                                            };
             //do {
             Worker.ReportProgress(-1);
             //Thread.Sleep(2000);
             Worker.ReportProgress(5);
             var result = new object[2];
-            using(Repository.Value.Uow.BeginTransaction())
+            using(Repository.Value.Uow.Initialize())
                 if(!Worker.CancellationPending) {
                     Emails = new ListCollectionView(Repository.Value.GetAll<Email>().ToList());
                     Worker.ReportProgress(50);

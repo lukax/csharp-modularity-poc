@@ -20,6 +20,7 @@ using LOB.UI.Core.Event.Infrastructure;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Base;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Logging;
 
 #endregion
 
@@ -51,6 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public IEnumerable<TEntity> Entities { get; private set; }
         public string Search { get; set; }
         [Import] protected Lazy<Notification> Notification { get; private set; }
+        [Import] protected Lazy<ILoggerFacade> Logger { get; private set; }
         [Import] protected Lazy<IRepository> Repository { get; private set; }
         [Import] protected Lazy<IEventAggregator> EventAggregator { get; private set; }
         protected NotificationEvent NotificationEvent {
@@ -119,42 +121,33 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
             //TODO: Dynamic set based on selected tab
-            Repository.Value.Uow.OnError += (o, s) => {
-                                                NotificationEvent.Publish(
-                                                    Notification.Value.Message(s.Description)
-                                                                .Detail(s.ErrorMessage)
-                                                                .Progress(-1)
-                                                                .State(NotificationType.Error));
-                                                //Worker.CancelAsync();
-                                                Lock();
-                                            };
             do {
-                if(Repository.Value.Uow.TestConnection())
-                    using(Repository.Value.Uow.BeginTransaction())
-                        if(!worker.CancellationPending) {
+                try {
+                    if(!worker.CancellationPending) {
+                        EventAggregator.Value.GetEvent<NotificationEvent>()
+                                       .Publish(
+                                           Notification.Value.Message(Strings.Notification_List_Updating).Progress(10).State(NotificationType.Info));
+                        IList<TEntity> localList = string.IsNullOrEmpty(Search)
+                                                       ? (Repository.Value.GetAll<TEntity>()).ToList()
+                                                       : (Repository.Value.GetAll(SearchCriteria)).ToList();
+                        EventAggregator.Value.GetEvent<NotificationEvent>()
+                                       .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
+                        if(Entities == null || !localList.SequenceEqual(Entities)) {
+                            Entities = new List<TEntity>(localList);
+                            EventAggregator.Value.GetEvent<NotificationEvent>()
+                                           .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
+                        }
+                        else
                             EventAggregator.Value.GetEvent<NotificationEvent>()
                                            .Publish(
-                                               Notification.Value.Message(Strings.Notification_List_Updating)
-                                                           .Progress(10)
-                                                           .State(NotificationType.Info));
-                            IList<TEntity> localList = string.IsNullOrEmpty(Search)
-                                                           ? (Repository.Value.GetAll<TEntity>()).ToList()
-                                                           : (Repository.Value.GetAll(SearchCriteria)).ToList();
-                            EventAggregator.Value.GetEvent<NotificationEvent>()
-                                           .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
-                            if(Entities == null || !localList.SequenceEqual(Entities)) {
-                                Entities = new List<TEntity>(localList);
-                                EventAggregator.Value.GetEvent<NotificationEvent>()
-                                               .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
-                            }
-                            else
-                                EventAggregator.Value.GetEvent<NotificationEvent>()
-                                               .Publish(
-                                                   Notification.Value.Message(Strings.Notification_List_Updated)
-                                                               .Progress(-1)
-                                                               .State(NotificationType.Ok));
-                            Unlock();
-                        }
+                                               Notification.Value.Message(Strings.Notification_List_Updated).Progress(-1).State(NotificationType.Ok));
+                    }
+                } catch(Exception e) {
+                    Logger.Value.Log(e.Message, Category.Exception, Priority.High);
+                    NotificationEvent.Publish(
+                        Notification.Value.Message(Strings.Notification_RequisitionFailed).Progress(-1).Detail(e.Message).Type(NotificationType.Error));
+                }
+                Unlock();
                 Thread.Sleep(2000);
             } while(!Worker.CancellationPending);
         }

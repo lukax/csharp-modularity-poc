@@ -63,6 +63,10 @@ namespace LOB.Domain.Logic {
             notification.Message = message;
             return notification;
         }
+        public static Notification Type(this Notification notification, NotificationType type) {
+            notification.Type = type;
+            return notification;
+        }
         public static Notification Detail(this Notification notification, string detail) {
             notification.Detail = detail;
             return notification;

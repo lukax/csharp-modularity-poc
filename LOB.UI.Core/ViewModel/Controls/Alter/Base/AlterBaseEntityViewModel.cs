@@ -109,23 +109,21 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Lock();
             NotificationEvent.Publish(
                 Notification.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationType.Info));
-            Repository.Value.Uow.OnError += (o, s) => {
-                                                NotificationEvent.Publish(
-                                                    Notification.Value.Message(s.Description)
-                                                                .Detail(s.ErrorMessage)
-                                                                .Progress(-1)
-                                                                .State(NotificationType.Error));
-                                                Worker.CancelAsync();
-                                            };
-            using(Repository.Value.Uow.BeginTransaction())
+            try {
+                Repository.Value.Uow.Initialize();
                 if(!Worker.CancellationPending) {
                     NotificationEvent.Publish(Notification.Value.Progress(50));
                     Entity = Repository.Value.SaveOrUpdate(Entity);
                     NotificationEvent.Publish(Notification.Value.Progress(70));
-                    Repository.Value.Uow.CommitTransaction();
+                    Repository.Value.Uow.Commit();
                     NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationType.Ok));
                     ChangeState(ViewState.Update);
                 }
+            } catch(Exception ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                NotificationEvent.Publish(
+                    Notification.Value.Message(Strings.Notification_RequisitionFailed).Detail(ex.Message).Progress(-1).Type(NotificationType.Error));
+            }
             Unlock();
         }
 

@@ -49,8 +49,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exception\Base\GenericDaoException.cs" />
+    <Compile Include="Exception\Database\DatabaseCommitException.cs" />
+    <Compile Include="Exception\Database\DatabaseConnectionException.cs" />
+    <Compile Include="Exception\Base\GenericDatabaseException.cs" />
+    <Compile Include="Exception\Database\DatabaseQueryException.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="ISessionFactoryCreator.cs" />
+    <Compile Include="IOrmFactory.cs" />
     <Compile Include="IUnityOfWork.cs" />
     <Compile Include="PersistType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +64,10 @@
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

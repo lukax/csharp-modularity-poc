@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using LOB.Domain;
-using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 using LOB.UI.Contract.Command;
 using LOB.UI.Contract.ViewModel.Controls.Alter;
@@ -37,21 +36,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter {
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
-            Repository.Value.Uow.OnError += (o, s) => {
-                                                NotificationEvent.Publish(
-                                                    Notification.Value.Message(s.Description)
-                                                                .Detail(s.ErrorMessage)
-                                                                .Progress(-1)
-                                                                .State(NotificationType.Error));
-                                                //Worker.CancelAsync();
-                                                Lock();
-                                            };
 
             do {
-                if(Repository.Value.Uow.TestConnection()) {
-                    Categories = Repository.Value.GetAll<Category>().ToList();
-                    Unlock();
-                }
+                Categories = Repository.Value.GetAll<Category>().ToList();
+                Unlock();
                 Thread.Sleep(2000); // TODO: Configuration based update time
             } while(!worker.CancellationPending);
         }
