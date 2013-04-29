@@ -3,10 +3,12 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Windows.Input;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
+using LOB.Dao.Contract.Exception;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Contract.Command;
@@ -105,7 +107,9 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Worker.WorkerSupportsCancellation = true;
             Worker.RunWorkerAsync();
         }
+        private int _retrys;
         protected virtual void SaveChangesExecute(object sender, DoWorkEventArgs e) {
+            if(_retrys > 3) return;
             Lock();
             NotificationEvent.Publish(
                 Notification.Value.Message(Strings.Notification_Field_Adding).Detail("").Progress(-2).State(NotificationType.Info));
@@ -119,11 +123,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                     NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_Field_Added).Progress(100).State(NotificationType.Ok));
                     ChangeState(ViewState.Update);
                 }
+            } catch(DatabaseConnectionException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                _retrys++;
+                NotificationEvent.Publish(
+                    Notification.Value.Message(Strings.Notification_Dao_ConnectionFailed).Detail(ex.Message).Progress(-2).Type(NotificationType.Error));
+                Thread.Sleep(2000);
+                SaveChangesExecute(sender, e);
             } catch(Exception ex) {
                 Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
                 NotificationEvent.Publish(
                     Notification.Value.Message(Strings.Notification_RequisitionFailed).Detail(ex.Message).Progress(-1).Type(NotificationType.Error));
             }
+            _retrys = 0;
             Unlock();
         }
 

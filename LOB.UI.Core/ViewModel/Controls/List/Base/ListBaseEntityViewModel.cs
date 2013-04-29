@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
+using LOB.Dao.Contract.Exception;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Contract.Command;
@@ -30,10 +31,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         where TEntity : BaseEntity {
         private int _updateInterval;
         private Expression<Func<TEntity, bool>> _searchCriteria;
+        private int _retrys;
         public virtual Expression<Func<TEntity, bool>> SearchCriteria {
             get {
                 try {
-                    var converted = Convert.ToInt32(Search);
+                    var converted = Convert.ToInt32(SearchString);
                     return _searchCriteria ?? (arg => arg.Code == converted);
                 } catch(FormatException) {
                     return arg => false;
@@ -50,7 +52,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         public ICommand CloseCommand { get; private set; }
         public TEntity Entity { get; set; }
         public IEnumerable<TEntity> Entities { get; private set; }
-        public string Search { get; set; }
+        public string SearchString { get; set; }
         [Import] protected Lazy<Notification> Notification { get; private set; }
         [Import] protected Lazy<ILoggerFacade> Logger { get; private set; }
         [Import] protected Lazy<IRepository> Repository { get; private set; }
@@ -69,7 +71,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             DeleteCommand = new DelegateCommand(DeleteExecute, CanDelete);
             FetchCommand = new DelegateCommand(FetchExecute, CanFetch);
             CloseCommand = new DelegateCommand(ExitExecute, CanExit);
-            Search = "";
+            SearchString = "";
             ChangeState(ViewState.List);
             Lock();
         }
@@ -93,7 +95,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             set { _updateInterval = value; }
         }
 
-        public override void Refresh() { Search = ""; }
+        public override void Refresh() { SearchString = ""; }
 
         protected virtual void SaveExecute(object arg) { }
 
@@ -111,45 +113,51 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Entities = null;
             Refresh();
             if(!Worker.IsBusy) Worker.RunWorkerAsync();
+            else {
+                Worker.CancelAsync();
+                Worker.RunWorkerAsync();
+            }
         }
 
         protected virtual bool CanFetch(object obj) { return IsUnlocked; }
 
         private void WorkerUpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
-            Lock();
+            Lock(); if (_retrys > 3) return;
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
             //TODO: Dynamic set based on selected tab
-            do {
-                try {
-                    if(!worker.CancellationPending) {
-                        EventAggregator.Value.GetEvent<NotificationEvent>()
-                                       .Publish(
-                                           Notification.Value.Message(Strings.Notification_List_Updating).Progress(10).State(NotificationType.Info));
-                        IList<TEntity> localList = string.IsNullOrEmpty(Search)
-                                                       ? (Repository.Value.GetAll<TEntity>()).ToList()
-                                                       : (Repository.Value.GetAll(SearchCriteria)).ToList();
-                        EventAggregator.Value.GetEvent<NotificationEvent>()
-                                       .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
-                        if(Entities == null || !localList.SequenceEqual(Entities)) {
-                            Entities = new List<TEntity>(localList);
-                            EventAggregator.Value.GetEvent<NotificationEvent>()
-                                           .Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
-                        }
-                        else
-                            EventAggregator.Value.GetEvent<NotificationEvent>()
-                                           .Publish(
-                                               Notification.Value.Message(Strings.Notification_List_Updated).Progress(-1).State(NotificationType.Ok));
+
+            try {
+                if(!worker.CancellationPending) {
+                    NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(10).State(NotificationType.Info));
+                    IList<TEntity> localList = string.IsNullOrEmpty(SearchString)
+                                                   ? (Repository.Value.GetAll<TEntity>()).ToList()
+                                                   : (Repository.Value.GetAll(SearchCriteria)).ToList();
+                    NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(70));
+                    if(Entities == null || !localList.SequenceEqual(Entities)) {
+                        Entities = localList.AsEnumerable();
+                        NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_List_Updating).Progress(100));
                     }
-                } catch(Exception e) {
-                    Logger.Value.Log(e.Message, Category.Exception, Priority.High);
-                    NotificationEvent.Publish(
-                        Notification.Value.Message(Strings.Notification_RequisitionFailed).Progress(-1).Detail(e.Message).Type(NotificationType.Error));
+                    else
+                        NotificationEvent.Publish(Notification.Value.Message(Strings.Notification_List_Updated)
+                                                              .Progress(-1)
+                                                              .State(NotificationType.Ok));
                 }
-                Unlock();
+                _retrys = 0;
+            } catch(DatabaseConnectionException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                _retrys++;
+                NotificationEvent.Publish(
+                    Notification.Value.Message(Strings.Notification_Dao_ConnectionFailed).Detail(ex.Message).Progress(-2).Type(NotificationType.Error));
                 Thread.Sleep(2000);
-            } while(!Worker.CancellationPending);
+                WorkerUpdateList(sender, doWorkEventArgs);
+            } catch(Exception e) {
+                Logger.Value.Log(e.Message, Category.Exception, Priority.High);
+                NotificationEvent.Publish(
+                    Notification.Value.Message(Strings.Notification_RequisitionFailed).Progress(-1).Detail(e.Message).Type(NotificationType.Error));
+            }
+            Unlock();
         }
 
         protected override void Dispose(bool disposing) {

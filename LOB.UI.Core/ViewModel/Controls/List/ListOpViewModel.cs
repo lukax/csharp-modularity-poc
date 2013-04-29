@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Windows.Input;
 using LOB.Core.Localization;
@@ -24,123 +23,99 @@ using Microsoft.Practices.Prism.Events;
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
     [Export(typeof(IListOpViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
-    public sealed class ListOpViewModel : BaseViewModel, IListOpViewModel {
-        private Lazy<IDictionary<string, IViewInfo>> _defaultViewInfoDictLazy;
+    public sealed class ListOpViewModel : BaseViewModel, IListOpViewModel, IPartImportsSatisfiedNotification {
         private string _search;
+        private IDictionary<string, IViewInfo> _viewinfodict;
+        private IDictionary<string, IViewInfo> ViewInfoDict {
+            get {
+                return (_viewinfodict ??
+                        (_viewinfodict =
+                         LazyViewInfos.Where(x => !x.Metadata.ViewStates.Contains(ViewState.Other))
+                                      .ToDictionary(key => ViewInfoExtension.ToString(key.Metadata), val => val.Metadata)));
+            }
+        }
         public string Entity { get; set; }
-        public ObservableCollection<PanoramaGroup> Entitys { get; set; }
-        public ICommand SaveChangesCommand { get; set; }
-        public string Search {
-            get { return _search ?? ""; }
+        public ObservableCollection<PanoramaGroup> Entities { get; set; }
+        public ICommand OpenOpCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public string SearchString {
+            get { return (_search ?? "").ToLower(); }
             set {
-                _search = value.ToLower();
-                if(!Worker.IsBusy) Worker.RunWorkerAsync();
+                _search = value;
+                if(String.IsNullOrEmpty(value)) Worker.RunWorkerAsync();
+                //if(!Worker.IsBusy) Worker.RunWorkerAsync();
             }
         }
         [ImportMany] public Lazy<IBaseView<IBaseViewModel>, IViewInfo>[] LazyViewInfos { get; set; }
         [Import] public Lazy<IEventAggregator> LazyEventAggregator { get; set; }
-        [Import] public AggregateCatalog Type { get; set; }
 
-        public ListOpViewModel() {
-            SaveChangesCommand = new DelegateCommand(SaveChanges);
+        public void OnImportsSatisfied() {
+            SearchCommand = new DelegateCommand(SearchExecute);
+            OpenOpCommand = new DelegateCommand(OpenOpExecute);
             Entity = "";
             IsChild = false;
             ChangeState(ViewState.Other);
             Unlock();
         }
 
+        private void SearchExecute(object o) { if(!Worker.IsBusy) Worker.RunWorkerAsync(); }
+
         public override void InitializeServices() {
-            _defaultViewInfoDictLazy = new Lazy<IDictionary<string, IViewInfo>>(CreateList);
             Worker.DoWork += UpdateList;
             Worker.RunWorkerAsync();
-        }
-        public override void Refresh() {
-            base.Refresh();
-            Search = "";
         }
 
         private void UpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
-            worker.WorkerSupportsCancellation = true;
 
-            //Thread.Sleep(1000);
-            if(string.IsNullOrEmpty(Search)) {
-                var alterGroup = new PanoramaGroup(Strings.UI_Header_Alter);
-                alterGroup.SetSource(_defaultViewInfoDictLazy.Value.Where(x => x.Value.ViewStates.Contains(ViewState.Add)).Select(x => x.Key));
-                var listGroup = new PanoramaGroup(Strings.UI_Header_List);
-                listGroup.SetSource(_defaultViewInfoDictLazy.Value.Where(x => x.Value.ViewStates.Contains(ViewState.List)).Select(x => x.Key));
-                var sellGroup = new PanoramaGroup(Strings.UI_Header_Sell);
-                sellGroup.SetSource(_defaultViewInfoDictLazy.Value.Where(x => x.Value.ViewStates.Contains(ViewState.Sell)).Select(x => x.Key));
-                Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
+            IEnumerable<string> alterGroup;
+            IEnumerable<string> listGroup;
+            IEnumerable<string> sellGroup;
+            if(string.IsNullOrWhiteSpace(SearchString)) {
+                alterGroup = (ViewInfoDict.Where(x => x.Value.ViewStates.Contains(ViewState.Add)).Select(x => x.Key));
+                listGroup = (ViewInfoDict.Where(x => x.Value.ViewStates.Contains(ViewState.List)).Select(x => x.Key));
+                sellGroup = (ViewInfoDict.Where(x => x.Value.ViewStates.Contains(ViewState.Sell)).Select(x => x.Key));
             }
             else {
-                var alterGroup = new PanoramaGroup(Strings.UI_Header_Alter);
-                alterGroup.SetSource(
-                    _defaultViewInfoDictLazy.Value.Keys.Where(x => _defaultViewInfoDictLazy.Value[x].ToString().Contains("Add"))
-                                            .Where(x => x.ToLower().Contains(Search))
-                                            .ToList());
-                var listGroup = new PanoramaGroup(Strings.UI_Header_List);
-                listGroup.SetSource(
-                    _defaultViewInfoDictLazy.Value.Keys.Where(x => _defaultViewInfoDictLazy.Value[x].ToString().Contains("List"))
-                                            .Where(x => x.ToLower().Contains(Search))
-                                            .ToList());
-                var sellGroup = new PanoramaGroup(Strings.UI_Header_Sell);
-                sellGroup.SetSource(
-                    _defaultViewInfoDictLazy.Value.Keys.Where(x => _defaultViewInfoDictLazy.Value[x].ToString().Contains("Sell"))
-                                            .Where(x => x.ToLower().Contains(Search))
-                                            .ToList());
-                Entitys = new ObservableCollection<PanoramaGroup> {alterGroup, listGroup, sellGroup};
+                alterGroup =
+                    (ViewInfoDict.Where(x => x.Value.ViewStates.Contains(ViewState.Add))
+                                 .Select(x => x.Key)
+                                 .Where(x => x.ToLower().Contains(SearchString)));
+                listGroup =
+                    (ViewInfoDict.Where(x => x.Value.ViewStates.Contains(ViewState.List))
+                                 .Select(x => x.Key)
+                                 .Where(x => x.ToLower().Contains(SearchString)));
+                sellGroup =
+                    (ViewInfoDict.Where(x => x.Value.ViewStates.Contains(ViewState.Sell))
+                                 .Select(x => x.Key)
+                                 .Where(x => x.ToLower().Contains(SearchString)));
             }
+            Entities = new ObservableCollection<PanoramaGroup> { // ReSharper disable PossibleMultipleEnumeration
+                alterGroup.Any() ? new PanoramaGroup(Strings.UI_Header_Alter, alterGroup) : null,
+                listGroup.Any() ? new PanoramaGroup(Strings.UI_Header_List, listGroup) : null,
+                sellGroup.Any() ? new PanoramaGroup(Strings.UI_Header_Sell, sellGroup) : null
+                // ReSharper restore PossibleMultipleEnumeration INFO: Not going to affect much the performance
+            };
         }
 
-        private void SaveChanges(object arg) {
-            var viewInfo = _defaultViewInfoDictLazy.Value[arg.ToString()];
+        private void OpenOpExecute(object arg) {
+            var viewInfo = ViewInfoDict[arg.ToString()];
             var notification = new Notification {
-                Message =
-                    string.Format("{0} {1}", Strings.Common_Initializing,
-                                  _defaultViewInfoDictLazy.Value.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key),
+                Message = string.Format("{0} {1}", Strings.Common_Initializing, ViewInfoDict.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key),
                 Progress = -2,
                 Type = NotificationType.Info
             };
             LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification);
             LazyEventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(viewInfo));
-            var stringy = string.Format("{0} {1}", Strings.Common_Initialized,
-                                        _defaultViewInfoDictLazy.Value.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key);
+            var stringy = string.Format("{0} {1}", Strings.Common_Initialized, ViewInfoDict.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key);
             LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification.Message(stringy).Progress(-1).State(NotificationType.Ok));
             LazyEventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id);
         }
 
-        private IDictionary<string, IViewInfo> CreateList() {
-            var catalog =
-                LazyViewInfos.Where(x => !x.Metadata.ViewStates.Contains(ViewState.Other))
-                             .ToDictionary(item => ViewInfoExtension.ToString(item.Metadata), item => item.Metadata);
-            //var catalog = UIOperationCatalog.UIOperations;
-            ////Remove Other usage Types from user selection:
-            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Other));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.BaseEntity));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Service));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.Type == ViewType.Person));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.Other));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.UpdateExecute));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.UpdateExecute));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.DeleteExecute));
-            //catalog.Remove(catalog.FirstOrDefault(x => x.ViewState == ViewState.QuickSearchExecute));
-            //var operationTypes = new Dictionary<string, ViewModelInfo>(catalog.Count);
-            //var stringsType = typeof(Strings);
-            //var stringsTypeProps = stringsType.GetProperties();
-
-            ////Parse to localized string
-            //foreach(var uiOperation in catalog) {
-            //    ViewModelInfo operation = uiOperation;
-            //    foreach(string name in
-            //        from propertyInfo in stringsTypeProps
-            //        let name = propertyInfo.Name
-            //        where propertyInfo.Name.Contains("Command_" + operation)
-            //        select name) operationTypes.Add(stringsType.GetProperty(name).GetValue(stringsType).ToString(), uiOperation);
-            //}
-            //return operationTypes;
-            return catalog;
+        public override void Refresh() {
+            base.Refresh();
+            SearchString = "";
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return (arg => //arg.Title.ToUpper().Contains(Search.ToUpper()) || 
                             //arg.HireDate.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                            arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) //|| 
+                            arg.Code.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) //|| 
                            //arg.Title.ToUpper().Contains(Search.ToUpper()) ||
                            //arg.FirstName.ToUpper().Contains(Search.ToUpper()) || 
                            //arg.LastName.ToUpper().Contains(Search.ToUpper()) ||

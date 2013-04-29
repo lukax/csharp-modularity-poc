@@ -17,11 +17,11 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.FirstName.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.LastName.ToUpper().Contains(Search.ToUpper()) || arg.NickName.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.RG.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CPF.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
+                         arg.Code.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) || arg.FirstName.ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.LastName.ToUpper().Contains(SearchString.ToUpper()) || arg.NickName.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.Notes.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.RG.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.CPF.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

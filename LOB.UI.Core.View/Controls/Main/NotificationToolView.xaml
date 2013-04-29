@@ -21,7 +21,7 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
 
-            <ListView ItemsSource="{Binding Entitys}" SelectedItem="{Binding Entity}" SelectionMode="Single"
+            <ListView ItemsSource="{Binding Entities}" SelectedItem="{Binding Entity}" SelectionMode="Single"
                       BorderThickness="0" behaviours:GridViewColumnResize.Enabled="True" MaxHeight="100">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderContainerStyle="{StaticResource MyHeaderStyle}">

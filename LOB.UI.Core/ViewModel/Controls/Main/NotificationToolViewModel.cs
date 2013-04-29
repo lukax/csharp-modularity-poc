@@ -23,7 +23,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
     [Export(typeof(INotificationToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel, IPartImportsSatisfiedNotification {
         public Notification Entity { get; set; }
-        public IList<Notification> Entitys { get; set; }
+        public IList<Notification> Entities { get; set; }
+        //TODO: Make Notification immutable to avoid thread problems
         public bool IsVisible {
             get { return Visibility == Visibility.Visible; }
             set { Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
@@ -31,7 +32,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         public ICommand DismissCommand { get; set; }
         public Visibility Visibility { get; private set; }
         public string Status {
-            get { return string.Format("{0} {1}", Entitys.Count, Strings.UI_ToolTip_Notifications); }
+            get { return string.Format("{0} {1}", Entities.Count, Strings.UI_ToolTip_Notifications); }
         }
         [Import] public IEventAggregator EventAggregator {
             set { value.GetEvent<NotificationEvent>().Subscribe(NotificationListener); }
@@ -39,7 +40,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
 
         public void OnImportsSatisfied() {
             DismissCommand = new DelegateCommand(DismissNotification);
-            Entitys = new List<Notification>();
+            Entities = new List<Notification>();
             IsVisible = false;
             InitWorker();
         }
@@ -47,15 +48,15 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
         [Export(ServiceName.NotificationService, typeof(Action<Notification>))]
         private void NotificationListener(Notification notification) {
             notification.Time = DateTime.Now;
-            if(Entitys.Contains(notification)) Entitys[Entitys.IndexOf(notification)] = notification;
-            else Entitys.Add(notification);
+            if(Entities.Contains(notification)) Entities[Entities.IndexOf(notification)] = notification;
+            else Entities.Add(notification);
             IsVisible = true;
         }
 
         private void DismissNotification(object o) {
-            if(Equals(o, "All")) Entitys.Clear();
-            else if(Entity != null) Entitys.Remove(Entity);
-            if(Entitys.Count == 0) IsVisible = false;
+            if(Equals(o, "All")) Entities.Clear();
+            else if(Entity != null) Entities.Remove(Entity);
+            if(Entities.Count == 0) IsVisible = false;
         }
 
         private void InitWorker() {
@@ -69,8 +70,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             worker.WorkerSupportsCancellation = true;
             do {
                 Thread.Sleep(5000);
-                var currentStack = Entitys.ToList(); //Thread Safe
-                foreach(var notification in currentStack) if(notification.Type == NotificationType.Ok) if(notification.Time.AddSeconds(10) < DateTime.Now) Entitys.Remove(notification);
+                var currentStack = Entities.ToList(); //Thread Safe
+                foreach(var notification in currentStack) if(notification.Type == NotificationType.Ok) if(notification.Time.AddSeconds(10) < DateTime.Now) Entities.Remove(notification);
             } while(!Worker.CancellationPending);
         }
     }

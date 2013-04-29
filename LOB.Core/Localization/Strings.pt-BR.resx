@@ -1002,16 +1002,16 @@
   <data name="Notification_Field_X_Valid" xml:space="preserve">
     <value>{0} Válido</value>
   </data>
-  <data name="Notification_Dao_Transaction_AlreadyActivated" xml:space="preserve">
+  <data name="Notification_Dao_AlreadyActivated" xml:space="preserve">
     <value>Transação do banco de dados já foi Ativada</value>
   </data>
-  <data name="Notification_Dao_Transaction_AlreadyInitialized" xml:space="preserve">
+  <data name="Notification_Dao_AlreadyInitialized" xml:space="preserve">
     <value>Transação do banco de dados já foi Inicializada</value>
   </data>
-  <data name="Notification_Dao_Transaction_NotActivated" xml:space="preserve">
+  <data name="Notification_Dao_NotActivated" xml:space="preserve">
     <value>Transação do banco de dados não ativada</value>
   </data>
-  <data name="Notification_Dao_Transaction_NotInitialized" xml:space="preserve">
+  <data name="Notification_Dao_NotInitialized" xml:space="preserve">
     <value>Transação do banco de dados não inicializada</value>
   </data>
   <data name="Common_LegalPerson" xml:space="preserve">
@@ -1064,5 +1064,8 @@
   </data>
   <data name="UI_ToolTip_TestDbConnection" xml:space="preserve">
     <value>Testar Conexão ao Banco de Dados</value>
+  </data>
+  <data name="Notification_RequisitionRetry" xml:space="preserve">
+    <value>Executando requisição novamente...</value>
   </data>
 </root>

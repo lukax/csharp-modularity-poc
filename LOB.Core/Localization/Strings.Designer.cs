@@ -1564,6 +1564,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyActivated.
+        /// </summary>
+        public static string Notification_Dao_AlreadyActivated {
+            get {
+                return ResourceManager.GetString("Notification_Dao_AlreadyActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyInitialized.
+        /// </summary>
+        public static string Notification_Dao_AlreadyInitialized {
+            get {
+                return ResourceManager.GetString("Notification_Dao_AlreadyInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Dao_Conected.
         /// </summary>
         public static string Notification_Dao_Conected {
@@ -1609,6 +1627,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotActivated.
+        /// </summary>
+        public static string Notification_Dao_NotActivated {
+            get {
+                return ResourceManager.GetString("Notification_Dao_NotActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotInitialized.
+        /// </summary>
+        public static string Notification_Dao_NotInitialized {
+            get {
+                return ResourceManager.GetString("Notification_Dao_NotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Dao_RequisitionFailed.
         /// </summary>
         public static string Notification_Dao_RequisitionFailed {
@@ -1623,42 +1659,6 @@ namespace LOB.Core.Localization {
         public static string Notification_Dao_RequisitionSucessful {
             get {
                 return ResourceManager.GetString("Notification_Dao_RequisitionSucessful", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyActivated.
-        /// </summary>
-        public static string Notification_Dao_Transaction_AlreadyActivated {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_AlreadyActivated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyInitialized.
-        /// </summary>
-        public static string Notification_Dao_Transaction_AlreadyInitialized {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_AlreadyInitialized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotActivated.
-        /// </summary>
-        public static string Notification_Dao_Transaction_NotActivated {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_NotActivated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotInitialized.
-        /// </summary>
-        public static string Notification_Dao_Transaction_NotInitialized {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_NotInitialized", resourceCulture);
             }
         }
         
@@ -2100,6 +2100,15 @@ namespace LOB.Core.Localization {
         public static string Notification_RequisitionFailed {
             get {
                 return ResourceManager.GetString("Notification_RequisitionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_RequisitionRetry.
+        /// </summary>
+        public static string Notification_RequisitionRetry {
+            get {
+                return ResourceManager.GetString("Notification_RequisitionRetry", resourceCulture);
             }
         }
         

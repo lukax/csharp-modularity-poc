@@ -18,8 +18,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(Search.ToUpper()));
+                         arg.Code.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.Notes.ToString(CultureInfo.InvariantCulture).ToUpper().Contains(SearchString.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

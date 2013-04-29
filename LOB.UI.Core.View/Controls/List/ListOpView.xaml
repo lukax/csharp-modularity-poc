@@ -20,14 +20,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <Button x:Name="ButtonSave" IsDefault="True" Width="18" Height="18" Background="Transparent"
-                    Command="{Binding SaveChangesCommand}" Padding="0" BorderThickness="0">
-                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/enter.png" />
+            <Button IsDefault="True" Width="18" Height="18" Background="Transparent"
+                    Command="{Binding SearchCommand}" Padding="0" BorderThickness="0">
+                <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/arrow-1-right.png" />
             </Button>
             <TextBox MinWidth="200" Width="Auto" Height="Auto" Background="Transparent"
-                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}"
-                     controls:TextboxHelper.ClearTextButton="True" />
+                     controls:TextboxHelper.ClearTextButton="True">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
         </DockPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
 
@@ -41,7 +45,7 @@
                 <DataTemplate DataType="{x:Type system:String}">
                     <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
                     <controls:Tile Title="{Binding}"
-                                   Command="{Binding ElementName=PanoramaEntitys, Path=DataContext.SaveChangesCommand}"
+                                   Command="{Binding ElementName=PanoramaEntities, Path=DataContext.OpenOpCommand}"
                                    CommandParameter="{Binding}" Width="100" Height="100">
                         <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
                         <Image Source="/LOB.UI.Core.Resources;component/Icons/256x256/module.png"
@@ -49,8 +53,8 @@
                     </controls:Tile>
                 </DataTemplate>
             </ScrollViewer.Resources>
-            <controls:Panorama x:Name="PanoramaEntitys" ItemsSource="{Binding Entitys}"
-                               VerticalAlignment="Stretch" Margin="0,20,0,0" ItemBox="120" UseSnapBackScrolling="False"
+            <controls:Panorama x:Name="PanoramaEntities" ItemsSource="{Binding Entities}" Background="Transparent"
+                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,20,0,0" ItemBox="120" UseSnapBackScrolling="False"
                                HeaderFontColor="{DynamicResource Foreground}" Height="550" GroupHeight="100" />
 
         </ScrollViewer>

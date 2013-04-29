@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\ShipperMap.cs" />
+    <Compile Include="OrmFactoryConfiguration.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\CommandMap.cs" />

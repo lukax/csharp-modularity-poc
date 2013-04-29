@@ -18,9 +18,9 @@ namespace LOB.Dao.Nhibernate {
         private object _orm;
         protected ITransaction Transaction { get; set; }
         [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
-        [Import] protected Lazy<ISession> Session { get; set; }
+        [Import] protected Lazy<OrmFactory> OrmFactory { get; set; }
         public object Orm {
-            get { return _orm ?? (_orm = Session.Value); }
+            get { return _orm ?? (_orm = OrmFactory.Value.Orm.As<ISession>()); }
         }
 
         public IUnityOfWork Initialize() {
@@ -46,7 +46,7 @@ namespace LOB.Dao.Nhibernate {
         public void Flush() {
             check_is_disposed();
             check_is_not_initialized();
-            Session.Value.Flush();
+            Orm.As<ISession>().Flush();
             begin_new_Transaction();
         }
 
@@ -54,11 +54,11 @@ namespace LOB.Dao.Nhibernate {
 
         protected void begin_new_Transaction() {
             if(Transaction != null) Transaction.Dispose();
-            Transaction = Session.Value.BeginTransaction();
+            Transaction = Orm.As<ISession>().BeginTransaction();
         }
         protected void check_is_not_initialized() { if(!_isInitialized) throw new InvalidOperationException("Must initialize (call Initialize()) on UnitOfWork before commiting or rolling back"); }
         protected void check_is_disposed() { if(_isDisposed) throw new ObjectDisposedException(GetType().Name); }
-        protected void check_is_transaction_active() { if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_Transaction_NotActivated); }
+        protected void check_is_transaction_active() { if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_NotInitialized); }
         #region Implementation of IDisposable
 
         ~UnityOfWork() { Dispose(false); }
@@ -70,10 +70,8 @@ namespace LOB.Dao.Nhibernate {
 
         protected virtual void Dispose(bool disposing) {
             if(_isDisposed || ! _isInitialized) return;
-
             Transaction.Dispose();
-            Session.Value.As<ISession>().Dispose();
-
+            Orm.As<ISession>().Dispose();
             _isDisposed = true;
         }
 

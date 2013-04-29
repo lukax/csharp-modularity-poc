@@ -15,11 +15,11 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         //{
         //    if (ReferenceEquals(Entity, null)) return false;
         //    if (Info.ViewState == ViewState.Add)
-        //        return base.CanSaveChanges(arg) & _alterAddressViewModel.SaveChangesCommand.CanExecute(arg) &&
-        //               _alterContactInfoViewModel.SaveChangesCommand.CanExecute(arg);
+        //        return base.CanSaveChanges(arg) & _alterAddressViewModel.SearchCommand.CanExecute(arg) &&
+        //               _alterContactInfoViewModel.SearchCommand.CanExecute(arg);
         //    if (Info.ViewState == ViewState.UpdateExecute)
-        //        return base.CanSaveChanges(arg) & _alterContactInfoViewModel.SaveChangesCommand.CanExecute(arg) &&
-        //               _alterContactInfoViewModel.SaveChangesCommand.CanExecute(arg);
+        //        return base.CanSaveChanges(arg) & _alterContactInfoViewModel.SearchCommand.CanExecute(arg) &&
+        //               _alterContactInfoViewModel.SearchCommand.CanExecute(arg);
         //    return false;
         //}
     }

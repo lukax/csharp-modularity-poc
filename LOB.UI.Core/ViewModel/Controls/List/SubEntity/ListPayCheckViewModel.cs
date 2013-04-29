@@ -17,10 +17,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.PS.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Bonus.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.CurrentSalary.ToString(Culture).ToUpper().Contains(Search.ToUpper()));
+                         arg.Code.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.PS.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.Bonus.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.CurrentSalary.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

@@ -18,7 +18,7 @@
                 <Button x:Name="ButtonSave" IsDefault="True" Width="20" Height="20" Background="Transparent"
                         Padding="0" BorderThickness="0" ToolTip="{x:Static loc:Strings.UI_ToolTip_Confirm}"
                         Command="{Binding SearchCommand}">
-                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/enter.png" />
+                    <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/arrow-1-right.png" />
                 </Button>
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -55,12 +55,16 @@
                 </Button>
             </StackPanel>
             <TextBox MinWidth="200" Width="Auto" Height="Auto" Background="Transparent"
-                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"
                      controls:TextboxHelper.Watermark="{x:Static loc:Strings.Common_Search}"
-                     controls:TextboxHelper.ClearTextButton="True" />
+                     controls:TextboxHelper.ClearTextButton="True" >
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
         </DockPanel>
         <!--<DataGrid IsReadOnly="True" GridLinesVisibility="None" SelectionMode="Single" Width="Auto"
                   HorizontalAlignment="Stretch" Background="Transparent"
-                  SelectedItem="{Binding Entity}" ItemsSource="{Binding Entitys}" />-->
+                  SelectedItem="{Binding Entity}" ItemsSource="{Binding Entities}" />-->
     </DockPanel>
 </UserControl>
