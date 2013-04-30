@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using LOB.UI.Contract;
 using LOB.UI.Contract.Controller;
 using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Core.Event.View;
@@ -23,16 +24,16 @@ namespace LOB.UI.Core.View.Controllers {
         [Import] private Lazy<ILoggerFacade> Logger { get; set; }
         [Import] private Lazy<IFluentNavigator> Navigator { get; set; }
         [Import] private Lazy<IRegionAdapter> RegionAdapter { get; set; }
-
+        
         private SubscriptionToken _openViewEventSubscription;
         private SubscriptionToken _closeViewEventSubscription;
 
         private void OpenView(OpenViewPayload openViewPayload) {
-            if(openViewPayload.ViewInfo.ViewStates[0] == ViewState.QuickSearch) QuickSearch(openViewPayload);
+            if(openViewPayload.ViewInfo.ViewStates != null && openViewPayload.ViewInfo.ViewStates[0] == ViewState.QuickSearch) QuickSearch(openViewPayload);
             else Navigator.Value.Init.ResolveView(openViewPayload.ViewInfo).AddToRegion(RegionName.TabRegion);
             if(openViewPayload.GetIdFunc != null) openViewPayload.GetIdFunc(Navigator.Value.GetViewId);
         }
-
+        
         private void QuickSearch(OpenViewPayload openViewPayload) {
             Navigator.Value.Init.ResolveView(openViewPayload.ViewInfo).AddToRegion(RegionName.ModalRegion);
             if(openViewPayload.GetIdFunc != null) openViewPayload.GetIdFunc(Navigator.Value.GetViewId);

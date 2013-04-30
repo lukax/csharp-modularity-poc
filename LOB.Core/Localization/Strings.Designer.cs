@@ -2059,6 +2059,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Navigator_View_CouldNotBeLoaded.
+        /// </summary>
+        public static string Notification_Navigator_View_CouldNotBeLoaded {
+            get {
+                return ResourceManager.GetString("Notification_Navigator_View_CouldNotBeLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Navigator_View_ResolveFirst.
         /// </summary>
         public static string Notification_Navigator_View_ResolveFirst {

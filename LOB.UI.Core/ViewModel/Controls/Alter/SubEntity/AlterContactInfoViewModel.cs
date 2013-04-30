@@ -45,16 +45,19 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
             InitBackgroundWorker();
         }
         private void AddEmail(object arg) {
-            var emailId = new Guid();
-            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterEmailViewModel), id => { emailId = id; }));
-            Entity.PhoneNumbers.Add(Repository.Value.Get<PhoneNumber>(emailId));
+            EventAggregator.Value.GetEvent<OpenViewTEvent>()
+                           .Publish(new OpenViewTPayload(typeof(IAlterEmailViewModel),
+                                                        id1 => EventAggregator.Value.GetEvent<CloseViewEvent>()
+                                                            .Subscribe(id2 => {if(id1 != id2) return;       
+                                                                var entity =  Repository.Value.Get<Email>(id2);
+                                                                if(entity != null)Entity.Emails.Add(entity);             })));
         }
 
         private bool CanAddEmail(object arg) { return IsUnlocked; }
 
         private void AddPhoneNumber(object arg) {
             var phoneNumberId = new Guid();
-            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterEmailViewModel), id => { phoneNumberId = id; }));
+            EventAggregator.Value.GetEvent<OpenViewTEvent>().Publish(new OpenViewTPayload(typeof(IAlterEmailViewModel), id => { phoneNumberId = id; }));
             Entity.PhoneNumbers.Add(Repository.Value.Get<PhoneNumber>(phoneNumberId));
         }
 

@@ -16,17 +16,18 @@ namespace LOB.UI.Core.View.Controllers {
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class PersonRegionController : IPartImportsSatisfiedNotification, IBaseController {
         [Import] protected IEventAggregator EventAggregator { get; set; }
-        [Import] protected IBaseView<IAlterAddressViewModel> AlterAddressView { get; set; }
-        [Import] protected IBaseView<IAlterContactInfoViewModel> AlterContactInfoView { get; set; }
         [Import] protected IRegionManager RegionManager { get; set; }
         [Import] protected Lazy<IRegionAdapter> RegionAdapter { get; set; }
+        [Import] protected IBaseView<IAlterAddressViewModel> AlterAddressView { get; set; }
+        [Import] protected IBaseView<IAlterContactInfoViewModel> AlterContactInfoView { get; set; }
         [Import] public IAlterPersonViewModel ViewModel { get; set; }
 
         public void OnImportsSatisfied() {
+            ViewModel.InitializeServices();
             EventAggregator.GetEvent<SetupChildViewEvent>()
-                           .Publish(new SetupChildPayload(AlterAddressView.ViewModel.Id, ViewModel.Id, ViewModel.Entity));
+                           .Publish(new SetupChildPayload(AlterAddressView.ViewModel.Id, ViewModel.Id, ViewModel.Entity.Address));
             EventAggregator.GetEvent<SetupChildViewEvent>()
-                           .Publish(new SetupChildPayload(AlterContactInfoView.ViewModel.Id, ViewModel.Id, ViewModel.Entity));
+                           .Publish(new SetupChildPayload(AlterContactInfoView.ViewModel.Id, ViewModel.Id, ViewModel.Entity.ContactInfo));
 
             RegionManager.RegisterViewWithRegion("AddressRegion", () => AlterAddressView);
             RegionManager.RegisterViewWithRegion("ContactInfoRegion", () => AlterContactInfoView);
@@ -39,6 +40,8 @@ namespace LOB.UI.Core.View.Controllers {
             RegionAdapter.Value.Remove(AlterAddressView);
             RegionAdapter.Value.Remove(AlterContactInfoView);
             ViewModel.Dispose();
+            AlterAddressView.Dispose();
+            AlterContactInfoView.Dispose();
         }
     }
 }

@@ -16,25 +16,19 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     [Export(typeof(IAlterAddressViewModel)), Export(typeof(AlterBaseEntityViewModel<Address>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class AlterAddressViewModel : AlterBaseEntityViewModel<Address>, IAlterAddressViewModel {
-        private string _status;
         private IList<string> _statuses;
         public ObservableCollection<UF> UFs { get; set; }
         public ObservableCollection<string> Districts { get; set; }
-        private UF _uf;
         public UF UF {
-            get { return _uf; }
+            get { return Entity.State.ToUF(); }
             set {
-                _uf = value;
                 Entity.State = value.ToLocalizedString();
                 Districts = new ObservableCollection<string>(value.GetDistricts());
             }
         }
         public string Status {
-            get { return _status; }
-            set {
-                _status = value;
-                Entity.Status = AddressStatusDictionary.Statuses[value];
-            }
+            get { return AddressStatusDictionary.Statuses.FirstOrDefault(x => x.Value == Entity.Status).Key; }
+            set { Entity.Status = AddressStatusDictionary.Statuses[value]; }
         }
 
         public IList<string> Statuses {

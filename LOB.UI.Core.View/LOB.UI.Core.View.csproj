@@ -111,9 +111,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\NaturalPersonRegionController.cs" />
-    <Compile Include="Controllers\CustomerRegionController.cs" />
-    <Compile Include="Controllers\PersonRegionController.cs" />
+    <Compile Include="Controllers\Controls\NaturalPersonRegionController.cs" />
+    <Compile Include="Controllers\Controls\CustomerRegionController.cs" />
+    <Compile Include="Controllers\Controls\PersonRegionController.cs" />
     <Compile Include="Controls\Alter\AlterSupplierView.xaml.cs">
       <DependentUpon>AlterSupplierView.xaml</DependentUpon>
     </Compile>
@@ -542,6 +542,10 @@
     <ProjectReference Include="..\LOB.UI.Interface\LOB.UI.Contract.csproj">
       <Project>{a231c91c-a4d3-4be7-ba4e-ee7dfb3d7eef}</Project>
       <Name>LOB.UI.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

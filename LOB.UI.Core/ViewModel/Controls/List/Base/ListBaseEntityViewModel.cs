@@ -32,6 +32,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         private int _updateInterval;
         private Expression<Func<TEntity, bool>> _searchCriteria;
         private int _retrys;
+        private bool _isInitialized;
         public virtual Expression<Func<TEntity, bool>> SearchCriteria {
             get {
                 try {
@@ -76,8 +77,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Lock();
         }
         public override void InitializeServices() {
+            if (_isInitialized) return;
             Worker.DoWork += WorkerUpdateList;
             Worker.RunWorkerAsync();
+            _isInitialized = true;
             Unlock();
         }
 

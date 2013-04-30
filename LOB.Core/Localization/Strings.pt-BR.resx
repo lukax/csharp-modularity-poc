@@ -1068,4 +1068,7 @@
   <data name="Notification_RequisitionRetry" xml:space="preserve">
     <value>Executando requisição novamente...</value>
   </data>
+  <data name="Notification_Navigator_View_CouldNotBeLoaded" xml:space="preserve">
+    <value>Parte visual não pode ser carregada</value>
+  </data>
 </root>

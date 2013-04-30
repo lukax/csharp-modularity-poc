@@ -10,6 +10,8 @@ using Microsoft.Practices.Prism.Events;
 namespace LOB.UI.Core.Event.View {
     public class OpenViewEvent : CompositePresentationEvent<OpenViewPayload>, IBaseEvent {}
 
+    public class OpenViewTEvent : CompositePresentationEvent<OpenViewTPayload>, IBaseEvent {}
+
     public class OpenViewPayload {
         public IViewInfo ViewInfo { get; private set; }
         public Type ViewType { get; private set; }
@@ -18,8 +20,13 @@ namespace LOB.UI.Core.Event.View {
             ViewInfo = viewInfo;
             GetIdFunc = getIdFunc;
         }
-        public OpenViewPayload(Type viewType, Action<Guid> getIdFunc = null) {
-            ViewType = viewType;
+    }
+
+    public class OpenViewTPayload {
+        public Type ViewType { get; private set; }
+        public Action<Guid> GetIdFunc { get; private set; }
+        public OpenViewTPayload(Type viewInfo, Action<Guid> getIdFunc = null) {
+            ViewType = viewInfo;
             GetIdFunc = getIdFunc;
         }
     }

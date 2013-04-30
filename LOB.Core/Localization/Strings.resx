@@ -1068,4 +1068,7 @@
   <data name="Notification_RequisitionRetry" xml:space="preserve">
     <value>@Notification_RequisitionRetry</value>
   </data>
+  <data name="Notification_Navigator_View_CouldNotBeLoaded" xml:space="preserve">
+    <value>@Notification_Navigator_View_CouldNotBeLoaded</value>
+  </data>
 </root>

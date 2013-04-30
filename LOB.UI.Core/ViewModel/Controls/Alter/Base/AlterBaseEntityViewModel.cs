@@ -27,6 +27,8 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
     [InheritedExport, PartCreationPolicy(CreationPolicy.NonShared)]
     public abstract class AlterBaseEntityViewModel<TEntity> : BaseViewModel, IAlterBaseEntityViewModel<TEntity>, IPartImportsSatisfiedNotification
         where TEntity : BaseEntity {
+        private int _retrys;
+        private bool _isInitialized;
         private ViewState _previousState;
         private SubscriptionToken _currentSubscription;
         private TEntity _entity;
@@ -69,13 +71,16 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
                                                                                 Id = payload.NewId;
                                                                                 Entity = payload.Entity as TEntity;
                                                                                 IsChild = true;
+                                                                                _isInitialized = true;
                                                                             });
             ChangeState(ViewState.Add);
             Lock();
         }
 
         public override void InitializeServices() {
+            if(_isInitialized) return;
             if(ReferenceEquals(Entity, null)) ClearEntityExecute(null);
+            _isInitialized = true;            
             Unlock();
         }
 
@@ -107,7 +112,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Worker.WorkerSupportsCancellation = true;
             Worker.RunWorkerAsync();
         }
-        private int _retrys;
+
         protected virtual void SaveChangesExecute(object sender, DoWorkEventArgs e) {
             if(_retrys > 3) return;
             Lock();
