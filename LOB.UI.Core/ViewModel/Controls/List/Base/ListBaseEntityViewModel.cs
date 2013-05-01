@@ -10,7 +10,7 @@ using System.Threading;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
-using LOB.Dao.Contract.Exception;
+using LOB.Dao.Contract.Exception.Database;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Contract.Command;
@@ -77,7 +77,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
             Lock();
         }
         public override void InitializeServices() {
-            if (_isInitialized) return;
+            if(_isInitialized) return;
             Worker.DoWork += WorkerUpdateList;
             Worker.RunWorkerAsync();
             _isInitialized = true;
@@ -90,7 +90,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         private void IncludeExecute(object o) { EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Publish(new EntityIncludePayload<TEntity>(Id, Entity)); }
         private bool CanInclude(object obj) { return IsUnlocked & !ReferenceEquals(Entity, null); }
 
-        private void ExitExecute(object obj) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id); }
+        private void ExitExecute(object obj) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(new CloseViewPayload(Id)); }
         private bool CanExit(object obj) { return IsUnlocked; }
 
         public int UpdateInterval {
@@ -125,7 +125,8 @@ namespace LOB.UI.Core.ViewModel.Controls.List.Base {
         protected virtual bool CanFetch(object obj) { return IsUnlocked; }
 
         private void WorkerUpdateList(object sender, DoWorkEventArgs doWorkEventArgs) {
-            Lock(); if (_retrys > 3) return;
+            Lock();
+            if(_retrys > 3) return;
             var worker = sender as BackgroundWorker;
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;

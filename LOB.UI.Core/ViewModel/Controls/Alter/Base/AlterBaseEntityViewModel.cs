@@ -8,7 +8,7 @@ using System.Windows.Input;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
-using LOB.Dao.Contract.Exception;
+using LOB.Dao.Contract.Exception.Database;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using LOB.UI.Contract.Command;
@@ -66,13 +66,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             ClearEntityCommand = new DelegateCommand(ClearEntityExecute, CanClearEntity);
 
             EventAggregator.Value.GetEvent<EntityIncludeEvent<TEntity>>().Subscribe(IncludeEventExecute);
-            EventAggregator.Value.GetEvent<SetupChildViewEvent>().Subscribe(payload => {
-                                                                                if(Id != payload.OldId) return;
-                                                                                Id = payload.NewId;
-                                                                                Entity = payload.Entity as TEntity;
-                                                                                IsChild = true;
-                                                                                _isInitialized = true;
-                                                                            });
+            EventAggregator.Value.GetEvent<SetupChildViewEvent>().Subscribe(SetupChildExecute);
             ChangeState(ViewState.Add);
             Lock();
         }
@@ -80,7 +74,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         public override void InitializeServices() {
             if(_isInitialized) return;
             if(ReferenceEquals(Entity, null)) ClearEntityExecute(null);
-            _isInitialized = true;            
+            _isInitialized = true;
             Unlock();
         }
 
@@ -97,7 +91,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             if(ViewState == ViewState.Update & IsUnlocked) return true;
             return false;
         }
-        protected virtual void DiscardChangesExecute(object arg) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id); }
+        protected virtual void DiscardChangesExecute(object arg) { EventAggregator.Value.GetEvent<CloseViewEvent>().Publish(new CloseViewPayload(Id, Entity)); }
 
         protected virtual bool CanSaveChanges(object arg) {
             if(EntityFacade != null) {
@@ -113,7 +107,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
             Worker.RunWorkerAsync();
         }
 
-        protected virtual void SaveChangesExecute(object sender, DoWorkEventArgs e) {
+        protected void SaveChangesExecute(object sender, DoWorkEventArgs e) { // INFO: too much functionality to make it virtual
             if(_retrys > 3) return;
             Lock();
             NotificationEvent.Publish(
@@ -148,10 +142,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected virtual void QuickSearchExecute(object arg) {
             _previousState = ViewState;
             ChangeState(ViewState.QuickSearch);
-            EventAggregator.Value.GetEvent<OpenViewEvent>()
-                           .Publish(new OpenViewPayload(ViewInfoExtension.New(ViewType.Address, new[] {ViewState.QuickSearch})));
+            EventAggregator.Value.GetEvent<OpenViewInfoEvent>()
+                           .Publish(new OpenViewInfoPayload(ViewInfoExtension.New(ViewType.Address, new[] {ViewState.QuickSearch})));
             _currentSubscription =
-                EventAggregator.Value.GetEvent<CloseViewEvent>().Subscribe(delegate(Guid payloadId) { if(Id == payloadId) RestoreUIState(); });
+                EventAggregator.Value.GetEvent<CloseViewEvent>().Subscribe(payload => { if(Id == payload.ViewId) RestoreUIState(); });
         }
 
         private void RestoreUIState() {
@@ -167,6 +161,17 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.Base {
         protected virtual void EntityChanged() {
             EntityFacade.Value.Entity = Entity;
             EventAggregator.Value.GetEvent<EntityChangedEvent<TEntity>>().Publish(new EntityChangedPayload<TEntity>(Id, Entity));
+            if(IsChild) ChildPayload.Entity = Entity;
+        }
+
+        private SetupChildPayload ChildPayload { get; set; }
+        private void SetupChildExecute(SetupChildPayload payload) {
+            if(Id != payload.OldId) return;
+            Id = payload.NewId;
+            Entity = payload.Entity as TEntity;
+            IsChild = true;
+            _isInitialized = true;
+            ChildPayload = payload;
         }
 
         public override void Refresh() { ClearEntityExecute(null); }

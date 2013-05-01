@@ -1,9 +1,12 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using FluentNHibernate;
+using LOB.Core.Localization;
 using LOB.Dao.Contract;
-using LOB.Dao.Contract.Exception;
+using LOB.Dao.Contract.Exception.Base;
+using LOB.Dao.Contract.Exception.Database;
 using NHibernate;
 
 #endregion
@@ -15,12 +18,11 @@ namespace LOB.Dao.Nhibernate {
 
         public object Orm {
             get {
-                var a = OrmFactoryConfiguration.OrmFactory as ISessionFactory;
-                var b = OrmFactoryConfiguration.OrmFactory as ISessionSource;
+                var sessionSource = OrmFactoryConfiguration.CreateSessionSource();
                 try {
-                    return a != null ? a.OpenSession() : b != null ? b.CreateSession() : new object();
-                } catch(HibernateException) {
-                    throw new DatabaseConnectionException();
+                    return sessionSource.CreateSession();
+                } catch(Exception ex) {
+                    throw new GenericDatabaseException(Strings.Notification_Dao_InternalError, ex.Message, ex);
                 }
             }
         }

@@ -1071,4 +1071,10 @@
   <data name="Notification_Navigator_View_CouldNotBeLoaded" xml:space="preserve">
     <value>@Notification_Navigator_View_CouldNotBeLoaded</value>
   </data>
+  <data name="Notification_Dao_InternalError" xml:space="preserve">
+    <value>@Notification_Dao_InternalError</value>
+  </data>
+  <data name="Notification_Dao_SchemaCreationFailed" xml:space="preserve">
+    <value>@Notification_Dao_SchemaCreationFailed</value>
+  </data>
 </root>

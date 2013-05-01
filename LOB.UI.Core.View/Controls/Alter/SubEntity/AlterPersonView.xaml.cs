@@ -5,6 +5,7 @@ using LOB.UI.Contract;
 using LOB.UI.Contract.Infrastructure;
 using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.View.Controllers;
+using LOB.UI.Core.View.Controllers.Controls;
 using LOB.UI.Core.View.Infrastructure;
 
 #endregion

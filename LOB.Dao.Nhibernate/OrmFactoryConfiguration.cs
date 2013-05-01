@@ -1,13 +1,20 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.ComponentModel.Composition;
 using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using LOB.Core.Localization;
 using LOB.Dao.Contract;
+using LOB.Dao.Contract.Exception.Base;
+using LOB.Dao.Contract.Exception.Database;
 using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+
+#endregion
 
 namespace LOB.Dao.Nhibernate {
     [Export, Export(typeof(IOrmFactoryConfiguration)), PartCreationPolicy(CreationPolicy.Shared)]
@@ -32,14 +39,7 @@ namespace LOB.Dao.Nhibernate {
         public bool IsNewDatabase { get; private set; }
 
         public object OrmFactory {
-            get {
-                try {
-                    return _orm ?? (_orm = CreateSessionSource());
-                } catch(NullReferenceException ex) {
-                    Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
-                }
-                return null;
-            }
+            get { return _orm ?? (_orm = CreateSessionSource()); }
         }
 
         public OrmFactoryConfiguration()
@@ -51,33 +51,36 @@ namespace LOB.Dao.Nhibernate {
             IsNewDatabase = isNewDatabase;
         }
 
-        public ISessionFactory CreateSessionFactory() {
-            FluentConfiguration cfg;
-            ISessionFactory factory = null;
-            switch(_persistType) {
-                case PersistType.MySql:
-                    cfg = MySqlConfiguration();
-                    break;
-                case PersistType.MsSql:
-                    cfg = MsSqlConfiguration();
-                    break;
-                case PersistType.File:
-                    cfg = FileConfiguration();
-                    break;
-                case PersistType.Memory:
-                    cfg = InMemoryConfiguration();
-                    break;
-                default:
-                    throw new ArgumentException("PersistType");
-            }
-            if(cfg != null)
-                try {
-                    factory = cfg.BuildSessionFactory();
-                } catch(Exception ex) {
-                    Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
-                }
-            return factory;
-        }
+        //public ISessionFactory CreateSessionFactory() {
+        //    FluentConfiguration cfg;
+        //    ISessionFactory factory = null;
+        //    switch(_persistType) {
+        //        case PersistType.MySql:
+        //            cfg = MySqlConfiguration();
+        //            break;
+        //        case PersistType.MsSql:
+        //            cfg = MsSqlConfiguration();
+        //            break;
+        //        case PersistType.File:
+        //            cfg = FileConfiguration();
+        //            break;
+        //        case PersistType.Memory:
+        //            cfg = InMemoryConfiguration();
+        //            break;
+        //        default:
+        //            throw new ArgumentException("PersistType");
+        //    }
+        //    if(cfg != null)
+        //        try {
+        //            factory = cfg.BuildSessionFactory();
+        //        } catch(HibernateException) {
+        //            throw;
+        //        } catch(Exception ex) {
+        //            Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+        //            throw;
+        //        }
+        //    return factory;
+        //}
 
         public ISessionSource CreateSessionSource() {
             FluentConfiguration cfg;
@@ -101,8 +104,9 @@ namespace LOB.Dao.Nhibernate {
             if(cfg != null)
                 try {
                     sessionSource = new SessionSource(cfg);
-                } catch(Exception ex) {
+                } catch(FluentConfigurationException ex) {
                     Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                    throw new DatabaseConnectionException(Strings.Notification_Dao_ConnectionFailed, ex.InnerException.Message, ex);
                 }
             return sessionSource;
         }
@@ -131,9 +135,9 @@ namespace LOB.Dao.Nhibernate {
                     _sqlSchema.Drop(false, true);
                     _sqlSchema.Create(false, true);
                 }
-            } catch(HibernateException e) {
-                Logger.Value.Log(e.Message, Category.Exception, Priority.High);
-                throw;
+            } catch(HibernateException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new GenericDatabaseException(Strings.Notification_Dao_SchemaCreationFailed, ex.Message, ex);
             }
         }
         #region Implementation of IDisposable

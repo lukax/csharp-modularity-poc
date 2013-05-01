@@ -1627,6 +1627,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_InternalError.
+        /// </summary>
+        public static string Notification_Dao_InternalError {
+            get {
+                return ResourceManager.GetString("Notification_Dao_InternalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotActivated.
         /// </summary>
         public static string Notification_Dao_NotActivated {
@@ -1659,6 +1668,15 @@ namespace LOB.Core.Localization {
         public static string Notification_Dao_RequisitionSucessful {
             get {
                 return ResourceManager.GetString("Notification_Dao_RequisitionSucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_SchemaCreationFailed.
+        /// </summary>
+        public static string Notification_Dao_SchemaCreationFailed {
+            get {
+                return ResourceManager.GetString("Notification_Dao_SchemaCreationFailed", resourceCulture);
             }
         }
         

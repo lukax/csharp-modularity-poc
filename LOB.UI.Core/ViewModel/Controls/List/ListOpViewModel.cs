@@ -107,10 +107,10 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                 Type = NotificationType.Info
             };
             LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification);
-            LazyEventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(viewInfo));
+            LazyEventAggregator.Value.GetEvent<OpenViewInfoEvent>().Publish(new OpenViewInfoPayload(viewInfo));
             var stringy = string.Format("{0} {1}", Strings.Common_Initialized, ViewInfoDict.FirstOrDefault(x => x.Value.Equals(viewInfo)).Key);
             LazyEventAggregator.Value.GetEvent<NotificationEvent>().Publish(notification.Message(stringy).Progress(-1).State(NotificationType.Ok));
-            LazyEventAggregator.Value.GetEvent<CloseViewEvent>().Publish(Id);
+            LazyEventAggregator.Value.GetEvent<CloseViewEvent>().Publish(new CloseViewPayload(Id));
         }
 
         public override void Refresh() {

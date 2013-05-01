@@ -119,7 +119,7 @@
     <Compile Include="Event\View\SetupChildViewEvent.cs" />
     <Compile Include="Event\NotificationEvent.cs" />
     <Compile Include="Event\View\CloseViewEvent.cs" />
-    <Compile Include="Event\View\OpenViewEvent.cs" />
+    <Compile Include="Event\View\OpenViewInfoEvent.cs" />
     <Compile Include="Infrastructure\CommandService.cs" />
     <Compile Include="netfx\System\StringFormatWith.cs" />
     <Compile Include="Util\EnumToPicConverter.cs" />

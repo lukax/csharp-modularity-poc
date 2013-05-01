@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
 using LOB.Dao.Contract.Exception.Base;
 
-namespace LOB.Dao.Contract.Exception
-{
-    public class DatabaseQueryException : GenericDatabaseException
-    {
+#endregion
+
+namespace LOB.Dao.Contract.Exception.Database {
+    public class DatabaseQueryException : GenericDatabaseException {
+        public DatabaseQueryException(string message = null, string detail = null, System.Exception innerException = null)
+            : base(message, detail, innerException) { }
     }
 }

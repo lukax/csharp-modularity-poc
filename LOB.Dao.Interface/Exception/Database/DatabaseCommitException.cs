@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LOB.Dao.Contract.Exception.Base;
+﻿using LOB.Dao.Contract.Exception.Base;
 
-namespace LOB.Dao.Contract.Exception
+namespace LOB.Dao.Contract.Exception.Database
 {
     public class DatabaseCommitException : GenericDatabaseException
     {
+        public DatabaseCommitException(string message, string detail = null, System.Exception innerException = null)
+            : base(message, detail, innerException) {}
     }
 }

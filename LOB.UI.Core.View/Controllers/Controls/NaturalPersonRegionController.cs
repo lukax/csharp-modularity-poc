@@ -13,7 +13,7 @@ using IRegionAdapter = LOB.UI.Contract.Infrastructure.IRegionAdapter;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controllers {
+namespace LOB.UI.Core.View.Controllers.Controls {
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class NaturalPersonRegionController : IBaseController, IPartImportsSatisfiedNotification {
         [Import] protected IEventAggregator EventAggregator { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.Practices.Prism.Events;
 
 #endregion
 
-namespace LOB.UI.Core.View.Controllers {
+namespace LOB.UI.Core.View.Controllers.Controls {
     [Export]
     public class CustomerRegionController : IDisposable {
         private readonly IEventAggregator _eventAggregator;

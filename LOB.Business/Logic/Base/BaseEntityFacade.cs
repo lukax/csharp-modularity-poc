@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Dao.Contract;
 using LOB.Dao.Contract.Exception;
+using LOB.Dao.Contract.Exception.Database;
 using LOB.Domain.Base;
 using LOB.Domain.Logic;
 using NullGuard;

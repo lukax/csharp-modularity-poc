@@ -13,6 +13,8 @@ namespace LOB.Domain.SubEntity {
         public static implicit operator string(Email e) { return e.Value; }
 
         public static implicit operator Email(string value) { return new Email {Value = value}; }
+
+        public override string ToString() { return Value; }
         #region Implementation of IEquatable<Email>
 
         public bool Equals(Email other) {

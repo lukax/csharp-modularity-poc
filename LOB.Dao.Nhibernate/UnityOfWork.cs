@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.Composition;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
+using LOB.Dao.Contract.Exception.Database;
 using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Linq;
@@ -20,7 +21,13 @@ namespace LOB.Dao.Nhibernate {
         [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
         [Import] protected Lazy<OrmFactory> OrmFactory { get; set; }
         public object Orm {
-            get { return _orm ?? (_orm = OrmFactory.Value.Orm.As<ISession>()); }
+            get {
+                try {
+                    return _orm ?? (_orm = OrmFactory.Value.Orm.As<ISession>());
+                } catch(NullReferenceException ex) {
+                    throw new DatabaseConnectionException(Strings.Notification_Dao_ConnectionFailed, ex.Message, ex);
+                }
+            }
         }
 
         public IUnityOfWork Initialize() {

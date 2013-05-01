@@ -24,7 +24,7 @@ namespace LOB.Domain.SubEntity {
                 return false;
             }
         }
-        public override string ToString() { return Number.ToString(Thread.CurrentThread.CurrentCulture); }
+        public override string ToString() { return string.Format("{0}",Number.ToString(Thread.CurrentThread.CurrentCulture)); }
     }
 
     [Serializable]

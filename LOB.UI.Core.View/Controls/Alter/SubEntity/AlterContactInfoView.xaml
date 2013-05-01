@@ -46,7 +46,7 @@
                 <Image Source="/LOB.UI.Core.Resources;component/Icons/32x32/MD-reload.png" />
             </Button>
             <GroupBox Header="{x:Static loc:Strings.Common_PhoneNumbers}" Grid.Column="1" Grid.Row="1" Margin="0">
-                <ListBox ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}"
+                <ListView ItemsSource="{Binding Entity.PhoneNumbers, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding PhoneNumber}" SelectionMode="Single" />
             </GroupBox>
 
@@ -63,7 +63,7 @@
             </StackPanel>
 
             <GroupBox Header="{x:Static loc:Strings.Common_Emails}" Grid.Column="1" Grid.Row="2" Margin="0">
-                <ListBox ItemsSource="{Binding Entity.Emails, UpdateSourceTrigger=PropertyChanged}"
+                <ListView ItemsSource="{Binding Entity.Emails, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding Email}" SelectionMode="Single" />
             </GroupBox>
 

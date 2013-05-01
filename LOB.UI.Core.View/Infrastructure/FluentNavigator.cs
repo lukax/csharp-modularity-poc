@@ -11,6 +11,7 @@ using LOB.Core.Localization;
 using LOB.UI.Contract;
 using LOB.UI.Contract.Exception;
 using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
 using Microsoft.Practices.ServiceLocation;
 
 #endregion
@@ -32,7 +33,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                 return this;
             }
         }
-        
+
         public IFluentNavigator ResolveView(IViewInfo param) {
             var t =
                 Catalog.Value.FirstOrDefault(
@@ -48,10 +49,12 @@ namespace LOB.UI.Core.View.Infrastructure {
             throw_if_view_wasnt_resolved();
             return this;
         }
+
         public IFluentNavigator ResolveView(Type param) {
-            if(!param.IsAssignableFrom(typeof(IBaseView<IBaseViewModel>))) throw new NotSupportedException("param should be from IBaseView<IBaseViewModel>");
-            var t = ServiceLocator.Value.GetInstance(param) as IBaseView<IBaseViewModel>;
-            ResolvedView = t;
+            if(param.GetInterfaces().Any(x=> x == typeof(IBaseViewModel))) {
+                ResolvedView = ServiceLocator.Value.GetInstance(typeof(IBaseView<>).MakeGenericType(param)) as IBaseView<IBaseViewModel>;
+            }
+            else throw new NotSupportedException("param should be derived from IBaseViewModel");
             throw_if_view_wasnt_resolved();
             return this;
         }
@@ -78,14 +81,12 @@ namespace LOB.UI.Core.View.Infrastructure {
         }
 
         protected void throw_if_view_wasnt_resolved() { if(ResolvedView == null) throw new ViewLoadException(Strings.Notification_Navigator_View_CouldNotBeLoaded); }
-
         #region Helper methods
 
         //TODO: Move this to somewhere else
         public IEnumerable<Type> GetExportedTypes<T>() { return Catalog.Value.Parts.Select(part => ComposablePartExportType<T>(part)).Where(t => t != null); }
 
-        private Type ComposablePartExportType<T>(ComposablePartDefinition part)
-        {
+        private Type ComposablePartExportType<T>(ComposablePartDefinition part) {
             return
                 part.ExportDefinitions.Any(
                     def => def.Metadata.ContainsKey("ExportTypeIdentity") && def.Metadata["ExportTypeIdentity"].Equals(typeof(T).FullName))
@@ -93,8 +94,7 @@ namespace LOB.UI.Core.View.Infrastructure {
                     : null;
         }
 
-        private Type ComposablePartExportType(ComposablePartDefinition part)
-        {
+        private Type ComposablePartExportType(ComposablePartDefinition part) {
             return part.ExportDefinitions.Any(def => def.Metadata.ContainsKey("ExportTypeIdentity"))
                        ? ReflectionModelServices.GetPartType(part).Value
                        : null;

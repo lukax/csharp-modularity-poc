@@ -3,8 +3,6 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Windows.Data;
 using System.Windows.Input;
 using LOB.Core.Localization;
 using LOB.Domain.Logic;
@@ -13,6 +11,7 @@ using LOB.UI.Contract.Command;
 using LOB.UI.Contract.ViewModel.Controls.Alter.SubEntity;
 using LOB.UI.Core.Event.View;
 using LOB.UI.Core.ViewModel.Controls.Alter.Base;
+using Microsoft.Practices.Prism.Events;
 
 //
 
@@ -37,33 +36,54 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
 
         public Email Email { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
-        public ICollectionView Emails { get; set; }
-        public ICollectionView PhoneNumbers { get; set; }
+        //public IList<Email> Emails { get; set; }
+        //public IList<PhoneNumber> PhoneNumbers { get; set; }
 
         public override void InitializeServices() {
             base.InitializeServices();
             InitBackgroundWorker();
         }
+
+        private SubscriptionToken _subEntityToken;
         private void AddEmail(object arg) {
-            EventAggregator.Value.GetEvent<OpenViewTEvent>()
-                           .Publish(new OpenViewTPayload(typeof(IAlterEmailViewModel),
-                                                        id1 => EventAggregator.Value.GetEvent<CloseViewEvent>()
-                                                            .Subscribe(id2 => {if(id1 != id2) return;       
-                                                                var entity =  Repository.Value.Get<Email>(id2);
-                                                                if(entity != null)Entity.Emails.Add(entity);             })));
+            Lock();
+            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterEmailViewModel), OnEmailIdFunc));
+        }
+        private void OnEmailIdFunc(Guid thisViewId) {
+            _subEntityToken = EventAggregator.Value.GetEvent<CloseViewEvent>().Subscribe(payload => {
+                                                                                             if(thisViewId != payload.ViewId) return;
+                                                                                             if(payload.OperatedEntity != null) Entity.Emails.Add(payload.OperatedEntity as Email);
+                                                                                             _subEntityToken.Dispose();
+                                                                                             Unlock();
+                                                                                         }, true);
         }
 
         private bool CanAddEmail(object arg) { return IsUnlocked; }
 
         private void AddPhoneNumber(object arg) {
-            var phoneNumberId = new Guid();
-            EventAggregator.Value.GetEvent<OpenViewTEvent>().Publish(new OpenViewTPayload(typeof(IAlterEmailViewModel), id => { phoneNumberId = id; }));
-            Entity.PhoneNumbers.Add(Repository.Value.Get<PhoneNumber>(phoneNumberId));
+            Lock();
+            EventAggregator.Value.GetEvent<OpenViewEvent>().Publish(new OpenViewPayload(typeof(IAlterPhoneNumberViewModel), OnPhoneIdFunc));
+        }
+        private void OnPhoneIdFunc(Guid thisViewId) {
+            _subEntityToken = EventAggregator.Value.GetEvent<CloseViewEvent>().Subscribe(payload => {
+                                                                                             if(thisViewId != payload.ViewId) return;
+                                                                                             if(payload.OperatedEntity != null)
+                                                                                                 Entity.PhoneNumbers.Add(
+                                                                                                     payload.OperatedEntity as PhoneNumber);
+                                                                                             _subEntityToken.Dispose();
+                                                                                             Unlock();
+                                                                                         }, true);
         }
 
         private bool CanAddPhoneNumber(object arg) { return IsUnlocked; }
 
-        private void DeleteEmail(object arg) { Entity.Emails.Remove(Email); }
+        private void DeleteEmail(object arg) {
+            Entity.Emails.Remove(Email);
+            Email = null;
+            OnPropertyChanged("Emails");
+            OnPropertyChanged("Entity.Emails");
+            OnPropertyChanged("Email");
+        }
 
         private bool CanDeleteEmail(object arg) {
             if(Email != null & IsUnlocked) return true;
@@ -82,40 +102,41 @@ namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
         #region Repo Operations
 
         private void InitBackgroundWorker() {
-            Worker.DoWork += WorkerListsGetFromRepo;
-            Worker.RunWorkerCompleted += WorkerListsSetFromRepo;
-            Worker.ProgressChanged += WorkerListsProgress;
-            Worker.WorkerSupportsCancellation = true;
-            Worker.WorkerReportsProgress = true;
-            Worker.RunWorkerAsync();
+            //Worker.DoWork += WorkerListsGetFromRepo;
+            //Worker.RunWorkerCompleted += WorkerListsSetFromRepo;
+            //Worker.ProgressChanged += WorkerListsProgress;
+            //Worker.WorkerSupportsCancellation = true;
+            //Worker.WorkerReportsProgress = true;
+            //Worker.RunWorkerAsync();
         }
 
         private void WorkerListsGetFromRepo(object sender, DoWorkEventArgs args) {
-            Worker.ReportProgress(10);
-            //do {
-            Worker.ReportProgress(-1);
-            //Thread.Sleep(2000);
-            Worker.ReportProgress(5);
-            var result = new object[2];
-            using(Repository.Value.Uow.Initialize())
-                if(!Worker.CancellationPending) {
-                    Emails = new ListCollectionView(Repository.Value.GetAll<Email>().ToList());
-                    Worker.ReportProgress(50);
-                    PhoneNumbers = new ListCollectionView(Repository.Value.GetAll<PhoneNumber>().ToList());
-                    Worker.ReportProgress(90);
-                    args.Result = result;
-                    Worker.ReportProgress(100);
-                }
-            //} while(!Worker.CancellationPending);
-            Worker.ReportProgress(-1);
+            //Worker.ReportProgress(10);
+            ////do {
+            //Worker.ReportProgress(-1);
+            ////Thread.Sleep(2000);
+            //Worker.ReportProgress(5);
+            //var result = new object[2];
+            //Repository.Value.Uow.Initialize();
+            //if (!Worker.CancellationPending)
+            //{
+            //    Emails = new ListCollectionView(Repository.Value.GetAll<Email>().ToList());
+            //    Worker.ReportProgress(50);
+            //    PhoneNumbers = new ListCollectionView(Repository.Value.GetAll<PhoneNumber>().ToList());
+            //    Worker.ReportProgress(90);
+            //    args.Result = result;
+            //    Worker.ReportProgress(100);
+            //}
+            ////} while(!Worker.CancellationPending);
+            //Worker.ReportProgress(-1);
         }
 
         private void WorkerListsSetFromRepo(object sender, RunWorkerCompletedEventArgs args) {
-            var result = args.Result as object[];
-            if(result != null) {
-                Emails = result[0] as ListCollectionView;
-                PhoneNumbers = result[1] as ListCollectionView;
-            }
+            //var result = args.Result as object[];
+            //if(result != null) {
+            //    Emails = result[0] as ListCollectionView;
+            //    PhoneNumbers = result[1] as ListCollectionView;
+            //}
         }
 
         private void WorkerListsProgress(object sender, ProgressChangedEventArgs args) {

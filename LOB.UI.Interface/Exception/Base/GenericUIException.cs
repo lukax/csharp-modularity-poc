@@ -6,9 +6,7 @@ using LOB.Util.Contract.Exception;
 
 namespace LOB.UI.Contract.Exception.Base {
     public class GenericUIException : BaseException {
-        public string LocalizedMessage { get; private set; }
-        public GenericUIException(string localizedMessage) {
-            LocalizedMessage = localizedMessage;
-        }
+        public GenericUIException(string message, string detail = null, System.Exception innerException = null)
+            : base(message, detail, innerException) {}
     }
 }
