@@ -76,7 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
+    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Contract.csproj">
       <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
       <Name>LOB.Dao.Interface</Name>
     </ProjectReference>

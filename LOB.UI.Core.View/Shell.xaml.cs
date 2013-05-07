@@ -71,7 +71,7 @@ namespace LOB.UI.Core.View {
         private async void TabRegion_OnSelectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             TabRegion.SelectedIndex = -1;
             //ProgressRing.IsActive = true;
-            await Task.Delay(150); //BUG: STUPID RESOURCES LOADING ASYNC
+            await Task.Delay(300); //BUG: STUPID RESOURCES LOADING ASYNC
             // Fix validation color border in textboxes
             //ProgressRing.IsActive = false;
             //await Task.Delay(1);
