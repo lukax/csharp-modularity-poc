@@ -16,7 +16,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
             Map(x => x.County);
             Map(x => x.State);
             Map(x => x.Country);
-            Map(x => x.ZipCode);
+            Map(x => x.PostalCode);
             Map(x => x.IsDefault);
         }
     }

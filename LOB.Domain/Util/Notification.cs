@@ -6,21 +6,19 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Domain.Logic {
+namespace LOB.Domain.Util {
+    [Serializable]
     public sealed class Notification : BaseNotifyChange, IEquatable<Notification> {
-        public Notification(string message = null, string detail = null, int progress = -1, NotificationType type = NotificationType.Ok,
-            Command fixCommand = null) {
+        public Notification(string message = null, string detail = null, int progress = -1, NotificationType type = NotificationType.Ok) {
             Message = message;
             Detail = detail;
             Progress = progress;
             Type = type;
-            FixCommand = fixCommand;
         }
         public NotificationType Type { get; set; }
         public string Message { get; set; }
         public string Detail { get; set; }
         public DateTime Time { get; set; }
-        public Command FixCommand { get; set; }
         /// <summary>
         ///     Value: -2 = Indeterminate progress
         ///     Value: -1 = Hidden
@@ -45,6 +43,7 @@ namespace LOB.Domain.Logic {
         #endregion
     }
 
+    [Serializable]
     public enum NotificationType {
         Ok,
         Info,
@@ -53,8 +52,6 @@ namespace LOB.Domain.Logic {
     }
 
     public static class NotificationExtension {
-        // public static Notification ToNotificationMessage(this ValidationResult validationResult) { return new Notification {Detail = validationResult.ErrorDescription, Message = Strings.Common_Error + " "}; }
-
         public static Notification State(this Notification notification, NotificationType type) {
             notification.Type = type;
             return notification;
@@ -69,10 +66,6 @@ namespace LOB.Domain.Logic {
         }
         public static Notification Detail(this Notification notification, string detail) {
             notification.Detail = detail;
-            return notification;
-        }
-        public static Notification Fix(this Notification notification, Command fix) {
-            notification.FixCommand = fix;
             return notification;
         }
         public static Notification Progress(this Notification notification, int progress) {

@@ -6,5 +6,5 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Contract.Logic.SubEntity {
-    public interface IPayCheckFacade : IBaseEntityFacade<PayCheck> {}
+    public interface IPayCheckFacade : IBaseEntityFacade<Paycheck> {}
 }

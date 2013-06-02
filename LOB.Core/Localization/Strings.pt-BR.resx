@@ -480,7 +480,7 @@
   <data name="Notification_Field_Empty" xml:space="preserve">
     <value>Campo vazio</value>
   </data>
-  <data name="Notification_Field_IntOnly" xml:space="preserve">
+  <data name="Notification_Field_OnlyNumbers" xml:space="preserve">
     <value>Campo suporta apenas números</value>
   </data>
   <data name="Notification_Field_Necessary" xml:space="preserve">
@@ -492,13 +492,13 @@
   <data name="Notification_Field_NotNecessary" xml:space="preserve">
     <value>Campo não nescessário</value>
   </data>
-  <data name="Notification_Field_TooLong" xml:space="preserve">
+  <data name="Notification_Field_MaxLength" xml:space="preserve">
     <value>Campo excedeu limite de caracters</value>
   </data>
-  <data name="Notification_Field_TooShort" xml:space="preserve">
+  <data name="Notification_Field_MinLength" xml:space="preserve">
     <value>Campo nescessita o mínimo de caracters</value>
   </data>
-  <data name="Notification_Field_WrongFormat" xml:space="preserve">
+  <data name="Notification_Field_InvalidFormat" xml:space="preserve">
     <value>Campo com formato inválido</value>
   </data>
   <data name="Notification_Info" xml:space="preserve">
@@ -777,7 +777,7 @@
   <data name="Notification_Field_Negative" xml:space="preserve">
     <value>Campo Negativo</value>
   </data>
-  <data name="Notification_Field_Nescessary" xml:space="preserve">
+  <data name="Notification_Field_Required" xml:space="preserve">
     <value>Campo Nescessário</value>
   </data>
   <data name="Notification_Field_Positive" xml:space="preserve">

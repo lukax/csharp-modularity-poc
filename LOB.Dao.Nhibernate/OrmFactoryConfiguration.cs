@@ -21,10 +21,18 @@ namespace LOB.Dao.Nhibernate {
     public class OrmFactoryConfiguration : IOrmFactoryConfiguration {
         private const string MySqlDefaultConnectionString = @"Server=192.168.0.150;Database=LOB;Uid=APP;Pwd=ANZW3YGtH7DSqtUG;";
         private const string MsSqlDefaultConnectionString = @"Data Source=192.168.0.151;Initial Catalog=LOB;User ID=LOB;Password=LOBSYSTEMDB";
+        private readonly PersistType _persistType;
         private string _connectionString;
         private object _orm;
-        private readonly PersistType _persistType;
         private SchemaExport _sqlSchema;
+        public OrmFactoryConfiguration()
+                : this(PersistType.MySql) { }
+
+        public OrmFactoryConfiguration(PersistType persistIn, string connectionString = null, bool isNewDatabase = false) {
+            if(connectionString != null) ConnectionString = connectionString;
+            _persistType = persistIn;
+            IsNewDatabase = isNewDatabase;
+        }
         protected string ConnectionString {
             get {
                 if(_connectionString != null) return _connectionString;
@@ -34,21 +42,13 @@ namespace LOB.Dao.Nhibernate {
             }
             set { _connectionString = value; }
         }
-        [Import] protected Lazy<ILoggerFacade> Logger { get; set; }
+        [Import]
+        protected Lazy<ILoggerFacade> Logger { get; set; }
 
         public bool IsNewDatabase { get; private set; }
 
         public object OrmFactory {
             get { return _orm ?? (_orm = CreateSessionSource()); }
-        }
-
-        public OrmFactoryConfiguration()
-            : this(PersistType.MySql) { }
-
-        public OrmFactoryConfiguration(PersistType persistIn, string connectionString = null, bool isNewDatabase = false) {
-            if(connectionString != null) ConnectionString = connectionString;
-            _persistType = persistIn;
-            IsNewDatabase = isNewDatabase;
         }
 
         //public ISessionFactory CreateSessionFactory() {
@@ -118,9 +118,9 @@ namespace LOB.Dao.Nhibernate {
 
         private FluentConfiguration Mapping() {
             return Fluently.Configure().Mappings(x => x.FluentMappings.AddFromAssemblyOf<OrmFactoryConfiguration>())
-                //Disable to much logging
+                    //Disable to much logging
                            .Diagnostics(x => x.Enable(false))
-                //Generate Tables
+                    //Generate Tables
                            .ExposeConfiguration(SchemaCreator);
         }
 
@@ -142,8 +142,8 @@ namespace LOB.Dao.Nhibernate {
         }
         #region Implementation of IDisposable
 
-        ~OrmFactoryConfiguration() { Dispose(false); }
         public void Dispose() { Dispose(true); }
+        ~OrmFactoryConfiguration() { Dispose(false); }
         public void Dispose(bool disposing) {
             var orm = _orm as ISessionFactory;
             if(orm == null) return;

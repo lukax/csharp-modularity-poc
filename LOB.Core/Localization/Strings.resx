@@ -483,7 +483,7 @@
   <data name="Notification_Field_Empty" xml:space="preserve">
     <value>@Notification_Field_Empty</value>
   </data>
-  <data name="Notification_Field_IntOnly" xml:space="preserve">
+  <data name="Notification_Field_OnlyNumbers" xml:space="preserve">
     <value>@Notification_Field_IntOnly</value>
   </data>
   <data name="Notification_Field_Necessary" xml:space="preserve">
@@ -495,13 +495,13 @@
   <data name="Notification_Field_NotNecessary" xml:space="preserve">
     <value>@Notification_Field_NotNecessary</value>
   </data>
-  <data name="Notification_Field_TooLong" xml:space="preserve">
+  <data name="Notification_Field_MaxLength" xml:space="preserve">
     <value>@Notification_Field_TooLong</value>
   </data>
-  <data name="Notification_Field_TooShort" xml:space="preserve">
+  <data name="Notification_Field_MinLength" xml:space="preserve">
     <value>@Notification_Field_TooShort</value>
   </data>
-  <data name="Notification_Field_WrongFormat" xml:space="preserve">
+  <data name="Notification_Field_InvalidFormat" xml:space="preserve">
     <value>@Notification_Field_WrongFormat</value>
   </data>
   <data name="Notification_Field_Invalid" xml:space="preserve">
@@ -786,8 +786,8 @@
   <data name="Notification_Field_Negative" xml:space="preserve">
     <value>@Notification_Field_Negative</value>
   </data>
-  <data name="Notification_Field_Nescessary" xml:space="preserve">
-    <value>@Notification_Field_Nescessary</value>
+  <data name="Notification_Field_Required" xml:space="preserve">
+    <value>@Notification_Field_Required</value>
   </data>
   <data name="Notification_Field_Positive" xml:space="preserve">
     <value>@Notification_Field_Positive</value>

@@ -8,27 +8,26 @@ using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
-using LOB.Domain;
-using LOB.Domain.Logic;
+using LOB.Domain.Base;
 
 #endregion
 
 namespace LOB.Business.Logic {
     [Export(typeof(ILegalPersonFacade)), Export(typeof(IBaseEntityFacade<LegalPerson>)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class LegalPersonFacade : BaseEntityFacade<LegalPerson>, ILegalPersonFacade {
-        private readonly IContactInfoFacade _contactInfoFacade;
         private readonly IAddressFacade _addressFacade;
+        private readonly IContactInfoFacade _contactInfoFacade;
 
         [ImportingConstructor]
         public LegalPersonFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IRepository repository)
-            : base(repository) {
+                : base(repository) {
             _contactInfoFacade = contactInfoFacade;
             _addressFacade = addressFacade;
             ConfigureValidations();
         }
 
         public override LegalPerson GenerateEntity() {
-            var result = base.GenerateEntity();
+            LegalPerson result = base.GenerateEntity();
             result.Address = _addressFacade.GenerateEntity();
             result.ContactInfo = _contactInfoFacade.GenerateEntity();
             result.Notes = "";
@@ -45,19 +44,19 @@ namespace LOB.Business.Logic {
             AddValidation(delegate {
                               if(string.IsNullOrWhiteSpace(Entity.CorporateName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
                               if(
-                                  !Regex.IsMatch(Entity.CorporateName,
-                                                 @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                                      !Regex.IsMatch(Entity.CorporateName,
+                                              @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
                                   return new ValidationResult("CorporateName",
-                                                              string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CorporateName));
+                                          string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CorporateName));
                               return null;
                           });
             AddValidation(delegate {
                               if(string.IsNullOrWhiteSpace(Entity.TradingName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
                               if(
-                                  !Regex.IsMatch(Entity.TradingName,
-                                                 @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                                      !Regex.IsMatch(Entity.TradingName,
+                                              @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
                                   return new ValidationResult("TradingName",
-                                                              string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_TradingName));
+                                          string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_TradingName));
                               return null;
                           });
             AddValidation(delegate {
@@ -69,7 +68,7 @@ namespace LOB.Business.Logic {
                               if(string.IsNullOrWhiteSpace(Entity.CNAEFiscal)) return new ValidationResult("CNAEFiscal", Strings.Notification_Field_Empty);
                               if(!Regex.IsMatch(Entity.CNAEFiscal, @"^\d{4}-\d{1}/\d{2}$"))
                                   return new ValidationResult("CNAEFiscal",
-                                                              string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CnaeFiscal));
+                                          string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_CnaeFiscal));
                               return null;
                           });
         }

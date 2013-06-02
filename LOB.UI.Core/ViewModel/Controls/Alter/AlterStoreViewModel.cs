@@ -9,5 +9,5 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter {
     [Export(typeof(IAlterStoreViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class AlterStoreViewModel : AlterBaseEntityViewModel<Store>, IAlterStoreViewModel {}
+    public sealed class AlterStoreViewModel : AlterBaseEntityViewModel<Company>, IAlterStoreViewModel {}
 }

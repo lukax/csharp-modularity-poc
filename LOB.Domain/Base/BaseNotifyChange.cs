@@ -10,7 +10,8 @@ namespace LOB.Domain.Base {
     [Serializable]
     public abstract class BaseNotifyChange : INotifyPropertyChanged {
         // Preventing some exceptions:
-        [field: NonSerialized] public event PropertyChangedEventHandler PropertyChanged;
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         ///     Avisar mudança de valores numa property.

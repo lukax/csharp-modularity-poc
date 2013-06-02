@@ -1816,20 +1816,20 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_IntOnly.
-        /// </summary>
-        public static string Notification_Field_IntOnly {
-            get {
-                return ResourceManager.GetString("Notification_Field_IntOnly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Invalid.
         /// </summary>
         public static string Notification_Field_Invalid {
             get {
                 return ResourceManager.GetString("Notification_Field_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_WrongFormat.
+        /// </summary>
+        public static string Notification_Field_InvalidFormat {
+            get {
+                return ResourceManager.GetString("Notification_Field_InvalidFormat", resourceCulture);
             }
         }
         
@@ -1852,6 +1852,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_TooLong.
+        /// </summary>
+        public static string Notification_Field_MaxLength {
+            get {
+                return ResourceManager.GetString("Notification_Field_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_TooShort.
+        /// </summary>
+        public static string Notification_Field_MinLength {
+            get {
+                return ResourceManager.GetString("Notification_Field_MinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Necessary.
         /// </summary>
         public static string Notification_Field_Necessary {
@@ -1866,15 +1884,6 @@ namespace LOB.Core.Localization {
         public static string Notification_Field_Negative {
             get {
                 return ResourceManager.GetString("Notification_Field_Negative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_Nescessary.
-        /// </summary>
-        public static string Notification_Field_Nescessary {
-            get {
-                return ResourceManager.GetString("Notification_Field_Nescessary", resourceCulture);
             }
         }
         
@@ -1897,6 +1906,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_IntOnly.
+        /// </summary>
+        public static string Notification_Field_OnlyNumbers {
+            get {
+                return ResourceManager.GetString("Notification_Field_OnlyNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Positive.
         /// </summary>
         public static string Notification_Field_Positive {
@@ -1906,29 +1924,20 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Required.
+        /// </summary>
+        public static string Notification_Field_Required {
+            get {
+                return ResourceManager.GetString("Notification_Field_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Searching.
         /// </summary>
         public static string Notification_Field_Searching {
             get {
                 return ResourceManager.GetString("Notification_Field_Searching", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_TooLong.
-        /// </summary>
-        public static string Notification_Field_TooLong {
-            get {
-                return ResourceManager.GetString("Notification_Field_TooLong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_TooShort.
-        /// </summary>
-        public static string Notification_Field_TooShort {
-            get {
-                return ResourceManager.GetString("Notification_Field_TooShort", resourceCulture);
             }
         }
         
@@ -1956,15 +1965,6 @@ namespace LOB.Core.Localization {
         public static string Notification_Field_Updating {
             get {
                 return ResourceManager.GetString("Notification_Field_Updating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_WrongFormat.
-        /// </summary>
-        public static string Notification_Field_WrongFormat {
-            get {
-                return ResourceManager.GetString("Notification_Field_WrongFormat", resourceCulture);
             }
         }
         

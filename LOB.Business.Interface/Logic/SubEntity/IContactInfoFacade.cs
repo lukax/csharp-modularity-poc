@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using LOB.Business.Contract.Logic.Base;
-using LOB.Domain.SubEntity;
 
 #endregion
 

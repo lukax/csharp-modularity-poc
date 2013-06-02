@@ -7,6 +7,6 @@ using LOB.Dao.Contract.Exception.Base;
 namespace LOB.Dao.Contract.Exception.Database {
     public class DatabaseQueryException : GenericDatabaseException {
         public DatabaseQueryException(string message = null, string detail = null, System.Exception innerException = null)
-            : base(message, detail, innerException) { }
+                : base(message, detail, innerException) { }
     }
 }

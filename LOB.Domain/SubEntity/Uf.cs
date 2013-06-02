@@ -11,6 +11,7 @@ using System.Threading;
 #endregion
 
 namespace LOB.Domain.SubEntity {
+    [Serializable]
     [DefaultValue(Outro)]
     public enum UF {
         // ReSharper disable InconsistentNaming
@@ -47,38 +48,38 @@ namespace LOB.Domain.SubEntity {
 
     public static class UFDictionary {
         private static readonly Lazy<IDictionary<UF, string>> Lazy =
-            new Lazy<IDictionary<UF, string>>(
-                () =>
-                new Dictionary<UF, string> {
-                    {UF.AC, "Acre"},
-                    {UF.AL, "Alagoas"},
-                    {UF.AP, "Amapá"},
-                    {UF.AM, "Amazonas"},
-                    {UF.BA, "Bahia"},
-                    {UF.CE, "Ceará"},
-                    {UF.DF, "Brasília"},
-                    {UF.ES, "Espírito Santo"},
-                    {UF.GO, "Goiás"},
-                    {UF.MA, "Maranhão"},
-                    {UF.MT, "Mato Grosso"},
-                    {UF.MS, "Mato Grosso do Sul"},
-                    {UF.MG, "Minas Gerais"},
-                    {UF.PA, "Pará"},
-                    {UF.PB, "Paraíba"},
-                    {UF.PR, "Paraná"},
-                    {UF.PE, "Pernambuco"},
-                    {UF.PI, "Piauí"},
-                    {UF.RJ, "Rio de Janeiro"},
-                    {UF.RN, "Rio Grande do Norte"},
-                    {UF.RS, "Rio Grande do Sul"},
-                    {UF.RO, "Rondônia"},
-                    {UF.RR, "Roraima"},
-                    {UF.SC, "Santa Catarina"},
-                    {UF.SP, "São Paulo"},
-                    {UF.SE, "Sergipe"},
-                    {UF.TO, "Tocantins"},
-                    {UF.Outro, ""},
-                });
+                new Lazy<IDictionary<UF, string>>(
+                        () =>
+                        new Dictionary<UF, string> {
+                                {UF.AC, "Acre"},
+                                {UF.AL, "Alagoas"},
+                                {UF.AP, "Amapá"},
+                                {UF.AM, "Amazonas"},
+                                {UF.BA, "Bahia"},
+                                {UF.CE, "Ceará"},
+                                {UF.DF, "Brasília"},
+                                {UF.ES, "Espírito Santo"},
+                                {UF.GO, "Goiás"},
+                                {UF.MA, "Maranhão"},
+                                {UF.MT, "Mato Grosso"},
+                                {UF.MS, "Mato Grosso do Sul"},
+                                {UF.MG, "Minas Gerais"},
+                                {UF.PA, "Pará"},
+                                {UF.PB, "Paraíba"},
+                                {UF.PR, "Paraná"},
+                                {UF.PE, "Pernambuco"},
+                                {UF.PI, "Piauí"},
+                                {UF.RJ, "Rio de Janeiro"},
+                                {UF.RN, "Rio Grande do Norte"},
+                                {UF.RS, "Rio Grande do Sul"},
+                                {UF.RO, "Rondônia"},
+                                {UF.RR, "Roraima"},
+                                {UF.SC, "Santa Catarina"},
+                                {UF.SP, "São Paulo"},
+                                {UF.SE, "Sergipe"},
+                                {UF.TO, "Tocantins"},
+                                {UF.Outro, ""},
+                        });
 
         public static IDictionary<UF, string> Ufs {
             get { return Lazy.Value; }
@@ -97,7 +98,7 @@ namespace LOB.Domain.SubEntity {
         public static IEnumerable<string> GetDistricts(this UF uf) {
             var ibgeCod = (int)uf;
             IEnumerable<string> contents = null;
-            foreach(var file in Directory.EnumerateFiles("..//..//..//lib//MunIBGE", "*.txt")) if(file.Contains(ibgeCod.ToString(Thread.CurrentThread.CurrentCulture))) contents = File.ReadLines(file, Encoding.Default);
+            foreach(string file in Directory.EnumerateFiles("..//..//..//lib//MunIBGE", "*.txt")) if(file.Contains(ibgeCod.ToString(Thread.CurrentThread.CurrentCulture))) contents = File.ReadLines(file, Encoding.Default);
             //Faster than Regex.Replace(input, @"[\d-]", "");
             return contents != null ? contents.Select(content => content.Remove(0, 8)) : null;
         }

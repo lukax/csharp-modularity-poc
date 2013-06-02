@@ -9,7 +9,6 @@ using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain;
-using LOB.Domain.Logic;
 
 #endregion
 
@@ -21,27 +20,27 @@ namespace LOB.Business.Logic {
 
         [ImportingConstructor]
         public ProductFacade(ICategoryFacade categoryFacade, IShipmentInfoFacade shipmentInfoFacade, IRepository repository)
-            : base(repository) {
+                : base(repository) {
             _categoryFacade = categoryFacade;
             _shipmentInfoFacade = shipmentInfoFacade;
             ConfigureValidations();
         }
 
         public override Product GenerateEntity() {
-            var result = base.GenerateEntity();
+            Product result = base.GenerateEntity();
             result.Status = default(ProductStatus);
             result.Category = _categoryFacade.GenerateEntity();
             result.Description = "";
             result.Name = "";
-            result.ShipmentInfo = _shipmentInfoFacade.GenerateEntity();
-            result.CodBarras = 0;
+            result.Shipment = _shipmentInfoFacade.GenerateEntity();
+            result.CodeBarras = 0;
             result.Image = new byte[8];
-            result.MaxUnitsOfStock = 0;
-            result.MinUnitsOfStock = 0;
+            result.MaxUnits = 0;
+            result.MinUnits = 0;
             result.ProfitMargin = 0;
             result.QuantityPerUnit = "";
-            result.Sales = new List<Sale>();
-            result.StockedStores = new List<Store>();
+            result.AssociatedOrders = new List<Order>();
+            result.AssociatedCompanies = new List<Company>();
             result.Suppliers = new List<Supplier>();
             result.UnitCostPrice = 0;
             result.UnitSalePrice = 0;
@@ -51,18 +50,18 @@ namespace LOB.Business.Logic {
 
         public void ConfigureValidations() {
             AddValidation(
-                (sender, name) => string.IsNullOrWhiteSpace(Entity.Name) ? new ValidationResult("Name", Strings.Notification_Field_Empty) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(Entity.Name) ? new ValidationResult("Name", Strings.Notification_Field_Empty) : null);
             AddValidation(
-                (sender, name) =>
-                Entity.Description.Length > 300
-                    ? new ValidationResult("Description", string.Format(Strings.Notification_Field_X_MaxLength, 300))
-                    : null);
+                    (sender, name) =>
+                    Entity.Description.Length > 300
+                            ? new ValidationResult("Description", string.Format(Strings.Notification_Field_X_MaxLength, 300))
+                            : null);
             AddValidation(
-                (sender, name) => Entity.UnitSalePrice < 0 ? new ValidationResult("UnitSalePrice", Strings.Notification_Field_Negative) : null);
+                    (sender, name) => Entity.UnitSalePrice < 0 ? new ValidationResult("UnitSalePrice", Strings.Notification_Field_Negative) : null);
             AddValidation((sender, name) => Entity.UnitsInStock < 0 ? new ValidationResult("UnitsInStock", Strings.Notification_Field_Negative) : null);
             AddValidation(
-                (sender, name) =>
-                string.IsNullOrWhiteSpace(Entity.Category.ToString()) ? new ValidationResult("Category", Strings.Notification_Field_Empty) : null);
+                    (sender, name) =>
+                    string.IsNullOrWhiteSpace(Entity.Category.ToString()) ? new ValidationResult("Category", Strings.Notification_Field_Empty) : null);
         }
     }
 }

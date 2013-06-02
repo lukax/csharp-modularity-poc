@@ -9,28 +9,27 @@ using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain;
-using LOB.Domain.Logic;
 using LOB.Domain.SubEntity;
 
 #endregion
 
 namespace LOB.Business.Logic.SubEntity {
-    [Export(typeof(IShipmentInfoFacade)), Export(typeof(IBaseEntityFacade<ShipmentInfo>)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class ShipmentInfoFacade : BaseEntityFacade<ShipmentInfo>, IShipmentInfoFacade {
+    [Export(typeof(IShipmentInfoFacade)), Export(typeof(IBaseEntityFacade<Shipment>)), PartCreationPolicy(CreationPolicy.NonShared)]
+    public sealed class ShipmentInfoFacade : BaseEntityFacade<Shipment>, IShipmentInfoFacade {
         private readonly IAddressFacade _addressFacade;
 
         [ImportingConstructor]
         public ShipmentInfoFacade(IAddressFacade addressFacade, IRepository repository)
-            : base(repository) {
+                : base(repository) {
             _addressFacade = addressFacade;
             ConfigureValidations();
         }
 
-        public override ShipmentInfo GenerateEntity() {
-            var result = base.GenerateEntity();
+        public override Shipment GenerateEntity() {
+            Shipment result = base.GenerateEntity();
             result.Address = _addressFacade.GenerateEntity();
             result.Status = default(ShipmentStatus);
-            result.DaySchedule = "";
+            result.ScheduleDate = "";
             result.DeliverDate = DateTime.Now;
             result.Products = new List<Product>();
             return result;
@@ -38,7 +37,7 @@ namespace LOB.Business.Logic.SubEntity {
 
         public void ConfigureValidations() {
             AddValidation(
-                (sender, name) => Entity.DaySchedule.Length < 1 ? new ValidationResult("DaySchedule", Strings.Notification_Field_Empty) : null);
+                    (sender, name) => Entity.ScheduleDate.Length < 1 ? new ValidationResult("DaySchedule", Strings.Notification_Field_Empty) : null);
             AddValidation(delegate {
                               if(Entity.DeliverDate.CompareTo(new DateTime(2013, 1, 1)) < 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooEarly);
                               if(Entity.DeliverDate.CompareTo(new DateTime(2015, 1, 1)) > 0) return new ValidationResult("DeliverDate", Strings.Notification_Field_DateTooLate);

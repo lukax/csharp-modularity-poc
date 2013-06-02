@@ -6,11 +6,11 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
-    public class PayCheckMap : BaseEntityMap<PayCheck> {
+    public class PayCheckMap : BaseEntityMap<Paycheck> {
         public PayCheckMap() {
             Map(x => x.CurrentSalary);
             Map(x => x.Bonus);
-            Map(x => x.PS);
+            Map(x => x.Description);
         }
     }
 }

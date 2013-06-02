@@ -7,6 +7,6 @@ using LOB.Business.Contract.Exception.Base;
 namespace LOB.Business.Contract.Exception {
     public class EntityValidationException : GenericBusinessException {
         public EntityValidationException(string message, string detail = null, System.Exception innerException = null)
-            : base(message, detail, innerException) {}
+                : base(message, detail, innerException) { }
     }
 }

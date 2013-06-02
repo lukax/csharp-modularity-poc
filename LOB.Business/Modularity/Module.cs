@@ -11,7 +11,8 @@ namespace LOB.Business.Modularity {
     [ModuleExport("BusinessModule", typeof(Module), DependsOnModuleNames = new[] {"LogModule", "DaoModule"})]
     public class Module : IModule {
 #if DEBUG
-        [Import] public ILoggerFacade LoggerFacade { get; set; }
+        [Import]
+        public ILoggerFacade LoggerFacade { get; set; }
 #endif
 
         public void Initialize() {

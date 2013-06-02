@@ -17,11 +17,13 @@ namespace LOB.Dao.Nhibernate {
     [Export(typeof(IRepository)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class Repository : IRepository {
         private ISession _ormAsSession;
-        [Import] protected Lazy<ILoggerFacade> Logger { get; private set; }
-        [Import] public IUnityOfWork Uow { get; private set; }
+        [Import]
+        protected Lazy<ILoggerFacade> Logger { get; private set; }
         protected ISession ORM {
             get { return _ormAsSession ?? (_ormAsSession = Uow.Orm.As<ISession>()); }
         }
+        [Import]
+        public IUnityOfWork Uow { get; private set; }
 
         public T Get<T>(object id) where T : BaseEntity {
             try {
@@ -141,7 +143,7 @@ namespace LOB.Dao.Nhibernate {
         }
         public T GetOne<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity {
             try {
-                var temp = ORM.Query<T>().FirstOrDefault();
+                T temp = ORM.Query<T>().FirstOrDefault();
                 return temp == default(T) ? null : temp;
             } catch(ADOException ex) {
                 Logger.Value.Log(ex.Message, Category.Exception, Priority.High);

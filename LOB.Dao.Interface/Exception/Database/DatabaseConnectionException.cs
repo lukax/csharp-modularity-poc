@@ -7,6 +7,6 @@ using LOB.Dao.Contract.Exception.Base;
 namespace LOB.Dao.Contract.Exception.Database {
     public class DatabaseConnectionException : GenericDaoException {
         public DatabaseConnectionException(string message = null, string detail = null, System.Exception innerException = null)
-            : base(message, detail, innerException) { }
+                : base(message, detail, innerException) { }
     }
 }

@@ -9,7 +9,6 @@ using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain;
-using LOB.Domain.Logic;
 
 #endregion
 
@@ -22,8 +21,8 @@ namespace LOB.Business.Logic {
 
         [ImportingConstructor]
         public EmployeeFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IPayCheckFacade payCheckFacade,
-            IRepository repository)
-            : base(repository) {
+                IRepository repository)
+                : base(repository) {
             _addressFacade = addressFacade;
             _contactInfoFacade = contactInfoFacade;
             _payCheckFacade = payCheckFacade;
@@ -31,7 +30,7 @@ namespace LOB.Business.Logic {
         }
 
         public override Employee GenerateEntity() {
-            var result = base.GenerateEntity();
+            Employee result = base.GenerateEntity();
             result.Address = _addressFacade.GenerateEntity();
             result.ContactInfo = _contactInfoFacade.GenerateEntity();
             result.Notes = "";
@@ -42,17 +41,17 @@ namespace LOB.Business.Logic {
             result.HireDate = DateTime.Now;
             result.NickName = "";
             result.Password = "";
-            result.PayCheck = _payCheckFacade.GenerateEntity();
+            result.Paycheck = _payCheckFacade.GenerateEntity();
             result.RG = "";
             result.RGUF = "";
             result.Title = "";
-            result.WorksIn = new Store(); //TODO
+            result.AssociatedCompany = new Company(); //TODO
             return result;
         }
 
         public void ConfigureValidations() {
             AddValidation(
-                (sender, name) => string.IsNullOrWhiteSpace(Entity.Title) ? new ValidationResult("Title", Strings.Notification_Field_Empty) : null);
+                    (sender, name) => string.IsNullOrWhiteSpace(Entity.Title) ? new ValidationResult("Title", Strings.Notification_Field_Empty) : null);
             AddValidation(delegate {
                               if(Entity.HireDate.CompareTo(new DateTime(1990, 1, 1)) < 0) return new ValidationResult("HireDate", Strings.Notification_Field_DateTooEarly);
                               if(Entity.HireDate.CompareTo(new DateTime(2015, 1, 1)) > 0) return new ValidationResult("HireDate", Strings.Notification_Field_DateTooLate);

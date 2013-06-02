@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using LOB.Dao.Nhibernate.Mapping.Base;
-using LOB.Domain;
 
 #endregion
 

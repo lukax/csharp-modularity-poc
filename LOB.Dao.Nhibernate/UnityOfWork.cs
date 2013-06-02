@@ -18,8 +18,10 @@ namespace LOB.Dao.Nhibernate {
         private bool _isInitialized;
         private object _orm;
         protected ITransaction Transaction { get; set; }
-        [Import] protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
-        [Import] protected Lazy<OrmFactory> OrmFactory { get; set; }
+        [Import]
+        protected Lazy<ILoggerFacade> LoggerFacade { get; set; }
+        [Import]
+        protected Lazy<OrmFactory> OrmFactory { get; set; }
         public object Orm {
             get {
                 try {
@@ -68,12 +70,11 @@ namespace LOB.Dao.Nhibernate {
         protected void check_is_transaction_active() { if(!Transaction.IsActive) throw new InvalidOperationException(Strings.Notification_Dao_NotInitialized); }
         #region Implementation of IDisposable
 
-        ~UnityOfWork() { Dispose(false); }
-
         public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        ~UnityOfWork() { Dispose(false); }
 
         protected virtual void Dispose(bool disposing) {
             if(_isDisposed || ! _isInitialized) return;

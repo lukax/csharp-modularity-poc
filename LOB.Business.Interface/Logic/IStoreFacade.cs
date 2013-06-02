@@ -6,5 +6,5 @@ using LOB.Domain;
 #endregion
 
 namespace LOB.Business.Contract.Logic {
-    public interface IStoreFacade : IBaseEntityFacade<Store> {}
+    public interface IStoreFacade : IBaseEntityFacade<Company> {}
 }

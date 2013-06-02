@@ -2,7 +2,7 @@
 
 using LOB.Business.Contract.Logic.Base;
 using LOB.Domain;
-using LOB.Domain.SubEntity;
+using LOB.Domain.Base;
 
 #endregion
 

@@ -9,5 +9,5 @@ using LOB.UI.Core.ViewModel.Controls.Alter.Base;
 
 namespace LOB.UI.Core.ViewModel.Controls.Alter.SubEntity {
     [Export(typeof(IAlterPayCheckViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<PayCheck>, IAlterPayCheckViewModel {}
+    public sealed class AlterPayCheckViewModel : AlterBaseEntityViewModel<Paycheck>, IAlterPayCheckViewModel {}
 }

@@ -10,9 +10,9 @@ using LOB.Domain;
 
 namespace LOB.Business.Logic {
     [Export(typeof(ISaleFacade)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SaleFacade : BaseEntityFacade<Sale>, ISaleFacade {
+    public class SaleFacade : BaseEntityFacade<Order>, ISaleFacade {
         [ImportingConstructor]
         public SaleFacade(IRepository repository)
-            : base(repository) { }
+                : base(repository) { }
     }
 }

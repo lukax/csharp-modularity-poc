@@ -11,7 +11,8 @@ namespace LOB.Dao.Nhibernate.Modularity {
     [ModuleExport("DaoModule", typeof(Module), DependsOnModuleNames = new[] {"LogModule"})]
     public class Module : IModule {
 #if DEBUG
-        [Import] public ILoggerFacade LoggerFacade { get; set; }
+        [Import]
+        public ILoggerFacade LoggerFacade { get; set; }
 #endif
 
         public void Initialize() {

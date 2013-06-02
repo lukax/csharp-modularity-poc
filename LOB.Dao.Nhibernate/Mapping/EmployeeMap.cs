@@ -8,10 +8,10 @@ using LOB.Domain;
 namespace LOB.Dao.Nhibernate.Mapping {
     public class EmployeeMap : SubclassMap<Employee> {
         public EmployeeMap() {
-            References(x => x.WorksIn);
+            References(x => x.AssociatedCompany);
             Map(x => x.Title);
             Map(x => x.HireDate);
-            References(x => x.PayCheck).Cascade.All();
+            References(x => x.Paycheck).Cascade.All();
             Map(x => x.Password);
         }
     }

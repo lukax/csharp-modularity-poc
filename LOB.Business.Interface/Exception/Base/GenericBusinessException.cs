@@ -7,6 +7,6 @@ using LOB.Util.Contract.Exception;
 namespace LOB.Business.Contract.Exception.Base {
     public class GenericBusinessException : BaseException {
         public GenericBusinessException(string message, string detail = null, System.Exception innerException = null)
-            : base(message, detail, innerException) {}
+                : base(message, detail, innerException) { }
     }
 }

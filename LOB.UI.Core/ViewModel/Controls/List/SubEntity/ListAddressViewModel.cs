@@ -22,7 +22,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                          arg.Street.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
                          arg.StreetComplement.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
                          arg.StreetNumber.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
-                         arg.ZipCode.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.PostalCode.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
                          arg.State.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
                          arg.Status.ToString().ToUpper().Contains(SearchString.ToUpper()));
                 } catch(FormatException) {

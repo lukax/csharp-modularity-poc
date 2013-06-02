@@ -9,8 +9,7 @@ using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
 using LOB.Core.Localization;
 using LOB.Dao.Contract;
-using LOB.Domain;
-using LOB.Domain.Logic;
+using LOB.Domain.Base;
 
 #endregion
 
@@ -22,14 +21,14 @@ namespace LOB.Business.Logic {
 
         [ImportingConstructor]
         public NaturalPersonFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IRepository repository)
-            : base(repository) {
+                : base(repository) {
             _addressFacade = addressFacade;
             _contactInfoFacade = contactInfoFacade;
             ConfigureValidations();
         }
 
         public override NaturalPerson GenerateEntity() {
-            var result = base.GenerateEntity();
+            NaturalPerson result = base.GenerateEntity();
             result.FirstName = "";
             result.LastName = "";
             result.NickName = "";
@@ -47,17 +46,17 @@ namespace LOB.Business.Logic {
             AddValidation(delegate {
                               if(string.IsNullOrWhiteSpace(Entity.FirstName)) return new ValidationResult("FirstName", Strings.Notification_Field_Empty);
                               if(
-                                  !Regex.IsMatch(Entity.FirstName,
-                                                 @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
+                                      !Regex.IsMatch(Entity.FirstName,
+                                              @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$"))
                                   return new ValidationResult("FirstName",
-                                                              string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_FirstName));
+                                          string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_FirstName));
                               return null;
                           });
             AddValidation(delegate {
                               if(string.IsNullOrWhiteSpace(Entity.LastName)) return new ValidationResult("LastName", Strings.Notification_Field_Empty);
                               if(
-                                  !Regex.IsMatch(Entity.LastName,
-                                                 @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$")) return new ValidationResult("LastName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_LastName));
+                                      !Regex.IsMatch(Entity.LastName,
+                                              @"^([\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$")) return new ValidationResult("LastName", string.Format(Strings.Notification_Field_X_Invalid, Strings.Common_LastName));
                               return null;
                           });
             AddValidation(delegate {

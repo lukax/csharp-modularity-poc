@@ -1,25 +1,7 @@
-﻿#region Usings
-
-using System;
-using System.Diagnostics;
-
-#endregion
+﻿using System;
+using LOB.Domain.Base;
 
 namespace LOB.Domain {
-    public class Supplier : LegalPerson, IEquatable<Supplier> {
-        #region Implementation of IEquatable<Supplier>
-
-        public bool Equals(Supplier other) {
-            try {
-                return base.Equals(other);
-            } catch(NullReferenceException ex) {
-#if DEBUG
-                Debug.WriteLine(ex.Message);
-#endif
-                return false;
-            }
-        }
-
-        #endregion
-    }
+    [Serializable]
+    public class Supplier : LegalPerson {}
 }

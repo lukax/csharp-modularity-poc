@@ -2,8 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using LOB.Domain.Base;
-using LOB.Domain.Logic;
 
 #endregion
 
@@ -15,7 +15,6 @@ namespace LOB.Business.Contract.Logic.Base {
     }
 
     public interface IBaseEntityFacade<TEntity> : IBaseEntityFacade where TEntity : BaseEntity {
-        TEntity Entity { set; }
         TEntity GenerateEntity();
     }
 }
