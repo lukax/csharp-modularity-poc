@@ -39,7 +39,6 @@ namespace LOB.Domain.SubEntity {
 
         [Required(ErrorMessageResourceName = "Notification_Field_Required", ErrorMessageResourceType = typeof(Strings))]
         public bool IsDefault { get; set; }
-
         #region Implementation of IEquatable<Address>
 
         public bool Equals(Address other) {

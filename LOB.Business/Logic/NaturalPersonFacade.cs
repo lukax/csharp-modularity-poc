@@ -35,6 +35,6 @@ namespace LOB.Business.Logic {
             return result;
         }
 
-        private class LocalNaturalPerson : NaturalPerson{}
+        private class LocalNaturalPerson : NaturalPerson {}
     }
 }

@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace LOB.Domain.SubEntity {
     [Serializable]
-    [DefaultValue(Outro)]
+    [DefaultValue(Other)]
     public enum UF {
         // ReSharper disable InconsistentNaming
         AC = 12,
@@ -43,7 +43,7 @@ namespace LOB.Domain.SubEntity {
         SE = 28,
         TO = 17,
         // ReSharper restore InconsistentNaming
-        Outro = 0
+        Other = 0
     }
 
     public static class UFDictionary {
@@ -78,7 +78,7 @@ namespace LOB.Domain.SubEntity {
                                 {UF.SP, "São Paulo"},
                                 {UF.SE, "Sergipe"},
                                 {UF.TO, "Tocantins"},
-                                {UF.Outro, ""},
+                                {UF.Other, ""},
                         });
 
         public static IDictionary<UF, string> Ufs {

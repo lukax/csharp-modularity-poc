@@ -16,7 +16,7 @@ namespace LOB.Business.Logic.SubEntity {
         public EmailFacade(IRepository repository)
                 : base(repository) { }
 
-        public  Email Generate() {
+        public Email Generate() {
             var result = new Email {Value = ""};
             return result;
         }

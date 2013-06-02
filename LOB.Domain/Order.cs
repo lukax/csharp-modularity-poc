@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using LOB.Domain.Base;
+using LOB.Domain.Monetary;
+using LOB.Domain.Util;
 
 #endregion
 
@@ -18,8 +20,7 @@ namespace LOB.Domain {
         public DateTime Date { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<Service> Services { get; set; }
-        public float TotalValue { get; set; }
-
+        public SimpleMoney TotalValue { get; set; }
         #region Implementation of IEquatable<Sale>
 
         public bool Equals(Order other) {

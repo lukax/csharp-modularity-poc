@@ -18,9 +18,7 @@ namespace LOB.Business.Logic {
 
         [ImportingConstructor]
         public ProductFacade(ICategoryFacade categoryFacade, IShipmentFacade shipmentFacade, IRepository repository)
-                : base(repository) {
-            _categoryFacade = categoryFacade;
-        }
+                : base(repository) { _categoryFacade = categoryFacade; }
 
         public Product Generate() {
             var result = new Product {

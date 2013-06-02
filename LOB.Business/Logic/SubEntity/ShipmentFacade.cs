@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using LOB.Business.Contract.Logic;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;

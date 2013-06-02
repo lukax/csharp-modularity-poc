@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using LOB.Business.Contract.Logic;
 using LOB.Business.Logic.Base;
@@ -15,6 +16,6 @@ namespace LOB.Business.Logic {
         public OrderFacade(IRepository repository)
                 : base(repository) { }
 
-        public Order Generate() { throw new System.NotImplementedException(); }
-}
+        public Order Generate() { throw new NotImplementedException(); }
+    }
 }

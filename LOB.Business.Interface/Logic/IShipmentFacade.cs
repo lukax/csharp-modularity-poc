@@ -5,6 +5,6 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Business.Contract.Logic.SubEntity {
+namespace LOB.Business.Contract.Logic {
     public interface IShipmentFacade : IBaseEntityFacade<Shipment> {}
 }

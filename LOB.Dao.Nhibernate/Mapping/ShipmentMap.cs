@@ -5,7 +5,7 @@ using LOB.Domain.SubEntity;
 
 #endregion
 
-namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
+namespace LOB.Dao.Nhibernate.Mapping {
     public class ShipmentMap : BaseEntityMap<Shipment> {
         public ShipmentMap() {
             References(x => x.Shipper);

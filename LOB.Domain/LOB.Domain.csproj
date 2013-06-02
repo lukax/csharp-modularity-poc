@@ -71,6 +71,9 @@
     <Compile Include="Shipper.cs" />
     <Compile Include="SubEntity\Stock.cs" />
     <Compile Include="Supplier.cs" />
+    <Compile Include="Monetary\CurrencyCode.cs" />
+    <Compile Include="Monetary\ICurrencyConverter.cs" />
+    <Compile Include="Monetary\Money.cs" />
     <Compile Include="Util\Notification.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="SubEntity\Paycheck.cs" />
@@ -91,6 +94,8 @@
     <Compile Include="SubEntity\Shipment.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="SubEntity\UF.cs" />
+    <Compile Include="Monetary\SampleConverter.cs" />
+    <Compile Include="Monetary\SimpleMoney.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
