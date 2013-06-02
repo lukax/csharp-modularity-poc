@@ -97,13 +97,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
@@ -115,13 +111,12 @@
     <Compile Include="Logic\LegalPersonFacade.cs" />
     <Compile Include="Logic\NaturalPersonFacade.cs" />
     <Compile Include="Logic\NotificationFacade.cs" />
-    <Compile Include="Logic\SaleFacade.cs" />
+    <Compile Include="Logic\OrderFacade.cs" />
     <Compile Include="Logic\SubEntity\AddressFacade.cs" />
-    <Compile Include="Logic\SubEntity\ContactInfoFacade.cs" />
     <Compile Include="Logic\SubEntity\PayCheckFacade.cs" />
     <Compile Include="Logic\SubEntity\EmailFacade.cs" />
     <Compile Include="Logic\SubEntity\PhoneNumberFacade.cs" />
-    <Compile Include="Logic\SubEntity\ShipmentInfoFacade.cs" />
+    <Compile Include="Logic\SubEntity\ShipmentFacade.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Logic\ProductFacade.cs" />
     <Compile Include="Logic\EmployeeFacade.cs" />

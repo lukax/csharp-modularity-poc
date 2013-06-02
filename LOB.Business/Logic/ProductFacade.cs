@@ -6,7 +6,6 @@ using LOB.Business.Contract.Logic;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
-using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain;
 
@@ -14,54 +13,31 @@ using LOB.Domain;
 
 namespace LOB.Business.Logic {
     [Export(typeof(IProductFacade)), Export(typeof(IBaseEntityFacade<Product>)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class ProductFacade : BaseEntityFacade<Product>, IProductFacade {
+    public sealed class ProductFacade : BaseEntityFacade, IProductFacade {
         private readonly ICategoryFacade _categoryFacade;
-        private readonly IShipmentInfoFacade _shipmentInfoFacade;
 
         [ImportingConstructor]
-        public ProductFacade(ICategoryFacade categoryFacade, IShipmentInfoFacade shipmentInfoFacade, IRepository repository)
+        public ProductFacade(ICategoryFacade categoryFacade, IShipmentFacade shipmentFacade, IRepository repository)
                 : base(repository) {
             _categoryFacade = categoryFacade;
-            _shipmentInfoFacade = shipmentInfoFacade;
-            ConfigureValidations();
         }
 
-        public override Product GenerateEntity() {
-            Product result = base.GenerateEntity();
-            result.Status = default(ProductStatus);
-            result.Category = _categoryFacade.GenerateEntity();
-            result.Description = "";
-            result.Name = "";
-            result.Shipment = _shipmentInfoFacade.GenerateEntity();
-            result.CodeBarras = 0;
-            result.Image = new byte[8];
-            result.MaxUnits = 0;
-            result.MinUnits = 0;
-            result.ProfitMargin = 0;
-            result.QuantityPerUnit = "";
-            result.AssociatedOrders = new List<Order>();
-            result.AssociatedCompanies = new List<Company>();
-            result.Suppliers = new List<Supplier>();
-            result.UnitCostPrice = 0;
-            result.UnitSalePrice = 0;
-            result.UnitsInStock = 0;
+        public Product Generate() {
+            var result = new Product {
+                    Status = default(ProductStatus),
+                    Category = _categoryFacade.Generate(),
+                    Description = "",
+                    Name = "",
+                    CodeBarras = 0,
+                    Image = new byte[8],
+                    ProfitMargin = 0,
+                    AssociatedOrders = new List<Order>(),
+                    AssociatedCompanies = new List<Company>(),
+                    Suppliers = new List<Supplier>(),
+                    UnitCostPrice = 0,
+                    UnitSalePrice = 0
+            };
             return result;
-        }
-
-        public void ConfigureValidations() {
-            AddValidation(
-                    (sender, name) => string.IsNullOrWhiteSpace(Entity.Name) ? new ValidationResult("Name", Strings.Notification_Field_Empty) : null);
-            AddValidation(
-                    (sender, name) =>
-                    Entity.Description.Length > 300
-                            ? new ValidationResult("Description", string.Format(Strings.Notification_Field_X_MaxLength, 300))
-                            : null);
-            AddValidation(
-                    (sender, name) => Entity.UnitSalePrice < 0 ? new ValidationResult("UnitSalePrice", Strings.Notification_Field_Negative) : null);
-            AddValidation((sender, name) => Entity.UnitsInStock < 0 ? new ValidationResult("UnitsInStock", Strings.Notification_Field_Negative) : null);
-            AddValidation(
-                    (sender, name) =>
-                    string.IsNullOrWhiteSpace(Entity.Category.ToString()) ? new ValidationResult("Category", Strings.Notification_Field_Empty) : null);
         }
     }
 }

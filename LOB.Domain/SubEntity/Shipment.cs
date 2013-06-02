@@ -12,7 +12,7 @@ namespace LOB.Domain.SubEntity {
     [Serializable]
     public class Shipment : BaseEntity, IEquatable<Shipment> {
         public ShipmentStatus Status { get; set; }
-        public LegalPerson Shipper { get; set; }
+        public Shipper Shipper { get; set; }
         public Contact Contact { get; set; }
         public DateTime ScheduleDate { get; set; }
         public DateTime DeliverDate { get; set; }
@@ -44,9 +44,9 @@ namespace LOB.Domain.SubEntity {
 
     [Serializable]
     public enum ShipmentStatus {
-        Active,
-        Paused,
-        Finished,
+        Pending,
+        Shipping,
+        Completed,
         Cancelled
     }
 }

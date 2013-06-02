@@ -13,7 +13,7 @@ using LOB.Domain.Base;
 
 namespace LOB.Business.Logic {
     [Export(typeof(ICustomerFacade)), Export(typeof(IBaseEntityFacade<Customer>)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class CustomerFacade : BaseEntityFacade<Customer>, ICustomerFacade {
+    public sealed class CustomerFacade : BaseEntityFacade, ICustomerFacade {
         private readonly ILegalPersonFacade _legalPersonFacade;
         private readonly INaturalPersonFacade _naturalPersonFacade;
 
@@ -24,20 +24,22 @@ namespace LOB.Business.Logic {
             _legalPersonFacade = legalPersonFacade;
         }
 
+        public Customer Generate() { return GenerateEntity(PersonType.Natural); }
+
         public Customer GenerateEntity(PersonType personType) {
-            Customer result = GenerateEntity();
+            var result = new Customer();
             if(personType == PersonType.Natural) {
                 result.Orders = new List<Order>();
                 result.Status = default(CustomerStatus);
                 result.AssociatedCompanies = new List<Company>();
-                result.Person = _naturalPersonFacade.GenerateEntity();
+                result.Person = _naturalPersonFacade.Generate();
                 result.PersonType = default(PersonType);
             }
             if(personType == PersonType.Legal) {
                 result.Orders = new List<Order>();
                 result.Status = default(CustomerStatus);
                 result.AssociatedCompanies = new List<Company>();
-                result.Person = _legalPersonFacade.GenerateEntity();
+                result.Person = _legalPersonFacade.Generate();
                 result.PersonType = default(PersonType);
             }
             return result;

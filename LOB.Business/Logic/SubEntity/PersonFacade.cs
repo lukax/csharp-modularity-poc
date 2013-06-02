@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using LOB.Business.Contract.Logic.Base;
 using LOB.Business.Contract.Logic.SubEntity;
 using LOB.Business.Logic.Base;
-using LOB.Core.Localization;
 using LOB.Dao.Contract;
 using LOB.Domain.Base;
 
@@ -12,28 +11,19 @@ using LOB.Domain.Base;
 
 namespace LOB.Business.Logic.SubEntity {
     [Export(typeof(IPersonFacade)), Export(typeof(IBaseEntityFacade<Person>)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public class PersonFacade : BaseEntityFacade<LocalPerson>, IPersonFacade {
+    public class PersonFacade : BaseEntityFacade, IPersonFacade {
         private readonly IAddressFacade _addressFacade;
-        private readonly IContactInfoFacade _contactInfoFacade;
 
         [ImportingConstructor]
-        public PersonFacade(IAddressFacade addressFacade, IContactInfoFacade contactInfoFacade, IRepository repository)
-                : base(repository) {
-            _addressFacade = addressFacade;
-            _contactInfoFacade = contactInfoFacade;
-        }
+        public PersonFacade(IAddressFacade addressFacade, IRepository repository)
+                : base(repository) { _addressFacade = addressFacade; }
 
-        public override Person GenerateEntity() {
-            Person local = base.GenerateEntity();
-            local.Address = _addressFacade.GenerateEntity();
-            local.ContactInfo = _contactInfoFacade.GenerateEntity();
-            local.Notes = "";
+        public Person Generate() {
+            Person local = new LocalPerson();
+            local.Address = _addressFacade.Generate();
             return local;
         }
-    }
 
-    public class LocalPerson : Person
-    {
-
+        private class LocalPerson : Person {}
     }
 }

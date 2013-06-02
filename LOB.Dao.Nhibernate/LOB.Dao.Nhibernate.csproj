@@ -79,11 +79,9 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\ShipperMap.cs" />
     <Compile Include="OrmFactoryConfiguration.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
-    <Compile Include="Mapping\CommandMap.cs" />
     <Compile Include="Mapping\SubEntity\PhoneNumberMap.cs" />
     <Compile Include="Mapping\SubEntity\EmailMap.cs" />
     <Compile Include="Mapping\EmployeeMap.cs" />
@@ -91,11 +89,10 @@
     <Compile Include="Mapping\NaturalPersonMap.cs" />
     <Compile Include="Mapping\SubEntity\PayCheckMap.cs" />
     <Compile Include="Mapping\ProductMap.cs" />
-    <Compile Include="Mapping\SubEntity\ShipmentInfoMap.cs" />
+    <Compile Include="Mapping\ShipmentMap.cs" />
     <Compile Include="Mapping\SubEntity\CategoryMap.cs" />
-    <Compile Include="Mapping\SubEntity\AdressMap.cs" />
-    <Compile Include="Mapping\SubEntity\ContactInfoMap.cs" />
-    <Compile Include="Mapping\SaleMap.cs" />
+    <Compile Include="Mapping\SubEntity\AddressMap.cs" />
+    <Compile Include="Mapping\OrderMap.cs" />
     <Compile Include="Mapping\SubEntity\PersonMap.cs" />
     <Compile Include="Mapping\Base\BaseEntityMap.cs" />
     <Compile Include="Mapping\StoreMap.cs" />

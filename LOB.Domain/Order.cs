@@ -11,7 +11,7 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class Order : BaseEntity, IEquatable<Order> {
-        public SaleStatus Status { get; set; }
+        public OrderStatus Status { get; set; }
         public string Description { get; set; }
         public Customer Buyer { get; set; }
         public Employee Seller { get; set; }
@@ -19,6 +19,7 @@ namespace LOB.Domain {
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<Service> Services { get; set; }
         public float TotalValue { get; set; }
+
         #region Implementation of IEquatable<Sale>
 
         public bool Equals(Order other) {
@@ -44,10 +45,9 @@ namespace LOB.Domain {
     }
 
     [Serializable]
-    public enum SaleStatus {
-        Open,
-        Finalized,
-        Canceled,
-        Paused
+    public enum OrderStatus {
+        Pending,
+        Completed,
+        Canceled
     }
 }

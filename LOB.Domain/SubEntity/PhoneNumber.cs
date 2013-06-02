@@ -21,6 +21,7 @@ namespace LOB.Domain.SubEntity {
         public PhoneNumberType Type { get; set; }
 
         public string Description { get; set; }
+
         #region Implementation of IEquatable
 
         public bool Equals(PhoneNumber other) {
@@ -40,8 +41,8 @@ namespace LOB.Domain.SubEntity {
 
     [Serializable]
     public enum PhoneNumberType {
-        Telephone,
-        Cellphone,
-        Fax
+        Residential,
+        Mobile,
+        Work
     }
 }

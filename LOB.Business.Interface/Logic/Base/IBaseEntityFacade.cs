@@ -8,13 +8,9 @@ using LOB.Domain.Base;
 #endregion
 
 namespace LOB.Business.Contract.Logic.Base {
-    public interface IBaseEntityFacade : IDisposable {
-        Tuple<bool, IEnumerable<ValidationResult>> CanAdd();
-        Tuple<bool, IEnumerable<ValidationResult>> CanUpdate();
-        Tuple<bool, IEnumerable<ValidationResult>> CanDelete();
-    }
+    public interface IBaseEntityFacade : IDisposable {}
 
-    public interface IBaseEntityFacade<TEntity> : IBaseEntityFacade where TEntity : BaseEntity {
-        TEntity GenerateEntity();
+    public interface IBaseEntityFacade<out TEntity> : IBaseEntityFacade where TEntity : BaseEntity {
+        TEntity Generate();
     }
 }

@@ -15,18 +15,13 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.CodeBarras);
             Map(x => x.CodeNCM);
             Map(x => x.CFOP);
-            Map(x => x.Image); //.CustomSqlType("BinaryBlob"); Nhibernate automap binary arrays
-            Map(x => x.UnitsInStock);
-            Map(x => x.MaxUnits);
-            Map(x => x.MinUnits);
+            Map(x => x.Image);
             Map(x => x.UnitCostPrice);
             Map(x => x.UnitSalePrice);
             Map(x => x.ProfitMargin);
-            Map(x => x.QuantityPerUnit);
             HasManyToMany(x => x.AssociatedCompanies).Cascade.All().Inverse().Table("ProductStore");
             HasManyToMany(x => x.AssociatedOrders).Inverse().Cascade.All().Table("ProductSale");
             HasMany(x => x.Suppliers);
-            References(x => x.Shipment);
         }
     }
 }

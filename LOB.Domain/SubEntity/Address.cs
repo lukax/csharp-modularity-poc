@@ -37,7 +37,9 @@ namespace LOB.Domain.SubEntity {
 
         public string County { get; set; }
 
+        [Required(ErrorMessageResourceName = "Notification_Field_Required", ErrorMessageResourceType = typeof(Strings))]
         public bool IsDefault { get; set; }
+
         #region Implementation of IEquatable<Address>
 
         public bool Equals(Address other) {

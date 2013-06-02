@@ -10,8 +10,6 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
         public PersonMap() {
             UseUnionSubclassForInheritanceMapping();
             References(x => x.Address).Cascade.All();
-            References(x => x.ContactInfo).Cascade.All();
-            Map(x => x.Notes);
         }
     }
 }

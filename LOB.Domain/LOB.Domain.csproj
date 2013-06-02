@@ -66,9 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contact.cs" />
-    <Compile Include="Regulamentations\ITaxes.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Base\Merchandise.cs" />
+    <Compile Include="Shipper.cs" />
     <Compile Include="SubEntity\Stock.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="Util\Notification.cs" />

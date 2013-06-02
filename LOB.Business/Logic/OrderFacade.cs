@@ -9,10 +9,12 @@ using LOB.Domain;
 #endregion
 
 namespace LOB.Business.Logic {
-    [Export(typeof(ISaleFacade)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SaleFacade : BaseEntityFacade<Order>, ISaleFacade {
+    [Export(typeof(IOrderFacade)), PartCreationPolicy(CreationPolicy.NonShared)]
+    public class OrderFacade : BaseEntityFacade, IOrderFacade {
         [ImportingConstructor]
-        public SaleFacade(IRepository repository)
+        public OrderFacade(IRepository repository)
                 : base(repository) { }
-    }
+
+        public Order Generate() { throw new System.NotImplementedException(); }
+}
 }

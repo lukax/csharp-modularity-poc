@@ -57,4 +57,5 @@ namespace LOB.Domain.Base {
         }
         public static string ToLocalizedString(this PersonType s) { return PersonTypesLocalizationsDict[s]; }
     }
+
 }

@@ -12,7 +12,6 @@ namespace LOB.Dao.Nhibernate.Mapping {
             Map(x => x.Title);
             Map(x => x.HireDate);
             References(x => x.Paycheck).Cascade.All();
-            Map(x => x.Password);
         }
     }
 }
