@@ -19,7 +19,7 @@
                             <ColumnDefinition Width="25" />
                         </Grid.ColumnDefinitions>
                         <ContentPresenter ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" Content="{Binding Header}">
+                                          VerticalAlignment="Center" Content="{Binding ViewModel.Header}">
                             <ContentPresenter.Resources>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Foreground" Value="{DynamicResource Foreground}" />

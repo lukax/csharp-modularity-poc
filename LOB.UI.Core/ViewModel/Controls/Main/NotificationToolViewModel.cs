@@ -1,71 +1,67 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using LOB.Core.Localization;
-using LOB.Core.Util;
 using LOB.Domain.Logic;
-using LOB.UI.Core.Events;
+using LOB.UI.Contract.Command;
+using LOB.UI.Contract.ViewModel.Controls.Main;
+using LOB.UI.Core.Event;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Command;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Main;
+using LOB.Util.Contract.Service;
 using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
-    public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel {
-        private readonly BackgroundWorker _worker = new BackgroundWorker();
-        //[AllowNull]
+    [Export(typeof(INotificationToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
+    public class NotificationToolViewModel : BaseViewModel, INotificationToolViewModel, IPartImportsSatisfiedNotification {
         public Notification Entity { get; set; }
-        public MThreadObservableCollection<Notification> Entitys { get; set; }
-        private readonly IEventAggregator _eventAggregator;
+        public IList<Notification> Entities { get; set; }
+        //TODO: Make Notification immutable to avoid thread problems
         public bool IsVisible {
-            get { return _isVisible; }
-            set {
-                _isVisible = value;
-                //if(Entitys == null || Entitys.Count == 0) Visibility = Visibility.Collapsed;
-                //else 
-                Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-            }
+            get { return Visibility == Visibility.Visible; }
+            set { Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
         }
         public ICommand DismissCommand { get; set; }
-        public Visibility Visibility { get; set; }
+        public Visibility Visibility { get; private set; }
         public string Status {
-            get { return string.Format("{0} {1}", Entitys.Count, Strings.UI_ToolTip_Notifications); }
+            get { return string.Format("{0} {1}", Entities.Count, Strings.UI_ToolTip_Notifications); }
+        }
+        [Import] public IEventAggregator EventAggregator {
+            set { value.GetEvent<NotificationEvent>().Subscribe(NotificationListener); }
         }
 
-        public NotificationToolViewModel(IEventAggregator eventAggregator) {
-            _eventAggregator = eventAggregator;
+        public void OnImportsSatisfied() {
             DismissCommand = new DelegateCommand(DismissNotification);
-            Entitys = new MThreadObservableCollection<Notification>();
+            Entities = new List<Notification>();
             IsVisible = false;
-            _eventAggregator.GetEvent<NotificationEvent>().Subscribe(NotificationListener);
             InitWorker();
         }
 
-        private void DismissNotification(object o) {
-            if(Equals(o, "All")) Entitys.Clear();
-            else if(Entity != null) Entitys.Remove(Entity);
-            if(Entitys.Count == 0) IsVisible = false;
-        }
-
-        public override void InitializeServices() { }
+        [Export(ServiceName.NotificationService, typeof(Action<Notification>))]
         private void NotificationListener(Notification notification) {
-            notification.Time = DateTime.Now.ToShortTimeString();
-            if(Entitys.Contains(notification)) Entitys[Entitys.IndexOf(notification)] = notification;
-            else Entitys.Add(notification);
+            notification.Time = DateTime.Now;
+            if(Entities.Contains(notification)) Entities[Entities.IndexOf(notification)] = notification;
+            else Entities.Add(notification);
             IsVisible = true;
         }
 
+        private void DismissNotification(object o) {
+            if(Equals(o, "All")) Entities.Clear();
+            else if(Entity != null) Entities.Remove(Entity);
+            if(Entities.Count == 0) IsVisible = false;
+        }
+
         private void InitWorker() {
-            _worker.DoWork += AutoCleanEntititys;
-            _worker.RunWorkerAsync();
+            Worker.DoWork += AutoCleanEntititys;
+            Worker.RunWorkerAsync();
         }
 
         private void AutoCleanEntititys(object sender, DoWorkEventArgs doWorkEventArgs) {
@@ -73,35 +69,10 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             if(worker == null) return;
             worker.WorkerSupportsCancellation = true;
             do {
-                Thread.Sleep(10000);
-                var currentStack = Entitys.ToList(); //Thread Safe
-                foreach(var notification in currentStack) if(notification.State == NotificationState.Ok) Entitys.Remove(notification);
-            } while(!_worker.CancellationPending);
+                Thread.Sleep(5000);
+                var currentStack = Entities.ToList(); //Thread Safe
+                foreach(var notification in currentStack) if(notification.Type == NotificationType.Ok) if(notification.Time.AddSeconds(10) < DateTime.Now) Entities.Remove(notification);
+            } while(!Worker.CancellationPending);
         }
-
-        public override void Refresh() { }
-
-        public override ViewID ViewID {
-            get { return _viewID; }
-            set { _viewID = value; }
-        }
-
-        private ViewID _viewID = new ViewID {Type = ViewType.NotificationTool, State = ViewState.Internal};
-        private bool _isVisible;
-        #region Implementation of IDisposable
-
-        ~NotificationToolViewModel() { Dispose(false); }
-
-        private void Dispose(bool disposing) {
-            _worker.CancelAsync();
-            if(disposing) _worker.Dispose();
-        }
-
-        public override void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
     }
 }

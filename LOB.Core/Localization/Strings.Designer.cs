@@ -1564,6 +1564,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyActivated.
+        /// </summary>
+        public static string Notification_Dao_AlreadyActivated {
+            get {
+                return ResourceManager.GetString("Notification_Dao_AlreadyActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyInitialized.
+        /// </summary>
+        public static string Notification_Dao_AlreadyInitialized {
+            get {
+                return ResourceManager.GetString("Notification_Dao_AlreadyInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Dao_Conected.
         /// </summary>
         public static string Notification_Dao_Conected {
@@ -1609,6 +1627,33 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_InternalError.
+        /// </summary>
+        public static string Notification_Dao_InternalError {
+            get {
+                return ResourceManager.GetString("Notification_Dao_InternalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotActivated.
+        /// </summary>
+        public static string Notification_Dao_NotActivated {
+            get {
+                return ResourceManager.GetString("Notification_Dao_NotActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotInitialized.
+        /// </summary>
+        public static string Notification_Dao_NotInitialized {
+            get {
+                return ResourceManager.GetString("Notification_Dao_NotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Dao_RequisitionFailed.
         /// </summary>
         public static string Notification_Dao_RequisitionFailed {
@@ -1627,38 +1672,11 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyActivated.
+        ///   Looks up a localized string similar to @Notification_Dao_SchemaCreationFailed.
         /// </summary>
-        public static string Notification_Dao_Transaction_AlreadyActivated {
+        public static string Notification_Dao_SchemaCreationFailed {
             get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_AlreadyActivated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_AlreadyInitialized.
-        /// </summary>
-        public static string Notification_Dao_Transaction_AlreadyInitialized {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_AlreadyInitialized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotActivated.
-        /// </summary>
-        public static string Notification_Dao_Transaction_NotActivated {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_NotActivated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Dao_Transaction_NotInitialized.
-        /// </summary>
-        public static string Notification_Dao_Transaction_NotInitialized {
-            get {
-                return ResourceManager.GetString("Notification_Dao_Transaction_NotInitialized", resourceCulture);
+                return ResourceManager.GetString("Notification_Dao_SchemaCreationFailed", resourceCulture);
             }
         }
         
@@ -1798,20 +1816,20 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_IntOnly.
-        /// </summary>
-        public static string Notification_Field_IntOnly {
-            get {
-                return ResourceManager.GetString("Notification_Field_IntOnly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Invalid.
         /// </summary>
         public static string Notification_Field_Invalid {
             get {
                 return ResourceManager.GetString("Notification_Field_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_WrongFormat.
+        /// </summary>
+        public static string Notification_Field_InvalidFormat {
+            get {
+                return ResourceManager.GetString("Notification_Field_InvalidFormat", resourceCulture);
             }
         }
         
@@ -1834,6 +1852,24 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_TooLong.
+        /// </summary>
+        public static string Notification_Field_MaxLength {
+            get {
+                return ResourceManager.GetString("Notification_Field_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_TooShort.
+        /// </summary>
+        public static string Notification_Field_MinLength {
+            get {
+                return ResourceManager.GetString("Notification_Field_MinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Necessary.
         /// </summary>
         public static string Notification_Field_Necessary {
@@ -1848,15 +1884,6 @@ namespace LOB.Core.Localization {
         public static string Notification_Field_Negative {
             get {
                 return ResourceManager.GetString("Notification_Field_Negative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_Nescessary.
-        /// </summary>
-        public static string Notification_Field_Nescessary {
-            get {
-                return ResourceManager.GetString("Notification_Field_Nescessary", resourceCulture);
             }
         }
         
@@ -1879,6 +1906,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_IntOnly.
+        /// </summary>
+        public static string Notification_Field_OnlyNumbers {
+            get {
+                return ResourceManager.GetString("Notification_Field_OnlyNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Positive.
         /// </summary>
         public static string Notification_Field_Positive {
@@ -1888,29 +1924,20 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Field_Required.
+        /// </summary>
+        public static string Notification_Field_Required {
+            get {
+                return ResourceManager.GetString("Notification_Field_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Field_Searching.
         /// </summary>
         public static string Notification_Field_Searching {
             get {
                 return ResourceManager.GetString("Notification_Field_Searching", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_TooLong.
-        /// </summary>
-        public static string Notification_Field_TooLong {
-            get {
-                return ResourceManager.GetString("Notification_Field_TooLong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_TooShort.
-        /// </summary>
-        public static string Notification_Field_TooShort {
-            get {
-                return ResourceManager.GetString("Notification_Field_TooShort", resourceCulture);
             }
         }
         
@@ -1938,15 +1965,6 @@ namespace LOB.Core.Localization {
         public static string Notification_Field_Updating {
             get {
                 return ResourceManager.GetString("Notification_Field_Updating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @Notification_Field_WrongFormat.
-        /// </summary>
-        public static string Notification_Field_WrongFormat {
-            get {
-                return ResourceManager.GetString("Notification_Field_WrongFormat", resourceCulture);
             }
         }
         
@@ -2059,6 +2077,15 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @Notification_Navigator_View_CouldNotBeLoaded.
+        /// </summary>
+        public static string Notification_Navigator_View_CouldNotBeLoaded {
+            get {
+                return ResourceManager.GetString("Notification_Navigator_View_CouldNotBeLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_Navigator_View_ResolveFirst.
         /// </summary>
         public static string Notification_Navigator_View_ResolveFirst {
@@ -2086,11 +2113,29 @@ namespace LOB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter is not a unique value.
+        /// </summary>
+        public static string Notification_Param_NotUnique {
+            get {
+                return ResourceManager.GetString("Notification_Param_NotUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @Notification_RequisitionFailed.
         /// </summary>
         public static string Notification_RequisitionFailed {
             get {
                 return ResourceManager.GetString("Notification_RequisitionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @Notification_RequisitionRetry.
+        /// </summary>
+        public static string Notification_RequisitionRetry {
+            get {
+                return ResourceManager.GetString("Notification_RequisitionRetry", resourceCulture);
             }
         }
         
@@ -2865,6 +2910,15 @@ namespace LOB.Core.Localization {
         public static string UI_ToolTip_Search {
             get {
                 return ResourceManager.GetString("UI_ToolTip_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @UI_ToolTip_TestDbConnection.
+        /// </summary>
+        public static string UI_ToolTip_TestDbConnection {
+            get {
+                return ResourceManager.GetString("UI_ToolTip_TestDbConnection", resourceCulture);
             }
         }
         

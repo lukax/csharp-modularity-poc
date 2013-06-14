@@ -1,25 +1,9 @@
-﻿#region Usings
-
-using System;
-using System.Diagnostics;
-
-#endregion
+﻿using System.Collections.Generic;
+using LOB.Domain.Base;
+using LOB.Domain.SubEntity;
 
 namespace LOB.Domain {
-    public class Shipper : LegalPerson, IEquatable<Shipper> {
-        #region Implementation of IEquatable<Shipper>
-
-        public bool Equals(Shipper other) {
-            try {
-                return base.Equals(other);
-            } catch(NullReferenceException ex) {
-#if DEBUG
-                Debug.WriteLine(ex.Message);
-#endif
-                return false;
-            }
-        }
-
-        #endregion
+    public class Shipper : LegalPerson {
+        public IEnumerable<Shipment> Shipments { get; set; }
     }
 }

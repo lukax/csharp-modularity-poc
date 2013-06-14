@@ -1,11 +1,10 @@
 ﻿#region Usings
 
-using LOB.UI.Interface.ViewModel.Controls.Alter.Base;
+using LOB.Domain;
+using LOB.UI.Contract.ViewModel.Controls.Alter.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.Alter {
-    public interface IAlterNaturalPersonViewModel : IAlterBaseEntityViewModel {
-        IAlterPersonViewModel AlterPersonViewModel { get; set; }
-    }
+namespace LOB.UI.Contract.ViewModel.Controls.Alter {
+    public interface IAlterNaturalPersonViewModel : IAlterBaseEntityViewModel<NaturalPerson> {}
 }

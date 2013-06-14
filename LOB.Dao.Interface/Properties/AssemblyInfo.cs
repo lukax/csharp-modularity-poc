@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-[assembly: AssemblyTitle("LOB.Dao.Interface")]
+[assembly: AssemblyTitle("LOB.Dao.Contract")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LOB.Dao.Interface")]
+[assembly: AssemblyProduct("LOB.Dao.Contract")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

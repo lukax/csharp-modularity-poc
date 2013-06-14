@@ -1,56 +1,162 @@
 #region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
+using LOB.Dao.Contract.Exception.Database;
 using LOB.Domain.Base;
-using Microsoft.Practices.Unity;
+using Microsoft.Practices.Prism.Logging;
 using NHibernate;
 using NHibernate.Linq;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate {
+    [Export(typeof(IRepository)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class Repository : IRepository {
-        protected ISession Session {
-            get { return Uow.As<UnityOfWork>().ORM.As<ISession>(); }
+        private ISession _ormAsSession;
+        [Import]
+        protected Lazy<ILoggerFacade> Logger { get; private set; }
+        protected ISession ORM {
+            get { return _ormAsSession ?? (_ormAsSession = Uow.Orm.As<ISession>()); }
         }
+        [Import]
         public IUnityOfWork Uow { get; private set; }
 
-        [InjectionConstructor]
-        public Repository(IUnityOfWork unityOfWork) { Uow = unityOfWork; }
-
-        public T Get<T>(object id) where T : BaseEntity { return Session.Get<T>(id); }
-        public T Load<T>(object id) where T : BaseEntity { return Session.Load<T>(id); }
+        public T Get<T>(object id) where T : BaseEntity {
+            try {
+                return ORM.Get<T>(id);
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public T Load<T>(object id) where T : BaseEntity {
+            try {
+                return ORM.Load<T>(id);
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
         public T Save<T>(T entity) where T : BaseEntity {
-            Session.Save(entity);
-            return entity;
+            try {
+                ORM.Save(entity);
+                return entity;
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
         }
         public T Update<T>(T entity) where T : BaseEntity {
-            Session.Update(entity);
-            return entity;
+            try {
+                ORM.Update(entity);
+                return entity;
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
         }
         public T SaveOrUpdate<T>(T entity) where T : BaseEntity {
-            Session.SaveOrUpdate(entity);
-            return entity;
+            try {
+                ORM.SaveOrUpdate(entity);
+                return entity;
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
         }
         public T SaveOrUpdateCopy<T>(T entity) where T : BaseEntity {
-            Session.SaveOrUpdate(entity);
-            return entity;
+            try {
+                ORM.SaveOrUpdate(entity);
+                return entity;
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
         }
-        public void Delete<T>(T entity) where T : BaseEntity { Session.Delete(entity); }
-        public void DeleteAll<T>() where T : BaseEntity { Session.Delete(string.Format("from {0}", typeof(T).Name)); }
-        public bool Contains<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(criteria)); }
-        public long Count<T>() where T : BaseEntity { return GetAll<T>().Count(); }
-        public long Count<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return GetAll(criteria).Count(); }
-        public bool Contains<T>(T entity) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(x => x == entity)); }
-        public IQueryable<T> GetAll<T>() where T : BaseEntity { return Session.Query<T>(); }
-        public IQueryable<T> GetAll<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity { return Session.Query<T>().Where(criteria); }
+        public void Delete<T>(T entity) where T : BaseEntity {
+            try {
+                ORM.Delete(entity);
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public void DeleteAll<T>() where T : BaseEntity {
+            try {
+                ORM.Delete(string.Format("from {0}", typeof(T).Name));
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public bool Contains<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity {
+            try {
+                return ORM.Query<T>().Contains(ORM.Query<T>().FirstOrDefault(criteria));
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public long Count<T>() where T : BaseEntity {
+            try {
+                return GetAll<T>().Count();
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public long Count<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity {
+            try {
+                return GetAll(criteria).Count();
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public bool Contains<T>(T entity) where T : BaseEntity {
+            try {
+                return ORM.Query<T>().Contains(ORM.Query<T>().FirstOrDefault(x => x == entity));
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public IQueryable<T> GetAll<T>() where T : BaseEntity {
+            try {
+                return ORM.Query<T>();
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
+        public IQueryable<T> GetAll<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity {
+            try {
+                return ORM.Query<T>().Where(criteria);
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
         public T GetOne<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity {
-            var temp = Session.Query<T>().FirstOrDefault();
-            return temp == default(T) ? null : temp;
+            try {
+                T temp = ORM.Query<T>().FirstOrDefault();
+                return temp == default(T) ? null : temp;
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
         }
-        public bool Contains<T>(int code) where T : BaseEntity { return Session.Query<T>().Contains(Session.Query<T>().FirstOrDefault(x => x.Code == code)); }
+        public bool Contains<T>(int code) where T : BaseEntity {
+            try {
+                return ORM.Query<T>().Contains(ORM.Query<T>().FirstOrDefault(x => x.Code == code));
+            } catch(ADOException ex) {
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
+                throw new DatabaseQueryException();
+            }
+        }
     }
 }

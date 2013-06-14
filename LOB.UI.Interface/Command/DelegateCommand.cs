@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace LOB.UI.Interface.Command {
+namespace LOB.UI.Contract.Command {
     public class DelegateCommand : ICommand {
         private readonly Predicate<object> _canExecute;
         private readonly Action<Object> _execute;
@@ -17,10 +17,7 @@ namespace LOB.UI.Interface.Command {
 
         public void Execute(object parameter) { _execute(parameter); }
 
-        public bool CanExecute(object parameter) {
-            if(_canExecute != null) return _canExecute(parameter);
-            return true;
-        }
+        public bool CanExecute(object parameter) { return _canExecute == null || _canExecute(parameter); }
 
         public event EventHandler CanExecuteChanged {
             add { CommandManager.RequerySuggested += value; }

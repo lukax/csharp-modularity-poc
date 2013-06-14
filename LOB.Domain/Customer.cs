@@ -12,17 +12,18 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class Customer : BaseEntity, IEquatable<Customer> {
+        public CustomerStatus Status { get; set; }
         public Person Person { get; set; }
         public PersonType PersonType { get; set; }
-        public IList<Store> CustomerOf { get; set; }
-        public CustomerStatus Status { get; set; }
-        public IList<Sale> BoughtHistory { get; set; }
+        public IEnumerable<Company> AssociatedCompanies { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
         #region Implementation of IEquatable<Customer>
 
         public bool Equals(Customer other) {
             try {
                 return base.Equals(other) && other.Person.Equals(other) && other.PersonType.Equals(PersonType) &&
-                       other.CustomerOf.SequenceEqual(CustomerOf) && other.Status.Equals(Status) && other.BoughtHistory.SequenceEqual(BoughtHistory);
+                       other.AssociatedCompanies.SequenceEqual(AssociatedCompanies) && other.Status.Equals(Status) &&
+                       other.Orders.SequenceEqual(Orders);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -41,13 +42,13 @@ namespace LOB.Domain {
         Inactive
     }
 
-    public static class CustomerExtensions {
+    public static class CustomerExtension {
         public static IDictionary<CustomerStatus, string> CustomerStatusLocalizationsDict {
             get {
                 return new Dictionary<CustomerStatus, string> {
-                    {CustomerStatus.New, Strings.Common_New},
-                    {CustomerStatus.Active, Strings.Common_Active},
-                    {CustomerStatus.Inactive, Strings.Common_Inactive}
+                        {CustomerStatus.New, Strings.Common_New},
+                        {CustomerStatus.Active, Strings.Common_Active},
+                        {CustomerStatus.Inactive, Strings.Common_Inactive}
                 };
             }
         }

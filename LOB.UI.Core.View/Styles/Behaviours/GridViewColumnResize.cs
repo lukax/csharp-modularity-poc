@@ -123,10 +123,12 @@ namespace LOB.UI.Core.View.Styles.Behaviours {
 
             public void SetWidth(double allowedSpace, double totalPercentage) {
                 if(IsStatic) _element.Width = StaticWidth;
-                else {
-                    double width = allowedSpace*(Percentage/totalPercentage);
-                    _element.Width = width;
-                }
+                else
+                    unchecked {
+                        double width = allowedSpace*(Percentage/totalPercentage);
+                        if(width < 1) return;
+                        _element.Width = width;
+                    }
             }
         }
 

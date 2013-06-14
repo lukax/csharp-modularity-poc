@@ -1,9 +1,9 @@
 ﻿#region Usings
 
-using LOB.UI.Interface.ViewModel.Controls.List.Base;
+using LOB.UI.Contract.ViewModel.Controls.List.Base;
 
 #endregion
 
-namespace LOB.UI.Interface.ViewModel.Controls.List {
+namespace LOB.UI.Contract.ViewModel.Controls.List {
     public interface IListCustomerViewModel : IListPersonViewModel {}
 }

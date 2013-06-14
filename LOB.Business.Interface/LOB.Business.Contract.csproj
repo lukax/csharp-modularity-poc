@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2C4999EC-85EC-49FB-8236-8CF74F71EC2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LOB.Business.Contract</RootNamespace>
+    <AssemblyName>LOB.Business.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exception\Base\GenericBusinessException.cs" />
+    <Compile Include="Exception\EntityGenerateException.cs" />
+    <Compile Include="Exception\EntityGenerateIdException.cs" />
+    <Compile Include="Exception\EntityValidationException.cs" />
+    <Compile Include="Logic\Base\IBaseEntityFacade.cs" />
+    <Compile Include="Logic\SubEntity\IPersonFacade.cs" />
+    <Compile Include="Logic\INaturalPersonFacade.cs" />
+    <Compile Include="Logic\ICustomerFacade.cs" />
+    <Compile Include="Logic\IEmployeeFacade.cs" />
+    <Compile Include="Logic\ILegalPersonFacade.cs" />
+    <Compile Include="Logic\IProductFacade.cs" />
+    <Compile Include="Logic\IOrderFacade.cs" />
+    <Compile Include="Logic\IStoreFacade.cs" />
+    <Compile Include="Logic\SubEntity\IPayCheckFacade.cs" />
+    <Compile Include="Logic\SubEntity\IPhoneNumberFacade.cs" />
+    <Compile Include="Logic\IShipmentFacade.cs" />
+    <Compile Include="Logic\SubEntity\IEmailFacade.cs" />
+    <Compile Include="Logic\SubEntity\IAddressFacade.cs" />
+    <Compile Include="Logic\SubEntity\ICategoryFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
+      <Project>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</Project>
+      <Name>LOB.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
+      <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
+      <Name>LOB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

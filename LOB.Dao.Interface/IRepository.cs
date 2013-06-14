@@ -7,7 +7,7 @@ using LOB.Domain.Base;
 
 #endregion
 
-namespace LOB.Dao.Interface {
+namespace LOB.Dao.Contract {
     public interface IRepository {
         IUnityOfWork Uow { get; }
         T Get<T>(object id) where T : BaseEntity;

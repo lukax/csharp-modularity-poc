@@ -1,11 +1,15 @@
 ﻿#region Usings
 
-using LOB.UI.Interface.Infrastructure;
+using System;
+using LOB.UI.Contract.Infrastructure;
 
 #endregion
 
-namespace LOB.UI.Interface {
+namespace LOB.UI.Contract {
     public interface IBaseViewModel : IUIComponent {
+        Guid Id { get; }
+        ViewState ViewState { get; }
+        bool IsChild { get; }
         void InitializeServices();
         void Refresh();
     }

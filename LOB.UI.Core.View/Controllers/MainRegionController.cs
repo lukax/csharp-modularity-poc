@@ -1,86 +1,67 @@
 ﻿#region Usings
 
 using System;
-using LOB.UI.Core.Events.View;
+using System.ComponentModel.Composition;
+using LOB.UI.Contract.Controller;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Core.Event.View;
 using LOB.UI.Core.Infrastructure;
-using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Core.ViewModel.Controls.Main;
-using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.ServiceLocation;
-using NullGuard;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controllers {
-    public class MainRegionController : IDisposable {
-        private readonly IServiceLocator _container;
-        private readonly IEventAggregator _eventAggregator;
-        private readonly ILoggerFacade _logger;
-        private readonly IFluentNavigator _navigator;
-        private readonly IRegionAdapter _regionAdapter;
-        //private readonly BackgroundWorker _worker = new BackgroundWorker();
-
-        public MainRegionController(IServiceLocator container, IRegionAdapter regionAdapter, IEventAggregator eventAggregator, ILoggerFacade logger,
-            IFluentNavigator navigator) {
-            _container = container;
-            _regionAdapter = regionAdapter;
-            _eventAggregator = eventAggregator;
-            _logger = logger;
-            _navigator = navigator;
-
-            OnLoad();
+    [Export, PartCreationPolicy(CreationPolicy.Shared)]
+    public sealed class MainRegionController : IBaseController {
+        [Import] private IEventAggregator EventAggregator {
+            set {
+                _openViewEventSubscription = value.GetEvent<OpenViewInfoEvent>().Subscribe(OpenViewInfo, true);
+                _openViewEventSubscription = value.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
+                _closeViewEventSubscription = value.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
+            }
         }
+        [Import] private Lazy<ILoggerFacade> Logger { get; set; }
+        [Import] private Lazy<IFluentNavigator> Navigator { get; set; }
+        [Import] private Lazy<IRegionAdapter> RegionAdapter { get; set; }
 
         private SubscriptionToken _openViewEventSubscription;
         private SubscriptionToken _closeViewEventSubscription;
-        private void OnLoad() {
-            _openViewEventSubscription = _eventAggregator.GetEvent<OpenViewEvent>().Subscribe(OpenView, true);
-            _closeViewEventSubscription = _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(CloseView, true);
-            //_eventAggregator.GetEvent<MessageShowEvent>().Subscribe(s => MessageShow(s), true);
-            //_eventAggregator.GetEvent<MessageHideEvent>().Subscribe(MessageHide, true);
+
+        private void OpenView(OpenViewPayload openViewPayload) {
+            if(openViewPayload.ViewState == ViewState.QuickSearch) Navigator.Value.Init.ResolveView(openViewPayload.ViewType).AddToRegion(RegionName.ModalRegion);
+            else Navigator.Value.Init.ResolveView(openViewPayload.ViewType).AddToRegion(RegionName.TabRegion);
+            if(openViewPayload.GetIdFunc != null) openViewPayload.GetIdFunc(Navigator.Value.GetViewId);
         }
 
-        private void OpenView(ViewID param) {
-            if(param.Type == default(ViewType)) throw new ArgumentNullException("param");
-            param.IsChild = false;
-            if(param.State == ViewState.QuickSearch) QuickSearch(param);
-            else _navigator.Init.ResolveView(param).ResolveViewModel(param).AddToRegion(RegionName.TabRegion);
+        private void OpenViewInfo(OpenViewInfoPayload openViewInfoPayload) {
+            if(openViewInfoPayload.ViewInfo.ViewStates != null && openViewInfoPayload.ViewInfo.ViewStates[0] == ViewState.QuickSearch) Navigator.Value.Init.ResolveView(openViewInfoPayload.ViewInfo).AddToRegion(RegionName.ModalRegion);
+            else Navigator.Value.Init.ResolveView(openViewInfoPayload.ViewInfo).AddToRegion(RegionName.TabRegion);
+            if(openViewInfoPayload.GetIdFunc != null) openViewInfoPayload.GetIdFunc(Navigator.Value.GetViewId);
         }
 
-        private void QuickSearch(ViewID param) {
-            if(param.Type == default(ViewType)) throw new ArgumentException("param");
-            var view = _navigator.Init.ResolveView(param).ResolveViewModel(param).GetView();
-            var baseViewModel = view.ViewModel as BaseViewModel;
-            if(baseViewModel != null) baseViewModel.ViewID = new ViewID {State = ViewState.QuickSearch, Type = view.ViewID.Type};
-            // Let the IuiComponentModel know that it's in QuickSearch State
-            _regionAdapter.AddView(view, RegionName.ModalRegion);
-        }
-
-        private void CloseView(ViewID param) {
+        private void CloseView(CloseViewPayload closeViewPayload) {
             try {
-                if(param.State != ViewState.QuickSearch) _regionAdapter.RemoveView(param, RegionName.TabRegion);
-                else if(param.State == ViewState.QuickSearch) _regionAdapter.RemoveView(param, RegionName.ModalRegion);
+                RegionAdapter.Value.Remove(RegionAdapter.Value.Get(closeViewPayload.ViewId));
             } catch(Exception ex) {
-                _logger.Log(ex.Message, Category.Exception, Priority.High);
+                Logger.Value.Log(ex.Message, Category.Exception, Priority.High);
                 MessageHide(ex.Message);
             }
         }
 
         public void MessageShow(string param, bool isRestrictive = true) {
-            MessageHide(null);
-            var viewModel = _container.GetInstance<MessageToolViewModel>();
-            viewModel.Initialize(param, !isRestrictive, isRestrictive);
-            _navigator.Init.ResolveView(new ViewID {Type = ViewType.MessageTool}).SetViewModel(viewModel).AddToRegion(RegionName.ModalRegion);
+            //MessageHide(null);
+            //var viewModel = _container.GetInstance<MessageToolViewModel>();
+            //viewModel.Initialize(param, !isRestrictive, isRestrictive);
+            //_navigator.Init.ResolveView(new ViewModelInfo {Type = ViewType.MessageTool}).SetViewModel(() => viewModel).AddToRegion(RegionName.ModalRegion);
         }
 
-        public void MessageHide([AllowNull] string param) {
-            _regionAdapter.RemoveView(new ViewID {Type = ViewType.MessageTool}, RegionName.ModalRegion);
+        public void MessageHide(string param) {
+            //_regionAdapter.Remove(new ViewModelInfo {Type = ViewType.MessageTool}, RegionName.ModalRegion);
 
-            if(param != null) MessageShow(param, false);
-            //await Task.Delay(4000);
-            //MessageHide(null);
+            //if(param != null) MessageShow(param, false);
+            ////await Task.Delay(4000);
+            ////MessageHide(null);
         }
         #region Implementation of IDisposable
 

@@ -1,13 +1,13 @@
-﻿#region Usings
-
-using LOB.UI.Interface.Infrastructure;
-
-#endregion
-
-namespace LOB.UI.Interface {
+﻿namespace LOB.UI.Contract {
+    /// <summary>
+    ///     Internal usage only
+    /// </summary>
     public interface IBaseView : IUIComponent {
-        IBaseViewModel ViewModel { get; set; }
-        int Index { get; set; }
-        void Refresh();
+        //int Index { get; set; }
+        //void Refresh();
+    }
+
+    public interface IBaseView<out TViewModel> : IBaseView where TViewModel : IBaseViewModel {
+        TViewModel ViewModel { get; }
     }
 }

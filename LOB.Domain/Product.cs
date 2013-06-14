@@ -11,37 +11,33 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Domain {
     [Serializable]
-    public class Product : BaseEntity, IEquatable<Product> {
-        public Category Category { get; set; }
+    public class Product : Merchandise, IEquatable<Product> {
         public ProductStatus Status { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int CodBarras { get; set; }
-        public int CodNCM { get; set; }
+        public Category Category { get; set; }
+        public int CodeBarras { get; set; }
+        public int CodeNCM { get; set; }
         public int CFOP { get; set; }
         public byte[] Image { get; set; }
-        public int UnitsInStock { get; set; }
-        public int MaxUnitsOfStock { get; set; }
-        public int MinUnitsOfStock { get; set; }
-        public double UnitCostPrice { get; set; }
-        public double UnitSalePrice { get; set; }
-        public double ProfitMargin { get; set; }
-        public string QuantityPerUnit { get; set; }
-        public IList<Store> StockedStores { get; set; }
-        public IList<Sale> Sales { get; set; }
-        public IList<Supplier> Suppliers { get; set; }
-        public ShipmentInfo ShipmentInfo { get; set; }
+        public Stock Stock { get; set; }
+        public IEnumerable<Company> AssociatedCompanies { get; set; }
+        public IEnumerable<Order> AssociatedOrders { get; set; }
+        public IEnumerable<Supplier> Suppliers { get; set; }
         #region Implementation of IEquatable<Product>
 
         public bool Equals(Product other) {
             try {
-                return base.Equals(other) && other.Category.Equals(Category) && other.Status.Equals(Status) && other.CodBarras.Equals(CodBarras) &&
-                       other.CodNCM.Equals(CodNCM) && other.CFOP.Equals(CFOP) && other.Image.Equals(Image) && other.UnitsInStock.Equals(UnitsInStock) &&
-                       other.MaxUnitsOfStock.Equals(MaxUnitsOfStock) && other.MinUnitsOfStock.Equals(MinUnitsOfStock) &&
-                       Equals(other.UnitCostPrice, UnitCostPrice) && Equals(other.UnitSalePrice, UnitSalePrice) &&
-                       Equals(other.ProfitMargin, ProfitMargin) && other.QuantityPerUnit.Equals(QuantityPerUnit) &&
-                       other.StockedStores.SequenceEqual(StockedStores) && other.Sales.SequenceEqual(Sales) &&
-                       other.Suppliers.SequenceEqual(Suppliers) && other.ShipmentInfo.Equals(ShipmentInfo);
+                return
+                        base.Equals(other) &&
+                        other.Status.Equals(Status) &&
+                        other.Category.Equals(Category) &&
+                        other.CodeBarras.Equals(CodeBarras) &&
+                        other.CodeNCM.Equals(CodeNCM) &&
+                        other.CFOP.Equals(CFOP) &&
+                        other.Image.Equals(Image) &&
+                        other.Stock.Equals(Stock) &&
+                        other.AssociatedCompanies.SequenceEqual(AssociatedCompanies) &&
+                        other.AssociatedOrders.SequenceEqual(AssociatedOrders) &&
+                        other.Suppliers.SequenceEqual(Suppliers);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -62,7 +58,7 @@ namespace LOB.Domain {
         Discontinued
     }
 
-    public static class ProductStatusExtensions {
+    public static class ProductStatusExtension {
         public static ProductStatus ToProductStatus(this string s) { return default(ProductStatus); }
         public static string ToLocalizedString(this ProductStatus s) { return ""; }
     }

@@ -9,9 +9,9 @@ namespace LOB.Dao.Nhibernate.Mapping {
     public class CustomerMap : BaseEntityMap<Customer> {
         public CustomerMap() {
             References(x => x.Person).Cascade.All();
-            HasManyToMany(x => x.CustomerOf);
+            HasManyToMany(x => x.AssociatedCompanies);
             Map(x => x.Status);
-            HasMany(x => x.BoughtHistory);
+            HasMany(x => x.Orders);
             Map(x => x.PersonType);
         }
     }

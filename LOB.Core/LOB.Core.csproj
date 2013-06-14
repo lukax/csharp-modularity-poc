@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{79FB165F-3816-4A5F-B5A1-B5A64BED0218}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LOB.Core</RootNamespace>
     <AssemblyName>LOB.Core</AssemblyName>
@@ -66,15 +66,16 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.0.1304.0\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.0.1304.0\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
-    <Reference Include="System.Drawing" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -84,15 +85,14 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Licensing\ProductLicense.cs" />
-    <Compile Include="Localization\StringsExtensions.cs" />
-    <Compile Include="Start.cs" />
+    <Compile Include="Localization\StringsExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\TrialMaker.cs" />
     <Compile Include="Util\ImageUtility.cs" />
     <Compile Include="Util\MThreadObservableCollection.cs" />
     <Compile Include="Util\RegistryUtility.cs" />
     <Compile Include="Util\StringWrapper.cs" />
-    <Compile Include="Util\UtilExtensions.cs" />
+    <Compile Include="Util\UtilExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -126,7 +126,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="Fody.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

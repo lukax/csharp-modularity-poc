@@ -1,10 +1,8 @@
 ﻿#region Usings
 
 using System;
-using System.Windows.Controls;
-using LOB.Core.Localization;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
+using System.ComponentModel.Composition;
+using LOB.UI.Contract;
 
 #endregion
 
@@ -12,17 +10,11 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for BusyIuiComponent.xaml
     /// </summary>
-    public partial class BusyView : UserControl, IBaseView {
+    [Export]
+    public partial class BusyView : IBaseView<IBaseViewModel> {
         public BusyView() { InitializeComponent(); }
 
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         public IBaseViewModel ViewModel { get; set; }
-
-        public string Header {
-            get { return Strings.UI_Header_Main_Busy; }
-        }
 
         public int Index { get; set; }
 

@@ -1,28 +1,23 @@
 ﻿#region Usings
 
-using LOB.Dao.Interface;
-using LOB.Log.Interface;
+using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.Dao.Nhibernate.Modularity {
-    [Module(ModuleName = "NHibernateModule")]
+    [ModuleExport("DaoModule", typeof(Module), DependsOnModuleNames = new[] {"LogModule"})]
     public class Module : IModule {
-        private readonly IUnityContainer _container;
-
-        public Module(IUnityContainer container) { _container = container; }
+#if DEBUG
+        [Import]
+        public ILoggerFacade LoggerFacade { get; set; }
+#endif
 
         public void Initialize() {
-            _container.RegisterType<ISessionFactoryCreator, SessionFactoryCreator>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<IUnityOfWork, UnityOfWork>();
-            _container.RegisterType<IRepository, Repository>();
-
 #if DEBUG
-            var log = _container.Resolve<ILogger>();
-            log.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);
+            LoggerFacade.Log("NhibernateModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
     }

@@ -1,3 +1,3 @@
-﻿namespace LOB.UI.Interface.ViewModel.Controls.List {
+﻿namespace LOB.UI.Contract.ViewModel.Controls.List {
     public interface IListOpViewModel : IBaseViewModel {}
 }

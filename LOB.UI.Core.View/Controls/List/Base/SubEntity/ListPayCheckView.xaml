@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="LOB.UI.Core.View.Controls.List.SubEntity.ListPayCheckView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:loc="clr-namespace:LOB.Core.Localization;assembly=LOB.Core"
+             xmlns:base="clr-namespace:LOB.UI.Core.View.Controls.List.Base"
+             xmlns:util="clr-namespace:LOB.UI.Core.View.Controls.Util"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/LOB.UI.Core.View;component/Skins/MetroSkin.xaml" />
+    </UserControl.Resources>
+
+    <Border BorderThickness="2" BorderBrush="{DynamicResource AccentBrush2}" Background="{DynamicResource Foreground}">
+        <StackPanel Margin="2">
+            <base:ListBaseEntityView x:Name="ViewListBaseEntity" />
+            <ListView ItemsSource="{Binding Entities, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Entity}"
+                      SelectionMode="Single">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_CurrentSalary}"
+                                        DisplayMemberBinding="{Binding CurrentSalary}" />
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Bonus}"
+                                        DisplayMemberBinding="{Binding Bonus}" />
+                        <GridViewColumn Header="{x:Static loc:Strings.Common_Ps}"
+                                        DisplayMemberBinding="{Binding PS}" />
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <util:ListContextToolMenuView x:Name="ViewListContextTool" />
+                </ListView.ContextMenu>
+            </ListView>
+        </StackPanel>
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="4" Direction="50" />
+        </Border.Effect>
+    </Border>
+</UserControl>

@@ -483,7 +483,7 @@
   <data name="Notification_Field_Empty" xml:space="preserve">
     <value>@Notification_Field_Empty</value>
   </data>
-  <data name="Notification_Field_IntOnly" xml:space="preserve">
+  <data name="Notification_Field_OnlyNumbers" xml:space="preserve">
     <value>@Notification_Field_IntOnly</value>
   </data>
   <data name="Notification_Field_Necessary" xml:space="preserve">
@@ -495,13 +495,13 @@
   <data name="Notification_Field_NotNecessary" xml:space="preserve">
     <value>@Notification_Field_NotNecessary</value>
   </data>
-  <data name="Notification_Field_TooLong" xml:space="preserve">
+  <data name="Notification_Field_MaxLength" xml:space="preserve">
     <value>@Notification_Field_TooLong</value>
   </data>
-  <data name="Notification_Field_TooShort" xml:space="preserve">
+  <data name="Notification_Field_MinLength" xml:space="preserve">
     <value>@Notification_Field_TooShort</value>
   </data>
-  <data name="Notification_Field_WrongFormat" xml:space="preserve">
+  <data name="Notification_Field_InvalidFormat" xml:space="preserve">
     <value>@Notification_Field_WrongFormat</value>
   </data>
   <data name="Notification_Field_Invalid" xml:space="preserve">
@@ -786,8 +786,8 @@
   <data name="Notification_Field_Negative" xml:space="preserve">
     <value>@Notification_Field_Negative</value>
   </data>
-  <data name="Notification_Field_Nescessary" xml:space="preserve">
-    <value>@Notification_Field_Nescessary</value>
+  <data name="Notification_Field_Required" xml:space="preserve">
+    <value>@Notification_Field_Required</value>
   </data>
   <data name="Notification_Field_Positive" xml:space="preserve">
     <value>@Notification_Field_Positive</value>
@@ -999,16 +999,16 @@
   <data name="Notification_Field_X_Valid" xml:space="preserve">
     <value>@Notification_Field_X_Valid</value>
   </data>
-  <data name="Notification_Dao_Transaction_AlreadyActivated" xml:space="preserve">
+  <data name="Notification_Dao_AlreadyActivated" xml:space="preserve">
     <value>@Notification_Dao_Transaction_AlreadyActivated</value>
   </data>
-  <data name="Notification_Dao_Transaction_AlreadyInitialized" xml:space="preserve">
+  <data name="Notification_Dao_AlreadyInitialized" xml:space="preserve">
     <value>@Notification_Dao_Transaction_AlreadyInitialized</value>
   </data>
-  <data name="Notification_Dao_Transaction_NotActivated" xml:space="preserve">
+  <data name="Notification_Dao_NotActivated" xml:space="preserve">
     <value>@Notification_Dao_Transaction_NotActivated</value>
   </data>
-  <data name="Notification_Dao_Transaction_NotInitialized" xml:space="preserve">
+  <data name="Notification_Dao_NotInitialized" xml:space="preserve">
     <value>@Notification_Dao_Transaction_NotInitialized</value>
   </data>
   <data name="Common_LegalPerson" xml:space="preserve">
@@ -1058,5 +1058,23 @@
   </data>
   <data name="Common_ClearAll" xml:space="preserve">
     <value>@Common_ClearAll</value>
+  </data>
+  <data name="Notification_Param_NotUnique" xml:space="preserve">
+    <value>Parameter is not a unique value</value>
+  </data>
+  <data name="UI_ToolTip_TestDbConnection" xml:space="preserve">
+    <value>@UI_ToolTip_TestDbConnection</value>
+  </data>
+  <data name="Notification_RequisitionRetry" xml:space="preserve">
+    <value>@Notification_RequisitionRetry</value>
+  </data>
+  <data name="Notification_Navigator_View_CouldNotBeLoaded" xml:space="preserve">
+    <value>@Notification_Navigator_View_CouldNotBeLoaded</value>
+  </data>
+  <data name="Notification_Dao_InternalError" xml:space="preserve">
+    <value>@Notification_Dao_InternalError</value>
+  </data>
+  <data name="Notification_Dao_SchemaCreationFailed" xml:space="preserve">
+    <value>@Notification_Dao_SchemaCreationFailed</value>
   </data>
 </root>

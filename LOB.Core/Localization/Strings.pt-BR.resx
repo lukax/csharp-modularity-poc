@@ -480,7 +480,7 @@
   <data name="Notification_Field_Empty" xml:space="preserve">
     <value>Campo vazio</value>
   </data>
-  <data name="Notification_Field_IntOnly" xml:space="preserve">
+  <data name="Notification_Field_OnlyNumbers" xml:space="preserve">
     <value>Campo suporta apenas números</value>
   </data>
   <data name="Notification_Field_Necessary" xml:space="preserve">
@@ -492,13 +492,13 @@
   <data name="Notification_Field_NotNecessary" xml:space="preserve">
     <value>Campo não nescessário</value>
   </data>
-  <data name="Notification_Field_TooLong" xml:space="preserve">
+  <data name="Notification_Field_MaxLength" xml:space="preserve">
     <value>Campo excedeu limite de caracters</value>
   </data>
-  <data name="Notification_Field_TooShort" xml:space="preserve">
+  <data name="Notification_Field_MinLength" xml:space="preserve">
     <value>Campo nescessita o mínimo de caracters</value>
   </data>
-  <data name="Notification_Field_WrongFormat" xml:space="preserve">
+  <data name="Notification_Field_InvalidFormat" xml:space="preserve">
     <value>Campo com formato inválido</value>
   </data>
   <data name="Notification_Info" xml:space="preserve">
@@ -777,7 +777,7 @@
   <data name="Notification_Field_Negative" xml:space="preserve">
     <value>Campo Negativo</value>
   </data>
-  <data name="Notification_Field_Nescessary" xml:space="preserve">
+  <data name="Notification_Field_Required" xml:space="preserve">
     <value>Campo Nescessário</value>
   </data>
   <data name="Notification_Field_Positive" xml:space="preserve">
@@ -1002,16 +1002,16 @@
   <data name="Notification_Field_X_Valid" xml:space="preserve">
     <value>{0} Válido</value>
   </data>
-  <data name="Notification_Dao_Transaction_AlreadyActivated" xml:space="preserve">
+  <data name="Notification_Dao_AlreadyActivated" xml:space="preserve">
     <value>Transação do banco de dados já foi Ativada</value>
   </data>
-  <data name="Notification_Dao_Transaction_AlreadyInitialized" xml:space="preserve">
+  <data name="Notification_Dao_AlreadyInitialized" xml:space="preserve">
     <value>Transação do banco de dados já foi Inicializada</value>
   </data>
-  <data name="Notification_Dao_Transaction_NotActivated" xml:space="preserve">
+  <data name="Notification_Dao_NotActivated" xml:space="preserve">
     <value>Transação do banco de dados não ativada</value>
   </data>
-  <data name="Notification_Dao_Transaction_NotInitialized" xml:space="preserve">
+  <data name="Notification_Dao_NotInitialized" xml:space="preserve">
     <value>Transação do banco de dados não inicializada</value>
   </data>
   <data name="Common_LegalPerson" xml:space="preserve">
@@ -1061,5 +1061,14 @@
   </data>
   <data name="Common_ClearAll" xml:space="preserve">
     <value>Limpar todos</value>
+  </data>
+  <data name="UI_ToolTip_TestDbConnection" xml:space="preserve">
+    <value>Testar Conexão ao Banco de Dados</value>
+  </data>
+  <data name="Notification_RequisitionRetry" xml:space="preserve">
+    <value>Executando requisição novamente...</value>
+  </data>
+  <data name="Notification_Navigator_View_CouldNotBeLoaded" xml:space="preserve">
+    <value>Parte visual não pode ser carregada</value>
   </data>
 </root>

@@ -16,14 +16,14 @@ namespace LOB.Util.Native.Test {
 
         [TestMethod]
         public void PowerTest() {
-            var result = Power(5, 3);
+            double result = Power(5, 3);
             Assert.AreEqual(125, result);
         }
 
         [TestMethod]
         public void RandomTest() {
-            var result1 = Random();
-            var result2 = Random();
+            double result1 = Random();
+            double result2 = Random();
             Assert.AreNotEqual(result1, result2, "1: " + result1 + " 2: " + result2);
         }
     }

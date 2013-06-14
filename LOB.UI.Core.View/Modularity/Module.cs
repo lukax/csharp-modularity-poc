@@ -1,49 +1,44 @@
 ﻿#region Usings
 
-using System.Diagnostics.CodeAnalysis;
-using LOB.Log.Interface;
+using System.ComponentModel.Composition;
+using LOB.UI.Contract;
+using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.Infrastructure;
 using LOB.UI.Core.View.Actions;
 using LOB.UI.Core.View.Controllers;
-using LOB.UI.Core.View.Controls.Main;
-using LOB.UI.Core.View.Infrastructure;
-using LOB.UI.Interface.Infrastructure;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
-using IRegionAdapter = LOB.UI.Interface.Infrastructure.IRegionAdapter;
+using IRegionAdapter = LOB.UI.Contract.Infrastructure.IRegionAdapter;
 
 #endregion
 
 namespace LOB.UI.Core.View.Modularity {
-    [Module(ModuleName = "UICoreViewModule")]
+    [ModuleExport("UICoreViewModule", typeof(Module), DependsOnModuleNames = new[] {"LogModule", "UICoreModule"},
+        InitializationMode = InitializationMode.OnDemand)]
     public class Module : IModule {
-        private readonly IUnityContainer _container;
+        private readonly ILoggerFacade _loggerFacade;
+        private readonly IRegionManager _regionManager;
+        private readonly IRegionAdapter _regionAdapter;
+        [Import] private MainRegionController _mainRegionController;
 
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")] // ReSharper disable NotAccessedField.Local
-        private MainRegionController _mainRegionController;
-// ReSharper restore NotAccessedField.Local
-
-        public Module(IUnityContainer container) { _container = container; }
+        [ImportingConstructor]
+        public Module(ILoggerFacade loggerFacade, IRegionManager regionManager, IRegionAdapter regionAdapter) {
+            _loggerFacade = loggerFacade;
+            _regionManager = regionManager;
+            _regionAdapter = regionAdapter;
+        }
 
         public void Initialize() {
-            _container.RegisterType<IFluentNavigator, FluentNavigator>();
-            _container.RegisterType<IRegionAdapter, RegionAdapter>( );
+            _regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(IBaseView<IHeaderToolViewModel>));
+            _regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(IBaseView<IColumnToolViewModel>));
+            _regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(IBaseView<INotificationToolViewModel>));
 
-            var regionManager = _container.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion(RegionName.HeaderRegion, typeof(HeaderToolView));
-            regionManager.RegisterViewWithRegion(RegionName.ColumnRegion, typeof(ColumnToolView));
-            regionManager.RegisterViewWithRegion(RegionName.BottomRegion, typeof(NotificationToolView));
+            CloseTabItemAction.RegionAdapter = _regionAdapter;
 
-            CloseTabItemAction.Container = _container.Resolve<IServiceLocator>();
-
-            //Init controller
-            _mainRegionController = _container.Resolve<MainRegionController>();
 #if DEBUG
-            var log = _container.Resolve<ILogger>();
-            log.Log("UICoreViewModule Initialized", Category.Debug, Priority.Medium);
+            _loggerFacade.Log("UICoreViewModule Initialized", Category.Debug, Priority.Medium);
 #endif
         }
     }

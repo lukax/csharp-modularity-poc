@@ -5,7 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,8 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LOB.Dao.Nhibernate.Test {
     [TestClass]
     public class PersistFactoryTest {
-        [Import("Sql")]
-        public IRepository Repository { get; set; }
+        [Import("Sql")] public IRepository Repository { get; set; }
 
         [TestMethod]
         public void GetInstanceTest() {
@@ -57,7 +56,7 @@ namespace LOB.Dao.Nhibernate.Test {
             private class Inner {
                 public readonly IUnityContainer Container;
 
-                [InjectionConstructor]
+                [ImportingConstructor]
                 public Inner(IUnityContainer container) { Container = container; }
             }
         }

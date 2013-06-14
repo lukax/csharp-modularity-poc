@@ -54,44 +54,34 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism">
+    <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
-      <HintPath>..\packages\Prism.UnityExtensions.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Prism.MefExtensions">
+      <HintPath>..\packages\Prism.MEFExtensions.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NullGuard">
-      <HintPath>..\packages\NullGuard.Fody.0.5.1.2\lib\portable-net4+sl4+wp7+win8\NullGuard.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <None Include="Fody.targets" />
-    <None Include="FodyWeavers.xml" />
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\ShipperMap.cs" />
+    <Compile Include="OrmFactoryConfiguration.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
-    <Compile Include="Mapping\CommandMap.cs" />
     <Compile Include="Mapping\SubEntity\PhoneNumberMap.cs" />
     <Compile Include="Mapping\SubEntity\EmailMap.cs" />
     <Compile Include="Mapping\EmployeeMap.cs" />
@@ -99,19 +89,18 @@
     <Compile Include="Mapping\NaturalPersonMap.cs" />
     <Compile Include="Mapping\SubEntity\PayCheckMap.cs" />
     <Compile Include="Mapping\ProductMap.cs" />
-    <Compile Include="Mapping\SubEntity\ShipmentInfoMap.cs" />
+    <Compile Include="Mapping\ShipmentMap.cs" />
     <Compile Include="Mapping\SubEntity\CategoryMap.cs" />
-    <Compile Include="Mapping\SubEntity\AdressMap.cs" />
-    <Compile Include="Mapping\SubEntity\ContactInfoMap.cs" />
-    <Compile Include="Mapping\SaleMap.cs" />
-    <Compile Include="Mapping\Base\PersonMap.cs" />
+    <Compile Include="Mapping\SubEntity\AddressMap.cs" />
+    <Compile Include="Mapping\OrderMap.cs" />
+    <Compile Include="Mapping\SubEntity\PersonMap.cs" />
     <Compile Include="Mapping\Base\BaseEntityMap.cs" />
     <Compile Include="Mapping\StoreMap.cs" />
     <Compile Include="Mapping\SubEntity\UfMap.cs" />
     <Compile Include="Mapping\SupplierMap.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionFactoryCreator.cs" />
+    <Compile Include="OrmFactory.cs" />
     <Compile Include="UnityOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -119,17 +108,21 @@
       <Project>{79fb165f-3816-4a5f-b5a1-b5a64bed0218}</Project>
       <Name>LOB.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Interface.csproj">
+    <ProjectReference Include="..\LOB.Dao.Interface\LOB.Dao.Contract.csproj">
       <Project>{b275a849-eba7-45d8-abad-a336f38153d9}</Project>
-      <Name>LOB.Dao.Interface</Name>
+      <Name>LOB.Dao.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{ff16079b-fe5d-41ca-a195-5f956ccec1c8}</Project>
       <Name>LOB.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Interface.csproj">
+    <ProjectReference Include="..\LOB.Log.Interface\LOB.Log.Contract.csproj">
       <Project>{5EE9ACB1-F25F-4A9D-AE79-517BE03E02D9}</Project>
-      <Name>LOB.Log.Interface</Name>
+      <Name>LOB.Log.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOB.Util.Contract\LOB.Util.Contract.csproj">
+      <Project>{30C8DE65-B9C2-436A-A1F2-E9DE7FDA8B93}</Project>
+      <Name>LOB.Util.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -142,12 +135,11 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
-xcopy /y "$(ProjectDir)$(OutDir)FluentNHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
-xcopy /y "$(ProjectDir)$(OutDir)Iesi.Collections.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
-xcopy /y "$(ProjectDir)$(OutDir)NHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /s /k /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\Modules\"
+xcopy  /s /k /y "$(ProjectDir)$(OutDir)FluentNHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
+xcopy /s /k /y "$(ProjectDir)$(OutDir)Iesi.Collections.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"
+xcopy  /s /k /y "$(ProjectDir)$(OutDir)NHibernate.dll" "$(SolutionDir)LOB.UI.Core.View\bin\Debug\"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="Fody.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

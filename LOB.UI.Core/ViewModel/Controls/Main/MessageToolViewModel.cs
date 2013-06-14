@@ -1,54 +1,30 @@
 ﻿#region Usings
 
-using System;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
+using LOB.UI.Contract.ViewModel.Controls.Main;
 using LOB.UI.Core.ViewModel.Base;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Main;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.Main {
+    [Export(typeof(IMessageToolViewModel)), PartCreationPolicy(CreationPolicy.Shared)]
     public class MessageToolViewModel : BaseViewModel, IMessageToolViewModel {
-        private readonly IUnityContainer _container;
-        private readonly IEventAggregator _eventAggregator;
-        #region Props
-
+        //[Import] private IEventAggregator EventAggregator { get; set; }
         public string Message { get; set; }
-
         public bool IsRestrictive { get; set; }
-
-        #endregion Description
-        #region CloseExecute Command
-
         private ICommand _closeCommand;
-
-        public ICommand CloseCommand {
-            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
-            set { _closeCommand = value; }
-        }
-
         public bool CanClose { get; set; }
+
+        public MessageToolViewModel() { Message = "Please wait..."; }
 
         public void CloseExecute() {
             //_eventAggregator.GetEvent<MessageHideEvent>().Publish(null);
         }
-
-        #endregion CloseExecute Command
-        public MessageToolViewModel(IUnityContainer container) {
-            Message = "Please wait...";
-            _container = container;
-            _eventAggregator = _container.Resolve<IEventAggregator>();
-        }
-
-        private ViewID _viewID = new ViewID {Type = ViewType.MessageTool, State = ViewState.Internal};
-
-        public override ViewID ViewID {
-            get { return _viewID; }
-            set { _viewID = value; }
+        public ICommand CloseCommand {
+            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(CloseExecute, () => CanClose)); }
+            set { _closeCommand = value; }
         }
 
         public void Initialize(string message, bool canClose, bool isRestrictive) {
@@ -56,14 +32,5 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             CanClose = canClose;
             IsRestrictive = isRestrictive;
         }
-
-        public override void InitializeServices() { }
-
-        public override void Refresh() { }
-        #region Implementation of IDisposable
-
-        public override void Dispose() { GC.SuppressFinalize(this); }
-
-        #endregion
     }
 }

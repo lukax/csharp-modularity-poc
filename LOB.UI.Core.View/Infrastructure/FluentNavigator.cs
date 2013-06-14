@@ -1,133 +1,105 @@
 ﻿#region Usings
 
 using System;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
+using System.Linq;
 using LOB.Core.Localization;
-using LOB.UI.Core.View.Controls.Util;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
-using Microsoft.Practices.Unity;
-using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Exception;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Core.ViewModel.Controls.Alter.SubEntity;
+using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
 namespace LOB.UI.Core.View.Infrastructure {
+    [Export(typeof(IFluentNavigator))]
     public class FluentNavigator : IFluentNavigator {
-        private readonly IUnityContainer _container;
-        private readonly IRegionAdapter _regionAdapter;
-        private IBaseView _resolvedView;
-        private IBaseViewModel _resolvedViewModel;
-
-        [InjectionConstructor]
-        public FluentNavigator(IUnityContainer container, IRegionAdapter regionAdapter) {
-            _container = container;
-            _regionAdapter = regionAdapter;
-        }
-
+        protected IBaseView<IBaseViewModel> ResolvedView;
+        [Import] protected Lazy<IRegionAdapter> RegionAdapter { get; set; }
+        [Import] protected Lazy<IServiceLocator> ServiceLocator { get; set; }
+        //[ImportMany] protected Lazy<Type, IViewInfo>[] Views { get; set; }
+        [Import] protected Lazy<AggregateCatalog> Catalog { get; set; }
         /// <summary>
         ///     Initialize with clean Fields
         /// </summary>
         public IFluentNavigator Init {
-            get { return new FluentNavigator(_container, _regionAdapter); }
-        }
-
-        public event OnOpenViewEventHandler OnOpenView;
-
-        public IBaseView GetView() {
-            if(_resolvedView == null) throw new ArgumentException(Strings.Notification_Navigator_View_ResolveFirst);
-            if(_resolvedView.ViewModel == null) throw new ArgumentException(Strings.Notification_Navigator_ViewModel_ResolveFirst);
-            if(_resolvedViewModel != null) _resolvedViewModel.InitializeServices();
-            return _resolvedView;
-        }
-
-        public IBaseViewModel GetViewModel() {
-            if(_resolvedViewModel == null) throw new ArgumentException(Strings.Notification_Navigator_ViewModel_ResolveFirst);
-            return _resolvedViewModel;
-        }
-
-        public IFluentNavigator ResolveViewModel(ViewID param) {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(ViewDictionary.ViewModels[param]) as IBaseViewModel;
-            dynamic resolvedd = resolved;
-            try {
-                resolvedd.ViewID = param; //TODO: Maybe change this later
-            } catch(NullReferenceException ex) {
-#if DEBUG
-                Debug.WriteLine(ex.Message);
-#endif
-            }
-            if(resolved == null) throw new ArgumentException("param");
-            SetViewModel(resolved);
-            return this;
-        }
-
-        public IFluentNavigator ResolveViewModel<TViewModel>() where TViewModel : IBaseViewModel {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve<TViewModel>();
-            SetViewModel(resolved);
-            return this;
-        }
-
-        public IFluentNavigator ResolveView(ViewID param) {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve(ViewDictionary.Views[param]) as IBaseView;
-            if(resolved == null) throw new ArgumentException("param");
-            SetView(resolved);
-            return this;
-        }
-
-        public IFluentNavigator ResolveView<TView>() where TView : IBaseView {
-            if(_resolvedViewModel != null) throw new InvalidOperationException("First Init the FluentNavigator to clean fields.");
-            var resolved = _container.Resolve<TView>();
-            SetView(resolved);
-            return this;
-        }
-
-        public IFluentNavigator SetViewModel(IBaseViewModel viewModel) {
-            _resolvedViewModel = viewModel;
-            if(_resolvedView != null) _resolvedView.ViewModel = viewModel;
-            return this;
-        }
-
-        public IFluentNavigator SetView(IBaseView view) {
-            _resolvedView = view;
-            return this;
-        }
-
-        public void AddToRegion(string regionName) {
-            var view = GetView();
-            view.ViewModel.ViewID.IsChild(false);
-            _regionAdapter.AddView(view, regionName);
-        }
-
-        public void Show(bool asDialog = false) {
-            var asUc = GetView() as UserControl;
-            if(asUc != null) {
-                var window = _container.Resolve<FrameWindow>();
-                window.Content = asUc;
-                window.DataContext = _resolvedView.ViewModel;
-                window.Height = asUc.Height + 50;
-                window.Width = asUc.Width + 50;
-                if(!string.IsNullOrEmpty(_resolvedView.Header)) window.Title = (_resolvedView).Header;
-
-                if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asUc));
-
-                if(asDialog) window.ShowDialog();
-                else window.Show();
-            }
-            else {
-                var asW = _resolvedView as Window;
-                if(asW != null) {
-                    if(OnOpenView != null) OnOpenView.Invoke(this, new OnOpenViewEventArgs((IBaseView)asW));
-
-                    if(asDialog) asW.ShowDialog();
-                    else asW.Show();
-                }
+            get {
+                ResolvedView = null;
+                return this;
             }
         }
 
-        public bool PromptUser(string message) { return MessageBox.Show(message, "Prompt", MessageBoxButton.YesNo) == MessageBoxResult.Yes; }
+        public IFluentNavigator ResolveView(IViewInfo param) {
+            var t =
+                Catalog.Value.FirstOrDefault(
+                    x =>
+                    x.ExportDefinitions.Any(
+                        y =>
+                        y.Metadata.Any(z => param.ViewType.Equals(z.Value)) &&
+                        x.ExportDefinitions.Any(
+                            a =>
+                            a.Metadata.Any(
+                                b => b.Value as IEnumerable<ViewState> != null && param.ViewStates.SequenceEqual(b.Value as IEnumerable<ViewState>)))));
+            if(t != null) ResolvedView = ServiceLocator.Value.GetInstance(ComposablePartExportType(t)) as IBaseView<IBaseViewModel>;
+            throw_if_view_wasnt_resolved();
+            return this;
+        }
+
+        public IFluentNavigator ResolveView(Type param) {
+            if(param.GetInterfaces().Any(x=> x == typeof(IBaseViewModel))) {
+                ResolvedView = ServiceLocator.Value.GetInstance(typeof(IBaseView<>).MakeGenericType(param)) as IBaseView<IBaseViewModel>;
+            }
+            else throw new NotSupportedException("param should be derived from IBaseViewModel");
+            throw_if_view_wasnt_resolved();
+            return this;
+        }
+
+        public IFluentNavigator ResolveView<TView>() where TView : IBaseViewModel {
+            var s = ServiceLocator.Value.GetInstance<IBaseView<TView>>();
+            ResolvedView = s as IBaseView<IBaseViewModel>;
+            throw_if_view_wasnt_resolved();
+            return this;
+        }
+
+        public IFluentNavigator AddToRegion(string regionName) {
+            throw_if_view_wasnt_resolved();
+            RegionAdapter.Value.Add(ResolvedView, regionName);
+            ResolvedView.ViewModel.InitializeServices();
+            return this;
+        }
+
+        public Guid GetViewId {
+            get {
+                throw_if_view_wasnt_resolved();
+                return ResolvedView.ViewModel.Id;
+            }
+        }
+
+        protected void throw_if_view_wasnt_resolved() { if(ResolvedView == null) throw new ViewLoadException(Strings.Notification_Navigator_View_CouldNotBeLoaded); }
+        #region Helper methods
+
+        //TODO: Move this to somewhere else
+        public IEnumerable<Type> GetExportedTypes<T>() { return Catalog.Value.Parts.Select(part => ComposablePartExportType<T>(part)).Where(t => t != null); }
+
+        private Type ComposablePartExportType<T>(ComposablePartDefinition part) {
+            return
+                part.ExportDefinitions.Any(
+                    def => def.Metadata.ContainsKey("ExportTypeIdentity") && def.Metadata["ExportTypeIdentity"].Equals(typeof(T).FullName))
+                    ? ReflectionModelServices.GetPartType(part).Value
+                    : null;
+        }
+
+        private Type ComposablePartExportType(ComposablePartDefinition part) {
+            return part.ExportDefinitions.Any(def => def.Metadata.ContainsKey("ExportTypeIdentity"))
+                       ? ReflectionModelServices.GetPartType(part).Value
+                       : null;
+        }
+
+        #endregion
     }
 }

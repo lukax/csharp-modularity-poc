@@ -1,20 +1,18 @@
 #region Usings
 
 using System;
-using System.Windows;
-using LOB.Core.Localization;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
+using System.ComponentModel.Composition;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Core.View.Infrastructure;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.List.Base {
-    public partial class ListBaseEntityView : IBaseView {
-        public ListBaseEntityView() {
-            InitializeComponent();
-            DataContextChanged += OnDataContextChanged;
-        }
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs) { }
+    [Export(typeof(IBaseView<IBaseViewModel>)), PartCreationPolicy(CreationPolicy.NonShared)]
+    [ViewInfo(ViewType.BaseEntity, ViewState.Other)]
+    public partial class ListBaseEntityView : IBaseView<IBaseViewModel> {
+        public ListBaseEntityView() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
@@ -22,16 +20,6 @@ namespace LOB.UI.Core.View.Controls.List.Base {
         }
 
         public int Index { get; set; }
-
-        public string Header {
-            get { return Strings.UI_Header_List_BaseEntity; }
-        }
-
-        public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

@@ -1,44 +1,35 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using LOB.UI.Core.Events.View;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
+using LOB.UI.Contract;
+using LOB.UI.Core.Event.View;
 using MahApps.Metro;
 using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.View.Controls.Util {
-    public partial class FrameWindow : IBaseView {
-        private readonly IEventAggregator _eventAggregator;
-
-        public FrameWindow(IEventAggregator eventAggregator) {
-            _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<CloseViewEvent>().Subscribe(o => Close());
-            InitializeComponent();
+    [Export]
+    public partial class FrameWindow : IBaseView<IBaseViewModel> {
+        [Import] public IEventAggregator EventAggregator {
+            set { value.GetEvent<CloseViewEvent>().Subscribe(o => Close()); }
         }
 
-        public UserControl View { get; set; }
+        public FrameWindow() { InitializeComponent(); }
 
         public IBaseViewModel ViewModel {
             get { return DataContext as IBaseViewModel; }
             set { DataContext = value; }
         }
 
-        public string Header { get; set; }
         public int Index { get; set; }
 
         public void Refresh() {
             UpdateLayout();
             MiLightBlue(null, null);
-        }
-
-        public ViewType ViewType {
-            get { return ViewType.Main; }
         }
         #region Themes
 
@@ -67,11 +58,6 @@ namespace LOB.UI.Core.View.Controls.Util {
         private void MiLightOrange(object sender, RoutedEventArgs e) { ThemeManager.ChangeTheme(this, ThemeManager.DefaultAccents.First(a => a.Name == "Orange"), Theme.Light); }
 
         #endregion
-        //private void Busy() { ModalRegion = new BusyIuiComponent(); }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

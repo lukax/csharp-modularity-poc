@@ -1,42 +1,31 @@
 ﻿#region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Linq.Expressions;
-using LOB.Dao.Interface;
 using LOB.Domain;
+using LOB.UI.Contract.ViewModel.Controls.List;
 using LOB.UI.Core.ViewModel.Controls.List.Base;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.List;
-using Microsoft.Practices.Prism.Events;
 
 #endregion
 
 namespace LOB.UI.Core.ViewModel.Controls.List {
+    [Export(typeof(IListProductViewModel)), PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class ListProductViewModel : ListBaseEntityViewModel<Product>, IListProductViewModel {
-        public ListProductViewModel(IRepository repository, EventAggregator eventAggregator)
-            : base(repository, eventAggregator) { }
-
-        public override void InitializeServices() {
-            if(Equals(ViewID, default(ViewID))) ViewID = _defaultViewID;
-            base.InitializeServices();
-        }
-
-        public new Expression<Func<Product, bool>> SearchCriteria {
+        public override Expression<Func<Product, bool>> SearchCriteria {
             get {
                 try {
                     return
                         (arg =>
-                         arg.Code.ToString(Culture).ToUpper().Contains(Search.ToUpper()) || arg.Name.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Description.ToUpper().Contains(Search.ToUpper()) ||
-                         arg.UnitSalePrice.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.ProfitMargin.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                         arg.Status.ToString().ToUpper().Contains(Search.ToUpper()));
+                         arg.Code.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) || arg.Name.ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.Description.ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.UnitSalePrice.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.ProfitMargin.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
+                         arg.Status.ToString().ToUpper().Contains(SearchString.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }
             }
         }
-
-        private readonly ViewID _defaultViewID = new ViewID {Type = ViewType.Product, State = ViewState.List};
     }
 }

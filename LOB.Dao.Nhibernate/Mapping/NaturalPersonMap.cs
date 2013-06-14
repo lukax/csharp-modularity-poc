@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using FluentNHibernate.Mapping;
-using LOB.Domain;
+using LOB.Domain.Base;
 
 #endregion
 

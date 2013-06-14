@@ -1,17 +1,14 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
+using System;
 using LOB.Domain.Base;
-using LOB.Domain.Logic;
 
 #endregion
 
-namespace LOB.Business.Interface.Logic.Base {
-    public interface IBaseEntityFacade<TEntity> where TEntity : BaseEntity {
-        TEntity Entity { set; }
-        TEntity GenerateEntity();
-        bool CanAdd(out IEnumerable<ValidationResult> invalidFields);
-        bool CanUpdate(out IEnumerable<ValidationResult> invalidFields);
-        bool CanDelete(out IEnumerable<ValidationResult> invalidFields);
+namespace LOB.Business.Contract.Logic.Base {
+    public interface IBaseEntityFacade : IDisposable {}
+
+    public interface IBaseEntityFacade<out TEntity> : IBaseEntityFacade where TEntity : BaseEntity {
+        TEntity Generate();
     }
 }

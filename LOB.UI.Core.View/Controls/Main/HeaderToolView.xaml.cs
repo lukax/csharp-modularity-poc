@@ -1,11 +1,11 @@
 ﻿#region Usings
 
 using System;
-using LOB.Core.Localization;
-using LOB.UI.Interface;
-using LOB.UI.Interface.Infrastructure;
-using LOB.UI.Interface.ViewModel.Controls.Main;
-using Microsoft.Practices.Unity;
+using System.ComponentModel.Composition;
+using LOB.UI.Contract;
+using LOB.UI.Contract.Infrastructure;
+using LOB.UI.Contract.ViewModel.Controls.Main;
+using LOB.UI.Core.View.Infrastructure;
 
 #endregion
 
@@ -13,30 +13,22 @@ namespace LOB.UI.Core.View.Controls.Main {
     /// <summary>
     ///     Interaction logic for ColumnToolView.xaml
     /// </summary>
-    public partial class HeaderToolView : IBaseView {
-        [Dependency]
-        public IHeaderToolsViewModel HeaderToolsViewModel {
-            set { DataContext = value; }
-        }
-
+    [Export(typeof(IBaseView<IHeaderToolViewModel>))]
+    [ViewInfo(ViewType.HeaderTool, ViewState.Other)]
+    public partial class HeaderToolView : IBaseView<IHeaderToolViewModel> {
         public HeaderToolView() { InitializeComponent(); }
 
-        public IBaseViewModel ViewModel {
-            get { return DataContext as IBaseViewModel; }
-            set { DataContext = value; }
-        }
-
-        public string Header {
-            get { return Strings.UI_Header_Main_Header; }
+        [Import] public IHeaderToolViewModel ViewModel {
+            get { return DataContext as IHeaderToolViewModel; }
+            set {
+                DataContext = value;
+                value.InitializeServices();
+            }
         }
 
         public int Index { get; set; }
 
         public void Refresh() { }
-
-        public ViewID ViewID {
-            get { return ViewModel.ViewID; }
-        }
         #region Implementation of IDisposable
 
         public void Dispose() {

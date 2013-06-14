@@ -11,15 +11,19 @@ using LOB.Domain.SubEntity;
 
 namespace LOB.Domain.Base {
     [Serializable]
-    public class Person : BaseEntity, IEquatable<Person> {
+    public abstract class Person : BaseEntity, IEquatable<Person> {
         public Address Address { get; set; }
-        public ContactInfo ContactInfo { get; set; }
-        public string Notes { get; set; }
+        public IEnumerable<Email> Emails { get; set; }
+        public IEnumerable<PhoneNumber> PhoneNumbers { get; set; }
         #region Implementation of IEquatable<Person>
 
         public bool Equals(Person other) {
             try {
-                return base.Equals(other) && other.Address.Equals(Address) && other.ContactInfo.Equals(ContactInfo) && other.Notes.Equals(Notes);
+                return
+                        base.Equals(other) &&
+                        other.Address.Equals(Address) &&
+                        other.Emails.SequenceEqual(Emails) &&
+                        other.PhoneNumbers.SequenceEqual(PhoneNumbers);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);
@@ -38,12 +42,12 @@ namespace LOB.Domain.Base {
         Legal
     }
 
-    public static class PersonExtensions {
+    public static class PersonExtension {
         public static IDictionary<PersonType, string> PersonTypesLocalizationsDict {
             get {
                 return new Dictionary<PersonType, string> {
-                    {PersonType.Natural, Strings.Common_NaturalPerson},
-                    {PersonType.Legal, Strings.Common_LegalPerson}
+                        {PersonType.Natural, Strings.Common_NaturalPerson},
+                        {PersonType.Legal, Strings.Common_LegalPerson}
                 };
             }
         }

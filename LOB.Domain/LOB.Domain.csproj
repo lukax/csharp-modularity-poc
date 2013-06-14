@@ -57,6 +57,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml">
@@ -64,13 +65,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
+    <Compile Include="Contact.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Logic\Notification.cs" />
-    <Compile Include="Logic\ValidationResult.cs" />
-    <Compile Include="Logic\ValidationDelegate.cs" />
-    <Compile Include="SubEntity\PayCheck.cs" />
+    <Compile Include="Base\Merchandise.cs" />
     <Compile Include="Shipper.cs" />
+    <Compile Include="SubEntity\Stock.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="Monetary\CurrencyCode.cs" />
+    <Compile Include="Monetary\ICurrencyConverter.cs" />
+    <Compile Include="Monetary\Money.cs" />
+    <Compile Include="Util\Notification.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="SubEntity\Paycheck.cs" />
     <Compile Include="SubEntity\Address.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\BaseNotifyChange.cs" />
@@ -79,18 +85,17 @@
     <Compile Include="SubEntity\Email.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Base\Person.cs" />
-    <Compile Include="SubEntity\ContactInfo.cs" />
-    <Compile Include="SubEntity\EntityGroup.cs" />
-    <Compile Include="LegalPerson.cs" />
-    <Compile Include="NaturalPerson.cs" />
+    <Compile Include="Base\LegalPerson.cs" />
+    <Compile Include="Base\NaturalPerson.cs" />
     <Compile Include="SubEntity\PhoneNumber.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sale.cs" />
-    <Compile Include="SubEntity\ShipmentInfo.cs" />
-    <Compile Include="Store.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="SubEntity\Shipment.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="SubEntity\UF.cs" />
-    <Compile Include="Supplier.cs" />
+    <Compile Include="Monetary\SampleConverter.cs" />
+    <Compile Include="Monetary\SimpleMoney.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LOB.Core\LOB.Core.csproj">
