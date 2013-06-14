@@ -14,20 +14,20 @@ namespace LOB.Domain {
     [Serializable]
     public class Order : BaseEntity, IEquatable<Order> {
         public OrderStatus Status { get; set; }
-        public string Description { get; set; }
         public Customer Buyer { get; set; }
         public Employee Seller { get; set; }
         public DateTime Date { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<Service> Services { get; set; }
         public SimpleMoney TotalValue { get; set; }
+        public string Detail { get; set; }
         #region Implementation of IEquatable<Sale>
 
         public bool Equals(Order other) {
             try {
                 return base.Equals(other) &&
                        other.Status.Equals(Status) &&
-                       other.Description.Equals(Description) &&
+                       other.Detail.Equals(Detail) &&
                        other.Buyer.Equals(Buyer) &&
                        other.Seller.Equals(Seller) &&
                        other.Date.Equals(Date) &&

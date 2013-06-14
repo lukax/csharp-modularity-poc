@@ -15,12 +15,12 @@ namespace LOB.Log {
     ///     *Note: Any logging framework could be plugged in here as long as we implement the ILoggerFacade interface.
     /// </summary>
     [Export(typeof(ILoggerFacade)), Export(typeof(ILogger))]
-    public class Logger : ILoggerFacade, ILogger {
+    public class LoggerImpl : ILoggerFacade, ILogger {
 // ReSharper disable InconsistentNaming
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(Logger));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(LoggerImpl));
 // ReSharper restore InconsistentNaming
 
-        public Logger() { XmlConfigurator.Configure(); }
+        public LoggerImpl() { XmlConfigurator.Configure(); }
         #region ILoggerFacade Members
 
         /// <summary>

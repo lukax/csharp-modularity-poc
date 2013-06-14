@@ -41,7 +41,7 @@ namespace LOB.UI.Core.ViewModel.Controls.Main {
             //Task.Run(() => {
             //             uow.OnError +=
             //                 (sender, args) =>
-            //                 notification.Message(args.Description).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
+            //                 notification.Message(args.Detail).Detail(args.ErrorMessage).State(NotificationType.Error).Progress(-1);
             //             if(uow.TestConnection())
             //                 _notificationEvent.Publish(
             //                     notification.Message(Strings.Notification_Dao_ConnectionSucessful).State(NotificationType.Ok).Progress(-1));

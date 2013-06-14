@@ -15,7 +15,7 @@ namespace LOB.Domain.SubEntity {
         [EmailAddress(ErrorMessageResourceName = "Notification_Field_InvalidFormat", ErrorMessageResourceType = typeof(Strings))]
         public string Value { get; set; }
 
-        public string Description { get; set; }
+        public string Detail { get; set; }
         #region EasyToUse
 
         public static implicit operator string(Email e) { return e.Value; }
@@ -30,7 +30,7 @@ namespace LOB.Domain.SubEntity {
                 return
                         base.Equals(other) &&
                         other.Value.Equals(Value) &&
-                        other.Description.Equals(Description);
+                        other.Detail.Equals(Detail);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

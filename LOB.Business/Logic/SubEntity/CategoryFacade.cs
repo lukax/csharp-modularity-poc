@@ -17,7 +17,7 @@ namespace LOB.Business.Logic.SubEntity {
                 : base(repository) { }
 
         public Category Generate() {
-            var result = new Category {Name = "", Description = ""};
+            var result = new Category {Name = "", Detail = ""};
             return result;
         }
     }

@@ -22,7 +22,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List {
                            //arg.FirstName.ToUpper().Contains(Search.ToUpper()) || 
                            //arg.LastName.ToUpper().Contains(Search.ToUpper()) ||
                            //arg.NickName.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
-                           //arg.Notes.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
+                           //arg.Detail.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                            //arg.RG.ToString(Culture).ToUpper().Contains(Search.ToUpper()) ||
                            //arg.CPF.ToString(Culture).ToUpper().Contains(Search.ToUpper())
                            );

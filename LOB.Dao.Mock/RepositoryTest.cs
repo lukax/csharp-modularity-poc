@@ -13,7 +13,7 @@ namespace LOB.Dao.Mock {
             //var uow = new Mock<IUnityOfWork>(MockBehavior.Strict);
             //var repo = new Mock<IRepository>(MockBehavior.Strict);
 
-            //var product = new Product {Description = "Teste description", UnitsInStock = 12};
+            //var product = new Product {Detail = "Teste description", UnitsInStock = 12};
             //var operations = new {Add = "1", Update = "2", Remove = "3"};
 
             //uow.Setup(x => x.ORMFactory).Returns(() => operations);

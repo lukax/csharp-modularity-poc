@@ -17,7 +17,7 @@ namespace LOB.Business.Logic.SubEntity {
                 : base(repository) { }
 
         public Paycheck Generate() {
-            var result = new Paycheck {CurrentSalary = 0, Description = ""};
+            var result = new Paycheck {CurrentSalary = 0, Detail = ""};
             return result;
         }
     }

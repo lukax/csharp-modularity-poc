@@ -4,6 +4,6 @@ using LOB.Domain.Base;
 namespace LOB.Domain {
     [Serializable]
     public class Contact : Person {
-        public string Notes { get; set; }
+        public string Detail { get; set; }
     }
 }

@@ -72,7 +72,7 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logger.cs" />
+    <Compile Include="LoggerImpl.cs" />
     <Compile Include="Modularity\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

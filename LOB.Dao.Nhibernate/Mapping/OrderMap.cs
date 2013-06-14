@@ -12,7 +12,7 @@ namespace LOB.Dao.Nhibernate.Mapping {
             References(x => x.Buyer);
             HasManyToMany(x => x.Products);
             Map(x => x.TotalValue);
-            Map(x => x.Description);
+            Map(x => x.Detail);
         }
     }
 }

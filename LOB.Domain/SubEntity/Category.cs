@@ -15,7 +15,7 @@ namespace LOB.Domain.SubEntity {
         public string Name { get; set; }
 
         [Required(ErrorMessageResourceName = "Notification_Field_Required", ErrorMessageResourceType = typeof(Strings))]
-        public string Description { get; set; }
+        public string Detail { get; set; }
         #region Implementation of IEquatable
 
         public bool Equals(Category other) {

@@ -19,7 +19,7 @@ namespace LOB.UI.Core.ViewModel.Controls.List.SubEntity {
                         (arg =>
                          arg.Code.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) ||
                          arg.Number.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()) || arg.Type.ToString().ToUpper().Contains(SearchString.ToUpper()) ||
-                         arg.Description.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()));
+                         arg.Detail.ToString(Culture).ToUpper().Contains(SearchString.ToUpper()));
                 } catch(FormatException) {
                     return arg => false;
                 }

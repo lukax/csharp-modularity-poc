@@ -6,6 +6,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Threading;
 
+//using System.Windows.Threading;
+
 #endregion
 
 namespace LOB.Core.Util {

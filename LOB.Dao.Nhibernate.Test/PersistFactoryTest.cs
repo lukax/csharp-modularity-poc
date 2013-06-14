@@ -5,7 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using LOB.Dao.Interface;
+using LOB.Dao.Contract;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

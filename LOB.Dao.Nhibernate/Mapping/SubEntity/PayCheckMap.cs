@@ -10,7 +10,7 @@ namespace LOB.Dao.Nhibernate.Mapping.SubEntity {
         public PayCheckMap() {
             Map(x => x.CurrentSalary);
             Map(x => x.Bonus);
-            Map(x => x.Description);
+            Map(x => x.Detail);
         }
     }
 }

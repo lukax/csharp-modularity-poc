@@ -20,12 +20,12 @@ namespace LOB.Domain.SubEntity {
         [Required(ErrorMessageResourceName = "Notification_Field_Required", ErrorMessageResourceType = typeof(Strings))]
         public PhoneNumberType Type { get; set; }
 
-        public string Description { get; set; }
+        public string Detail { get; set; }
         #region Implementation of IEquatable
 
         public bool Equals(PhoneNumber other) {
             try {
-                return base.Equals(other) && other.Number.Equals(Number) && other.Type.Equals(Type) && other.Description.Equals(Description);
+                return base.Equals(other) && other.Number.Equals(Number) && other.Type.Equals(Type) && other.Detail.Equals(Detail);
             } catch(NullReferenceException ex) {
 #if DEBUG
                 Debug.WriteLine(ex.Message);

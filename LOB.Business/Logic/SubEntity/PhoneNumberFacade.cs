@@ -17,7 +17,7 @@ namespace LOB.Business.Logic.SubEntity {
                 : base(repository) { }
 
         public PhoneNumber Generate() {
-            var result = new PhoneNumber {Number = "", Type = default(PhoneNumberType), Description = ""};
+            var result = new PhoneNumber {Number = "", Type = default(PhoneNumberType), Detail = ""};
             return result;
         }
     }
