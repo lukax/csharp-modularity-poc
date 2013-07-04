@@ -14,11 +14,11 @@ namespace LOB.Service.Contract
 
         [OperationContract]
         [WebGet(BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        Category One();
+        DCO.Category One(long code);
 
         [OperationContract]
         [WebGet(BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        IEnumerable<Category> All();
+        IEnumerable<DCO.Category> All();
         
     }
 }

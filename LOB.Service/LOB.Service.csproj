@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LOB.Business.Interface\LOB.Business.Contract.csproj">
+      <Project>{2c4999ec-85ec-49fb-8236-8cf74f71ec2f}</Project>
+      <Name>LOB.Business.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOB.Domain\LOB.Domain.csproj">
       <Project>{FF16079B-FE5D-41CA-A195-5F956CCEC1C8}</Project>
       <Name>LOB.Domain</Name>

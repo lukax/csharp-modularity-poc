@@ -6,5 +6,8 @@ using LOB.Domain.SubEntity;
 #endregion
 
 namespace LOB.Business.Contract.Logic.SubEntity {
-    public interface ICategoryFacade : IBaseEntityFacade<Category> {}
+    public interface ICategoryFacade : IBaseEntityFacade<Category> {
+        public One
+
+    }
 }
