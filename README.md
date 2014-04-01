@@ -1,3 +1,3 @@
-# LOBCRM
+# LOBModularityApp
 
 Proof of concept of things like: Modularity, IoC, WPF, Dependency Injection Containers...
